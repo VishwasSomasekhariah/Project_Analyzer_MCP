@@ -1,0 +1,1145 @@
+{
+  "answer": "The HelloWorldApp is structured around several key components, each encapsulated in its own source code file. The application is orchestrated by the Manager class, which implements the INotifier interface and is responsible for running the application and managing worker instances. The Program class serves as the entry point of the application, where the Main method initializes the Manager and starts the execution process. The application utilizes a factory pattern through the WorkerFactory class to create instances of workers, specifically WorkerA, WorkerB, and WorkerC, all of which implement the IWorker interface. These workers perform tasks and send notifications back to the Manager. The Helper class, located in the HelloWorldApp.Utilities namespace, provides utility functions such as message formatting. The application also includes a TestAliases class for testing purposes. The codebase makes use of external libraries like System and System.Collections.Generic to support its operations.",
+  "confidence": "medium",
+  "citations": [
+    {
+      "claim": "The HelloWorldApp consists of several key components, each represented by a source code file.",
+      "source_file": "HelloWorldApp/INotifier.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/INotifier.cs",
+      "entity_name": "INotifier",
+      "entity_type": "file",
+      "evidence": {
+        "file_count": 11
+      },
+      "verification_status": "verified",
+      "verification_explanation": "The claim that the HelloWorldApp consists of several key components, each represented by a source code file, is verified. The evidence provided states there are 11 files, and the query confirms there are indeed 11 files in the HelloWorldApp directory.",
+      "discovery_query": "MATCH (f:File) WHERE f.file_path CONTAINS 'HelloWorldApp' RETURN f.name, f.file_path",
+      "verification_query": "MATCH (f:File) WHERE f.file_path STARTS WITH 'HelloWorldApp/' RETURN COUNT(f) AS file_count",
+      "cot_agent_id": "CoT-1",
+      "confidence": "high"
+    },
+    {
+      "claim": "The INotifier interface is responsible for defining a notification method.",
+      "source_file": "HelloWorldApp/INotifier.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/INotifier.cs",
+      "entity_name": "INotifier",
+      "entity_type": "interface",
+      "evidence": {
+        "body": "{\n        void Notify(string message);\n    }"
+      },
+      "verification_status": "not_verified",
+      "verification_explanation": "The query did not return any results, indicating that there is no 'Notify' function defined within the 'INotifier' interface in the specified file path. Therefore, the claim that the INotifier interface defines a notification method could not be verified.",
+      "discovery_query": "MATCH (t:Type) WHERE t.file_path STARTS WITH 'HelloWorldApp/' RETURN t.name AS className, t.file_path AS filePath, t.body AS body",
+      "verification_query": "MATCH (t:Type {name: 'INotifier', file_path: 'HelloWorldApp/INotifier.cs'})-[:CONTAINS]->(f:Function {name: 'Notify'})\nRETURN f.body AS function_body",
+      "cot_agent_id": "CoT-2",
+      "confidence": "high"
+    },
+    {
+      "claim": "The IWorker interface defines a processing method for workers.",
+      "source_file": "HelloWorldApp/IWorker.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/IWorker.cs",
+      "entity_name": "IWorker",
+      "entity_type": "interface",
+      "evidence": {
+        "body": "{\n        void Process();\n    }"
+      },
+      "verification_status": "not_verified",
+      "verification_explanation": "The query did not return any results, indicating that there is no 'Process' function defined within the 'IWorker' interface in the specified file path. This contradicts the provided evidence.",
+      "discovery_query": "MATCH (t:Type) WHERE t.file_path STARTS WITH 'HelloWorldApp/' RETURN t.name AS className, t.file_path AS filePath, t.body AS body",
+      "verification_query": "MATCH (i:Type {name: 'IWorker', file_path: 'HelloWorldApp/IWorker.cs'})-[:CONTAINS]->(f:Function {name: 'Process'}) RETURN i, f",
+      "cot_agent_id": "CoT-2",
+      "confidence": "high"
+    },
+    {
+      "claim": "The Manager class is responsible for running the application and managing workers.",
+      "source_file": "HelloWorldApp/Manager.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/Manager.cs",
+      "entity_name": "Manager",
+      "entity_type": "class",
+      "evidence": {
+        "body": "{\n        public void Run()\n        {\n            Console.WriteLine(\"Manager starting work...\");\n            IEnumerable<IWorker> workers = WorkerFactory.CreateWorkers(this);\n\n            // one-to-many: Manager invokes all workers\n            foreach (var worker in workers)\n            {\n                worker.Process();\n            }\n        }\n\n        // many-to-one: workers call back here\n        public void Notify(string message)\n        {\n            Console.WriteLine($\"Manager received notification: {message}\");\n        }\n    }"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "The claim that the Manager class is responsible for running the application and managing workers is verified. The class contains a 'Run' method that starts the application and manages workers by invoking their 'Process' method. Additionally, the 'Notify' method suggests a callback mechanism, supporting the management aspect.",
+      "discovery_query": "MATCH (t:Type) WHERE t.file_path STARTS WITH 'HelloWorldApp/' RETURN t.name AS className, t.file_path AS filePath, t.body AS body",
+      "verification_query": "MATCH (t:Type {name: 'Manager', file_path: 'HelloWorldApp/Manager.cs'})-[:CONTAINS]->(f:Function)\nRETURN t.name AS className, f.name AS functionName, f.body AS functionBody",
+      "cot_agent_id": "CoT-2",
+      "confidence": "high"
+    },
+    {
+      "claim": "The Program class contains the main entry point of the application.",
+      "source_file": "HelloWorldApp/Program.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/Program.cs",
+      "entity_name": "Program",
+      "entity_type": "class",
+      "evidence": {
+        "body": "{\n        static void Main(string[] args)\n        {\n            Manager manager = new Manager();\n            manager.Run();\n            Console.WriteLine(\"All work completed. Press any key to exit.\");\n            Console.ReadKey();\n        }\n    }"
+      },
+      "verification_status": "not_verified",
+      "verification_explanation": "The query did not return the expected body for the 'Main' function within the 'Program' class. The evidence provided a specific body for the 'Main' function, but the query result returned null, indicating that the function body could not be found or does not match the provided evidence.",
+      "discovery_query": "MATCH (t:Type) WHERE t.file_path STARTS WITH 'HelloWorldApp/' RETURN t.name AS className, t.file_path AS filePath, t.body AS body",
+      "verification_query": "MATCH (t:Type {name: 'Program', file_path: 'HelloWorldApp/Program.cs'})-[:CONTAINS]->(f:Function {name: 'Main'}) RETURN f.body AS body",
+      "cot_agent_id": "CoT-2",
+      "confidence": "high"
+    },
+    {
+      "claim": "The TestAliases class is used for testing generic aliases.",
+      "source_file": "HelloWorldApp/TestAliases.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/TestAliases.cs",
+      "entity_name": "TestAliases",
+      "entity_type": "class",
+      "evidence": {
+        "body": "{\n        public void TestMethod()\n        {\n            MyGeneric.List<string> items = new MyGeneric.List<string>();\n            WriteLine(\"Testing aliases\");\n        }\n    }"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "The TestAliases class contains a method that uses a generic alias 'MyGeneric.List<string>', which aligns with the claim that it is used for testing generic aliases.",
+      "discovery_query": "MATCH (t:Type) WHERE t.file_path STARTS WITH 'HelloWorldApp/' RETURN t.name AS className, t.file_path AS filePath, t.body AS body",
+      "verification_query": "MATCH (t:Type {name: 'TestAliases', file_path: 'HelloWorldApp/TestAliases.cs'})-[:CONTAINS]->(f:Function)\nWHERE f.body CONTAINS 'MyGeneric.List<string>'\nRETURN t.name AS className, f.name AS functionName, f.body AS functionBody",
+      "cot_agent_id": "CoT-2",
+      "confidence": "medium"
+    },
+    {
+      "claim": "The Helper class provides utility functions such as message formatting.",
+      "source_file": "HelloWorldApp/Utilities/Helper.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/Utilities/Helper.cs",
+      "entity_name": "Helper",
+      "entity_type": "class",
+      "evidence": {
+        "body": "{\n        public static string FormatMessage(string workerName, string text)\n        {\n            return $\"[{workerName}] {text}\";\n        }\n    }"
+      },
+      "verification_status": "partially_verified",
+      "verification_explanation": "The claim that the Helper class provides utility functions such as message formatting is partially verified. The graph confirms the existence of a function named 'FormatMessage' within a type named 'Helper' located at the specified file path. However, the function body was not retrieved, so the specific implementation details of the function could not be verified against the provided evidence.",
+      "discovery_query": "MATCH (t:Type) WHERE t.file_path STARTS WITH 'HelloWorldApp/' RETURN t.name AS className, t.file_path AS filePath, t.body AS body",
+      "verification_query": "MATCH (t:Type {name: 'Helper', file_path: 'HelloWorldApp/Utilities/Helper.cs'})-[:CONTAINS]->(f:Function)\nWHERE f.name = 'FormatMessage'\nRETURN f.body AS function_body, f.name AS function_name",
+      "cot_agent_id": "CoT-2",
+      "confidence": "high"
+    },
+    {
+      "claim": "The WorkerA class implements the IWorker interface and processes tasks with notifications.",
+      "source_file": "HelloWorldApp/WorkerA.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/WorkerA.cs",
+      "entity_name": "WorkerA",
+      "entity_type": "class",
+      "evidence": {
+        "body": "{\n        private readonly INotifier _notifier;\n\n        public WorkerA(INotifier notifier)\n        {\n            _notifier = notifier;\n        }\n\n        public void Process()\n        {\n            string msg = Utilities.Helper.FormatMessage(\"WorkerA\", \"Hello from A\");\n            System.Console.WriteLine(msg);\n            _notifier.Notify(\"WorkerA has finished processing.\");\n        }\n    }"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "The WorkerA class is confirmed to implement the IWorker interface. The provided evidence matches the data in the graph, showing that WorkerA has a method Process that uses a notifier to send notifications, aligning with the claim.",
+      "discovery_query": "MATCH (t:Type) WHERE t.file_path STARTS WITH 'HelloWorldApp/' RETURN t.name AS className, t.file_path AS filePath, t.body AS body",
+      "verification_query": "MATCH (worker:Type {name: 'WorkerA'})-[:IMPLEMENTS]->(interface:Type {name: 'IWorker'})\nRETURN worker, interface",
+      "cot_agent_id": "CoT-2",
+      "confidence": "high"
+    },
+    {
+      "claim": "The WorkerB class implements the IWorker interface and processes tasks with notifications.",
+      "source_file": "HelloWorldApp/WorkerB.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/WorkerB.cs",
+      "entity_name": "WorkerB",
+      "entity_type": "class",
+      "evidence": {
+        "body": "{\n        private readonly INotifier _notifier;\n\n        public WorkerB(INotifier notifier)\n        {\n            _notifier = notifier;\n        }\n\n        public void Process()\n        {\n            string msg = Utilities.Helper.FormatMessage(\"WorkerB\", \"Greetings from B\");\n            System.Console.WriteLine(msg);\n            _notifier.Notify(\"WorkerB has finished processing.\");\n        }\n    }"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "The WorkerB class is confirmed to implement the IWorker interface. The provided evidence matches the actual code structure, showing that WorkerB processes tasks with notifications.",
+      "discovery_query": "MATCH (t:Type) WHERE t.file_path STARTS WITH 'HelloWorldApp/' RETURN t.name AS className, t.file_path AS filePath, t.body AS body",
+      "verification_query": "MATCH (workerB:Type {name: 'WorkerB', file_path: 'HelloWorldApp/WorkerB.cs'})-[:IMPLEMENTS]->(interface:Type {name: 'IWorker'}) RETURN workerB, interface",
+      "cot_agent_id": "CoT-2",
+      "confidence": "high"
+    },
+    {
+      "claim": "The WorkerC class implements the IWorker interface and processes tasks with notifications.",
+      "source_file": "HelloWorldApp/WorkerC.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/WorkerC.cs",
+      "entity_name": "WorkerC",
+      "entity_type": "class",
+      "evidence": {
+        "body": "{\n        private readonly INotifier _notifier;\n\n        public WorkerC(INotifier notifier)\n        {\n            _notifier = notifier;\n        }\n\n        public void Process()\n        {\n            string msg = Utilities.Helper.FormatMessage(\"WorkerC\", \"Hi there, C here\");\n            System.Console.WriteLine(msg);\n            _notifier.Notify(\"WorkerC has finished processing.\");\n        }\n    }"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "The WorkerC class is confirmed to implement the IWorker interface. The provided evidence matches the actual code structure, showing that WorkerC has a method Process that uses a notifier to send notifications, which aligns with the claim.",
+      "discovery_query": "MATCH (t:Type) WHERE t.file_path STARTS WITH 'HelloWorldApp/' RETURN t.name AS className, t.file_path AS filePath, t.body AS body",
+      "verification_query": "MATCH (workerC:Type {name: 'WorkerC'})-[:IMPLEMENTS]->(iWorker:Type {name: 'IWorker'}) RETURN workerC, iWorker",
+      "cot_agent_id": "CoT-2",
+      "confidence": "high"
+    },
+    {
+      "claim": "The WorkerFactory class is responsible for creating worker instances.",
+      "source_file": "HelloWorldApp/WorkerFactory.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/WorkerFactory.cs",
+      "entity_name": "WorkerFactory",
+      "entity_type": "class",
+      "evidence": {
+        "body": "{\n        public static IEnumerable<IWorker> CreateWorkers(INotifier notifier)\n        {\n            // create multiple workers, each knows how to call back\n            return new List<IWorker>\n            {\n                new WorkerA(notifier),\n                new WorkerB(notifier),\n                new WorkerC(notifier)\n            };\n        }\n    }"
+      },
+      "verification_status": "not_verified",
+      "verification_explanation": "The query did not return the expected function body for the 'CreateWorkers' function within the 'WorkerFactory' class. This means that the evidence provided could not be independently verified against the code property graph.",
+      "discovery_query": "MATCH (t:Type) WHERE t.file_path STARTS WITH 'HelloWorldApp/' RETURN t.name AS className, t.file_path AS filePath, t.body AS body",
+      "verification_query": "MATCH (t:Type {name: 'WorkerFactory', file_path: 'HelloWorldApp/WorkerFactory.cs'})-[:CONTAINS]->(f:Function {name: 'CreateWorkers'})\nRETURN f.body AS function_body",
+      "cot_agent_id": "CoT-2",
+      "confidence": "high"
+    },
+    {
+      "claim": "The HelloWorldApp project contains a Helper class with a FormatMessage function.",
+      "source_file": "HelloWorldApp/Utilities/Helper.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/Utilities/Helper.cs",
+      "entity_name": "Helper",
+      "entity_type": "class",
+      "evidence": {
+        "projectName": "HelloWorldApp",
+        "namespaceName": "HelloWorldApp.Utilities"
+      },
+      "verification_status": "not_verified",
+      "verification_explanation": "The query did not return any results, indicating that there is no evidence in the graph to support the claim that the HelloWorldApp project contains a Helper class with a FormatMessage function in the specified file path.",
+      "discovery_query": "MATCH (p:Project)-[:CONTAINS]->(f:File)-[:CONTAINS]->(n:Namespace)-[:CONTAINS]->(t:Type)-[:CONTAINS]->(func:Function) RETURN p.name AS projectName, f.file_path AS filePath, n.name AS namespaceName, t.name AS typeName, func.name AS functionName",
+      "verification_query": "MATCH (p:Project {name: 'HelloWorldApp'})-[:CONTAINS]->(f:File {file_path: 'HelloWorldApp/Utilities/Helper.cs'})-[:CONTAINS]->(t:Type {name: 'Helper'})-[:CONTAINS]->(func:Function {name: 'FormatMessage'}) RETURN p, f, t, func",
+      "cot_agent_id": "CoT-3",
+      "confidence": "high"
+    },
+    {
+      "claim": "The Main function calls the Run function, which calls the Process function.",
+      "source_file": null,
+      "source_line": null,
+      "source_location": null,
+      "entity_name": "Main",
+      "entity_type": "function",
+      "evidence": {
+        "callerFunction": "Main",
+        "calleeFunction": "Run"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "The claim that the Main function calls the Run function, which in turn calls the Process function, is verified by the query results. The query returned multiple instances where this call hierarchy is present, confirming the claim.",
+      "discovery_query": "MATCH (caller:Function)-[:CALLS]->(callee:Function) RETURN caller.name AS callerFunction, callee.name AS calleeFunction",
+      "verification_query": "MATCH (main:Function {name: 'Main'})-[:CALLS]->(run:Function {name: 'Run'})-[:CALLS]->(process:Function {name: 'Process'}) RETURN main, run, process",
+      "cot_agent_id": "CoT-3",
+      "confidence": "high"
+    },
+    {
+      "claim": "The CreateWorkers function calls WorkerA, WorkerB, and WorkerC functions.",
+      "source_file": null,
+      "source_line": null,
+      "source_location": null,
+      "entity_name": "CreateWorkers",
+      "entity_type": "function",
+      "evidence": {
+        "callerFunction": "CreateWorkers",
+        "calleeFunction": "WorkerA"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "The query results confirm that the CreateWorkers function calls WorkerA, WorkerB, and WorkerC functions, matching the claim.",
+      "discovery_query": "MATCH (caller:Function)-[:CALLS]->(callee:Function) RETURN caller.name AS callerFunction, callee.name AS calleeFunction",
+      "verification_query": "MATCH (caller:Function {name: 'CreateWorkers'})-[:CALLS]->(callee:Function)\nWHERE callee.name IN ['WorkerA', 'WorkerB', 'WorkerC']\nRETURN caller.name AS callerFunction, collect(callee.name) AS calleeFunctions",
+      "cot_agent_id": "CoT-3",
+      "confidence": "high"
+    },
+    {
+      "claim": "The Manager class implements the INotifier interface.",
+      "source_file": "HelloWorldApp/Manager.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/Manager.cs",
+      "entity_name": "Manager",
+      "entity_type": "class",
+      "evidence": {
+        "typeName": "Manager",
+        "interfaceName": "INotifier"
+      },
+      "verification_status": "not_verified",
+      "verification_explanation": "The query did not return any results, indicating that there is no direct IMPLEMENTS relationship between the 'Manager' class and the 'INotifier' interface in the specified file path.",
+      "discovery_query": "MATCH (t:Type)-[:IMPLEMENTS]->(i:Type) RETURN t.name AS typeName, i.name AS interfaceName, t.file_path AS filePath",
+      "verification_query": "MATCH (class:Type {name: 'Manager'}), (interface:Type {name: 'INotifier'})\nWHERE class.file_path = 'HelloWorldApp/Manager.cs' AND interface.file_path = 'HelloWorldApp/Manager.cs'\nMATCH (class)-[:IMPLEMENTS]->(interface)\nRETURN class.name AS className, interface.name AS interfaceName",
+      "cot_agent_id": "CoT-4",
+      "confidence": "high"
+    },
+    {
+      "claim": "The WorkerA class implements the IWorker interface.",
+      "source_file": "HelloWorldApp/WorkerA.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/WorkerA.cs",
+      "entity_name": "WorkerA",
+      "entity_type": "class",
+      "evidence": {
+        "typeName": "WorkerA",
+        "interfaceName": "IWorker"
+      },
+      "verification_status": "not_verified",
+      "verification_explanation": "The query did not return any results, indicating that there is no direct IMPLEMENTS relationship between the WorkerA class and the IWorker interface in the specified file path.",
+      "discovery_query": "MATCH (t:Type)-[:IMPLEMENTS]->(i:Type) RETURN t.name AS typeName, i.name AS interfaceName, t.file_path AS filePath",
+      "verification_query": "MATCH (class:Type {name: 'WorkerA'}), (interface:Type {name: 'IWorker'})\nWHERE class.file_path = 'HelloWorldApp/WorkerA.cs' AND interface.file_path = 'HelloWorldApp/WorkerA.cs'\nMATCH (class)-[:IMPLEMENTS]->(interface)\nRETURN class.name AS className, interface.name AS interfaceName",
+      "cot_agent_id": "CoT-4",
+      "confidence": "high"
+    },
+    {
+      "claim": "The WorkerFactory class contains the CreateWorkers method.",
+      "source_file": "HelloWorldApp/WorkerFactory.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/WorkerFactory.cs",
+      "entity_name": "WorkerFactory",
+      "entity_type": "class",
+      "evidence": {
+        "typeName": "WorkerFactory",
+        "functionName": "CreateWorkers"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "The query confirmed that the WorkerFactory class contains the CreateWorkers method as claimed.",
+      "discovery_query": "MATCH (t:Type)-[:CONTAINS]->(f:Function) RETURN t.name AS typeName, f.name AS functionName, t.file_path AS filePath",
+      "verification_query": "MATCH (class:Type {name: 'WorkerFactory'})-[:CONTAINS]->(method:Function {name: 'CreateWorkers'}) RETURN class, method",
+      "cot_agent_id": "CoT-4",
+      "confidence": "high"
+    },
+    {
+      "claim": "The HelloWorldApp uses external libraries such as System and System.Collections.Generic.",
+      "source_file": "HelloWorldApp/Manager.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/Manager.cs",
+      "entity_name": "Manager",
+      "entity_type": "file",
+      "evidence": {
+        "Manager.cs imports": [
+          "System",
+          "System.Collections.Generic"
+        ],
+        "Program.cs imports": [
+          "System"
+        ],
+        "TestAliases.cs imports": [
+          "System",
+          "System.Collections.Generic",
+          "System.Console"
+        ],
+        "WorkerFactory.cs imports": [
+          "System.Collections.Generic"
+        ]
+      },
+      "verification_status": "verified",
+      "verification_explanation": "The claim that the HelloWorldApp uses external libraries such as System and System.Collections.Generic is verified. The provided evidence matches the data retrieved from the codebase.",
+      "discovery_query": "MATCH (f:File) WHERE f.file_path CONTAINS 'HelloWorldApp' RETURN f.file_path, f.imports",
+      "verification_query": "MATCH (f:File) WHERE f.file_path IN ['HelloWorldApp/Manager.cs', 'HelloWorldApp/Program.cs', 'HelloWorldApp/TestAliases.cs', 'HelloWorldApp/WorkerFactory.cs'] RETURN f.file_path AS file, f.imports AS imports",
+      "cot_agent_id": "CoT-5",
+      "confidence": "high"
+    }
+  ],
+  "verified_count": 10,
+  "unverified_count": 8,
+  "token_usage": {
+    "total_prompt_tokens": 274593,
+    "total_completion_tokens": 12697,
+    "total_tokens": 287290,
+    "by_agent_role": {
+      "tot_orchestrator": 2434,
+      "cot_agent": 92533,
+      "verifier": 192323
+    },
+    "by_agent_id": {
+      "tot_orchestrator": 2434,
+      "EntityResolver": 2062,
+      "CoT-1": 11516,
+      "CoT-2": 13522,
+      "CoT-3": 27641,
+      "CoT-5": 11325,
+      "CoT-4": 26467,
+      "verifier": 192323
+    },
+    "call_count": 98,
+    "details": [
+      {
+        "prompt_tokens": 136,
+        "completion_tokens": 301,
+        "total_tokens": 437,
+        "model": "gpt-4o",
+        "agent_role": "tot_orchestrator",
+        "agent_id": "tot_orchestrator"
+      },
+      {
+        "prompt_tokens": 929,
+        "completion_tokens": 43,
+        "total_tokens": 972,
+        "model": "gpt-4o",
+        "agent_role": "cot_agent",
+        "agent_id": "EntityResolver"
+      },
+      {
+        "prompt_tokens": 1060,
+        "completion_tokens": 30,
+        "total_tokens": 1090,
+        "model": "gpt-4o",
+        "agent_role": "cot_agent",
+        "agent_id": "EntityResolver"
+      },
+      {
+        "prompt_tokens": 2463,
+        "completion_tokens": 11,
+        "total_tokens": 2474,
+        "model": "gpt-4o",
+        "agent_role": "cot_agent",
+        "agent_id": "CoT-1"
+      },
+      {
+        "prompt_tokens": 2464,
+        "completion_tokens": 11,
+        "total_tokens": 2475,
+        "model": "gpt-4o",
+        "agent_role": "cot_agent",
+        "agent_id": "CoT-2"
+      },
+      {
+        "prompt_tokens": 2462,
+        "completion_tokens": 11,
+        "total_tokens": 2473,
+        "model": "gpt-4o",
+        "agent_role": "cot_agent",
+        "agent_id": "CoT-3"
+      },
+      {
+        "prompt_tokens": 2519,
+        "completion_tokens": 15,
+        "total_tokens": 2534,
+        "model": "gpt-4o",
+        "agent_role": "cot_agent",
+        "agent_id": "CoT-1"
+      },
+      {
+        "prompt_tokens": 2520,
+        "completion_tokens": 15,
+        "total_tokens": 2535,
+        "model": "gpt-4o",
+        "agent_role": "cot_agent",
+        "agent_id": "CoT-2"
+      },
+      {
+        "prompt_tokens": 2518,
+        "completion_tokens": 17,
+        "total_tokens": 2535,
+        "model": "gpt-4o",
+        "agent_role": "cot_agent",
+        "agent_id": "CoT-3"
+      },
+      {
+        "prompt_tokens": 2795,
+        "completion_tokens": 41,
+        "total_tokens": 2836,
+        "model": "gpt-4o",
+        "agent_role": "cot_agent",
+        "agent_id": "CoT-1"
+      },
+      {
+        "prompt_tokens": 2772,
+        "completion_tokens": 52,
+        "total_tokens": 2824,
+        "model": "gpt-4o",
+        "agent_role": "cot_agent",
+        "agent_id": "CoT-2"
+      },
+      {
+        "prompt_tokens": 2638,
+        "completion_tokens": 17,
+        "total_tokens": 2655,
+        "model": "gpt-4o",
+        "agent_role": "cot_agent",
+        "agent_id": "CoT-3"
+      },
+      {
+        "prompt_tokens": 2760,
+        "completion_tokens": 17,
+        "total_tokens": 2777,
+        "model": "gpt-4o",
+        "agent_role": "cot_agent",
+        "agent_id": "CoT-3"
+      },
+      {
+        "prompt_tokens": 2839,
+        "completion_tokens": 17,
+        "total_tokens": 2856,
+        "model": "gpt-4o",
+        "agent_role": "cot_agent",
+        "agent_id": "CoT-3"
+      },
+      {
+        "prompt_tokens": 2914,
+        "completion_tokens": 17,
+        "total_tokens": 2931,
+        "model": "gpt-4o",
+        "agent_role": "cot_agent",
+        "agent_id": "CoT-3"
+      },
+      {
+        "prompt_tokens": 2983,
+        "completion_tokens": 93,
+        "total_tokens": 3076,
+        "model": "gpt-4o",
+        "agent_role": "cot_agent",
+        "agent_id": "CoT-3"
+      },
+      {
+        "prompt_tokens": 3215,
+        "completion_tokens": 457,
+        "total_tokens": 3672,
+        "model": "gpt-4o",
+        "agent_role": "cot_agent",
+        "agent_id": "CoT-1"
+      },
+      {
+        "prompt_tokens": 3868,
+        "completion_tokens": 1820,
+        "total_tokens": 5688,
+        "model": "gpt-4o",
+        "agent_role": "cot_agent",
+        "agent_id": "CoT-2"
+      },
+      {
+        "prompt_tokens": 3249,
+        "completion_tokens": 45,
+        "total_tokens": 3294,
+        "model": "gpt-4o",
+        "agent_role": "cot_agent",
+        "agent_id": "CoT-3"
+      },
+      {
+        "prompt_tokens": 2462,
+        "completion_tokens": 11,
+        "total_tokens": 2473,
+        "model": "gpt-4o",
+        "agent_role": "cot_agent",
+        "agent_id": "CoT-5"
+      },
+      {
+        "prompt_tokens": 2464,
+        "completion_tokens": 11,
+        "total_tokens": 2475,
+        "model": "gpt-4o",
+        "agent_role": "cot_agent",
+        "agent_id": "CoT-4"
+      },
+      {
+        "prompt_tokens": 2518,
+        "completion_tokens": 15,
+        "total_tokens": 2533,
+        "model": "gpt-4o",
+        "agent_role": "cot_agent",
+        "agent_id": "CoT-5"
+      },
+      {
+        "prompt_tokens": 2520,
+        "completion_tokens": 15,
+        "total_tokens": 2535,
+        "model": "gpt-4o",
+        "agent_role": "cot_agent",
+        "agent_id": "CoT-4"
+      },
+      {
+        "prompt_tokens": 4262,
+        "completion_tokens": 782,
+        "total_tokens": 5044,
+        "model": "gpt-4o",
+        "agent_role": "cot_agent",
+        "agent_id": "CoT-3"
+      },
+      {
+        "prompt_tokens": 2794,
+        "completion_tokens": 42,
+        "total_tokens": 2836,
+        "model": "gpt-4o",
+        "agent_role": "cot_agent",
+        "agent_id": "CoT-5"
+      },
+      {
+        "prompt_tokens": 2772,
+        "completion_tokens": 15,
+        "total_tokens": 2787,
+        "model": "gpt-4o",
+        "agent_role": "cot_agent",
+        "agent_id": "CoT-4"
+      },
+      {
+        "prompt_tokens": 3046,
+        "completion_tokens": 17,
+        "total_tokens": 3063,
+        "model": "gpt-4o",
+        "agent_role": "cot_agent",
+        "agent_id": "CoT-4"
+      },
+      {
+        "prompt_tokens": 3168,
+        "completion_tokens": 17,
+        "total_tokens": 3185,
+        "model": "gpt-4o",
+        "agent_role": "cot_agent",
+        "agent_id": "CoT-4"
+      },
+      {
+        "prompt_tokens": 3288,
+        "completion_tokens": 51,
+        "total_tokens": 3339,
+        "model": "gpt-4o",
+        "agent_role": "cot_agent",
+        "agent_id": "CoT-4"
+      },
+      {
+        "prompt_tokens": 3228,
+        "completion_tokens": 255,
+        "total_tokens": 3483,
+        "model": "gpt-4o",
+        "agent_role": "cot_agent",
+        "agent_id": "CoT-5"
+      },
+      {
+        "prompt_tokens": 3832,
+        "completion_tokens": 50,
+        "total_tokens": 3882,
+        "model": "gpt-4o",
+        "agent_role": "cot_agent",
+        "agent_id": "CoT-4"
+      },
+      {
+        "prompt_tokens": 4735,
+        "completion_tokens": 466,
+        "total_tokens": 5201,
+        "model": "gpt-4o",
+        "agent_role": "cot_agent",
+        "agent_id": "CoT-4"
+      },
+      {
+        "prompt_tokens": 2815,
+        "completion_tokens": 11,
+        "total_tokens": 2826,
+        "model": "gpt-4o",
+        "agent_role": "verifier",
+        "agent_id": "verifier"
+      },
+      {
+        "prompt_tokens": 2871,
+        "completion_tokens": 15,
+        "total_tokens": 2886,
+        "model": "gpt-4o",
+        "agent_role": "verifier",
+        "agent_id": "verifier"
+      },
+      {
+        "prompt_tokens": 3147,
+        "completion_tokens": 41,
+        "total_tokens": 3188,
+        "model": "gpt-4o",
+        "agent_role": "verifier",
+        "agent_id": "verifier"
+      },
+      {
+        "prompt_tokens": 3264,
+        "completion_tokens": 120,
+        "total_tokens": 3384,
+        "model": "gpt-4o",
+        "agent_role": "verifier",
+        "agent_id": "verifier"
+      },
+      {
+        "prompt_tokens": 2364,
+        "completion_tokens": 43,
+        "total_tokens": 2407,
+        "model": "gpt-4o",
+        "agent_role": "verifier",
+        "agent_id": "verifier"
+      },
+      {
+        "prompt_tokens": 2682,
+        "completion_tokens": 66,
+        "total_tokens": 2748,
+        "model": "gpt-4o",
+        "agent_role": "verifier",
+        "agent_id": "verifier"
+      },
+      {
+        "prompt_tokens": 2835,
+        "completion_tokens": 135,
+        "total_tokens": 2970,
+        "model": "gpt-4o",
+        "agent_role": "verifier",
+        "agent_id": "verifier"
+      },
+      {
+        "prompt_tokens": 2359,
+        "completion_tokens": 43,
+        "total_tokens": 2402,
+        "model": "gpt-4o",
+        "agent_role": "verifier",
+        "agent_id": "verifier"
+      },
+      {
+        "prompt_tokens": 2677,
+        "completion_tokens": 59,
+        "total_tokens": 2736,
+        "model": "gpt-4o",
+        "agent_role": "verifier",
+        "agent_id": "verifier"
+      },
+      {
+        "prompt_tokens": 2816,
+        "completion_tokens": 116,
+        "total_tokens": 2932,
+        "model": "gpt-4o",
+        "agent_role": "verifier",
+        "agent_id": "verifier"
+      },
+      {
+        "prompt_tokens": 2467,
+        "completion_tokens": 11,
+        "total_tokens": 2478,
+        "model": "gpt-4o",
+        "agent_role": "verifier",
+        "agent_id": "verifier"
+      },
+      {
+        "prompt_tokens": 2523,
+        "completion_tokens": 46,
+        "total_tokens": 2569,
+        "model": "gpt-4o",
+        "agent_role": "verifier",
+        "agent_id": "verifier"
+      },
+      {
+        "prompt_tokens": 3058,
+        "completion_tokens": 68,
+        "total_tokens": 3126,
+        "model": "gpt-4o",
+        "agent_role": "verifier",
+        "agent_id": "verifier"
+      },
+      {
+        "prompt_tokens": 3334,
+        "completion_tokens": 258,
+        "total_tokens": 3592,
+        "model": "gpt-4o",
+        "agent_role": "verifier",
+        "agent_id": "verifier"
+      },
+      {
+        "prompt_tokens": 2408,
+        "completion_tokens": 46,
+        "total_tokens": 2454,
+        "model": "gpt-4o",
+        "agent_role": "verifier",
+        "agent_id": "verifier"
+      },
+      {
+        "prompt_tokens": 2795,
+        "completion_tokens": 15,
+        "total_tokens": 2810,
+        "model": "gpt-4o",
+        "agent_role": "verifier",
+        "agent_id": "verifier"
+      },
+      {
+        "prompt_tokens": 3047,
+        "completion_tokens": 59,
+        "total_tokens": 3106,
+        "model": "gpt-4o",
+        "agent_role": "verifier",
+        "agent_id": "verifier"
+      },
+      {
+        "prompt_tokens": 3198,
+        "completion_tokens": 144,
+        "total_tokens": 3342,
+        "model": "gpt-4o",
+        "agent_role": "verifier",
+        "agent_id": "verifier"
+      },
+      {
+        "prompt_tokens": 2392,
+        "completion_tokens": 11,
+        "total_tokens": 2403,
+        "model": "gpt-4o",
+        "agent_role": "verifier",
+        "agent_id": "verifier"
+      },
+      {
+        "prompt_tokens": 2448,
+        "completion_tokens": 46,
+        "total_tokens": 2494,
+        "model": "gpt-4o",
+        "agent_role": "verifier",
+        "agent_id": "verifier"
+      },
+      {
+        "prompt_tokens": 2983,
+        "completion_tokens": 83,
+        "total_tokens": 3066,
+        "model": "gpt-4o",
+        "agent_role": "verifier",
+        "agent_id": "verifier"
+      },
+      {
+        "prompt_tokens": 3231,
+        "completion_tokens": 190,
+        "total_tokens": 3421,
+        "model": "gpt-4o",
+        "agent_role": "verifier",
+        "agent_id": "verifier"
+      },
+      {
+        "prompt_tokens": 2387,
+        "completion_tokens": 58,
+        "total_tokens": 2445,
+        "model": "gpt-4o",
+        "agent_role": "verifier",
+        "agent_id": "verifier"
+      },
+      {
+        "prompt_tokens": 2799,
+        "completion_tokens": 15,
+        "total_tokens": 2814,
+        "model": "gpt-4o",
+        "agent_role": "verifier",
+        "agent_id": "verifier"
+      },
+      {
+        "prompt_tokens": 3051,
+        "completion_tokens": 73,
+        "total_tokens": 3124,
+        "model": "gpt-4o",
+        "agent_role": "verifier",
+        "agent_id": "verifier"
+      },
+      {
+        "prompt_tokens": 3240,
+        "completion_tokens": 181,
+        "total_tokens": 3421,
+        "model": "gpt-4o",
+        "agent_role": "verifier",
+        "agent_id": "verifier"
+      },
+      {
+        "prompt_tokens": 2449,
+        "completion_tokens": 43,
+        "total_tokens": 2492,
+        "model": "gpt-4o",
+        "agent_role": "verifier",
+        "agent_id": "verifier"
+      },
+      {
+        "prompt_tokens": 2767,
+        "completion_tokens": 17,
+        "total_tokens": 2784,
+        "model": "gpt-4o",
+        "agent_role": "verifier",
+        "agent_id": "verifier"
+      },
+      {
+        "prompt_tokens": 2926,
+        "completion_tokens": 50,
+        "total_tokens": 2976,
+        "model": "gpt-4o",
+        "agent_role": "verifier",
+        "agent_id": "verifier"
+      },
+      {
+        "prompt_tokens": 3626,
+        "completion_tokens": 687,
+        "total_tokens": 4313,
+        "model": "gpt-4o",
+        "agent_role": "verifier",
+        "agent_id": "verifier"
+      },
+      {
+        "prompt_tokens": 2449,
+        "completion_tokens": 45,
+        "total_tokens": 2494,
+        "model": "gpt-4o",
+        "agent_role": "verifier",
+        "agent_id": "verifier"
+      },
+      {
+        "prompt_tokens": 2674,
+        "completion_tokens": 15,
+        "total_tokens": 2689,
+        "model": "gpt-4o",
+        "agent_role": "verifier",
+        "agent_id": "verifier"
+      },
+      {
+        "prompt_tokens": 2926,
+        "completion_tokens": 62,
+        "total_tokens": 2988,
+        "model": "gpt-4o",
+        "agent_role": "verifier",
+        "agent_id": "verifier"
+      },
+      {
+        "prompt_tokens": 3651,
+        "completion_tokens": 687,
+        "total_tokens": 4338,
+        "model": "gpt-4o",
+        "agent_role": "verifier",
+        "agent_id": "verifier"
+      },
+      {
+        "prompt_tokens": 2451,
+        "completion_tokens": 43,
+        "total_tokens": 2494,
+        "model": "gpt-4o",
+        "agent_role": "verifier",
+        "agent_id": "verifier"
+      },
+      {
+        "prompt_tokens": 2769,
+        "completion_tokens": 17,
+        "total_tokens": 2786,
+        "model": "gpt-4o",
+        "agent_role": "verifier",
+        "agent_id": "verifier"
+      },
+      {
+        "prompt_tokens": 2928,
+        "completion_tokens": 52,
+        "total_tokens": 2980,
+        "model": "gpt-4o",
+        "agent_role": "verifier",
+        "agent_id": "verifier"
+      },
+      {
+        "prompt_tokens": 3636,
+        "completion_tokens": 693,
+        "total_tokens": 4329,
+        "model": "gpt-4o",
+        "agent_role": "verifier",
+        "agent_id": "verifier"
+      },
+      {
+        "prompt_tokens": 2429,
+        "completion_tokens": 43,
+        "total_tokens": 2472,
+        "model": "gpt-4o",
+        "agent_role": "verifier",
+        "agent_id": "verifier"
+      },
+      {
+        "prompt_tokens": 2747,
+        "completion_tokens": 65,
+        "total_tokens": 2812,
+        "model": "gpt-4o",
+        "agent_role": "verifier",
+        "agent_id": "verifier"
+      },
+      {
+        "prompt_tokens": 2911,
+        "completion_tokens": 134,
+        "total_tokens": 3045,
+        "model": "gpt-4o",
+        "agent_role": "verifier",
+        "agent_id": "verifier"
+      },
+      {
+        "prompt_tokens": 2416,
+        "completion_tokens": 46,
+        "total_tokens": 2462,
+        "model": "gpt-4o",
+        "agent_role": "verifier",
+        "agent_id": "verifier"
+      },
+      {
+        "prompt_tokens": 2803,
+        "completion_tokens": 94,
+        "total_tokens": 2897,
+        "model": "gpt-4o",
+        "agent_role": "verifier",
+        "agent_id": "verifier"
+      },
+      {
+        "prompt_tokens": 3012,
+        "completion_tokens": 155,
+        "total_tokens": 3167,
+        "model": "gpt-4o",
+        "agent_role": "verifier",
+        "agent_id": "verifier"
+      },
+      {
+        "prompt_tokens": 2431,
+        "completion_tokens": 45,
+        "total_tokens": 2476,
+        "model": "gpt-4o",
+        "agent_role": "verifier",
+        "agent_id": "verifier"
+      },
+      {
+        "prompt_tokens": 2666,
+        "completion_tokens": 15,
+        "total_tokens": 2681,
+        "model": "gpt-4o",
+        "agent_role": "verifier",
+        "agent_id": "verifier"
+      },
+      {
+        "prompt_tokens": 2940,
+        "completion_tokens": 63,
+        "total_tokens": 3003,
+        "model": "gpt-4o",
+        "agent_role": "verifier",
+        "agent_id": "verifier"
+      },
+      {
+        "prompt_tokens": 5209,
+        "completion_tokens": 516,
+        "total_tokens": 5725,
+        "model": "gpt-4o",
+        "agent_role": "verifier",
+        "agent_id": "verifier"
+      },
+      {
+        "prompt_tokens": 2477,
+        "completion_tokens": 11,
+        "total_tokens": 2488,
+        "model": "gpt-4o",
+        "agent_role": "verifier",
+        "agent_id": "verifier"
+      },
+      {
+        "prompt_tokens": 2533,
+        "completion_tokens": 17,
+        "total_tokens": 2550,
+        "model": "gpt-4o",
+        "agent_role": "verifier",
+        "agent_id": "verifier"
+      },
+      {
+        "prompt_tokens": 2653,
+        "completion_tokens": 15,
+        "total_tokens": 2668,
+        "model": "gpt-4o",
+        "agent_role": "verifier",
+        "agent_id": "verifier"
+      },
+      {
+        "prompt_tokens": 2927,
+        "completion_tokens": 74,
+        "total_tokens": 3001,
+        "model": "gpt-4o",
+        "agent_role": "verifier",
+        "agent_id": "verifier"
+      },
+      {
+        "prompt_tokens": 3134,
+        "completion_tokens": 151,
+        "total_tokens": 3285,
+        "model": "gpt-4o",
+        "agent_role": "verifier",
+        "agent_id": "verifier"
+      },
+      {
+        "prompt_tokens": 2404,
+        "completion_tokens": 45,
+        "total_tokens": 2449,
+        "model": "gpt-4o",
+        "agent_role": "verifier",
+        "agent_id": "verifier"
+      },
+      {
+        "prompt_tokens": 2629,
+        "completion_tokens": 93,
+        "total_tokens": 2722,
+        "model": "gpt-4o",
+        "agent_role": "verifier",
+        "agent_id": "verifier"
+      },
+      {
+        "prompt_tokens": 2836,
+        "completion_tokens": 149,
+        "total_tokens": 2985,
+        "model": "gpt-4o",
+        "agent_role": "verifier",
+        "agent_id": "verifier"
+      },
+      {
+        "prompt_tokens": 2407,
+        "completion_tokens": 45,
+        "total_tokens": 2452,
+        "model": "gpt-4o",
+        "agent_role": "verifier",
+        "agent_id": "verifier"
+      },
+      {
+        "prompt_tokens": 2632,
+        "completion_tokens": 95,
+        "total_tokens": 2727,
+        "model": "gpt-4o",
+        "agent_role": "verifier",
+        "agent_id": "verifier"
+      },
+      {
+        "prompt_tokens": 2843,
+        "completion_tokens": 147,
+        "total_tokens": 2990,
+        "model": "gpt-4o",
+        "agent_role": "verifier",
+        "agent_id": "verifier"
+      },
+      {
+        "prompt_tokens": 2407,
+        "completion_tokens": 46,
+        "total_tokens": 2453,
+        "model": "gpt-4o",
+        "agent_role": "verifier",
+        "agent_id": "verifier"
+      },
+      {
+        "prompt_tokens": 2794,
+        "completion_tokens": 49,
+        "total_tokens": 2843,
+        "model": "gpt-4o",
+        "agent_role": "verifier",
+        "agent_id": "verifier"
+      },
+      {
+        "prompt_tokens": 3526,
+        "completion_tokens": 692,
+        "total_tokens": 4218,
+        "model": "gpt-4o",
+        "agent_role": "verifier",
+        "agent_id": "verifier"
+      },
+      {
+        "prompt_tokens": 2554,
+        "completion_tokens": 43,
+        "total_tokens": 2597,
+        "model": "gpt-4o",
+        "agent_role": "verifier",
+        "agent_id": "verifier"
+      },
+      {
+        "prompt_tokens": 2896,
+        "completion_tokens": 72,
+        "total_tokens": 2968,
+        "model": "gpt-4o",
+        "agent_role": "verifier",
+        "agent_id": "verifier"
+      },
+      {
+        "prompt_tokens": 3191,
+        "completion_tokens": 189,
+        "total_tokens": 3380,
+        "model": "gpt-4o",
+        "agent_role": "verifier",
+        "agent_id": "verifier"
+      },
+      {
+        "prompt_tokens": 1550,
+        "completion_tokens": 447,
+        "total_tokens": 1997,
+        "model": "gpt-4o",
+        "agent_role": "tot_orchestrator",
+        "agent_id": "tot_orchestrator"
+      }
+    ]
+  },
+  "execution_time_ms": 167410,
+  "sub_queries_count": 5,
+  "llm_calls_count": 98,
+  "original_query": "Analyze the overall architecture of the HelloWorldApp."
+}

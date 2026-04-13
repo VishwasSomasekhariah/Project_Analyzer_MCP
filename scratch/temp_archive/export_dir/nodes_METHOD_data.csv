@@ -1,0 +1,60 @@
+111669149696,METHOD,<empty>,<empty>,void Notify(string message);,8,36,HelloWorldApp/INotifier.cs,HelloWorldApp.INotifier.Notify:System.Void(System.String),<empty>,,false,4,4,Notify,,,2,System.Void(System.String)
+111669149697,METHOD,<empty>,<empty>,void Process();,8,23,HelloWorldApp/IWorker.cs,HelloWorldApp.IWorker.Process:System.Void(),<empty>,,false,4,4,Process,,,2,System.Void()
+111669149698,METHOD,<empty>,<empty>,"public void Run()
+        {
+            Console.WriteLine(""Manager starting work..."");
+            IEnumerable<IWorker> workers = WorkerFactory.CreateWorkers(this);
+
+            // one-to-many: Manager invokes all workers
+            foreach (var worker in workers)
+            {
+                worker.Process();
+            }
+        }",8,9,HelloWorldApp/Manager.cs,HelloWorldApp.Manager.Run:System.Void(),<empty>,,false,7,17,Run,,,2,System.Void()
+111669149699,METHOD,<empty>,<empty>,"public void Notify(string message)
+        {
+            Console.WriteLine($""Manager received notification: {message}"");
+        }",8,9,HelloWorldApp/Manager.cs,HelloWorldApp.Manager.Notify:System.Void(System.String),<empty>,,false,20,23,Notify,,,3,System.Void(System.String)
+111669149700,METHOD,<empty>,<empty>,"static void Main(string[] args)
+        {
+            Manager manager = new Manager();
+            manager.Run();
+            Console.WriteLine(""All work completed. Press any key to exit."");
+            Console.ReadKey();
+        }",8,9,HelloWorldApp/Program.cs,HelloWorldApp.Program.Main:System.Void(System.String[]),<empty>,,false,6,12,Main,,,2,System.Void(System.String[])
+111669149701,METHOD,<empty>,<empty>,"public static string FormatMessage(string workerName, string text)
+        {
+            return $""[{workerName}] {text}"";
+        }",8,9,HelloWorldApp/Utilities/Helper.cs,"HelloWorldApp.Utilities.Helper.FormatMessage:System.String(System.String,System.String)",<empty>,,false,4,7,FormatMessage,,,3,"System.String(System.String,System.String)"
+111669149702,METHOD,<empty>,<empty>,"public WorkerC(INotifier notifier)
+        {
+            _notifier = notifier;
+        }",8,9,HelloWorldApp/WorkerC.cs,HelloWorldApp.WorkerC.<init>:System.Void(HelloWorldApp.INotifier),<empty>,,false,6,9,<init>,,,3,System.Void(HelloWorldApp.INotifier)
+111669149703,METHOD,<empty>,<empty>,"public void Process()
+        {
+            string msg = Utilities.Helper.FormatMessage(""WorkerC"", ""Hi there, C here"");
+            System.Console.WriteLine(msg);
+            _notifier.Notify(""WorkerC has finished processing."");
+        }",8,9,HelloWorldApp/WorkerC.cs,HelloWorldApp.WorkerC.Process:System.Void(),<empty>,,false,11,16,Process,,,4,System.Void()
+111669149704,METHOD,<empty>,<empty>,"public static IEnumerable<IWorker> CreateWorkers(INotifier notifier)
+        {
+            // create multiple workers, each knows how to call back
+            return new List<IWorker>
+            {
+                new WorkerA(notifier),
+                new WorkerB(notifier),
+                new WorkerC(notifier)
+            };
+        }",8,9,HelloWorldApp/WorkerFactory.cs,HelloWorldApp.WorkerFactory.CreateWorkers:IEnumerable(HelloWorldApp.INotifier),<empty>,,false,6,15,CreateWorkers,,,3,IEnumerable(HelloWorldApp.INotifier)
+111669149705,METHOD,<global>,NAMESPACE_BLOCK,<empty>,,,<empty>,System.Console.WriteLine:System.Void(System.String),<empty>,,true,,,WriteLine,,,0,System.Void(System.String)
+111669149706,METHOD,<global>,NAMESPACE_BLOCK,<empty>,,,<empty>,<operator>.assignment,<empty>,,true,,,<operator>.assignment,,,0,
+111669149707,METHOD,<global>,NAMESPACE_BLOCK,<empty>,,,<empty>,HelloWorldApp.WorkerFactory.CreateWorkers:IEnumerable(INotifier),<empty>,,true,,,CreateWorkers,,,0,IEnumerable(INotifier)
+111669149708,METHOD,<global>,NAMESPACE_BLOCK,<empty>,,,<empty>,<operator>.lessThan,<empty>,,true,,,<operator>.lessThan,,,0,
+111669149709,METHOD,<global>,NAMESPACE_BLOCK,<empty>,,,<empty>,<operator>.fieldAccess,<empty>,,true,,,<operator>.fieldAccess,,,0,
+111669149710,METHOD,<global>,NAMESPACE_BLOCK,<empty>,,,<empty>,<operator>.indexAccess,<empty>,,true,,,<operator>.indexAccess,,,0,
+111669149711,METHOD,<global>,NAMESPACE_BLOCK,<empty>,,,<empty>,<operator>.postIncrement,<empty>,,true,,,<operator>.postIncrement,,,0,
+111669149712,METHOD,<global>,NAMESPACE_BLOCK,<empty>,,,<empty>,var.Process:<unresolvedSignature>,<empty>,,true,,,Process,,,0,<unresolvedSignature>
+111669149713,METHOD,<global>,NAMESPACE_BLOCK,<empty>,,,<empty>,<operator>.formatString,<empty>,,true,,,<operator>.formatString,,,0,
+111669149714,METHOD,<global>,NAMESPACE_BLOCK,<empty>,,,<empty>,HelloWorldApp.Manager.<init>,<empty>,,true,,,<init>,,,0,
+111669149715,METHOD,<global>,NAMESPACE_BLOCK,<empty>,,,<empty>,System.Console.ReadKey:System.ConsoleKeyInfo(),<empty>,,true,,,ReadKey,,,0,System.ConsoleKeyInfo()
+111669149716,METHOD,<global>,NAMESPACE_BLOCK,<empty>,,,<empty>,List.<init>,<empty>,,true,,,<init>,,,0,

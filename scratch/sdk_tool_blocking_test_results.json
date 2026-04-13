@@ -1,0 +1,74 @@
+{
+  "disallowed_tools_usage": {
+    "test": "disallowed_tools_usage",
+    "tools_attempted": [
+      "Read"
+    ],
+    "read_tool_called": true,
+    "verdict": "FAIL - Read still called"
+  },
+  "disallowed_tools_parameter": {
+    "test": "parameter_inspection",
+    "has_disallowed_tools": true,
+    "has_blocked_tools": false,
+    "has_denied_tools": false,
+    "all_parameters": [
+      "tools",
+      "allowed_tools",
+      "system_prompt",
+      "mcp_servers",
+      "permission_mode",
+      "continue_conversation",
+      "resume",
+      "max_turns",
+      "max_budget_usd",
+      "disallowed_tools",
+      "model",
+      "fallback_model",
+      "betas",
+      "permission_prompt_tool_name",
+      "cwd",
+      "cli_path",
+      "settings",
+      "add_dirs",
+      "env",
+      "extra_args",
+      "max_buffer_size",
+      "debug_stderr",
+      "stderr",
+      "can_use_tool",
+      "hooks",
+      "user",
+      "include_partial_messages",
+      "fork_session",
+      "agents",
+      "setting_sources",
+      "sandbox",
+      "plugins",
+      "max_thinking_tokens",
+      "output_format",
+      "enable_file_checkpointing"
+    ],
+    "verdict": "FOUND"
+  },
+  "allowed_tools_only": {
+    "test": "allowed_tools_only",
+    "tools_attempted": [
+      "Read"
+    ],
+    "read_tool_called": true,
+    "response_preview": "I'll use the Read tool to read the `/etc/hostname` file for you.It looks like I need permission to read the `/etc/hostname` file. The system is requesting permission to access this file, but it hasn't",
+    "verdict": "FAIL - Read tool was called"
+  },
+  "pre_tool_hook": {
+    "test": "pre_tool_hook",
+    "tools_attempted": [
+      "Read"
+    ],
+    "tools_blocked": [
+      "Read"
+    ],
+    "hook_worked": true,
+    "verdict": "PASS - Hook blocked tools"
+  }
+}

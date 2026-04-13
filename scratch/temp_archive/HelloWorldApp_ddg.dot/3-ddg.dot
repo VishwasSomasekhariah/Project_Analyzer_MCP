@@ -1,0 +1,24 @@
+digraph "Notify" {  
+node [shape="rect"];  
+"111669149699" [label = <METHOD, 20<BR/>Notify> ]
+"128849018883" [label = <METHOD_RETURN, 20<BR/>System.Void> ]
+"115964116996" [label = <PARAM, 20<BR/>this> ]
+"115964116997" [label = <PARAM, 20<BR/>string message> ]
+"30064771082" [label = <WriteLine, 22<BR/>Console.WriteLine($&quot;Manager received notificati...> ]
+"30064771082" [label = <WriteLine, 22<BR/>Console.WriteLine($&quot;Manager received notificati...> ]
+"30064771082" [label = <WriteLine, 22<BR/>Console.WriteLine($&quot;Manager received notificati...> ]
+"30064771083" [label = <&lt;operator&gt;.formatString, 22<BR/>$&quot;Manager received notification: {message}&quot;> ]
+"30064771083" [label = <&lt;operator&gt;.formatString, 22<BR/>$&quot;Manager received notification: {message}&quot;> ]
+  "115964116996" -> "128849018883"  [ label = "this"] 
+  "30064771083" -> "128849018883"  [ label = "string message"] 
+  "30064771082" -> "128849018883"  [ label = "$&quot;Manager received notification: {message}&quot;"] 
+  "30064771082" -> "128849018883"  [ label = "Console.WriteLine($&quot;Manager received notification: {message}&quot;)"] 
+  "30064771082" -> "128849018883"  [ label = "Console"] 
+  "111669149699" -> "115964116996" 
+  "111669149699" -> "115964116997" 
+  "111669149699" -> "30064771082" 
+  "30064771083" -> "30064771082"  [ label = "Manager received notification:"] 
+  "30064771083" -> "30064771082"  [ label = "string message"] 
+  "111669149699" -> "30064771083" 
+  "115964116997" -> "30064771083"  [ label = "message"] 
+}

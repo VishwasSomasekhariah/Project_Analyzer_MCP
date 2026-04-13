@@ -1,0 +1,838 @@
+{
+  "status": "success",
+  "tool_name": "query_cpg_rag",
+  "workflow_type": "4_agent_team",
+  "user_query": "Which specific classes are instantiated and returned by the WorkerFactory.CreateWorkers() method?",
+  "project_name": "HelloWorldApp",
+  "response": {
+    "answer": "The WorkerFactory.CreateWorkers() method instantiates and returns three specific worker classes: WorkerA, WorkerB, and WorkerC. This method is a public static factory method located in HelloWorldApp/WorkerFactory.cs that takes an INotifier parameter and returns an IEnumerable<IWorker>. The implementation creates a new List<IWorker> collection containing instances of all three worker classes: 'new WorkerA(notifier)', 'new WorkerB(notifier)', and 'new WorkerC(notifier)'. Each worker class is instantiated using the 'new' keyword and their constructors all accept the same INotifier parameter. The method implements a covariant return pattern by declaring IEnumerable<IWorker> as the return type while actually returning the more specific List<IWorker> concrete collection. All three worker classes (WorkerA, WorkerB, WorkerC) are public classes that implement the IWorker interface, which defines a Process() method.",
+    "confidence": "high",
+    "status": "success"
+  },
+  "citations": [
+    {
+      "claim": "WorkerFactory class contains CreateWorkers method via CONTAINS relationship",
+      "source_file": "HelloWorldApp/WorkerFactory.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/WorkerFactory.cs",
+      "entity_name": "WorkerFactory",
+      "entity_type": "Type",
+      "evidence": {
+        "summary": "Query returned direct evidence of CONTAINS relationship between WorkerFactory type and CreateWorkers function, both located in HelloWorldApp/WorkerFactory.cs"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (wf:Type {name: 'WorkerFactory'})-[:CONTAINS]->(cw:Function {name: 'CreateWorkers'}) RETURN wf.name AS class_name, wf.file_path AS class_file, cw.name AS method_name, cw.file_path AS method_file, cw.parameters AS parameters, cw.return_type AS return_type, cw.start_point AS start_location, cw.end_point AS end_location, cw.modifier AS modifier",
+      "verification_query": "MATCH (wf:Type {name: 'WorkerFactory'})-[:CONTAINS]->(cw:Function {name: 'CreateWorkers'}) RETURN wf.name AS class_name, wf.file_path AS class_file, cw.name AS method_name, cw.file_path AS method_file, cw.parameters AS parameters, cw.return_type AS return_type, cw.start_point AS start_location, cw.end_point AS end_location, cw.modifier AS modifier",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "CreateWorkers is a public static method with signature (INotifier notifier) returning IEnumerable<IWorker>",
+      "source_file": "HelloWorldApp/WorkerFactory.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/WorkerFactory.cs",
+      "entity_name": "CreateWorkers",
+      "entity_type": "Function",
+      "evidence": {
+        "summary": "Query results show CreateWorkers function with parameters '(INotifier notifier)', return_type 'IEnumerable<IWorker>', and modifier array ['public', 'static']"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (wf:Type {name: 'WorkerFactory'})-[:CONTAINS]->(cw:Function {name: 'CreateWorkers'}) RETURN wf.name AS class_name, wf.file_path AS class_file, cw.name AS method_name, cw.file_path AS method_file, cw.parameters AS parameters, cw.return_type AS return_type, cw.start_point AS start_location, cw.end_point AS end_location, cw.modifier AS modifier",
+      "verification_query": "MATCH (wf:Type {name: 'WorkerFactory'})-[:CONTAINS]->(cw:Function {name: 'CreateWorkers'}) RETURN wf.name AS class_name, wf.file_path AS class_file, cw.name AS method_name, cw.file_path AS method_file, cw.parameters AS parameters, cw.return_type AS return_type, cw.start_point AS start_location, cw.end_point AS end_location, cw.modifier AS modifier",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "WorkerFactory and CreateWorkers have multiple relationship types including CONTAINS, IMPLEMENTS, and REFERENCES",
+      "source_file": "HelloWorldApp/WorkerFactory.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/WorkerFactory.cs",
+      "entity_name": "WorkerFactory",
+      "entity_type": "Type",
+      "evidence": {
+        "summary": "Second query returned 3 relationship records between WorkerFactory and CreateWorkers with relationship_type values of 'IMPLEMENTS', 'REFERENCES', and 'CONTAINS'"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (wf:Type {name: 'WorkerFactory'})-[r]-(cw:Function {name: 'CreateWorkers'}) RETURN wf.name AS class_name, wf.file_path AS class_file, cw.name AS method_name, cw.file_path AS method_file, cw.parameters AS parameters, cw.return_type AS return_type, cw.start_point AS start_location, cw.end_point AS end_location, cw.modifier AS modifier, type(r) AS relationship_type",
+      "verification_query": "MATCH (wf:Type {name: 'WorkerFactory'})-[r]-(cw:Function {name: 'CreateWorkers'}) RETURN wf.name AS class_name, wf.file_path AS class_file, cw.name AS method_name, cw.file_path AS method_file, cw.parameters AS parameters, cw.return_type AS return_type, cw.start_point AS start_location, cw.end_point AS end_location, cw.modifier AS modifier, type(r) AS relationship_type",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "CreateWorkers method spans from line 6 column 8 to line 15 column 9 in WorkerFactory.cs",
+      "source_file": "HelloWorldApp/WorkerFactory.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/WorkerFactory.cs",
+      "entity_name": "CreateWorkers",
+      "entity_type": "Function",
+      "evidence": {
+        "summary": "Query results show start_point [6, 8] and end_point [15, 9] indicating the method spans 10 lines in the source file"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (wf:Type {name: 'WorkerFactory'})-[:CONTAINS]->(cw:Function {name: 'CreateWorkers'}) RETURN wf.name AS class_name, wf.file_path AS class_file, cw.name AS method_name, cw.file_path AS method_file, cw.parameters AS parameters, cw.return_type AS return_type, cw.start_point AS start_location, cw.end_point AS end_location, cw.modifier AS modifier",
+      "verification_query": "MATCH (wf:Type {name: 'WorkerFactory'})-[:CONTAINS]->(cw:Function {name: 'CreateWorkers'}) RETURN wf.name AS class_name, wf.file_path AS class_file, cw.name AS method_name, cw.file_path AS method_file, cw.parameters AS parameters, cw.return_type AS return_type, cw.start_point AS start_location, cw.end_point AS end_location, cw.modifier AS modifier",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "CreateWorkers method has direct reference to WorkerFactory class type",
+      "source_file": "HelloWorldApp/WorkerFactory.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/WorkerFactory.cs",
+      "entity_name": "CreateWorkers",
+      "entity_type": "Function",
+      "evidence": {
+        "summary": "Query returned direct REFERENCES relationship to WorkerFactory type with type_kind 'class', type_modifier ['public', 'static'], confirming depth-1 direct reference"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (f:Function {name: 'CreateWorkers'})-[:REFERENCES]->(t:Type) WHERE f.file_path = 'HelloWorldApp/WorkerFactory.cs'",
+      "verification_query": "MATCH (f:Function {name: 'CreateWorkers'})-[:REFERENCES]->(t:Type) WHERE f.file_path = 'HelloWorldApp/WorkerFactory.cs'",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "CreateWorkers method indirectly references INotifier interface through 'notifier' variable",
+      "source_file": "HelloWorldApp/WorkerFactory.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/WorkerFactory.cs",
+      "entity_name": "CreateWorkers",
+      "entity_type": "Function",
+      "evidence": {
+        "summary": "Variable-mediated reference shows INotifier with type_kind 'interface', type_modifier 'public', accessed through 'notifier' variable with multiple reference instances"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (f:Function {name: 'CreateWorkers'})-[:REFERENCES]->(v:Variable)-[:REFERENCES]->(t:Type) WHERE f.file_path = 'HelloWorldApp/WorkerFactory.cs'",
+      "verification_query": "MATCH (f:Function {name: 'CreateWorkers'})-[:REFERENCES]->(v:Variable)-[:REFERENCES]->(t:Type) WHERE f.file_path = 'HelloWorldApp/WorkerFactory.cs'",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "CreateWorkers method indirectly references IWorker interface through 'workers' variable",
+      "source_file": "HelloWorldApp/WorkerFactory.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/WorkerFactory.cs",
+      "entity_name": "CreateWorkers",
+      "entity_type": "Function",
+      "evidence": {
+        "summary": "Query results show IWorker interface with type_kind 'interface', type_modifier 'public', referenced through 'workers' variable in variable_mediated reference pattern"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (f:Function {name: 'CreateWorkers'})-[:REFERENCES]->(v:Variable)-[:REFERENCES]->(t:Type) WHERE f.file_path = 'HelloWorldApp/WorkerFactory.cs'",
+      "verification_query": "MATCH (f:Function {name: 'CreateWorkers'})-[:REFERENCES]->(v:Variable)-[:REFERENCES]->(t:Type) WHERE f.file_path = 'HelloWorldApp/WorkerFactory.cs'",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "CreateWorkers method indirectly references concrete worker classes WorkerA, WorkerB, and WorkerC through 'workers' variable",
+      "source_file": "HelloWorldApp/WorkerFactory.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/WorkerFactory.cs",
+      "entity_name": "CreateWorkers",
+      "entity_type": "Function",
+      "evidence": {
+        "summary": "Variable-mediated references show all three worker classes (WorkerA, WorkerB, WorkerC) with type_kind 'class', type_modifier 'public', all accessed through 'workers' variable"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (f:Function {name: 'CreateWorkers'})-[:REFERENCES]->(v:Variable)-[:REFERENCES]->(t:Type) WHERE f.file_path = 'HelloWorldApp/WorkerFactory.cs'",
+      "verification_query": "MATCH (f:Function {name: 'CreateWorkers'})-[:REFERENCES]->(v:Variable)-[:REFERENCES]->(t:Type) WHERE f.file_path = 'HelloWorldApp/WorkerFactory.cs'",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "CreateWorkers method indirectly references Manager class through 'notifier' variable",
+      "source_file": "HelloWorldApp/WorkerFactory.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/WorkerFactory.cs",
+      "entity_name": "CreateWorkers",
+      "entity_type": "Function",
+      "evidence": {
+        "summary": "Manager class referenced with type_kind 'class', type_modifier 'public' through 'notifier' variable with multiple reference instances in variable_mediated pattern"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (f:Function {name: 'CreateWorkers'})-[:REFERENCES]->(v:Variable)-[:REFERENCES]->(t:Type) WHERE f.file_path = 'HelloWorldApp/WorkerFactory.cs'",
+      "verification_query": "MATCH (f:Function {name: 'CreateWorkers'})-[:REFERENCES]->(v:Variable)-[:REFERENCES]->(t:Type) WHERE f.file_path = 'HelloWorldApp/WorkerFactory.cs'",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "CreateWorkers method has reference relationships at two distinct depths: direct (depth 1) and variable-mediated (depth 2)",
+      "source_file": "HelloWorldApp/WorkerFactory.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/WorkerFactory.cs",
+      "entity_name": "CreateWorkers",
+      "entity_type": "Function",
+      "evidence": {
+        "summary": "Path analysis shows reference_depth values of 1 for WorkerFactory (direct) and 2 for other types (INotifier, IWorker, Manager, WorkerA, WorkerB, WorkerC) with intermediate_nodes containing 'Variable' or 'Type'"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH path = (f)-[:REFERENCES*1..2]->(t:Type) WHERE f.file_path = 'HelloWorldApp/WorkerFactory.cs'",
+      "verification_query": "MATCH path = (f)-[:REFERENCES*1..2]->(t:Type) WHERE f.file_path = 'HelloWorldApp/WorkerFactory.cs'",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "CreateWorkers method uses 'new' keyword to instantiate List<IWorker> and three worker classes (WorkerA, WorkerB, WorkerC)",
+      "source_file": "HelloWorldApp/WorkerFactory.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/WorkerFactory.cs",
+      "entity_name": "CreateWorkers",
+      "entity_type": "Function",
+      "evidence": {
+        "summary": "Return statement shows explicit 'new' keyword usage: 'return new List<IWorker> { new WorkerA(notifier), new WorkerB(notifier), new WorkerC(notifier) };' demonstrating factory pattern with constructor calls"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (f:Function {name: 'CreateWorkers'})-[:REFERENCES]->(s:Statement) WHERE f.file_path = 'HelloWorldApp/WorkerFactory.cs'",
+      "verification_query": "MATCH (f:Function {name: 'CreateWorkers'})-[:REFERENCES]->(s:Statement) WHERE f.file_path = 'HelloWorldApp/WorkerFactory.cs'",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "CreateWorkers method calls constructors for WorkerA, WorkerB, and WorkerC classes, all accepting INotifier parameter",
+      "source_file": "HelloWorldApp/WorkerA.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/WorkerA.cs",
+      "entity_name": "WorkerA",
+      "entity_type": "Function",
+      "evidence": {
+        "summary": "Query results show function calls to WorkerA, WorkerB, and WorkerC constructors, all with modifier 'public' and parameters '(INotifier notifier)', confirming uniform constructor signature pattern"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (f:Function {name: 'CreateWorkers'})-[:CALLS]->(called_func:Function) WHERE f.file_path = 'HelloWorldApp/WorkerFactory.cs'",
+      "verification_query": "MATCH (f:Function {name: 'CreateWorkers'})-[:CALLS]->(called_func:Function) WHERE f.file_path = 'HelloWorldApp/WorkerFactory.cs'",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "CreateWorkers method references two variables: 'notifier' parameter and 'workers' local variable",
+      "source_file": "HelloWorldApp/WorkerFactory.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/WorkerFactory.cs",
+      "entity_name": "notifier",
+      "entity_type": "Variable",
+      "evidence": {
+        "summary": "Query returned two distinct variables: 'notifier' at location [6, 57] and 'workers' at location [10, 12], both of type 'Variable'"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (f:Function {name: 'CreateWorkers'})-[:REFERENCES]->(v:Variable) WHERE f.file_path = 'HelloWorldApp/WorkerFactory.cs'",
+      "verification_query": "MATCH (f:Function {name: 'CreateWorkers'})-[:REFERENCES]->(v:Variable) WHERE f.file_path = 'HelloWorldApp/WorkerFactory.cs'",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "CreateWorkers method contains a single code block with explanatory comment and factory instantiation return statement",
+      "source_file": "HelloWorldApp/WorkerFactory.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/WorkerFactory.cs",
+      "entity_name": "CreateWorkers",
+      "entity_type": "Function",
+      "evidence": {
+        "summary": "Block contains exactly 2 statements: comment '// create multiple workers, each knows how to call back' and return statement with List<IWorker> instantiation, spanning from [7,8] to [15,9]"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (f:Function {name: 'CreateWorkers'})-[:CONTAINS]->(b:Block) WHERE f.file_path = 'HelloWorldApp/WorkerFactory.cs'",
+      "verification_query": "MATCH (f:Function {name: 'CreateWorkers'})-[:CONTAINS]->(b:Block) WHERE f.file_path = 'HelloWorldApp/WorkerFactory.cs'",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "CreateWorkers method has declared return type of IEnumerable<IWorker>",
+      "source_file": "HelloWorldApp/WorkerFactory.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/WorkerFactory.cs",
+      "entity_name": "CreateWorkers",
+      "entity_type": "Function",
+      "evidence": {
+        "summary": "Function query returned declared_return_type 'IEnumerable<IWorker>' with method_modifiers ['public', 'static'] and method_parameters '(INotifier notifier)'"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (f:Function {name: 'CreateWorkers'}) WHERE f.file_path = 'HelloWorldApp/WorkerFactory.cs'",
+      "verification_query": "MATCH (f:Function {name: 'CreateWorkers'}) WHERE f.file_path = 'HelloWorldApp/WorkerFactory.cs'",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "CreateWorkers method actually returns concrete List<IWorker> collection containing WorkerA, WorkerB, and WorkerC instances",
+      "source_file": "HelloWorldApp/WorkerFactory.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/WorkerFactory.cs",
+      "entity_name": "CreateWorkers",
+      "entity_type": "Function",
+      "evidence": {
+        "summary": "Return statement shows 'return new List<IWorker> { new WorkerA(notifier), new WorkerB(notifier), new WorkerC(notifier) };' at location [9, 12] with statement_order 2"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (f:Function {name: 'CreateWorkers'})-[:REFERENCES]->(s:Statement) WHERE f.file_path = 'HelloWorldApp/WorkerFactory.cs' AND s.statement_type = 'return'",
+      "verification_query": "MATCH (f:Function {name: 'CreateWorkers'})-[:REFERENCES]->(s:Statement) WHERE f.file_path = 'HelloWorldApp/WorkerFactory.cs' AND s.statement_type = 'return'",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "IWorker interface defines a Process() method and is publicly accessible",
+      "source_file": "HelloWorldApp/IWorker.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/IWorker.cs",
+      "entity_name": "IWorker",
+      "entity_type": "Type",
+      "evidence": {
+        "summary": "IWorker type query returned type_kind 'interface', access_modifier 'public', and interface_definition '{ void Process(); }' in HelloWorldApp/IWorker.cs"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (t:Type {name: 'IWorker'})",
+      "verification_query": "MATCH (t:Type {name: 'IWorker'})",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "CreateWorkers method references IWorker interface at depth 2 through Variable intermediation",
+      "source_file": "HelloWorldApp/WorkerFactory.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/WorkerFactory.cs",
+      "entity_name": "CreateWorkers",
+      "entity_type": "Function",
+      "evidence": {
+        "summary": "Path analysis shows relationship_depth 2 with relationship_path ['REFERENCES', 'REFERENCES'] and intermediate_nodes ['Variable'], confirming Function -> Variable -> Type pattern"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH path = (f)-[:REFERENCES*1..2]->(t:Type {name: 'IWorker'}) WHERE f.file_path = 'HelloWorldApp/WorkerFactory.cs'",
+      "verification_query": "MATCH path = (f)-[:REFERENCES*1..2]->(t:Type {name: 'IWorker'}) WHERE f.file_path = 'HelloWorldApp/WorkerFactory.cs'",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "CreateWorkers implements covariant return pattern declaring IEnumerable<IWorker> but returning concrete List<IWorker>",
+      "source_file": "HelloWorldApp/WorkerFactory.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/WorkerFactory.cs",
+      "entity_name": "CreateWorkers",
+      "entity_type": "Function",
+      "evidence": {
+        "summary": "Function signature shows declared_return_type 'IEnumerable<IWorker>' while return statement shows actual return 'new List<IWorker>', demonstrating interface-to-concrete covariance pattern"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "Combined evidence from function signature query and return statement query",
+      "verification_query": "Combined evidence from function signature query and return statement query",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "CreateWorkers method instantiates three concrete worker classes using 'new' keyword: WorkerA, WorkerB, and WorkerC",
+      "source_file": "HelloWorldApp/WorkerFactory.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/WorkerFactory.cs",
+      "entity_name": "CreateWorkers",
+      "entity_type": "Function",
+      "evidence": {
+        "summary": "Return statement shows explicit instantiation code 'return new List<IWorker> { new WorkerA(notifier), new WorkerB(notifier), new WorkerC(notifier) };' at statement_order 2 and code_location [9, 12]"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (f:Function {name: 'CreateWorkers'})-[:REFERENCES]->(s:Statement) WHERE f.file_path = 'HelloWorldApp/WorkerFactory.cs' AND s.statement_type = 'return'",
+      "verification_query": "MATCH (f:Function {name: 'CreateWorkers'})-[:REFERENCES]->(s:Statement) WHERE f.file_path = 'HelloWorldApp/WorkerFactory.cs' AND s.statement_type = 'return'",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "CreateWorkers method calls constructors for WorkerA, WorkerB, and WorkerC with uniform signature (INotifier notifier)",
+      "source_file": "HelloWorldApp/WorkerA.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/WorkerA.cs",
+      "entity_name": "WorkerA",
+      "entity_type": "Function",
+      "evidence": {
+        "summary": "Constructor call query returned three results showing instantiated_type values 'WorkerA', 'WorkerB', 'WorkerC' all with identical constructor_signature '(INotifier notifier)' in their respective files"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (f:Function {name: 'CreateWorkers'})-[:CALLS]->(constructor:Function) WHERE f.file_path = 'HelloWorldApp/WorkerFactory.cs' AND constructor.name IN ['WorkerA', 'WorkerB', 'WorkerC']",
+      "verification_query": "MATCH (f:Function {name: 'CreateWorkers'})-[:CALLS]->(constructor:Function) WHERE f.file_path = 'HelloWorldApp/WorkerFactory.cs' AND constructor.name IN ['WorkerA', 'WorkerB', 'WorkerC']",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "CreateWorkers method references seven distinct types: INotifier, IWorker, Manager, WorkerA, WorkerB, WorkerC, and WorkerFactory",
+      "source_file": "HelloWorldApp/WorkerFactory.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/WorkerFactory.cs",
+      "entity_name": "CreateWorkers",
+      "entity_type": "Function",
+      "evidence": {
+        "summary": "Type collection query returned 7 distinct types with type_classification values showing 2 interfaces (INotifier, IWorker) and 5 classes (Manager, WorkerA, WorkerB, WorkerC, WorkerFactory), all with access_modifier 'public'"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "OPTIONAL MATCH (f)-[:REFERENCES]->(t1:Type) OPTIONAL MATCH (f)-[:REFERENCES]->(v:Variable)-[:REFERENCES]->(t2:Type) WITH collect(DISTINCT t1) + collect(DISTINCT t2) AS all_types",
+      "verification_query": "OPTIONAL MATCH (f)-[:REFERENCES]->(t1:Type) OPTIONAL MATCH (f)-[:REFERENCES]->(v:Variable)-[:REFERENCES]->(t2:Type) WITH collect(DISTINCT t1) + collect(DISTINCT t2) AS all_types",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "CreateWorkers categorizes types into INSTANTIATED group (WorkerA, WorkerB, WorkerC) and REFERENCED_ONLY group (INotifier, IWorker, Manager, WorkerFactory)",
+      "source_file": "HelloWorldApp/WorkerA.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/WorkerA.cs",
+      "entity_name": "WorkerA",
+      "entity_type": "Type",
+      "evidence": {
+        "summary": "Categorization query returned usage_category 'INSTANTIATED' for WorkerA, WorkerB, WorkerC (all with type_classification 'class') and usage_category 'REFERENCED_ONLY' for INotifier, IWorker, Manager, WorkerFactory"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "CASE WHEN t.name IN ['WorkerA', 'WorkerB', 'WorkerC'] THEN 'INSTANTIATED' WHEN t.name IN ['INotifier', 'IWorker', 'WorkerFactory', 'Manager'] THEN 'REFERENCED_ONLY'",
+      "verification_query": "CASE WHEN t.name IN ['WorkerA', 'WorkerB', 'WorkerC'] THEN 'INSTANTIATED' WHEN t.name IN ['INotifier', 'IWorker', 'WorkerFactory', 'Manager'] THEN 'REFERENCED_ONLY'",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    }
+  ],
+  "raw_results": [
+    {
+      "claim": "WorkerFactory class contains CreateWorkers method via CONTAINS relationship",
+      "source_file": "HelloWorldApp/WorkerFactory.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/WorkerFactory.cs",
+      "entity_name": "WorkerFactory",
+      "entity_type": "Type",
+      "evidence": {
+        "summary": "Query returned direct evidence of CONTAINS relationship between WorkerFactory type and CreateWorkers function, both located in HelloWorldApp/WorkerFactory.cs"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (wf:Type {name: 'WorkerFactory'})-[:CONTAINS]->(cw:Function {name: 'CreateWorkers'}) RETURN wf.name AS class_name, wf.file_path AS class_file, cw.name AS method_name, cw.file_path AS method_file, cw.parameters AS parameters, cw.return_type AS return_type, cw.start_point AS start_location, cw.end_point AS end_location, cw.modifier AS modifier",
+      "verification_query": "MATCH (wf:Type {name: 'WorkerFactory'})-[:CONTAINS]->(cw:Function {name: 'CreateWorkers'}) RETURN wf.name AS class_name, wf.file_path AS class_file, cw.name AS method_name, cw.file_path AS method_file, cw.parameters AS parameters, cw.return_type AS return_type, cw.start_point AS start_location, cw.end_point AS end_location, cw.modifier AS modifier",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "CreateWorkers is a public static method with signature (INotifier notifier) returning IEnumerable<IWorker>",
+      "source_file": "HelloWorldApp/WorkerFactory.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/WorkerFactory.cs",
+      "entity_name": "CreateWorkers",
+      "entity_type": "Function",
+      "evidence": {
+        "summary": "Query results show CreateWorkers function with parameters '(INotifier notifier)', return_type 'IEnumerable<IWorker>', and modifier array ['public', 'static']"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (wf:Type {name: 'WorkerFactory'})-[:CONTAINS]->(cw:Function {name: 'CreateWorkers'}) RETURN wf.name AS class_name, wf.file_path AS class_file, cw.name AS method_name, cw.file_path AS method_file, cw.parameters AS parameters, cw.return_type AS return_type, cw.start_point AS start_location, cw.end_point AS end_location, cw.modifier AS modifier",
+      "verification_query": "MATCH (wf:Type {name: 'WorkerFactory'})-[:CONTAINS]->(cw:Function {name: 'CreateWorkers'}) RETURN wf.name AS class_name, wf.file_path AS class_file, cw.name AS method_name, cw.file_path AS method_file, cw.parameters AS parameters, cw.return_type AS return_type, cw.start_point AS start_location, cw.end_point AS end_location, cw.modifier AS modifier",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "WorkerFactory and CreateWorkers have multiple relationship types including CONTAINS, IMPLEMENTS, and REFERENCES",
+      "source_file": "HelloWorldApp/WorkerFactory.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/WorkerFactory.cs",
+      "entity_name": "WorkerFactory",
+      "entity_type": "Type",
+      "evidence": {
+        "summary": "Second query returned 3 relationship records between WorkerFactory and CreateWorkers with relationship_type values of 'IMPLEMENTS', 'REFERENCES', and 'CONTAINS'"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (wf:Type {name: 'WorkerFactory'})-[r]-(cw:Function {name: 'CreateWorkers'}) RETURN wf.name AS class_name, wf.file_path AS class_file, cw.name AS method_name, cw.file_path AS method_file, cw.parameters AS parameters, cw.return_type AS return_type, cw.start_point AS start_location, cw.end_point AS end_location, cw.modifier AS modifier, type(r) AS relationship_type",
+      "verification_query": "MATCH (wf:Type {name: 'WorkerFactory'})-[r]-(cw:Function {name: 'CreateWorkers'}) RETURN wf.name AS class_name, wf.file_path AS class_file, cw.name AS method_name, cw.file_path AS method_file, cw.parameters AS parameters, cw.return_type AS return_type, cw.start_point AS start_location, cw.end_point AS end_location, cw.modifier AS modifier, type(r) AS relationship_type",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "CreateWorkers method spans from line 6 column 8 to line 15 column 9 in WorkerFactory.cs",
+      "source_file": "HelloWorldApp/WorkerFactory.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/WorkerFactory.cs",
+      "entity_name": "CreateWorkers",
+      "entity_type": "Function",
+      "evidence": {
+        "summary": "Query results show start_point [6, 8] and end_point [15, 9] indicating the method spans 10 lines in the source file"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (wf:Type {name: 'WorkerFactory'})-[:CONTAINS]->(cw:Function {name: 'CreateWorkers'}) RETURN wf.name AS class_name, wf.file_path AS class_file, cw.name AS method_name, cw.file_path AS method_file, cw.parameters AS parameters, cw.return_type AS return_type, cw.start_point AS start_location, cw.end_point AS end_location, cw.modifier AS modifier",
+      "verification_query": "MATCH (wf:Type {name: 'WorkerFactory'})-[:CONTAINS]->(cw:Function {name: 'CreateWorkers'}) RETURN wf.name AS class_name, wf.file_path AS class_file, cw.name AS method_name, cw.file_path AS method_file, cw.parameters AS parameters, cw.return_type AS return_type, cw.start_point AS start_location, cw.end_point AS end_location, cw.modifier AS modifier",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "CreateWorkers method has direct reference to WorkerFactory class type",
+      "source_file": "HelloWorldApp/WorkerFactory.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/WorkerFactory.cs",
+      "entity_name": "CreateWorkers",
+      "entity_type": "Function",
+      "evidence": {
+        "summary": "Query returned direct REFERENCES relationship to WorkerFactory type with type_kind 'class', type_modifier ['public', 'static'], confirming depth-1 direct reference"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (f:Function {name: 'CreateWorkers'})-[:REFERENCES]->(t:Type) WHERE f.file_path = 'HelloWorldApp/WorkerFactory.cs'",
+      "verification_query": "MATCH (f:Function {name: 'CreateWorkers'})-[:REFERENCES]->(t:Type) WHERE f.file_path = 'HelloWorldApp/WorkerFactory.cs'",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "CreateWorkers method indirectly references INotifier interface through 'notifier' variable",
+      "source_file": "HelloWorldApp/WorkerFactory.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/WorkerFactory.cs",
+      "entity_name": "CreateWorkers",
+      "entity_type": "Function",
+      "evidence": {
+        "summary": "Variable-mediated reference shows INotifier with type_kind 'interface', type_modifier 'public', accessed through 'notifier' variable with multiple reference instances"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (f:Function {name: 'CreateWorkers'})-[:REFERENCES]->(v:Variable)-[:REFERENCES]->(t:Type) WHERE f.file_path = 'HelloWorldApp/WorkerFactory.cs'",
+      "verification_query": "MATCH (f:Function {name: 'CreateWorkers'})-[:REFERENCES]->(v:Variable)-[:REFERENCES]->(t:Type) WHERE f.file_path = 'HelloWorldApp/WorkerFactory.cs'",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "CreateWorkers method indirectly references IWorker interface through 'workers' variable",
+      "source_file": "HelloWorldApp/WorkerFactory.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/WorkerFactory.cs",
+      "entity_name": "CreateWorkers",
+      "entity_type": "Function",
+      "evidence": {
+        "summary": "Query results show IWorker interface with type_kind 'interface', type_modifier 'public', referenced through 'workers' variable in variable_mediated reference pattern"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (f:Function {name: 'CreateWorkers'})-[:REFERENCES]->(v:Variable)-[:REFERENCES]->(t:Type) WHERE f.file_path = 'HelloWorldApp/WorkerFactory.cs'",
+      "verification_query": "MATCH (f:Function {name: 'CreateWorkers'})-[:REFERENCES]->(v:Variable)-[:REFERENCES]->(t:Type) WHERE f.file_path = 'HelloWorldApp/WorkerFactory.cs'",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "CreateWorkers method indirectly references concrete worker classes WorkerA, WorkerB, and WorkerC through 'workers' variable",
+      "source_file": "HelloWorldApp/WorkerFactory.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/WorkerFactory.cs",
+      "entity_name": "CreateWorkers",
+      "entity_type": "Function",
+      "evidence": {
+        "summary": "Variable-mediated references show all three worker classes (WorkerA, WorkerB, WorkerC) with type_kind 'class', type_modifier 'public', all accessed through 'workers' variable"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (f:Function {name: 'CreateWorkers'})-[:REFERENCES]->(v:Variable)-[:REFERENCES]->(t:Type) WHERE f.file_path = 'HelloWorldApp/WorkerFactory.cs'",
+      "verification_query": "MATCH (f:Function {name: 'CreateWorkers'})-[:REFERENCES]->(v:Variable)-[:REFERENCES]->(t:Type) WHERE f.file_path = 'HelloWorldApp/WorkerFactory.cs'",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "CreateWorkers method indirectly references Manager class through 'notifier' variable",
+      "source_file": "HelloWorldApp/WorkerFactory.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/WorkerFactory.cs",
+      "entity_name": "CreateWorkers",
+      "entity_type": "Function",
+      "evidence": {
+        "summary": "Manager class referenced with type_kind 'class', type_modifier 'public' through 'notifier' variable with multiple reference instances in variable_mediated pattern"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (f:Function {name: 'CreateWorkers'})-[:REFERENCES]->(v:Variable)-[:REFERENCES]->(t:Type) WHERE f.file_path = 'HelloWorldApp/WorkerFactory.cs'",
+      "verification_query": "MATCH (f:Function {name: 'CreateWorkers'})-[:REFERENCES]->(v:Variable)-[:REFERENCES]->(t:Type) WHERE f.file_path = 'HelloWorldApp/WorkerFactory.cs'",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "CreateWorkers method has reference relationships at two distinct depths: direct (depth 1) and variable-mediated (depth 2)",
+      "source_file": "HelloWorldApp/WorkerFactory.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/WorkerFactory.cs",
+      "entity_name": "CreateWorkers",
+      "entity_type": "Function",
+      "evidence": {
+        "summary": "Path analysis shows reference_depth values of 1 for WorkerFactory (direct) and 2 for other types (INotifier, IWorker, Manager, WorkerA, WorkerB, WorkerC) with intermediate_nodes containing 'Variable' or 'Type'"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH path = (f)-[:REFERENCES*1..2]->(t:Type) WHERE f.file_path = 'HelloWorldApp/WorkerFactory.cs'",
+      "verification_query": "MATCH path = (f)-[:REFERENCES*1..2]->(t:Type) WHERE f.file_path = 'HelloWorldApp/WorkerFactory.cs'",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "CreateWorkers method uses 'new' keyword to instantiate List<IWorker> and three worker classes (WorkerA, WorkerB, WorkerC)",
+      "source_file": "HelloWorldApp/WorkerFactory.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/WorkerFactory.cs",
+      "entity_name": "CreateWorkers",
+      "entity_type": "Function",
+      "evidence": {
+        "summary": "Return statement shows explicit 'new' keyword usage: 'return new List<IWorker> { new WorkerA(notifier), new WorkerB(notifier), new WorkerC(notifier) };' demonstrating factory pattern with constructor calls"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (f:Function {name: 'CreateWorkers'})-[:REFERENCES]->(s:Statement) WHERE f.file_path = 'HelloWorldApp/WorkerFactory.cs'",
+      "verification_query": "MATCH (f:Function {name: 'CreateWorkers'})-[:REFERENCES]->(s:Statement) WHERE f.file_path = 'HelloWorldApp/WorkerFactory.cs'",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "CreateWorkers method calls constructors for WorkerA, WorkerB, and WorkerC classes, all accepting INotifier parameter",
+      "source_file": "HelloWorldApp/WorkerA.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/WorkerA.cs",
+      "entity_name": "WorkerA",
+      "entity_type": "Function",
+      "evidence": {
+        "summary": "Query results show function calls to WorkerA, WorkerB, and WorkerC constructors, all with modifier 'public' and parameters '(INotifier notifier)', confirming uniform constructor signature pattern"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (f:Function {name: 'CreateWorkers'})-[:CALLS]->(called_func:Function) WHERE f.file_path = 'HelloWorldApp/WorkerFactory.cs'",
+      "verification_query": "MATCH (f:Function {name: 'CreateWorkers'})-[:CALLS]->(called_func:Function) WHERE f.file_path = 'HelloWorldApp/WorkerFactory.cs'",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "CreateWorkers method references two variables: 'notifier' parameter and 'workers' local variable",
+      "source_file": "HelloWorldApp/WorkerFactory.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/WorkerFactory.cs",
+      "entity_name": "notifier",
+      "entity_type": "Variable",
+      "evidence": {
+        "summary": "Query returned two distinct variables: 'notifier' at location [6, 57] and 'workers' at location [10, 12], both of type 'Variable'"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (f:Function {name: 'CreateWorkers'})-[:REFERENCES]->(v:Variable) WHERE f.file_path = 'HelloWorldApp/WorkerFactory.cs'",
+      "verification_query": "MATCH (f:Function {name: 'CreateWorkers'})-[:REFERENCES]->(v:Variable) WHERE f.file_path = 'HelloWorldApp/WorkerFactory.cs'",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "CreateWorkers method contains a single code block with explanatory comment and factory instantiation return statement",
+      "source_file": "HelloWorldApp/WorkerFactory.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/WorkerFactory.cs",
+      "entity_name": "CreateWorkers",
+      "entity_type": "Function",
+      "evidence": {
+        "summary": "Block contains exactly 2 statements: comment '// create multiple workers, each knows how to call back' and return statement with List<IWorker> instantiation, spanning from [7,8] to [15,9]"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (f:Function {name: 'CreateWorkers'})-[:CONTAINS]->(b:Block) WHERE f.file_path = 'HelloWorldApp/WorkerFactory.cs'",
+      "verification_query": "MATCH (f:Function {name: 'CreateWorkers'})-[:CONTAINS]->(b:Block) WHERE f.file_path = 'HelloWorldApp/WorkerFactory.cs'",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "CreateWorkers method has declared return type of IEnumerable<IWorker>",
+      "source_file": "HelloWorldApp/WorkerFactory.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/WorkerFactory.cs",
+      "entity_name": "CreateWorkers",
+      "entity_type": "Function",
+      "evidence": {
+        "summary": "Function query returned declared_return_type 'IEnumerable<IWorker>' with method_modifiers ['public', 'static'] and method_parameters '(INotifier notifier)'"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (f:Function {name: 'CreateWorkers'}) WHERE f.file_path = 'HelloWorldApp/WorkerFactory.cs'",
+      "verification_query": "MATCH (f:Function {name: 'CreateWorkers'}) WHERE f.file_path = 'HelloWorldApp/WorkerFactory.cs'",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "CreateWorkers method actually returns concrete List<IWorker> collection containing WorkerA, WorkerB, and WorkerC instances",
+      "source_file": "HelloWorldApp/WorkerFactory.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/WorkerFactory.cs",
+      "entity_name": "CreateWorkers",
+      "entity_type": "Function",
+      "evidence": {
+        "summary": "Return statement shows 'return new List<IWorker> { new WorkerA(notifier), new WorkerB(notifier), new WorkerC(notifier) };' at location [9, 12] with statement_order 2"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (f:Function {name: 'CreateWorkers'})-[:REFERENCES]->(s:Statement) WHERE f.file_path = 'HelloWorldApp/WorkerFactory.cs' AND s.statement_type = 'return'",
+      "verification_query": "MATCH (f:Function {name: 'CreateWorkers'})-[:REFERENCES]->(s:Statement) WHERE f.file_path = 'HelloWorldApp/WorkerFactory.cs' AND s.statement_type = 'return'",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "IWorker interface defines a Process() method and is publicly accessible",
+      "source_file": "HelloWorldApp/IWorker.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/IWorker.cs",
+      "entity_name": "IWorker",
+      "entity_type": "Type",
+      "evidence": {
+        "summary": "IWorker type query returned type_kind 'interface', access_modifier 'public', and interface_definition '{ void Process(); }' in HelloWorldApp/IWorker.cs"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (t:Type {name: 'IWorker'})",
+      "verification_query": "MATCH (t:Type {name: 'IWorker'})",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "CreateWorkers method references IWorker interface at depth 2 through Variable intermediation",
+      "source_file": "HelloWorldApp/WorkerFactory.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/WorkerFactory.cs",
+      "entity_name": "CreateWorkers",
+      "entity_type": "Function",
+      "evidence": {
+        "summary": "Path analysis shows relationship_depth 2 with relationship_path ['REFERENCES', 'REFERENCES'] and intermediate_nodes ['Variable'], confirming Function -> Variable -> Type pattern"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH path = (f)-[:REFERENCES*1..2]->(t:Type {name: 'IWorker'}) WHERE f.file_path = 'HelloWorldApp/WorkerFactory.cs'",
+      "verification_query": "MATCH path = (f)-[:REFERENCES*1..2]->(t:Type {name: 'IWorker'}) WHERE f.file_path = 'HelloWorldApp/WorkerFactory.cs'",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "CreateWorkers implements covariant return pattern declaring IEnumerable<IWorker> but returning concrete List<IWorker>",
+      "source_file": "HelloWorldApp/WorkerFactory.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/WorkerFactory.cs",
+      "entity_name": "CreateWorkers",
+      "entity_type": "Function",
+      "evidence": {
+        "summary": "Function signature shows declared_return_type 'IEnumerable<IWorker>' while return statement shows actual return 'new List<IWorker>', demonstrating interface-to-concrete covariance pattern"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "Combined evidence from function signature query and return statement query",
+      "verification_query": "Combined evidence from function signature query and return statement query",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "CreateWorkers method instantiates three concrete worker classes using 'new' keyword: WorkerA, WorkerB, and WorkerC",
+      "source_file": "HelloWorldApp/WorkerFactory.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/WorkerFactory.cs",
+      "entity_name": "CreateWorkers",
+      "entity_type": "Function",
+      "evidence": {
+        "summary": "Return statement shows explicit instantiation code 'return new List<IWorker> { new WorkerA(notifier), new WorkerB(notifier), new WorkerC(notifier) };' at statement_order 2 and code_location [9, 12]"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (f:Function {name: 'CreateWorkers'})-[:REFERENCES]->(s:Statement) WHERE f.file_path = 'HelloWorldApp/WorkerFactory.cs' AND s.statement_type = 'return'",
+      "verification_query": "MATCH (f:Function {name: 'CreateWorkers'})-[:REFERENCES]->(s:Statement) WHERE f.file_path = 'HelloWorldApp/WorkerFactory.cs' AND s.statement_type = 'return'",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "CreateWorkers method calls constructors for WorkerA, WorkerB, and WorkerC with uniform signature (INotifier notifier)",
+      "source_file": "HelloWorldApp/WorkerA.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/WorkerA.cs",
+      "entity_name": "WorkerA",
+      "entity_type": "Function",
+      "evidence": {
+        "summary": "Constructor call query returned three results showing instantiated_type values 'WorkerA', 'WorkerB', 'WorkerC' all with identical constructor_signature '(INotifier notifier)' in their respective files"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (f:Function {name: 'CreateWorkers'})-[:CALLS]->(constructor:Function) WHERE f.file_path = 'HelloWorldApp/WorkerFactory.cs' AND constructor.name IN ['WorkerA', 'WorkerB', 'WorkerC']",
+      "verification_query": "MATCH (f:Function {name: 'CreateWorkers'})-[:CALLS]->(constructor:Function) WHERE f.file_path = 'HelloWorldApp/WorkerFactory.cs' AND constructor.name IN ['WorkerA', 'WorkerB', 'WorkerC']",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "CreateWorkers method references seven distinct types: INotifier, IWorker, Manager, WorkerA, WorkerB, WorkerC, and WorkerFactory",
+      "source_file": "HelloWorldApp/WorkerFactory.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/WorkerFactory.cs",
+      "entity_name": "CreateWorkers",
+      "entity_type": "Function",
+      "evidence": {
+        "summary": "Type collection query returned 7 distinct types with type_classification values showing 2 interfaces (INotifier, IWorker) and 5 classes (Manager, WorkerA, WorkerB, WorkerC, WorkerFactory), all with access_modifier 'public'"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "OPTIONAL MATCH (f)-[:REFERENCES]->(t1:Type) OPTIONAL MATCH (f)-[:REFERENCES]->(v:Variable)-[:REFERENCES]->(t2:Type) WITH collect(DISTINCT t1) + collect(DISTINCT t2) AS all_types",
+      "verification_query": "OPTIONAL MATCH (f)-[:REFERENCES]->(t1:Type) OPTIONAL MATCH (f)-[:REFERENCES]->(v:Variable)-[:REFERENCES]->(t2:Type) WITH collect(DISTINCT t1) + collect(DISTINCT t2) AS all_types",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "CreateWorkers categorizes types into INSTANTIATED group (WorkerA, WorkerB, WorkerC) and REFERENCED_ONLY group (INotifier, IWorker, Manager, WorkerFactory)",
+      "source_file": "HelloWorldApp/WorkerA.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/WorkerA.cs",
+      "entity_name": "WorkerA",
+      "entity_type": "Type",
+      "evidence": {
+        "summary": "Categorization query returned usage_category 'INSTANTIATED' for WorkerA, WorkerB, WorkerC (all with type_classification 'class') and usage_category 'REFERENCED_ONLY' for INotifier, IWorker, Manager, WorkerFactory"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "CASE WHEN t.name IN ['WorkerA', 'WorkerB', 'WorkerC'] THEN 'INSTANTIATED' WHEN t.name IN ['INotifier', 'IWorker', 'WorkerFactory', 'Manager'] THEN 'REFERENCED_ONLY'",
+      "verification_query": "CASE WHEN t.name IN ['WorkerA', 'WorkerB', 'WorkerC'] THEN 'INSTANTIATED' WHEN t.name IN ['INotifier', 'IWorker', 'WorkerFactory', 'Manager'] THEN 'REFERENCED_ONLY'",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    }
+  ],
+  "verified_count": 23,
+  "unverified_count": 0,
+  "total_citations": 23,
+  "sub_queries_count": 5,
+  "llm_calls_count": 50,
+  "execution_time_ms": 1494882,
+  "token_usage": {
+    "total_tokens": 52852,
+    "total_prompt_tokens": 533,
+    "total_completion_tokens": 52319,
+    "call_count": 50,
+    "by_agent_role": {
+      "cot_agent": 1559,
+      "tot_orchestrator": 1464,
+      "thinker": 16776,
+      "thinking_validator": 3271,
+      "cypher_validator": 13051,
+      "executor_verifier": 16731
+    }
+  },
+  "total_tokens_used": 52852,
+  "total_input_tokens": 533,
+  "total_output_tokens": 52319,
+  "agent_workflow": "4_agent_team",
+  "agent_metadata": {
+    "llm_model": "gpt-4o",
+    "max_cot_iterations": 15,
+    "parallel_agents": true,
+    "verification_enabled": true,
+    "entity_resolution_enabled": true,
+    "observer_enabled": false,
+    "use_4_agent_team": true,
+    "four_agent_max_iterations": 3
+  },
+  "cli_parameters_used": {
+    "config_path": "/opt/genpod/neo4j_config.json",
+    "schema_path": "/opt/genpod/src/schemas/project_knowledgebase_graph_schema.yaml",
+    "llm_model": "gpt-4o"
+  },
+  "message": "4-Agent Team CPG RAG completed successfully (1494882ms)"
+}

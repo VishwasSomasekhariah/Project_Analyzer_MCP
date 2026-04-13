@@ -1,0 +1,25 @@
+Bug confirmed: Interfaces processed before implementing classes create deferred relationships. See:
+DEBUG:project_analyzer.tools.universal_parser:Checking for deferred relationships targeting: INotifier
+DEBUG:project_analyzer.tools.universal_parser:Available pending relationship keys: []
+DEBUG:project_analyzer.tools.universal_parser:Checking for deferred relationships targeting: IWorker
+DEBUG:project_analyzer.tools.universal_parser:Available pending relationship keys: []
+DEBUG:project_analyzer.tools.universal_parser:Deferred DEFERRED relationship: Manager -> INotifier
+DEBUG:project_analyzer.tools.universal_parser:Checking for deferred relationships targeting: Manager
+DEBUG:project_analyzer.tools.universal_parser:Available pending relationship keys: ['INotifier']
+DEBUG:project_analyzer.tools.universal_parser:Checking for deferred relationships targeting: Program
+DEBUG:project_analyzer.tools.universal_parser:Available pending relationship keys: []
+DEBUG:project_analyzer.tools.universal_parser:Checking for deferred relationships targeting: TestAliases
+DEBUG:project_analyzer.tools.universal_parser:Available pending relationship keys: []
+DEBUG:project_analyzer.tools.universal_parser:Deferred DEFERRED relationship: WorkerA -> IWorker
+DEBUG:project_analyzer.tools.universal_parser:Checking for deferred relationships targeting: WorkerA
+DEBUG:project_analyzer.tools.universal_parser:Available pending relationship keys: ['IWorker']
+DEBUG:project_analyzer.tools.universal_parser:Deferred DEFERRED relationship: WorkerB -> IWorker
+DEBUG:project_analyzer.tools.universal_parser:Checking for deferred relationships targeting: WorkerB
+DEBUG:project_analyzer.tools.universal_parser:Available pending relationship keys: ['IWorker']
+DEBUG:project_analyzer.tools.universal_parser:Deferred DEFERRED relationship: WorkerC -> IWorker
+DEBUG:project_analyzer.tools.universal_parser:Checking for deferred relationships targeting: WorkerC
+DEBUG:project_analyzer.tools.universal_parser:Available pending relationship keys: ['IWorker']
+DEBUG:project_analyzer.tools.universal_parser:Checking for deferred relationships targeting: WorkerFactory
+DEBUG:project_analyzer.tools.universal_parser:Available pending relationship keys: []
+DEBUG:project_analyzer.tools.universal_parser:Checking for deferred relationships targeting: Helper
+DEBUG:project_analyzer.tools.universal_parser:Available pending relationship keys: []

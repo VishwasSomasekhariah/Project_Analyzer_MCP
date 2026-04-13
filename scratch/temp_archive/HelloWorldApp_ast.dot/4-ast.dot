@@ -1,0 +1,38 @@
+digraph "Main" {  
+node [shape="rect"];  
+"111669149700" [label = <METHOD, 6<BR/>Main> ]
+"115964116998" [label = <PARAM, 6<BR/>string[] args> ]
+"25769803781" [label = <BLOCK, 7<BR/>&lt;empty&gt;> ]
+"30064771084" [label = <&lt;operator&gt;.assignment, 8<BR/>manager = new Manager()> ]
+"68719476749" [label = <IDENTIFIER, 8<BR/>manager = new Manager()> ]
+"30064771085" [label = <&lt;init&gt;, 8<BR/>new Manager()> ]
+"68719476750" [label = <IDENTIFIER<BR/>this<BR/>new Manager()> ]
+"94489280515" [label = <LOCAL, 8<BR/>manager: HelloWorldApp.Manager> ]
+"30064771086" [label = <Run, 9<BR/>manager.Run()> ]
+"68719476751" [label = <IDENTIFIER, 9<BR/>manager<BR/>manager.Run()> ]
+"30064771087" [label = <WriteLine, 10<BR/>Console.WriteLine(&quot;All work completed. Press an...> ]
+"68719476752" [label = <IDENTIFIER, 10<BR/>Console<BR/>Console.WriteLine(&quot;All work completed. Press an...> ]
+"90194313219" [label = <LITERAL, 10<BR/>&quot;All work completed. Press any key to exit.&quot;<BR/>Console.WriteLine(&quot;All work completed. Press an...> ]
+"30064771088" [label = <ReadKey, 11<BR/>Console.ReadKey()> ]
+"68719476753" [label = <IDENTIFIER, 11<BR/>Console<BR/>Console.ReadKey()> ]
+"133143986184" [label = <MODIFIER, 6<BR/>INTERNAL> ]
+"133143986185" [label = <MODIFIER, 6<BR/>STATIC> ]
+"128849018884" [label = <METHOD_RETURN, 6<BR/>System.Void> ]
+  "111669149700" -> "115964116998" 
+  "111669149700" -> "25769803781" 
+  "111669149700" -> "133143986184" 
+  "111669149700" -> "133143986185" 
+  "111669149700" -> "128849018884" 
+  "25769803781" -> "30064771084" 
+  "25769803781" -> "94489280515" 
+  "25769803781" -> "30064771086" 
+  "25769803781" -> "30064771087" 
+  "25769803781" -> "30064771088" 
+  "30064771084" -> "68719476749" 
+  "30064771084" -> "30064771085" 
+  "30064771085" -> "68719476750" 
+  "30064771086" -> "68719476751" 
+  "30064771087" -> "68719476752" 
+  "30064771087" -> "90194313219" 
+  "30064771088" -> "68719476753" 
+}

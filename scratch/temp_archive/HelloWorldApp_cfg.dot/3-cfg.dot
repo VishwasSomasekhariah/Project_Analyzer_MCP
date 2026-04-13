@@ -1,0 +1,10 @@
+digraph "Notify" {  
+node [shape="rect"];  
+"30064771082" [label = <WriteLine, 22<BR/>Console.WriteLine($&quot;Manager received notificati...> ]
+"30064771083" [label = <&lt;operator&gt;.formatString, 22<BR/>$&quot;Manager received notification: {message}&quot;> ]
+"111669149699" [label = <METHOD, 20<BR/>Notify> ]
+"128849018883" [label = <METHOD_RETURN, 20<BR/>System.Void> ]
+  "30064771082" -> "128849018883" 
+  "30064771083" -> "30064771082" 
+  "111669149699" -> "30064771083" 
+}

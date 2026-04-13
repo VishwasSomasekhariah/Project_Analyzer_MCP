@@ -1,0 +1,51 @@
+2025-08-04 19:20:08,358 - INFO - 🚀 Starting Enhanced Graph RAG Test Suite
+2025-08-04 19:20:08,358 - INFO - 
+📋 Running Basic Cypher Queries...
+2025-08-04 19:20:08,366 - INFO - Connecting to SSE endpoint: http://localhost:9000/sse
+2025-08-04 19:20:08,438 - INFO - HTTP Request: GET http://localhost:9000/sse "HTTP/1.1 200 OK"
+2025-08-04 19:20:08,440 - INFO - Received endpoint URL: http://localhost:9000/messages/?session_id=ff7319e4b14a40dbb339a29f79c63301
+2025-08-04 19:20:08,440 - INFO - Starting post writer with endpoint URL: http://localhost:9000/messages/?session_id=ff7319e4b14a40dbb339a29f79c63301
+2025-08-04 19:20:08,446 - INFO - HTTP Request: POST http://localhost:9000/messages/?session_id=ff7319e4b14a40dbb339a29f79c63301 "HTTP/1.1 202 Accepted"
+2025-08-04 19:20:08,455 - INFO - HTTP Request: POST http://localhost:9000/messages/?session_id=ff7319e4b14a40dbb339a29f79c63301 "HTTP/1.1 202 Accepted"
+2025-08-04 19:20:08,458 - INFO - HTTP Request: POST http://localhost:9000/messages/?session_id=ff7319e4b14a40dbb339a29f79c63301 "HTTP/1.1 202 Accepted"
+2025-08-04 19:20:08,461 - INFO -   Testing: Simple Type Query
+2025-08-04 19:20:08,465 - INFO - HTTP Request: POST http://localhost:9000/messages/?session_id=ff7319e4b14a40dbb339a29f79c63301 "HTTP/1.1 202 Accepted"
+2025-08-04 19:20:13,669 - ERROR -     Result: ❌ ERROR - 'CallToolResult' object has no attribute 'get'
+2025-08-04 19:20:13,670 - INFO -   Testing: File Contents Query
+2025-08-04 19:20:13,673 - INFO - HTTP Request: POST http://localhost:9000/messages/?session_id=ff7319e4b14a40dbb339a29f79c63301 "HTTP/1.1 202 Accepted"
+2025-08-04 19:20:17,572 - ERROR -     Result: ❌ ERROR - 'CallToolResult' object has no attribute 'get'
+2025-08-04 19:20:17,573 - INFO -   Testing: Complex Relationship Query
+2025-08-04 19:20:17,575 - INFO - HTTP Request: POST http://localhost:9000/messages/?session_id=ff7319e4b14a40dbb339a29f79c63301 "HTTP/1.1 202 Accepted"
+2025-08-04 19:20:21,482 - ERROR -     Result: ❌ ERROR - 'CallToolResult' object has no attribute 'get'
+2025-08-04 19:20:21,483 - INFO - 
+📋 Running Natural Language Queries...
+2025-08-04 19:20:21,485 - INFO - Connecting to SSE endpoint: http://localhost:9000/sse
+2025-08-04 19:20:21,518 - INFO - HTTP Request: GET http://localhost:9000/sse "HTTP/1.1 200 OK"
+2025-08-04 19:20:21,519 - INFO - Received endpoint URL: http://localhost:9000/messages/?session_id=35aa3751472348d1947cc0bbf0cf21f5
+2025-08-04 19:20:21,520 - INFO - Starting post writer with endpoint URL: http://localhost:9000/messages/?session_id=35aa3751472348d1947cc0bbf0cf21f5
+2025-08-04 19:20:21,527 - INFO - HTTP Request: POST http://localhost:9000/messages/?session_id=35aa3751472348d1947cc0bbf0cf21f5 "HTTP/1.1 202 Accepted"
+2025-08-04 19:20:21,532 - INFO - HTTP Request: POST http://localhost:9000/messages/?session_id=35aa3751472348d1947cc0bbf0cf21f5 "HTTP/1.1 202 Accepted"
+2025-08-04 19:20:21,537 - INFO - HTTP Request: POST http://localhost:9000/messages/?session_id=35aa3751472348d1947cc0bbf0cf21f5 "HTTP/1.1 202 Accepted"
+2025-08-04 19:20:21,541 - INFO -   Testing: Comment Counting Query
+2025-08-04 19:20:21,546 - INFO - HTTP Request: POST http://localhost:9000/messages/?session_id=35aa3751472348d1947cc0bbf0cf21f5 "HTTP/1.1 202 Accepted"
+2025-08-04 19:20:58,220 - ERROR -     Result: ❌ ERROR - 'CallToolResult' object has no attribute 'get'
+2025-08-04 19:20:58,220 - INFO -   Testing: Method Listing Query
+2025-08-04 19:20:58,225 - INFO - HTTP Request: POST http://localhost:9000/messages/?session_id=35aa3751472348d1947cc0bbf0cf21f5 "HTTP/1.1 202 Accepted"
+2025-08-04 19:21:09,439 - ERROR -     Result: ❌ ERROR - 'CallToolResult' object has no attribute 'get'
+2025-08-04 19:21:09,440 - INFO -   Testing: Relationship Query
+2025-08-04 19:21:09,443 - INFO - HTTP Request: POST http://localhost:9000/messages/?session_id=35aa3751472348d1947cc0bbf0cf21f5 "HTTP/1.1 202 Accepted"
+2025-08-04 19:21:37,106 - ERROR -     Result: ❌ ERROR - 'CallToolResult' object has no attribute 'get'
+2025-08-04 19:21:37,106 - INFO -   Testing: Location Query
+2025-08-04 19:21:37,109 - INFO - HTTP Request: POST http://localhost:9000/messages/?session_id=35aa3751472348d1947cc0bbf0cf21f5 "HTTP/1.1 202 Accepted"
+2025-08-04 19:22:02,688 - ERROR -     Result: ❌ ERROR - 'CallToolResult' object has no attribute 'get'
+2025-08-04 19:22:02,688 - INFO - 
+📋 Running Advanced RAG Features...
+2025-08-04 19:22:02,693 - INFO - Connecting to SSE endpoint: http://localhost:9000/sse
+2025-08-04 19:22:02,718 - INFO - HTTP Request: GET http://localhost:9000/sse "HTTP/1.1 200 OK"
+2025-08-04 19:22:02,719 - INFO - Received endpoint URL: http://localhost:9000/messages/?session_id=6eb9fcc8165044ed8aef3e76fce6337b
+2025-08-04 19:22:02,720 - INFO - Starting post writer with endpoint URL: http://localhost:9000/messages/?session_id=6eb9fcc8165044ed8aef3e76fce6337b
+2025-08-04 19:22:02,724 - INFO - HTTP Request: POST http://localhost:9000/messages/?session_id=6eb9fcc8165044ed8aef3e76fce6337b "HTTP/1.1 202 Accepted"
+2025-08-04 19:22:02,729 - INFO - HTTP Request: POST http://localhost:9000/messages/?session_id=6eb9fcc8165044ed8aef3e76fce6337b "HTTP/1.1 202 Accepted"
+2025-08-04 19:22:02,731 - INFO - HTTP Request: POST http://localhost:9000/messages/?session_id=6eb9fcc8165044ed8aef3e76fce6337b "HTTP/1.1 202 Accepted"
+2025-08-04 19:22:02,734 - INFO -   Testing: Entity Extraction
+2025-08-04 19:22:02,737 - INFO - HTTP Request: POST http://localhost:9000/messages/?session_id=6eb9fcc8165044ed8aef3e76fce6337b "HTTP/1.1 202 Accepted"

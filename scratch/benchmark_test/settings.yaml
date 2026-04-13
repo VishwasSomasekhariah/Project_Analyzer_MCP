@@ -1,0 +1,43 @@
+## Input Configuration
+reference:
+  name: lazygraphrag
+  answer_base_path: input/lazygraphrag/activity_global.json # The path to the reference answers. Modify this based on your dataset.
+
+generated:
+  - name: vector_rag
+    answer_base_path: input/vector_rag/activity_global.json # The path to the generated answers. Modify this based on your dataset.
+
+## Scoring Configuration
+score_min: 1
+score_max: 10
+# criteria:
+#   - name: "criteria name"
+#     description: "criteria description"
+trials: 4 # Number of trials to repeat the scoring process for each question. Should be an even number to allow for counterbalancing.
+
+## LLM Configuration
+llm_config: 
+  model: gpt-4.1
+  auth_type: api_key # or azure_managed_identity
+  api_key: ${OPENAI_API_KEY} # remove this if using azure_managed_identity
+  llm_provider: openai.chat # or azure.openai.chat | azure.inference.chat
+  concurrent_requests: 4 # The number of concurrent requests to send to the model.
+  # init_args:
+  #   Additional initialization arguments for the LLM can be added here.
+  #   For example, you can set the model version or other parameters.
+  #   api_version: 2024-12-01-preview
+  #   azure_endpoint: https://<instance>.openai.azure.com
+  # call_args:
+  #   Additional arguments for the LLM call can be added here.
+  #   For example, you can set the temperature, max tokens, etc.
+  #   temperature: 0.0
+  #   seed: 42
+  # custom_providers: # When implementing a custom LLM provider, you can add it here.
+  #   - model_type: chat
+  #     name: custom.chat # This name should match the llm_provider above
+  #     module: custom_test.custom_provider
+  #     model_class: CustomChatModel
+
+prompts_config:
+  user_prompt: prompts/reference_user_prompt.txt
+  system_prompt: prompts/reference_system_prompt.txt

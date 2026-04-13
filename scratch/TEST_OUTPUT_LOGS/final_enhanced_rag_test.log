@@ -1,0 +1,151 @@
+2025-08-04 19:36:26,168 - INFO - 🚀 Starting Final Enhanced Graph RAG Validation
+2025-08-04 19:36:26,170 - INFO - 📋 Testing Basic Cypher Queries...
+2025-08-04 19:36:26,178 - INFO - Connecting to SSE endpoint: http://localhost:9000/sse
+2025-08-04 19:36:26,234 - INFO - HTTP Request: GET http://localhost:9000/sse "HTTP/1.1 200 OK"
+2025-08-04 19:36:26,235 - INFO - Received endpoint URL: http://localhost:9000/messages/?session_id=a69831c22f4e4de48ebc021088f94c75
+2025-08-04 19:36:26,237 - INFO - Starting post writer with endpoint URL: http://localhost:9000/messages/?session_id=a69831c22f4e4de48ebc021088f94c75
+2025-08-04 19:36:26,242 - INFO - HTTP Request: POST http://localhost:9000/messages/?session_id=a69831c22f4e4de48ebc021088f94c75 "HTTP/1.1 202 Accepted"
+2025-08-04 19:36:26,246 - INFO - HTTP Request: POST http://localhost:9000/messages/?session_id=a69831c22f4e4de48ebc021088f94c75 "HTTP/1.1 202 Accepted"
+2025-08-04 19:36:26,248 - INFO - HTTP Request: POST http://localhost:9000/messages/?session_id=a69831c22f4e4de48ebc021088f94c75 "HTTP/1.1 202 Accepted"
+2025-08-04 19:36:26,253 - INFO - HTTP Request: POST http://localhost:9000/messages/?session_id=a69831c22f4e4de48ebc021088f94c75 "HTTP/1.1 202 Accepted"
+2025-08-04 19:36:29,930 - INFO - 📋 Testing Advanced RAG Workflow...
+2025-08-04 19:36:29,936 - INFO - Connecting to SSE endpoint: http://localhost:9000/sse
+2025-08-04 19:36:29,976 - INFO - HTTP Request: GET http://localhost:9000/sse "HTTP/1.1 200 OK"
+2025-08-04 19:36:29,977 - INFO - Received endpoint URL: http://localhost:9000/messages/?session_id=6345938a6dc44008bf806a07ee180553
+2025-08-04 19:36:29,978 - INFO - Starting post writer with endpoint URL: http://localhost:9000/messages/?session_id=6345938a6dc44008bf806a07ee180553
+2025-08-04 19:36:29,981 - INFO - HTTP Request: POST http://localhost:9000/messages/?session_id=6345938a6dc44008bf806a07ee180553 "HTTP/1.1 202 Accepted"
+2025-08-04 19:36:29,985 - INFO - HTTP Request: POST http://localhost:9000/messages/?session_id=6345938a6dc44008bf806a07ee180553 "HTTP/1.1 202 Accepted"
+2025-08-04 19:36:29,987 - INFO - HTTP Request: POST http://localhost:9000/messages/?session_id=6345938a6dc44008bf806a07ee180553 "HTTP/1.1 202 Accepted"
+2025-08-04 19:36:29,991 - INFO - HTTP Request: POST http://localhost:9000/messages/?session_id=6345938a6dc44008bf806a07ee180553 "HTTP/1.1 202 Accepted"
+2025-08-04 19:36:37,454 - INFO - 📋 Testing Entity Extraction...
+2025-08-04 19:36:37,460 - INFO - Connecting to SSE endpoint: http://localhost:9000/sse
+2025-08-04 19:36:37,493 - INFO - HTTP Request: GET http://localhost:9000/sse "HTTP/1.1 200 OK"
+2025-08-04 19:36:37,495 - INFO - Received endpoint URL: http://localhost:9000/messages/?session_id=592401256bcd45b59b8af451aa6c0414
+2025-08-04 19:36:37,495 - INFO - Starting post writer with endpoint URL: http://localhost:9000/messages/?session_id=592401256bcd45b59b8af451aa6c0414
+2025-08-04 19:36:37,499 - INFO - HTTP Request: POST http://localhost:9000/messages/?session_id=592401256bcd45b59b8af451aa6c0414 "HTTP/1.1 202 Accepted"
+2025-08-04 19:36:37,502 - INFO - HTTP Request: POST http://localhost:9000/messages/?session_id=592401256bcd45b59b8af451aa6c0414 "HTTP/1.1 202 Accepted"
+2025-08-04 19:36:37,505 - INFO - HTTP Request: POST http://localhost:9000/messages/?session_id=592401256bcd45b59b8af451aa6c0414 "HTTP/1.1 202 Accepted"
+2025-08-04 19:36:37,508 - INFO - HTTP Request: POST http://localhost:9000/messages/?session_id=592401256bcd45b59b8af451aa6c0414 "HTTP/1.1 202 Accepted"
+2025-08-04 19:36:45,012 - INFO - HTTP Request: POST http://localhost:9000/messages/?session_id=592401256bcd45b59b8af451aa6c0414 "HTTP/1.1 202 Accepted"
+2025-08-04 19:36:59,632 - INFO - 📋 Testing Intent Classification...
+2025-08-04 19:36:59,637 - INFO - Connecting to SSE endpoint: http://localhost:9000/sse
+2025-08-04 19:36:59,669 - INFO - HTTP Request: GET http://localhost:9000/sse "HTTP/1.1 200 OK"
+2025-08-04 19:36:59,670 - INFO - Received endpoint URL: http://localhost:9000/messages/?session_id=4b65f4e5f3cf4e378125eb17ca4642f3
+2025-08-04 19:36:59,671 - INFO - Starting post writer with endpoint URL: http://localhost:9000/messages/?session_id=4b65f4e5f3cf4e378125eb17ca4642f3
+2025-08-04 19:36:59,675 - INFO - HTTP Request: POST http://localhost:9000/messages/?session_id=4b65f4e5f3cf4e378125eb17ca4642f3 "HTTP/1.1 202 Accepted"
+2025-08-04 19:36:59,678 - INFO - HTTP Request: POST http://localhost:9000/messages/?session_id=4b65f4e5f3cf4e378125eb17ca4642f3 "HTTP/1.1 202 Accepted"
+2025-08-04 19:36:59,681 - INFO - HTTP Request: POST http://localhost:9000/messages/?session_id=4b65f4e5f3cf4e378125eb17ca4642f3 "HTTP/1.1 202 Accepted"
+2025-08-04 19:36:59,685 - INFO - HTTP Request: POST http://localhost:9000/messages/?session_id=4b65f4e5f3cf4e378125eb17ca4642f3 "HTTP/1.1 202 Accepted"
+2025-08-04 19:37:08,846 - INFO - HTTP Request: POST http://localhost:9000/messages/?session_id=4b65f4e5f3cf4e378125eb17ca4642f3 "HTTP/1.1 202 Accepted"
+2025-08-04 19:37:23,391 - INFO - HTTP Request: POST http://localhost:9000/messages/?session_id=4b65f4e5f3cf4e378125eb17ca4642f3 "HTTP/1.1 202 Accepted"
+2025-08-04 19:37:35,882 - INFO - HTTP Request: POST http://localhost:9000/messages/?session_id=4b65f4e5f3cf4e378125eb17ca4642f3 "HTTP/1.1 202 Accepted"
+2025-08-04 19:37:48,100 - INFO - 📋 Testing Synthesis Quality...
+2025-08-04 19:37:48,104 - INFO - Connecting to SSE endpoint: http://localhost:9000/sse
+2025-08-04 19:37:48,133 - INFO - HTTP Request: GET http://localhost:9000/sse "HTTP/1.1 200 OK"
+2025-08-04 19:37:48,133 - INFO - Received endpoint URL: http://localhost:9000/messages/?session_id=153b2dcaa5d6441fb1b1a9151506b94f
+2025-08-04 19:37:48,134 - INFO - Starting post writer with endpoint URL: http://localhost:9000/messages/?session_id=153b2dcaa5d6441fb1b1a9151506b94f
+2025-08-04 19:37:48,137 - INFO - HTTP Request: POST http://localhost:9000/messages/?session_id=153b2dcaa5d6441fb1b1a9151506b94f "HTTP/1.1 202 Accepted"
+2025-08-04 19:37:48,140 - INFO - HTTP Request: POST http://localhost:9000/messages/?session_id=153b2dcaa5d6441fb1b1a9151506b94f "HTTP/1.1 202 Accepted"
+2025-08-04 19:37:48,142 - INFO - HTTP Request: POST http://localhost:9000/messages/?session_id=153b2dcaa5d6441fb1b1a9151506b94f "HTTP/1.1 202 Accepted"
+2025-08-04 19:37:48,145 - INFO - HTTP Request: POST http://localhost:9000/messages/?session_id=153b2dcaa5d6441fb1b1a9151506b94f "HTTP/1.1 202 Accepted"
+2025-08-04 19:37:57,616 - INFO - 📋 Testing Error Handling...
+2025-08-04 19:37:57,627 - INFO - Connecting to SSE endpoint: http://localhost:9000/sse
+2025-08-04 19:37:57,669 - INFO - HTTP Request: GET http://localhost:9000/sse "HTTP/1.1 200 OK"
+2025-08-04 19:37:57,670 - INFO - Received endpoint URL: http://localhost:9000/messages/?session_id=f32f88f794694c2f85d264c4c5333da5
+2025-08-04 19:37:57,670 - INFO - Starting post writer with endpoint URL: http://localhost:9000/messages/?session_id=f32f88f794694c2f85d264c4c5333da5
+2025-08-04 19:37:57,674 - INFO - HTTP Request: POST http://localhost:9000/messages/?session_id=f32f88f794694c2f85d264c4c5333da5 "HTTP/1.1 202 Accepted"
+2025-08-04 19:37:57,678 - INFO - HTTP Request: POST http://localhost:9000/messages/?session_id=f32f88f794694c2f85d264c4c5333da5 "HTTP/1.1 202 Accepted"
+2025-08-04 19:37:57,681 - INFO - HTTP Request: POST http://localhost:9000/messages/?session_id=f32f88f794694c2f85d264c4c5333da5 "HTTP/1.1 202 Accepted"
+2025-08-04 19:37:57,687 - INFO - HTTP Request: POST http://localhost:9000/messages/?session_id=f32f88f794694c2f85d264c4c5333da5 "HTTP/1.1 202 Accepted"
+2025-08-04 19:38:01,364 - INFO - HTTP Request: POST http://localhost:9000/messages/?session_id=f32f88f794694c2f85d264c4c5333da5 "HTTP/1.1 202 Accepted"
+2025-08-04 19:38:01,371 - INFO - 
+🎯 ENHANCED GRAPH RAG VALIDATION SUMMARY
+2025-08-04 19:38:01,372 - INFO - Total Categories: 6
+2025-08-04 19:38:01,372 - INFO - ✅ Passed: 2
+2025-08-04 19:38:01,373 - INFO - ❌ Failed: 4
+2025-08-04 19:38:01,373 - INFO - Success Rate: 33.3%
+2025-08-04 19:38:01,374 - INFO -   Basic Cypher: ✅ PASS
+2025-08-04 19:38:01,374 - INFO -   Advanced Rag Workflow: ✅ PASS
+2025-08-04 19:38:01,375 - INFO -   Entity Extraction: ❌ FAIL
+2025-08-04 19:38:01,375 - INFO -   Intent Classification: ❌ FAIL
+2025-08-04 19:38:01,375 - INFO -   Synthesis Quality: ❌ FAIL
+2025-08-04 19:38:01,376 - INFO -   Error Handling: ❌ FAIL
+2025-08-04 19:38:01,376 - INFO - 📄 Detailed report saved: enhanced_rag_validation_report_20250804_193801.json
+2025-08-04 19:49:48,014 - INFO - 🚀 Starting Final Enhanced Graph RAG Validation
+2025-08-04 19:49:48,015 - INFO - 📋 Testing Basic Cypher Queries...
+2025-08-04 19:49:48,023 - INFO - Connecting to SSE endpoint: http://localhost:9000/sse
+2025-08-04 19:49:48,071 - INFO - HTTP Request: GET http://localhost:9000/sse "HTTP/1.1 200 OK"
+2025-08-04 19:49:48,072 - INFO - Received endpoint URL: http://localhost:9000/messages/?session_id=9ca888d222794a37897ac817d98b266f
+2025-08-04 19:49:48,073 - INFO - Starting post writer with endpoint URL: http://localhost:9000/messages/?session_id=9ca888d222794a37897ac817d98b266f
+2025-08-04 19:49:48,079 - INFO - HTTP Request: POST http://localhost:9000/messages/?session_id=9ca888d222794a37897ac817d98b266f "HTTP/1.1 202 Accepted"
+2025-08-04 19:49:48,082 - INFO - HTTP Request: POST http://localhost:9000/messages/?session_id=9ca888d222794a37897ac817d98b266f "HTTP/1.1 202 Accepted"
+2025-08-04 19:49:48,085 - INFO - HTTP Request: POST http://localhost:9000/messages/?session_id=9ca888d222794a37897ac817d98b266f "HTTP/1.1 202 Accepted"
+2025-08-04 19:49:48,091 - INFO - HTTP Request: POST http://localhost:9000/messages/?session_id=9ca888d222794a37897ac817d98b266f "HTTP/1.1 202 Accepted"
+2025-08-04 19:49:51,662 - INFO - 📋 Testing Advanced RAG Workflow...
+2025-08-04 19:49:51,666 - INFO - Connecting to SSE endpoint: http://localhost:9000/sse
+2025-08-04 19:49:51,695 - INFO - HTTP Request: GET http://localhost:9000/sse "HTTP/1.1 200 OK"
+2025-08-04 19:49:51,696 - INFO - Received endpoint URL: http://localhost:9000/messages/?session_id=70145e74586e401dab834245a2f852ac
+2025-08-04 19:49:51,697 - INFO - Starting post writer with endpoint URL: http://localhost:9000/messages/?session_id=70145e74586e401dab834245a2f852ac
+2025-08-04 19:49:51,700 - INFO - HTTP Request: POST http://localhost:9000/messages/?session_id=70145e74586e401dab834245a2f852ac "HTTP/1.1 202 Accepted"
+2025-08-04 19:49:51,706 - INFO - HTTP Request: POST http://localhost:9000/messages/?session_id=70145e74586e401dab834245a2f852ac "HTTP/1.1 202 Accepted"
+2025-08-04 19:49:51,708 - INFO - HTTP Request: POST http://localhost:9000/messages/?session_id=70145e74586e401dab834245a2f852ac "HTTP/1.1 202 Accepted"
+2025-08-04 19:49:51,713 - INFO - HTTP Request: POST http://localhost:9000/messages/?session_id=70145e74586e401dab834245a2f852ac "HTTP/1.1 202 Accepted"
+2025-08-04 19:50:00,308 - INFO - 📋 Testing Entity Extraction...
+2025-08-04 19:50:00,313 - INFO - Connecting to SSE endpoint: http://localhost:9000/sse
+2025-08-04 19:50:00,345 - INFO - HTTP Request: GET http://localhost:9000/sse "HTTP/1.1 200 OK"
+2025-08-04 19:50:00,346 - INFO - Received endpoint URL: http://localhost:9000/messages/?session_id=de78f13dc89c45c3bbcc6f5a10c000c7
+2025-08-04 19:50:00,347 - INFO - Starting post writer with endpoint URL: http://localhost:9000/messages/?session_id=de78f13dc89c45c3bbcc6f5a10c000c7
+2025-08-04 19:50:00,351 - INFO - HTTP Request: POST http://localhost:9000/messages/?session_id=de78f13dc89c45c3bbcc6f5a10c000c7 "HTTP/1.1 202 Accepted"
+2025-08-04 19:50:00,357 - INFO - HTTP Request: POST http://localhost:9000/messages/?session_id=de78f13dc89c45c3bbcc6f5a10c000c7 "HTTP/1.1 202 Accepted"
+2025-08-04 19:50:00,361 - INFO - HTTP Request: POST http://localhost:9000/messages/?session_id=de78f13dc89c45c3bbcc6f5a10c000c7 "HTTP/1.1 202 Accepted"
+2025-08-04 19:50:00,365 - INFO - HTTP Request: POST http://localhost:9000/messages/?session_id=de78f13dc89c45c3bbcc6f5a10c000c7 "HTTP/1.1 202 Accepted"
+2025-08-04 19:50:07,629 - INFO - HTTP Request: POST http://localhost:9000/messages/?session_id=de78f13dc89c45c3bbcc6f5a10c000c7 "HTTP/1.1 202 Accepted"
+2025-08-04 19:50:18,159 - INFO - 📋 Testing Intent Classification...
+2025-08-04 19:50:18,163 - INFO - Connecting to SSE endpoint: http://localhost:9000/sse
+2025-08-04 19:50:18,194 - INFO - HTTP Request: GET http://localhost:9000/sse "HTTP/1.1 200 OK"
+2025-08-04 19:50:18,196 - INFO - Received endpoint URL: http://localhost:9000/messages/?session_id=af734d2355dd406a9185b869dd4c9068
+2025-08-04 19:50:18,197 - INFO - Starting post writer with endpoint URL: http://localhost:9000/messages/?session_id=af734d2355dd406a9185b869dd4c9068
+2025-08-04 19:50:18,203 - INFO - HTTP Request: POST http://localhost:9000/messages/?session_id=af734d2355dd406a9185b869dd4c9068 "HTTP/1.1 202 Accepted"
+2025-08-04 19:50:18,207 - INFO - HTTP Request: POST http://localhost:9000/messages/?session_id=af734d2355dd406a9185b869dd4c9068 "HTTP/1.1 202 Accepted"
+2025-08-04 19:50:18,210 - INFO - HTTP Request: POST http://localhost:9000/messages/?session_id=af734d2355dd406a9185b869dd4c9068 "HTTP/1.1 202 Accepted"
+2025-08-04 19:50:18,216 - INFO - HTTP Request: POST http://localhost:9000/messages/?session_id=af734d2355dd406a9185b869dd4c9068 "HTTP/1.1 202 Accepted"
+2025-08-04 19:50:26,826 - INFO - HTTP Request: POST http://localhost:9000/messages/?session_id=af734d2355dd406a9185b869dd4c9068 "HTTP/1.1 202 Accepted"
+2025-08-04 19:50:41,229 - INFO - HTTP Request: POST http://localhost:9000/messages/?session_id=af734d2355dd406a9185b869dd4c9068 "HTTP/1.1 202 Accepted"
+2025-08-04 19:50:54,689 - INFO - HTTP Request: POST http://localhost:9000/messages/?session_id=af734d2355dd406a9185b869dd4c9068 "HTTP/1.1 202 Accepted"
+2025-08-04 19:51:08,073 - INFO - 📋 Testing Synthesis Quality...
+2025-08-04 19:51:08,083 - INFO - Connecting to SSE endpoint: http://localhost:9000/sse
+2025-08-04 19:51:08,132 - INFO - HTTP Request: GET http://localhost:9000/sse "HTTP/1.1 200 OK"
+2025-08-04 19:51:08,134 - INFO - Received endpoint URL: http://localhost:9000/messages/?session_id=0d95ae5f5d644af3912ba5ca871d5d33
+2025-08-04 19:51:08,135 - INFO - Starting post writer with endpoint URL: http://localhost:9000/messages/?session_id=0d95ae5f5d644af3912ba5ca871d5d33
+2025-08-04 19:51:08,138 - INFO - HTTP Request: POST http://localhost:9000/messages/?session_id=0d95ae5f5d644af3912ba5ca871d5d33 "HTTP/1.1 202 Accepted"
+2025-08-04 19:51:08,141 - INFO - HTTP Request: POST http://localhost:9000/messages/?session_id=0d95ae5f5d644af3912ba5ca871d5d33 "HTTP/1.1 202 Accepted"
+2025-08-04 19:51:08,143 - INFO - HTTP Request: POST http://localhost:9000/messages/?session_id=0d95ae5f5d644af3912ba5ca871d5d33 "HTTP/1.1 202 Accepted"
+2025-08-04 19:51:08,147 - INFO - HTTP Request: POST http://localhost:9000/messages/?session_id=0d95ae5f5d644af3912ba5ca871d5d33 "HTTP/1.1 202 Accepted"
+2025-08-04 19:51:31,751 - INFO - 📋 Testing Error Handling...
+2025-08-04 19:51:31,755 - INFO - Connecting to SSE endpoint: http://localhost:9000/sse
+2025-08-04 19:51:31,808 - INFO - HTTP Request: GET http://localhost:9000/sse "HTTP/1.1 200 OK"
+2025-08-04 19:51:31,809 - INFO - Received endpoint URL: http://localhost:9000/messages/?session_id=2a7959088b5f4d88a63233dad8c4bdbc
+2025-08-04 19:51:31,810 - INFO - Starting post writer with endpoint URL: http://localhost:9000/messages/?session_id=2a7959088b5f4d88a63233dad8c4bdbc
+2025-08-04 19:51:31,817 - INFO - HTTP Request: POST http://localhost:9000/messages/?session_id=2a7959088b5f4d88a63233dad8c4bdbc "HTTP/1.1 202 Accepted"
+2025-08-04 19:51:31,824 - INFO - HTTP Request: POST http://localhost:9000/messages/?session_id=2a7959088b5f4d88a63233dad8c4bdbc "HTTP/1.1 202 Accepted"
+2025-08-04 19:51:31,828 - INFO - HTTP Request: POST http://localhost:9000/messages/?session_id=2a7959088b5f4d88a63233dad8c4bdbc "HTTP/1.1 202 Accepted"
+2025-08-04 19:51:31,836 - INFO - HTTP Request: POST http://localhost:9000/messages/?session_id=2a7959088b5f4d88a63233dad8c4bdbc "HTTP/1.1 202 Accepted"
+2025-08-04 19:51:35,465 - INFO - HTTP Request: POST http://localhost:9000/messages/?session_id=2a7959088b5f4d88a63233dad8c4bdbc "HTTP/1.1 202 Accepted"
+2025-08-04 19:51:35,472 - INFO - 
+🎯 ENHANCED GRAPH RAG VALIDATION SUMMARY
+2025-08-04 19:51:35,472 - INFO - Total Categories: 6
+2025-08-04 19:51:35,473 - INFO - ✅ Passed: 4
+2025-08-04 19:51:35,473 - INFO - ❌ Failed: 2
+2025-08-04 19:51:35,474 - INFO - Success Rate: 66.7%
+2025-08-04 19:51:35,474 - INFO -   Basic Cypher: ✅ PASS
+2025-08-04 19:51:35,475 - INFO -   Advanced Rag Workflow: ✅ PASS
+2025-08-04 19:51:35,475 - INFO -   Entity Extraction: ❌ FAIL
+2025-08-04 19:51:35,475 - INFO -   Intent Classification: ✅ PASS
+2025-08-04 19:51:35,476 - INFO -   Synthesis Quality: ✅ PASS
+2025-08-04 19:51:35,476 - INFO -   Error Handling: ❌ FAIL
+2025-08-04 19:51:35,477 - INFO - 📄 Detailed report saved: enhanced_rag_validation_report_20250804_195135.json
+2025-08-12 18:43:44,078 - INFO - 🚀 Starting Final Enhanced Graph RAG Validation
+2025-08-12 18:43:44,079 - INFO - 📋 Testing Basic Cypher Queries...
+2025-08-12 18:43:44,089 - INFO - Connecting to SSE endpoint: http://localhost:9000/sse
+2025-08-12 18:43:44,164 - ERROR - Error in SseConnectionManager task: unhandled errors in a TaskGroup (1 sub-exception)
+2025-08-12 18:43:44,166 - ERROR - Failed to connect to MCP implementation via HTTP/SSE: unhandled errors in a TaskGroup (1 sub-exception)

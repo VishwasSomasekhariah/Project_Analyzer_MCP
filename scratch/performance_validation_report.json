@@ -1,0 +1,577 @@
+{
+  "metadata": {
+    "csv_file": "/opt/genpod/test_results/comparative_analysis_20250715_184459.csv",
+    "total_scenarios": 37,
+    "analysis_date": "2025-07-15T20:13:30.940765",
+    "unique_categories": [
+      "Technical",
+      "Functional",
+      "Non-Functional",
+      "Modification",
+      "Feature Addition",
+      "Modernization",
+      "Bug Analysis",
+      "Integration"
+    ]
+  },
+  "response_times": {
+    "Vector-only": {
+      "mean": 21947.54054054054,
+      "median": 18962.0,
+      "std": 11357.494766292712,
+      "min": "15715",
+      "max": "78548",
+      "p95": 32444.399999999892,
+      "count": 37
+    },
+    "CPG-only": {
+      "mean": 10185.405405405405,
+      "median": 9803.0,
+      "std": 2359.4550390039394,
+      "min": "7027",
+      "max": "16255",
+      "p95": 14465.999999999996,
+      "count": 37
+    },
+    "Comprehensive": {
+      "mean": 48502.78378378379,
+      "median": 44839.0,
+      "std": 14467.639451039871,
+      "min": "37190",
+      "max": "128362",
+      "p95": 59810.19999999998,
+      "count": 37
+    }
+  },
+  "success_rates": {
+    "Vector-only": {
+      "total_scenarios": 37,
+      "successful": 37,
+      "success_rate": 100.0,
+      "failed": 0
+    },
+    "CPG-only": {
+      "total_scenarios": 37,
+      "successful": 37,
+      "success_rate": 100.0,
+      "failed": 0
+    },
+    "Comprehensive": {
+      "total_scenarios": 37,
+      "successful": 37,
+      "success_rate": 100.0,
+      "failed": 0
+    }
+  },
+  "response_quality": {
+    "Vector-only": {
+      "avg_response_length": 41102.35135135135,
+      "median_response_length": 40655.0,
+      "structured_responses": 37,
+      "structured_rate": 100.0,
+      "short_responses": 0,
+      "short_response_rate": 0.0,
+      "total_responses": 37
+    },
+    "CPG-only": {
+      "avg_response_length": 895.2162162162163,
+      "median_response_length": 803.0,
+      "structured_responses": 37,
+      "structured_rate": 100.0,
+      "short_responses": 0,
+      "short_response_rate": 0.0,
+      "total_responses": 37
+    },
+    "Comprehensive": {
+      "avg_response_length": 126929.83783783784,
+      "median_response_length": 125448.0,
+      "structured_responses": 37,
+      "structured_rate": 100.0,
+      "short_responses": 0,
+      "short_response_rate": 0.0,
+      "total_responses": 37
+    }
+  },
+  "category_analysis": {
+    "Technical": {
+      "scenario_count": 5,
+      "avg_response_times": {
+        "vector": 29556.4,
+        "cpg": 11923.8,
+        "comprehensive": 63300.6
+      },
+      "success_rates": {
+        "vector": 100.0,
+        "cpg": 100.0,
+        "comprehensive": 100.0
+      }
+    },
+    "Functional": {
+      "scenario_count": 5,
+      "avg_response_times": {
+        "vector": 18113.6,
+        "cpg": 9010.8,
+        "comprehensive": 43986.4
+      },
+      "success_rates": {
+        "vector": 100.0,
+        "cpg": 100.0,
+        "comprehensive": 100.0
+      }
+    },
+    "Non-Functional": {
+      "scenario_count": 6,
+      "avg_response_times": {
+        "vector": 18106.5,
+        "cpg": 9173.833333333334,
+        "comprehensive": 45642.0
+      },
+      "success_rates": {
+        "vector": 100.0,
+        "cpg": 100.0,
+        "comprehensive": 100.0
+      }
+    },
+    "Modification": {
+      "scenario_count": 5,
+      "avg_response_times": {
+        "vector": 30576.4,
+        "cpg": 10110.4,
+        "comprehensive": 47911.4
+      },
+      "success_rates": {
+        "vector": 100.0,
+        "cpg": 100.0,
+        "comprehensive": 100.0
+      }
+    },
+    "Feature Addition": {
+      "scenario_count": 5,
+      "avg_response_times": {
+        "vector": 19438.2,
+        "cpg": 9635.4,
+        "comprehensive": 44723.2
+      },
+      "success_rates": {
+        "vector": 100.0,
+        "cpg": 100.0,
+        "comprehensive": 100.0
+      }
+    },
+    "Modernization": {
+      "scenario_count": 5,
+      "avg_response_times": {
+        "vector": 20978.4,
+        "cpg": 11797.2,
+        "comprehensive": 49712.6
+      },
+      "success_rates": {
+        "vector": 100.0,
+        "cpg": 100.0,
+        "comprehensive": 100.0
+      }
+    },
+    "Bug Analysis": {
+      "scenario_count": 3,
+      "avg_response_times": {
+        "vector": 18098.0,
+        "cpg": 9060.666666666666,
+        "comprehensive": 43747.0
+      },
+      "success_rates": {
+        "vector": 100.0,
+        "cpg": 100.0,
+        "comprehensive": 100.0
+      }
+    },
+    "Integration": {
+      "scenario_count": 3,
+      "avg_response_times": {
+        "vector": 18603.666666666668,
+        "cpg": 10749.0,
+        "comprehensive": 47113.0
+      },
+      "success_rates": {
+        "vector": 100.0,
+        "cpg": 100.0,
+        "comprehensive": 100.0
+      }
+    }
+  },
+  "performance_patterns": {
+    "high_comprehensive_overhead": {
+      "count": 36,
+      "scenarios": [
+        {
+          "query_id": "T001",
+          "query_category": "Technical",
+          "comprehensive_overhead": 76036
+        },
+        {
+          "query_id": "T002",
+          "query_category": "Technical",
+          "comprehensive_overhead": 25234
+        },
+        {
+          "query_id": "T003",
+          "query_category": "Technical",
+          "comprehensive_overhead": 22872
+        },
+        {
+          "query_id": "T004",
+          "query_category": "Technical",
+          "comprehensive_overhead": 21131
+        },
+        {
+          "query_id": "T005",
+          "query_category": "Technical",
+          "comprehensive_overhead": 23448
+        },
+        {
+          "query_id": "F001",
+          "query_category": "Functional",
+          "comprehensive_overhead": 26284
+        },
+        {
+          "query_id": "F002",
+          "query_category": "Functional",
+          "comprehensive_overhead": 28770
+        },
+        {
+          "query_id": "F003",
+          "query_category": "Functional",
+          "comprehensive_overhead": 23501
+        },
+        {
+          "query_id": "F004",
+          "query_category": "Functional",
+          "comprehensive_overhead": 27390
+        },
+        {
+          "query_id": "F005",
+          "query_category": "Functional",
+          "comprehensive_overhead": 23419
+        },
+        {
+          "query_id": "NF001",
+          "query_category": "Non-Functional",
+          "comprehensive_overhead": 25432
+        },
+        {
+          "query_id": "NF002",
+          "query_category": "Non-Functional",
+          "comprehensive_overhead": 29914
+        },
+        {
+          "query_id": "NF003",
+          "query_category": "Non-Functional",
+          "comprehensive_overhead": 39256
+        },
+        {
+          "query_id": "NF004",
+          "query_category": "Non-Functional",
+          "comprehensive_overhead": 21475
+        },
+        {
+          "query_id": "NF005",
+          "query_category": "Non-Functional",
+          "comprehensive_overhead": 26798
+        },
+        {
+          "query_id": "NF006",
+          "query_category": "Non-Functional",
+          "comprehensive_overhead": 22338
+        },
+        {
+          "query_id": "M001",
+          "query_category": "Modification",
+          "comprehensive_overhead": 36404
+        },
+        {
+          "query_id": "M002",
+          "query_category": "Modification",
+          "comprehensive_overhead": 24250
+        },
+        {
+          "query_id": "M003",
+          "query_category": "Modification",
+          "comprehensive_overhead": 32399
+        },
+        {
+          "query_id": "M005",
+          "query_category": "Modification",
+          "comprehensive_overhead": 28505
+        },
+        {
+          "query_id": "FA001",
+          "query_category": "Feature Addition",
+          "comprehensive_overhead": 28063
+        },
+        {
+          "query_id": "FA002",
+          "query_category": "Feature Addition",
+          "comprehensive_overhead": 20245
+        },
+        {
+          "query_id": "FA003",
+          "query_category": "Feature Addition",
+          "comprehensive_overhead": 26044
+        },
+        {
+          "query_id": "FA004",
+          "query_category": "Feature Addition",
+          "comprehensive_overhead": 27536
+        },
+        {
+          "query_id": "FA005",
+          "query_category": "Feature Addition",
+          "comprehensive_overhead": 24537
+        },
+        {
+          "query_id": "MOD001",
+          "query_category": "Modernization",
+          "comprehensive_overhead": 41825
+        },
+        {
+          "query_id": "MOD002",
+          "query_category": "Modernization",
+          "comprehensive_overhead": 24640
+        },
+        {
+          "query_id": "MOD003",
+          "query_category": "Modernization",
+          "comprehensive_overhead": 21773
+        },
+        {
+          "query_id": "MOD004",
+          "query_category": "Modernization",
+          "comprehensive_overhead": 29219
+        },
+        {
+          "query_id": "MOD005",
+          "query_category": "Modernization",
+          "comprehensive_overhead": 26214
+        },
+        {
+          "query_id": "BUG001",
+          "query_category": "Bug Analysis",
+          "comprehensive_overhead": 28939
+        },
+        {
+          "query_id": "BUG002",
+          "query_category": "Bug Analysis",
+          "comprehensive_overhead": 23957
+        },
+        {
+          "query_id": "BUG003",
+          "query_category": "Bug Analysis",
+          "comprehensive_overhead": 24051
+        },
+        {
+          "query_id": "INT001",
+          "query_category": "Integration",
+          "comprehensive_overhead": 38342
+        },
+        {
+          "query_id": "INT002",
+          "query_category": "Integration",
+          "comprehensive_overhead": 24919
+        },
+        {
+          "query_id": "INT003",
+          "query_category": "Integration",
+          "comprehensive_overhead": 22267
+        }
+      ]
+    },
+    "vector_advantage_scenarios": {
+      "count": 0,
+      "scenarios": []
+    },
+    "cpg_advantage_scenarios": {
+      "count": 36,
+      "scenarios": [
+        {
+          "query_id": "T001",
+          "query_category": "Technical",
+          "vector_vs_cpg_diff": -38066
+        },
+        {
+          "query_id": "T002",
+          "query_category": "Technical",
+          "vector_vs_cpg_diff": -11054
+        },
+        {
+          "query_id": "T003",
+          "query_category": "Technical",
+          "vector_vs_cpg_diff": -11777
+        },
+        {
+          "query_id": "T004",
+          "query_category": "Technical",
+          "vector_vs_cpg_diff": -13308
+        },
+        {
+          "query_id": "T005",
+          "query_category": "Technical",
+          "vector_vs_cpg_diff": -13958
+        },
+        {
+          "query_id": "F001",
+          "query_category": "Functional",
+          "vector_vs_cpg_diff": -6546
+        },
+        {
+          "query_id": "F002",
+          "query_category": "Functional",
+          "vector_vs_cpg_diff": -11023
+        },
+        {
+          "query_id": "F003",
+          "query_category": "Functional",
+          "vector_vs_cpg_diff": -7394
+        },
+        {
+          "query_id": "F004",
+          "query_category": "Functional",
+          "vector_vs_cpg_diff": -9633
+        },
+        {
+          "query_id": "F005",
+          "query_category": "Functional",
+          "vector_vs_cpg_diff": -10918
+        },
+        {
+          "query_id": "NF001",
+          "query_category": "Non-Functional",
+          "vector_vs_cpg_diff": -7310
+        },
+        {
+          "query_id": "NF002",
+          "query_category": "Non-Functional",
+          "vector_vs_cpg_diff": -10628
+        },
+        {
+          "query_id": "NF003",
+          "query_category": "Non-Functional",
+          "vector_vs_cpg_diff": -7436
+        },
+        {
+          "query_id": "NF004",
+          "query_category": "Non-Functional",
+          "vector_vs_cpg_diff": -6391
+        },
+        {
+          "query_id": "NF005",
+          "query_category": "Non-Functional",
+          "vector_vs_cpg_diff": -7505
+        },
+        {
+          "query_id": "NF006",
+          "query_category": "Non-Functional",
+          "vector_vs_cpg_diff": -14326
+        },
+        {
+          "query_id": "M001",
+          "query_category": "Modification",
+          "vector_vs_cpg_diff": -6066
+        },
+        {
+          "query_id": "M002",
+          "query_category": "Modification",
+          "vector_vs_cpg_diff": -7528
+        },
+        {
+          "query_id": "M003",
+          "query_category": "Modification",
+          "vector_vs_cpg_diff": -6570
+        },
+        {
+          "query_id": "M004",
+          "query_category": "Modification",
+          "vector_vs_cpg_diff": -71065
+        },
+        {
+          "query_id": "M005",
+          "query_category": "Modification",
+          "vector_vs_cpg_diff": -11101
+        },
+        {
+          "query_id": "FA001",
+          "query_category": "Feature Addition",
+          "vector_vs_cpg_diff": -8012
+        },
+        {
+          "query_id": "FA002",
+          "query_category": "Feature Addition",
+          "vector_vs_cpg_diff": -17917
+        },
+        {
+          "query_id": "FA003",
+          "query_category": "Feature Addition",
+          "vector_vs_cpg_diff": -8374
+        },
+        {
+          "query_id": "FA004",
+          "query_category": "Feature Addition",
+          "vector_vs_cpg_diff": -9265
+        },
+        {
+          "query_id": "FA005",
+          "query_category": "Feature Addition",
+          "vector_vs_cpg_diff": -5446
+        },
+        {
+          "query_id": "MOD001",
+          "query_category": "Modernization",
+          "vector_vs_cpg_diff": -8873
+        },
+        {
+          "query_id": "MOD002",
+          "query_category": "Modernization",
+          "vector_vs_cpg_diff": -11310
+        },
+        {
+          "query_id": "MOD003",
+          "query_category": "Modernization",
+          "vector_vs_cpg_diff": -15227
+        },
+        {
+          "query_id": "MOD005",
+          "query_category": "Modernization",
+          "vector_vs_cpg_diff": -7089
+        },
+        {
+          "query_id": "BUG001",
+          "query_category": "Bug Analysis",
+          "vector_vs_cpg_diff": -8883
+        },
+        {
+          "query_id": "BUG002",
+          "query_category": "Bug Analysis",
+          "vector_vs_cpg_diff": -10049
+        },
+        {
+          "query_id": "BUG003",
+          "query_category": "Bug Analysis",
+          "vector_vs_cpg_diff": -8180
+        },
+        {
+          "query_id": "INT001",
+          "query_category": "Integration",
+          "vector_vs_cpg_diff": -9477
+        },
+        {
+          "query_id": "INT002",
+          "query_category": "Integration",
+          "vector_vs_cpg_diff": -9067
+        },
+        {
+          "query_id": "INT003",
+          "query_category": "Integration",
+          "vector_vs_cpg_diff": -5020
+        }
+      ]
+    }
+  }
+}

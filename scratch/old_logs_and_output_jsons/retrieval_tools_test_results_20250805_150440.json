@@ -1,0 +1,48 @@
+{
+  "test_metadata": {
+    "timestamp": "2025-08-05T15:06:29.740833",
+    "test_suite": "comprehensive_retrieval_tools",
+    "total_tests": 3,
+    "passed_tests": 0,
+    "success_rate": 0.0,
+    "overall_success": false
+  },
+  "individual_tests": {
+    "vector_only": {
+      "success": false,
+      "test_query": "Find WorkerA.cs file",
+      "tool_response": null,
+      "raw_results": [],
+      "ai_response": "",
+      "metadata": {}
+    },
+    "cpg_only_enhanced_rag": {
+      "success": false,
+      "test_query": "How many comment lines are in WorkerA.cs?",
+      "tool_response": null,
+      "raw_results": [],
+      "synthesis": "",
+      "entities_extracted": {},
+      "retrieval_plan": {},
+      "advanced_rag_metadata": {}
+    },
+    "comprehensive_hybrid": {
+      "success": false,
+      "test_query": "Analyze the structure of WorkerA.cs",
+      "tool_response": null,
+      "vector_raw_results": [],
+      "cpg_raw_results": [],
+      "hybrid_results": [],
+      "synthesis": "",
+      "entities_extracted": {},
+      "performance_metrics": {},
+      "summary": {}
+    }
+  },
+  "configuration": {
+    "config_file": "/opt/genpod/file_watcher_mcp_config.json",
+    "collection_name": "helloworldapp-benchmarking",
+    "project_path": "/opt/HelloWorldApp",
+    "neo4j_config": "/opt/genpod/neo4j_config.json"
+  }
+}

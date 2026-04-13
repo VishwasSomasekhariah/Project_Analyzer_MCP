@@ -1,0 +1,26 @@
+digraph "&lt;init&gt;" {  
+node [shape="rect"];  
+"111669149702" [label = <METHOD, 6<BR/>&lt;init&gt;> ]
+"115964117001" [label = <PARAM, 6<BR/>this> ]
+"115964117002" [label = <PARAM, 6<BR/>INotifier notifier> ]
+"25769803783" [label = <BLOCK, 7<BR/>&lt;empty&gt;> ]
+"30064771090" [label = <&lt;operator&gt;.assignment, 8<BR/>_notifier = notifier> ]
+"30064771091" [label = <&lt;operator&gt;.fieldAccess, 8<BR/>this._notifier> ]
+"68719476756" [label = <IDENTIFIER, 8<BR/>this<BR/>_notifier = notifier> ]
+"55834574849" [label = <FIELD_IDENTIFIER, 8<BR/>_notifier> ]
+"68719476757" [label = <IDENTIFIER, 8<BR/>INotifier notifier<BR/>_notifier = notifier> ]
+"133143986193" [label = <MODIFIER, 6<BR/>PUBLIC> ]
+"133143986194" [label = <MODIFIER, 6<BR/>CONSTRUCTOR> ]
+"128849018886" [label = <METHOD_RETURN, 6<BR/>System.Void> ]
+  "111669149702" -> "115964117001" 
+  "111669149702" -> "115964117002" 
+  "111669149702" -> "25769803783" 
+  "111669149702" -> "133143986193" 
+  "111669149702" -> "133143986194" 
+  "111669149702" -> "128849018886" 
+  "25769803783" -> "30064771090" 
+  "30064771090" -> "30064771091" 
+  "30064771090" -> "68719476757" 
+  "30064771091" -> "68719476756" 
+  "30064771091" -> "55834574849" 
+}

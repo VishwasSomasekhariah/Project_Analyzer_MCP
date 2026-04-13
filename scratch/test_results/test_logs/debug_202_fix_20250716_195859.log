@@ -1,0 +1,14 @@
+2025-07-16 19:59:36,986 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-16 19:59:37,004 - __main__ - INFO - ✅ LLM generated 2 queries for category: Technical
+2025-07-16 19:59:37,550 - __main__ - ERROR - CPG query failed: HTTP error 404: Not Found
+2025-07-16 19:59:37,550 - asyncio - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x70b2c43ef110>
+2025-07-16 19:59:37,551 - asyncio - ERROR - Unclosed connector
+connections: ['deque([(<aiohttp.client_proto.ResponseHandler object at 0x70b2c43e1cd0>, 4062.100927779)])']
+connector: <aiohttp.connector.TCPConnector object at 0x70b2c45a6ba0>
+2025-07-16 19:59:38,115 - __main__ - ERROR - Comprehensive query failed: HTTP error 404: Not Found
+2025-07-16 19:59:38,116 - asyncio - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x70b2c43ecc50>
+2025-07-16 19:59:38,116 - asyncio - ERROR - Unclosed connector
+connections: ['deque([(<aiohttp.client_proto.ResponseHandler object at 0x70b2c43e1cd0>, 4062.666639348)])']
+connector: <aiohttp.connector.TCPConnector object at 0x70b2c43ef560>

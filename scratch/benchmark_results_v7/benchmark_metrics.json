@@ -1,0 +1,242 @@
+[
+  {
+    "run_number": 1,
+    "timestamp": "2025-11-21T21:14:21.296227",
+    "total_time_seconds": 197.15,
+    "success": false,
+    "final_answer": "",
+    "confidence_score": 0.0,
+    "workflow_output_file": "benchmark_results_v7/run_1_output.json",
+    "phase0_time": 0.0,
+    "phase1_time": 0.0,
+    "total_subqueries": 3,
+    "successful_subqueries": 3,
+    "total_queries_executed": 15,
+    "total_tokens_used": 85823,
+    "total_cost": 0.2381,
+    "subquery_details": [
+      {
+        "name": "Approach_0",
+        "iterations": 1,
+        "queries_executed": 5,
+        "tokens_used": 28219,
+        "cost": 0.0564,
+        "status": "success",
+        "quality_grade": 0.0,
+        "confidence": "Unknown"
+      },
+      {
+        "name": "Approach_1",
+        "iterations": 1,
+        "queries_executed": 5,
+        "tokens_used": 28568,
+        "cost": 0.0571,
+        "status": "success",
+        "quality_grade": 0.0,
+        "confidence": "Unknown"
+      },
+      {
+        "name": "Approach_2",
+        "iterations": 1,
+        "queries_executed": 5,
+        "tokens_used": 26662,
+        "cost": 0.0533,
+        "status": "success",
+        "quality_grade": 0.0,
+        "confidence": "Unknown"
+      }
+    ]
+  },
+  {
+    "run_number": 2,
+    "timestamp": "2025-11-21T21:16:35.968434",
+    "total_time_seconds": 132.63,
+    "success": false,
+    "final_answer": "",
+    "confidence_score": 0.0,
+    "workflow_output_file": "benchmark_results_v7/run_2_output.json",
+    "phase0_time": 0.0,
+    "phase1_time": 0.0,
+    "total_subqueries": 3,
+    "successful_subqueries": 3,
+    "total_queries_executed": 15,
+    "total_tokens_used": 88285,
+    "total_cost": 0.2657,
+    "subquery_details": [
+      {
+        "name": "Approach_0",
+        "iterations": 1,
+        "queries_executed": 5,
+        "tokens_used": 29148,
+        "cost": 0.0583,
+        "status": "success",
+        "quality_grade": 0.0,
+        "confidence": "Unknown"
+      },
+      {
+        "name": "Approach_1",
+        "iterations": 1,
+        "queries_executed": 5,
+        "tokens_used": 28260,
+        "cost": 0.0565,
+        "status": "success",
+        "quality_grade": 0.0,
+        "confidence": "Unknown"
+      },
+      {
+        "name": "Approach_2",
+        "iterations": 1,
+        "queries_executed": 5,
+        "tokens_used": 27695,
+        "cost": 0.0554,
+        "status": "success",
+        "quality_grade": 0.0,
+        "confidence": "Unknown"
+      }
+    ]
+  },
+  {
+    "run_number": 3,
+    "timestamp": "2025-11-21T21:18:26.689020",
+    "total_time_seconds": 108.68,
+    "success": false,
+    "final_answer": "",
+    "confidence_score": 0.0,
+    "workflow_output_file": "benchmark_results_v7/run_3_output.json",
+    "phase0_time": 0.0,
+    "phase1_time": 0.0,
+    "total_subqueries": 3,
+    "successful_subqueries": 3,
+    "total_queries_executed": 15,
+    "total_tokens_used": 87928,
+    "total_cost": 0.249,
+    "subquery_details": [
+      {
+        "name": "Approach_0",
+        "iterations": 1,
+        "queries_executed": 5,
+        "tokens_used": 28885,
+        "cost": 0.0578,
+        "status": "success",
+        "quality_grade": 0.0,
+        "confidence": "Unknown"
+      },
+      {
+        "name": "Approach_1",
+        "iterations": 1,
+        "queries_executed": 5,
+        "tokens_used": 28499,
+        "cost": 0.057,
+        "status": "success",
+        "quality_grade": 0.0,
+        "confidence": "Unknown"
+      },
+      {
+        "name": "Approach_2",
+        "iterations": 1,
+        "queries_executed": 5,
+        "tokens_used": 27930,
+        "cost": 0.0559,
+        "status": "success",
+        "quality_grade": 0.0,
+        "confidence": "Unknown"
+      }
+    ]
+  },
+  {
+    "run_number": 4,
+    "timestamp": "2025-11-21T21:20:33.406015",
+    "total_time_seconds": 124.67,
+    "success": false,
+    "final_answer": "",
+    "confidence_score": 0.0,
+    "workflow_output_file": "benchmark_results_v7/run_4_output.json",
+    "phase0_time": 0.0,
+    "phase1_time": 0.0,
+    "total_subqueries": 3,
+    "successful_subqueries": 3,
+    "total_queries_executed": 15,
+    "total_tokens_used": 87542,
+    "total_cost": 0.2484,
+    "subquery_details": [
+      {
+        "name": "Approach_0",
+        "iterations": 1,
+        "queries_executed": 5,
+        "tokens_used": 28400,
+        "cost": 0.0568,
+        "status": "success",
+        "quality_grade": 0.0,
+        "confidence": "Unknown"
+      },
+      {
+        "name": "Approach_1",
+        "iterations": 1,
+        "queries_executed": 5,
+        "tokens_used": 28285,
+        "cost": 0.0566,
+        "status": "success",
+        "quality_grade": 0.0,
+        "confidence": "Unknown"
+      },
+      {
+        "name": "Approach_2",
+        "iterations": 1,
+        "queries_executed": 5,
+        "tokens_used": 28240,
+        "cost": 0.0565,
+        "status": "success",
+        "quality_grade": 0.0,
+        "confidence": "Unknown"
+      }
+    ]
+  },
+  {
+    "run_number": 5,
+    "timestamp": "2025-11-21T21:23:20.349936",
+    "total_time_seconds": 164.91,
+    "success": false,
+    "final_answer": "",
+    "confidence_score": 0.0,
+    "workflow_output_file": "benchmark_results_v7/run_5_output.json",
+    "phase0_time": 0.0,
+    "phase1_time": 0.0,
+    "total_subqueries": 3,
+    "successful_subqueries": 3,
+    "total_queries_executed": 15,
+    "total_tokens_used": 86461,
+    "total_cost": 0.2533,
+    "subquery_details": [
+      {
+        "name": "Approach_0",
+        "iterations": 1,
+        "queries_executed": 5,
+        "tokens_used": 27893,
+        "cost": 0.0558,
+        "status": "success",
+        "quality_grade": 0.0,
+        "confidence": "Unknown"
+      },
+      {
+        "name": "Approach_1",
+        "iterations": 1,
+        "queries_executed": 5,
+        "tokens_used": 28103,
+        "cost": 0.0562,
+        "status": "success",
+        "quality_grade": 0.0,
+        "confidence": "Unknown"
+      },
+      {
+        "name": "Approach_2",
+        "iterations": 1,
+        "queries_executed": 5,
+        "tokens_used": 27596,
+        "cost": 0.0552,
+        "status": "success",
+        "quality_grade": 0.0,
+        "confidence": "Unknown"
+      }
+    ]
+  }
+]

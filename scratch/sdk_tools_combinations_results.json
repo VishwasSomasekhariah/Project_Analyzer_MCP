@@ -1,0 +1,78 @@
+[
+  {
+    "test": "tools_mcp_only",
+    "read_called": false,
+    "bash_called": false,
+    "builtin_tool_called": false,
+    "tools_attempted": [],
+    "verdict": "\u2705 PASS - No built-in tools called"
+  },
+  {
+    "test": "empty_tools_with_allowed_mcp",
+    "read_called": false,
+    "bash_called": false,
+    "builtin_tool_called": false,
+    "tools_attempted": [],
+    "verdict": "\u2705 PASS - No built-in tools called"
+  },
+  {
+    "test": "tools_mcp_with_allowed_mcp",
+    "read_called": false,
+    "bash_called": false,
+    "builtin_tool_called": false,
+    "tools_attempted": [],
+    "verdict": "\u2705 PASS - No built-in tools called"
+  },
+  {
+    "test": "tools_mcp_with_disallowed_builtins",
+    "read_called": false,
+    "bash_called": false,
+    "builtin_tool_called": false,
+    "tools_attempted": [],
+    "verdict": "\u2705 PASS - No built-in tools called"
+  },
+  {
+    "test": "empty_tools_with_disallowed_builtins",
+    "read_called": false,
+    "bash_called": false,
+    "builtin_tool_called": false,
+    "tools_attempted": [],
+    "verdict": "\u2705 PASS - No built-in tools called"
+  },
+  {
+    "test": "triple_combination",
+    "read_called": false,
+    "bash_called": false,
+    "builtin_tool_called": false,
+    "tools_attempted": [],
+    "verdict": "\u2705 PASS - No built-in tools called"
+  },
+  {
+    "test": "tools_preset_with_allowed",
+    "read_called": true,
+    "bash_called": false,
+    "builtin_tool_called": true,
+    "tools_attempted": [
+      "Read"
+    ],
+    "verdict": "\u274c FAIL - Built-in tools still called"
+  },
+  {
+    "test": "only_allowed_tools",
+    "read_called": true,
+    "bash_called": false,
+    "builtin_tool_called": true,
+    "tools_attempted": [
+      "Read"
+    ],
+    "verdict": "\u274c FAIL - Built-in tools still called"
+  },
+  {
+    "test": "only_disallowed_tools",
+    "read_called": false,
+    "bash_called": false,
+    "builtin_tool_called": false,
+    "tools_attempted": [],
+    "verdict": "\u2705 PASS - No built-in tools called"
+  }
+]

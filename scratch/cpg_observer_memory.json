@@ -1,0 +1,1373 @@
+{
+  "observations": [
+    {
+      "timestamp": "2025-12-05T22:09:09.317586",
+      "session_id": "ed6af895",
+      "user_query": "Analyze the overall architecture of the HelloWorldApp.",
+      "sub_query": "What are the main components or modules of the HelloWorldApp?",
+      "agent_id": "CoT-1",
+      "cypher_query": "MATCH (f:File) WHERE f.file_path CONTAINS 'HelloWorldApp' RETURN f.name, f.file_path",
+      "result_count": 11,
+      "is_empty": false,
+      "had_error": false,
+      "error_message": null,
+      "execution_time_ms": 5997,
+      "node_types_queried": [
+        "File"
+      ],
+      "relationships_queried": [],
+      "properties_accessed": [
+        "file_path",
+        "name"
+      ]
+    },
+    {
+      "timestamp": "2025-12-05T22:09:13.741952",
+      "session_id": "ed6af895",
+      "user_query": "Analyze the overall architecture of the HelloWorldApp.",
+      "sub_query": "What are the key classes and their responsibilities in the HelloWorldApp?",
+      "agent_id": "CoT-2",
+      "cypher_query": "MATCH (t:Type) WHERE t.file_path STARTS WITH 'HelloWorldApp/' RETURN t.name AS className, t.file_path AS filePath, t.body AS body",
+      "result_count": 10,
+      "is_empty": false,
+      "had_error": false,
+      "error_message": null,
+      "execution_time_ms": 8925,
+      "node_types_queried": [
+        "Type"
+      ],
+      "relationships_queried": [],
+      "properties_accessed": [
+        "body",
+        "file_path",
+        "name"
+      ]
+    },
+    {
+      "timestamp": "2025-12-05T22:09:26.129058",
+      "session_id": "ed6af895",
+      "user_query": "Analyze the overall architecture of the HelloWorldApp.",
+      "sub_query": "How do the components of the HelloWorldApp interact with each other?",
+      "agent_id": "CoT-3",
+      "cypher_query": "MATCH (p:Project)-[:CONTAINS]->(f:File)-[:CONTAINS]->(n:Namespace)-[:CONTAINS]->(t:Type)-[:CONTAINS]->(func:Function) RETURN p.name AS projectName, f.file_path AS filePath, n.name AS namespaceName, t.name AS typeName, func.name AS functionName",
+      "result_count": 1,
+      "is_empty": false,
+      "had_error": false,
+      "error_message": null,
+      "execution_time_ms": 16847,
+      "node_types_queried": [
+        "Namespace",
+        "Type",
+        "Function",
+        "CONTAINS",
+        "File",
+        "Project"
+      ],
+      "relationships_queried": [
+        "CONTAINS"
+      ],
+      "properties_accessed": [
+        "file_path",
+        "name"
+      ]
+    },
+    {
+      "timestamp": "2025-12-05T22:09:29.950748",
+      "session_id": "ed6af895",
+      "user_query": "Analyze the overall architecture of the HelloWorldApp.",
+      "sub_query": "How do the components of the HelloWorldApp interact with each other?",
+      "agent_id": "CoT-3",
+      "cypher_query": "MATCH (caller:Function)-[:CALLS]->(callee:Function) RETURN caller.name AS callerFunction, callee.name AS calleeFunction",
+      "result_count": 43,
+      "is_empty": false,
+      "had_error": false,
+      "error_message": null,
+      "execution_time_ms": 2350,
+      "node_types_queried": [
+        "CALLS",
+        "Function"
+      ],
+      "relationships_queried": [
+        "CALLS"
+      ],
+      "properties_accessed": [
+        "name"
+      ]
+    },
+    {
+      "timestamp": "2025-12-05T22:09:43.607109",
+      "session_id": "ed6af895",
+      "user_query": "Analyze the overall architecture of the HelloWorldApp.",
+      "sub_query": "What are the external dependencies or libraries used in the HelloWorldApp?",
+      "agent_id": "CoT-5",
+      "cypher_query": "MATCH (f:File) WHERE f.file_path CONTAINS 'HelloWorldApp' RETURN f.file_path, f.imports",
+      "result_count": 11,
+      "is_empty": false,
+      "had_error": false,
+      "error_message": null,
+      "execution_time_ms": 3626,
+      "node_types_queried": [
+        "File"
+      ],
+      "relationships_queried": [],
+      "properties_accessed": [
+        "imports",
+        "file_path"
+      ]
+    },
+    {
+      "timestamp": "2025-12-05T22:09:46.184426",
+      "session_id": "ed6af895",
+      "user_query": "Analyze the overall architecture of the HelloWorldApp.",
+      "sub_query": "What design patterns, if any, are used in the HelloWorldApp?",
+      "agent_id": "CoT-4",
+      "cypher_query": "MATCH (t:Type)-[:CONTAINS]->(f:Function) RETURN t.name AS typeName, f.name AS functionName, t.file_path AS filePath",
+      "result_count": 12,
+      "is_empty": false,
+      "had_error": false,
+      "error_message": null,
+      "execution_time_ms": 2588,
+      "node_types_queried": [
+        "Type",
+        "CONTAINS",
+        "Function"
+      ],
+      "relationships_queried": [
+        "CONTAINS"
+      ],
+      "properties_accessed": [
+        "file_path",
+        "name"
+      ]
+    },
+    {
+      "timestamp": "2025-12-05T22:09:47.268075",
+      "session_id": "ed6af895",
+      "user_query": "Analyze the overall architecture of the HelloWorldApp.",
+      "sub_query": "What design patterns, if any, are used in the HelloWorldApp?",
+      "agent_id": "CoT-4",
+      "cypher_query": "MATCH (t:Type)-[:IMPLEMENTS]->(i:Type) RETURN t.name AS typeName, i.name AS interfaceName, t.file_path AS filePath",
+      "result_count": 22,
+      "is_empty": false,
+      "had_error": false,
+      "error_message": null,
+      "execution_time_ms": 142,
+      "node_types_queried": [
+        "Type",
+        "IMPLEMENTS"
+      ],
+      "relationships_queried": [
+        "IMPLEMENTS"
+      ],
+      "properties_accessed": [
+        "file_path",
+        "name"
+      ]
+    },
+    {
+      "timestamp": "2025-12-05T22:09:53.427019",
+      "session_id": "ed6af895",
+      "user_query": "Analyze the overall architecture of the HelloWorldApp.",
+      "sub_query": null,
+      "agent_id": "Verifier",
+      "cypher_query": "MATCH (f:File) WHERE f.file_path STARTS WITH 'HelloWorldApp/' RETURN COUNT(f) AS file_count",
+      "result_count": 1,
+      "is_empty": false,
+      "had_error": false,
+      "error_message": null,
+      "execution_time_ms": 73,
+      "node_types_queried": [
+        "File"
+      ],
+      "relationships_queried": [],
+      "properties_accessed": [
+        "file_path"
+      ]
+    },
+    {
+      "timestamp": "2025-12-05T22:09:57.124337",
+      "session_id": "ed6af895",
+      "user_query": "Analyze the overall architecture of the HelloWorldApp.",
+      "sub_query": null,
+      "agent_id": "Verifier",
+      "cypher_query": "MATCH (t:Type {name: 'INotifier', file_path: 'HelloWorldApp/INotifier.cs'})-[:CONTAINS]->(f:Function {name: 'Notify'})\nRETURN f.body AS function_body",
+      "result_count": 0,
+      "is_empty": true,
+      "had_error": false,
+      "error_message": null,
+      "execution_time_ms": 372,
+      "node_types_queried": [
+        "Type",
+        "CONTAINS",
+        "Function"
+      ],
+      "relationships_queried": [
+        "CONTAINS"
+      ],
+      "properties_accessed": [
+        "cs",
+        "body",
+        "name"
+      ]
+    },
+    {
+      "timestamp": "2025-12-05T22:10:01.088402",
+      "session_id": "ed6af895",
+      "user_query": "Analyze the overall architecture of the HelloWorldApp.",
+      "sub_query": null,
+      "agent_id": "Verifier",
+      "cypher_query": "MATCH (i:Type {name: 'IWorker', file_path: 'HelloWorldApp/IWorker.cs'})-[:CONTAINS]->(f:Function {name: 'Process'}) RETURN i, f",
+      "result_count": 0,
+      "is_empty": true,
+      "had_error": false,
+      "error_message": null,
+      "execution_time_ms": 637,
+      "node_types_queried": [
+        "Type",
+        "CONTAINS",
+        "Function"
+      ],
+      "relationships_queried": [
+        "CONTAINS"
+      ],
+      "properties_accessed": [
+        "cs",
+        "name"
+      ]
+    },
+    {
+      "timestamp": "2025-12-05T22:10:06.217632",
+      "session_id": "ed6af895",
+      "user_query": "Analyze the overall architecture of the HelloWorldApp.",
+      "sub_query": null,
+      "agent_id": "Verifier",
+      "cypher_query": "MATCH (t:Type {name: 'Manager', file_path: 'HelloWorldApp/Manager.cs'})-[:CONTAINS]->(f:Function)\nRETURN t.name AS className, f.name AS functionName, f.body AS functionBody",
+      "result_count": 2,
+      "is_empty": false,
+      "had_error": false,
+      "error_message": null,
+      "execution_time_ms": 435,
+      "node_types_queried": [
+        "Type",
+        "CONTAINS",
+        "Function"
+      ],
+      "relationships_queried": [
+        "CONTAINS"
+      ],
+      "properties_accessed": [
+        "cs",
+        "body",
+        "name"
+      ]
+    },
+    {
+      "timestamp": "2025-12-05T22:10:13.271730",
+      "session_id": "ed6af895",
+      "user_query": "Analyze the overall architecture of the HelloWorldApp.",
+      "sub_query": null,
+      "agent_id": "Verifier",
+      "cypher_query": "MATCH (t:Type {name: 'Program', file_path: 'HelloWorldApp/Program.cs'})-[:CONTAINS]->(f:Function {name: 'Main'}) RETURN f.body AS body",
+      "result_count": 1,
+      "is_empty": false,
+      "had_error": false,
+      "error_message": null,
+      "execution_time_ms": 168,
+      "node_types_queried": [
+        "Type",
+        "CONTAINS",
+        "Function"
+      ],
+      "relationships_queried": [
+        "CONTAINS"
+      ],
+      "properties_accessed": [
+        "cs",
+        "body",
+        "name"
+      ]
+    },
+    {
+      "timestamp": "2025-12-05T22:10:18.116333",
+      "session_id": "ed6af895",
+      "user_query": "Analyze the overall architecture of the HelloWorldApp.",
+      "sub_query": null,
+      "agent_id": "Verifier",
+      "cypher_query": "MATCH (t:Type {name: 'TestAliases', file_path: 'HelloWorldApp/TestAliases.cs'})-[:CONTAINS]->(f:Function)\nWHERE f.body CONTAINS 'MyGeneric.List<string>'\nRETURN t.name AS className, f.name AS functionName, f.body AS functionBody",
+      "result_count": 1,
+      "is_empty": false,
+      "had_error": false,
+      "error_message": null,
+      "execution_time_ms": 39,
+      "node_types_queried": [
+        "Type",
+        "CONTAINS",
+        "Function"
+      ],
+      "relationships_queried": [
+        "CONTAINS"
+      ],
+      "properties_accessed": [
+        "cs",
+        "body",
+        "name"
+      ]
+    },
+    {
+      "timestamp": "2025-12-05T22:10:22.708001",
+      "session_id": "ed6af895",
+      "user_query": "Analyze the overall architecture of the HelloWorldApp.",
+      "sub_query": null,
+      "agent_id": "Verifier",
+      "cypher_query": "MATCH (t:Type {name: 'Helper', file_path: 'HelloWorldApp/Utilities/Helper.cs'})-[:CONTAINS]->(f:Function)\nWHERE f.name = 'FormatMessage'\nRETURN f.body AS function_body, f.name AS function_name",
+      "result_count": 1,
+      "is_empty": false,
+      "had_error": false,
+      "error_message": null,
+      "execution_time_ms": 325,
+      "node_types_queried": [
+        "Type",
+        "CONTAINS",
+        "Function"
+      ],
+      "relationships_queried": [
+        "CONTAINS"
+      ],
+      "properties_accessed": [
+        "cs",
+        "body",
+        "name"
+      ]
+    },
+    {
+      "timestamp": "2025-12-05T22:10:28.542585",
+      "session_id": "ed6af895",
+      "user_query": "Analyze the overall architecture of the HelloWorldApp.",
+      "sub_query": null,
+      "agent_id": "Verifier",
+      "cypher_query": "MATCH (worker:Type {name: 'WorkerA'})-[:IMPLEMENTS]->(interface:Type {name: 'IWorker'})\nRETURN worker, interface",
+      "result_count": 1,
+      "is_empty": false,
+      "had_error": false,
+      "error_message": null,
+      "execution_time_ms": 319,
+      "node_types_queried": [
+        "Type",
+        "IMPLEMENTS"
+      ],
+      "relationships_queried": [
+        "IMPLEMENTS"
+      ],
+      "properties_accessed": [
+        "name"
+      ]
+    },
+    {
+      "timestamp": "2025-12-05T22:10:36.330403",
+      "session_id": "ed6af895",
+      "user_query": "Analyze the overall architecture of the HelloWorldApp.",
+      "sub_query": null,
+      "agent_id": "Verifier",
+      "cypher_query": "MATCH (workerB:Type {name: 'WorkerB', file_path: 'HelloWorldApp/WorkerB.cs'})-[:IMPLEMENTS]->(interface:Type {name: 'IWorker'}) RETURN workerB, interface",
+      "result_count": 1,
+      "is_empty": false,
+      "had_error": false,
+      "error_message": null,
+      "execution_time_ms": 367,
+      "node_types_queried": [
+        "Type",
+        "IMPLEMENTS"
+      ],
+      "relationships_queried": [
+        "IMPLEMENTS"
+      ],
+      "properties_accessed": [
+        "cs",
+        "name"
+      ]
+    },
+    {
+      "timestamp": "2025-12-05T22:10:44.302835",
+      "session_id": "ed6af895",
+      "user_query": "Analyze the overall architecture of the HelloWorldApp.",
+      "sub_query": null,
+      "agent_id": "Verifier",
+      "cypher_query": "MATCH (workerC:Type {name: 'WorkerC'})-[:IMPLEMENTS]->(iWorker:Type {name: 'IWorker'}) RETURN workerC, iWorker",
+      "result_count": 1,
+      "is_empty": false,
+      "had_error": false,
+      "error_message": null,
+      "execution_time_ms": 296,
+      "node_types_queried": [
+        "Type",
+        "IMPLEMENTS"
+      ],
+      "relationships_queried": [
+        "IMPLEMENTS"
+      ],
+      "properties_accessed": [
+        "name"
+      ]
+    },
+    {
+      "timestamp": "2025-12-05T22:10:51.332136",
+      "session_id": "ed6af895",
+      "user_query": "Analyze the overall architecture of the HelloWorldApp.",
+      "sub_query": null,
+      "agent_id": "Verifier",
+      "cypher_query": "MATCH (t:Type {name: 'WorkerFactory', file_path: 'HelloWorldApp/WorkerFactory.cs'})-[:CONTAINS]->(f:Function {name: 'CreateWorkers'})\nRETURN f.body AS function_body",
+      "result_count": 1,
+      "is_empty": false,
+      "had_error": false,
+      "error_message": null,
+      "execution_time_ms": 402,
+      "node_types_queried": [
+        "Type",
+        "CONTAINS",
+        "Function"
+      ],
+      "relationships_queried": [
+        "CONTAINS"
+      ],
+      "properties_accessed": [
+        "cs",
+        "body",
+        "name"
+      ]
+    },
+    {
+      "timestamp": "2025-12-05T22:10:56.308556",
+      "session_id": "ed6af895",
+      "user_query": "Analyze the overall architecture of the HelloWorldApp.",
+      "sub_query": null,
+      "agent_id": "Verifier",
+      "cypher_query": "MATCH (p:Project {name: 'HelloWorldApp'})-[:CONTAINS]->(f:File {file_path: 'HelloWorldApp/Utilities/Helper.cs'})-[:CONTAINS]->(t:Type {name: 'Helper'})-[:CONTAINS]->(func:Function {name: 'FormatMessage'}) RETURN p, f, t, func",
+      "result_count": 0,
+      "is_empty": true,
+      "had_error": false,
+      "error_message": null,
+      "execution_time_ms": 601,
+      "node_types_queried": [
+        "Type",
+        "Function",
+        "CONTAINS",
+        "File",
+        "Project"
+      ],
+      "relationships_queried": [
+        "CONTAINS"
+      ],
+      "properties_accessed": [
+        "cs",
+        "file_path",
+        "name"
+      ]
+    },
+    {
+      "timestamp": "2025-12-05T22:11:01.888280",
+      "session_id": "ed6af895",
+      "user_query": "Analyze the overall architecture of the HelloWorldApp.",
+      "sub_query": null,
+      "agent_id": "Verifier",
+      "cypher_query": "MATCH (main:Function {name: 'Main'})-[:CALLS]->(run:Function {name: 'Run'})-[:CALLS]->(process:Function {name: 'Process'}) RETURN main, run, process",
+      "result_count": 3,
+      "is_empty": false,
+      "had_error": false,
+      "error_message": null,
+      "execution_time_ms": 305,
+      "node_types_queried": [
+        "CALLS",
+        "Function"
+      ],
+      "relationships_queried": [
+        "CALLS"
+      ],
+      "properties_accessed": [
+        "name"
+      ]
+    },
+    {
+      "timestamp": "2025-12-05T22:11:11.441896",
+      "session_id": "ed6af895",
+      "user_query": "Analyze the overall architecture of the HelloWorldApp.",
+      "sub_query": null,
+      "agent_id": "Verifier",
+      "cypher_query": "MATCH (caller:Function {name: 'CreateWorkers'})-[:CALLS]->(callee:Function)\nWHERE callee.name IN ['WorkerA', 'WorkerB', 'WorkerC']\nRETURN caller.name AS callerFunction, collect(callee.name) AS calleeFunctions",
+      "result_count": 1,
+      "is_empty": false,
+      "had_error": false,
+      "error_message": null,
+      "execution_time_ms": 457,
+      "node_types_queried": [
+        "CALLS",
+        "Function"
+      ],
+      "relationships_queried": [
+        "CALLS"
+      ],
+      "properties_accessed": [
+        "name"
+      ]
+    },
+    {
+      "timestamp": "2025-12-05T22:11:16.030199",
+      "session_id": "ed6af895",
+      "user_query": "Analyze the overall architecture of the HelloWorldApp.",
+      "sub_query": null,
+      "agent_id": "Verifier",
+      "cypher_query": "MATCH (class:Type {name: 'Manager'}), (interface:Type {name: 'INotifier'})\nWHERE class.file_path = 'HelloWorldApp/Manager.cs' AND interface.file_path = 'HelloWorldApp/Manager.cs'\nMATCH (class)-[:IMPLEMENTS]->(interface)\nRETURN class.name AS className, interface.name AS interfaceName",
+      "result_count": 0,
+      "is_empty": true,
+      "had_error": false,
+      "error_message": null,
+      "execution_time_ms": 46,
+      "node_types_queried": [
+        "Type",
+        "IMPLEMENTS"
+      ],
+      "relationships_queried": [
+        "IMPLEMENTS"
+      ],
+      "properties_accessed": [
+        "cs",
+        "file_path",
+        "name"
+      ]
+    },
+    {
+      "timestamp": "2025-12-05T22:11:20.593138",
+      "session_id": "ed6af895",
+      "user_query": "Analyze the overall architecture of the HelloWorldApp.",
+      "sub_query": null,
+      "agent_id": "Verifier",
+      "cypher_query": "MATCH (class:Type {name: 'WorkerA'}), (interface:Type {name: 'IWorker'})\nWHERE class.file_path = 'HelloWorldApp/WorkerA.cs' AND interface.file_path = 'HelloWorldApp/WorkerA.cs'\nMATCH (class)-[:IMPLEMENTS]->(interface)\nRETURN class.name AS className, interface.name AS interfaceName",
+      "result_count": 0,
+      "is_empty": true,
+      "had_error": false,
+      "error_message": null,
+      "execution_time_ms": 67,
+      "node_types_queried": [
+        "Type",
+        "IMPLEMENTS"
+      ],
+      "relationships_queried": [
+        "IMPLEMENTS"
+      ],
+      "properties_accessed": [
+        "cs",
+        "file_path",
+        "name"
+      ]
+    },
+    {
+      "timestamp": "2025-12-05T22:11:24.648110",
+      "session_id": "ed6af895",
+      "user_query": "Analyze the overall architecture of the HelloWorldApp.",
+      "sub_query": null,
+      "agent_id": "Verifier",
+      "cypher_query": "MATCH (class:Type {name: 'WorkerFactory'})-[:CONTAINS]->(method:Function {name: 'CreateWorkers'}) RETURN class, method",
+      "result_count": 1,
+      "is_empty": false,
+      "had_error": false,
+      "error_message": null,
+      "execution_time_ms": 311,
+      "node_types_queried": [
+        "Type",
+        "CONTAINS",
+        "Function"
+      ],
+      "relationships_queried": [
+        "CONTAINS"
+      ],
+      "properties_accessed": [
+        "name"
+      ]
+    },
+    {
+      "timestamp": "2025-12-05T22:11:31.705518",
+      "session_id": "ed6af895",
+      "user_query": "Analyze the overall architecture of the HelloWorldApp.",
+      "sub_query": null,
+      "agent_id": "Verifier",
+      "cypher_query": "MATCH (f:File) WHERE f.file_path IN ['HelloWorldApp/Manager.cs', 'HelloWorldApp/Program.cs', 'HelloWorldApp/TestAliases.cs', 'HelloWorldApp/WorkerFactory.cs'] RETURN f.file_path AS file, f.imports AS imports",
+      "result_count": 4,
+      "is_empty": false,
+      "had_error": false,
+      "error_message": null,
+      "execution_time_ms": 292,
+      "node_types_queried": [
+        "File"
+      ],
+      "relationships_queried": [],
+      "properties_accessed": [
+        "imports",
+        "cs",
+        "file_path"
+      ]
+    },
+    {
+      "timestamp": "2025-12-08T17:37:10.024135",
+      "session_id": "b2c902d4",
+      "user_query": "Analyze the overall architecture of the HelloWorldApp.",
+      "sub_query": "What functions are implemented in the HelloWorldApp and what do they do?",
+      "agent_id": "CoT-3",
+      "cypher_query": "MATCH (f:Function) WHERE f.file_path STARTS WITH 'HelloWorldApp/' RETURN f.name AS functionName, f.body AS functionBody, f.file_path AS filePath",
+      "result_count": 12,
+      "is_empty": false,
+      "had_error": false,
+      "error_message": null,
+      "execution_time_ms": 2087,
+      "node_types_queried": [
+        "Function"
+      ],
+      "relationships_queried": [],
+      "properties_accessed": [
+        "name",
+        "file_path",
+        "body"
+      ]
+    },
+    {
+      "timestamp": "2025-12-08T17:37:16.511831",
+      "session_id": "b2c902d4",
+      "user_query": "Analyze the overall architecture of the HelloWorldApp.",
+      "sub_query": "What classes are defined in the HelloWorldApp and what are their responsibilities?",
+      "agent_id": "CoT-2",
+      "cypher_query": "MATCH (t:Type) WHERE t.file_path STARTS WITH 'HelloWorldApp/' RETURN t.name AS className, t.file_path AS filePath, t.body AS classBody",
+      "result_count": 10,
+      "is_empty": false,
+      "had_error": false,
+      "error_message": null,
+      "execution_time_ms": 7371,
+      "node_types_queried": [
+        "Type"
+      ],
+      "relationships_queried": [],
+      "properties_accessed": [
+        "name",
+        "file_path",
+        "body"
+      ]
+    },
+    {
+      "timestamp": "2025-12-08T17:37:29.805609",
+      "session_id": "b2c902d4",
+      "user_query": "Analyze the overall architecture of the HelloWorldApp.",
+      "sub_query": "What are the main components or modules of the HelloWorldApp?",
+      "agent_id": "CoT-1",
+      "cypher_query": "MATCH (f:File) WHERE f.file_path CONTAINS 'HelloWorldApp' RETURN f.name, f.file_path",
+      "result_count": 11,
+      "is_empty": false,
+      "had_error": false,
+      "error_message": null,
+      "execution_time_ms": 19828,
+      "node_types_queried": [
+        "File"
+      ],
+      "relationships_queried": [],
+      "properties_accessed": [
+        "name",
+        "file_path"
+      ]
+    },
+    {
+      "timestamp": "2025-12-08T17:37:40.533199",
+      "session_id": "b2c902d4",
+      "user_query": "Analyze the overall architecture of the HelloWorldApp.",
+      "sub_query": "What external libraries or frameworks does the HelloWorldApp use?",
+      "agent_id": "CoT-5",
+      "cypher_query": "MATCH (f:File) WHERE f.file_path CONTAINS 'HelloWorldApp' RETURN f.file_path, f.imports",
+      "result_count": 11,
+      "is_empty": false,
+      "had_error": false,
+      "error_message": null,
+      "execution_time_ms": 2228,
+      "node_types_queried": [
+        "File"
+      ],
+      "relationships_queried": [],
+      "properties_accessed": [
+        "imports",
+        "file_path"
+      ]
+    },
+    {
+      "timestamp": "2025-12-08T17:37:42.358300",
+      "session_id": "b2c902d4",
+      "user_query": "Analyze the overall architecture of the HelloWorldApp.",
+      "sub_query": "How do the components of the HelloWorldApp interact with each other?",
+      "agent_id": "CoT-4",
+      "cypher_query": "MATCH (f:File)-[:CONTAINS]->(n:Namespace)-[:CONTAINS]->(t:Type)-[:CONTAINS]->(func:Function) RETURN f.file_path AS filePath, n.name AS namespaceName, t.name AS typeName, func.name AS functionName",
+      "result_count": 1,
+      "is_empty": false,
+      "had_error": false,
+      "error_message": null,
+      "execution_time_ms": 1826,
+      "node_types_queried": [
+        "CONTAINS",
+        "Type",
+        "File",
+        "Namespace",
+        "Function"
+      ],
+      "relationships_queried": [
+        "CONTAINS"
+      ],
+      "properties_accessed": [
+        "name",
+        "file_path"
+      ]
+    },
+    {
+      "timestamp": "2025-12-08T17:37:43.093487",
+      "session_id": "b2c902d4",
+      "user_query": "Analyze the overall architecture of the HelloWorldApp.",
+      "sub_query": "How do the components of the HelloWorldApp interact with each other?",
+      "agent_id": "CoT-4",
+      "cypher_query": "MATCH (caller:Function)-[:CALLS]->(callee:Function) RETURN caller.name AS callerName, callee.name AS calleeName",
+      "result_count": 43,
+      "is_empty": false,
+      "had_error": false,
+      "error_message": null,
+      "execution_time_ms": 23,
+      "node_types_queried": [
+        "Function",
+        "CALLS"
+      ],
+      "relationships_queried": [
+        "CALLS"
+      ],
+      "properties_accessed": [
+        "name"
+      ]
+    },
+    {
+      "timestamp": "2025-12-08T17:37:49.355908",
+      "session_id": "b2c902d4",
+      "user_query": "Analyze the overall architecture of the HelloWorldApp.",
+      "sub_query": null,
+      "agent_id": "Verifier",
+      "cypher_query": "MATCH (f:File) WHERE f.file_path STARTS WITH 'HelloWorldApp/' RETURN COUNT(f) AS file_count",
+      "result_count": 1,
+      "is_empty": false,
+      "had_error": false,
+      "error_message": null,
+      "execution_time_ms": 23,
+      "node_types_queried": [
+        "File"
+      ],
+      "relationships_queried": [],
+      "properties_accessed": [
+        "file_path"
+      ]
+    },
+    {
+      "timestamp": "2025-12-08T17:37:52.273200",
+      "session_id": "b2c902d4",
+      "user_query": "Analyze the overall architecture of the HelloWorldApp.",
+      "sub_query": null,
+      "agent_id": "Verifier",
+      "cypher_query": "MATCH (t:Type {name: 'INotifier', file_path: 'HelloWorldApp/INotifier.cs'}) RETURN t.body AS classBody, t.type_kind AS typeKind",
+      "result_count": 1,
+      "is_empty": false,
+      "had_error": false,
+      "error_message": null,
+      "execution_time_ms": 360,
+      "node_types_queried": [
+        "Type"
+      ],
+      "relationships_queried": [],
+      "properties_accessed": [
+        "type_kind",
+        "name",
+        "cs",
+        "body"
+      ]
+    },
+    {
+      "timestamp": "2025-12-08T17:37:55.151373",
+      "session_id": "b2c902d4",
+      "user_query": "Analyze the overall architecture of the HelloWorldApp.",
+      "sub_query": null,
+      "agent_id": "Verifier",
+      "cypher_query": "MATCH (t:Type {name: 'IWorker', file_path: 'HelloWorldApp/IWorker.cs'}) RETURN t.body AS classBody, t.type_kind AS typeKind",
+      "result_count": 1,
+      "is_empty": false,
+      "had_error": false,
+      "error_message": null,
+      "execution_time_ms": 35,
+      "node_types_queried": [
+        "Type"
+      ],
+      "relationships_queried": [],
+      "properties_accessed": [
+        "type_kind",
+        "name",
+        "cs",
+        "body"
+      ]
+    },
+    {
+      "timestamp": "2025-12-08T17:37:59.127854",
+      "session_id": "b2c902d4",
+      "user_query": "Analyze the overall architecture of the HelloWorldApp.",
+      "sub_query": null,
+      "agent_id": "Verifier",
+      "cypher_query": "MATCH (t:Type {name: 'Manager', file_path: 'HelloWorldApp/Manager.cs'})-[:CONTAINS]->(f:Function)\nRETURN t.name AS className, t.file_path AS filePath, f.name AS functionName, f.body AS functionBody",
+      "result_count": 2,
+      "is_empty": false,
+      "had_error": false,
+      "error_message": null,
+      "execution_time_ms": 56,
+      "node_types_queried": [
+        "Function",
+        "CONTAINS",
+        "Type"
+      ],
+      "relationships_queried": [
+        "CONTAINS"
+      ],
+      "properties_accessed": [
+        "name",
+        "cs",
+        "file_path",
+        "body"
+      ]
+    },
+    {
+      "timestamp": "2025-12-08T17:38:05.571943",
+      "session_id": "b2c902d4",
+      "user_query": "Analyze the overall architecture of the HelloWorldApp.",
+      "sub_query": null,
+      "agent_id": "Verifier",
+      "cypher_query": "MATCH (t:Type {name: 'Program', file_path: 'HelloWorldApp/Program.cs'})-[:CONTAINS]->(f:Function {name: 'Main'})\nRETURN t, f",
+      "result_count": 1,
+      "is_empty": false,
+      "had_error": false,
+      "error_message": null,
+      "execution_time_ms": 655,
+      "node_types_queried": [
+        "Function",
+        "CONTAINS",
+        "Type"
+      ],
+      "relationships_queried": [
+        "CONTAINS"
+      ],
+      "properties_accessed": [
+        "name",
+        "cs"
+      ]
+    },
+    {
+      "timestamp": "2025-12-08T17:38:10.107017",
+      "session_id": "b2c902d4",
+      "user_query": "Analyze the overall architecture of the HelloWorldApp.",
+      "sub_query": null,
+      "agent_id": "Verifier",
+      "cypher_query": "MATCH (t:Type {name: 'TestAliases', file_path: 'HelloWorldApp/TestAliases.cs'}) RETURN t.body AS classBody, t.file_path AS filePath",
+      "result_count": 1,
+      "is_empty": false,
+      "had_error": false,
+      "error_message": null,
+      "execution_time_ms": 108,
+      "node_types_queried": [
+        "Type"
+      ],
+      "relationships_queried": [],
+      "properties_accessed": [
+        "name",
+        "cs",
+        "file_path",
+        "body"
+      ]
+    },
+    {
+      "timestamp": "2025-12-08T17:38:14.299457",
+      "session_id": "b2c902d4",
+      "user_query": "Analyze the overall architecture of the HelloWorldApp.",
+      "sub_query": null,
+      "agent_id": "Verifier",
+      "cypher_query": "MATCH (t:Type {name: 'Helper', file_path: 'HelloWorldApp/Utilities/Helper.cs'}) RETURN t.body AS classBody, t.file_path AS filePath, t.name AS className",
+      "result_count": 1,
+      "is_empty": false,
+      "had_error": false,
+      "error_message": null,
+      "execution_time_ms": 110,
+      "node_types_queried": [
+        "Type"
+      ],
+      "relationships_queried": [],
+      "properties_accessed": [
+        "name",
+        "cs",
+        "file_path",
+        "body"
+      ]
+    },
+    {
+      "timestamp": "2025-12-08T17:38:20.518063",
+      "session_id": "b2c902d4",
+      "user_query": "Analyze the overall architecture of the HelloWorldApp.",
+      "sub_query": null,
+      "agent_id": "Verifier",
+      "cypher_query": "MATCH (t:Type {name: 'WorkerA', file_path: 'HelloWorldApp/WorkerA.cs'}) RETURN t.body AS classBody",
+      "result_count": 1,
+      "is_empty": false,
+      "had_error": false,
+      "error_message": null,
+      "execution_time_ms": 85,
+      "node_types_queried": [
+        "Type"
+      ],
+      "relationships_queried": [],
+      "properties_accessed": [
+        "name",
+        "cs",
+        "body"
+      ]
+    },
+    {
+      "timestamp": "2025-12-08T17:38:25.495361",
+      "session_id": "b2c902d4",
+      "user_query": "Analyze the overall architecture of the HelloWorldApp.",
+      "sub_query": null,
+      "agent_id": "Verifier",
+      "cypher_query": "MATCH (t:Type {name: 'WorkerB', file_path: 'HelloWorldApp/WorkerB.cs'}) RETURN t.name AS className, t.body AS classBody, t.file_path AS filePath",
+      "result_count": 1,
+      "is_empty": false,
+      "had_error": false,
+      "error_message": null,
+      "execution_time_ms": 76,
+      "node_types_queried": [
+        "Type"
+      ],
+      "relationships_queried": [],
+      "properties_accessed": [
+        "name",
+        "cs",
+        "file_path",
+        "body"
+      ]
+    },
+    {
+      "timestamp": "2025-12-08T17:38:30.046402",
+      "session_id": "b2c902d4",
+      "user_query": "Analyze the overall architecture of the HelloWorldApp.",
+      "sub_query": null,
+      "agent_id": "Verifier",
+      "cypher_query": "MATCH (t:Type {name: 'WorkerC', file_path: 'HelloWorldApp/WorkerC.cs'}) RETURN t.name AS className, t.body AS classBody, t.file_path AS filePath",
+      "result_count": 1,
+      "is_empty": false,
+      "had_error": false,
+      "error_message": null,
+      "execution_time_ms": 23,
+      "node_types_queried": [
+        "Type"
+      ],
+      "relationships_queried": [],
+      "properties_accessed": [
+        "name",
+        "cs",
+        "file_path",
+        "body"
+      ]
+    },
+    {
+      "timestamp": "2025-12-08T17:38:35.308946",
+      "session_id": "b2c902d4",
+      "user_query": "Analyze the overall architecture of the HelloWorldApp.",
+      "sub_query": null,
+      "agent_id": "Verifier",
+      "cypher_query": "MATCH (t:Type {name: 'WorkerFactory', file_path: 'HelloWorldApp/WorkerFactory.cs'})-[:CONTAINS]->(f:Function)\nRETURN t.name AS className, t.file_path AS filePath, f.name AS functionName, f.body AS functionBody",
+      "result_count": 1,
+      "is_empty": false,
+      "had_error": false,
+      "error_message": null,
+      "execution_time_ms": 21,
+      "node_types_queried": [
+        "Function",
+        "CONTAINS",
+        "Type"
+      ],
+      "relationships_queried": [
+        "CONTAINS"
+      ],
+      "properties_accessed": [
+        "name",
+        "cs",
+        "file_path",
+        "body"
+      ]
+    },
+    {
+      "timestamp": "2025-12-08T17:38:41.815542",
+      "session_id": "b2c902d4",
+      "user_query": "Analyze the overall architecture of the HelloWorldApp.",
+      "sub_query": null,
+      "agent_id": "Verifier",
+      "cypher_query": "MATCH (t:Type)-[:CONTAINS]->(f:Function {name: 'Run', file_path: 'HelloWorldApp/Manager.cs'})\nWHERE t.name = 'Manager'\nRETURN f.body AS function_body, t.name AS type_name",
+      "result_count": 1,
+      "is_empty": false,
+      "had_error": false,
+      "error_message": null,
+      "execution_time_ms": 137,
+      "node_types_queried": [
+        "Function",
+        "CONTAINS",
+        "Type"
+      ],
+      "relationships_queried": [
+        "CONTAINS"
+      ],
+      "properties_accessed": [
+        "name",
+        "cs",
+        "body"
+      ]
+    },
+    {
+      "timestamp": "2025-12-08T17:38:46.004053",
+      "session_id": "b2c902d4",
+      "user_query": "Analyze the overall architecture of the HelloWorldApp.",
+      "sub_query": null,
+      "agent_id": "Verifier",
+      "cypher_query": "MATCH (file:File {file_path: 'HelloWorldApp/TestAliases.cs'})-[:CONTAINS]->(class:Type {name: 'TestAliases'})-[:CONTAINS]->(method:Function {name: 'TestMethod'})-[:CONTAINS]->(block:Block)-[:CONTAINS]->(statement:Statement)\nRETURN method, block, statement LIMIT 1",
+      "result_count": 1,
+      "is_empty": false,
+      "had_error": false,
+      "error_message": null,
+      "execution_time_ms": 400,
+      "node_types_queried": [
+        "CONTAINS",
+        "Type",
+        "File",
+        "Block",
+        "Function",
+        "Statement"
+      ],
+      "relationships_queried": [
+        "CONTAINS"
+      ],
+      "properties_accessed": [
+        "name",
+        "cs",
+        "file_path"
+      ]
+    },
+    {
+      "timestamp": "2025-12-08T17:38:54.007462",
+      "session_id": "b2c902d4",
+      "user_query": "Analyze the overall architecture of the HelloWorldApp.",
+      "sub_query": null,
+      "agent_id": "Verifier",
+      "cypher_query": "MATCH (file:File)-[:CONTAINS]->(namespace:Namespace)-[:CONTAINS]->(type:Type {name: 'WorkerA'})-[:CONTAINS]->(method:Function {name: 'Process'}) WHERE file.file_path = 'HelloWorldApp/WorkerA.cs' RETURN method.body AS body",
+      "result_count": 0,
+      "is_empty": true,
+      "had_error": false,
+      "error_message": null,
+      "execution_time_ms": 210,
+      "node_types_queried": [
+        "CONTAINS",
+        "Type",
+        "File",
+        "Namespace",
+        "Function"
+      ],
+      "relationships_queried": [
+        "CONTAINS"
+      ],
+      "properties_accessed": [
+        "name",
+        "cs",
+        "file_path",
+        "body"
+      ]
+    },
+    {
+      "timestamp": "2025-12-08T17:38:59.530641",
+      "session_id": "b2c902d4",
+      "user_query": "Analyze the overall architecture of the HelloWorldApp.",
+      "sub_query": null,
+      "agent_id": "Verifier",
+      "cypher_query": "MATCH (f:Function {name: \"Process\", file_path: \"HelloWorldApp/WorkerB.cs\"})-[:CONTAINS]->(b:Block)-[:CONTAINS]->(s:Statement)\nWHERE f.body CONTAINS \"FormatMessage\" AND f.body CONTAINS \"Notify\"\nRETURN f.name AS function_name, f.file_path AS file_path, f.body AS body",
+      "result_count": 3,
+      "is_empty": false,
+      "had_error": false,
+      "error_message": null,
+      "execution_time_ms": 65,
+      "node_types_queried": [
+        "Function",
+        "CONTAINS",
+        "Statement",
+        "Block"
+      ],
+      "relationships_queried": [
+        "CONTAINS"
+      ],
+      "properties_accessed": [
+        "name",
+        "cs",
+        "file_path",
+        "body"
+      ]
+    },
+    {
+      "timestamp": "2025-12-08T17:39:05.349304",
+      "session_id": "b2c902d4",
+      "user_query": "Analyze the overall architecture of the HelloWorldApp.",
+      "sub_query": null,
+      "agent_id": "Verifier",
+      "cypher_query": "MATCH (f:Function {name: 'Process', file_path: 'HelloWorldApp/WorkerC.cs'})-[:CONTAINS]->(b:Block)-[:CONTAINS]->(s:Statement)\nWHERE f.body CONTAINS 'FormatMessage' AND f.body CONTAINS 'Notify'\nRETURN f.name AS function_name, f.body AS function_body, collect(s) AS statements",
+      "result_count": 1,
+      "is_empty": false,
+      "had_error": false,
+      "error_message": null,
+      "execution_time_ms": 252,
+      "node_types_queried": [
+        "Function",
+        "CONTAINS",
+        "Statement",
+        "Block"
+      ],
+      "relationships_queried": [
+        "CONTAINS"
+      ],
+      "properties_accessed": [
+        "name",
+        "cs",
+        "body"
+      ]
+    },
+    {
+      "timestamp": "2025-12-08T17:39:13.626410",
+      "session_id": "b2c902d4",
+      "user_query": "Analyze the overall architecture of the HelloWorldApp.",
+      "sub_query": null,
+      "agent_id": "Verifier",
+      "cypher_query": "MATCH (namespace:Namespace {name: 'HelloWorldApp.Utilities'})-[:CONTAINS]->(type:Type {name: 'Helper'})-[:CONTAINS]->(function:Function {name: 'FormatMessage'}) RETURN namespace, type, function",
+      "result_count": 1,
+      "is_empty": false,
+      "had_error": false,
+      "error_message": null,
+      "execution_time_ms": 17,
+      "node_types_queried": [
+        "Function",
+        "CONTAINS",
+        "Type",
+        "Namespace"
+      ],
+      "relationships_queried": [
+        "CONTAINS"
+      ],
+      "properties_accessed": [
+        "name"
+      ]
+    },
+    {
+      "timestamp": "2025-12-08T17:39:18.329157",
+      "session_id": "b2c902d4",
+      "user_query": "Analyze the overall architecture of the HelloWorldApp.",
+      "sub_query": null,
+      "agent_id": "Verifier",
+      "cypher_query": "MATCH (caller:Function)-[:CALLS]->(callee:Function) WHERE caller.name = 'Run' AND callee.name = 'Process' RETURN caller.name AS callerName, callee.name AS calleeName",
+      "result_count": 3,
+      "is_empty": false,
+      "had_error": false,
+      "error_message": null,
+      "execution_time_ms": 37,
+      "node_types_queried": [
+        "Function",
+        "CALLS"
+      ],
+      "relationships_queried": [
+        "CALLS"
+      ],
+      "properties_accessed": [
+        "name"
+      ]
+    },
+    {
+      "timestamp": "2025-12-08T17:39:22.523790",
+      "session_id": "b2c902d4",
+      "user_query": "Analyze the overall architecture of the HelloWorldApp.",
+      "sub_query": null,
+      "agent_id": "Verifier",
+      "cypher_query": "MATCH (caller:Function {name: 'CreateWorkers'})-[:CALLS]->(callee:Function) RETURN caller.name AS callerName, callee.name AS calleeName",
+      "result_count": 10,
+      "is_empty": false,
+      "had_error": false,
+      "error_message": null,
+      "execution_time_ms": 19,
+      "node_types_queried": [
+        "Function",
+        "CALLS"
+      ],
+      "relationships_queried": [
+        "CALLS"
+      ],
+      "properties_accessed": [
+        "name"
+      ]
+    },
+    {
+      "timestamp": "2025-12-08T17:39:27.184722",
+      "session_id": "b2c902d4",
+      "user_query": "Analyze the overall architecture of the HelloWorldApp.",
+      "sub_query": null,
+      "agent_id": "Verifier",
+      "cypher_query": "MATCH (f:File)\nWHERE f.file_path IN [\"HelloWorldApp/Manager.cs\", \"HelloWorldApp/Program.cs\", \"HelloWorldApp/TestAliases.cs\", \"HelloWorldApp/WorkerFactory.cs\"]\nRETURN f.file_path AS file, f.imports AS imports",
+      "result_count": 4,
+      "is_empty": false,
+      "had_error": false,
+      "error_message": null,
+      "execution_time_ms": 57,
+      "node_types_queried": [
+        "File"
+      ],
+      "relationships_queried": [],
+      "properties_accessed": [
+        "imports",
+        "cs",
+        "file_path"
+      ]
+    },
+    {
+      "timestamp": "2025-12-09T18:31:18.292794",
+      "session_id": "2f58b281",
+      "user_query": "What are the key methods in the HelloWorldApp and their cyclomatic complexity?",
+      "sub_query": "What are the methods defined in the HelloWorldApp class?",
+      "agent_id": "CoT-1",
+      "cypher_query": "MATCH (t:Type)-[:CONTAINS]->(f:Function) WHERE t.file_path STARTS WITH 'HelloWorldApp/' AND t.name = 'HelloWorldApp' RETURN f.name AS function_name, f.file_path AS file_path, f.body AS body",
+      "result_count": 0,
+      "is_empty": true,
+      "had_error": false,
+      "error_message": null,
+      "execution_time_ms": 77,
+      "node_types_queried": [
+        "Type",
+        "Function",
+        "CONTAINS"
+      ],
+      "relationships_queried": [
+        "CONTAINS"
+      ],
+      "properties_accessed": [
+        "body",
+        "file_path",
+        "name"
+      ]
+    },
+    {
+      "timestamp": "2025-12-09T18:31:20.172021",
+      "session_id": "2f58b281",
+      "user_query": "What are the key methods in the HelloWorldApp and their cyclomatic complexity?",
+      "sub_query": "What is the cyclomatic complexity of each method in the HelloWorldApp class?",
+      "agent_id": "CoT-2",
+      "cypher_query": "MATCH (p:Project)-[:CONTAINS]->(f:File)-[:CONTAINS]->(t:Type {name: 'HelloWorldApp'})-[:CONTAINS]->(m:Function) WHERE f.file_path STARTS WITH 'HelloWorldApp/' RETURN m.name AS methodName, m.body AS methodBody, f.file_path AS filePath",
+      "result_count": 0,
+      "is_empty": true,
+      "had_error": false,
+      "error_message": null,
+      "execution_time_ms": 3394,
+      "node_types_queried": [
+        "Project",
+        "CONTAINS",
+        "Function",
+        "File",
+        "Type"
+      ],
+      "relationships_queried": [
+        "CONTAINS"
+      ],
+      "properties_accessed": [
+        "body",
+        "file_path",
+        "name"
+      ]
+    },
+    {
+      "timestamp": "2025-12-09T18:31:31.995681",
+      "session_id": "2f58b281",
+      "user_query": "What are the key methods in the HelloWorldApp and their cyclomatic complexity?",
+      "sub_query": null,
+      "agent_id": "Verifier",
+      "cypher_query": "MATCH (project:Project)-[:CONTAINS]->(file:File)-[:CONTAINS]->(namespace:Namespace)-[:CONTAINS]->(type:Type {name: 'HelloWorldApp'})-[:CONTAINS]->(function:Function) WHERE project.name = 'HelloWorldApp' RETURN function",
+      "result_count": 0,
+      "is_empty": true,
+      "had_error": false,
+      "error_message": null,
+      "execution_time_ms": 245,
+      "node_types_queried": [
+        "Project",
+        "CONTAINS",
+        "File",
+        "Type",
+        "Function",
+        "Namespace"
+      ],
+      "relationships_queried": [
+        "CONTAINS"
+      ],
+      "properties_accessed": [
+        "name"
+      ]
+    },
+    {
+      "timestamp": "2025-12-09T18:31:37.887601",
+      "session_id": "2f58b281",
+      "user_query": "What are the key methods in the HelloWorldApp and their cyclomatic complexity?",
+      "sub_query": null,
+      "agent_id": "Verifier",
+      "cypher_query": "MATCH (t:Type)-[:CONTAINS]->(f:Function) WHERE t.name = 'HelloWorldApp' RETURN t.name AS className, f.name AS functionName",
+      "result_count": 0,
+      "is_empty": true,
+      "had_error": false,
+      "error_message": null,
+      "execution_time_ms": 258,
+      "node_types_queried": [
+        "Type",
+        "Function",
+        "CONTAINS"
+      ],
+      "relationships_queried": [
+        "CONTAINS"
+      ],
+      "properties_accessed": [
+        "name"
+      ]
+    }
+  ],
+  "identified_issues": [],
+  "query_patterns": {
+    "File-": 8,
+    "Type-": 9,
+    "CONTAINS,File,Function,Namespace,Project,Type-CONTAINS": 2,
+    "CALLS,Function-CALLS": 6,
+    "CONTAINS,Function,Type-CONTAINS": 15,
+    "IMPLEMENTS,Type-IMPLEMENTS": 6,
+    "CONTAINS,File,Function,Project,Type-CONTAINS": 2,
+    "Function-": 1,
+    "CONTAINS,File,Function,Namespace,Type-CONTAINS": 2,
+    "Block,CONTAINS,File,Function,Statement,Type-CONTAINS": 1,
+    "Block,CONTAINS,Function,Statement-CONTAINS": 2,
+    "CONTAINS,Function,Namespace,Type-CONTAINS": 1
+  },
+  "empty_result_queries": [
+    "MATCH (t:Type {name: 'INotifier', file_path: 'HelloWorldApp/INotifier.cs'})-[:CONTAINS]->(f:Function {name: 'Notify'})\nRETURN f.body AS function_body",
+    "MATCH (i:Type {name: 'IWorker', file_path: 'HelloWorldApp/IWorker.cs'})-[:CONTAINS]->(f:Function {name: 'Process'}) RETURN i, f",
+    "MATCH (p:Project {name: 'HelloWorldApp'})-[:CONTAINS]->(f:File {file_path: 'HelloWorldApp/Utilities/Helper.cs'})-[:CONTAINS]->(t:Type {name: 'Helper'})-[:CONTAINS]->(func:Function {name: 'FormatMessage'}) RETURN p, f, t, func",
+    "MATCH (class:Type {name: 'Manager'}), (interface:Type {name: 'INotifier'})\nWHERE class.file_path = 'HelloWorldApp/Manager.cs' AND interface.file_path = 'HelloWorldApp/Manager.cs'\nMATCH (class)-[:IMPLEMENTS]->(interface)\nRETURN class.name AS className, interface.name AS interfaceName",
+    "MATCH (class:Type {name: 'WorkerA'}), (interface:Type {name: 'IWorker'})\nWHERE class.file_path = 'HelloWorldApp/WorkerA.cs' AND interface.file_path = 'HelloWorldApp/WorkerA.cs'\nMATCH (class)-[:IMPLEMENTS]->(interface)\nRETURN class.name AS className, interface.name AS interfaceName",
+    "MATCH (file:File)-[:CONTAINS]->(namespace:Namespace)-[:CONTAINS]->(type:Type {name: 'WorkerA'})-[:CONTAINS]->(method:Function {name: 'Process'}) WHERE file.file_path = 'HelloWorldApp/WorkerA.cs' RETURN method.body AS body",
+    "MATCH (t:Type)-[:CONTAINS]->(f:Function) WHERE t.file_path STARTS WITH 'HelloWorldApp/' AND t.name = 'HelloWorldApp' RETURN f.name AS function_name, f.file_path AS file_path, f.body AS body",
+    "MATCH (p:Project)-[:CONTAINS]->(f:File)-[:CONTAINS]->(t:Type {name: 'HelloWorldApp'})-[:CONTAINS]->(m:Function) WHERE f.file_path STARTS WITH 'HelloWorldApp/' RETURN m.name AS methodName, m.body AS methodBody, f.file_path AS filePath",
+    "MATCH (project:Project)-[:CONTAINS]->(file:File)-[:CONTAINS]->(namespace:Namespace)-[:CONTAINS]->(type:Type {name: 'HelloWorldApp'})-[:CONTAINS]->(function:Function) WHERE project.name = 'HelloWorldApp' RETURN function",
+    "MATCH (t:Type)-[:CONTAINS]->(f:Function) WHERE t.name = 'HelloWorldApp' RETURN t.name AS className, f.name AS functionName"
+  ],
+  "error_queries": [],
+  "schema_gaps_detected": [],
+  "last_analysis_timestamp": null,
+  "session_count": 3,
+  "last_report": null
+}

@@ -1,0 +1,47 @@
+{
+  "status": "success",
+  "tool_name": "query_cpg_rag",
+  "workflow_type": "4_agent_team",
+  "user_query": "What variable name stores the formatted message in WorkerZ?",
+  "project_name": "HelloWorldApp",
+  "response": {
+    "answer": "Error synthesizing answer: Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}",
+    "confidence": "low",
+    "status": "success"
+  },
+  "citations": [],
+  "raw_results": [],
+  "verified_count": 0,
+  "unverified_count": 0,
+  "total_citations": 0,
+  "sub_queries_count": 1,
+  "llm_calls_count": 0,
+  "execution_time_ms": 165869,
+  "token_usage": {
+    "total_tokens": 0,
+    "total_prompt_tokens": 0,
+    "total_completion_tokens": 0,
+    "call_count": 0,
+    "by_agent_role": {}
+  },
+  "total_tokens_used": 0,
+  "total_input_tokens": 0,
+  "total_output_tokens": 0,
+  "agent_workflow": "4_agent_team",
+  "agent_metadata": {
+    "llm_model": "gpt-4o",
+    "max_cot_iterations": 15,
+    "parallel_agents": true,
+    "verification_enabled": true,
+    "entity_resolution_enabled": true,
+    "observer_enabled": false,
+    "use_4_agent_team": true,
+    "four_agent_max_iterations": 3
+  },
+  "cli_parameters_used": {
+    "config_path": "/opt/genpod/neo4j_config.json",
+    "schema_path": "/opt/genpod/src/schemas/project_knowledgebase_graph_schema.yaml",
+    "llm_model": "gpt-4o"
+  },
+  "message": "4-Agent Team CPG RAG completed successfully (165869ms)"
+}

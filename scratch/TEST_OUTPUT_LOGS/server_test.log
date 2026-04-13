@@ -1,0 +1,31 @@
+INFO:     Started server process [8590]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:9001 (Press CTRL+C to quit)
+INFO:     127.0.0.1:42838 - "POST /sse/messages HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:48250 - "HEAD /sse HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54126 - "GET /sse HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54142 - "POST /messages/?session_id=b443e2f0114e4af28a33249612765195 HTTP/1.1" 202 Accepted
+INFO:     127.0.0.1:54142 - "POST /messages/?session_id=b443e2f0114e4af28a33249612765195 HTTP/1.1" 202 Accepted
+INFO:     127.0.0.1:54142 - "POST /messages/?session_id=b443e2f0114e4af28a33249612765195 HTTP/1.1" 202 Accepted
+2025-07-17 20:14:46,981 - mcp.server.lowlevel.server - INFO - Processing request of type ListToolsRequest
+INFO:     127.0.0.1:54142 - "POST /messages/?session_id=b443e2f0114e4af28a33249612765195 HTTP/1.1" 202 Accepted
+2025-07-17 20:14:46,985 - mcp.server.lowlevel.server - INFO - Processing request of type CallToolRequest
+INFO:     127.0.0.1:48214 - "POST /sse/messages HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:54588 - "GET /sse HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54600 - "POST /messages/?session_id=df806e072c25441595f87ae772661956 HTTP/1.1" 202 Accepted
+INFO:     127.0.0.1:54600 - "POST /messages/?session_id=df806e072c25441595f87ae772661956 HTTP/1.1" 202 Accepted
+INFO:     127.0.0.1:54600 - "POST /messages/?session_id=df806e072c25441595f87ae772661956 HTTP/1.1" 202 Accepted
+2025-07-17 20:17:06,123 - mcp.server.lowlevel.server - INFO - Processing request of type ListToolsRequest
+INFO:     127.0.0.1:54600 - "POST /messages/?session_id=df806e072c25441595f87ae772661956 HTTP/1.1" 202 Accepted
+2025-07-17 20:17:06,134 - mcp.server.lowlevel.server - INFO - Processing request of type CallToolRequest
+INFO:     127.0.0.1:43454 - "POST /sse/messages HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:34958 - "POST /sse/messages HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:41164 - "POST /sse/messages HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:46682 - "GET /sse HTTP/1.1" 200 OK
+INFO:     127.0.0.1:46690 - "POST /messages/?session_id=009bb924ecd54e0492a7f7491d89fa26 HTTP/1.1" 202 Accepted
+INFO:     127.0.0.1:46690 - "POST /messages/?session_id=009bb924ecd54e0492a7f7491d89fa26 HTTP/1.1" 202 Accepted
+INFO:     127.0.0.1:46690 - "POST /messages/?session_id=009bb924ecd54e0492a7f7491d89fa26 HTTP/1.1" 202 Accepted
+2025-07-17 20:33:52,578 - mcp.server.lowlevel.server - INFO - Processing request of type ListToolsRequest
+INFO:     127.0.0.1:46690 - "POST /messages/?session_id=009bb924ecd54e0492a7f7491d89fa26 HTTP/1.1" 202 Accepted
+2025-07-17 20:33:52,602 - mcp.server.lowlevel.server - INFO - Processing request of type CallToolRequest

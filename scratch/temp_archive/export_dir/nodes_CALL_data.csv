@@ -1,0 +1,32 @@
+30064771072,CALL,-1,,"Console.WriteLine(""Manager starting work..."")",12,STATIC_DISPATCH,,9,System.Console.WriteLine:System.Void(System.String),WriteLine,,,1,,System.Void(System.String),System.Void
+30064771073,CALL,-1,,workers = WorkerFactory.CreateWorkers(this),33,STATIC_DISPATCH,,10,<operator>.assignment,<operator>.assignment,,,2,,,IEnumerable
+30064771074,CALL,2,,WorkerFactory.CreateWorkers(this),43,STATIC_DISPATCH,,10,HelloWorldApp.WorkerFactory.CreateWorkers:IEnumerable(INotifier),CreateWorkers,,,2,,IEnumerable(INotifier),IEnumerable
+30064771075,CALL,-1,,_idx_ = 0,12,STATIC_DISPATCH,,13,<operator>.assignment,<operator>.assignment,,,3,,,<empty>
+30064771076,CALL,-1,,_idx_ < workers.Count,12,STATIC_DISPATCH,,13,<operator>.lessThan,<operator>.lessThan,,,4,,,<empty>
+30064771077,CALL,2,,workers.Count,12,STATIC_DISPATCH,,13,<operator>.fieldAccess,<operator>.fieldAccess,,,2,,,<empty>
+30064771078,CALL,-1,,worker = workers[_idx_++],12,STATIC_DISPATCH,,13,<operator>.assignment,<operator>.assignment,,,5,,,<empty>
+30064771079,CALL,2,,workers[_idx_++],12,STATIC_DISPATCH,,13,<operator>.indexAccess,<operator>.indexAccess,,,2,,,<empty>
+30064771080,CALL,2,,_idx_++,12,STATIC_DISPATCH,,13,<operator>.postIncrement,<operator>.postIncrement,,,2,,,<empty>
+30064771081,CALL,-1,,worker.Process(),16,STATIC_DISPATCH,,15,var.Process:<unresolvedSignature>,Process,,,1,,<unresolvedSignature>,<empty>
+30064771082,CALL,-1,,"Console.WriteLine($""Manager received notification: {message}"")",12,STATIC_DISPATCH,,22,System.Console.WriteLine:System.Void(System.String),WriteLine,,,1,,System.Void(System.String),System.Void
+30064771083,CALL,1,,"$""Manager received notification: {message}""",30,STATIC_DISPATCH,,22,<operator>.formatString,<operator>.formatString,,,2,,,System.String
+30064771084,CALL,-1,,manager = new Manager(),20,STATIC_DISPATCH,,8,<operator>.assignment,<operator>.assignment,,,1,,,HelloWorldApp.Manager
+30064771085,CALL,2,,new Manager(),30,STATIC_DISPATCH,,8,HelloWorldApp.Manager.<init>,<init>,,,2,,,HelloWorldApp.Manager
+30064771086,CALL,-1,,manager.Run(),12,DYNAMIC_DISPATCH,,9,HelloWorldApp.Manager.Run:System.Void(),Run,,,3,,System.Void(),System.Void
+30064771087,CALL,-1,,"Console.WriteLine(""All work completed. Press any key to exit."")",12,STATIC_DISPATCH,,10,System.Console.WriteLine:System.Void(System.String),WriteLine,,,4,,System.Void(System.String),System.Void
+30064771088,CALL,-1,,Console.ReadKey(),12,STATIC_DISPATCH,,11,System.Console.ReadKey:System.ConsoleKeyInfo(),ReadKey,,,5,,System.ConsoleKeyInfo(),System.ConsoleKeyInfo
+30064771089,CALL,1,,"$""[{workerName}] {text}""",19,STATIC_DISPATCH,,6,<operator>.formatString,<operator>.formatString,,,1,,,System.String
+30064771090,CALL,-1,,_notifier = notifier,12,STATIC_DISPATCH,,8,<operator>.assignment,<operator>.assignment,,,1,,,HelloWorldApp.INotifier
+30064771091,CALL,1,,this._notifier,12,STATIC_DISPATCH,,8,<operator>.fieldAccess,<operator>.fieldAccess,,,1,,,HelloWorldApp.INotifier
+30064771092,CALL,-1,,"msg = Utilities.Helper.FormatMessage(""WorkerC"", ""Hi there, C here"")",19,STATIC_DISPATCH,,13,<operator>.assignment,<operator>.assignment,,,1,,,System.String
+30064771093,CALL,2,,"Utilities.Helper.FormatMessage(""WorkerC"", ""Hi there, C here"")",25,STATIC_DISPATCH,,13,"HelloWorldApp.Utilities.Helper.FormatMessage:System.String(System.String,System.String)",FormatMessage,,,2,,"System.String(System.String,System.String)",System.String
+30064771094,CALL,0,,Utilities.Helper,25,STATIC_DISPATCH,,13,<operator>.fieldAccess,<operator>.fieldAccess,,,1,,,HelloWorldApp.Utilities.Helper
+30064771095,CALL,-1,,System.Console.WriteLine(msg),12,STATIC_DISPATCH,,14,System.Console.WriteLine:System.Void(System.String),WriteLine,,,3,,System.Void(System.String),System.Void
+30064771096,CALL,0,,System.Console,12,STATIC_DISPATCH,,14,<operator>.fieldAccess,<operator>.fieldAccess,,,1,,,System.Console
+30064771097,CALL,-1,,"_notifier.Notify(""WorkerC has finished processing."")",12,DYNAMIC_DISPATCH,,15,HelloWorldApp.INotifier.Notify:System.Void(System.String),Notify,,,4,,System.Void(System.String),System.Void
+30064771098,CALL,1,,"new List<IWorker>
+            {
+                new WorkerA(notifier),
+                new WorkerB(notifier),
+                new WorkerC(notifier)
+            }",19,STATIC_DISPATCH,,9,List.<init>,<init>,,,1,,,List

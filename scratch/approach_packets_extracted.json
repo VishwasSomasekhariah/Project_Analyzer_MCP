@@ -1,0 +1,127 @@
+{
+  "SQ1": {
+    "id": "SQ1",
+    "text": "Locate the Function node for CreateWorkers within the Type node WorkerFactory.",
+    "logical_form": "Locate WorkerFactory.CreateWorkers() \u2192 Retrieve instantiated classes \u2192 Retrieve returned classes",
+    "original_premises": [
+      {
+        "id": "P1",
+        "text": "WorkerFactory is a Type node."
+      },
+      {
+        "id": "P2",
+        "text": "CreateWorkers is a Function node contained within WorkerFactory."
+      }
+    ],
+    "corrected_premises": [],
+    "active_premises": [
+      {
+        "id": "P1",
+        "text": "WorkerFactory is a Type node."
+      },
+      {
+        "id": "P2",
+        "text": "CreateWorkers is a Function node contained within WorkerFactory."
+      }
+    ],
+    "depends_on_subqueries": [],
+    "status": "pending",
+    "input_data": {},
+    "result": null,
+    "error": null,
+    "sufficiency_status": null,
+    "sufficiency_reasoning": null,
+    "execution_time_ms": null,
+    "attempts": 0
+  },
+  "SQ2": {
+    "id": "SQ2",
+    "text": "Retrieve all Statement nodes within the Block nodes contained in the CreateWorkers Function node that instantiate Type nodes.",
+    "logical_form": "Locate WorkerFactory.CreateWorkers() \u2192 Retrieve instantiated classes \u2192 Retrieve returned classes",
+    "original_premises": [
+      {
+        "id": "P3",
+        "text": "Function nodes can contain Block nodes."
+      },
+      {
+        "id": "P4",
+        "text": "Block nodes can contain Statement nodes."
+      },
+      {
+        "id": "P5",
+        "text": "Statement nodes can reference Type nodes."
+      }
+    ],
+    "corrected_premises": [],
+    "active_premises": [
+      {
+        "id": "P3",
+        "text": "Function nodes can contain Block nodes."
+      },
+      {
+        "id": "P4",
+        "text": "Block nodes can contain Statement nodes."
+      },
+      {
+        "id": "P5",
+        "text": "Statement nodes can reference Type nodes."
+      }
+    ],
+    "depends_on_subqueries": [
+      "SQ1"
+    ],
+    "status": "pending",
+    "input_data": {},
+    "result": null,
+    "error": null,
+    "sufficiency_status": null,
+    "sufficiency_reasoning": null,
+    "execution_time_ms": null,
+    "attempts": 0
+  },
+  "SQ3": {
+    "id": "SQ3",
+    "text": "Retrieve all Statement nodes within the Block nodes contained in the CreateWorkers Function node that return Type nodes.",
+    "logical_form": "Locate WorkerFactory.CreateWorkers() \u2192 Retrieve instantiated classes \u2192 Retrieve returned classes",
+    "original_premises": [
+      {
+        "id": "P3",
+        "text": "Function nodes can contain Block nodes."
+      },
+      {
+        "id": "P4",
+        "text": "Block nodes can contain Statement nodes."
+      },
+      {
+        "id": "P5",
+        "text": "Statement nodes can reference Type nodes."
+      }
+    ],
+    "corrected_premises": [],
+    "active_premises": [
+      {
+        "id": "P3",
+        "text": "Function nodes can contain Block nodes."
+      },
+      {
+        "id": "P4",
+        "text": "Block nodes can contain Statement nodes."
+      },
+      {
+        "id": "P5",
+        "text": "Statement nodes can reference Type nodes."
+      }
+    ],
+    "depends_on_subqueries": [
+      "SQ1"
+    ],
+    "status": "pending",
+    "input_data": {},
+    "result": null,
+    "error": null,
+    "sufficiency_status": null,
+    "sufficiency_reasoning": null,
+    "execution_time_ms": null,
+    "attempts": 0
+  }
+}

@@ -1,0 +1,12 @@
+digraph "WriteLine" {  
+node [shape="rect"];  
+"111669149705" [label = <METHOD<BR/>WriteLine> ]
+"115964117005" [label = <PARAM<BR/>p0> ]
+"115964117006" [label = <PARAM<BR/>p1> ]
+"25769803786" [label = <BLOCK<BR/>&lt;empty&gt;> ]
+"128849018889" [label = <METHOD_RETURN<BR/>ANY> ]
+  "111669149705" -> "115964117005" 
+  "111669149705" -> "115964117006" 
+  "111669149705" -> "25769803786" 
+  "111669149705" -> "128849018889" 
+}

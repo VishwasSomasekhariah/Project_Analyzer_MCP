@@ -1,0 +1,266 @@
+{
+  "timestamp": "20251028_205001",
+  "user_query": "How many method calls are in Manager.Run()?",
+  "project_name": "HelloWorldApp",
+  "total_approaches": 5,
+  "approaches": [
+    {
+      "approach_name": "Direct CALLS Edge Count",
+      "description": "Count all static call edges originating from Manager.Run via the CALLS relationship.",
+      "target_nodes": [
+        "Function"
+      ],
+      "key_attributes": [
+        "name"
+      ],
+      "relationships": [
+        "CALLS"
+      ],
+      "strategy": "MATCH (p:Project {name:'HelloWorldApp'})-[:CONTAINS]->(:File)-[:CONTAINS]->(fn:Function {name:'Manager.Run'})-[:CALLS]->(callee:Function) RETURN count(callee) AS callCount",
+      "corrections_applied": []
+    },
+    {
+      "approach_name": "Project-Scoped CALLS Traversal",
+      "description": "Ensure correct scoping by locating Manager.Run under HelloWorldApp and then counting its callees.",
+      "target_nodes": [
+        "Project",
+        "File",
+        "Function"
+      ],
+      "key_attributes": [
+        "File.name",
+        "File.file_path",
+        "Function.name",
+        "Function.file_path",
+        "Project.project_path",
+        "Project.dependencies",
+        "Project.project_checksum",
+        "Project.build_properties",
+        "Project.name",
+        "Project.created_at",
+        "Project.output_type",
+        "Project.type",
+        "Project.target_framework",
+        "Project.modified_at",
+        "Project.config_metadata",
+        "Project.version"
+      ],
+      "relationships": [
+        "CONTAINS",
+        "CALLS"
+      ],
+      "strategy": "MATCH (p:Project {name:'HelloWorldApp'})-[:CONTAINS]->(f:File)-[:CONTAINS]->(fn:Function {name:'Manager.Run'})-[:CALLS]->(callee) RETURN count(callee) AS methodCallCount",
+      "corrections_applied": [
+        "Replaced invalid Project attributes with all schema attributes: ['project_path', 'dependencies', 'project_checksum', 'build_properties', 'name', 'created_at', 'output_type', 'type', 'target_framework', 'modified_at', 'config_metadata', 'version']"
+      ],
+      "discovered_paths": [
+        {
+          "pattern": [
+            "Project",
+            "File"
+          ],
+          "start_node": "Project",
+          "end_node": "File",
+          "occurrences": 11,
+          "depth": 1
+        },
+        {
+          "pattern": [
+            "Project",
+            "File",
+            "Type",
+            "Function"
+          ],
+          "start_node": "Project",
+          "end_node": "Function",
+          "occurrences": 11,
+          "depth": 3
+        },
+        {
+          "pattern": [
+            "File",
+            "Type",
+            "Function"
+          ],
+          "start_node": "File",
+          "end_node": "Function",
+          "occurrences": 11,
+          "depth": 2
+        },
+        {
+          "pattern": [
+            "Project",
+            "File",
+            "Namespace",
+            "Type",
+            "Function"
+          ],
+          "start_node": "Project",
+          "end_node": "Function",
+          "occurrences": 1,
+          "depth": 4
+        },
+        {
+          "pattern": [
+            "File",
+            "Namespace",
+            "Type",
+            "Function"
+          ],
+          "start_node": "File",
+          "end_node": "Function",
+          "occurrences": 1,
+          "depth": 3
+        }
+      ]
+    },
+    {
+      "approach_name": "Unique Call Site Deduplication",
+      "description": "Count distinct call sites by deduplicating on the CALLS relationship's start_byte property to avoid double-counting the same invocation.",
+      "target_nodes": [
+        "Function"
+      ],
+      "key_attributes": [
+        "name"
+      ],
+      "relationships": [
+        "CALLS"
+      ],
+      "strategy": "MATCH (fn:Function {name:'Manager.Run'})-[c:CALLS]->() RETURN count(DISTINCT c.start_byte) AS uniqueCallSites",
+      "corrections_applied": []
+    },
+    {
+      "approach_name": "Statement-Level Invocation Scan",
+      "description": "Traverse the AST block under Manager.Run to count expression statements that represent method calls.",
+      "target_nodes": [
+        "Function",
+        "Block",
+        "Statement"
+      ],
+      "key_attributes": [
+        "Statement.statement_type",
+        "Statement.text",
+        "Block.start_byte",
+        "Block.end_byte",
+        "Block.end_point",
+        "Block.start_point",
+        "Block.file_path",
+        "Block.statements",
+        "Block.type",
+        "Block.type_kind",
+        "Block.symbols_location",
+        "Function.body",
+        "Function.end_byte",
+        "Function.end_point",
+        "Function.start_point",
+        "Function.file_path",
+        "Function.return_type",
+        "Function.type",
+        "Function.type_kind",
+        "Function.symbols_location",
+        "Function.modifier",
+        "Function.start_byte",
+        "Function.name",
+        "Function.parameters"
+      ],
+      "relationships": [
+        "CONTAINS"
+      ],
+      "strategy": "MATCH (p:Project {name:'HelloWorldApp'})-[:CONTAINS]->(:File)-[:CONTAINS]->(fn:Function {name:'Manager.Run'})-[:CONTAINS]->(b:Block)-[:CONTAINS]->(s:Statement) WHERE s.statement_type='expression_statement' AND s.text CONTAINS '(' RETURN count(s) AS statementCallCount",
+      "corrections_applied": [
+        "Replaced invalid Block attributes with all schema attributes: ['start_byte', 'end_byte', 'end_point', 'start_point', 'file_path', 'statements', 'type', 'type_kind', 'symbols_location']",
+        "Replaced invalid Function attributes with all schema attributes: ['body', 'end_byte', 'end_point', 'start_point', 'file_path', 'return_type', 'type', 'type_kind', 'symbols_location', 'modifier', 'start_byte', 'name', 'parameters']"
+      ],
+      "discovered_paths": [
+        {
+          "pattern": [
+            "Block",
+            "Statement"
+          ],
+          "start_node": "Block",
+          "end_node": "Statement",
+          "occurrences": 25,
+          "depth": 1
+        },
+        {
+          "pattern": [
+            "Function",
+            "Block",
+            "Statement"
+          ],
+          "start_node": "Function",
+          "end_node": "Statement",
+          "occurrences": 24,
+          "depth": 2
+        },
+        {
+          "pattern": [
+            "Function",
+            "Block"
+          ],
+          "start_node": "Function",
+          "end_node": "Block",
+          "occurrences": 12,
+          "depth": 1
+        },
+        {
+          "pattern": [
+            "Function",
+            "Block",
+            "Block"
+          ],
+          "start_node": "Function",
+          "end_node": "Block",
+          "occurrences": 1,
+          "depth": 2
+        },
+        {
+          "pattern": [
+            "Function",
+            "Block",
+            "Block",
+            "Statement"
+          ],
+          "start_node": "Function",
+          "end_node": "Statement",
+          "occurrences": 1,
+          "depth": 3
+        },
+        {
+          "pattern": [
+            "Block",
+            "Block"
+          ],
+          "start_node": "Block",
+          "end_node": "Block",
+          "occurrences": 1,
+          "depth": 1
+        },
+        {
+          "pattern": [
+            "Block",
+            "Block",
+            "Statement"
+          ],
+          "start_node": "Block",
+          "end_node": "Statement",
+          "occurrences": 1,
+          "depth": 2
+        }
+      ]
+    },
+    {
+      "approach_name": "Body-Text Pattern Count",
+      "description": "Leverage the Function.body attribute to estimate the number of invocations via simple string splitting on the '(' character.",
+      "target_nodes": [
+        "Function"
+      ],
+      "key_attributes": [
+        "body"
+      ],
+      "relationships": [],
+      "strategy": "MATCH (fn:Function {name:'Manager.Run'}) RETURN size(split(fn.body, '(')) - 1 AS estimatedCallCount",
+      "corrections_applied": []
+    }
+  ]
+}

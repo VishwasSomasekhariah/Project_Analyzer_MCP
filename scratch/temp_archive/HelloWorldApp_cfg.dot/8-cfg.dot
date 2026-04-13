@@ -1,0 +1,10 @@
+digraph "CreateWorkers" {  
+node [shape="rect"];  
+"146028888065" [label = <RETURN, 9<BR/>return new List&lt;IWorker&gt; { ...> ]
+"30064771098" [label = <&lt;init&gt;, 9<BR/>new List&lt;IWorker&gt; { ...> ]
+"111669149704" [label = <METHOD, 6<BR/>CreateWorkers> ]
+"128849018888" [label = <METHOD_RETURN, 6<BR/>IEnumerable> ]
+  "146028888065" -> "128849018888" 
+  "30064771098" -> "146028888065" 
+  "111669149704" -> "30064771098" 
+}

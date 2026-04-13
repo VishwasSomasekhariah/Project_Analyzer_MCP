@@ -1,0 +1,1573 @@
+{
+  "status": "success",
+  "response": "The `WorkerFactory.CreateWorkers()` method is responsible for instantiating and returning a list of worker objects. Specifically, it returns a new `List<IWorker>` containing instances of the classes `WorkerA`, `WorkerB`, and `WorkerC`. This is confirmed by the statement located in the file `HelloWorldApp/WorkerFactory.cs`, which constructs and returns this list. The method's return type is a collection of `IWorker` objects, indicating that it is designed to provide a set of worker instances that implement the `IWorker` interface. The analysis from Approach 2 provides the most direct insight into the specific classes instantiated and returned by the method.",
+  "query_history": [
+    "This plan will validate the existence of the CreateWorkers function and its containment within the WorkerFactory type, then retrieve the relevant Function node.",
+    "This plan verifies the existence of the CreateWorkers function, checks the containment path from Function to Block to Statement, and retrieves Statements that instantiate classes.",
+    "This plan will validate the existence of the CreateWorkers function, verify the REFERENCES relationship to a Type node, and retrieve the return type."
+  ],
+  "iterations_used": 1,
+  "final_results": [
+    {
+      "f.name": "CreateWorkers",
+      "f.file_path": "HelloWorldApp/WorkerFactory.cs",
+      "_source_query": "This plan will validate the existence of the CreateWorkers function and its containment within the WorkerFactory type, then retrieve the relevant Function node.",
+      "_source_iteration": 1,
+      "_query_purpose": "This plan will validate the existence of the CreateWorkers function and its containment within the WorkerFactory type, then retrieve the relevant Function node.",
+      "_cot_reasoning": {
+        "step1_perspective": "Locate the Function node for CreateWorkers within the Type node WorkerFactory.",
+        "step2_premise_validation": "Premises P1 and P2 establish that WorkerFactory is a Type node and CreateWorkers is a Function node contained within WorkerFactory.",
+        "step3_path_trace": "Type\u2192CONTAINS\u2192Function",
+        "step4_filters": "Filter by Function name 'CreateWorkers' and Type name 'WorkerFactory'.",
+        "step5_return": "Return the Function node properties such as name and file_path.",
+        "step6_optimize": "Use indexed properties for efficient filtering and limit results to 1."
+      }
+    },
+    {
+      "s": {
+        "file_path": "HelloWorldApp/WorkerFactory.cs",
+        "end_point": "[14, 14]",
+        "start_byte": 272,
+        "start_point": "[9, 12]",
+        "type_kind": "statement",
+        "text": "return new List<IWorker>\n            {\n                new WorkerA(notifier),\n                new WorkerB(notifier),\n                new WorkerC(notifier)\n            };",
+        "type": "Statement",
+        "end_byte": 441,
+        "symbols_location": "{\"symbols\": [{\"text\": \"List\", \"start_byte\": 283, \"end_byte\": 287, \"start_point\": [9, 23], \"end_point\": [9, 27]}]}",
+        "statement_type": "return",
+        "order": 2
+      },
+      "_source_query": "This plan verifies the existence of the CreateWorkers function, checks the containment path from Function to Block to Statement, and retrieves Statements that instantiate classes.",
+      "_source_iteration": 1,
+      "_query_purpose": "This plan verifies the existence of the CreateWorkers function, checks the containment path from Function to Block to Statement, and retrieves Statements that instantiate classes.",
+      "_cot_reasoning": {
+        "step1_perspective": "Investigate the existence and containment of Statement nodes within Block nodes in the CreateWorkers Function.",
+        "step2_premise_validation": "Premises P2 and P3 establish that CreateWorkers is a Function node and that Functions can contain Blocks, which in turn contain Statements.",
+        "step3_path_trace": "Function\u2192CONTAINS\u2192Block\u2192CONTAINS\u2192Statement",
+        "step4_filters": "Filter Statements that instantiate classes by checking if the text contains 'new'.",
+        "step5_return": "Return the Statement nodes that match the criteria.",
+        "step6_optimize": "Limit results to 50 for manageability."
+      }
+    },
+    {
+      "t.name": "WorkerFactory",
+      "_source_query": "This plan will validate the existence of the CreateWorkers function, verify the REFERENCES relationship to a Type node, and retrieve the return type.",
+      "_source_iteration": 1,
+      "_query_purpose": "This plan will validate the existence of the CreateWorkers function, verify the REFERENCES relationship to a Type node, and retrieve the return type.",
+      "_cot_reasoning": {
+        "step1_perspective": "Identify the return type of the CreateWorkers function to determine the classes it returns.",
+        "step2_premise_validation": "The premise that CreateWorkers is a Function node contained within WorkerFactory sets the scope for our query.",
+        "step3_path_trace": "Function\u2192REFERENCES\u2192Type",
+        "step4_filters": "Filter by function name 'CreateWorkers' and ensure the REFERENCES relationship leads to a Type node.",
+        "step5_return": "Return the 'name' property of the Type node to identify the class.",
+        "step6_optimize": "Use LIMIT to restrict the number of results for efficiency."
+      }
+    }
+  ],
+  "intent": {
+    "intent_type": "lookup",
+    "confidence": 0.95,
+    "reasoning": "The user's query is focused on retrieving specific information about the classes instantiated and returned by a particular method, WorkerFactory.CreateWorkers(). This indicates a need for specific data retrieval rather than understanding broader architectural patterns or relationships.",
+    "expected_result_type": "A list or description of the specific classes that are instantiated and returned by the WorkerFactory.CreateWorkers() method.",
+    "_token_updates": {
+      "llm_call_history": [
+        {
+          "call_type": "intent_analysis",
+          "timestamp": 1764014708.9805453,
+          "model_name": "gpt-4o-2024-08-06",
+          "input_tokens": 133,
+          "output_tokens": 96,
+          "total_tokens": 229,
+          "input_cost_usd": 0.0039900000000000005,
+          "output_cost_usd": 0.0028799999999999997,
+          "total_cost_usd": 0.00687,
+          "latency_seconds": 3.238,
+          "call_purpose": "Analyze user query intent",
+          "approach_index": null
+        }
+      ],
+      "total_input_tokens": 133,
+      "total_output_tokens": 96,
+      "total_tokens_used": 229,
+      "total_estimated_cost_usd": 0.00687,
+      "models_used": [
+        "gpt-4o-2024-08-06"
+      ]
+    }
+  },
+  "workflow": "langgraph_agent",
+  "organized_data": null,
+  "architectural_summary": {},
+  "synthesis_context_used": 0,
+  "raw_query_results": [
+    {
+      "f.name": "CreateWorkers",
+      "f.file_path": "HelloWorldApp/WorkerFactory.cs"
+    },
+    {
+      "s": {
+        "file_path": "HelloWorldApp/WorkerFactory.cs",
+        "end_point": "[14, 14]",
+        "start_byte": 272,
+        "start_point": "[9, 12]",
+        "type_kind": "statement",
+        "text": "return new List<IWorker>\n            {\n                new WorkerA(notifier),\n                new WorkerB(notifier),\n                new WorkerC(notifier)\n            };",
+        "type": "Statement",
+        "end_byte": 441,
+        "symbols_location": "{\"symbols\": [{\"text\": \"List\", \"start_byte\": 283, \"end_byte\": 287, \"start_point\": [9, 23], \"end_point\": [9, 27]}]}",
+        "statement_type": "return",
+        "order": 2
+      }
+    },
+    {
+      "t.name": "WorkerFactory"
+    }
+  ],
+  "all_executed_queries": [
+    "This plan will validate the existence of the CreateWorkers function and its containment within the WorkerFactory type, then retrieve the relevant Function node.",
+    "This plan verifies the existence of the CreateWorkers function, checks the containment path from Function to Block to Statement, and retrieves Statements that instantiate classes.",
+    "This plan will validate the existence of the CreateWorkers function, verify the REFERENCES relationship to a Type node, and retrieve the return type."
+  ],
+  "total_tokens_used": 65853,
+  "total_input_tokens": 52963,
+  "total_output_tokens": 12890,
+  "total_estimated_cost_usd": 0.164914,
+  "discovery_research_tokens": 0,
+  "think_tokens": 0,
+  "generate_tokens": 0,
+  "rethink_tokens": 0,
+  "diagnostics_tokens": 0,
+  "refinement_tokens": 0,
+  "sufficiency_check_tokens": 0,
+  "synthesis_tokens": 957,
+  "tokens_per_approach": {
+    "0": 19698,
+    "1": 19802,
+    "2": 25167
+  },
+  "cost_per_approach": {
+    "0": 0.039396,
+    "1": 0.039604,
+    "2": 0.050334
+  },
+  "tokens_per_data_point": null,
+  "cost_per_data_point": null,
+  "models_used": [
+    "gpt-4o-2024-08-06"
+  ],
+  "primary_model": "gpt-4-turbo",
+  "llm_call_history": [
+    {
+      "call_type": "intent_analysis",
+      "timestamp": 1764014708.9805453,
+      "model_name": "gpt-4o-2024-08-06",
+      "input_tokens": 133,
+      "output_tokens": 96,
+      "total_tokens": 229,
+      "input_cost_usd": 0.0039900000000000005,
+      "output_cost_usd": 0.0028799999999999997,
+      "total_cost_usd": 0.00687,
+      "latency_seconds": 3.238,
+      "call_purpose": "Analyze user query intent",
+      "approach_index": null
+    },
+    {
+      "call_type": "synthesis",
+      "timestamp": 1764014755.5802453,
+      "model_name": "gpt-4o-2024-08-06",
+      "input_tokens": 800,
+      "output_tokens": 157,
+      "total_tokens": 957,
+      "input_cost_usd": 0.023999999999999997,
+      "output_cost_usd": 0.00471,
+      "total_cost_usd": 0.02871,
+      "latency_seconds": 3.734,
+      "call_purpose": "Synthesize final response from discovered data",
+      "approach_index": null
+    }
+  ],
+  "raw_results": [
+    {
+      "f.name": "CreateWorkers",
+      "f.file_path": "HelloWorldApp/WorkerFactory.cs",
+      "_source_query": "This plan will validate the existence of the CreateWorkers function and its containment within the WorkerFactory type, then retrieve the relevant Function node.",
+      "_source_iteration": 1,
+      "_query_purpose": "This plan will validate the existence of the CreateWorkers function and its containment within the WorkerFactory type, then retrieve the relevant Function node.",
+      "_cot_reasoning": {
+        "step1_perspective": "Locate the Function node for CreateWorkers within the Type node WorkerFactory.",
+        "step2_premise_validation": "Premises P1 and P2 establish that WorkerFactory is a Type node and CreateWorkers is a Function node contained within WorkerFactory.",
+        "step3_path_trace": "Type\u2192CONTAINS\u2192Function",
+        "step4_filters": "Filter by Function name 'CreateWorkers' and Type name 'WorkerFactory'.",
+        "step5_return": "Return the Function node properties such as name and file_path.",
+        "step6_optimize": "Use indexed properties for efficient filtering and limit results to 1."
+      }
+    },
+    {
+      "s": {
+        "file_path": "HelloWorldApp/WorkerFactory.cs",
+        "end_point": "[14, 14]",
+        "start_byte": 272,
+        "start_point": "[9, 12]",
+        "type_kind": "statement",
+        "text": "return new List<IWorker>\n            {\n                new WorkerA(notifier),\n                new WorkerB(notifier),\n                new WorkerC(notifier)\n            };",
+        "type": "Statement",
+        "end_byte": 441,
+        "symbols_location": "{\"symbols\": [{\"text\": \"List\", \"start_byte\": 283, \"end_byte\": 287, \"start_point\": [9, 23], \"end_point\": [9, 27]}]}",
+        "statement_type": "return",
+        "order": 2
+      },
+      "_source_query": "This plan verifies the existence of the CreateWorkers function, checks the containment path from Function to Block to Statement, and retrieves Statements that instantiate classes.",
+      "_source_iteration": 1,
+      "_query_purpose": "This plan verifies the existence of the CreateWorkers function, checks the containment path from Function to Block to Statement, and retrieves Statements that instantiate classes.",
+      "_cot_reasoning": {
+        "step1_perspective": "Investigate the existence and containment of Statement nodes within Block nodes in the CreateWorkers Function.",
+        "step2_premise_validation": "Premises P2 and P3 establish that CreateWorkers is a Function node and that Functions can contain Blocks, which in turn contain Statements.",
+        "step3_path_trace": "Function\u2192CONTAINS\u2192Block\u2192CONTAINS\u2192Statement",
+        "step4_filters": "Filter Statements that instantiate classes by checking if the text contains 'new'.",
+        "step5_return": "Return the Statement nodes that match the criteria.",
+        "step6_optimize": "Limit results to 50 for manageability."
+      }
+    },
+    {
+      "t.name": "WorkerFactory",
+      "_source_query": "This plan will validate the existence of the CreateWorkers function, verify the REFERENCES relationship to a Type node, and retrieve the return type.",
+      "_source_iteration": 1,
+      "_query_purpose": "This plan will validate the existence of the CreateWorkers function, verify the REFERENCES relationship to a Type node, and retrieve the return type.",
+      "_cot_reasoning": {
+        "step1_perspective": "Identify the return type of the CreateWorkers function to determine the classes it returns.",
+        "step2_premise_validation": "The premise that CreateWorkers is a Function node contained within WorkerFactory sets the scope for our query.",
+        "step3_path_trace": "Function\u2192REFERENCES\u2192Type",
+        "step4_filters": "Filter by function name 'CreateWorkers' and ensure the REFERENCES relationship leads to a Type node.",
+        "step5_return": "Return the 'name' property of the Type node to identify the class.",
+        "step6_optimize": "Use LIMIT to restrict the number of results for efficiency."
+      }
+    }
+  ],
+  "executed_queries": [
+    "This plan will validate the existence of the CreateWorkers function and its containment within the WorkerFactory type, then retrieve the relevant Function node.",
+    "This plan verifies the existence of the CreateWorkers function, checks the containment path from Function to Block to Statement, and retrieves Statements that instantiate classes.",
+    "This plan will validate the existence of the CreateWorkers function, verify the REFERENCES relationship to a Type node, and retrieve the return type."
+  ],
+  "approach_statuses": {
+    "0": "success",
+    "1": "success",
+    "2": "success"
+  },
+  "failed_approaches": [],
+  "approach_execution_traces": {
+    "0": {
+      "approach_name": "Subquery SQ1",
+      "approach_goal": "Locate the Function node for CreateWorkers within the Type node WorkerFactory.",
+      "queries_executed": 1,
+      "query_history": [
+        {
+          "iteration": 1,
+          "mode": "plan",
+          "results": [
+            {
+              "f.name": "CreateWorkers",
+              "f.file_path": "HelloWorldApp/WorkerFactory.cs"
+            }
+          ],
+          "error": null,
+          "result_count": 1,
+          "analysis": {
+            "analysis": "The query plan executed successfully, confirming the existence of the CreateWorkers function within the WorkerFactory type and retrieving its properties.",
+            "key_findings": [
+              "Successfully located the CreateWorkers function within the WorkerFactory type.",
+              "Returned the function's name and file path as expected."
+            ],
+            "recommendation": "Sufficient",
+            "next_query_hint": null
+          },
+          "premise_validations": [],
+          "apoc_diagnostics_used": false,
+          "sufficiency_status": null,
+          "query": "This plan will validate the existence of the CreateWorkers function and its containment within the WorkerFactory type, then retrieve the relevant Function node.",
+          "query_plan": "cot_reasoning=CoTReasoningSteps(step1_perspective='Locate the Function node for CreateWorkers within the Type node WorkerFactory.', step2_premise_validation='Premises P1 and P2 establish that WorkerFactory is a Type node and CreateWorkers is a Function node contained within WorkerFactory.', step3_path_trace='Type\u2192CONTAINS\u2192Function', step4_filters=\"Filter by Function name 'CreateWorkers' and Type name 'WorkerFactory'.\", step5_return='Return the Function node properties such as name and file_path.', step6_optimize='Use indexed properties for efficient filtering and limit results to 1.') plan_overview='This plan will validate the existence of the CreateWorkers function and its containment within the WorkerFactory type, then retrieve the relevant Function node.' steps=[QueryStep(step_number=1, step_type=<QueryStepType.ENTITY_CHECK: 'entity_check'>, purpose='Verify CreateWorkers function exists', cypher_query=\"MATCH (f:Function {name: 'CreateWorkers'}) RETURN count(f) as count\", expected_outcome='count >= 1', on_failure_guidance=\"Function 'CreateWorkers' not found - try fuzzy matching or check for typos\", depends_on_steps=[], entities_validated=[EntityConstraint(var='f', label='Function', property='name', value='CreateWorkers')]), QueryStep(step_number=2, step_type=<QueryStepType.ENTITY_CHECK: 'entity_check'>, purpose='Verify WorkerFactory type exists', cypher_query=\"MATCH (t:Type {name: 'WorkerFactory'}) RETURN count(t) as count\", expected_outcome='count >= 1', on_failure_guidance=\"Type 'WorkerFactory' not found - ensure correct spelling and case\", depends_on_steps=[], entities_validated=[EntityConstraint(var='t', label='Type', property='name', value='WorkerFactory')]), QueryStep(step_number=3, step_type=<QueryStepType.PATH_CHECK: 'path_check'>, purpose='Verify Type contains Function', cypher_query=\"MATCH (t:Type {name: 'WorkerFactory'})-[:CONTAINS]->(f:Function {name: 'CreateWorkers'}) RETURN count(f) as count\", expected_outcome='count >= 1', on_failure_guidance='No containment path found - verify Type and Function names and relationship', depends_on_steps=[1, 2], entities_validated=[]), QueryStep(step_number=4, step_type=<QueryStepType.DATA_RETRIEVAL: 'data_retrieval'>, purpose='Retrieve CreateWorkers Function node', cypher_query=\"MATCH (t:Type {name: 'WorkerFactory'})-[:CONTAINS]->(f:Function {name: 'CreateWorkers'}) RETURN f.name, f.file_path LIMIT 1\", expected_outcome='results > 0', on_failure_guidance='Function node retrieval failed - check previous steps for errors', depends_on_steps=[3], entities_validated=[])] data_retrieval_step=4 fallback_hints=[\"If Type\u2192Function path doesn't exist, verify Type and Function names and relationship\", 'If retrieval fails, ensure Function node properties are correctly specified'] all_entity_constraints=[EntityConstraint(var='f', label='Function', property='name', value='CreateWorkers'), EntityConstraint(var='t', label='Type', property='name', value='WorkerFactory')]",
+          "steps": [
+            "step_number=1 step_type=<QueryStepType.ENTITY_CHECK: 'entity_check'> purpose='Verify CreateWorkers function exists' cypher_query=\"MATCH (f:Function {name: 'CreateWorkers'}) RETURN count(f) as count\" expected_outcome='count >= 1' on_failure_guidance=\"Function 'CreateWorkers' not found - try fuzzy matching or check for typos\" depends_on_steps=[] entities_validated=[EntityConstraint(var='f', label='Function', property='name', value='CreateWorkers')]",
+            "step_number=2 step_type=<QueryStepType.ENTITY_CHECK: 'entity_check'> purpose='Verify WorkerFactory type exists' cypher_query=\"MATCH (t:Type {name: 'WorkerFactory'}) RETURN count(t) as count\" expected_outcome='count >= 1' on_failure_guidance=\"Type 'WorkerFactory' not found - ensure correct spelling and case\" depends_on_steps=[] entities_validated=[EntityConstraint(var='t', label='Type', property='name', value='WorkerFactory')]",
+            "step_number=3 step_type=<QueryStepType.PATH_CHECK: 'path_check'> purpose='Verify Type contains Function' cypher_query=\"MATCH (t:Type {name: 'WorkerFactory'})-[:CONTAINS]->(f:Function {name: 'CreateWorkers'}) RETURN count(f) as count\" expected_outcome='count >= 1' on_failure_guidance='No containment path found - verify Type and Function names and relationship' depends_on_steps=[1, 2] entities_validated=[]",
+            "step_number=4 step_type=<QueryStepType.DATA_RETRIEVAL: 'data_retrieval'> purpose='Retrieve CreateWorkers Function node' cypher_query=\"MATCH (t:Type {name: 'WorkerFactory'})-[:CONTAINS]->(f:Function {name: 'CreateWorkers'}) RETURN f.name, f.file_path LIMIT 1\" expected_outcome='results > 0' on_failure_guidance='Function node retrieval failed - check previous steps for errors' depends_on_steps=[3] entities_validated=[]"
+          ],
+          "failed_at_step": null,
+          "reasoning": {
+            "cot_reasoning": {
+              "step1_perspective": "Locate the Function node for CreateWorkers within the Type node WorkerFactory.",
+              "step2_premise_validation": "Premises P1 and P2 establish that WorkerFactory is a Type node and CreateWorkers is a Function node contained within WorkerFactory.",
+              "step3_path_trace": "Type\u2192CONTAINS\u2192Function",
+              "step4_filters": "Filter by Function name 'CreateWorkers' and Type name 'WorkerFactory'.",
+              "step5_return": "Return the Function node properties such as name and file_path.",
+              "step6_optimize": "Use indexed properties for efficient filtering and limit results to 1."
+            },
+            "query_purpose": "This plan will validate the existence of the CreateWorkers function and its containment within the WorkerFactory type, then retrieve the relevant Function node.",
+            "plan_overview": "This plan will validate the existence of the CreateWorkers function and its containment within the WorkerFactory type, then retrieve the relevant Function node."
+          }
+        }
+      ],
+      "reasoning_trail": [
+        {
+          "step": "Iteration 1 - Decision",
+          "type": "think",
+          "reasoning": "Agent decided to generate another query",
+          "context": "1 data points collected so far"
+        },
+        {
+          "step": "Iteration 1 - Query Generation",
+          "type": "generate",
+          "query": "This plan will validate the existence of the CreateWorkers function and its containment within the WorkerFactory type, then retrieve the relevant Function node.",
+          "cot_reasoning": {
+            "step1_perspective": "Locate the Function node for CreateWorkers within the Type node WorkerFactory.",
+            "step2_premise_validation": "Premises P1 and P2 establish that WorkerFactory is a Type node and CreateWorkers is a Function node contained within WorkerFactory.",
+            "step3_path_trace": "Type\u2192CONTAINS\u2192Function",
+            "step4_filters": "Filter by Function name 'CreateWorkers' and Type name 'WorkerFactory'.",
+            "step5_return": "Return the Function node properties such as name and file_path.",
+            "step6_optimize": "Use indexed properties for efficient filtering and limit results to 1."
+          },
+          "query_purpose": "This plan will validate the existence of the CreateWorkers function and its containment within the WorkerFactory type, then retrieve the relevant Function node."
+        },
+        {
+          "step": "Iteration 1 - Execution",
+          "type": "execute",
+          "result_count": 1,
+          "error": null,
+          "status": "success"
+        },
+        {
+          "step": "Iteration 1 - Analysis",
+          "type": "analyze",
+          "analysis": "The query plan executed successfully, confirming the existence of the CreateWorkers function within the WorkerFactory type and retrieving its properties.",
+          "key_findings": [
+            "Successfully located the CreateWorkers function within the WorkerFactory type.",
+            "Returned the function's name and file path as expected."
+          ],
+          "recommendation": "Sufficient",
+          "next_query_hint": null
+        },
+        {
+          "step": "Final Decision",
+          "type": "conclude",
+          "is_sufficient": true,
+          "reason": "The query plan executed successfully, confirming the existence of the CreateWorkers function within the WorkerFactory type and retrieving its properties.",
+          "total_iterations": 1,
+          "total_data_points": 1
+        }
+      ],
+      "citations": {
+        "data_point_0": {
+          "query_index": 0,
+          "query": "This plan will validate the existence of the CreateWorkers function and its containment within the WorkerFactory type, then retrieve the relevant Function node.",
+          "iteration": 1,
+          "query_purpose": "This plan will validate the existence of the CreateWorkers function and its containment within the WorkerFactory type, then retrieve the relevant Function node.",
+          "cot_reasoning": {
+            "step1_perspective": "Locate the Function node for CreateWorkers within the Type node WorkerFactory.",
+            "step2_premise_validation": "Premises P1 and P2 establish that WorkerFactory is a Type node and CreateWorkers is a Function node contained within WorkerFactory.",
+            "step3_path_trace": "Type\u2192CONTAINS\u2192Function",
+            "step4_filters": "Filter by Function name 'CreateWorkers' and Type name 'WorkerFactory'.",
+            "step5_return": "Return the Function node properties such as name and file_path.",
+            "step6_optimize": "Use indexed properties for efficient filtering and limit results to 1."
+          },
+          "discovered_at": "Iteration 1, Query 1"
+        }
+      },
+      "evidence_summary": {
+        "query_0": {
+          "iteration": 1,
+          "query": "This plan will validate the existence of the CreateWorkers function and its containment within the WorkerFactory type, then retrieve the relevant Function node.",
+          "query_purpose": "This plan will validate the existence of the CreateWorkers function and its containment within the WorkerFactory type, then retrieve the relevant Function node.",
+          "cot_reasoning": {
+            "perspective": "Locate the Function node for CreateWorkers within the Type node WorkerFactory.",
+            "premises_validated": "Premises P1 and P2 establish that WorkerFactory is a Type node and CreateWorkers is a Function node contained within WorkerFactory.",
+            "path_used": "Type\u2192CONTAINS\u2192Function",
+            "filters_applied": "Filter by Function name 'CreateWorkers' and Type name 'WorkerFactory'."
+          },
+          "result_count": 1,
+          "key_findings": [
+            "Successfully located the CreateWorkers function within the WorkerFactory type.",
+            "Returned the function's name and file path as expected."
+          ],
+          "results": [
+            {
+              "f.name": "CreateWorkers",
+              "f.file_path": "HelloWorldApp/WorkerFactory.cs"
+            }
+          ]
+        }
+      },
+      "is_sufficient": true,
+      "sufficiency_reason": "The query plan executed successfully, confirming the existence of the CreateWorkers function within the WorkerFactory type and retrieving its properties.",
+      "approach_answer": "The discovered data confirms the existence of the CreateWorkers function within the WorkerFactory type. The Function node for CreateWorkers is located in the file 'HelloWorldApp/WorkerFactory.cs'. This information was retrieved by validating the function's presence and its containment within the specified type, as per the approach's goal.",
+      "approach_quality_grade": 0.72,
+      "data_points_used": [
+        0
+      ],
+      "confidence_assessment": "Medium - The confidence is medium due to the single data point with a moderate quality score, indicating some level of uncertainty in the findings.",
+      "partial_answers": [
+        {
+          "iteration": 1,
+          "answer": "The query plan executed successfully, confirming the existence of the CreateWorkers function within the WorkerFactory type and retrieving its properties.",
+          "key_findings": [
+            "Successfully located the CreateWorkers function within the WorkerFactory type.",
+            "Returned the function's name and file path as expected."
+          ],
+          "data_count": 1,
+          "quality_grade": 0.5,
+          "query_purpose": "This plan will validate the existence of the CreateWorkers function and its containment within the WorkerFactory type, then retrieve the relevant Function node."
+        }
+      ]
+    },
+    "1": {
+      "approach_name": "Subquery SQ2",
+      "approach_goal": "Retrieve all Statement nodes within the Block nodes contained in the CreateWorkers Function that instantiate classes.",
+      "queries_executed": 1,
+      "query_history": [
+        {
+          "iteration": 1,
+          "mode": "plan",
+          "results": [
+            {
+              "s": {
+                "file_path": "HelloWorldApp/WorkerFactory.cs",
+                "end_point": "[14, 14]",
+                "start_byte": 272,
+                "start_point": "[9, 12]",
+                "type_kind": "statement",
+                "text": "return new List<IWorker>\n            {\n                new WorkerA(notifier),\n                new WorkerB(notifier),\n                new WorkerC(notifier)\n            };",
+                "type": "Statement",
+                "end_byte": 441,
+                "symbols_location": "{\"symbols\": [{\"text\": \"List\", \"start_byte\": 283, \"end_byte\": 287, \"start_point\": [9, 23], \"end_point\": [9, 27]}]}",
+                "statement_type": "return",
+                "order": 2
+              }
+            }
+          ],
+          "error": null,
+          "result_count": 1,
+          "analysis": {
+            "analysis": "The query plan executed successfully, retrieving one Statement node that instantiates classes within the CreateWorkers function.",
+            "key_findings": [
+              "Successfully found a Statement node containing class instantiations using 'new'.",
+              "The retrieved Statement includes multiple instantiations of Worker classes.",
+              "All validation steps passed, confirming the query met its expected outcomes."
+            ],
+            "recommendation": "Sufficient",
+            "next_query_hint": null
+          },
+          "premise_validations": [],
+          "apoc_diagnostics_used": false,
+          "sufficiency_status": null,
+          "query": "This plan verifies the existence of the CreateWorkers function, checks the containment path from Function to Block to Statement, and retrieves Statements that instantiate classes.",
+          "query_plan": "cot_reasoning=CoTReasoningSteps(step1_perspective='Investigate the existence and containment of Statement nodes within Block nodes in the CreateWorkers Function.', step2_premise_validation='Premises P2 and P3 establish that CreateWorkers is a Function node and that Functions can contain Blocks, which in turn contain Statements.', step3_path_trace='Function\u2192CONTAINS\u2192Block\u2192CONTAINS\u2192Statement', step4_filters=\"Filter Statements that instantiate classes by checking if the text contains 'new'.\", step5_return='Return the Statement nodes that match the criteria.', step6_optimize='Limit results to 50 for manageability.') plan_overview='This plan verifies the existence of the CreateWorkers function, checks the containment path from Function to Block to Statement, and retrieves Statements that instantiate classes.' steps=[QueryStep(step_number=1, step_type=<QueryStepType.ENTITY_CHECK: 'entity_check'>, purpose='Verify CreateWorkers function exists', cypher_query=\"MATCH (f:Function {name: 'CreateWorkers'}) RETURN count(f) as count\", expected_outcome='count >= 1', on_failure_guidance=\"Function 'CreateWorkers' not found - try fuzzy matching or check for typos\", depends_on_steps=[], entities_validated=[EntityConstraint(var='f', label='Function', property='name', value='CreateWorkers')]), QueryStep(step_number=2, step_type=<QueryStepType.PATH_CHECK: 'path_check'>, purpose='Verify Function contains Block nodes', cypher_query=\"MATCH (f:Function {name: 'CreateWorkers'})-[:CONTAINS]->(b:Block) RETURN count(b) as count\", expected_outcome='count >= 1', on_failure_guidance='CreateWorkers has no Block nodes - statements may be direct children of Function', depends_on_steps=[1], entities_validated=[]), QueryStep(step_number=3, step_type=<QueryStepType.DATA_RETRIEVAL: 'data_retrieval'>, purpose='Retrieve Statement nodes within Blocks', cypher_query=\"MATCH (f:Function {name: 'CreateWorkers'})-[:CONTAINS]->(b:Block)-[:CONTAINS]->(s:Statement) WHERE s.text CONTAINS 'new' RETURN s LIMIT 50\", expected_outcome='results > 0', on_failure_guidance=\"No statements with 'new' keyword - try different text patterns or relationships\", depends_on_steps=[1, 2], entities_validated=[])] data_retrieval_step=3 fallback_hints=[\"If Block path doesn't exist, try direct Function\u2192Statement path\", \"If 'new' keyword filter returns nothing, try Statement\u2192Type relationship\"] all_entity_constraints=[EntityConstraint(var='f', label='Function', property='name', value='CreateWorkers')]",
+          "steps": [
+            "step_number=1 step_type=<QueryStepType.ENTITY_CHECK: 'entity_check'> purpose='Verify CreateWorkers function exists' cypher_query=\"MATCH (f:Function {name: 'CreateWorkers'}) RETURN count(f) as count\" expected_outcome='count >= 1' on_failure_guidance=\"Function 'CreateWorkers' not found - try fuzzy matching or check for typos\" depends_on_steps=[] entities_validated=[EntityConstraint(var='f', label='Function', property='name', value='CreateWorkers')]",
+            "step_number=2 step_type=<QueryStepType.PATH_CHECK: 'path_check'> purpose='Verify Function contains Block nodes' cypher_query=\"MATCH (f:Function {name: 'CreateWorkers'})-[:CONTAINS]->(b:Block) RETURN count(b) as count\" expected_outcome='count >= 1' on_failure_guidance='CreateWorkers has no Block nodes - statements may be direct children of Function' depends_on_steps=[1] entities_validated=[]",
+            "step_number=3 step_type=<QueryStepType.DATA_RETRIEVAL: 'data_retrieval'> purpose='Retrieve Statement nodes within Blocks' cypher_query=\"MATCH (f:Function {name: 'CreateWorkers'})-[:CONTAINS]->(b:Block)-[:CONTAINS]->(s:Statement) WHERE s.text CONTAINS 'new' RETURN s LIMIT 50\" expected_outcome='results > 0' on_failure_guidance=\"No statements with 'new' keyword - try different text patterns or relationships\" depends_on_steps=[1, 2] entities_validated=[]"
+          ],
+          "failed_at_step": null,
+          "reasoning": {
+            "cot_reasoning": {
+              "step1_perspective": "Investigate the existence and containment of Statement nodes within Block nodes in the CreateWorkers Function.",
+              "step2_premise_validation": "Premises P2 and P3 establish that CreateWorkers is a Function node and that Functions can contain Blocks, which in turn contain Statements.",
+              "step3_path_trace": "Function\u2192CONTAINS\u2192Block\u2192CONTAINS\u2192Statement",
+              "step4_filters": "Filter Statements that instantiate classes by checking if the text contains 'new'.",
+              "step5_return": "Return the Statement nodes that match the criteria.",
+              "step6_optimize": "Limit results to 50 for manageability."
+            },
+            "query_purpose": "This plan verifies the existence of the CreateWorkers function, checks the containment path from Function to Block to Statement, and retrieves Statements that instantiate classes.",
+            "plan_overview": "This plan verifies the existence of the CreateWorkers function, checks the containment path from Function to Block to Statement, and retrieves Statements that instantiate classes."
+          }
+        }
+      ],
+      "reasoning_trail": [
+        {
+          "step": "Iteration 1 - Decision",
+          "type": "think",
+          "reasoning": "Agent decided to generate another query",
+          "context": "1 data points collected so far"
+        },
+        {
+          "step": "Iteration 1 - Query Generation",
+          "type": "generate",
+          "query": "This plan verifies the existence of the CreateWorkers function, checks the containment path from Function to Block to Statement, and retrieves Statements that instantiate classes.",
+          "cot_reasoning": {
+            "step1_perspective": "Investigate the existence and containment of Statement nodes within Block nodes in the CreateWorkers Function.",
+            "step2_premise_validation": "Premises P2 and P3 establish that CreateWorkers is a Function node and that Functions can contain Blocks, which in turn contain Statements.",
+            "step3_path_trace": "Function\u2192CONTAINS\u2192Block\u2192CONTAINS\u2192Statement",
+            "step4_filters": "Filter Statements that instantiate classes by checking if the text contains 'new'.",
+            "step5_return": "Return the Statement nodes that match the criteria.",
+            "step6_optimize": "Limit results to 50 for manageability."
+          },
+          "query_purpose": "This plan verifies the existence of the CreateWorkers function, checks the containment path from Function to Block to Statement, and retrieves Statements that instantiate classes."
+        },
+        {
+          "step": "Iteration 1 - Execution",
+          "type": "execute",
+          "result_count": 1,
+          "error": null,
+          "status": "success"
+        },
+        {
+          "step": "Iteration 1 - Analysis",
+          "type": "analyze",
+          "analysis": "The query plan executed successfully, retrieving one Statement node that instantiates classes within the CreateWorkers function.",
+          "key_findings": [
+            "Successfully found a Statement node containing class instantiations using 'new'.",
+            "The retrieved Statement includes multiple instantiations of Worker classes.",
+            "All validation steps passed, confirming the query met its expected outcomes."
+          ],
+          "recommendation": "Sufficient",
+          "next_query_hint": null
+        },
+        {
+          "step": "Final Decision",
+          "type": "conclude",
+          "is_sufficient": true,
+          "reason": "The query plan executed successfully, retrieving one Statement node that instantiates classes within the CreateWorkers function.",
+          "total_iterations": 1,
+          "total_data_points": 1
+        }
+      ],
+      "citations": {
+        "data_point_0": {
+          "query_index": 0,
+          "query": "This plan verifies the existence of the CreateWorkers function, checks the containment path from Function to Block to Statement, and retrieves Statements that instantiate classes.",
+          "iteration": 1,
+          "query_purpose": "This plan verifies the existence of the CreateWorkers function, checks the containment path from Function to Block to Statement, and retrieves Statements that instantiate classes.",
+          "cot_reasoning": {
+            "step1_perspective": "Investigate the existence and containment of Statement nodes within Block nodes in the CreateWorkers Function.",
+            "step2_premise_validation": "Premises P2 and P3 establish that CreateWorkers is a Function node and that Functions can contain Blocks, which in turn contain Statements.",
+            "step3_path_trace": "Function\u2192CONTAINS\u2192Block\u2192CONTAINS\u2192Statement",
+            "step4_filters": "Filter Statements that instantiate classes by checking if the text contains 'new'.",
+            "step5_return": "Return the Statement nodes that match the criteria.",
+            "step6_optimize": "Limit results to 50 for manageability."
+          },
+          "discovered_at": "Iteration 1, Query 1"
+        }
+      },
+      "evidence_summary": {
+        "query_0": {
+          "iteration": 1,
+          "query": "This plan verifies the existence of the CreateWorkers function, checks the containment path from Function to Block to Statement, and retrieves Statements that instantiate classes.",
+          "query_purpose": "This plan verifies the existence of the CreateWorkers function, checks the containment path from Function to Block to Statement, and retrieves Statements that instantiate classes.",
+          "cot_reasoning": {
+            "perspective": "Investigate the existence and containment of Statement nodes within Block nodes in the CreateWorkers Function.",
+            "premises_validated": "Premises P2 and P3 establish that CreateWorkers is a Function node and that Functions can contain Blocks, which in turn contain Statements.",
+            "path_used": "Function\u2192CONTAINS\u2192Block\u2192CONTAINS\u2192Statement",
+            "filters_applied": "Filter Statements that instantiate classes by checking if the text contains 'new'."
+          },
+          "result_count": 1,
+          "key_findings": [
+            "Successfully found a Statement node containing class instantiations using 'new'.",
+            "The retrieved Statement includes multiple instantiations of Worker classes.",
+            "All validation steps passed, confirming the query met its expected outcomes."
+          ],
+          "results": [
+            {
+              "s": {
+                "file_path": "HelloWorldApp/WorkerFactory.cs",
+                "end_point": "[14, 14]",
+                "start_byte": 272,
+                "start_point": "[9, 12]",
+                "type_kind": "statement",
+                "text": "return new List<IWorker>\n            {\n                new WorkerA(notifier),\n                new WorkerB(notifier),\n                new WorkerC(notifier)\n            };",
+                "type": "Statement",
+                "end_byte": 441,
+                "symbols_location": "{\"symbols\": [{\"text\": \"List\", \"start_byte\": 283, \"end_byte\": 287, \"start_point\": [9, 23], \"end_point\": [9, 27]}]}",
+                "statement_type": "return",
+                "order": 2
+              }
+            }
+          ]
+        }
+      },
+      "is_sufficient": true,
+      "sufficiency_reason": "The query plan executed successfully, retrieving one Statement node that instantiates classes within the CreateWorkers function.",
+      "approach_answer": "The discovered data confirms that within the CreateWorkers function, there is a Statement node that instantiates classes. Specifically, the Statement node is a return statement that creates a new List of IWorker objects, which includes instantiations of WorkerA, WorkerB, and WorkerC classes. This Statement is located in the file 'HelloWorldApp/WorkerFactory.cs', starting at byte 272 and ending at byte 441, with the text spanning from line 9, column 12 to line 14, column 14.",
+      "approach_quality_grade": 0.72,
+      "data_points_used": [
+        0
+      ],
+      "confidence_assessment": "Medium - The data point provides a clear example of class instantiation within the specified function, but the overall quality rating of the data is moderate, suggesting some caution in interpretation.",
+      "partial_answers": [
+        {
+          "iteration": 1,
+          "answer": "The query plan executed successfully, retrieving one Statement node that instantiates classes within the CreateWorkers function.",
+          "key_findings": [
+            "Successfully found a Statement node containing class instantiations using 'new'.",
+            "The retrieved Statement includes multiple instantiations of Worker classes.",
+            "All validation steps passed, confirming the query met its expected outcomes."
+          ],
+          "data_count": 1,
+          "quality_grade": 0.5,
+          "query_purpose": "This plan verifies the existence of the CreateWorkers function, checks the containment path from Function to Block to Statement, and retrieves Statements that instantiate classes."
+        }
+      ]
+    },
+    "2": {
+      "approach_name": "Subquery SQ3",
+      "approach_goal": "Retrieve the return type of the CreateWorkers Function to identify the classes returned.",
+      "queries_executed": 1,
+      "query_history": [
+        {
+          "iteration": 1,
+          "mode": "plan",
+          "results": [
+            {
+              "t.name": "WorkerFactory"
+            }
+          ],
+          "error": null,
+          "result_count": 1,
+          "analysis": {
+            "analysis": "The query plan executed successfully, retrieving the return type of the CreateWorkers function, which is 'WorkerFactory'.",
+            "key_findings": [
+              "Successfully identified the return type of the CreateWorkers function",
+              "The function references a Type node named 'WorkerFactory'"
+            ],
+            "recommendation": "Sufficient",
+            "next_query_hint": null
+          },
+          "premise_validations": [],
+          "apoc_diagnostics_used": false,
+          "sufficiency_status": null,
+          "query": "This plan will validate the existence of the CreateWorkers function, verify the REFERENCES relationship to a Type node, and retrieve the return type.",
+          "query_plan": "cot_reasoning=CoTReasoningSteps(step1_perspective='Identify the return type of the CreateWorkers function to determine the classes it returns.', step2_premise_validation='The premise that CreateWorkers is a Function node contained within WorkerFactory sets the scope for our query.', step3_path_trace='Function\u2192REFERENCES\u2192Type', step4_filters=\"Filter by function name 'CreateWorkers' and ensure the REFERENCES relationship leads to a Type node.\", step5_return=\"Return the 'name' property of the Type node to identify the class.\", step6_optimize='Use LIMIT to restrict the number of results for efficiency.') plan_overview='This plan will validate the existence of the CreateWorkers function, verify the REFERENCES relationship to a Type node, and retrieve the return type.' steps=[QueryStep(step_number=1, step_type=<QueryStepType.ENTITY_CHECK: 'entity_check'>, purpose='Verify CreateWorkers function exists', cypher_query=\"MATCH (f:Function {name: 'CreateWorkers'}) RETURN count(f) as count\", expected_outcome='count >= 1', on_failure_guidance=\"Function 'CreateWorkers' not found - try fuzzy matching or check for typos\", depends_on_steps=[], entities_validated=[EntityConstraint(var='f', label='Function', property='name', value='CreateWorkers')]), QueryStep(step_number=2, step_type=<QueryStepType.PATH_CHECK: 'path_check'>, purpose='Verify Function REFERENCES Type nodes', cypher_query=\"MATCH (f:Function {name: 'CreateWorkers'})-[:REFERENCES]->(t:Type) RETURN count(t) as count\", expected_outcome='count >= 1', on_failure_guidance='No Type nodes referenced by CreateWorkers - check if REFERENCES relationship is correct', depends_on_steps=[1], entities_validated=[]), QueryStep(step_number=3, step_type=<QueryStepType.DATA_RETRIEVAL: 'data_retrieval'>, purpose='Retrieve the return type of CreateWorkers', cypher_query=\"MATCH (f:Function {name: 'CreateWorkers'})-[:REFERENCES]->(t:Type) RETURN t.name LIMIT 10\", expected_outcome='results > 0', on_failure_guidance='No return types found - verify the REFERENCES relationship and function name', depends_on_steps=[1, 2], entities_validated=[])] data_retrieval_step=3 fallback_hints=[\"If REFERENCES path doesn't exist, verify the relationship type or check for direct Function\u2192Type paths\", 'If no results, consider checking other relationships or properties'] all_entity_constraints=[EntityConstraint(var='f', label='Function', property='name', value='CreateWorkers')]",
+          "steps": [
+            "step_number=1 step_type=<QueryStepType.ENTITY_CHECK: 'entity_check'> purpose='Verify CreateWorkers function exists' cypher_query=\"MATCH (f:Function {name: 'CreateWorkers'}) RETURN count(f) as count\" expected_outcome='count >= 1' on_failure_guidance=\"Function 'CreateWorkers' not found - try fuzzy matching or check for typos\" depends_on_steps=[] entities_validated=[EntityConstraint(var='f', label='Function', property='name', value='CreateWorkers')]",
+            "step_number=2 step_type=<QueryStepType.PATH_CHECK: 'path_check'> purpose='Verify Function REFERENCES Type nodes' cypher_query=\"MATCH (f:Function {name: 'CreateWorkers'})-[:REFERENCES]->(t:Type) RETURN count(t) as count\" expected_outcome='count >= 1' on_failure_guidance='No Type nodes referenced by CreateWorkers - check if REFERENCES relationship is correct' depends_on_steps=[1] entities_validated=[]",
+            "step_number=3 step_type=<QueryStepType.DATA_RETRIEVAL: 'data_retrieval'> purpose='Retrieve the return type of CreateWorkers' cypher_query=\"MATCH (f:Function {name: 'CreateWorkers'})-[:REFERENCES]->(t:Type) RETURN t.name LIMIT 10\" expected_outcome='results > 0' on_failure_guidance='No return types found - verify the REFERENCES relationship and function name' depends_on_steps=[1, 2] entities_validated=[]"
+          ],
+          "failed_at_step": null,
+          "reasoning": {
+            "cot_reasoning": {
+              "step1_perspective": "Identify the return type of the CreateWorkers function to determine the classes it returns.",
+              "step2_premise_validation": "The premise that CreateWorkers is a Function node contained within WorkerFactory sets the scope for our query.",
+              "step3_path_trace": "Function\u2192REFERENCES\u2192Type",
+              "step4_filters": "Filter by function name 'CreateWorkers' and ensure the REFERENCES relationship leads to a Type node.",
+              "step5_return": "Return the 'name' property of the Type node to identify the class.",
+              "step6_optimize": "Use LIMIT to restrict the number of results for efficiency."
+            },
+            "query_purpose": "This plan will validate the existence of the CreateWorkers function, verify the REFERENCES relationship to a Type node, and retrieve the return type.",
+            "plan_overview": "This plan will validate the existence of the CreateWorkers function, verify the REFERENCES relationship to a Type node, and retrieve the return type."
+          }
+        }
+      ],
+      "reasoning_trail": [
+        {
+          "step": "Iteration 1 - Decision",
+          "type": "think",
+          "reasoning": "Agent decided to generate another query",
+          "context": "1 data points collected so far"
+        },
+        {
+          "step": "Iteration 1 - Query Generation",
+          "type": "generate",
+          "query": "This plan will validate the existence of the CreateWorkers function, verify the REFERENCES relationship to a Type node, and retrieve the return type.",
+          "cot_reasoning": {
+            "step1_perspective": "Identify the return type of the CreateWorkers function to determine the classes it returns.",
+            "step2_premise_validation": "The premise that CreateWorkers is a Function node contained within WorkerFactory sets the scope for our query.",
+            "step3_path_trace": "Function\u2192REFERENCES\u2192Type",
+            "step4_filters": "Filter by function name 'CreateWorkers' and ensure the REFERENCES relationship leads to a Type node.",
+            "step5_return": "Return the 'name' property of the Type node to identify the class.",
+            "step6_optimize": "Use LIMIT to restrict the number of results for efficiency."
+          },
+          "query_purpose": "This plan will validate the existence of the CreateWorkers function, verify the REFERENCES relationship to a Type node, and retrieve the return type."
+        },
+        {
+          "step": "Iteration 1 - Execution",
+          "type": "execute",
+          "result_count": 1,
+          "error": null,
+          "status": "success"
+        },
+        {
+          "step": "Iteration 1 - Analysis",
+          "type": "analyze",
+          "analysis": "The query plan executed successfully, retrieving the return type of the CreateWorkers function, which is 'WorkerFactory'.",
+          "key_findings": [
+            "Successfully identified the return type of the CreateWorkers function",
+            "The function references a Type node named 'WorkerFactory'"
+          ],
+          "recommendation": "Sufficient",
+          "next_query_hint": null
+        },
+        {
+          "step": "Final Decision",
+          "type": "conclude",
+          "is_sufficient": true,
+          "reason": "The query plan executed successfully, retrieving the return type of the CreateWorkers function, which is 'WorkerFactory'.",
+          "total_iterations": 1,
+          "total_data_points": 1
+        }
+      ],
+      "citations": {
+        "data_point_0": {
+          "query_index": 0,
+          "query": "This plan will validate the existence of the CreateWorkers function, verify the REFERENCES relationship to a Type node, and retrieve the return type.",
+          "iteration": 1,
+          "query_purpose": "This plan will validate the existence of the CreateWorkers function, verify the REFERENCES relationship to a Type node, and retrieve the return type.",
+          "cot_reasoning": {
+            "step1_perspective": "Identify the return type of the CreateWorkers function to determine the classes it returns.",
+            "step2_premise_validation": "The premise that CreateWorkers is a Function node contained within WorkerFactory sets the scope for our query.",
+            "step3_path_trace": "Function\u2192REFERENCES\u2192Type",
+            "step4_filters": "Filter by function name 'CreateWorkers' and ensure the REFERENCES relationship leads to a Type node.",
+            "step5_return": "Return the 'name' property of the Type node to identify the class.",
+            "step6_optimize": "Use LIMIT to restrict the number of results for efficiency."
+          },
+          "discovered_at": "Iteration 1, Query 1"
+        }
+      },
+      "evidence_summary": {
+        "query_0": {
+          "iteration": 1,
+          "query": "This plan will validate the existence of the CreateWorkers function, verify the REFERENCES relationship to a Type node, and retrieve the return type.",
+          "query_purpose": "This plan will validate the existence of the CreateWorkers function, verify the REFERENCES relationship to a Type node, and retrieve the return type.",
+          "cot_reasoning": {
+            "perspective": "Identify the return type of the CreateWorkers function to determine the classes it returns.",
+            "premises_validated": "The premise that CreateWorkers is a Function node contained within WorkerFactory sets the scope for our query.",
+            "path_used": "Function\u2192REFERENCES\u2192Type",
+            "filters_applied": "Filter by function name 'CreateWorkers' and ensure the REFERENCES relationship leads to a Type node."
+          },
+          "result_count": 1,
+          "key_findings": [
+            "Successfully identified the return type of the CreateWorkers function",
+            "The function references a Type node named 'WorkerFactory'"
+          ],
+          "results": [
+            {
+              "t.name": "WorkerFactory"
+            }
+          ]
+        }
+      },
+      "is_sufficient": true,
+      "sufficiency_reason": "The query plan executed successfully, retrieving the return type of the CreateWorkers function, which is 'WorkerFactory'.",
+      "approach_answer": "The CreateWorkers function returns a type that references a Type node named 'WorkerFactory'. This indicates that the function is designed to return instances of the WorkerFactory class or a related type.",
+      "approach_quality_grade": 0.72,
+      "data_points_used": [
+        0
+      ],
+      "confidence_assessment": "Medium - The data point provides a clear indication of the return type, but the overall quality rating suggests there may be some uncertainty or lack of additional corroborating details.",
+      "partial_answers": [
+        {
+          "iteration": 1,
+          "answer": "The query plan executed successfully, retrieving the return type of the CreateWorkers function, which is 'WorkerFactory'.",
+          "key_findings": [
+            "Successfully identified the return type of the CreateWorkers function",
+            "The function references a Type node named 'WorkerFactory'"
+          ],
+          "data_count": 1,
+          "quality_grade": 0.5,
+          "query_purpose": "This plan will validate the existence of the CreateWorkers function, verify the REFERENCES relationship to a Type node, and retrieve the return type."
+        }
+      ]
+    }
+  },
+  "approach_raw_results": {
+    "0": {
+      "approach_index": "SQ1",
+      "approach_name": "Subquery SQ1",
+      "approach_goal": "Locate the Function node for CreateWorkers within the Type node WorkerFactory.",
+      "approach_answer": {
+        "answer": "The discovered data confirms the existence of the CreateWorkers function within the WorkerFactory type. The Function node for CreateWorkers is located in the file 'HelloWorldApp/WorkerFactory.cs'. This information was retrieved by validating the function's presence and its containment within the specified type, as per the approach's goal.",
+        "data_points_used": [
+          0
+        ],
+        "confidence_assessment": "Medium - The confidence is medium due to the single data point with a moderate quality score, indicating some level of uncertainty in the findings."
+      },
+      "approach_quality_grade": 0.72,
+      "confidence_level": "high",
+      "subquery_citation": {
+        "subquery_id": "SQ1",
+        "subquery_text": "Locate the Function node for CreateWorkers within the Type node WorkerFactory.",
+        "execution_group": 0,
+        "logical_form": "Locate WorkerFactory.CreateWorkers \u2192 Retrieve instantiated classes \u2192 Retrieve returned classes",
+        "original_premises": [
+          {
+            "id": "P1",
+            "text": "WorkerFactory is a Type node."
+          },
+          {
+            "id": "P2",
+            "text": "CreateWorkers is a Function node contained within WorkerFactory."
+          }
+        ],
+        "corrected_premises": [],
+        "active_premises": [
+          {
+            "id": "P1",
+            "text": "WorkerFactory is a Type node."
+          },
+          {
+            "id": "P2",
+            "text": "CreateWorkers is a Function node contained within WorkerFactory."
+          }
+        ],
+        "premise_validations": [],
+        "cypher_query": "This plan will validate the existence of the CreateWorkers function and its containment within the WorkerFactory type, then retrieve the relevant Function node.",
+        "execution_attempts": 1,
+        "result_data": [
+          {
+            "f.name": "CreateWorkers",
+            "f.file_path": "HelloWorldApp/WorkerFactory.cs",
+            "_source_query": "This plan will validate the existence of the CreateWorkers function and its containment within the WorkerFactory type, then retrieve the relevant Function node.",
+            "_source_iteration": 1,
+            "_query_purpose": "This plan will validate the existence of the CreateWorkers function and its containment within the WorkerFactory type, then retrieve the relevant Function node.",
+            "_cot_reasoning": {
+              "step1_perspective": "Locate the Function node for CreateWorkers within the Type node WorkerFactory.",
+              "step2_premise_validation": "Premises P1 and P2 establish that WorkerFactory is a Type node and CreateWorkers is a Function node contained within WorkerFactory.",
+              "step3_path_trace": "Type\u2192CONTAINS\u2192Function",
+              "step4_filters": "Filter by Function name 'CreateWorkers' and Type name 'WorkerFactory'.",
+              "step5_return": "Return the Function node properties such as name and file_path.",
+              "step6_optimize": "Use indexed properties for efficient filtering and limit results to 1."
+            }
+          }
+        ],
+        "sufficiency_status": "FOUND",
+        "apoc_diagnostics_used": true,
+        "error": null
+      },
+      "discovered_data": [
+        {
+          "f.name": "CreateWorkers",
+          "f.file_path": "HelloWorldApp/WorkerFactory.cs",
+          "_source_query": "This plan will validate the existence of the CreateWorkers function and its containment within the WorkerFactory type, then retrieve the relevant Function node.",
+          "_source_iteration": 1,
+          "_query_purpose": "This plan will validate the existence of the CreateWorkers function and its containment within the WorkerFactory type, then retrieve the relevant Function node.",
+          "_cot_reasoning": {
+            "step1_perspective": "Locate the Function node for CreateWorkers within the Type node WorkerFactory.",
+            "step2_premise_validation": "Premises P1 and P2 establish that WorkerFactory is a Type node and CreateWorkers is a Function node contained within WorkerFactory.",
+            "step3_path_trace": "Type\u2192CONTAINS\u2192Function",
+            "step4_filters": "Filter by Function name 'CreateWorkers' and Type name 'WorkerFactory'.",
+            "step5_return": "Return the Function node properties such as name and file_path.",
+            "step6_optimize": "Use indexed properties for efficient filtering and limit results to 1."
+          }
+        }
+      ],
+      "total_results": 1,
+      "total_discovered": 1,
+      "queries_executed": 1,
+      "query_history": [
+        {
+          "iteration": 1,
+          "mode": "plan",
+          "results": [
+            {
+              "f.name": "CreateWorkers",
+              "f.file_path": "HelloWorldApp/WorkerFactory.cs"
+            }
+          ],
+          "error": null,
+          "result_count": 1,
+          "analysis": {
+            "analysis": "The query plan executed successfully, confirming the existence of the CreateWorkers function within the WorkerFactory type and retrieving its properties.",
+            "key_findings": [
+              "Successfully located the CreateWorkers function within the WorkerFactory type.",
+              "Returned the function's name and file path as expected."
+            ],
+            "recommendation": "Sufficient",
+            "next_query_hint": null
+          },
+          "premise_validations": [],
+          "apoc_diagnostics_used": false,
+          "sufficiency_status": null,
+          "query": "This plan will validate the existence of the CreateWorkers function and its containment within the WorkerFactory type, then retrieve the relevant Function node.",
+          "query_plan": "cot_reasoning=CoTReasoningSteps(step1_perspective='Locate the Function node for CreateWorkers within the Type node WorkerFactory.', step2_premise_validation='Premises P1 and P2 establish that WorkerFactory is a Type node and CreateWorkers is a Function node contained within WorkerFactory.', step3_path_trace='Type\u2192CONTAINS\u2192Function', step4_filters=\"Filter by Function name 'CreateWorkers' and Type name 'WorkerFactory'.\", step5_return='Return the Function node properties such as name and file_path.', step6_optimize='Use indexed properties for efficient filtering and limit results to 1.') plan_overview='This plan will validate the existence of the CreateWorkers function and its containment within the WorkerFactory type, then retrieve the relevant Function node.' steps=[QueryStep(step_number=1, step_type=<QueryStepType.ENTITY_CHECK: 'entity_check'>, purpose='Verify CreateWorkers function exists', cypher_query=\"MATCH (f:Function {name: 'CreateWorkers'}) RETURN count(f) as count\", expected_outcome='count >= 1', on_failure_guidance=\"Function 'CreateWorkers' not found - try fuzzy matching or check for typos\", depends_on_steps=[], entities_validated=[EntityConstraint(var='f', label='Function', property='name', value='CreateWorkers')]), QueryStep(step_number=2, step_type=<QueryStepType.ENTITY_CHECK: 'entity_check'>, purpose='Verify WorkerFactory type exists', cypher_query=\"MATCH (t:Type {name: 'WorkerFactory'}) RETURN count(t) as count\", expected_outcome='count >= 1', on_failure_guidance=\"Type 'WorkerFactory' not found - ensure correct spelling and case\", depends_on_steps=[], entities_validated=[EntityConstraint(var='t', label='Type', property='name', value='WorkerFactory')]), QueryStep(step_number=3, step_type=<QueryStepType.PATH_CHECK: 'path_check'>, purpose='Verify Type contains Function', cypher_query=\"MATCH (t:Type {name: 'WorkerFactory'})-[:CONTAINS]->(f:Function {name: 'CreateWorkers'}) RETURN count(f) as count\", expected_outcome='count >= 1', on_failure_guidance='No containment path found - verify Type and Function names and relationship', depends_on_steps=[1, 2], entities_validated=[]), QueryStep(step_number=4, step_type=<QueryStepType.DATA_RETRIEVAL: 'data_retrieval'>, purpose='Retrieve CreateWorkers Function node', cypher_query=\"MATCH (t:Type {name: 'WorkerFactory'})-[:CONTAINS]->(f:Function {name: 'CreateWorkers'}) RETURN f.name, f.file_path LIMIT 1\", expected_outcome='results > 0', on_failure_guidance='Function node retrieval failed - check previous steps for errors', depends_on_steps=[3], entities_validated=[])] data_retrieval_step=4 fallback_hints=[\"If Type\u2192Function path doesn't exist, verify Type and Function names and relationship\", 'If retrieval fails, ensure Function node properties are correctly specified'] all_entity_constraints=[EntityConstraint(var='f', label='Function', property='name', value='CreateWorkers'), EntityConstraint(var='t', label='Type', property='name', value='WorkerFactory')]",
+          "steps": [
+            "step_number=1 step_type=<QueryStepType.ENTITY_CHECK: 'entity_check'> purpose='Verify CreateWorkers function exists' cypher_query=\"MATCH (f:Function {name: 'CreateWorkers'}) RETURN count(f) as count\" expected_outcome='count >= 1' on_failure_guidance=\"Function 'CreateWorkers' not found - try fuzzy matching or check for typos\" depends_on_steps=[] entities_validated=[EntityConstraint(var='f', label='Function', property='name', value='CreateWorkers')]",
+            "step_number=2 step_type=<QueryStepType.ENTITY_CHECK: 'entity_check'> purpose='Verify WorkerFactory type exists' cypher_query=\"MATCH (t:Type {name: 'WorkerFactory'}) RETURN count(t) as count\" expected_outcome='count >= 1' on_failure_guidance=\"Type 'WorkerFactory' not found - ensure correct spelling and case\" depends_on_steps=[] entities_validated=[EntityConstraint(var='t', label='Type', property='name', value='WorkerFactory')]",
+            "step_number=3 step_type=<QueryStepType.PATH_CHECK: 'path_check'> purpose='Verify Type contains Function' cypher_query=\"MATCH (t:Type {name: 'WorkerFactory'})-[:CONTAINS]->(f:Function {name: 'CreateWorkers'}) RETURN count(f) as count\" expected_outcome='count >= 1' on_failure_guidance='No containment path found - verify Type and Function names and relationship' depends_on_steps=[1, 2] entities_validated=[]",
+            "step_number=4 step_type=<QueryStepType.DATA_RETRIEVAL: 'data_retrieval'> purpose='Retrieve CreateWorkers Function node' cypher_query=\"MATCH (t:Type {name: 'WorkerFactory'})-[:CONTAINS]->(f:Function {name: 'CreateWorkers'}) RETURN f.name, f.file_path LIMIT 1\" expected_outcome='results > 0' on_failure_guidance='Function node retrieval failed - check previous steps for errors' depends_on_steps=[3] entities_validated=[]"
+          ],
+          "failed_at_step": null,
+          "reasoning": {
+            "cot_reasoning": {
+              "step1_perspective": "Locate the Function node for CreateWorkers within the Type node WorkerFactory.",
+              "step2_premise_validation": "Premises P1 and P2 establish that WorkerFactory is a Type node and CreateWorkers is a Function node contained within WorkerFactory.",
+              "step3_path_trace": "Type\u2192CONTAINS\u2192Function",
+              "step4_filters": "Filter by Function name 'CreateWorkers' and Type name 'WorkerFactory'.",
+              "step5_return": "Return the Function node properties such as name and file_path.",
+              "step6_optimize": "Use indexed properties for efficient filtering and limit results to 1."
+            },
+            "query_purpose": "This plan will validate the existence of the CreateWorkers function and its containment within the WorkerFactory type, then retrieve the relevant Function node.",
+            "plan_overview": "This plan will validate the existence of the CreateWorkers function and its containment within the WorkerFactory type, then retrieve the relevant Function node."
+          }
+        }
+      ],
+      "citations": {
+        "data_point_0": {
+          "query_index": 0,
+          "query": "This plan will validate the existence of the CreateWorkers function and its containment within the WorkerFactory type, then retrieve the relevant Function node.",
+          "iteration": 1,
+          "query_purpose": "This plan will validate the existence of the CreateWorkers function and its containment within the WorkerFactory type, then retrieve the relevant Function node.",
+          "cot_reasoning": {
+            "step1_perspective": "Locate the Function node for CreateWorkers within the Type node WorkerFactory.",
+            "step2_premise_validation": "Premises P1 and P2 establish that WorkerFactory is a Type node and CreateWorkers is a Function node contained within WorkerFactory.",
+            "step3_path_trace": "Type\u2192CONTAINS\u2192Function",
+            "step4_filters": "Filter by Function name 'CreateWorkers' and Type name 'WorkerFactory'.",
+            "step5_return": "Return the Function node properties such as name and file_path.",
+            "step6_optimize": "Use indexed properties for efficient filtering and limit results to 1."
+          },
+          "discovered_at": "Iteration 1, Query 1"
+        }
+      },
+      "reasoning_trail": [
+        {
+          "step": "Iteration 1 - Decision",
+          "type": "think",
+          "reasoning": "Agent decided to generate another query",
+          "context": "1 data points collected so far"
+        },
+        {
+          "step": "Iteration 1 - Query Generation",
+          "type": "generate",
+          "query": "This plan will validate the existence of the CreateWorkers function and its containment within the WorkerFactory type, then retrieve the relevant Function node.",
+          "cot_reasoning": {
+            "step1_perspective": "Locate the Function node for CreateWorkers within the Type node WorkerFactory.",
+            "step2_premise_validation": "Premises P1 and P2 establish that WorkerFactory is a Type node and CreateWorkers is a Function node contained within WorkerFactory.",
+            "step3_path_trace": "Type\u2192CONTAINS\u2192Function",
+            "step4_filters": "Filter by Function name 'CreateWorkers' and Type name 'WorkerFactory'.",
+            "step5_return": "Return the Function node properties such as name and file_path.",
+            "step6_optimize": "Use indexed properties for efficient filtering and limit results to 1."
+          },
+          "query_purpose": "This plan will validate the existence of the CreateWorkers function and its containment within the WorkerFactory type, then retrieve the relevant Function node."
+        },
+        {
+          "step": "Iteration 1 - Execution",
+          "type": "execute",
+          "result_count": 1,
+          "error": null,
+          "status": "success"
+        },
+        {
+          "step": "Iteration 1 - Analysis",
+          "type": "analyze",
+          "analysis": "The query plan executed successfully, confirming the existence of the CreateWorkers function within the WorkerFactory type and retrieving its properties.",
+          "key_findings": [
+            "Successfully located the CreateWorkers function within the WorkerFactory type.",
+            "Returned the function's name and file path as expected."
+          ],
+          "recommendation": "Sufficient",
+          "next_query_hint": null
+        },
+        {
+          "step": "Final Decision",
+          "type": "conclude",
+          "is_sufficient": true,
+          "reason": "The query plan executed successfully, confirming the existence of the CreateWorkers function within the WorkerFactory type and retrieving its properties.",
+          "total_iterations": 1,
+          "total_data_points": 1
+        }
+      ],
+      "evidence_summary": {
+        "query_0": {
+          "iteration": 1,
+          "query": "This plan will validate the existence of the CreateWorkers function and its containment within the WorkerFactory type, then retrieve the relevant Function node.",
+          "query_purpose": "This plan will validate the existence of the CreateWorkers function and its containment within the WorkerFactory type, then retrieve the relevant Function node.",
+          "cot_reasoning": {
+            "perspective": "Locate the Function node for CreateWorkers within the Type node WorkerFactory.",
+            "premises_validated": "Premises P1 and P2 establish that WorkerFactory is a Type node and CreateWorkers is a Function node contained within WorkerFactory.",
+            "path_used": "Type\u2192CONTAINS\u2192Function",
+            "filters_applied": "Filter by Function name 'CreateWorkers' and Type name 'WorkerFactory'."
+          },
+          "result_count": 1,
+          "key_findings": [
+            "Successfully located the CreateWorkers function within the WorkerFactory type.",
+            "Returned the function's name and file path as expected."
+          ],
+          "results": [
+            {
+              "f.name": "CreateWorkers",
+              "f.file_path": "HelloWorldApp/WorkerFactory.cs"
+            }
+          ]
+        }
+      },
+      "partial_answers": [
+        {
+          "iteration": 1,
+          "answer": "The query plan executed successfully, confirming the existence of the CreateWorkers function within the WorkerFactory type and retrieving its properties.",
+          "key_findings": [
+            "Successfully located the CreateWorkers function within the WorkerFactory type.",
+            "Returned the function's name and file path as expected."
+          ],
+          "data_count": 1,
+          "quality_grade": 0.5,
+          "query_purpose": "This plan will validate the existence of the CreateWorkers function and its containment within the WorkerFactory type, then retrieve the relevant Function node."
+        }
+      ],
+      "is_sufficient": true,
+      "sufficiency_reason": "The query plan executed successfully, confirming the existence of the CreateWorkers function within the WorkerFactory type and retrieving its properties.",
+      "tokens_used": 19698,
+      "total_input_tokens": 15837,
+      "total_output_tokens": 3861,
+      "token_breakdown": {
+        "iteration_1": {
+          "think": 372,
+          "total": 19698,
+          "generate_plan": 17719,
+          "analyze_plan": 881,
+          "synthesis": 726
+        }
+      },
+      "iterations": 1
+    },
+    "1": {
+      "approach_index": "SQ2",
+      "approach_name": "Subquery SQ2",
+      "approach_goal": "Retrieve all Statement nodes within the Block nodes contained in the CreateWorkers Function that instantiate classes.",
+      "approach_answer": {
+        "answer": "The discovered data confirms that within the CreateWorkers function, there is a Statement node that instantiates classes. Specifically, the Statement node is a return statement that creates a new List of IWorker objects, which includes instantiations of WorkerA, WorkerB, and WorkerC classes. This Statement is located in the file 'HelloWorldApp/WorkerFactory.cs', starting at byte 272 and ending at byte 441, with the text spanning from line 9, column 12 to line 14, column 14.",
+        "data_points_used": [
+          0
+        ],
+        "confidence_assessment": "Medium - The data point provides a clear example of class instantiation within the specified function, but the overall quality rating of the data is moderate, suggesting some caution in interpretation."
+      },
+      "approach_quality_grade": 0.72,
+      "confidence_level": "high",
+      "subquery_citation": {
+        "subquery_id": "SQ2",
+        "subquery_text": "Retrieve all Statement nodes within the Block nodes contained in the CreateWorkers Function that instantiate classes.",
+        "execution_group": 0,
+        "logical_form": "Locate WorkerFactory.CreateWorkers \u2192 Retrieve instantiated classes \u2192 Retrieve returned classes",
+        "original_premises": [
+          {
+            "id": "P2",
+            "text": "CreateWorkers is a Function node contained within WorkerFactory."
+          },
+          {
+            "id": "P3",
+            "text": "Function nodes can contain Block nodes, which in turn contain Statement nodes."
+          }
+        ],
+        "corrected_premises": [],
+        "active_premises": [
+          {
+            "id": "P2",
+            "text": "CreateWorkers is a Function node contained within WorkerFactory."
+          },
+          {
+            "id": "P3",
+            "text": "Function nodes can contain Block nodes, which in turn contain Statement nodes."
+          }
+        ],
+        "premise_validations": [],
+        "cypher_query": "This plan verifies the existence of the CreateWorkers function, checks the containment path from Function to Block to Statement, and retrieves Statements that instantiate classes.",
+        "execution_attempts": 1,
+        "result_data": [
+          {
+            "s": {
+              "file_path": "HelloWorldApp/WorkerFactory.cs",
+              "end_point": "[14, 14]",
+              "start_byte": 272,
+              "start_point": "[9, 12]",
+              "type_kind": "statement",
+              "text": "return new List<IWorker>\n            {\n                new WorkerA(notifier),\n                new WorkerB(notifier),\n                new WorkerC(notifier)\n            };",
+              "type": "Statement",
+              "end_byte": 441,
+              "symbols_location": "{\"symbols\": [{\"text\": \"List\", \"start_byte\": 283, \"end_byte\": 287, \"start_point\": [9, 23], \"end_point\": [9, 27]}]}",
+              "statement_type": "return",
+              "order": 2
+            },
+            "_source_query": "This plan verifies the existence of the CreateWorkers function, checks the containment path from Function to Block to Statement, and retrieves Statements that instantiate classes.",
+            "_source_iteration": 1,
+            "_query_purpose": "This plan verifies the existence of the CreateWorkers function, checks the containment path from Function to Block to Statement, and retrieves Statements that instantiate classes.",
+            "_cot_reasoning": {
+              "step1_perspective": "Investigate the existence and containment of Statement nodes within Block nodes in the CreateWorkers Function.",
+              "step2_premise_validation": "Premises P2 and P3 establish that CreateWorkers is a Function node and that Functions can contain Blocks, which in turn contain Statements.",
+              "step3_path_trace": "Function\u2192CONTAINS\u2192Block\u2192CONTAINS\u2192Statement",
+              "step4_filters": "Filter Statements that instantiate classes by checking if the text contains 'new'.",
+              "step5_return": "Return the Statement nodes that match the criteria.",
+              "step6_optimize": "Limit results to 50 for manageability."
+            }
+          }
+        ],
+        "sufficiency_status": "FOUND",
+        "apoc_diagnostics_used": true,
+        "error": null
+      },
+      "discovered_data": [
+        {
+          "s": {
+            "file_path": "HelloWorldApp/WorkerFactory.cs",
+            "end_point": "[14, 14]",
+            "start_byte": 272,
+            "start_point": "[9, 12]",
+            "type_kind": "statement",
+            "text": "return new List<IWorker>\n            {\n                new WorkerA(notifier),\n                new WorkerB(notifier),\n                new WorkerC(notifier)\n            };",
+            "type": "Statement",
+            "end_byte": 441,
+            "symbols_location": "{\"symbols\": [{\"text\": \"List\", \"start_byte\": 283, \"end_byte\": 287, \"start_point\": [9, 23], \"end_point\": [9, 27]}]}",
+            "statement_type": "return",
+            "order": 2
+          },
+          "_source_query": "This plan verifies the existence of the CreateWorkers function, checks the containment path from Function to Block to Statement, and retrieves Statements that instantiate classes.",
+          "_source_iteration": 1,
+          "_query_purpose": "This plan verifies the existence of the CreateWorkers function, checks the containment path from Function to Block to Statement, and retrieves Statements that instantiate classes.",
+          "_cot_reasoning": {
+            "step1_perspective": "Investigate the existence and containment of Statement nodes within Block nodes in the CreateWorkers Function.",
+            "step2_premise_validation": "Premises P2 and P3 establish that CreateWorkers is a Function node and that Functions can contain Blocks, which in turn contain Statements.",
+            "step3_path_trace": "Function\u2192CONTAINS\u2192Block\u2192CONTAINS\u2192Statement",
+            "step4_filters": "Filter Statements that instantiate classes by checking if the text contains 'new'.",
+            "step5_return": "Return the Statement nodes that match the criteria.",
+            "step6_optimize": "Limit results to 50 for manageability."
+          }
+        }
+      ],
+      "total_results": 1,
+      "total_discovered": 1,
+      "queries_executed": 1,
+      "query_history": [
+        {
+          "iteration": 1,
+          "mode": "plan",
+          "results": [
+            {
+              "s": {
+                "file_path": "HelloWorldApp/WorkerFactory.cs",
+                "end_point": "[14, 14]",
+                "start_byte": 272,
+                "start_point": "[9, 12]",
+                "type_kind": "statement",
+                "text": "return new List<IWorker>\n            {\n                new WorkerA(notifier),\n                new WorkerB(notifier),\n                new WorkerC(notifier)\n            };",
+                "type": "Statement",
+                "end_byte": 441,
+                "symbols_location": "{\"symbols\": [{\"text\": \"List\", \"start_byte\": 283, \"end_byte\": 287, \"start_point\": [9, 23], \"end_point\": [9, 27]}]}",
+                "statement_type": "return",
+                "order": 2
+              }
+            }
+          ],
+          "error": null,
+          "result_count": 1,
+          "analysis": {
+            "analysis": "The query plan executed successfully, retrieving one Statement node that instantiates classes within the CreateWorkers function.",
+            "key_findings": [
+              "Successfully found a Statement node containing class instantiations using 'new'.",
+              "The retrieved Statement includes multiple instantiations of Worker classes.",
+              "All validation steps passed, confirming the query met its expected outcomes."
+            ],
+            "recommendation": "Sufficient",
+            "next_query_hint": null
+          },
+          "premise_validations": [],
+          "apoc_diagnostics_used": false,
+          "sufficiency_status": null,
+          "query": "This plan verifies the existence of the CreateWorkers function, checks the containment path from Function to Block to Statement, and retrieves Statements that instantiate classes.",
+          "query_plan": "cot_reasoning=CoTReasoningSteps(step1_perspective='Investigate the existence and containment of Statement nodes within Block nodes in the CreateWorkers Function.', step2_premise_validation='Premises P2 and P3 establish that CreateWorkers is a Function node and that Functions can contain Blocks, which in turn contain Statements.', step3_path_trace='Function\u2192CONTAINS\u2192Block\u2192CONTAINS\u2192Statement', step4_filters=\"Filter Statements that instantiate classes by checking if the text contains 'new'.\", step5_return='Return the Statement nodes that match the criteria.', step6_optimize='Limit results to 50 for manageability.') plan_overview='This plan verifies the existence of the CreateWorkers function, checks the containment path from Function to Block to Statement, and retrieves Statements that instantiate classes.' steps=[QueryStep(step_number=1, step_type=<QueryStepType.ENTITY_CHECK: 'entity_check'>, purpose='Verify CreateWorkers function exists', cypher_query=\"MATCH (f:Function {name: 'CreateWorkers'}) RETURN count(f) as count\", expected_outcome='count >= 1', on_failure_guidance=\"Function 'CreateWorkers' not found - try fuzzy matching or check for typos\", depends_on_steps=[], entities_validated=[EntityConstraint(var='f', label='Function', property='name', value='CreateWorkers')]), QueryStep(step_number=2, step_type=<QueryStepType.PATH_CHECK: 'path_check'>, purpose='Verify Function contains Block nodes', cypher_query=\"MATCH (f:Function {name: 'CreateWorkers'})-[:CONTAINS]->(b:Block) RETURN count(b) as count\", expected_outcome='count >= 1', on_failure_guidance='CreateWorkers has no Block nodes - statements may be direct children of Function', depends_on_steps=[1], entities_validated=[]), QueryStep(step_number=3, step_type=<QueryStepType.DATA_RETRIEVAL: 'data_retrieval'>, purpose='Retrieve Statement nodes within Blocks', cypher_query=\"MATCH (f:Function {name: 'CreateWorkers'})-[:CONTAINS]->(b:Block)-[:CONTAINS]->(s:Statement) WHERE s.text CONTAINS 'new' RETURN s LIMIT 50\", expected_outcome='results > 0', on_failure_guidance=\"No statements with 'new' keyword - try different text patterns or relationships\", depends_on_steps=[1, 2], entities_validated=[])] data_retrieval_step=3 fallback_hints=[\"If Block path doesn't exist, try direct Function\u2192Statement path\", \"If 'new' keyword filter returns nothing, try Statement\u2192Type relationship\"] all_entity_constraints=[EntityConstraint(var='f', label='Function', property='name', value='CreateWorkers')]",
+          "steps": [
+            "step_number=1 step_type=<QueryStepType.ENTITY_CHECK: 'entity_check'> purpose='Verify CreateWorkers function exists' cypher_query=\"MATCH (f:Function {name: 'CreateWorkers'}) RETURN count(f) as count\" expected_outcome='count >= 1' on_failure_guidance=\"Function 'CreateWorkers' not found - try fuzzy matching or check for typos\" depends_on_steps=[] entities_validated=[EntityConstraint(var='f', label='Function', property='name', value='CreateWorkers')]",
+            "step_number=2 step_type=<QueryStepType.PATH_CHECK: 'path_check'> purpose='Verify Function contains Block nodes' cypher_query=\"MATCH (f:Function {name: 'CreateWorkers'})-[:CONTAINS]->(b:Block) RETURN count(b) as count\" expected_outcome='count >= 1' on_failure_guidance='CreateWorkers has no Block nodes - statements may be direct children of Function' depends_on_steps=[1] entities_validated=[]",
+            "step_number=3 step_type=<QueryStepType.DATA_RETRIEVAL: 'data_retrieval'> purpose='Retrieve Statement nodes within Blocks' cypher_query=\"MATCH (f:Function {name: 'CreateWorkers'})-[:CONTAINS]->(b:Block)-[:CONTAINS]->(s:Statement) WHERE s.text CONTAINS 'new' RETURN s LIMIT 50\" expected_outcome='results > 0' on_failure_guidance=\"No statements with 'new' keyword - try different text patterns or relationships\" depends_on_steps=[1, 2] entities_validated=[]"
+          ],
+          "failed_at_step": null,
+          "reasoning": {
+            "cot_reasoning": {
+              "step1_perspective": "Investigate the existence and containment of Statement nodes within Block nodes in the CreateWorkers Function.",
+              "step2_premise_validation": "Premises P2 and P3 establish that CreateWorkers is a Function node and that Functions can contain Blocks, which in turn contain Statements.",
+              "step3_path_trace": "Function\u2192CONTAINS\u2192Block\u2192CONTAINS\u2192Statement",
+              "step4_filters": "Filter Statements that instantiate classes by checking if the text contains 'new'.",
+              "step5_return": "Return the Statement nodes that match the criteria.",
+              "step6_optimize": "Limit results to 50 for manageability."
+            },
+            "query_purpose": "This plan verifies the existence of the CreateWorkers function, checks the containment path from Function to Block to Statement, and retrieves Statements that instantiate classes.",
+            "plan_overview": "This plan verifies the existence of the CreateWorkers function, checks the containment path from Function to Block to Statement, and retrieves Statements that instantiate classes."
+          }
+        }
+      ],
+      "citations": {
+        "data_point_0": {
+          "query_index": 0,
+          "query": "This plan verifies the existence of the CreateWorkers function, checks the containment path from Function to Block to Statement, and retrieves Statements that instantiate classes.",
+          "iteration": 1,
+          "query_purpose": "This plan verifies the existence of the CreateWorkers function, checks the containment path from Function to Block to Statement, and retrieves Statements that instantiate classes.",
+          "cot_reasoning": {
+            "step1_perspective": "Investigate the existence and containment of Statement nodes within Block nodes in the CreateWorkers Function.",
+            "step2_premise_validation": "Premises P2 and P3 establish that CreateWorkers is a Function node and that Functions can contain Blocks, which in turn contain Statements.",
+            "step3_path_trace": "Function\u2192CONTAINS\u2192Block\u2192CONTAINS\u2192Statement",
+            "step4_filters": "Filter Statements that instantiate classes by checking if the text contains 'new'.",
+            "step5_return": "Return the Statement nodes that match the criteria.",
+            "step6_optimize": "Limit results to 50 for manageability."
+          },
+          "discovered_at": "Iteration 1, Query 1"
+        }
+      },
+      "reasoning_trail": [
+        {
+          "step": "Iteration 1 - Decision",
+          "type": "think",
+          "reasoning": "Agent decided to generate another query",
+          "context": "1 data points collected so far"
+        },
+        {
+          "step": "Iteration 1 - Query Generation",
+          "type": "generate",
+          "query": "This plan verifies the existence of the CreateWorkers function, checks the containment path from Function to Block to Statement, and retrieves Statements that instantiate classes.",
+          "cot_reasoning": {
+            "step1_perspective": "Investigate the existence and containment of Statement nodes within Block nodes in the CreateWorkers Function.",
+            "step2_premise_validation": "Premises P2 and P3 establish that CreateWorkers is a Function node and that Functions can contain Blocks, which in turn contain Statements.",
+            "step3_path_trace": "Function\u2192CONTAINS\u2192Block\u2192CONTAINS\u2192Statement",
+            "step4_filters": "Filter Statements that instantiate classes by checking if the text contains 'new'.",
+            "step5_return": "Return the Statement nodes that match the criteria.",
+            "step6_optimize": "Limit results to 50 for manageability."
+          },
+          "query_purpose": "This plan verifies the existence of the CreateWorkers function, checks the containment path from Function to Block to Statement, and retrieves Statements that instantiate classes."
+        },
+        {
+          "step": "Iteration 1 - Execution",
+          "type": "execute",
+          "result_count": 1,
+          "error": null,
+          "status": "success"
+        },
+        {
+          "step": "Iteration 1 - Analysis",
+          "type": "analyze",
+          "analysis": "The query plan executed successfully, retrieving one Statement node that instantiates classes within the CreateWorkers function.",
+          "key_findings": [
+            "Successfully found a Statement node containing class instantiations using 'new'.",
+            "The retrieved Statement includes multiple instantiations of Worker classes.",
+            "All validation steps passed, confirming the query met its expected outcomes."
+          ],
+          "recommendation": "Sufficient",
+          "next_query_hint": null
+        },
+        {
+          "step": "Final Decision",
+          "type": "conclude",
+          "is_sufficient": true,
+          "reason": "The query plan executed successfully, retrieving one Statement node that instantiates classes within the CreateWorkers function.",
+          "total_iterations": 1,
+          "total_data_points": 1
+        }
+      ],
+      "evidence_summary": {
+        "query_0": {
+          "iteration": 1,
+          "query": "This plan verifies the existence of the CreateWorkers function, checks the containment path from Function to Block to Statement, and retrieves Statements that instantiate classes.",
+          "query_purpose": "This plan verifies the existence of the CreateWorkers function, checks the containment path from Function to Block to Statement, and retrieves Statements that instantiate classes.",
+          "cot_reasoning": {
+            "perspective": "Investigate the existence and containment of Statement nodes within Block nodes in the CreateWorkers Function.",
+            "premises_validated": "Premises P2 and P3 establish that CreateWorkers is a Function node and that Functions can contain Blocks, which in turn contain Statements.",
+            "path_used": "Function\u2192CONTAINS\u2192Block\u2192CONTAINS\u2192Statement",
+            "filters_applied": "Filter Statements that instantiate classes by checking if the text contains 'new'."
+          },
+          "result_count": 1,
+          "key_findings": [
+            "Successfully found a Statement node containing class instantiations using 'new'.",
+            "The retrieved Statement includes multiple instantiations of Worker classes.",
+            "All validation steps passed, confirming the query met its expected outcomes."
+          ],
+          "results": [
+            {
+              "s": {
+                "file_path": "HelloWorldApp/WorkerFactory.cs",
+                "end_point": "[14, 14]",
+                "start_byte": 272,
+                "start_point": "[9, 12]",
+                "type_kind": "statement",
+                "text": "return new List<IWorker>\n            {\n                new WorkerA(notifier),\n                new WorkerB(notifier),\n                new WorkerC(notifier)\n            };",
+                "type": "Statement",
+                "end_byte": 441,
+                "symbols_location": "{\"symbols\": [{\"text\": \"List\", \"start_byte\": 283, \"end_byte\": 287, \"start_point\": [9, 23], \"end_point\": [9, 27]}]}",
+                "statement_type": "return",
+                "order": 2
+              }
+            }
+          ]
+        }
+      },
+      "partial_answers": [
+        {
+          "iteration": 1,
+          "answer": "The query plan executed successfully, retrieving one Statement node that instantiates classes within the CreateWorkers function.",
+          "key_findings": [
+            "Successfully found a Statement node containing class instantiations using 'new'.",
+            "The retrieved Statement includes multiple instantiations of Worker classes.",
+            "All validation steps passed, confirming the query met its expected outcomes."
+          ],
+          "data_count": 1,
+          "quality_grade": 0.5,
+          "query_purpose": "This plan verifies the existence of the CreateWorkers function, checks the containment path from Function to Block to Statement, and retrieves Statements that instantiate classes."
+        }
+      ],
+      "is_sufficient": true,
+      "sufficiency_reason": "The query plan executed successfully, retrieving one Statement node that instantiates classes within the CreateWorkers function.",
+      "tokens_used": 19802,
+      "total_input_tokens": 15952,
+      "total_output_tokens": 3850,
+      "token_breakdown": {
+        "iteration_1": {
+          "think": 361,
+          "total": 19802,
+          "generate_plan": 17424,
+          "analyze_plan": 1061,
+          "synthesis": 956
+        }
+      },
+      "iterations": 1
+    },
+    "2": {
+      "approach_index": "SQ3",
+      "approach_name": "Subquery SQ3",
+      "approach_goal": "Retrieve the return type of the CreateWorkers Function to identify the classes returned.",
+      "approach_answer": {
+        "answer": "The CreateWorkers function returns a type that references a Type node named 'WorkerFactory'. This indicates that the function is designed to return instances of the WorkerFactory class or a related type.",
+        "data_points_used": [
+          0
+        ],
+        "confidence_assessment": "Medium - The data point provides a clear indication of the return type, but the overall quality rating suggests there may be some uncertainty or lack of additional corroborating details."
+      },
+      "approach_quality_grade": 0.72,
+      "confidence_level": "high",
+      "subquery_citation": {
+        "subquery_id": "SQ3",
+        "subquery_text": "Retrieve the return type of the CreateWorkers Function to identify the classes returned.",
+        "execution_group": 0,
+        "logical_form": "Locate WorkerFactory.CreateWorkers \u2192 Retrieve instantiated classes \u2192 Retrieve returned classes",
+        "original_premises": [
+          {
+            "id": "P2",
+            "text": "CreateWorkers is a Function node contained within WorkerFactory."
+          }
+        ],
+        "corrected_premises": [],
+        "active_premises": [
+          {
+            "id": "P2",
+            "text": "CreateWorkers is a Function node contained within WorkerFactory."
+          }
+        ],
+        "premise_validations": [],
+        "cypher_query": "This plan will validate the existence of the CreateWorkers function, verify the REFERENCES relationship to a Type node, and retrieve the return type.",
+        "execution_attempts": 1,
+        "result_data": [
+          {
+            "t.name": "WorkerFactory",
+            "_source_query": "This plan will validate the existence of the CreateWorkers function, verify the REFERENCES relationship to a Type node, and retrieve the return type.",
+            "_source_iteration": 1,
+            "_query_purpose": "This plan will validate the existence of the CreateWorkers function, verify the REFERENCES relationship to a Type node, and retrieve the return type.",
+            "_cot_reasoning": {
+              "step1_perspective": "Identify the return type of the CreateWorkers function to determine the classes it returns.",
+              "step2_premise_validation": "The premise that CreateWorkers is a Function node contained within WorkerFactory sets the scope for our query.",
+              "step3_path_trace": "Function\u2192REFERENCES\u2192Type",
+              "step4_filters": "Filter by function name 'CreateWorkers' and ensure the REFERENCES relationship leads to a Type node.",
+              "step5_return": "Return the 'name' property of the Type node to identify the class.",
+              "step6_optimize": "Use LIMIT to restrict the number of results for efficiency."
+            }
+          }
+        ],
+        "sufficiency_status": "FOUND",
+        "apoc_diagnostics_used": true,
+        "error": null
+      },
+      "discovered_data": [
+        {
+          "t.name": "WorkerFactory",
+          "_source_query": "This plan will validate the existence of the CreateWorkers function, verify the REFERENCES relationship to a Type node, and retrieve the return type.",
+          "_source_iteration": 1,
+          "_query_purpose": "This plan will validate the existence of the CreateWorkers function, verify the REFERENCES relationship to a Type node, and retrieve the return type.",
+          "_cot_reasoning": {
+            "step1_perspective": "Identify the return type of the CreateWorkers function to determine the classes it returns.",
+            "step2_premise_validation": "The premise that CreateWorkers is a Function node contained within WorkerFactory sets the scope for our query.",
+            "step3_path_trace": "Function\u2192REFERENCES\u2192Type",
+            "step4_filters": "Filter by function name 'CreateWorkers' and ensure the REFERENCES relationship leads to a Type node.",
+            "step5_return": "Return the 'name' property of the Type node to identify the class.",
+            "step6_optimize": "Use LIMIT to restrict the number of results for efficiency."
+          }
+        }
+      ],
+      "total_results": 1,
+      "total_discovered": 1,
+      "queries_executed": 1,
+      "query_history": [
+        {
+          "iteration": 1,
+          "mode": "plan",
+          "results": [
+            {
+              "t.name": "WorkerFactory"
+            }
+          ],
+          "error": null,
+          "result_count": 1,
+          "analysis": {
+            "analysis": "The query plan executed successfully, retrieving the return type of the CreateWorkers function, which is 'WorkerFactory'.",
+            "key_findings": [
+              "Successfully identified the return type of the CreateWorkers function",
+              "The function references a Type node named 'WorkerFactory'"
+            ],
+            "recommendation": "Sufficient",
+            "next_query_hint": null
+          },
+          "premise_validations": [],
+          "apoc_diagnostics_used": false,
+          "sufficiency_status": null,
+          "query": "This plan will validate the existence of the CreateWorkers function, verify the REFERENCES relationship to a Type node, and retrieve the return type.",
+          "query_plan": "cot_reasoning=CoTReasoningSteps(step1_perspective='Identify the return type of the CreateWorkers function to determine the classes it returns.', step2_premise_validation='The premise that CreateWorkers is a Function node contained within WorkerFactory sets the scope for our query.', step3_path_trace='Function\u2192REFERENCES\u2192Type', step4_filters=\"Filter by function name 'CreateWorkers' and ensure the REFERENCES relationship leads to a Type node.\", step5_return=\"Return the 'name' property of the Type node to identify the class.\", step6_optimize='Use LIMIT to restrict the number of results for efficiency.') plan_overview='This plan will validate the existence of the CreateWorkers function, verify the REFERENCES relationship to a Type node, and retrieve the return type.' steps=[QueryStep(step_number=1, step_type=<QueryStepType.ENTITY_CHECK: 'entity_check'>, purpose='Verify CreateWorkers function exists', cypher_query=\"MATCH (f:Function {name: 'CreateWorkers'}) RETURN count(f) as count\", expected_outcome='count >= 1', on_failure_guidance=\"Function 'CreateWorkers' not found - try fuzzy matching or check for typos\", depends_on_steps=[], entities_validated=[EntityConstraint(var='f', label='Function', property='name', value='CreateWorkers')]), QueryStep(step_number=2, step_type=<QueryStepType.PATH_CHECK: 'path_check'>, purpose='Verify Function REFERENCES Type nodes', cypher_query=\"MATCH (f:Function {name: 'CreateWorkers'})-[:REFERENCES]->(t:Type) RETURN count(t) as count\", expected_outcome='count >= 1', on_failure_guidance='No Type nodes referenced by CreateWorkers - check if REFERENCES relationship is correct', depends_on_steps=[1], entities_validated=[]), QueryStep(step_number=3, step_type=<QueryStepType.DATA_RETRIEVAL: 'data_retrieval'>, purpose='Retrieve the return type of CreateWorkers', cypher_query=\"MATCH (f:Function {name: 'CreateWorkers'})-[:REFERENCES]->(t:Type) RETURN t.name LIMIT 10\", expected_outcome='results > 0', on_failure_guidance='No return types found - verify the REFERENCES relationship and function name', depends_on_steps=[1, 2], entities_validated=[])] data_retrieval_step=3 fallback_hints=[\"If REFERENCES path doesn't exist, verify the relationship type or check for direct Function\u2192Type paths\", 'If no results, consider checking other relationships or properties'] all_entity_constraints=[EntityConstraint(var='f', label='Function', property='name', value='CreateWorkers')]",
+          "steps": [
+            "step_number=1 step_type=<QueryStepType.ENTITY_CHECK: 'entity_check'> purpose='Verify CreateWorkers function exists' cypher_query=\"MATCH (f:Function {name: 'CreateWorkers'}) RETURN count(f) as count\" expected_outcome='count >= 1' on_failure_guidance=\"Function 'CreateWorkers' not found - try fuzzy matching or check for typos\" depends_on_steps=[] entities_validated=[EntityConstraint(var='f', label='Function', property='name', value='CreateWorkers')]",
+            "step_number=2 step_type=<QueryStepType.PATH_CHECK: 'path_check'> purpose='Verify Function REFERENCES Type nodes' cypher_query=\"MATCH (f:Function {name: 'CreateWorkers'})-[:REFERENCES]->(t:Type) RETURN count(t) as count\" expected_outcome='count >= 1' on_failure_guidance='No Type nodes referenced by CreateWorkers - check if REFERENCES relationship is correct' depends_on_steps=[1] entities_validated=[]",
+            "step_number=3 step_type=<QueryStepType.DATA_RETRIEVAL: 'data_retrieval'> purpose='Retrieve the return type of CreateWorkers' cypher_query=\"MATCH (f:Function {name: 'CreateWorkers'})-[:REFERENCES]->(t:Type) RETURN t.name LIMIT 10\" expected_outcome='results > 0' on_failure_guidance='No return types found - verify the REFERENCES relationship and function name' depends_on_steps=[1, 2] entities_validated=[]"
+          ],
+          "failed_at_step": null,
+          "reasoning": {
+            "cot_reasoning": {
+              "step1_perspective": "Identify the return type of the CreateWorkers function to determine the classes it returns.",
+              "step2_premise_validation": "The premise that CreateWorkers is a Function node contained within WorkerFactory sets the scope for our query.",
+              "step3_path_trace": "Function\u2192REFERENCES\u2192Type",
+              "step4_filters": "Filter by function name 'CreateWorkers' and ensure the REFERENCES relationship leads to a Type node.",
+              "step5_return": "Return the 'name' property of the Type node to identify the class.",
+              "step6_optimize": "Use LIMIT to restrict the number of results for efficiency."
+            },
+            "query_purpose": "This plan will validate the existence of the CreateWorkers function, verify the REFERENCES relationship to a Type node, and retrieve the return type.",
+            "plan_overview": "This plan will validate the existence of the CreateWorkers function, verify the REFERENCES relationship to a Type node, and retrieve the return type."
+          }
+        }
+      ],
+      "citations": {
+        "data_point_0": {
+          "query_index": 0,
+          "query": "This plan will validate the existence of the CreateWorkers function, verify the REFERENCES relationship to a Type node, and retrieve the return type.",
+          "iteration": 1,
+          "query_purpose": "This plan will validate the existence of the CreateWorkers function, verify the REFERENCES relationship to a Type node, and retrieve the return type.",
+          "cot_reasoning": {
+            "step1_perspective": "Identify the return type of the CreateWorkers function to determine the classes it returns.",
+            "step2_premise_validation": "The premise that CreateWorkers is a Function node contained within WorkerFactory sets the scope for our query.",
+            "step3_path_trace": "Function\u2192REFERENCES\u2192Type",
+            "step4_filters": "Filter by function name 'CreateWorkers' and ensure the REFERENCES relationship leads to a Type node.",
+            "step5_return": "Return the 'name' property of the Type node to identify the class.",
+            "step6_optimize": "Use LIMIT to restrict the number of results for efficiency."
+          },
+          "discovered_at": "Iteration 1, Query 1"
+        }
+      },
+      "reasoning_trail": [
+        {
+          "step": "Iteration 1 - Decision",
+          "type": "think",
+          "reasoning": "Agent decided to generate another query",
+          "context": "1 data points collected so far"
+        },
+        {
+          "step": "Iteration 1 - Query Generation",
+          "type": "generate",
+          "query": "This plan will validate the existence of the CreateWorkers function, verify the REFERENCES relationship to a Type node, and retrieve the return type.",
+          "cot_reasoning": {
+            "step1_perspective": "Identify the return type of the CreateWorkers function to determine the classes it returns.",
+            "step2_premise_validation": "The premise that CreateWorkers is a Function node contained within WorkerFactory sets the scope for our query.",
+            "step3_path_trace": "Function\u2192REFERENCES\u2192Type",
+            "step4_filters": "Filter by function name 'CreateWorkers' and ensure the REFERENCES relationship leads to a Type node.",
+            "step5_return": "Return the 'name' property of the Type node to identify the class.",
+            "step6_optimize": "Use LIMIT to restrict the number of results for efficiency."
+          },
+          "query_purpose": "This plan will validate the existence of the CreateWorkers function, verify the REFERENCES relationship to a Type node, and retrieve the return type."
+        },
+        {
+          "step": "Iteration 1 - Execution",
+          "type": "execute",
+          "result_count": 1,
+          "error": null,
+          "status": "success"
+        },
+        {
+          "step": "Iteration 1 - Analysis",
+          "type": "analyze",
+          "analysis": "The query plan executed successfully, retrieving the return type of the CreateWorkers function, which is 'WorkerFactory'.",
+          "key_findings": [
+            "Successfully identified the return type of the CreateWorkers function",
+            "The function references a Type node named 'WorkerFactory'"
+          ],
+          "recommendation": "Sufficient",
+          "next_query_hint": null
+        },
+        {
+          "step": "Final Decision",
+          "type": "conclude",
+          "is_sufficient": true,
+          "reason": "The query plan executed successfully, retrieving the return type of the CreateWorkers function, which is 'WorkerFactory'.",
+          "total_iterations": 1,
+          "total_data_points": 1
+        }
+      ],
+      "evidence_summary": {
+        "query_0": {
+          "iteration": 1,
+          "query": "This plan will validate the existence of the CreateWorkers function, verify the REFERENCES relationship to a Type node, and retrieve the return type.",
+          "query_purpose": "This plan will validate the existence of the CreateWorkers function, verify the REFERENCES relationship to a Type node, and retrieve the return type.",
+          "cot_reasoning": {
+            "perspective": "Identify the return type of the CreateWorkers function to determine the classes it returns.",
+            "premises_validated": "The premise that CreateWorkers is a Function node contained within WorkerFactory sets the scope for our query.",
+            "path_used": "Function\u2192REFERENCES\u2192Type",
+            "filters_applied": "Filter by function name 'CreateWorkers' and ensure the REFERENCES relationship leads to a Type node."
+          },
+          "result_count": 1,
+          "key_findings": [
+            "Successfully identified the return type of the CreateWorkers function",
+            "The function references a Type node named 'WorkerFactory'"
+          ],
+          "results": [
+            {
+              "t.name": "WorkerFactory"
+            }
+          ]
+        }
+      },
+      "partial_answers": [
+        {
+          "iteration": 1,
+          "answer": "The query plan executed successfully, retrieving the return type of the CreateWorkers function, which is 'WorkerFactory'.",
+          "key_findings": [
+            "Successfully identified the return type of the CreateWorkers function",
+            "The function references a Type node named 'WorkerFactory'"
+          ],
+          "data_count": 1,
+          "quality_grade": 0.5,
+          "query_purpose": "This plan will validate the existence of the CreateWorkers function, verify the REFERENCES relationship to a Type node, and retrieve the return type."
+        }
+      ],
+      "is_sufficient": true,
+      "sufficiency_reason": "The query plan executed successfully, retrieving the return type of the CreateWorkers function, which is 'WorkerFactory'.",
+      "tokens_used": 25167,
+      "total_input_tokens": 20241,
+      "total_output_tokens": 4926,
+      "token_breakdown": {
+        "iteration_1": {
+          "think": 349,
+          "total": 25167,
+          "generate_plan": 23292,
+          "analyze_plan": 832,
+          "synthesis": 694
+        }
+      },
+      "iterations": 1
+    }
+  },
+  "agent_metadata": {
+    "neo4j_version": "",
+    "schema_nodes": 10,
+    "total_queries_executed": 3,
+    "total_raw_results": 3,
+    "workflow_nodes_executed": 7,
+    "agents_involved": [
+      "environment",
+      "discovery",
+      "intent",
+      "query_generator",
+      "expansion",
+      "synthesis"
+    ],
+    "modular_workflow_version": "2.0.0",
+    "pydantic_validation_enabled": true,
+    "research_based_discovery": false,
+    "context_manager_used": false,
+    "metadata": {
+      "project_path": null,
+      "mappings_path": null,
+      "queries_path": null,
+      "neo4j_config": "neo4j_config.json"
+    }
+  },
+  "error": null
+}

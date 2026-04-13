@@ -1,0 +1,6 @@
+digraph "&lt;operator&gt;.indexAccess" {  
+node [shape="rect"];  
+"111669149710" [label = <METHOD<BR/>&lt;operator&gt;.indexAccess> ]
+"128849018894" [label = <METHOD_RETURN<BR/>ANY> ]
+  "111669149710" -> "128849018894" 
+}

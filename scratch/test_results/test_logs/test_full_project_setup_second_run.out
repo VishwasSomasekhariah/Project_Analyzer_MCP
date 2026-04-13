@@ -1,0 +1,18 @@
+🧪 Testing full_project_setup tool
+==================================================
+✅ Connected to MCP server
+🔧 Running full_project_setup...
+   Project: /opt/HelloWorldApp
+   Collection: helloworldapp-fresh-test
+   LSP: enabled
+   AI: enabled
+⏳ Processing...
+⏱️  Completed in 132.98 seconds
+✅ SUCCESS: full_project_setup completed successfully!
+📊 Capabilities: ['vector_search', 'cpg_analysis', 'llm_integration']
+📡 Monitoring mode: comprehensive
+
+==================================================
+🎉 Test completed successfully!
+✅ full_project_setup tool is working correctly
+==================================================

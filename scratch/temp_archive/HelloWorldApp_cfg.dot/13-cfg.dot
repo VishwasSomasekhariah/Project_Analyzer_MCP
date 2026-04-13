@@ -1,0 +1,6 @@
+digraph "&lt;operator&gt;.fieldAccess" {  
+node [shape="rect"];  
+"111669149709" [label = <METHOD<BR/>&lt;operator&gt;.fieldAccess> ]
+"128849018893" [label = <METHOD_RETURN<BR/>ANY> ]
+  "111669149709" -> "128849018893" 
+}

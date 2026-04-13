@@ -1,0 +1,84 @@
+2025-08-06 07:54:09,169 - codebase_vector_rag.services.llamaindex_query_service - INFO - Initializing LlamaIndex query service...
+[08/06/25 07:54:10] INFO     HTTP Request: GET                   _client.py:1025
+                             http://host.docker.internal:8200/ap                
+                             i/v2/auth/identity "HTTP/1.1 200                   
+                             OK"                                                
+[08/06/25 07:54:11] INFO     HTTP Request: GET                   _client.py:1025
+                             http://host.docker.internal:8200/ap                
+                             i/v2/tenants/default_tenant                        
+                             "HTTP/1.1 200 OK"                                  
+                    INFO     HTTP Request: GET                   _client.py:1025
+                             http://host.docker.internal:8200/ap                
+                             i/v2/tenants/default_tenant/databas                
+                             es/default_database "HTTP/1.1 200                  
+                             OK"                                                
+                    ERROR    Failed to send telemetry event        posthog.py:61
+                             ClientStartEvent: capture() takes 1                
+                             positional argument but 3 were given               
+                    INFO     Processing request of type            server.py:619
+                             ListToolsRequest                                   
+2025-08-06 07:54:11,081 - codebase_vector_rag.integrations.mcp.chroma_mcp_utils - INFO - Created MCP session: chroma-mcp
+2025-08-06 07:54:11,081 - codebase_vector_rag.services.llamaindex_query_service - INFO - ChromaDB MCP utils initialized
+                    INFO     Processing request of type            server.py:619
+                             CallToolRequest                                    
+                    INFO     HTTP Request: GET                   _client.py:1025
+                             http://host.docker.internal:8200/ap                
+                             i/v2/tenants/default_tenant/databas                
+                             es/default_database/collections/hel                
+                             loworldapp-benchmarking "HTTP/1.1                  
+                             200 OK"                                            
+2025-08-06 07:54:11,094 - codebase_vector_rag.services.llamaindex_query_service - INFO - MCP collection wrapper created: helloworldapp-benchmarking
+2025-08-06 07:54:11,094 - codebase_vector_rag.services.llamaindex_query_service - INFO - Using OpenAI embeddings: text-embedding-ada-002
+2025-08-06 07:54:11,183 - codebase_vector_rag.services.llamaindex_query_service - INFO - ChromaVectorStore created with MCP backend
+2025-08-06 07:54:11,593 - codebase_vector_rag.services.llamaindex_query_service - INFO - VectorStoreIndex created from existing collection
+2025-08-06 07:54:11,624 - codebase_vector_rag.services.llamaindex_query_service - INFO - Query engine created with retrieval and post-processing
+2025-08-06 07:54:11,958 - codebase_vector_rag.integrations.ai.ai_service - INFO - AI service initialized successfully
+2025-08-06 07:54:11,959 - codebase_vector_rag.services.llamaindex_query_service - INFO - AI service initialized
+2025-08-06 07:54:11,960 - codebase_vector_rag.services.llamaindex_query_service - INFO - LlamaIndex query service initialization complete
+2025-08-06 07:54:11,961 - codebase_vector_rag.services.llamaindex_query_service - INFO - Executing LlamaIndex query: 'Which class method formats the notification message that gets printed to console in each worker?' (max_results=5, threshold=0.1)
+2025-08-06 07:54:13,264 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+[08/06/25 07:54:14] INFO     HTTP Request: GET                   _client.py:1025
+                             http://host.docker.internal:8200/ap                
+                             i/v2/auth/identity "HTTP/1.1 200                   
+                             OK"                                                
+                    INFO     HTTP Request: GET                   _client.py:1025
+                             http://host.docker.internal:8200/ap                
+                             i/v2/tenants/default_tenant                        
+                             "HTTP/1.1 200 OK"                                  
+                    INFO     HTTP Request: GET                   _client.py:1025
+                             http://host.docker.internal:8200/ap                
+                             i/v2/tenants/default_tenant/databas                
+                             es/default_database "HTTP/1.1 200                  
+                             OK"                                                
+                    ERROR    Failed to send telemetry event        posthog.py:61
+                             ClientStartEvent: capture() takes 1                
+                             positional argument but 3 were given               
+                    INFO     Processing request of type            server.py:619
+                             ListToolsRequest                                   
+2025-08-06 07:54:14,880 - codebase_vector_rag.integrations.mcp.chroma_mcp_utils - INFO - Created MCP session: chroma-mcp
+                    INFO     Processing request of type            server.py:619
+                             CallToolRequest                                    
+                    INFO     HTTP Request: GET                   _client.py:1025
+                             http://host.docker.internal:8200/ap                
+                             i/v2/tenants/default_tenant/databas                
+                             es/default_database/collections/hel                
+                             loworldapp-benchmarking "HTTP/1.1                  
+                             200 OK"                                            
+                    INFO     HTTP Request: POST                  _client.py:1025
+                             http://host.docker.internal:8200/ap                
+                             i/v2/tenants/default_tenant/databas                
+                             es/default_database/collections/d9d                
+                             52fbd-3b76-43ef-9e55-60e7b858b13b/q                
+                             uery "HTTP/1.1 200 OK"                             
+2025-08-06 07:54:14,925 - codebase_vector_rag.integrations.mcp.chroma_mcp_utils - INFO - Closed MCP session: chroma-mcp
+2025-08-06 07:54:15,925 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-08-06 07:54:15,939 - codebase_vector_rag.services.llamaindex_query_service - INFO - 🎭 STEP 1: Using LlamaIndex-generated response
+2025-08-06 07:54:15,939 - codebase_vector_rag.services.llamaindex_query_service - INFO - 🔍 STEP 2: Critic validating response against raw results...
+2025-08-06 07:54:17,122 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-08-06 07:54:17,124 - codebase_vector_rag.integrations.ai.ai_service - INFO - 🔍 CRITIC RAW OUTPUT: CORRECTED: The `Process` method in the `WorkerC` class uses the `FormatMessage` method from the `Helper` class to format the notification message that gets printed to the console.
+2025-08-06 07:54:17,125 - codebase_vector_rag.integrations.ai.ai_service - INFO - Response corrected by critic
+2025-08-06 07:54:17,125 - codebase_vector_rag.integrations.ai.ai_service - INFO - 🔍 FINAL PROCESSED RESULT: The `Process` method in the `WorkerC` class uses the `FormatMessage` method from the `Helper` class to format the notification message that gets printed to the console....
+2025-08-06 07:54:17,125 - codebase_vector_rag.services.llamaindex_query_service - INFO - 🔍 STEP 2: Critic validation successful
+2025-08-06 07:54:17,126 - codebase_vector_rag.services.llamaindex_query_service - INFO - Query completed: 5 results in 5.165s
+2025-08-06 07:54:17,133 - codebase_vector_rag.integrations.mcp.chroma_mcp_utils - INFO - Closed MCP session: chroma-mcp
+2025-08-06 07:54:17,133 - codebase_vector_rag.services.llamaindex_query_service - INFO - LlamaIndex query service closed

@@ -1,0 +1,9 @@
+90194313216,LITERAL,1,,"""Manager starting work...""",30,,9,,,2,,System.String
+90194313217,LITERAL,2,,0,,,,,,2,,System.Int32
+90194313218,LITERAL,1,,Manager received notification:,32,,22,,,1,,System.String
+90194313219,LITERAL,1,,"""All work completed. Press any key to exit.""",30,,10,,,2,,System.String
+90194313220,LITERAL,1,,[,21,,6,,,1,,System.String
+90194313221,LITERAL,3,,],34,,6,,,3,,System.String
+90194313222,LITERAL,1,,"""WorkerC""",56,,13,,,2,,System.String
+90194313223,LITERAL,2,,"""Hi there, C here""",67,,13,,,3,,System.String
+90194313224,LITERAL,1,,"""WorkerC has finished processing.""",29,,15,,,2,,System.String

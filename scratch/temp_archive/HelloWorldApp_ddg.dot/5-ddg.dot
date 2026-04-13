@@ -1,0 +1,23 @@
+digraph "FormatMessage" {  
+node [shape="rect"];  
+"111669149701" [label = <METHOD, 4<BR/>FormatMessage> ]
+"128849018885" [label = <METHOD_RETURN, 4<BR/>System.String> ]
+"115964116999" [label = <PARAM, 4<BR/>string workerName> ]
+"115964117000" [label = <PARAM, 4<BR/>string text> ]
+"146028888064" [label = <RETURN, 6<BR/>return $&quot;[{workerName}] {text}&quot;;> ]
+"30064771089" [label = <&lt;operator&gt;.formatString, 6<BR/>$&quot;[{workerName}] {text}&quot;> ]
+"30064771089" [label = <&lt;operator&gt;.formatString, 6<BR/>$&quot;[{workerName}] {text}&quot;> ]
+"30064771089" [label = <&lt;operator&gt;.formatString, 6<BR/>$&quot;[{workerName}] {text}&quot;> ]
+"30064771089" [label = <&lt;operator&gt;.formatString, 6<BR/>$&quot;[{workerName}] {text}&quot;> ]
+"30064771089" [label = <&lt;operator&gt;.formatString, 6<BR/>$&quot;[{workerName}] {text}&quot;> ]
+  "146028888064" -> "128849018885"  [ label = "&lt;RET&gt;"] 
+  "30064771089" -> "128849018885"  [ label = "string workerName"] 
+  "30064771089" -> "128849018885"  [ label = "string text"] 
+  "30064771089" -> "128849018885"  [ label = "$&quot;[{workerName}] {text}&quot;"] 
+  "111669149701" -> "115964116999" 
+  "111669149701" -> "115964117000" 
+  "30064771089" -> "146028888064"  [ label = "$&quot;[{workerName}] {text}&quot;"] 
+  "111669149701" -> "30064771089" 
+  "115964116999" -> "30064771089"  [ label = "workerName"] 
+  "115964117000" -> "30064771089"  [ label = "text"] 
+}

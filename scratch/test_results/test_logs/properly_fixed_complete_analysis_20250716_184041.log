@@ -1,0 +1,12 @@
+2025-07-16 18:41:17,691 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-16 18:41:17,718 - __main__ - INFO - ✅ LLM generated 2 queries for category: Technical
+2025-07-16 18:41:18,929 - __main__ - ERROR - CPG query failed: HTTP error 202: Accepted
+2025-07-16 18:41:20,238 - __main__ - ERROR - Comprehensive query failed: HTTP error 202: Accepted
+2025-07-16 18:41:47,044 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-16 18:41:47,049 - __main__ - INFO - ✅ LLM generated 2 queries for category: Technical
+2025-07-16 18:41:50,394 - __main__ - ERROR - CPG query failed: HTTP error 202: Accepted
+2025-07-16 18:41:51,852 - __main__ - ERROR - Comprehensive query failed: HTTP error 202: Accepted
+2025-07-16 18:42:25,632 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-16 18:42:25,633 - __main__ - INFO - ✅ LLM generated 2 queries for category: Technical
+2025-07-16 18:42:26,992 - __main__ - ERROR - CPG query failed: HTTP error 202: Accepted
+2025-07-16 18:42:28,577 - __main__ - ERROR - Comprehensive query failed: HTTP error 202: Accepted

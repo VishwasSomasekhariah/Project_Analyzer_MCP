@@ -1,0 +1,12 @@
+digraph "&lt;operator&gt;.assignment" {  
+node [shape="rect"];  
+"111669149706" [label = <METHOD<BR/>&lt;operator&gt;.assignment> ]
+"115964117007" [label = <PARAM<BR/>p1> ]
+"115964117008" [label = <PARAM<BR/>p2> ]
+"25769803787" [label = <BLOCK<BR/>&lt;empty&gt;> ]
+"128849018890" [label = <METHOD_RETURN<BR/>ANY> ]
+  "111669149706" -> "115964117007" 
+  "111669149706" -> "25769803787" 
+  "111669149706" -> "115964117008" 
+  "111669149706" -> "128849018890" 
+}

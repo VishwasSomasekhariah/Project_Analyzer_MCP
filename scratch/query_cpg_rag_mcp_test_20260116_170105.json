@@ -1,0 +1,9 @@
+{
+  "status": "error",
+  "tool_name": "query_cpg_rag",
+  "error": "name 'QueryDecomposition' is not defined",
+  "traceback": "Traceback (most recent call last):\n  File \"/opt/genpod/src/project_analyzer_tool/tools.py\", line 2746, in query_cpg_rag\n    response = await system.run(user_query)\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/genpod/src/core/graph_rag/orchestrators/multi_agent_cot.py\", line 522, in run\n    decomposition = QueryDecomposition(\n                    ^^^^^^^^^^^^^^^^^^\nNameError: name 'QueryDecomposition' is not defined. Did you mean: 'decomposition'?\n",
+  "user_query": "What is the overall architecture and design patterns used in this project?",
+  "project_name": "HelloWorldApp",
+  "message": "Multi-Agent CPG RAG failed: name 'QueryDecomposition' is not defined"
+}

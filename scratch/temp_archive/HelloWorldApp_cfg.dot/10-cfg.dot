@@ -1,0 +1,6 @@
+digraph "&lt;operator&gt;.assignment" {  
+node [shape="rect"];  
+"111669149706" [label = <METHOD<BR/>&lt;operator&gt;.assignment> ]
+"128849018890" [label = <METHOD_RETURN<BR/>ANY> ]
+  "111669149706" -> "128849018890" 
+}

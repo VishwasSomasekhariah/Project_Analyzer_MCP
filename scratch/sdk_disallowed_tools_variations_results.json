@@ -1,0 +1,51 @@
+[
+  {
+    "variation": "Empty allowed_tools",
+    "read_called": true,
+    "tools_attempted": [
+      "Read"
+    ],
+    "verdict": "\u274c FAIL - Read called"
+  },
+  {
+    "variation": "disallowed_tools = ['Read']",
+    "read_called": true,
+    "tools_attempted": [
+      "Read",
+      "Bash"
+    ],
+    "verdict": "\u274c FAIL - Read called"
+  },
+  {
+    "variation": "disallowed_tools = [all built-in tools]",
+    "read_called": true,
+    "tools_attempted": [
+      "Read"
+    ],
+    "verdict": "\u274c FAIL - Read called"
+  },
+  {
+    "variation": "allowed_tools=[] + disallowed_tools=['Read']",
+    "read_called": true,
+    "tools_attempted": [
+      "Read",
+      "Bash"
+    ],
+    "verdict": "\u274c FAIL - Read called"
+  },
+  {
+    "variation": "can_use_tool callback",
+    "read_called": true,
+    "tools_attempted": [
+      "Read",
+      "Bash"
+    ],
+    "verdict": "\u274c FAIL - Read called"
+  },
+  {
+    "variation": "tools = [] (empty tools list)",
+    "read_called": false,
+    "tools_attempted": [],
+    "verdict": "\u2705 PASS - Read blocked"
+  }
+]

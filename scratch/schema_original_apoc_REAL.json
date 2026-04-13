@@ -1,0 +1,1775 @@
+{
+  "Variable": {
+    "count": 18,
+    "labels": [],
+    "properties": {
+      "start_byte": {
+        "unique": false,
+        "indexed": false,
+        "type": "INTEGER",
+        "existence": false
+      },
+      "modifier": {
+        "unique": false,
+        "indexed": false,
+        "type": "STRING",
+        "existence": false
+      },
+      "end_byte": {
+        "unique": false,
+        "indexed": false,
+        "type": "INTEGER",
+        "existence": false
+      },
+      "end_point": {
+        "unique": false,
+        "indexed": false,
+        "type": "STRING",
+        "existence": false
+      },
+      "start_point": {
+        "unique": false,
+        "indexed": false,
+        "type": "STRING",
+        "existence": false
+      },
+      "file_path": {
+        "unique": false,
+        "indexed": true,
+        "type": "STRING",
+        "existence": false
+      },
+      "name": {
+        "unique": false,
+        "indexed": true,
+        "type": "STRING",
+        "existence": false
+      },
+      "type": {
+        "unique": false,
+        "indexed": false,
+        "type": "STRING",
+        "existence": false
+      },
+      "type_kind": {
+        "unique": false,
+        "indexed": false,
+        "type": "STRING",
+        "existence": false
+      },
+      "symbols_location": {
+        "unique": false,
+        "indexed": false,
+        "type": "STRING",
+        "existence": false
+      }
+    },
+    "type": "node",
+    "relationships": {
+      "REFERENCES": {
+        "count": 108,
+        "direction": "out",
+        "labels": [
+          "Variable",
+          "Function",
+          "Type",
+          "Statement",
+          "Block",
+          "Literal",
+          "Namespace",
+          "Variable",
+          "Type",
+          "Function"
+        ],
+        "properties": {
+          "start_byte": {
+            "indexed": false,
+            "type": "INTEGER",
+            "existence": false,
+            "array": false
+          },
+          "text": {
+            "indexed": false,
+            "type": "STRING",
+            "existence": false,
+            "array": false
+          },
+          "end_byte": {
+            "indexed": false,
+            "type": "INTEGER",
+            "existence": false,
+            "array": false
+          },
+          "end_point": {
+            "indexed": false,
+            "type": "STRING",
+            "existence": false,
+            "array": false
+          },
+          "start_point": {
+            "indexed": false,
+            "type": "STRING",
+            "existence": false,
+            "array": false
+          },
+          "enriched_by": {
+            "indexed": false,
+            "type": "STRING",
+            "existence": false,
+            "array": false
+          },
+          "created_at": {
+            "indexed": false,
+            "type": "STRING",
+            "existence": false,
+            "array": false
+          },
+          "modified_at": {
+            "indexed": false,
+            "type": "STRING",
+            "existence": false,
+            "array": false
+          }
+        }
+      },
+      "CONTAINS": {
+        "count": 17,
+        "direction": "in",
+        "labels": [
+          "Type",
+          "Function",
+          "Block"
+        ],
+        "properties": {
+          "order": {
+            "indexed": false,
+            "type": "INTEGER",
+            "existence": false,
+            "array": false
+          },
+          "enriched_by": {
+            "indexed": false,
+            "type": "STRING",
+            "existence": false,
+            "array": false
+          },
+          "created_at": {
+            "indexed": false,
+            "type": "STRING",
+            "existence": false,
+            "array": false
+          },
+          "modified_at": {
+            "indexed": false,
+            "type": "STRING",
+            "existence": false,
+            "array": false
+          }
+        }
+      }
+    }
+  },
+  "Literal": {
+    "count": 17,
+    "labels": [],
+    "properties": {
+      "start_byte": {
+        "unique": false,
+        "indexed": false,
+        "type": "INTEGER",
+        "existence": false
+      },
+      "end_byte": {
+        "unique": false,
+        "indexed": false,
+        "type": "INTEGER",
+        "existence": false
+      },
+      "end_point": {
+        "unique": false,
+        "indexed": false,
+        "type": "STRING",
+        "existence": false
+      },
+      "start_point": {
+        "unique": false,
+        "indexed": false,
+        "type": "STRING",
+        "existence": false
+      },
+      "file_path": {
+        "unique": false,
+        "indexed": true,
+        "type": "STRING",
+        "existence": false
+      },
+      "value": {
+        "unique": false,
+        "indexed": false,
+        "type": "STRING",
+        "existence": false
+      },
+      "literal_type": {
+        "unique": false,
+        "indexed": false,
+        "type": "STRING",
+        "existence": false
+      },
+      "type": {
+        "unique": false,
+        "indexed": false,
+        "type": "STRING",
+        "existence": false
+      },
+      "type_kind": {
+        "unique": false,
+        "indexed": false,
+        "type": "STRING",
+        "existence": false
+      },
+      "symbols_location": {
+        "unique": false,
+        "indexed": false,
+        "type": "STRING",
+        "existence": false
+      }
+    },
+    "type": "node",
+    "relationships": {
+      "REFERENCES": {
+        "count": 186,
+        "direction": "in",
+        "labels": [
+          "Variable",
+          "Function"
+        ],
+        "properties": {
+          "start_byte": {
+            "indexed": false,
+            "type": "INTEGER",
+            "existence": false,
+            "array": false
+          },
+          "text": {
+            "indexed": false,
+            "type": "STRING",
+            "existence": false,
+            "array": false
+          },
+          "end_byte": {
+            "indexed": false,
+            "type": "INTEGER",
+            "existence": false,
+            "array": false
+          },
+          "end_point": {
+            "indexed": false,
+            "type": "STRING",
+            "existence": false,
+            "array": false
+          },
+          "start_point": {
+            "indexed": false,
+            "type": "STRING",
+            "existence": false,
+            "array": false
+          },
+          "enriched_by": {
+            "indexed": false,
+            "type": "STRING",
+            "existence": false,
+            "array": false
+          },
+          "created_at": {
+            "indexed": false,
+            "type": "STRING",
+            "existence": false,
+            "array": false
+          },
+          "modified_at": {
+            "indexed": false,
+            "type": "STRING",
+            "existence": false,
+            "array": false
+          }
+        }
+      },
+      "CONTAINS": {
+        "count": 17,
+        "direction": "in",
+        "labels": [
+          "Type",
+          "Block"
+        ],
+        "properties": {
+          "order": {
+            "indexed": false,
+            "type": "INTEGER",
+            "existence": false,
+            "array": false
+          },
+          "enriched_by": {
+            "indexed": false,
+            "type": "STRING",
+            "existence": false,
+            "array": false
+          },
+          "created_at": {
+            "indexed": false,
+            "type": "STRING",
+            "existence": false,
+            "array": false
+          },
+          "modified_at": {
+            "indexed": false,
+            "type": "STRING",
+            "existence": false,
+            "array": false
+          }
+        }
+      }
+    }
+  },
+  "IMPLEMENTS": {
+    "count": 38,
+    "properties": {
+      "start_byte": {
+        "indexed": false,
+        "type": "INTEGER",
+        "existence": false,
+        "array": false
+      },
+      "text": {
+        "indexed": false,
+        "type": "STRING",
+        "existence": false,
+        "array": false
+      },
+      "end_byte": {
+        "indexed": false,
+        "type": "INTEGER",
+        "existence": false,
+        "array": false
+      },
+      "end_point": {
+        "indexed": false,
+        "type": "STRING",
+        "existence": false,
+        "array": false
+      },
+      "start_point": {
+        "indexed": false,
+        "type": "STRING",
+        "existence": false,
+        "array": false
+      },
+      "enriched_by": {
+        "indexed": false,
+        "type": "STRING",
+        "existence": false,
+        "array": false
+      },
+      "created_at": {
+        "indexed": false,
+        "type": "STRING",
+        "existence": false,
+        "array": false
+      },
+      "modified_at": {
+        "indexed": false,
+        "type": "STRING",
+        "existence": false,
+        "array": false
+      }
+    },
+    "type": "relationship"
+  },
+  "Type": {
+    "count": 10,
+    "labels": [],
+    "properties": {
+      "modifier": {
+        "unique": false,
+        "indexed": false,
+        "type": "STRING",
+        "existence": false
+      },
+      "start_byte": {
+        "unique": false,
+        "indexed": false,
+        "type": "INTEGER",
+        "existence": false
+      },
+      "body": {
+        "unique": false,
+        "indexed": false,
+        "type": "STRING",
+        "existence": false
+      },
+      "end_byte": {
+        "unique": false,
+        "indexed": false,
+        "type": "INTEGER",
+        "existence": false
+      },
+      "end_point": {
+        "unique": false,
+        "indexed": false,
+        "type": "STRING",
+        "existence": false
+      },
+      "start_point": {
+        "unique": false,
+        "indexed": false,
+        "type": "STRING",
+        "existence": false
+      },
+      "file_path": {
+        "unique": false,
+        "indexed": true,
+        "type": "STRING",
+        "existence": false
+      },
+      "base_list": {
+        "unique": false,
+        "indexed": false,
+        "type": "STRING",
+        "existence": false
+      },
+      "name": {
+        "unique": false,
+        "indexed": true,
+        "type": "STRING",
+        "existence": false
+      },
+      "type": {
+        "unique": false,
+        "indexed": false,
+        "type": "STRING",
+        "existence": false
+      },
+      "type_kind": {
+        "unique": false,
+        "indexed": false,
+        "type": "STRING",
+        "existence": false
+      },
+      "symbols_location": {
+        "unique": false,
+        "indexed": false,
+        "type": "STRING",
+        "existence": false
+      }
+    },
+    "type": "node",
+    "relationships": {
+      "IMPLEMENTS": {
+        "count": 30,
+        "direction": "out",
+        "labels": [
+          "Type",
+          "Type",
+          "Function"
+        ],
+        "properties": {
+          "start_byte": {
+            "indexed": false,
+            "type": "INTEGER",
+            "existence": false,
+            "array": false
+          },
+          "text": {
+            "indexed": false,
+            "type": "STRING",
+            "existence": false,
+            "array": false
+          },
+          "end_byte": {
+            "indexed": false,
+            "type": "INTEGER",
+            "existence": false,
+            "array": false
+          },
+          "end_point": {
+            "indexed": false,
+            "type": "STRING",
+            "existence": false,
+            "array": false
+          },
+          "start_point": {
+            "indexed": false,
+            "type": "STRING",
+            "existence": false,
+            "array": false
+          },
+          "enriched_by": {
+            "indexed": false,
+            "type": "STRING",
+            "existence": false,
+            "array": false
+          },
+          "created_at": {
+            "indexed": false,
+            "type": "STRING",
+            "existence": false,
+            "array": false
+          },
+          "modified_at": {
+            "indexed": false,
+            "type": "STRING",
+            "existence": false,
+            "array": false
+          }
+        }
+      },
+      "REFERENCES": {
+        "count": 77,
+        "direction": "out",
+        "labels": [
+          "Variable",
+          "Function",
+          "Statement",
+          "Type",
+          "Block",
+          "Namespace",
+          "Variable",
+          "Type",
+          "Function"
+        ],
+        "properties": {
+          "start_byte": {
+            "indexed": false,
+            "type": "INTEGER",
+            "existence": false,
+            "array": false
+          },
+          "text": {
+            "indexed": false,
+            "type": "STRING",
+            "existence": false,
+            "array": false
+          },
+          "end_byte": {
+            "indexed": false,
+            "type": "INTEGER",
+            "existence": false,
+            "array": false
+          },
+          "end_point": {
+            "indexed": false,
+            "type": "STRING",
+            "existence": false,
+            "array": false
+          },
+          "start_point": {
+            "indexed": false,
+            "type": "STRING",
+            "existence": false,
+            "array": false
+          },
+          "enriched_by": {
+            "indexed": false,
+            "type": "STRING",
+            "existence": false,
+            "array": false
+          },
+          "created_at": {
+            "indexed": false,
+            "type": "STRING",
+            "existence": false,
+            "array": false
+          },
+          "modified_at": {
+            "indexed": false,
+            "type": "STRING",
+            "existence": false,
+            "array": false
+          }
+        }
+      },
+      "CONTAINS": {
+        "count": 9,
+        "direction": "out",
+        "labels": [
+          "Variable",
+          "Literal",
+          "Function",
+          "File",
+          "Namespace"
+        ],
+        "properties": {
+          "order": {
+            "indexed": false,
+            "type": "INTEGER",
+            "existence": false,
+            "array": false
+          },
+          "enriched_by": {
+            "indexed": false,
+            "type": "STRING",
+            "existence": false,
+            "array": false
+          },
+          "created_at": {
+            "indexed": false,
+            "type": "STRING",
+            "existence": false,
+            "array": false
+          },
+          "modified_at": {
+            "indexed": false,
+            "type": "STRING",
+            "existence": false,
+            "array": false
+          }
+        }
+      }
+    }
+  },
+  "Statement": {
+    "count": 25,
+    "labels": [],
+    "properties": {
+      "start_byte": {
+        "unique": false,
+        "indexed": false,
+        "type": "INTEGER",
+        "existence": false
+      },
+      "text": {
+        "unique": false,
+        "indexed": false,
+        "type": "STRING",
+        "existence": false
+      },
+      "end_byte": {
+        "unique": false,
+        "indexed": false,
+        "type": "INTEGER",
+        "existence": false
+      },
+      "end_point": {
+        "unique": false,
+        "indexed": false,
+        "type": "STRING",
+        "existence": false
+      },
+      "start_point": {
+        "unique": false,
+        "indexed": false,
+        "type": "STRING",
+        "existence": false
+      },
+      "order": {
+        "unique": false,
+        "indexed": false,
+        "type": "INTEGER",
+        "existence": false
+      },
+      "file_path": {
+        "unique": false,
+        "indexed": false,
+        "type": "STRING",
+        "existence": false
+      },
+      "statement_type": {
+        "unique": false,
+        "indexed": false,
+        "type": "STRING",
+        "existence": false
+      },
+      "type": {
+        "unique": false,
+        "indexed": false,
+        "type": "STRING",
+        "existence": false
+      },
+      "type_kind": {
+        "unique": false,
+        "indexed": false,
+        "type": "STRING",
+        "existence": false
+      },
+      "symbols_location": {
+        "unique": false,
+        "indexed": false,
+        "type": "STRING",
+        "existence": false
+      }
+    },
+    "type": "node",
+    "relationships": {
+      "REFERENCES": {
+        "count": 186,
+        "direction": "in",
+        "labels": [
+          "Variable",
+          "Type",
+          "Function"
+        ],
+        "properties": {
+          "start_byte": {
+            "indexed": false,
+            "type": "INTEGER",
+            "existence": false,
+            "array": false
+          },
+          "text": {
+            "indexed": false,
+            "type": "STRING",
+            "existence": false,
+            "array": false
+          },
+          "end_byte": {
+            "indexed": false,
+            "type": "INTEGER",
+            "existence": false,
+            "array": false
+          },
+          "end_point": {
+            "indexed": false,
+            "type": "STRING",
+            "existence": false,
+            "array": false
+          },
+          "start_point": {
+            "indexed": false,
+            "type": "STRING",
+            "existence": false,
+            "array": false
+          },
+          "enriched_by": {
+            "indexed": false,
+            "type": "STRING",
+            "existence": false,
+            "array": false
+          },
+          "created_at": {
+            "indexed": false,
+            "type": "STRING",
+            "existence": false,
+            "array": false
+          },
+          "modified_at": {
+            "indexed": false,
+            "type": "STRING",
+            "existence": false,
+            "array": false
+          }
+        }
+      },
+      "CONTAINS": {
+        "count": 48,
+        "direction": "in",
+        "labels": [
+          "Block"
+        ],
+        "properties": {
+          "order": {
+            "indexed": false,
+            "type": "INTEGER",
+            "existence": false,
+            "array": false
+          },
+          "enriched_by": {
+            "indexed": false,
+            "type": "STRING",
+            "existence": false,
+            "array": false
+          },
+          "created_at": {
+            "indexed": false,
+            "type": "STRING",
+            "existence": false,
+            "array": false
+          },
+          "modified_at": {
+            "indexed": false,
+            "type": "STRING",
+            "existence": false,
+            "array": false
+          }
+        }
+      }
+    }
+  },
+  "Function": {
+    "count": 12,
+    "labels": [],
+    "properties": {
+      "body": {
+        "unique": false,
+        "indexed": true,
+        "type": "STRING",
+        "existence": false
+      },
+      "end_byte": {
+        "unique": false,
+        "indexed": false,
+        "type": "INTEGER",
+        "existence": false
+      },
+      "end_point": {
+        "unique": false,
+        "indexed": false,
+        "type": "STRING",
+        "existence": false
+      },
+      "start_point": {
+        "unique": false,
+        "indexed": false,
+        "type": "STRING",
+        "existence": false
+      },
+      "file_path": {
+        "unique": false,
+        "indexed": true,
+        "type": "STRING",
+        "existence": false
+      },
+      "return_type": {
+        "unique": false,
+        "indexed": false,
+        "type": "STRING",
+        "existence": false
+      },
+      "type": {
+        "unique": false,
+        "indexed": false,
+        "type": "STRING",
+        "existence": false
+      },
+      "type_kind": {
+        "unique": false,
+        "indexed": false,
+        "type": "STRING",
+        "existence": false
+      },
+      "symbols_location": {
+        "unique": false,
+        "indexed": false,
+        "type": "STRING",
+        "existence": false
+      },
+      "modifier": {
+        "unique": false,
+        "indexed": false,
+        "type": "STRING",
+        "existence": false
+      },
+      "start_byte": {
+        "unique": false,
+        "indexed": false,
+        "type": "INTEGER",
+        "existence": false
+      },
+      "name": {
+        "unique": false,
+        "indexed": true,
+        "type": "STRING",
+        "existence": false
+      },
+      "parameters": {
+        "unique": false,
+        "indexed": false,
+        "type": "STRING",
+        "existence": false
+      }
+    },
+    "type": "node",
+    "relationships": {
+      "IMPLEMENTS": {
+        "count": 0,
+        "direction": "out",
+        "labels": [
+          "Type"
+        ],
+        "properties": {
+          "start_byte": {
+            "indexed": false,
+            "type": "INTEGER",
+            "existence": false,
+            "array": false
+          },
+          "text": {
+            "indexed": false,
+            "type": "STRING",
+            "existence": false,
+            "array": false
+          },
+          "end_byte": {
+            "indexed": false,
+            "type": "INTEGER",
+            "existence": false,
+            "array": false
+          },
+          "end_point": {
+            "indexed": false,
+            "type": "STRING",
+            "existence": false,
+            "array": false
+          },
+          "start_point": {
+            "indexed": false,
+            "type": "STRING",
+            "existence": false,
+            "array": false
+          },
+          "enriched_by": {
+            "indexed": false,
+            "type": "STRING",
+            "existence": false,
+            "array": false
+          },
+          "created_at": {
+            "indexed": false,
+            "type": "STRING",
+            "existence": false,
+            "array": false
+          },
+          "modified_at": {
+            "indexed": false,
+            "type": "STRING",
+            "existence": false,
+            "array": false
+          }
+        }
+      },
+      "CALLS": {
+        "count": 43,
+        "direction": "out",
+        "labels": [
+          "Function",
+          "Function"
+        ],
+        "properties": {
+          "start_byte": {
+            "indexed": false,
+            "type": "INTEGER",
+            "existence": false,
+            "array": false
+          },
+          "text": {
+            "indexed": false,
+            "type": "STRING",
+            "existence": false,
+            "array": false
+          },
+          "end_byte": {
+            "indexed": false,
+            "type": "INTEGER",
+            "existence": false,
+            "array": false
+          },
+          "end_point": {
+            "indexed": false,
+            "type": "STRING",
+            "existence": false,
+            "array": false
+          },
+          "start_point": {
+            "indexed": false,
+            "type": "STRING",
+            "existence": false,
+            "array": false
+          },
+          "enriched_by": {
+            "indexed": false,
+            "type": "STRING",
+            "existence": false,
+            "array": false
+          },
+          "created_at": {
+            "indexed": false,
+            "type": "STRING",
+            "existence": false,
+            "array": false
+          },
+          "modified_at": {
+            "indexed": false,
+            "type": "STRING",
+            "existence": false,
+            "array": false
+          }
+        }
+      },
+      "REFERENCES": {
+        "count": 59,
+        "direction": "out",
+        "labels": [
+          "Statement",
+          "Block",
+          "Variable",
+          "Type",
+          "Literal",
+          "Variable",
+          "Type"
+        ],
+        "properties": {
+          "start_byte": {
+            "indexed": false,
+            "type": "INTEGER",
+            "existence": false,
+            "array": false
+          },
+          "text": {
+            "indexed": false,
+            "type": "STRING",
+            "existence": false,
+            "array": false
+          },
+          "end_byte": {
+            "indexed": false,
+            "type": "INTEGER",
+            "existence": false,
+            "array": false
+          },
+          "end_point": {
+            "indexed": false,
+            "type": "STRING",
+            "existence": false,
+            "array": false
+          },
+          "start_point": {
+            "indexed": false,
+            "type": "STRING",
+            "existence": false,
+            "array": false
+          },
+          "enriched_by": {
+            "indexed": false,
+            "type": "STRING",
+            "existence": false,
+            "array": false
+          },
+          "created_at": {
+            "indexed": false,
+            "type": "STRING",
+            "existence": false,
+            "array": false
+          },
+          "modified_at": {
+            "indexed": false,
+            "type": "STRING",
+            "existence": false,
+            "array": false
+          }
+        }
+      },
+      "CONTAINS": {
+        "count": 12,
+        "direction": "out",
+        "labels": [
+          "Block",
+          "Variable",
+          "Type"
+        ],
+        "properties": {
+          "order": {
+            "indexed": false,
+            "type": "INTEGER",
+            "existence": false,
+            "array": false
+          },
+          "enriched_by": {
+            "indexed": false,
+            "type": "STRING",
+            "existence": false,
+            "array": false
+          },
+          "created_at": {
+            "indexed": false,
+            "type": "STRING",
+            "existence": false,
+            "array": false
+          },
+          "modified_at": {
+            "indexed": false,
+            "type": "STRING",
+            "existence": false,
+            "array": false
+          }
+        }
+      }
+    }
+  },
+  "File": {
+    "count": 11,
+    "labels": [],
+    "properties": {
+      "start_byte": {
+        "unique": false,
+        "indexed": false,
+        "type": "INTEGER",
+        "existence": false
+      },
+      "end_byte": {
+        "unique": false,
+        "indexed": false,
+        "type": "INTEGER",
+        "existence": false
+      },
+      "end_point": {
+        "unique": false,
+        "indexed": false,
+        "type": "STRING",
+        "existence": false
+      },
+      "start_point": {
+        "unique": false,
+        "indexed": false,
+        "type": "STRING",
+        "existence": false
+      },
+      "file_path": {
+        "unique": false,
+        "indexed": true,
+        "type": "STRING",
+        "existence": false
+      },
+      "name": {
+        "unique": false,
+        "indexed": true,
+        "type": "STRING",
+        "existence": false
+      },
+      "import_aliases": {
+        "unique": false,
+        "indexed": false,
+        "type": "STRING",
+        "existence": false
+      },
+      "type": {
+        "unique": false,
+        "indexed": false,
+        "type": "STRING",
+        "existence": false
+      },
+      "file_checksum": {
+        "unique": false,
+        "indexed": false,
+        "type": "STRING",
+        "existence": false
+      },
+      "imports": {
+        "unique": false,
+        "indexed": false,
+        "type": "STRING",
+        "existence": false
+      }
+    },
+    "type": "node",
+    "relationships": {
+      "CONTAINS": {
+        "count": 10,
+        "direction": "out",
+        "labels": [
+          "Type",
+          "Namespace",
+          "Project"
+        ],
+        "properties": {
+          "order": {
+            "indexed": false,
+            "type": "INTEGER",
+            "existence": false,
+            "array": false
+          },
+          "enriched_by": {
+            "indexed": false,
+            "type": "STRING",
+            "existence": false,
+            "array": false
+          },
+          "created_at": {
+            "indexed": false,
+            "type": "STRING",
+            "existence": false,
+            "array": false
+          },
+          "modified_at": {
+            "indexed": false,
+            "type": "STRING",
+            "existence": false,
+            "array": false
+          }
+        }
+      }
+    }
+  },
+  "REFERENCES": {
+    "count": 444,
+    "properties": {
+      "start_byte": {
+        "indexed": false,
+        "type": "INTEGER",
+        "existence": false,
+        "array": false
+      },
+      "text": {
+        "indexed": false,
+        "type": "STRING",
+        "existence": false,
+        "array": false
+      },
+      "end_byte": {
+        "indexed": false,
+        "type": "INTEGER",
+        "existence": false,
+        "array": false
+      },
+      "end_point": {
+        "indexed": false,
+        "type": "STRING",
+        "existence": false,
+        "array": false
+      },
+      "start_point": {
+        "indexed": false,
+        "type": "STRING",
+        "existence": false,
+        "array": false
+      },
+      "enriched_by": {
+        "indexed": false,
+        "type": "STRING",
+        "existence": false,
+        "array": false
+      },
+      "created_at": {
+        "indexed": false,
+        "type": "STRING",
+        "existence": false,
+        "array": false
+      },
+      "modified_at": {
+        "indexed": false,
+        "type": "STRING",
+        "existence": false,
+        "array": false
+      }
+    },
+    "type": "relationship"
+  },
+  "CONTAINS": {
+    "count": 107,
+    "properties": {
+      "order": {
+        "indexed": false,
+        "type": "INTEGER",
+        "existence": false,
+        "array": false
+      },
+      "enriched_by": {
+        "indexed": false,
+        "type": "STRING",
+        "existence": false,
+        "array": false
+      },
+      "created_at": {
+        "indexed": false,
+        "type": "STRING",
+        "existence": false,
+        "array": false
+      },
+      "modified_at": {
+        "indexed": false,
+        "type": "STRING",
+        "existence": false,
+        "array": false
+      }
+    },
+    "type": "relationship"
+  },
+  "CALLS": {
+    "count": 43,
+    "properties": {
+      "start_byte": {
+        "indexed": false,
+        "type": "INTEGER",
+        "existence": false,
+        "array": false
+      },
+      "text": {
+        "indexed": false,
+        "type": "STRING",
+        "existence": false,
+        "array": false
+      },
+      "end_byte": {
+        "indexed": false,
+        "type": "INTEGER",
+        "existence": false,
+        "array": false
+      },
+      "end_point": {
+        "indexed": false,
+        "type": "STRING",
+        "existence": false,
+        "array": false
+      },
+      "start_point": {
+        "indexed": false,
+        "type": "STRING",
+        "existence": false,
+        "array": false
+      },
+      "enriched_by": {
+        "indexed": false,
+        "type": "STRING",
+        "existence": false,
+        "array": false
+      },
+      "created_at": {
+        "indexed": false,
+        "type": "STRING",
+        "existence": false,
+        "array": false
+      },
+      "modified_at": {
+        "indexed": false,
+        "type": "STRING",
+        "existence": false,
+        "array": false
+      }
+    },
+    "type": "relationship"
+  },
+  "Namespace": {
+    "count": 1,
+    "labels": [],
+    "properties": {
+      "start_byte": {
+        "unique": false,
+        "indexed": false,
+        "type": "INTEGER",
+        "existence": false
+      },
+      "body": {
+        "unique": false,
+        "indexed": false,
+        "type": "STRING",
+        "existence": false
+      },
+      "end_byte": {
+        "unique": false,
+        "indexed": false,
+        "type": "INTEGER",
+        "existence": false
+      },
+      "end_point": {
+        "unique": false,
+        "indexed": false,
+        "type": "STRING",
+        "existence": false
+      },
+      "start_point": {
+        "unique": false,
+        "indexed": false,
+        "type": "STRING",
+        "existence": false
+      },
+      "file_path": {
+        "unique": false,
+        "indexed": true,
+        "type": "STRING",
+        "existence": false
+      },
+      "name": {
+        "unique": false,
+        "indexed": true,
+        "type": "STRING",
+        "existence": false
+      },
+      "type": {
+        "unique": false,
+        "indexed": false,
+        "type": "STRING",
+        "existence": false
+      },
+      "type_kind": {
+        "unique": false,
+        "indexed": false,
+        "type": "STRING",
+        "existence": false
+      },
+      "symbols_location": {
+        "unique": false,
+        "indexed": false,
+        "type": "STRING",
+        "existence": false
+      }
+    },
+    "type": "node",
+    "relationships": {
+      "REFERENCES": {
+        "count": 9,
+        "direction": "out",
+        "labels": [
+          "Namespace",
+          "Variable",
+          "Namespace",
+          "Type"
+        ],
+        "properties": {
+          "start_byte": {
+            "indexed": false,
+            "type": "INTEGER",
+            "existence": false,
+            "array": false
+          },
+          "text": {
+            "indexed": false,
+            "type": "STRING",
+            "existence": false,
+            "array": false
+          },
+          "end_byte": {
+            "indexed": false,
+            "type": "INTEGER",
+            "existence": false,
+            "array": false
+          },
+          "end_point": {
+            "indexed": false,
+            "type": "STRING",
+            "existence": false,
+            "array": false
+          },
+          "start_point": {
+            "indexed": false,
+            "type": "STRING",
+            "existence": false,
+            "array": false
+          },
+          "enriched_by": {
+            "indexed": false,
+            "type": "STRING",
+            "existence": false,
+            "array": false
+          },
+          "created_at": {
+            "indexed": false,
+            "type": "STRING",
+            "existence": false,
+            "array": false
+          },
+          "modified_at": {
+            "indexed": false,
+            "type": "STRING",
+            "existence": false,
+            "array": false
+          }
+        }
+      },
+      "CONTAINS": {
+        "count": 1,
+        "direction": "out",
+        "labels": [
+          "Type",
+          "File"
+        ],
+        "properties": {
+          "order": {
+            "indexed": false,
+            "type": "INTEGER",
+            "existence": false,
+            "array": false
+          },
+          "enriched_by": {
+            "indexed": false,
+            "type": "STRING",
+            "existence": false,
+            "array": false
+          },
+          "created_at": {
+            "indexed": false,
+            "type": "STRING",
+            "existence": false,
+            "array": false
+          },
+          "modified_at": {
+            "indexed": false,
+            "type": "STRING",
+            "existence": false,
+            "array": false
+          }
+        }
+      }
+    }
+  },
+  "Project": {
+    "count": 1,
+    "labels": [],
+    "properties": {
+      "project_path": {
+        "unique": false,
+        "indexed": false,
+        "type": "STRING",
+        "existence": false
+      },
+      "dependencies": {
+        "unique": false,
+        "indexed": false,
+        "type": "STRING",
+        "existence": false
+      },
+      "project_checksum": {
+        "unique": false,
+        "indexed": false,
+        "type": "STRING",
+        "existence": false
+      },
+      "build_properties": {
+        "unique": false,
+        "indexed": false,
+        "type": "STRING",
+        "existence": false
+      },
+      "name": {
+        "unique": false,
+        "indexed": true,
+        "type": "STRING",
+        "existence": false
+      },
+      "created_at": {
+        "unique": false,
+        "indexed": false,
+        "type": "STRING",
+        "existence": false
+      },
+      "output_type": {
+        "unique": false,
+        "indexed": false,
+        "type": "STRING",
+        "existence": false
+      },
+      "type": {
+        "unique": false,
+        "indexed": false,
+        "type": "STRING",
+        "existence": false
+      },
+      "target_framework": {
+        "unique": false,
+        "indexed": false,
+        "type": "STRING",
+        "existence": false
+      },
+      "modified_at": {
+        "unique": false,
+        "indexed": false,
+        "type": "STRING",
+        "existence": false
+      },
+      "config_metadata": {
+        "unique": false,
+        "indexed": false,
+        "type": "STRING",
+        "existence": false
+      },
+      "version": {
+        "unique": false,
+        "indexed": false,
+        "type": "STRING",
+        "existence": false
+      }
+    },
+    "type": "node",
+    "relationships": {
+      "CONTAINS": {
+        "count": 0,
+        "direction": "out",
+        "labels": [
+          "File"
+        ],
+        "properties": {
+          "order": {
+            "indexed": false,
+            "type": "INTEGER",
+            "existence": false,
+            "array": false
+          },
+          "enriched_by": {
+            "indexed": false,
+            "type": "STRING",
+            "existence": false,
+            "array": false
+          },
+          "created_at": {
+            "indexed": false,
+            "type": "STRING",
+            "existence": false,
+            "array": false
+          },
+          "modified_at": {
+            "indexed": false,
+            "type": "STRING",
+            "existence": false,
+            "array": false
+          }
+        }
+      }
+    }
+  },
+  "Block": {
+    "count": 13,
+    "labels": [],
+    "properties": {
+      "start_byte": {
+        "unique": false,
+        "indexed": false,
+        "type": "INTEGER",
+        "existence": false
+      },
+      "end_byte": {
+        "unique": false,
+        "indexed": false,
+        "type": "INTEGER",
+        "existence": false
+      },
+      "end_point": {
+        "unique": false,
+        "indexed": false,
+        "type": "STRING",
+        "existence": false
+      },
+      "start_point": {
+        "unique": false,
+        "indexed": false,
+        "type": "STRING",
+        "existence": false
+      },
+      "file_path": {
+        "unique": false,
+        "indexed": true,
+        "type": "STRING",
+        "existence": false
+      },
+      "statements": {
+        "unique": false,
+        "indexed": false,
+        "type": "STRING",
+        "existence": false
+      },
+      "type": {
+        "unique": false,
+        "indexed": false,
+        "type": "STRING",
+        "existence": false
+      },
+      "type_kind": {
+        "unique": false,
+        "indexed": false,
+        "type": "STRING",
+        "existence": false
+      },
+      "symbols_location": {
+        "unique": false,
+        "indexed": false,
+        "type": "STRING",
+        "existence": false
+      }
+    },
+    "type": "node",
+    "relationships": {
+      "REFERENCES": {
+        "count": 186,
+        "direction": "in",
+        "labels": [
+          "Variable",
+          "Type",
+          "Function"
+        ],
+        "properties": {
+          "start_byte": {
+            "indexed": false,
+            "type": "INTEGER",
+            "existence": false,
+            "array": false
+          },
+          "text": {
+            "indexed": false,
+            "type": "STRING",
+            "existence": false,
+            "array": false
+          },
+          "end_byte": {
+            "indexed": false,
+            "type": "INTEGER",
+            "existence": false,
+            "array": false
+          },
+          "end_point": {
+            "indexed": false,
+            "type": "STRING",
+            "existence": false,
+            "array": false
+          },
+          "start_point": {
+            "indexed": false,
+            "type": "STRING",
+            "existence": false,
+            "array": false
+          },
+          "enriched_by": {
+            "indexed": false,
+            "type": "STRING",
+            "existence": false,
+            "array": false
+          },
+          "created_at": {
+            "indexed": false,
+            "type": "STRING",
+            "existence": false,
+            "array": false
+          },
+          "modified_at": {
+            "indexed": false,
+            "type": "STRING",
+            "existence": false,
+            "array": false
+          }
+        }
+      },
+      "CONTAINS": {
+        "count": 13,
+        "direction": "out",
+        "labels": [
+          "Block",
+          "Variable",
+          "Literal",
+          "Statement",
+          "Function",
+          "Block"
+        ],
+        "properties": {
+          "order": {
+            "indexed": false,
+            "type": "INTEGER",
+            "existence": false,
+            "array": false
+          },
+          "enriched_by": {
+            "indexed": false,
+            "type": "STRING",
+            "existence": false,
+            "array": false
+          },
+          "created_at": {
+            "indexed": false,
+            "type": "STRING",
+            "existence": false,
+            "array": false
+          },
+          "modified_at": {
+            "indexed": false,
+            "type": "STRING",
+            "existence": false,
+            "array": false
+          }
+        }
+      }
+    }
+  }
+}

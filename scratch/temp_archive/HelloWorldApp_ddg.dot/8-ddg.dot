@@ -1,0 +1,26 @@
+digraph "CreateWorkers" {  
+node [shape="rect"];  
+"111669149704" [label = <METHOD, 6<BR/>CreateWorkers> ]
+"128849018888" [label = <METHOD_RETURN, 6<BR/>IEnumerable> ]
+"115964117004" [label = <PARAM, 6<BR/>INotifier notifier> ]
+"146028888065" [label = <RETURN, 9<BR/>return new List&lt;IWorker&gt; { ...> ]
+"30064771098" [label = <&lt;init&gt;, 9<BR/>new List&lt;IWorker&gt; { ...> ]
+"30064771098" [label = <&lt;init&gt;, 9<BR/>new List&lt;IWorker&gt; { ...> ]
+  "146028888065" -> "128849018888"  [ label = "&lt;RET&gt;"] 
+  "115964117004" -> "128849018888"  [ label = "notifier"] 
+  "30064771098" -> "128849018888"  [ label = "this"] 
+  "30064771098" -> "128849018888"  [ label = "new List&lt;IWorker&gt;
+            {
+                new WorkerA(notifier),
+                new WorkerB(notifier),
+                new WorkerC(notifier)
+            }"] 
+  "111669149704" -> "115964117004" 
+  "30064771098" -> "146028888065"  [ label = "new List&lt;IWorker&gt;
+            {
+                new WorkerA(notifier),
+                new WorkerB(notifier),
+                new WorkerC(notifier)
+            }"] 
+  "111669149704" -> "30064771098" 
+}

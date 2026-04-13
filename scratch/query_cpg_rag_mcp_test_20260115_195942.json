@@ -1,0 +1,50 @@
+{
+  "status": "success",
+  "tool_name": "query_cpg_rag",
+  "workflow_type": "4_agent_team",
+  "user_query": "What variable name stores the formatted message in WorkerZ?",
+  "project_name": "HelloWorldApp",
+  "response": {
+    "answer": "",
+    "confidence": "medium",
+    "status": "success"
+  },
+  "citations": [],
+  "raw_results": [],
+  "verified_count": 0,
+  "unverified_count": 0,
+  "total_citations": 0,
+  "sub_queries_count": 0,
+  "llm_calls_count": 4,
+  "execution_time_ms": 141100,
+  "token_usage": {
+    "total_tokens": 3666,
+    "total_prompt_tokens": 67,
+    "total_completion_tokens": 3599,
+    "call_count": 4,
+    "by_agent_role": {
+      "cot_agent": 1885,
+      "tot_orchestrator": 1781
+    }
+  },
+  "total_tokens_used": 3666,
+  "total_input_tokens": 67,
+  "total_output_tokens": 3599,
+  "agent_workflow": "4_agent_team",
+  "agent_metadata": {
+    "llm_model": "gpt-4o",
+    "max_cot_iterations": 15,
+    "parallel_agents": true,
+    "verification_enabled": true,
+    "entity_resolution_enabled": true,
+    "observer_enabled": false,
+    "use_4_agent_team": true,
+    "four_agent_max_iterations": 3
+  },
+  "cli_parameters_used": {
+    "config_path": "/opt/genpod/neo4j_config.json",
+    "schema_path": "/opt/genpod/src/schemas/project_knowledgebase_graph_schema.yaml",
+    "llm_model": "gpt-4o"
+  },
+  "message": "4-Agent Team CPG RAG completed successfully (141100ms)"
+}

@@ -1,0 +1,5 @@
+94489280512,LOCAL,,workers,33,,<empty>,10,workers,,,3,,IEnumerable
+94489280513,LOCAL,,_idx_,,,<empty>,,_idx_,,,1,,System.Int32
+94489280514,LOCAL,,worker,,,<empty>,,worker,,,2,,var
+94489280515,LOCAL,,manager,20,,<empty>,8,manager,,,2,,HelloWorldApp.Manager
+94489280516,LOCAL,,msg,19,,<empty>,13,msg,,,2,,System.String

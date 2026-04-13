@@ -1,0 +1,29 @@
+=== WORKFLOW EXECUTION TRACE ANALYSIS ===
+
+Start Time: 15:51:27
+End Time:   15:55:17
+Total Duration: 3m 50s (230 seconds)
+
+=== PHASE BREAKDOWN ===
+
+1. Schema Initialization: 33.5s
+   - APOC cache: 21.7s
+   - Valid relationship pairs: 35 found ✅
+   - Direct edges cached: 29 ✅
+   - Cache efficiency: 91.0% ✅
+   - Embeddings loading: 10s
+
+2. Phase 0 (Query Decomposition): 67.2s (1m 7s)
+   - O4-mini decomposition: 36.9s
+   - O4-mini dependency analysis: 30.2s
+   - Result: 8 subqueries generated
+
+3. Worker Pool Execution: 93.0s (1m 33s)
+   - 8 subqueries executed in parallel
+   - Max concurrent: 3 workers
+   - No concurrency errors ✅
+
+4. Synthesis: ~7s
+
+=== KEY IMPROVEMENTS ===
+

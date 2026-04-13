@@ -1,0 +1,18 @@
+digraph "&lt;init&gt;" {  
+node [shape="rect"];  
+"111669149702" [label = <METHOD, 6<BR/>&lt;init&gt;> ]
+"128849018886" [label = <METHOD_RETURN, 6<BR/>System.Void> ]
+"115964117001" [label = <PARAM, 6<BR/>this> ]
+"115964117002" [label = <PARAM, 6<BR/>INotifier notifier> ]
+"30064771090" [label = <&lt;operator&gt;.assignment, 8<BR/>_notifier = notifier> ]
+"30064771090" [label = <&lt;operator&gt;.assignment, 8<BR/>_notifier = notifier> ]
+"30064771090" [label = <&lt;operator&gt;.assignment, 8<BR/>_notifier = notifier> ]
+  "115964117001" -> "128849018886"  [ label = "this"] 
+  "30064771090" -> "128849018886"  [ label = "this._notifier"] 
+  "30064771090" -> "128849018886"  [ label = "INotifier notifier"] 
+  "30064771090" -> "128849018886"  [ label = "_notifier = notifier"] 
+  "111669149702" -> "115964117001" 
+  "111669149702" -> "115964117002" 
+  "115964117002" -> "30064771090"  [ label = "notifier"] 
+  "111669149702" -> "30064771090" 
+}
