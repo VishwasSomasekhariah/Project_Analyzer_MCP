@@ -1,0 +1,9 @@
+{
+    "mcpServers": {
+        "enhanced_weaviate_mcp_server": {
+            "type": "http",
+            "url": "http://127.0.0.1:8400/sse",
+            "description": "Enhanced Weaviate MCP server with client-side embedding support"
+        }
+    }
+}
