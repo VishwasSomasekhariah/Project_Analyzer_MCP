@@ -1,0 +1,430 @@
+nodes:
+  Project:
+    attributes: ["name", "project_path", "project_checksum", "version", "type", "created_at", "modified_at", "config_metadata", "dependencies", "target_framework", "output_type", "build_properties"]
+    relationships: ["CONTAINS"]
+  File:
+    attributes: ["name", "file_path", "version", "imports", "import_aliases", "start_point", "end_point", "start_byte", "end_byte"]
+    relationships: ["CONTAINS"]
+  Function:
+    attributes: ["name", "type_kind", "return_type", "parameters", "start_point", "end_point", "file_path", "body", "modifier", "type_parameters", "constraints", "attribute", "start_byte", "end_byte", "symbols_location"]
+    relationships: ["CALLS", "DEFINED_IN", "DECLARES", "USES_TYPE"]
+  Type:
+    attributes: ["name", "type_kind", "access_modifier", "is_abstract", "documentation", "file_path", "fields", "base_list", "type_parameters", "constraints", "body", "modifier", "attribute", "start_byte", "end_byte", "symbols_location"]
+    relationships: ["CONTAINS", "INHERITS_FROM", "IMPLEMENTS", "DECLARES"]
+  Variable:
+    attributes: ["name", "alias", "type_kind", "initial_value", "access_modifier", "file_path", "explicit_interface", "accessors", "arrow_clause", "value", "modifier", "attribute", "start_byte", "end_byte", "symbols_location"]
+    relationships: ["DECLARES"]
+  Namespace:
+    attributes: ["name", "type_kind", "path", "start_point", "end_point", "file_path", "attribute", "body", "modifier", "start_byte", "end_byte", "symbols_location"]
+    relationships: ["CONTAINS", "DECLARES"]
+  Macro:
+    attributes: ["name", "type_kind", "value", "start_point", "end_point", "file_path", "parameters", "body", "start_byte", "end_byte", "symbols_location"]
+    relationships: []
+  Block:
+    attributes: ["statements", "type_kind", "start_point", "end_point", "file_path", "start_byte", "end_byte", "symbols_location"]
+    relationships: ["CONTAINS", "DECLARES"]
+  Literal:
+    attributes: ["value", "type_kind", "literal_type", "start_point", "end_point", "file_path", "start_byte", "end_byte", "symbols_location"]
+    relationships: []
+
+relationships:
+  DEFINED_IN:
+    from: ["Function", "Type", "Namespace", "Variable"]
+    to: ["File", "Namespace"]
+    properties: ["created_at", "modified_at", "enriched_by"]
+  HAS_TYPE:
+    from: Function
+    to: Type
+    properties: ["created_at", "modified_at", "enriched_by"]
+  INCLUDED_IN:
+    from: Macro
+    to: File
+    properties: ["created_at", "modified_at", "enriched_by"]
+  CONTAINS:
+    from: ["Namespace", "Type", "File", "Block"]
+    to: ["Namespace", "Type", "Function", "Block", "Literal", "Macro"]
+    properties: ["created_at", "modified_at", "enriched_by"]
+  INHERITS_FROM:
+    from: Type
+    to: Type
+    properties: ["created_at", "modified_at", "enriched_by"]
+  IMPLEMENTS:
+    from: Type
+    to: Type
+    properties: ["created_at", "modified_at", "enriched_by", "text", "start_point", "end_point", "start_byte", "end_byte"]
+  DECLARES:
+    from: ["Function", "Type", "Namespace", "Block"]
+    to: ["Variable"]
+    properties: ["created_at", "modified_at", "enriched_by"]
+  REFERENCES:
+    from: ["Function", "Type", "Variable"]
+    to: ["Function", "Type", "Variable"]
+    properties: ["text", "start_point", "end_point", "start_byte", "end_byte", "created_at", "modified_at", "enriched_by"]
+  CALLS:
+    from: Function
+    to: Function
+    properties: ["text", "start_point", "end_point", "start_byte", "end_byte", "created_at", "modified_at", "enriched_by"]
+    constraints: ["from != to"]  # Prevent self-references
+  USES_TYPE:
+    from: Function
+    to: Type
+    properties: ["text", "start_point", "end_point", "start_byte", "end_byte", "created_at", "modified_at", "enriched_by"]
+
+NodeDefinitions:
+  Project:
+    Contents:
+      Attributes:
+        - name: "The project's name (e.g., HelloWorldApp)"
+        - project_path: "The project's root directory path"
+        - project_checksum: "Checksum for project integrity verification"
+        - version: "Project version information"
+        - type: "Node type identifier (always 'Project')"
+        - created_at: "Timestamp when the project was first processed"
+        - modified_at: "Timestamp when the project was last modified"
+        - config_metadata: "JSON object containing parsed config file metadata from project files (.csproj, package.json, etc.)"
+        - dependencies: "JSON object mapping dependency types to package lists (e.g., {'runtime': {...}, 'development': {...}})"
+        - target_framework: "Target framework/runtime (e.g., 'net9.0', 'node18')"
+        - output_type: "Build output type (e.g., 'Exe', 'Library', 'Module')"
+        - build_properties: "JSON object with build configuration properties (SDK, language version, etc.)"
+    Creation:
+      Description: "The top-level container representing the entire project or solution. All source files within the project are connected to this Project node via CONTAINS relationships, enabling project-level queries and architectural analysis. Config file metadata is automatically parsed and attached to provide build, dependency, and runtime configuration context."
+
+  File:
+    Contents:
+      Attributes:
+        - name: "The file's name"
+        - file_path: "The file's location within the project"
+        - version: "Version information (if available)"
+        - imports: "Array of imported namespaces/modules (e.g., ['System', 'System.Collections.Generic'])"
+        - import_aliases: "Object mapping aliases to full names (e.g., {'Collections': 'System.Collections'})"
+        - start_point: "Start position [line, column] in the source file"
+        - end_point: "End position [line, column] in the source file"
+        - start_byte: "Start byte offset in the source file"
+        - end_byte: "End byte offset in the source file"
+    Creation:
+      Description: "Every parsed source file (from languages like C, C++, C#, or Java) is represented as a File node. Import statements are captured as File properties rather than separate nodes, making RAG queries more efficient. File boundaries are captured using tree-sitter parse information."
+
+  Function:
+    Contents:
+      Attributes:
+        - name: "The function's identifier"
+        - type_kind: "Marker indicating that the node represents a function"
+        - return_type: "The data type returned by the function"
+        - parameters: "Function parameter signature as a string (e.g., '(string message, int count)')"
+        - start_point: "Start position in the source file"
+        - end_point: "End position in the source file"
+        - file_path: "The file where the function is defined"
+        - body: "The implementation of the function"
+        - modifier: "Access modifiers or additional metadata"
+        - type_parameters: "Generic type parameters, if any"
+        - constraints: "Any constraints applied to the function"
+        - attribute: "Other custom attributes"
+    Creation:
+      Description: "Language-specific constructs such as 'function.definition', 'function.return_type', and 'function.parameters' are mapped to a unified Function node. Parameters are stored as string attributes rather than separate Parameter entities for efficiency and Neo4j property compatibility."
+
+  Type:
+    Contents:
+      Attributes:
+        - name: "The type's name (e.g., class, struct, enum, union, typedef)"
+        - type_kind: "Indicates the kind of type (class, struct, etc.)"
+        - access_modifier: "Visibility (public, private, etc.)"
+        - is_abstract: "Indicator for abstract types (in OOP)"
+        - documentation: "Associated documentation or comments but may not be present in all languages"
+        - file_path: "Location of the type definition"
+        - fields: "Member variables or fields of the type"
+        - base_list: "List of base types (inheritance or interface implementation)"
+        - type_parameters: "Generic parameters, if applicable"
+        - constraints: "Type constraints"
+        - body: "The type body content"
+        - modifier: "Additional modifiers"
+        - attribute: "Other attributes"
+    Creation:
+      Description: "Mappings like 'struct.definition', 'class.definition', 'enum.definition', or 'typedef.definition' from various languages are normalized into a unified Type node."
+
+  Variable:
+    Contents:
+      Attributes:
+        - name: "The variable or field name"
+        - alias: "Alternative names or aliases"
+        - type_kind: "The variable's data type or category"
+        - initial_value: "Assigned value at declaration, if any"
+        - access_modifier: "Visibility or access level"
+        - file_path: "File where the variable is declared"
+        - explicit_interface: "Interface details for properties (if applicable)"
+        - accessors: "Accessors for properties"
+        - arrow_clause: "Arrow-expression syntax, if used"
+        - value: "The variable's assigned value"
+        - modifier: "Additional modifiers"
+        - attribute: "Other custom attributes"
+    Creation:
+      Description: "Language-specific captures (e.g., 'declaration.definition', 'variable.definition', 'field.definition') are converted into a unified Variable node, representing both local variables and fields."
+
+  Namespace:
+    Contents:
+      Attributes:
+        - name: "The namespace identifier"
+        - type_kind: "Indicates that this node is a namespace"
+        - path: "The hierarchical or dotted path of the namespace"
+        - start_point: "Start position in the file"
+        - end_point: "End position in the file"
+        - file_path: "File containing the namespace definition"
+        - attribute: "Attributes applied to the namespace"
+        - body: "Contained declarations and definitions"
+        - modifier: "Additional modifiers"
+    Creation:
+      Description: "Constructs like 'namespace.definition' or 'file_scoped_namespace.definition' are mapped to a Namespace node, encapsulating all types and functions defined within that scope."
+
+  Macro:
+    Contents:
+      Attributes:
+        - name: "The macro's identifier"
+        - type_kind: "Indicates that this is a macro"
+        - value: "The replacement text or definition"
+        - start_point: "Starting location in the file"
+        - end_point: "Ending location in the file"
+        - file_path: "File where the macro is defined"
+        - parameters: "Parameters for macro functions (if applicable)"
+        - body: "The macro's body (for macro functions)"
+    Creation:
+      Description: "Preprocessor constructs (e.g., 'macro.definition', 'macro_function.definition') are mapped to Macro nodes, representing macros and macro functions uniformly."
+
+  Block:
+    Contents:
+      Attributes:
+        - statements: "A list of contained statements or inner elements"
+        - type_kind: "Denotes that this node represents a block of code"
+        - start_point: "Start position in the source file"
+        - end_point: "End position in the source file"
+        - file_path: "The source file containing the block"
+    Creation:
+      Description: "Blocks are generated for sequences of statements (typically enclosed in braces) and capture the nested structure of the source code."
+
+  Literal:
+    Contents:
+      Attributes:
+        - value: "The literal value (e.g., number, string, boolean)"
+        - type_kind: "Classification of the literal"
+        - literal_type: "More specific type information (distinguishing string, numeric, etc.)"
+        - start_point: "Position in the source file where the literal appears"
+        - end_point: "End position of the literal in the source file"
+        - file_path: "File where the literal is found"
+    Creation:
+      Description: "Literal expressions captured (e.g., 'expression.literal', 'literal.string') are represented as Literal nodes, ensuring uniform handling of constant values."
+
+EdgeDefinitions:
+  CALLS:
+    Definition:
+      From: "Function (caller)"
+      To: "Function (callee)"
+    Creation:
+      Description: "When a function call is detected within a function body (using language-specific captures such as 'call.definition' and 'call.function'), a CALLS edge is established between the caller and callee Function nodes."
+
+  USES_TYPE:
+    Definition:
+      From: "Function"
+      To: "Type"
+    Creation:
+      Description: "When a function uses a type (in parameters, field declarations, local variables, static method calls, object instantiation, etc.) but does not call methods on that type, a USES_TYPE edge is established. This distinguishes type usage from actual method calls, enabling semantic analysis of how functions interact with types in different contexts."
+
+  DEFINED_IN:
+    Definition:
+      From: "Function, Type, Namespace, or Variable"
+      To: "File"
+    Creation:
+      Description: "Each element carries a file context (via the 'file_path' attribute) that is used to establish a DEFINED_IN edge linking the element to its source File node."
+
+  INCLUDED_IN:
+    Definition:
+      From: "Macro"
+      To: "File"
+    Creation:
+      Description: "Preprocessor macros (captured with 'macro.definition') are linked to the File node in which they are defined, forming an INCLUDED_IN relationship."
+
+
+  CONTAINS:
+    Definition:
+      From: "File, Namespace, Type, or Block"
+      To: "Namespace, Type, Function, Block, Literal, or Macro"
+    Creation:
+      Description: "This edge models the hierarchical nesting found in source code. For instance, a File node contains Type and Function nodes, while a Type node may contain its member Variables and Functions. The CONTAINS relationship is derived from structural nesting indicated by language-specific captures."
+
+  INHERITS_FROM:
+    Definition:
+      From: "Type (derived)"
+      To: "Type (base)"
+    Creation:
+      Description: "Object-oriented inheritance constructs (e.g., 'class.base', 'class.superclass') are mapped to INHERITS_FROM edges, linking derived types with their base types."
+
+  IMPLEMENTS:
+    Definition:
+      From: "Type (class/struct)"
+      To: "Type (interface)"
+    Creation:
+      Description: "Language constructs indicating interface implementation (such as a class listing interfaces in 'class.base') are normalized into an IMPLEMENTS edge, representing that a type conforms to an interface contract."
+
+  DECLARES:
+    Definition:
+      From: "Function, Type, Namespace, or Block"
+      To: "Variable"
+    Creation:
+      Description: "When a variable declaration is encountered (via captures like 'declaration.definition' or 'field.definition'), a DECLARES edge is created linking the declaration scope to the Variable node, enabling scope-aware queries."
+
+# llm_query_guidance:
+#   conventions:
+#     labels: ["Project","File","Type","Function","Variable","Namespace","Macro","Block","Literal","Statement"]
+#     canonical_properties:
+#       Project: ["name","project_path","version","type","created_at","modified_at"]
+#       File: ["name","file_path","version","imports","import_aliases","start_point","end_point","start_byte","end_byte"]
+#       Type: ["name","type_kind","access_modifier","is_abstract","documentation","file_path","fields","base_list","body","modifier","attribute","start_byte","end_byte","symbols_location"]
+#       Function: ["name","type_kind","return_type","parameters","file_path","body","modifier","type_parameters","constraints","attribute","start_byte","end_byte","symbols_location","start_point","end_point"]
+#       Variable: ["name","alias","type_kind","initial_value","access_modifier","file_path","explicit_interface","accessors","arrow_clause","value","modifier","attribute","start_byte","end_byte","symbols_location"]
+#       Namespace: ["name","type_kind","path","file_path","attribute","body","modifier","start_byte","end_byte","symbols_location","start_point","end_point"]
+#       Block: ["statements","type_kind","file_path","start_byte","end_byte","symbols_location","start_point","end_point","statement_count","has_loops","has_error_handling"]
+#       Literal: ["value","type_kind","literal_type","file_path","start_byte","end_byte","symbols_location","start_point","end_point"]
+#       Statement: ["text","statement_type","order","file_path","start_byte","end_byte","symbols_location","start_point","end_point"]
+#     synonyms:
+#       "class": {label: "Type", filters: {"type_kind": ["class","struct","interface","enum"]}}
+#       "interface": {label: "Type", filters: {"type_kind": ["interface"]}}
+#       "constructor": {label: "Function", filters: {"type_kind": ["constructor"]}}
+#       "method": {label: "Function", filters: {"type_kind": ["method","function"]}}
+#       "comment": {label: "Literal", filters: {"literal_type": ["comment","doc"]}}
+#       "file": {label: "File"}
+#       "variable": {label: "Variable"}
+#     case_handling:
+#       # Use toLower for user-provided substrings
+#       substring_match: "toLower(n.name) CONTAINS toLower($needle)"
+
+#   parameters:
+#     required:
+#       project_name: {type: string, description: "Exact Project.name"}
+#     optional:
+#       file_name_contains: {type: string}
+#       type_name_exact: {type: string}
+#       function_name_exact: {type: string}
+
+#   traversal_shortcuts:   # macro-like patterns an orchestrator can expand before running
+#     byProjectFile:
+#       description: "Project → File"
+#       pattern: "(p:Project {name: $project_name})-[:CONTAINS]->(f:File)"
+#       binds: ["p","f"]
+#     fileContains:
+#       description: "File → any contained node"
+#       pattern: "(f)-[:CONTAINS]->(n)"
+#       binds: ["n"]
+#     typeContainsMember:
+#       description: "Type → member (Function|Variable|Type|Block|Literal)"
+#       pattern: "(t:Type)-[:CONTAINS]->(m)"
+#       binds: ["m"]
+#     blockContainsStatements:
+#       description: "Block → Statement (ordered)"
+#       pattern: "(b:Block)-[r:CONTAINS]->(s:Statement)"
+#       binds: ["b","r","s"]
+#       order_by: "r.order"
+#     functionCalls:
+#       description: "Function → CALLS → Function"
+#       pattern: "(caller:Function)-[:CALLS]->(callee:Function)"
+#       binds: ["caller","callee"]
+
+#   relationship_hints:
+#     CONTAINS:
+#       direction: "parent -> child"
+#       cardinality: "one-to-many"
+#       inverse_of: "DEFINED_IN"
+#       semantics: "Structural ownership; descend into code elements."
+#       examples:
+#         - name: "Functions in a file"
+#           cypher: |
+#             MATCH (p:Project {name:$project_name})-[:CONTAINS]->(f:File {name:$file})
+#                   -[:CONTAINS]->(fn:Function)
+#             RETURN fn.name LIMIT 50
+#     DEFINED_IN:
+#       direction: "child -> parent"
+#       cardinality: "many-to-one"
+#       inverse_of: "CONTAINS"
+#       semantics: "Declaring scope of a symbol (file/namespace)."
+#       examples:
+#         - name: "File for a function"
+#           cypher: |
+#             MATCH (fn:Function {name:$function_name_exact})-[:DEFINED_IN]->(f:File)
+#             RETURN f.file_path LIMIT 1
+#     CALLS:
+#       direction: "caller -> callee"
+#       cardinality: "many-to-many"
+#       properties: ["call_site_line?","call_site_col?"]
+#       semantics: "Static/detected call edges between functions."
+#       examples:
+#         - name: "Callees of a function"
+#           cypher: |
+#             MATCH (caller:Function {name:$function_name_exact})-[:CALLS]->(callee:Function)
+#             RETURN callee.name LIMIT 100
+#     USES_TYPE:
+#       direction: "function -> type"
+#       cardinality: "many-to-many"
+#       semantics: "Function uses a type for parameters, instantiation, static access, or declarations."
+#       examples:
+#         - name: "Types used by a function"
+#           cypher: |
+#             MATCH (f:Function {name:$function_name_exact})-[:USES_TYPE]->(t:Type)
+#             RETURN t.name
+#     HAS_TYPE:
+#       direction: "function -> type"
+#       cardinality: "one-to-one|optional"
+#       semantics: "Declared return/associated type if modeled."
+#       notes: ["Use only if present in your graph."]
+#     INHERITS_FROM:
+#       direction: "derived -> base"
+#       cardinality: "many-to-one|many"
+#       semantics: "Class/struct inheritance."
+#       examples:
+#         - name: "Base classes of a type"
+#           cypher: |
+#             MATCH (t:Type {name:$type_name_exact})-[:INHERITS_FROM]->(base:Type)
+#             RETURN base.name
+#     IMPLEMENTS:
+#       direction: "class -> interface"
+#       cardinality: "many-to-many"
+#       semantics: "Interface implementation."
+#       examples:
+#         - name: "Interfaces implemented by a class"
+#           cypher: |
+#             MATCH (c:Type {name:$type_name_exact})-[:IMPLEMENTS]->(i:Type)
+#             RETURN i.name
+#     DECLARES:
+#       direction: "scope -> variable"
+#       cardinality: "one-to-many"
+#       semantics: "Declaration relationship for variables (fields, locals, etc.)."
+#       examples:
+#         - name: "Vars declared by a function"
+#           cypher: |
+#             MATCH (fn:Function {name:$function_name_exact})-[:DECLARES]->(v:Variable)
+#             RETURN v.name
+#     INCLUDED_IN:
+#       direction: "macro -> file"
+#       cardinality: "many-to-one"
+#       semantics: "Preprocessor macro defined in file."
+
+#   query_recipes:
+#     find_file_by_substring:
+#       description: "Locate a file whose name contains a substring (case-insensitive)."
+#       cypher: |
+#         MATCH (p:Project {name:$project_name})-[:CONTAINS]->(f:File)
+#         WHERE toLower(f.name) CONTAINS toLower($file_name_contains)
+#         RETURN f.name, f.file_path LIMIT 20
+
+#     constructors_in_type:
+#       description: "Find constructors for a given Type."
+#       cypher: |
+#         MATCH (t:Type {name:$type_name_exact})-[:CONTAINS]->(fn:Function {type_kind:'constructor'})
+#         RETURN fn.name, fn.parameters
+
+#     functions_with_parameter_type:
+#       description: "Find functions that use a specific type in their parameters."
+#       cypher: |
+#         MATCH (p:Project {name:$project_name})-[:CONTAINS]->(f:File)-[:CONTAINS]->(fn:Function)
+#         WHERE fn.parameters CONTAINS $parameter_type
+#         RETURN fn.name, fn.parameters, fn.file_path
+
+#   validation:
+#     must_only_use_properties_from_label: true
+#     require_anchor_project: true
+#     enforce_parameters: true

@@ -1,0 +1,348 @@
+nodes:
+  Project:
+    attributes: ["id", "name", "project_path", "project_checksum", "version", "type", "created_at", "modified_at", "config_metadata", "dependencies", "target_framework", "output_type", "build_properties"]
+    relationships: ["CONTAINS"]
+  File:
+    attributes: ["id", "name", "file_path", "version", "imports", "import_aliases", "start_point", "end_point", "start_byte", "end_byte"]
+    relationships: ["CONTAINS"]
+  Function:
+    # IMPROVEMENT-002: Added identity properties (scope, arity, signature_lc) for unique identification
+    attributes: ["id", "name", "type_kind", "return_type", "parameters", "scope", "arity", "signature_lc", "start_point", "end_point", "file_path", "body", "modifier", "type_parameters", "constraints", "attribute", "start_byte", "end_byte", "symbols_location"]
+    relationships: ["CALLS", "DEFINED_IN", "DECLARES", "USES_TYPE", "CONTAINS", "HAS_PARAMETER"]
+  Type:
+    attributes: ["id", "name", "type_kind", "access_modifier", "is_abstract", "documentation", "file_path", "fields", "base_list", "type_parameters", "constraints", "body", "modifier", "attribute", "start_byte", "end_byte", "symbols_location"]
+    relationships: ["CONTAINS", "INHERITS_FROM", "IMPLEMENTS", "DECLARES", "DEFINED_IN"]
+  Variable:
+    attributes: ["id", "name", "alias", "type_kind", "initial_value", "access_modifier", "file_path", "explicit_interface", "accessors", "arrow_clause", "value", "modifier", "attribute", "start_byte", "end_byte", "symbols_location"]
+    relationships: ["DECLARES", "DEFINED_IN", "HAS_TYPE", "HAS_PARAMETER", "CONTAINS"]
+  Namespace:
+    attributes: ["id", "name", "type_kind", "path", "start_point", "end_point", "file_path", "attribute", "body", "modifier", "start_byte", "end_byte", "symbols_location"]
+    relationships: ["CONTAINS", "DECLARES", "DEFINED_IN"]
+  Macro:
+    attributes: ["id", "name", "type_kind", "value", "start_point", "end_point", "file_path", "parameters", "body", "start_byte", "end_byte", "symbols_location"]
+    relationships: ["CONTAINS", "INCLUDED_IN"]
+  Block:
+    attributes: ["id", "statements", "type_kind", "start_point", "end_point", "file_path", "start_byte", "end_byte", "symbols_location"]
+    relationships: ["CONTAINS", "DECLARES"]
+  Literal:
+    attributes: ["id", "value", "type_kind", "literal_type", "start_point", "end_point", "file_path", "start_byte", "end_byte", "symbols_location"]
+    relationships: ["CONTAINS"]
+  Statement:
+    attributes: ["id", "text", "statement_type", "order", "start_point", "end_point", "file_path", "start_byte", "end_byte", "symbols_location"]
+    relationships: ["CONTAINS"]
+
+relationships:
+  DEFINED_IN:
+    from: ["Function", "Type", "Namespace", "Variable"]
+    to: ["File", "Namespace"]
+    properties: ["created_at", "modified_at", "enriched_by"]
+  HAS_TYPE:
+    from: ["Variable"]
+    to: ["Type"]
+    properties: ["created_at", "modified_at", "enriched_by"]
+  INCLUDED_IN:
+    from: Macro
+    to: File
+    properties: ["created_at", "modified_at", "enriched_by"]
+  CONTAINS:
+    from: ["Project", "Namespace", "Type", "File", "Block", "Function"]
+    to: ["File", "Namespace", "Type", "Function", "Block", "Literal", "Statement", "Macro", "Variable"]
+    properties: ["created_at", "modified_at", "enriched_by", "order"]
+  INHERITS_FROM:
+    from: Type
+    to: Type
+    properties: ["created_at", "modified_at", "enriched_by"]
+  IMPLEMENTS:
+    from: Type
+    to: Type
+    properties: ["created_at", "modified_at", "enriched_by", "text", "start_point", "end_point", "start_byte", "end_byte"]
+  DECLARES:
+    from: ["Function", "Type", "Namespace", "Block"]
+    to: ["Variable"]
+    properties: ["created_at", "modified_at", "enriched_by"]
+  REFERENCES:
+    from: ["Function", "Type", "Variable"]
+    to: ["Function", "Type", "Variable"]
+    properties: ["text", "start_point", "end_point", "start_byte", "end_byte", "created_at", "modified_at", "enriched_by"]
+  CALLS:
+    from: Function
+    to: Function
+    properties: ["text", "start_point", "end_point", "start_byte", "end_byte", "created_at", "modified_at", "enriched_by"]
+    constraints: ["from != to"]  # Prevent self-references
+  USES_TYPE:
+    from: ["Function"]
+    to: ["Type"]
+    properties: ["text", "start_point", "end_point", "start_byte", "end_byte", "created_at", "modified_at", "enriched_by"]
+  HAS_PARAMETER:
+    from: ["Function"]
+    to: ["Variable"]
+    properties: ["position", "created_at", "modified_at", "enriched_by"]
+    constraints: []
+
+NodeDefinitions:
+  Project:
+    Contents:
+      Attributes:
+        - id: "Deterministic unique identifier in format '{type}:{normalized_file_path}:{name_or_position}' (e.g., 'Project:/opt/projects/HelloWorldApp:HelloWorldApp'). Computed at parse time; used as the MERGE key in Neo4j for idempotent upserts."
+        - name: "The project's name (e.g., HelloWorldApp)"
+        - project_path: "The project's root directory path"
+        - project_checksum: "Checksum for project integrity verification"
+        - version: "Project version information"
+        - type: "Node type identifier (always 'Project')"
+        - created_at: "Timestamp when the project was first processed"
+        - modified_at: "Timestamp when the project was last modified"
+        - config_metadata: "JSON STRING containing parsed config file metadata from project files (.csproj, package.json, etc.). To query contents: apoc.convert.fromJsonMap(p.config_metadata)"
+        - dependencies: "JSON STRING mapping dependency types to package lists. To query contents: apoc.convert.fromJsonMap(p.dependencies)"
+        - target_framework: "Target framework/runtime string (e.g., 'net9.0', 'node18')"
+        - output_type: "Build output type string (e.g., 'Exe', 'Library', 'Module')"
+        - build_properties: "JSON STRING with build configuration properties (SDK, language version, etc.). To query contents: apoc.convert.fromJsonMap(p.build_properties)"
+    Creation:
+      Description: "The top-level container representing the entire project or solution. IMPORTANT: Project nodes ONLY directly contain File nodes via CONTAINS relationships (Project→File). Other node types (Type, Function, Namespace, etc.) are NOT directly contained by Project - they are nested deeper in the hierarchy via File containment (e.g., Project→File→Type→Function). To reach non-File nodes from Project, traverse through File nodes first. Project config files (.csproj, package.json, pyproject.toml, etc.) are NOT stored as separate File nodes - their contents are extracted and stored as JSON strings in config_metadata and build_properties. Use apoc.convert.fromJsonMap() to parse and query these JSON strings."
+      EnrichmentDescription: "Represents the overall software project or solution, serving as the top-level container for all code and related files. Each Project node contains one or more File nodes via CONTAINS. Other entities such as Functions, Types, or Namespaces are reached indirectly through their File containers (e.g., Project → File → Type → Function). Configuration files like .csproj, package.json, or pyproject.toml are not represented as File nodes. Their parsed metadata is instead stored within attributes (config_metadata, build_properties, and dependencies). This node allows for questions such as “What files belong to this project?”, “What is the target framework?”, or “What dependencies are declared?” — supporting structural and metadata-level project analysis."
+  
+  File:
+    Contents:
+      Attributes:
+        - id: "Deterministic unique identifier in format 'File:{normalized_file_path}:{file_name}' (e.g., 'File:src/Program.cs:Program.cs'). MERGE key in Neo4j."
+        - name: "The file's name"
+        - file_path: "The file's location within the project"
+        - version: "Version information (if available)"
+        - imports: "Array of imported namespaces/modules (e.g., ['System', 'System.Collections.Generic'])"
+        - import_aliases: "Object mapping aliases to full names (e.g., {'Collections': 'System.Collections'})"
+        - start_point: "Start position [line, column] in the source file"
+        - end_point: "End position [line, column] in the source file"
+        - start_byte: "Start byte offset in the source file"
+        - end_byte: "End byte offset in the source file"
+    Creation:
+      Description: "Represents parsed SOURCE CODE files (languages like C, C++, C#, Java, Python, etc.). Import statements are captured as File properties rather than separate nodes, making RAG queries more efficient. IMPORTANT: Project configuration files (.csproj, package.json, pyproject.toml, CMakeLists.txt, etc.) are NOT stored as File nodes - their data is extracted and stored in the Project node's config_metadata and build_properties attributes. Only source code files appear as File nodes."
+      EnrichmentDescription: "Represents a source code file within a project (e.g., .cs, .cpp, .java, .py). File nodes act as containers for code entities such as Types, Namespaces, and Functions through the CONTAINS relationship. Each File captures import statements and aliases directly as attributes (imports, import_aliases) for efficient retrieval in code intelligence and RAG-based lookups. Configuration or build files (e.g., .csproj, package.json, CMakeLists.txt) are not included as File nodes — their data is extracted and stored in the parent Project node. Enables queries like “Which functions are defined in this file?”, “What imports are used here?”, or “Where is this type declared?"
+  
+  Function:
+    Contents:
+      Attributes:
+        - id: "Deterministic unique identifier in format 'Function:{normalized_file_path}:{scope}:{name}:{arity}' (e.g., 'Function:src/Manager.cs:Manager:Notify:1'). The scope is the enclosing Type or Namespace name; arity is the parameter count. Together they disambiguate overloaded methods (same name, different signatures) in the same class. When scope is absent (top-level function) the format is 'Function:{file}:{name}:{arity}'. MERGE key in Neo4j."
+        - name: "The function's identifier"
+        - type_kind: "Marker indicating that the node represents a function"
+        - return_type: "The data type returned by the function"
+        - parameters: "Function parameter signature as a string (e.g., '(string message, int count)')"
+        - scope: "Name of the enclosing Type or Namespace (e.g. 'Manager' for a method inside class Manager). Used in the deterministic id to disambiguate same-named functions across scopes."
+        - arity: "Number of declared parameters (integer). Used with scope in the deterministic id to disambiguate overloaded methods."
+        - signature_lc: "Lowercase comma-joined parameter type names (e.g. 'inotifier' for a single INotifier param). Supports case-insensitive signature matching queries."
+        - start_point: "Start position in the source file"
+        - end_point: "End position in the source file"
+        - file_path: "The file where the function is defined"
+        - body: "The implementation of the function"
+        - modifier: "Access modifiers or additional metadata"
+        - type_parameters: "Generic type parameters, if any"
+        - constraints: "Any constraints applied to the function"
+        - attribute: "Other custom attributes"
+    Creation:
+      Description: "Language-specific constructs such as 'function.definition', 'function.return_type', and 'function.parameters' are mapped to a unified Function node. Parameters are stored as string attributes rather than separate Parameter entities for efficiency and Neo4j property compatibility."
+      EnrichmentDescription: "Represents a function, method, or procedure — a block of code performing a specific task. Captures both syntactic and semantic aspects, including parameters, modifiers, generic type parameters, and return types. Identity properties scope (enclosing type/namespace name), arity (parameter count), and signature_lc (lowercase parameter type list) enable precise disambiguation of overloaded methods and case-insensitive signature matching. Function nodes link to called functions via CALLS, to types they reference via USES_TYPE, to their declared parameters via HAS_PARAMETER, and to inner blocks and variables via CONTAINS and DECLARES. Supports natural queries like “Where is this function defined?”, “What does this function call?”, “Which types does this method depend on?”, or “What parameters does this constructor accept?”. Language-agnostic unification ensures functions from C, C++, Java, Python, etc., are represented consistently for cross-language analysis."
+  
+  Type:
+    Contents:
+      Attributes:
+        - id: "Deterministic unique identifier in format 'Type:{normalized_file_path}:{name}' for top-level types (e.g., 'Type:src/INotifier.cs:INotifier'), or 'Type:{normalized_file_path}:Type.{enclosingType}:{name}' for nested types (e.g., 'Type:src/Outer.cs:Type.Outer:Config'). The nested format disambiguates two inner classes with the same name defined inside different outer classes in the same file. MERGE key in Neo4j."
+        - name: "The type's name (e.g., class, struct, enum, union, typedef)"
+        - type_kind: "Indicates the kind of type (class, struct, etc.)"
+        - access_modifier: "Visibility (public, private, etc.)"
+        - is_abstract: "Indicator for abstract types (in OOP)"
+        - documentation: "Associated documentation or comments but may not be present in all languages"
+        - file_path: "Location of the type definition"
+        - fields: "Member variables or fields of the type"
+        - base_list: "List of base types (inheritance or interface implementation)"
+        - type_parameters: "Generic parameters, if applicable"
+        - constraints: "Type constraints"
+        - body: "The type body content"
+        - modifier: "Additional modifiers"
+        - attribute: "Other attributes"
+    Creation:
+      Description: "Mappings like 'struct.definition', 'class.definition', 'enum.definition', or 'typedef.definition' from various languages are normalized into a unified Type node."
+      EnrichmentDescription: "Represents a user-defined or language-defined type such as a class, struct, enum, or typedef. Type nodes serve as structural anchors within source code — they may contain member functions, fields, and nested types via CONTAINS, link back to their defining file via DEFINED_IN, declare member variables via DECLARES, and form semantic relationships via INHERITS_FROM (for inheritance) and IMPLEMENTS (for interface conformance). The access_modifier, is_abstract, and fields attributes provide OOP metadata derived during post-processing. Supports natural-language queries like “Which class implements this interface?”, “What members belong to this type?”, “Which base type does this class extend?”, or “Where is this type defined?”. "
+  
+  Variable:
+    Contents:
+      Attributes:
+        - id: "Deterministic unique identifier in format 'Variable:{normalized_file_path}:{NodeType}.{scope}:{name}' (e.g., 'Variable:src/WorkerA.cs:Type.WorkerA:_notifier' for a class field, 'Variable:src/WorkerA.cs:Function.WorkerA:notifier' for a constructor parameter). The NodeType prefix ('Type' or 'Function') distinguishes a field from a same-named constructor parameter. When no named ancestor exists the format falls back to 'Variable:{file}:{name}'. MERGE key in Neo4j."
+        - name: "The variable or field name"
+        - alias: "Alternative names or aliases"
+        - type_kind: "The variable's data type or category"
+        - initial_value: "Assigned value at declaration, if any"
+        - access_modifier: "Visibility or access level"
+        - file_path: "File where the variable is declared"
+        - explicit_interface: "Interface details for properties (if applicable)"
+        - accessors: "Accessors for properties"
+        - arrow_clause: "Arrow-expression syntax, if used"
+        - value: "The variable's assigned value"
+        - modifier: "Additional modifiers"
+        - attribute: "Other custom attributes"
+    Creation:
+      Description: "Language-specific captures (e.g., 'declaration.definition', 'variable.definition', 'field.definition') are converted into a unified Variable node, representing both local variables and fields."
+      EnrichmentDescription: "Represents a variable or field in code — a named storage element with a value, type, and visibility. Covers all variable kinds unified under a single schema: fields (class members), properties, parameters, and local variables, distinguished by type_kind. Variables are declared within a scope via DECLARES (from Type, Function, Namespace, or Block), linked to their defining file via DEFINED_IN, connected to their declared type via HAS_TYPE (when the type resolves to a project-internal Type node), and connected to their owning function as a parameter via HAS_PARAMETER. The id format encodes the declaring scope (Type.ClassName or Function.MethodName) to disambiguate same-named fields and parameters across different classes. Supports natural queries such as “Where is this variable defined?”, “What is its declared type?”, “Which function declares this variable?”, or “Find all fields of type INotifier?”. Enables fine-grained variable resolution for static analysis, symbol search, and type-resolved dependency tracing."
+  
+  Namespace:
+    Contents:
+      Attributes:
+        - id: "Deterministic unique identifier in format 'Namespace::{name}' (no file_path — project-scoped). The same logical namespace declared across multiple files MERGEs to a single Neo4j node. Each contributing file gets its own CONTAINS → Namespace edge."
+        - name: "The namespace identifier"
+        - type_kind: "Indicates that this node is a namespace"
+        - path: "The hierarchical or dotted path of the namespace"
+        - start_point: "Start position in the file"
+        - end_point: "End position in the file"
+        - file_path: "File containing the namespace definition"
+        - attribute: "Attributes applied to the namespace"
+        - body: "Contained declarations and definitions"
+        - modifier: "Additional modifiers"
+    Creation:
+      Description: "Constructs like 'namespace.definition' or 'file_scoped_namespace.definition' are mapped to a Namespace node, encapsulating all types and functions defined within that scope."
+      EnrichmentDescription: "Represents a namespace or module scope grouping related code entities (Types, Functions, etc.). Acts as an organizational unit, enabling hierarchical lookups of definitions. Namespace nodes contain child Types or nested Namespaces via CONTAINS, and link back to their defining file through DEFINED_IN. Enables semantic queries like “What types are declared in this namespace?” or “Which namespace contains this class?”. "
+  
+  Macro:
+    Contents:
+      Attributes:
+        - id: "Deterministic unique identifier in format 'Macro:{normalized_file_path}:{name}'. MERGE key in Neo4j."
+        - name: "The macro's identifier"
+        - type_kind: "Indicates that this is a macro"
+        - value: "The replacement text or definition"
+        - start_point: "Starting location in the file"
+        - end_point: "Ending location in the file"
+        - file_path: "File where the macro is defined"
+        - parameters: "Parameters for macro functions (if applicable)"
+        - body: "The macro's body (for macro functions)"
+    Creation:
+      Description: "Preprocessor constructs (e.g., 'macro.definition', 'macro_function.definition') are mapped to Macro nodes, representing macros and macro functions uniformly."
+      EnrichmentDescription: "Represents a preprocessor macro or macro function, typically defined in C, C++, or similar languages. Captures both parameterized and simple macro forms with their defining values. Macro nodes are included in Files through INCLUDED_IN, and can be contained by higher-level constructs for dependency tracing. Supports queries such as “Where is this macro defined?”, “What value does this macro expand to?”, or “Which files include this macro?”. "
+  
+  Block:
+    Contents:
+      Attributes:
+        - id: "Deterministic unique identifier in format 'Block:{normalized_file_path}:{start_line}:{start_col}' (four colon-separated segments; line and col come from the tree-sitter start_point). MERGE key in Neo4j."
+        - statements: "A list of contained statements or inner elements"
+        - type_kind: "Denotes that this node represents a block of code"
+        - start_point: "Start position in the source file"
+        - end_point: "End position in the source file"
+        - file_path: "The source file containing the block"
+    Creation:
+      Description: "Blocks are generated for sequences of statements (typically enclosed in braces) and capture the nested structure of the source code."
+      EnrichmentDescription: "Represents a code block — a syntactic region enclosed in braces or indentation, containing one or more statements or nested blocks. Blocks are linked to their statements or inner scopes via the CONTAINS relationship, maintaining execution order with the order property. Enables reasoning about local control flow, nested logic, and scope-based declarations. Common queries such as “What statements are in this block?”, “Which variables are declared here?”, or “How is this block nested within its parent function?”. "
+  
+  Literal:
+    Contents:
+      Attributes:
+        - id: "Deterministic unique identifier in format 'Literal:{normalized_file_path}:{start_line}:{start_col}' (four colon-separated segments). MERGE key in Neo4j."
+        - value: "The literal value (e.g., number, string, boolean)"
+        - type_kind: "Classification of the literal"
+        - literal_type: "More specific type information (distinguishing string, numeric, etc.)"
+        - start_point: "Position in the source file where the literal appears"
+        - end_point: "End position of the literal in the source file"
+        - file_path: "File where the literal is found"
+    Creation:
+      Description: "Literal expressions captured (e.g., 'expression.literal', 'literal.string') are represented as Literal nodes, ensuring uniform handling of constant values."
+      EnrichmentDescription: "Represents a literal value — constants appearing directly in code such as numbers, strings, booleans, or nulls. Ensures a uniform representation of constant expressions across languages. Useful for semantic code understanding, value propagation, and pattern analysis (e.g., “Where is the string 'error' used?”). Often contained within statements, expressions, or functions through CONTAINS. "
+  
+  Statement:
+    Contents:
+      Attributes:
+        - id: "Deterministic unique identifier in format 'Statement:{normalized_file_path}:{start_line}:{start_col}' (four colon-separated segments). MERGE key in Neo4j."
+        - text: "The statement text (e.g., 'x = 5;', 'return result;')"
+        - statement_type: "Classification of the statement (e.g., 'expression_statement', 'local_declaration_statement', 'foreach_statement', 'comment')"
+        - order: "Sequential position within the containing block (1-indexed)"
+        - start_point: "Position in the source file where the statement begins"
+        - end_point: "End position of the statement in the source file"
+        - file_path: "File where the statement is found"
+        - start_byte: "Start byte offset in the source file"
+        - end_byte: "End byte offset in the source file"
+        - symbols_location: "LSP-compatible location information"
+    Creation:
+      Description: "Statement nodes are created from explicit tree-sitter query captures (e.g., 'statement.expression', 'statement.declaration', 'statement.if') for various statement types. Each statement is represented as a Statement node with a CONTAINS relationship to its parent Block, maintaining order. The 'statement_type' attribute classifies the statement (e.g., 'expression_statement', 'local_declaration_statement', 'if_statement'). This enables fine-grained control flow and data flow analysis within code blocks."
+      EnrichmentDescription: "Represents a single statement in source code, such as an expression, assignment, loop, or conditional. Captures the statement text, its type (e.g., if_statement, return_statement), and sequential position within a block (order). Each Statement is contained within a Block and connects to other code entities through usage or reference relationships. Enables natural queries like “What statements appear in this block?”, “Where does this function return?”, or “Which line declares this variable?”. "
+
+EdgeDefinitions:
+  CALLS:
+    Definition:
+      From: "Function (caller)"
+      To: "Function (callee)"
+    Creation:
+      Description: "When a function call is detected within a function body (using language-specific captures such as 'call.definition' and 'call.function'), a CALLS edge is established between the caller and callee Function nodes."
+      EnrichmentDescription: "Represents a function call relationship between two Function nodes — linking the caller to the callee. Derived from language-specific syntax captures (call.definition, call.function). Enables tracing of call hierarchies and runtime dependencies. Natural queries such as “Which functions call this one?”, “What does this function invoke?”, “Show me the call graph for this file.”. "
+  
+  DEFINED_IN:
+    Definition:
+      From: "Function, Type, Namespace, or Variable"
+      To: "File"
+    Creation:
+      Description: "Each element carries a file context (via the 'file_path' attribute) that is used to establish a DEFINED_IN edge linking the element to its source File node."
+      EnrichmentDescription: "Represents a definition-location relationship, linking a Function, Type, Namespace, or Variable to the File (or Namespace) where it is defined. Provides traceability of source locations for code navigation, indexing, and symbol lookup. Enables queries like “Where is this function defined?”, “Which file defines this class?”, or “Which namespace declares this variable?”. "
+  
+  INCLUDED_IN:
+    Definition:
+      From: "Macro"
+      To: "File"
+    Creation:
+      Description: "Preprocessor macros (captured with 'macro.definition') are linked to the File node in which they are defined, forming an INCLUDED_IN relationship."
+      EnrichmentDescription: "Connects a Macro definition to the File that includes or declares it. Facilitates preprocessor dependency tracking, answering queries such as “What macros are defined in this header?” or “Which file includes this macro definition?”. "
+  
+  CONTAINS:
+    Definition:
+      From: "File, Namespace, Type, or Block"
+      To: "Namespace, Type, Function, Block, Literal, Statement, or Macro"
+    Creation:
+      Description: "This edge models the hierarchical nesting found in source code. For instance, a File node contains Type and Function nodes, while a Type node may contain its member Variables and Functions, and Block nodes contain Statement nodes. The CONTAINS relationship is derived from structural nesting indicated by language-specific captures. When connecting Block to Statement, an 'order' property maintains statement sequence."
+      EnrichmentDescription: "Models structural containment — one code entity owning or nesting another. Example chains are 'Project -> File -> Type -> Function', 'Function -> Block -> Statement'. Each relationship preserves syntactic hierarchy and execution order when applicable (e.g., via order). Supports natural queries such as “What does this class contain?”, “Which statements belong to this block?”, “What files are part of this project?”."
+  
+  INHERITS_FROM:
+    Definition:
+      From: "Type (derived)"
+      To: "Type (base)"
+    Creation:
+      Description: "Object-oriented inheritance constructs (e.g., 'class.base', 'class.superclass') are mapped to INHERITS_FROM edges, linking derived types with their base types."
+      EnrichmentDescription: "Represents classical inheritance in object-oriented code, linking a derived Type to its base Type. Enables semantic queries such as “Which classes extend this base class?” or “What is the inheritance tree for this type?”. Useful for structural analysis, polymorphism exploration, and type hierarchy resolution."
+  
+  IMPLEMENTS:
+    Definition:
+      From: "Type (class/struct)"
+      To: "Type (interface)"
+    Creation:
+      Description: "Language constructs indicating interface implementation (such as a class listing interfaces in 'class.base') are normalized into an IMPLEMENTS edge, representing that a type conforms to an interface contract."
+      EnrichmentDescription: "Represents an interface implementation — where a class or struct conforms to an interface contract. Normalizes constructs like class.base or interface lists across languages. Enables questions such as “Which types implement this interface?” or “Does this class implement IDisposable?”. Supports OOP and dependency-injection graph analysis."
+  
+  DECLARES:
+    Definition:
+      From: "Function, Type, Namespace, or Block"
+      To: "Variable"
+    Creation:
+      Description: "When a variable declaration is encountered (via captures like 'declaration.definition' or 'field.definition'), a DECLARES edge is created linking the declaration scope to the Variable node, enabling scope-aware queries."
+      EnrichmentDescription: "Represents the declaration relationship — linking a scope (Function, Type, Namespace, or Block) to Variables defined within it. Enables scope-aware symbol resolution and declaration tracing. Helps in answering common questions like 'Which variables are declared inside this block?', 'What fields belong to this class?', or 'What local variables are declared in this function?'."
+  
+  HAS_TYPE:
+    Definition:
+      From: "Variable (any type_kind: field, property, parameter, local_variable)"
+      To: "Type"
+    Creation:
+      Description: "A HAS_TYPE edge links a Variable node to the Type node of its declared type. Built in PASS 1 via textDocument/typeDefinition on the variable's name symbol. Applies to all Variable kinds — fields (e.g. 'private INotifier _notifier'), properties, parameters (e.g. 'INotifier notifier'), and local variables (e.g. 'Manager manager = new Manager()') — whenever LSP resolves the declared type to a project-internal Type node. Function return types are not captured here (use Function.return_type attribute instead); type references within function bodies are covered by USES_TYPE."
+      EnrichmentDescription: "Links a Variable to the Type node for its declared type. Enables semantic type-resolution queries such as 'Which variables are of type INotifier?', 'What is the declared type of this field?', or 'Find all parameters whose type is an interface.' Covers all Variable kinds (field, property, parameter, local_variable). Only populated when the declared type resolves to a project-internal Type node — primitive types and external library types are not captured. Complements USES_TYPE (which is function-scoped) by providing direct variable-to-type linkage."
+
+  USES_TYPE:
+    Definition:
+      From: "Function"
+      To: "Type"
+    Creation:
+      Description: "When a function uses a type (in parameters, field declarations, local variables, static method calls, object instantiation, etc.) but does not call methods on that type, a USES_TYPE edge is established. Built in PASS 2 via semantic tokens + textDocument/definition. Positional scoping ensures only tokens that fall within the function's declared source range (start_point to end_point) are attributed to that function, preventing class-level tokens from being incorrectly attributed to methods inside the class."
+      EnrichmentDescription: "Represents a type-usage dependency between a Function and a Type — the function references the type in its implementation without necessarily calling it. Built from semantic token analysis and LSP definitions within the function's source range. Enables queries such as 'Which types does this function depend on?', 'What functions use INotifier?', or 'Show all types referenced in the Run method.' Complements CALLS (function-to-function) and HAS_TYPE (variable-to-type) for complete dependency tracing."
+
+  HAS_PARAMETER:
+    Definition:
+      From: "Function (method, constructor, delegate, operator)"
+      To: "Variable (with type_kind='parameter')"
+    Creation:
+      Description: "When a function declares parameters, each parameter is represented as a Variable node (type_kind='parameter') connected via HAS_PARAMETER relationship. The 'position' property maintains parameter order (0-indexed). This enables queries like 'find all functions that take an INotifier parameter' and supports parameter-level analysis."
+      EnrichmentDescription: "Links a Function to each of its declared parameters, represented as Variable nodes with type_kind='parameter'. The 'position' property (0-indexed) preserves parameter order, enabling ordered signature reconstruction. Complements the Function.parameters string attribute with a navigable, structured representation. Supports queries such as 'What parameters does this function accept?', 'Find all functions with an INotifier as their first parameter', or 'Which constructor has the most parameters?' Combined with HAS_TYPE on the parameter Variable, provides full type-resolved parameter analysis."
+
+  REFERENCES:
+    Definition:
+      From: "Function, Type, or Variable (referrer)"
+      To: "Function, Type, or Variable (referent)"
+    Creation:
+      Description: "Represents code-level reference relationships among symbols. A REFERENCES edge is established whenever a Function, Type, or Variable refers to another Function, Type, or Variable within source code. This models symbol usage links detected through parsing and semantic analysis, capturing how declarations are used or invoked in code. The edge supports data flow, dependency, and reference resolution analysis, enabling cross-entity connectivity across files and scopes."
+      EnrichmentDescription: "Represents the same concept as a 'Go to References' or 'Find All References' operation in language server protocols (LSP). This relationship connects where a symbol is declared to all points where it is referenced, used, called, or accessed within the codebase. It provides the semantic link between definitions and their usages, supporting natural queries such as 'Where is this variable used?', 'Which functions reference this type?', 'Show all references to this method?', and 'What code depends on this symbol?'. This edge is essential for dependency visualization, impact analysis, and code navigation experiences that mirror IDE-level cross-references. It bridges semantic understanding (intent of usage) with structural representation (where usage occurs), improving both retrieval precision and interpretability for LLM-driven or natural-language graph exploration."
