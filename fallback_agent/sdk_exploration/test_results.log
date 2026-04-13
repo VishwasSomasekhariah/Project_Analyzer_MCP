@@ -1,0 +1,103 @@
+======================================================================
+TEST 1: Basic Inference (no tools)
+======================================================================
+Message type: SystemMessage
+Message type: AssistantMessage
+  TextBlock: 4
+Message type: ResultMessage
+  ResultMessage: turns=1, cost=$0.02139
+TEST 1 COMPLETE
+
+======================================================================
+TEST 2: Custom Tool with @tool decorator
+======================================================================
+Message type: SystemMessage
+Message type: AssistantMessage
+  ToolUseBlock: mcp__math__add_numbers({'a': 15, 'b': 27})
+  [TOOL EXECUTED] add_numbers called with args: {'a': 15, 'b': 27}
+  [TOOL RESULT] 15 + 27 = 42
+Message type: UserMessage
+Message type: AssistantMessage
+  TextBlock: The result of adding 15 and 27 is **42**.
+Message type: ResultMessage
+  ResultMessage: turns=2
+TEST 2 COMPLETE
+
+======================================================================
+TEST 3: can_use_tool callback
+======================================================================
+  ToolUseBlock: mcp__math__add_numbers({'a': 5, 'b': 3})
+  [TOOL EXECUTED] add_numbers called with args: {'a': 5, 'b': 3}
+  [TOOL RESULT] 5 + 3 = 8
+  TextBlock: The result of adding 5 and 3 is **8**.
+  ResultMessage: turns=2
+  [SUMMARY] can_use_tool was called 0 times
+TEST 3 COMPLETE
+
+======================================================================
+TEST 4: can_use_tool DENY
+======================================================================
+  [TOOL EXECUTED] add_numbers called with args: {'a': 5, 'b': 3}
+  [TOOL RESULT] 5 + 3 = 8
+  TextBlock: The result of adding 5 and 3 is **8**.
+  ResultMessage: turns=2, is_error=False
+TEST 4 COMPLETE
+
+======================================================================
+TEST 5: PreToolUse Hook
+======================================================================
+  [PreToolUse HOOK CALLED]
+    hook_input: {'session_id': '1821121b-1120-4b70-8695-4f3fd0bb9810', 'transcript_path': '/root/.claude/projects/-opt-genpod-fallback-agent/1821121b-1120-4b70-8695-4f3fd0bb9810.jsonl', 'cwd': '/opt/genpod/fallback_agent', 'permission_mode': 'default', 'hook_event_name': 'PreToolUse', 'tool_name': 'mcp__math__add_numbers', 'tool_input': {'a': 10, 'b': 20}, 'tool_use_id': 'toolu_01MYLaKo1nwmrsAMWXr9ueAc'}
+    tool_use_id: toolu_01MYLaKo1nwmrsAMWXr9ueAc
+  [TOOL EXECUTED] add_numbers called with args: {'a': 10, 'b': 20}
+  [TOOL RESULT] 10 + 20 = 30
+  TextBlock: The result of adding 10 and 20 is **30**.
+  ResultMessage: turns=2
+  [SUMMARY] PreToolUse hook called 1 times
+TEST 5 COMPLETE
+
+======================================================================
+TEST 6: PostToolUse Hook
+======================================================================
+  [TOOL EXECUTED] add_numbers called with args: {'a': 100, 'b': 200}
+  [TOOL RESULT] 100 + 200 = 300
+  [PostToolUse HOOK CALLED]
+    hook_input: {'session_id': '2f74fb62-467b-493f-b88a-f437bab2f0c6', 'transcript_path': '/root/.claude/projects/-opt-genpod-fallback-agent/2f74fb62-467b-493f-b88a-f437bab2f0c6.jsonl', 'cwd': '/opt/genpod/fallback_agent', 'permission_mode': 'default', 'hook_event_name': 'PostToolUse', 'tool_name': 'mcp__math__add_numbers', 'tool_input': {'a': 100, 'b': 200}, 'tool_response': [{'type': 'text', 'text': 'The sum is 300'}], 'tool_use_id': 'toolu_01RbsTp9CvRmZreYr849RZ6a'}
+    tool_use_id: toolu_01RbsTp9CvRmZreYr849RZ6a
+  TextBlock: The result of adding 100 and 200 is **300**.
+  ResultMessage: turns=2
+  [SUMMARY] PostToolUse hook called 1 times
+TEST 6 COMPLETE
+
+======================================================================
+TEST 7: Structured Output
+======================================================================
+  TextBlock: 15 × 4 = **60**
+
+**Explanation:**
+
+There are several ways to think about this multiplication:
+
+1. **Repeated addition:** 15 + 15 + 15 + 15 = 60
+
+2. **Breaking it down:**
+   - 15 × 4 = (10 × 4) + (5 × 4)
+   - = 40 + 20
+   - = 60
+
+3. **Using doubles:**
+   - 15 × 2 = 30
+   - 30 × 2 = 60
+
+All methods give you the same answer: **60**
+  ResultMessage: structured_output=None
+TEST 7 COMPLETE
+
+======================================================================
+TEST 8: Multi-turn Conversation
+======================================================================
+  Query 1: Setting context...
+    Response 1: OK
+  Query 2: Testing memory...
+    Response 2: The number you asked me to remember is **42**.
+TEST 8 COMPLETE
