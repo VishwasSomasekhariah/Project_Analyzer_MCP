@@ -1,0 +1,71 @@
+# Sub-repositories (managed independently)
+neo4j-mcp-server/
+project_analyzer_cli/
+
+# Deprecated / legacy
+deprecated/
+
+# Runtime artifacts
+logs/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.egg-info/
+*.egg
+dist/
+build/
+.eggs/
+.venv/
+venv/
+.virtualenv/
+
+# uv
+.uv/
+
+# Profiling
+*.prof
+server_debug.log
+
+# Binary state / large outputs
+*.pkl
+*.pkl.gz
+
+# Benchmark results and test output
+Test_Suite_Benchmarking/
+JSON_OUTPUT_FILES/
+mcp_debug_dumps/
+
+# Environment / secrets
+.env
+*.env
+
+# IDE and tools
+.vscode/
+.cache/
+.serena/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Compiled C extensions
+*.so
+
+# Pytest / coverage
+.pytest_cache/
+htmlcov/
+.coverage
+
+# Mypy
+.mypy_cache/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Root-level test fixtures (not source)
+*.cs
+HelloWorldApp_Facts.yaml
