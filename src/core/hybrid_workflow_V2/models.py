@@ -169,6 +169,10 @@ class HybridState(BaseModel):
     # Combined Results
     combined_raw_results: List[Dict[str, Any]] = Field(default=[], description="Combined raw results from both retrievers")
     batched_results: List[List[Dict[str, Any]]] = Field(default=[], description="Results organized in batches for processing")
+    citation_lookup: Dict[str, Any] = Field(default={}, description="Deduped map of citation_id → raw result object, built in combine_results")
+
+    # Multi-source synthesis (Issue #1)
+    retriever_summaries: List[Any] = Field(default=[], description="Compressed per-retriever claim summaries (RetrieverSummary instances) produced in Stage 1")
     
     # Synthesis
     synthesis_result: Optional[SynthesisResult] = Field(description="Final synthesis result")
@@ -259,3 +263,45 @@ class SynthesisImprovementRawResponse(BaseModel):
     confidence: float = Field(description="Improved confidence", ge=0.0, le=1.0)
     status: str = Field(description="Improved status")
     suggestions: List[str] = Field(description="Improved suggestions")
+
+
+# ---------------------------------------------------------------------------
+# Multi-source synthesis models (Issue #1)
+# ---------------------------------------------------------------------------
+
+class EvidenceClaim(BaseModel):
+    """A single claim extracted from a retriever's response.
+
+    citation_ids reference the original raw result objects by their stable ID
+    — the LLM never paraphrases or copies citation text, only points to IDs.
+    """
+    text: str = Field(description="The claim statement")
+    confidence: float = Field(description="Confidence in this claim", ge=0.0, le=1.0)
+    citation_ids: List[str] = Field(default=[], description="IDs of raw citations supporting this claim")
+
+
+class RetrieverSummary(BaseModel):
+    """Compressed per-retriever findings for multi-source synthesis.
+
+    Produced by one focused LLM call per retriever (Stage 1 / Map).
+    Raw citations stay untouched in state; claims reference them by ID only.
+    """
+    retriever: str = Field(description="Retriever name: pageindex, vector, or cpg")
+    claims: List[EvidenceClaim] = Field(default=[], description="Extracted claims with citation ID references")
+    gaps: List[str] = Field(default=[], description="Topics not covered or uncertain by this retriever")
+    overall_confidence: float = Field(description="Overall confidence in this retriever's findings", ge=0.0, le=1.0)
+
+
+class ClaimExtractionRawResponse(BaseModel):
+    """Raw LLM response for per-retriever claim extraction"""
+    claims: List[Dict[str, Any]] = Field(description="List of claims — each must have: text (str), confidence (float), citation_ids (list[str])")
+    gaps: List[str] = Field(description="Topics not covered or uncertain")
+    overall_confidence: float = Field(description="Overall confidence in retriever findings", ge=0.0, le=1.0)
+
+
+class ReconciliationRawResponse(BaseModel):
+    """Raw LLM response for cross-retriever claim reconciliation (Stage 2)"""
+    agreements: List[str] = Field(description="Claims agreed upon across multiple retrievers")
+    conflicts: List[str] = Field(description="Conflicting claims between retrievers, with which retrievers disagree")
+    unique_per_retriever: Dict[str, List[str]] = Field(description="Claims unique to each retriever keyed by retriever name")
+    confidence_score: float = Field(description="Overall reconciliation confidence", ge=0.0, le=1.0)
