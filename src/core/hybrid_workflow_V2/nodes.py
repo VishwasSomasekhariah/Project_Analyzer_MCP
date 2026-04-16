@@ -1538,9 +1538,19 @@ Return ONLY a valid JSON object:
                 return SynthesisStrategy.PAGEINDEX_PRIMARY
             return SynthesisStrategy.NO_RESULTS
 
+        pageindex_succeeded = state.pageindex_result and state.pageindex_result.succeeded
+
         if vector_succeeded and not cpg_succeeded:
+            # FALLBACK_VECTOR only when pageindex also failed/was absent.
+            # When pageindex succeeded alongside vector, both are full participants.
+            if pageindex_succeeded:
+                return SynthesisStrategy.VECTOR_PRIMARY
             return SynthesisStrategy.FALLBACK_VECTOR
+
         if cpg_succeeded and not vector_succeeded:
+            # Same logic for CPG-only downstream path.
+            if pageindex_succeeded:
+                return SynthesisStrategy.CPG_PRIMARY
             return SynthesisStrategy.FALLBACK_CPG
 
         # Both vector and CPG succeeded — pick strategy by intent
