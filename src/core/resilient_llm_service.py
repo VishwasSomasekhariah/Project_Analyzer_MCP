@@ -87,8 +87,7 @@ class ResilientLLMService:
             mcp_config_path = self.config.get("mcp_config_path")
 
             # Get fallback config
-            # model = self.config.get("fallback_model", "claude-sonnet-4-5-20250929")
-            model = self.config.get("fallback_model", "claude-opus-4-6")
+            model = self.config.get("fallback_model", "claude-sonnet-4-6")
             system_prompt = self.config.get("fallback_system_prompt", None)
             max_turns = self.config.get("fallback_max_turns", 10)
             timeout = self.config.get("fallback_timeout", 300)
