@@ -434,6 +434,7 @@ class ProperlyFixedComparativeAnalyzer:
     async def run_vector_only_query(self, query: str) -> Dict[str, Any]:
         """Run query using query_vector_only MCP tool with vector database support."""
         start_time = time.time()
+        session = None
 
         try:
             # Create session with custom timeouts for long-running workflows
@@ -526,6 +527,13 @@ class ProperlyFixedComparativeAnalyzer:
                 "response_time_ms": int((time.time() - start_time) * 1000),
                 "error": str(e)
             }
+        finally:
+            if session is not None:
+                try:
+                    await session.disconnect()
+                    logger.info("🔌 MCP session disconnected successfully")
+                except Exception as cleanup_error:
+                    logger.warning(f"Session cleanup warning: {cleanup_error}")
 
     async def run_pageindex_only_query(self, query: str) -> Dict[str, Any]:
         """Run query using query_pageindex_only MCP tool (MCTS-based file tree navigation)."""
