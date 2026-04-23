@@ -260,7 +260,7 @@ class MultiAgentCoT:
                 temp_config_path = f.name
 
             client = MCPClient.from_config_file(temp_config_path)
-            session = await client.create_session(server_name)
+            session = await asyncio.wait_for(client.create_session(server_name), timeout=30.0)
 
             # Create tool manager with dedicated session
             tool_manager = ToolManager(
@@ -347,7 +347,9 @@ class MultiAgentCoT:
         finally:
             if client:
                 try:
-                    await client.close_all_sessions()
+                    await asyncio.wait_for(client.close_all_sessions(), timeout=15.0)
+                except asyncio.TimeoutError:
+                    self._logger.warning(f"{workflow_id}: Session cleanup timed out after 15s — SSE close hung (CLOSE_WAIT leak)")
                 except Exception as e:
                     self._logger.debug(f"Session cleanup for {workflow_id}: {e}")
 
@@ -575,7 +577,7 @@ EXTRACTED CONTEXT:"""
                             temp_config_path = f.name
 
                         client = MCPClient.from_config_file(temp_config_path)
-                        session = await client.create_session(server_name)
+                        session = await asyncio.wait_for(client.create_session(server_name), timeout=30.0)
 
                         # Create tool manager with dedicated session
                         tool_manager = ToolManager(
@@ -694,7 +696,9 @@ Please retry with the corrected approach."""
                     finally:
                         if client:
                             try:
-                                await client.close_all_sessions()
+                                await asyncio.wait_for(client.close_all_sessions(), timeout=15.0)
+                            except asyncio.TimeoutError:
+                                self._logger.warning(f"{cot_agent_id}: Session cleanup timed out after 15s — SSE close hung (CLOSE_WAIT leak)")
                             except Exception as e:
                                 self._logger.debug(f"Session cleanup for {cot_agent_id}: {e}")
 

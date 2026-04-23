@@ -18,7 +18,8 @@ from .models import (
     RetrievalStatus, SynthesisResult, SynthesisStrategy, RetrieverCombination,
     CriticValidation, CrossValidationResult, BatchProcessingResult,
     ChainOfThoughtResult, ChainOfThoughtStep, IntentAnalysisRawResponse,
-    SynthesisRawResponse, CriticValidationRawResponse, SynthesisImprovementRawResponse
+    SynthesisRawResponse, CriticValidationRawResponse, SynthesisImprovementRawResponse,
+    EvidenceClaim, RetrieverSummary, ClaimExtractionRawResponse, ReconciliationRawResponse,
 )
 
 logger = logging.getLogger(__name__)
@@ -30,6 +31,12 @@ T = TypeVar('T', bound=BaseModel)
 # Below this threshold the workflow falls back to vector + CPG.
 _PAGEINDEX_SUFFICIENCY_MIN_CONFIDENCE: float = 0.4
 _PAGEINDEX_SUFFICIENCY_MIN_ANSWER_CHARS: int = 50
+
+# Feature flag — Issue #1: treat PageIndex as a full synthesis participant.
+# When True, all active retrievers go through map-reduce synthesis (extract
+# claims per retriever → reconcile → synthesise from compressed claims).
+# Set to False to revert to the legacy single-source fallback behaviour.
+_USE_MULTI_SOURCE_SYNTHESIS: bool = True
 
 
 # ---------------------------------------------------------------------------
@@ -1093,40 +1100,62 @@ Unsupported claims (claims made but not backed by evidence):
         Implements intelligent batching for context window management.
         """
         logger.info("🔗 Node: combine_results")
-        
+
         try:
             combined_results = []
+            # citation_lookup: deduped map of citation_id → original raw object.
+            # Built here so synthesis nodes can resolve IDs back to raw objects
+            # without re-scanning all results. Each raw object is stored once,
+            # keyed by its stable ID, preventing duplicate citations in the
+            # final response payload regardless of how many retrievers returned it.
+            citation_lookup: Dict[str, Any] = {}
+            seen_ids: set = set()
 
-            # When in fallback path, prepend any partial pageindex results so the
-            # synthesis has the high-level context alongside the deeper findings.
-            if state.use_fallback and state.pageindex_result and state.pageindex_result.raw_results:
-                for result in state.pageindex_result.raw_results:
-                    result_copy = dict(result) if isinstance(result, dict) else {"content": result}
-                    result_copy["_source"] = "pageindex_partial"
-                    combined_results.append(result_copy)
-                logger.info(f"📊 Added {len(state.pageindex_result.raw_results)} partial pageindex results")
+            def _add_results(raw_results: List[Any], source: str) -> int:
+                """Tag, deduplicate, and append raw results. Returns count added."""
+                added = 0
+                for idx, result in enumerate(raw_results):
+                    item = dict(result) if isinstance(result, dict) else {"content": result}
+                    cid = (
+                        item.get("node_id") or
+                        item.get("id") or
+                        item.get("chunk_id") or
+                        f"{source}:{idx}"
+                    )
+                    # Store original (untagged) object in citation_lookup once
+                    if cid not in seen_ids:
+                        citation_lookup[cid] = dict(result) if isinstance(result, dict) else {"content": result}
+                        seen_ids.add(cid)
 
-            # Add vector results with source tags
+                    # Always include in combined_results for batching/context,
+                    # but tag with source so prompt builders can filter by retriever
+                    item["_source"] = source
+                    item["_citation_id"] = cid
+                    combined_results.append(item)
+                    added += 1
+                return added
+
+            # PageIndex results — always include when available (sufficient or partial)
+            if state.pageindex_result and state.pageindex_result.raw_results:
+                source_tag = "pageindex" if state.pageindex_result.succeeded else "pageindex_partial"
+                n = _add_results(state.pageindex_result.raw_results, source_tag)
+                logger.info(f"📊 Added {n} pageindex results (tag={source_tag})")
+
+            # Vector results
             if state.vector_result and state.vector_result.succeeded:
-                for result in state.vector_result.raw_results:
-                    result_copy = dict(result) if isinstance(result, dict) else {"content": result}
-                    result_copy["_source"] = "vector"
-                    # NOTE: _retriever_metadata removed to prevent data explosion (was 278KB per item)
-                    # Metadata is available at state.vector_result.metadata for synthesis
-                    combined_results.append(result_copy)
+                n = _add_results(state.vector_result.raw_results, "vector")
+                # NOTE: _retriever_metadata removed to prevent data explosion (was 278KB per item)
+                # Metadata is available at state.vector_result.metadata for synthesis
+                logger.info(f"📊 Added {n} vector results")
 
-                logger.info(f"📊 Added {len(state.vector_result.raw_results)} vector results")
-
-            # Add CPG results with source tags
+            # CPG results
             if state.cpg_result and state.cpg_result.succeeded:
-                for result in state.cpg_result.raw_results:
-                    result_copy = dict(result) if isinstance(result, dict) else {"content": result}
-                    result_copy["_source"] = "cpg"
-                    # NOTE: _retriever_metadata removed to prevent data explosion
-                    # Metadata is available at state.cpg_result.metadata for synthesis
-                    combined_results.append(result_copy)
+                n = _add_results(state.cpg_result.raw_results, "cpg")
+                # NOTE: _retriever_metadata removed to prevent data explosion
+                # Metadata is available at state.cpg_result.metadata for synthesis
+                logger.info(f"📊 Added {n} CPG results")
 
-                logger.info(f"📊 Added {len(state.cpg_result.raw_results)} CPG results")
+            logger.info(f"📊 citation_lookup contains {len(citation_lookup)} unique citations across all retrievers")
             
             # Batch results for context management
             batched_results = self._create_intelligent_batches(
@@ -1142,18 +1171,20 @@ Unsupported claims (claims made but not backed by evidence):
             
             return {
                 "combined_raw_results": combined_results,
-                "batched_results": batched_results, 
-                "context_size": context_size
+                "batched_results": batched_results,
+                "context_size": context_size,
+                "citation_lookup": citation_lookup,
             }
-            
+
         except Exception as e:
             logger.error(f"❌ Result combination failed: {e}")
-            
+
             # Fallback
             return {
                 "combined_raw_results": [],
                 "batched_results": [],
                 "context_size": 0,
+                "citation_lookup": {},
                 "error_log": state.error_log + [f"Result combination error: {str(e)}"]
             }
     
@@ -1174,9 +1205,15 @@ Unsupported claims (claims made but not backed by evidence):
                 synthesis_result = await self._synthesize_pageindex_primary(state)
             elif synthesis_strategy == SynthesisStrategy.NO_RESULTS:
                 synthesis_result = await self._synthesize_no_results(state)
+            elif _USE_MULTI_SOURCE_SYNTHESIS:
+                # Issue #1: all active retrievers are equal participants.
+                # Map-reduce: extract claims per retriever → reconcile → synthesise.
+                synthesis_result = await self._synthesize_multi_source(state, synthesis_strategy)
             elif synthesis_strategy in [SynthesisStrategy.FALLBACK_VECTOR, SynthesisStrategy.FALLBACK_CPG]:
+                # Legacy path — only reachable when _USE_MULTI_SOURCE_SYNTHESIS=False
                 synthesis_result = await self._synthesize_single_source(state, synthesis_strategy)
             else:
+                # Legacy path — only reachable when _USE_MULTI_SOURCE_SYNTHESIS=False
                 synthesis_result = await self._synthesize_hybrid_with_cross_validation(state, synthesis_strategy)
             
             logger.info(f"✅ Synthesis completed: {synthesis_result.status} (confidence: {synthesis_result.confidence:.2f})")
@@ -1501,9 +1538,19 @@ Return ONLY a valid JSON object:
                 return SynthesisStrategy.PAGEINDEX_PRIMARY
             return SynthesisStrategy.NO_RESULTS
 
+        pageindex_succeeded = state.pageindex_result and state.pageindex_result.succeeded
+
         if vector_succeeded and not cpg_succeeded:
+            # FALLBACK_VECTOR only when pageindex also failed/was absent.
+            # When pageindex succeeded alongside vector, both are full participants.
+            if pageindex_succeeded:
+                return SynthesisStrategy.VECTOR_PRIMARY
             return SynthesisStrategy.FALLBACK_VECTOR
+
         if cpg_succeeded and not vector_succeeded:
+            # Same logic for CPG-only downstream path.
+            if pageindex_succeeded:
+                return SynthesisStrategy.CPG_PRIMARY
             return SynthesisStrategy.FALLBACK_CPG
 
         # Both vector and CPG succeeded — pick strategy by intent
@@ -1596,6 +1643,382 @@ Return ONLY a valid JSON object:
             batch_metadata={"strategy": "no_results"}
         )
     
+    # ------------------------------------------------------------------
+    # Multi-source synthesis helpers (Issue #1)
+    # ------------------------------------------------------------------
+
+    def _get_retriever_citations(self, state: HybridState, retriever: str) -> List[Dict[str, Any]]:
+        """Return raw results for a given retriever, each annotated with _citation_id."""
+        source_tags = {
+            "pageindex": {"pageindex", "pageindex_partial"},
+            "vector":    {"vector"},
+            "cpg":       {"cpg"},
+        }
+        tags = source_tags.get(retriever, {retriever})
+        return [r for r in state.combined_raw_results if r.get("_source") in tags]
+
+    async def _extract_retriever_claims(
+        self,
+        state: HybridState,
+        retriever: str,
+        response_text: str,
+        citations: List[Dict[str, Any]],
+    ) -> RetrieverSummary:
+        """Stage 1 (Map): one focused LLM call per retriever.
+
+        The LLM extracts structured claims and maps each claim to the IDs of
+        the raw citations that support it.  It never paraphrases or copies
+        citation text — only references citation IDs from the provided list.
+        """
+        if not response_text or not citations:
+            return RetrieverSummary(retriever=retriever, claims=[], gaps=["No response or citations available"], overall_confidence=0.0)
+
+        # Build a compact citation index for the prompt: id → short excerpt only
+        citation_index = {}
+        for c in citations:
+            cid = c.get("_citation_id", c.get("node_id", c.get("id", "")))
+            excerpt = (
+                c.get("scoring_text") or
+                c.get("md_content") or
+                c.get("content") or
+                str(c)
+            )
+            citation_index[cid] = str(excerpt)[:300]  # cap excerpt length
+
+        citation_list_str = "\n".join(
+            f'  - ID: "{cid}"\n    Excerpt: {excerpt}'
+            for cid, excerpt in citation_index.items()
+        )
+
+        prompt = f"""You are extracting structured claims from a retriever's response for code analysis synthesis.
+
+RETRIEVER: {retriever}
+
+RETRIEVER RESPONSE:
+{response_text}
+
+AVAILABLE CITATIONS (each has an ID and a short excerpt):
+{citation_list_str}
+
+TASK:
+1. Extract 3-7 key factual claims from the response.
+2. For each claim, list which citation IDs support it (use ONLY IDs from the list above).
+3. Do NOT paraphrase or copy citation text — only reference IDs.
+4. Identify any topics the response was uncertain about or could not answer.
+
+Return ONLY valid JSON:
+{{
+    "claims": [
+        {{"text": "claim statement", "confidence": <0.0-1.0>, "citation_ids": ["id1", "id2"]}}
+    ],
+    "gaps": ["topic not covered or uncertain"],
+    "overall_confidence": <0.0-1.0>
+}}"""
+
+        raw_response, error = await self._robust_llm_call_with_pydantic_validation(
+            llm_service=state.llm_service,
+            prompt=prompt,
+            pydantic_model=ClaimExtractionRawResponse,
+            max_tokens=2000,
+            temperature=0.2,
+            max_retries=2,
+        )
+
+        if raw_response:
+            claims = [
+                EvidenceClaim(
+                    text=c.get("text", ""),
+                    confidence=float(c.get("confidence", 0.5)),
+                    citation_ids=[cid for cid in c.get("citation_ids", []) if cid in citation_index],
+                )
+                for c in raw_response.claims
+                if c.get("text")
+            ]
+            return RetrieverSummary(
+                retriever=retriever,
+                claims=claims,
+                gaps=raw_response.gaps,
+                overall_confidence=raw_response.overall_confidence,
+            )
+
+        logger.warning(f"⚠️ Claim extraction failed for {retriever}: {error} — using empty summary")
+        return RetrieverSummary(retriever=retriever, claims=[], gaps=[f"Extraction failed: {error}"], overall_confidence=0.3)
+
+    async def _reconcile_claims(
+        self,
+        summaries: List[RetrieverSummary],
+        llm_service: Any,
+    ) -> ReconciliationRawResponse:
+        """Stage 2 (Reconcile): cross-validate claim sets from all retrievers.
+
+        Operates only on compressed claim texts — no raw evidence passed.
+        """
+        summary_blocks = []
+        for s in summaries:
+            claim_lines = "\n".join(
+                f'    - [{c.confidence:.2f}] {c.text}  (cites: {c.citation_ids})'
+                for c in s.claims
+            ) or "    (no claims extracted)"
+            gap_lines = ", ".join(s.gaps) or "none"
+            summary_blocks.append(
+                f"RETRIEVER: {s.retriever} (overall_confidence={s.overall_confidence:.2f})\n"
+                f"  Claims:\n{claim_lines}\n"
+                f"  Gaps: {gap_lines}"
+            )
+
+        prompt = f"""You are reconciling claims from multiple code analysis retrievers.
+
+{chr(10).join(summary_blocks)}
+
+TASK:
+1. Identify claims that multiple retrievers AGREE on (consensus).
+2. Identify claims that CONFLICT between retrievers — note which retrievers disagree.
+3. Identify claims that are UNIQUE to a single retriever (potential novel insight or noise).
+
+Return ONLY valid JSON:
+{{
+    "agreements": ["agreed claim 1", "agreed claim 2"],
+    "conflicts": ["retriever_a says X but retriever_b says Y"],
+    "unique_per_retriever": {{
+        "pageindex": ["unique claim"],
+        "vector": ["unique claim"],
+        "cpg": ["unique claim"]
+    }},
+    "confidence_score": <0.0-1.0>
+}}"""
+
+        raw_response, error = await self._robust_llm_call_with_pydantic_validation(
+            llm_service=llm_service,
+            prompt=prompt,
+            pydantic_model=ReconciliationRawResponse,
+            max_tokens=2000,
+            temperature=0.2,
+            max_retries=2,
+        )
+
+        if raw_response:
+            return raw_response
+
+        logger.warning(f"⚠️ Reconciliation failed: {error} — using empty reconciliation")
+        return ReconciliationRawResponse(
+            agreements=[],
+            conflicts=[],
+            unique_per_retriever={s.retriever: [] for s in summaries},
+            confidence_score=0.3,
+        )
+
+    def _resolve_citation_ids(
+        self,
+        summaries: List[RetrieverSummary],
+        citation_lookup: Dict[str, Any],
+    ) -> Dict[str, Any]:
+        """Resolve all citation IDs referenced across summaries back to original raw objects.
+
+        Deduplicates by citation ID — each raw object appears exactly once in the
+        returned dict regardless of how many claims or retrievers reference it.
+        Returns {citation_id: raw_object} preserving the original untagged object.
+        """
+        resolved: Dict[str, Any] = {}
+        for summary in summaries:
+            for claim in summary.claims:
+                for cid in claim.citation_ids:
+                    if cid not in resolved and cid in citation_lookup:
+                        resolved[cid] = citation_lookup[cid]
+        return resolved
+
+    async def _synthesize_multi_source(
+        self,
+        state: HybridState,
+        strategy: SynthesisStrategy,
+    ) -> SynthesisResult:
+        """Map-reduce synthesis treating all active retrievers as equal participants.
+
+        Stage 1 (Map)     — extract structured claims per retriever (parallel LLM calls)
+        Stage 2 (Reduce)  — reconcile claim sets across retrievers
+        Stage 3 (Synthesise) — generate final answer from reconciled claims only
+        """
+        citation_lookup = state.citation_lookup or {}
+
+        # ── Stage 1: extract claims from each active retriever ──────────────
+        active = []
+        if state.pageindex_result and state.pageindex_result.succeeded:
+            active.append(("pageindex", state.pageindex_result.response_text or ""))
+        if state.vector_result and state.vector_result.succeeded:
+            active.append(("vector", state.vector_result.response_text or ""))
+        if state.cpg_result and state.cpg_result.succeeded:
+            active.append(("cpg", state.cpg_result.response_text or ""))
+
+        if not active:
+            return await self._synthesize_no_results(state)
+
+        extraction_tasks = [
+            self._extract_retriever_claims(
+                state,
+                retriever,
+                response_text,
+                self._get_retriever_citations(state, retriever),
+            )
+            for retriever, response_text in active
+        ]
+        summaries: List[RetrieverSummary] = await asyncio.gather(*extraction_tasks)
+        logger.info(f"✅ Stage 1 complete — extracted claims from {len(summaries)} retriever(s): "
+                    f"{[s.retriever for s in summaries]}")
+
+        # ── Stage 2: reconcile claim sets ────────────────────────────────────
+        reconciliation = await self._reconcile_claims(summaries, state.llm_service)
+        logger.info(f"✅ Stage 2 complete — {len(reconciliation.agreements)} agreements, "
+                    f"{len(reconciliation.conflicts)} conflicts")
+
+        # ── Stage 3: synthesise from reconciled claims ───────────────────────
+        synthesis_prompt = self._build_multi_source_synthesis_prompt(
+            state, summaries, reconciliation, strategy
+        )
+        raw_response, error = await self._robust_llm_call_with_pydantic_validation(
+            llm_service=state.llm_service,
+            prompt=synthesis_prompt,
+            pydantic_model=SynthesisRawResponse,
+            max_tokens=16000,
+            temperature=0.7,
+            max_retries=3,
+        )
+
+        # ── Resolve citation IDs → original raw objects (deduped) ───────────
+        resolved_evidence = self._resolve_citation_ids(summaries, citation_lookup)
+        logger.info(f"📎 Resolved {len(resolved_evidence)} unique citation(s) across all retrievers")
+
+        if raw_response:
+            return SynthesisResult(
+                strategy_used=strategy,
+                answer=raw_response.answer,
+                details=raw_response.details,
+                confidence=raw_response.confidence,
+                status=raw_response.status,
+                suggestions=raw_response.suggestions,
+                cross_validation=CrossValidationResult(
+                    vector_validates_cpg=raw_response.cross_validation.get("vector_validates_cpg", False),
+                    cpg_validates_vector=raw_response.cross_validation.get("cpg_validates_vector", False),
+                    conflicts_found=reconciliation.conflicts,
+                    consensus_points=reconciliation.agreements,
+                    confidence_score=reconciliation.confidence_score,
+                    validation_details={
+                        "strategy": "multi_source_map_reduce",
+                        "retrievers": [s.retriever for s in summaries],
+                        "unique_per_retriever": reconciliation.unique_per_retriever,
+                    },
+                ),
+                evidence={"citations": list(resolved_evidence.values())},
+                batch_metadata={
+                    **(raw_response.batch_metadata or {}),
+                    "strategy_applied": str(strategy),
+                    "retrievers_used": [s.retriever for s in summaries],
+                    "unique_citations": len(resolved_evidence),
+                },
+            )
+
+        logger.error(f"❌ Multi-source synthesis LLM call failed: {error}")
+        # Graceful degradation — fall back to best available single-source response
+        best = max(summaries, key=lambda s: s.overall_confidence)
+        fallback_result = state.pageindex_result if best.retriever == "pageindex" else \
+                          state.vector_result    if best.retriever == "vector"    else \
+                          state.cpg_result
+        return SynthesisResult(
+            strategy_used=strategy,
+            answer=fallback_result.response_text or "Synthesis failed.",
+            details=f"Multi-source synthesis failed ({error}). Showing best single-source response from {best.retriever}.",
+            confidence=0.4,
+            status="partial",
+            suggestions=["Multi-source synthesis failed — result may be incomplete"],
+            cross_validation=CrossValidationResult(
+                vector_validates_cpg=False, cpg_validates_vector=False,
+                conflicts_found=[], consensus_points=[],
+                confidence_score=0.3,
+                validation_details={"fallback": True, "reason": error},
+            ),
+            evidence={"citations": list(resolved_evidence.values())},
+            batch_metadata={"fallback": True, "reason": error},
+        )
+
+    def _build_multi_source_synthesis_prompt(
+        self,
+        state: HybridState,
+        summaries: List[RetrieverSummary],
+        reconciliation: ReconciliationRawResponse,
+        strategy: SynthesisStrategy,
+    ) -> str:
+        """Build synthesis prompt from compressed claim sets only — no raw evidence."""
+        summary_blocks = []
+        for s in summaries:
+            claim_lines = "\n".join(
+                f"  - [{c.confidence:.2f}] {c.text}"
+                for c in s.claims
+            ) or "  (no claims extracted)"
+            gap_lines = ", ".join(s.gaps) or "none"
+            summary_blocks.append(
+                f"### {s.retriever.upper()} (confidence={s.overall_confidence:.2f})\n"
+                f"Claims:\n{claim_lines}\n"
+                f"Gaps: {gap_lines}"
+            )
+
+        agreements_str = "\n".join(f"  ✓ {a}" for a in reconciliation.agreements) or "  (none identified)"
+        conflicts_str  = "\n".join(f"  ✗ {c}" for c in reconciliation.conflicts)  or "  (none identified)"
+
+        combination = state.retriever_combination.value if hasattr(state.retriever_combination, "value") else str(state.retriever_combination)
+        _combination_labels = {
+            "pageindex_vector_graph": "PageIndex, Vector, and CPG",
+            "pageindex_vector":       "PageIndex and Vector",
+            "pageindex_graph":        "PageIndex and CPG",
+            "pageindex_and_graph":    "PageIndex and CPG (parallel)",
+            "pageindex_and_vector":   "PageIndex and Vector (parallel)",
+        }
+        active_label = _combination_labels.get(combination, combination)
+
+        return f"""You are an expert code analysis synthesizer.
+Produce a final answer by reasoning across compressed findings from {active_label}.
+
+**USER QUERY**: {state.user_query}
+**SYNTHESIS STRATEGY**: {strategy}
+
+## Per-Retriever Findings (compressed — all retrievers are equal participants)
+
+{chr(10).join(summary_blocks)}
+
+## Cross-Retriever Reconciliation
+
+Agreements (high-confidence facts):
+{agreements_str}
+
+Conflicts (resolve these carefully using the agreement and confidence scores above):
+{conflicts_str}
+
+## Instructions
+
+1. Ground your answer in the AGREEMENTS first — these are confirmed across retrievers.
+2. For CONFLICTS, reason about which retriever is more authoritative for that claim type and explain.
+3. Incorporate UNIQUE findings from each retriever only if they are plausible and not contradicted.
+4. Do NOT invent facts not present in the findings above.
+5. Cite which retriever(s) support each key claim in your details.
+
+**OUTPUT FORMAT** — return ONLY valid JSON:
+{{
+    "answer": "Direct, comprehensive answer to the user query",
+    "details": "Detailed explanation noting which retriever(s) support each claim",
+    "confidence": <float 0.0-1.0>,
+    "status": "found|not_found|partial",
+    "suggestions": ["suggestion if needed"],
+    "cross_validation": {{
+        "vector_validates_cpg": <boolean>,
+        "cpg_validates_vector": <boolean>,
+        "conflicts_found": {json.dumps(reconciliation.conflicts)},
+        "consensus_points": {json.dumps(reconciliation.agreements)},
+        "confidence_score": {reconciliation.confidence_score},
+        "validation_details": {{"strategy": "multi_source_map_reduce"}}
+    }},
+    "batch_metadata": {{
+        "retrievers_used": {json.dumps([s.retriever for s in summaries])},
+        "strategy_applied": "{strategy}"
+    }}
+}}"""
+
     async def _synthesize_single_source(self, state: HybridState, strategy: SynthesisStrategy) -> SynthesisResult:
         """Synthesize response from a single successful retriever"""
         if strategy == SynthesisStrategy.FALLBACK_VECTOR:
