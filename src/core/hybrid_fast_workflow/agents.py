@@ -202,6 +202,7 @@ class GraphAgent:
             system_config = SystemConfig(
                 mcp_config_path=neo4j_config_path,
                 yaml_schema_path=schema_path,
+                llm_config={"fallback_max_turns": self._max_iterations},
             )
             yaml_schema = system_config.get_yaml_schema()
             cypher_adapter = MCPCypherAdapter(session)
