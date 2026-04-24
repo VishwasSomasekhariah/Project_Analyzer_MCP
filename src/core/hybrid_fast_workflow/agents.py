@@ -156,6 +156,19 @@ _GRAPH_AGENT_ALLOWED_TOOLS = [
     "neo4j_execute_query",
 ]
 
+# MCP-prefixed names used by the Claude SDK fallback
+_GRAPH_AGENT_SDK_ALLOWED_TOOLS = [
+    "mcp__schema_tools__get_node_labels",
+    "mcp__schema_tools__get_node_properties",
+    "mcp__schema_tools__get_valid_pairs",
+    "mcp__schema_tools__validate_relationship_triplet",
+    "mcp__schema_tools__get_outgoing_relationships",
+    "mcp__schema_tools__get_incoming_relationships",
+    "mcp__schema_tools__get_children_types",
+    "mcp__schema_tools__get_leaf_nodes",
+    "mcp__neo4j_memory__neo4j_execute_query",
+]
+
 
 class GraphAgent:
     """
@@ -197,6 +210,11 @@ class GraphAgent:
             tool_manager = ToolManager(session, schema_manager, agent_id="graph_agent_fast")
             llm_config = system_config.get_llm_config()
             client = llm_config.create_client()
+            if hasattr(client, "enable_per_agent_mode"):
+                client.enable_per_agent_mode(
+                    agent_id="graph_agent_fast",
+                    allowed_tools=_GRAPH_AGENT_SDK_ALLOWED_TOOLS,
+                )
             if hasattr(client, "set_tool_context"):
                 client.set_tool_context(schema_manager, session)
 
@@ -226,6 +244,10 @@ class GraphAgent:
                     tools=tools,
                     tool_choice="auto",
                     temperature=0.1,
+                    agent_context={
+                        "agent_id": "graph_agent_fast",
+                        "allowed_tools": _GRAPH_AGENT_SDK_ALLOWED_TOOLS,
+                    },
                 )
                 msg = response.choices[0].message
 
