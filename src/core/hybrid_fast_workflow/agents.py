@@ -175,15 +175,14 @@ class GraphAgent:
 
         try:
             # Schema + tools — same setup as multi_agent_cot
-            schema_manager = DynamicSchemaManager(yaml_schema_path=schema_path)
-            await schema_manager.initialize_background(session)
-            tool_manager = ToolManager(session, schema_manager, agent_id="graph_agent_fast")
-
-            # ResilientLLMClient with Claude SDK fallback + in-process schema tools
             system_config = SystemConfig(
                 mcp_config_path=neo4j_config_path,
                 yaml_schema_path=schema_path,
             )
+            yaml_schema = system_config.get_yaml_schema()
+            schema_manager = DynamicSchemaManager(yaml_schema=yaml_schema)
+            await schema_manager.initialize_background(session)
+            tool_manager = ToolManager(session, schema_manager, agent_id="graph_agent_fast")
             llm_config = system_config.get_llm_config()
             client = llm_config.create_client()
             if hasattr(client, "set_tool_context"):
