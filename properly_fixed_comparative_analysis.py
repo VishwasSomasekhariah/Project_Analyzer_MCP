@@ -11,6 +11,7 @@ This version fixes all the identified issues:
 """
 
 import asyncio
+import gc
 import json
 import logging
 import time
@@ -1278,7 +1279,10 @@ class ProperlyFixedComparativeAnalyzer:
             
             # Save results incrementally after each scenario
             self.save_incremental_results(results, timestamp)
-            
+
+            # Run GC after each scenario to free intermediate allocations
+            gc.collect()
+
         return results, timestamp
 
     def load_existing_results(self) -> tuple[List[Dict[str, Any]], str]:

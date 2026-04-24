@@ -205,6 +205,7 @@
 import subprocess
 import traceback
 import os
+import gc
 import json
 from typing import Dict, Any, List, Optional
 from mcp.server.fastmcp import FastMCP
@@ -1262,7 +1263,11 @@ def register_all_tools(mcp: FastMCP):
                 llm_service=llm_service,
                 config=hybrid_config
             )
-            
+
+            # Release LLM cache and run GC after each query
+            llm_service.clear_cache()
+            gc.collect()
+
             if workflow_result.get("status") == "success":
                 logger.info("✅ Hybrid RAG analysis completed successfully")
 
