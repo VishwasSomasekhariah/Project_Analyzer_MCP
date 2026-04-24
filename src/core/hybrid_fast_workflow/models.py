@@ -22,3 +22,8 @@ class OrchestratorState(TypedDict):
     final_answer: Optional[str]
     error_log: List[str]
     hop_count: int
+    # Routing fields — set by orchestrate_step, consumed by conditional edge / call_agent
+    next_action: Optional[str]       # "call_agent" | "synthesize"
+    _pending_agent: Optional[str]    # "pageindex" | "vector" | "graph"
+    _pending_query: Optional[str]
+    _pending_reasoning: Optional[str]
