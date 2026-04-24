@@ -153,7 +153,7 @@ class GraphAgent:
     graph_rag agents do.
     """
 
-    def __init__(self, max_iterations: int = 5):
+    def __init__(self, max_iterations: int = 15):
         self._max_iterations = max_iterations
 
     async def run(self, query: str, config: Dict[str, Any], context: str = "") -> Dict[str, Any]:
