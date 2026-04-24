@@ -14,6 +14,7 @@ import subprocess
 import tempfile
 from typing import Any, Dict
 
+from src.core.graph_rag.adapters.mcp_adapter import MCPCypherAdapter
 from src.core.graph_rag.adapters.session_pool import MCPSessionPool
 from src.core.graph_rag.core.config import SystemConfig
 from src.core.graph_rag.schema.dynamic_schema_manager import DynamicSchemaManager
@@ -93,7 +94,6 @@ class VectorAgent:
                 session.call_tool("qdrant-find", {
                     "query": search_query,
                     "collection_name": collection_name,
-                    "limit": limit,
                 }),
                 timeout=120,
             )
@@ -180,8 +180,9 @@ class GraphAgent:
                 yaml_schema_path=schema_path,
             )
             yaml_schema = system_config.get_yaml_schema()
-            schema_manager = DynamicSchemaManager(yaml_schema=yaml_schema)
-            await schema_manager.initialize_background(session)
+            cypher_adapter = MCPCypherAdapter(session)
+            schema_manager = DynamicSchemaManager(cypher_server=cypher_adapter, yaml_schema=yaml_schema)
+            await schema_manager.initialize_background()
             tool_manager = ToolManager(session, schema_manager, agent_id="graph_agent_fast")
             llm_config = system_config.get_llm_config()
             client = llm_config.create_client()
