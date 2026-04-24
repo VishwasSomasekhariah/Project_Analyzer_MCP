@@ -20,6 +20,7 @@ from src.core.graph_rag.core.config import SystemConfig
 from src.core.graph_rag.schema.dynamic_schema_manager import DynamicSchemaManager
 from src.core.graph_rag.tools.manager import ToolManager
 from src.core.hybrid_fast_workflow.utils import parse_llm_json
+from src.core.retrieval.hybrid_vector_retriever import HybridVectorRetriever
 
 logger = logging.getLogger(__name__)
 
@@ -73,12 +74,17 @@ class PageIndexAgent:
 # ── Vector ───────────────────────────────────────────────────────────────────
 
 class VectorAgent:
-    """Calls qdrant-find directly via a dedicated MCP session."""
+    """
+    Hybrid vector retrieval agent using HybridVectorRetriever.
+
+    Calls qdrant-find via MCP, applies BM25 post-scoring and RRF reranking
+    through the shared HybridVectorRetriever — no subprocess needed.
+    """
 
     async def run(self, query: str, config: Dict[str, Any], context: str = "") -> Dict[str, Any]:
         qdrant_config_path = config.get("qdrant_config_path", "/opt/genpod/qdrant_config.json")
         collection_name = config.get("collection_name", "HelloWorldApp_pageindex_v3")
-        limit = config.get("max_results", 5)
+        top_k = config.get("max_results", 5)
 
         with open(qdrant_config_path) as f:
             cfg = json.load(f)
@@ -88,29 +94,13 @@ class VectorAgent:
 
         try:
             search_query = query if not context else f"{query}\n\nContext: {context}"
-            logger.info(f"[VectorAgent] qdrant-find: {query[:80]}")
+            logger.info(f"[VectorAgent] hybrid search: {query[:80]}")
 
-            raw = await asyncio.wait_for(
-                session.call_tool("qdrant-find", {
-                    "query": search_query,
-                    "collection_name": collection_name,
-                }),
-                timeout=120,
-            )
+            retriever = HybridVectorRetriever(session, collection_name)
+            results = await retriever.search(search_query, top_k=top_k)
 
-            content = raw.content[0] if isinstance(raw.content, list) else raw.content
-            text = content.text if hasattr(content, "text") else str(content)
-
-            try:
-                data = json.loads(text)
-                results = data if isinstance(data, list) else data.get("results", [data])
-            except json.JSONDecodeError:
-                results = [{"content": text}]
-
-            summary = "\n\n".join(
-                r.get("document", r.get("content", str(r)))
-                for r in results[:limit]
-            )
+            summary = "\n\n".join(r["content"] for r in results)
+            logger.info(f"[VectorAgent] {len(results)} results after BM25+RRF reranking")
             return {"answer": summary, "raw_results": results, "sufficient": bool(results)}
 
         except Exception as e:
