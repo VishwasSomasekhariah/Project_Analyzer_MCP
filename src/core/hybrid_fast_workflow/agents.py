@@ -211,10 +211,7 @@ class GraphAgent:
             llm_config = system_config.get_llm_config()
             client = llm_config.create_client()
             if hasattr(client, "enable_per_agent_mode"):
-                client.enable_per_agent_mode(
-                    agent_id="graph_agent_fast",
-                    allowed_tools=_GRAPH_AGENT_SDK_ALLOWED_TOOLS,
-                )
+                client.enable_per_agent_mode()
             if hasattr(client, "set_tool_context"):
                 client.set_tool_context(schema_manager, session)
 
