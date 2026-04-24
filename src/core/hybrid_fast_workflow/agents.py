@@ -10,12 +10,12 @@ import asyncio
 import json
 import logging
 import os
-import re
 import subprocess
 import tempfile
 from typing import Any, Dict
 
 from src.core.graph_rag.adapters.session_pool import MCPSessionPool
+from src.core.graph_rag.core.config import SystemConfig
 from src.core.graph_rag.schema.dynamic_schema_manager import DynamicSchemaManager
 from src.core.graph_rag.tools.manager import ToolManager
 from src.core.hybrid_fast_workflow.utils import parse_llm_json
@@ -124,43 +124,46 @@ class VectorAgent:
 
 _GRAPH_AGENT_SYSTEM = """\
 You are a schema-aware CPG (Code Property Graph) query agent.
-The CPG is a custom language-agnostic universal graph — you MUST inspect the schema
-before writing Cypher queries.
+The CPG is a custom language-agnostic universal graph.
 
-You have access to these tools (call them one at a time):
-  get_node_labels              — list all node types in the CPG
-  get_node_properties          — properties for a given node type
-  get_valid_pairs              — valid (from, to) pairs for a relationship type
-  validate_relationship_triplet — check if (from)-[rel]->(to) exists
-  get_outgoing_relationships   — relationships leaving a node type
-  get_incoming_relationships   — relationships entering a node type
-  get_children_types           — child types in the hierarchy
-  get_leaf_nodes               — leaf nodes in the hierarchy
-  neo4j_execute_query          — execute a Cypher query against the CPG
-
-At each step output EXACTLY one of these JSON formats (no markdown):
-
-To call a tool:
-{"action": "call_tool", "tool": "<tool_name>", "args": {<tool_args>}}
-
-When you have a complete answer:
-{"action": "answer", "answer": "<your findings>", "cypher_used": "<final cypher or empty>", "sufficient": true}\
+You MUST inspect the schema before writing any Cypher query:
+1. Call get_node_labels to see available node types
+2. Call get_node_properties / get_outgoing_relationships to understand structure
+3. Write and execute a schema-valid Cypher query via neo4j_execute_query
+4. Return your findings as plain text\
 """
+
+_GRAPH_AGENT_ALLOWED_TOOLS = [
+    "get_node_labels",
+    "get_node_properties",
+    "get_valid_pairs",
+    "validate_relationship_triplet",
+    "get_outgoing_relationships",
+    "get_incoming_relationships",
+    "get_children_types",
+    "get_leaf_nodes",
+    "neo4j_execute_query",
+]
 
 
 class GraphAgent:
     """
-    Schema-aware CPG agent using a text-based ReAct loop.
+    Schema-aware CPG agent using native OpenAI function-calling.
 
-    Uses DynamicSchemaManager schema tools + neo4j_execute_query.
-    The llm_service passed in is ResilientLLMService — Claude SDK fallback
-    activates automatically if the primary LLM fails.
+    Follows the same pattern as VectorAgent — all session lifecycle (MCP pool,
+    schema manager, tool manager, LLM client) is managed internally inside run().
+    No BaseAgent inheritance needed since there is no shared state or team context.
+
+    Uses ResilientLLMClient (via SystemConfig.get_llm_config().create_client()) so
+    Claude SDK fallback activates automatically, with set_tool_context() wiring
+    schema tools in-process for the fallback path — exactly as the original
+    graph_rag agents do.
     """
 
     def __init__(self, max_iterations: int = 5):
         self._max_iterations = max_iterations
 
-    async def run(self, query: str, config: Dict[str, Any], context: str = "", llm_service: Any = None) -> Dict[str, Any]:
+    async def run(self, query: str, config: Dict[str, Any], context: str = "") -> Dict[str, Any]:
         neo4j_config_path = config.get("neo4j_config_path", "/opt/genpod/neo4j_config.json")
         schema_path = config.get("schema_path", "/opt/genpod/src/schemas/project_knowledgebase_graph_schema.yaml")
 
@@ -168,70 +171,85 @@ class GraphAgent:
             neo4j_cfg = json.load(f)
 
         pool = MCPSessionPool(neo4j_cfg, sse_timeout=300)
-        session_id, session = await pool.acquire_session("graph_agent")
+        session_id, session = await pool.acquire_session("graph_agent_fast")
 
         try:
+            # Schema + tools — same setup as multi_agent_cot
             schema_manager = DynamicSchemaManager(yaml_schema_path=schema_path)
             await schema_manager.initialize_background(session)
-            tool_manager = ToolManager(session, schema_manager, agent_id="graph_agent")
+            tool_manager = ToolManager(session, schema_manager, agent_id="graph_agent_fast")
 
-            # Build ReAct conversation as a growing text prompt
-            conversation = []
-            user_prompt = f"QUERY: {query}"
+            # ResilientLLMClient with Claude SDK fallback + in-process schema tools
+            system_config = SystemConfig(
+                mcp_config_path=neo4j_config_path,
+                yaml_schema_path=schema_path,
+            )
+            llm_config = system_config.get_llm_config()
+            client = llm_config.create_client()
+            if hasattr(client, "set_tool_context"):
+                client.set_tool_context(schema_manager, session)
+
+            # Filter to only allowed tools
+            tools = [
+                t for t in tool_manager.tools
+                if t.get("function", {}).get("name") in _GRAPH_AGENT_ALLOWED_TOOLS
+            ]
+
+            user_content = f"QUERY: {query}"
             if context:
-                user_prompt += f"\n\nCONTEXT FROM PRIOR HOPS:\n{context}"
-            conversation.append(f"USER: {user_prompt}")
+                user_content += f"\n\nCONTEXT FROM PRIOR HOPS:\n{context}"
+
+            messages = [
+                {"role": "system", "content": _GRAPH_AGENT_SYSTEM},
+                {"role": "user", "content": user_content},
+            ]
+
+            last_cypher = ""
 
             for attempt in range(self._max_iterations):
                 logger.info(f"[GraphAgent] attempt {attempt + 1}/{self._max_iterations}")
 
-                full_prompt = "\n\n".join(conversation) + "\n\nASSISTANT:"
-
-                # ResilientLLMService — Claude SDK fallback fires automatically
-                llm_response = await llm_service.generate_response(
-                    prompt=full_prompt,
-                    system_prompt=_GRAPH_AGENT_SYSTEM,
-                    json_mode=True,
+                response = client.chat.completions.create(
+                    model=llm_config.model,
+                    messages=messages,
+                    tools=tools,
+                    tool_choice="auto",
                     temperature=0.1,
-                    max_tokens=4000,
-                    use_cache=False,
                 )
+                msg = response.choices[0].message
 
-                if llm_response.error:
-                    logger.error(f"[GraphAgent] LLM error: {llm_response.error}")
-                    break
+                if msg.tool_calls:
+                    messages.append(msg)
+                    for tc in msg.tool_calls:
+                        tool_name = tc.function.name
+                        try:
+                            args = json.loads(tc.function.arguments)
+                        except json.JSONDecodeError:
+                            args = {}
+                        if tool_name == "neo4j_execute_query":
+                            last_cypher = args.get("query", "")
+                        try:
+                            result = await tool_manager.execute_tool(tool_name, args)
+                        except Exception as e:
+                            result = json.dumps({"error": str(e)})
+                        messages.append({
+                            "role": "tool",
+                            "tool_call_id": tc.id,
+                            "content": result,
+                        })
+                    continue
 
-                raw_content = llm_response.content
-                conversation.append(f"ASSISTANT: {raw_content}")
+                # Final text answer
+                answer = msg.content or ""
+                logger.info(f"[GraphAgent] complete: {answer[:100]}")
+                return {
+                    "answer": answer,
+                    "cypher_used": last_cypher,
+                    "raw_results": [],
+                    "sufficient": True,
+                }
 
-                try:
-                    action = parse_llm_json(raw_content)
-                except (json.JSONDecodeError, ValueError):
-                    logger.warning(f"[GraphAgent] non-JSON response: {raw_content[:200]}")
-                    break
-
-                if action.get("action") == "answer":
-                    return {
-                        "answer": action.get("answer", ""),
-                        "cypher_used": action.get("cypher_used", ""),
-                        "raw_results": [],
-                        "sufficient": action.get("sufficient", True),
-                    }
-
-                if action.get("action") == "call_tool":
-                    tool_name = action.get("tool", "")
-                    tool_args = action.get("args", {})
-                    try:
-                        tool_result = await tool_manager.execute_tool(tool_name, tool_args)
-                        conversation.append(f"TOOL ({tool_name}): {tool_result}")
-                    except Exception as e:
-                        conversation.append(f"TOOL ({tool_name}) ERROR: {str(e)}")
-
-            return {
-                "answer": "Graph agent exhausted retries without a conclusive answer.",
-                "raw_results": [],
-                "sufficient": False,
-            }
+            return {"answer": "Graph agent exhausted retries.", "raw_results": [], "sufficient": False}
 
         except Exception as e:
             logger.error(f"[GraphAgent] failed: {e}")

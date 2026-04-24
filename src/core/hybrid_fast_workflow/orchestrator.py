@@ -113,7 +113,7 @@ async def call_agent(state: OrchestratorState) -> Dict:
     elif agent_name == "vector":
         result = await VectorAgent().run(agent_query, config, context)
     elif agent_name == "graph":
-        result = await GraphAgent().run(agent_query, config, context, llm_service=llm_service)
+        result = await GraphAgent().run(agent_query, config, context)
     else:
         result = {"answer": f"Unknown agent: {agent_name}", "sufficient": False}
 
