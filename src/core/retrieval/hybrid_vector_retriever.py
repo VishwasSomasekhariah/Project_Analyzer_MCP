@@ -74,6 +74,7 @@ def _parse_qdrant_response(raw_list: List[str]) -> List[VectorEntry]:
     """
     Convert raw qdrant-find response (list[str]) into VectorEntry objects.
     The first element is a human-readable summary string — skip it.
+    Entries whose chunk_id starts with __ are internal metadata — skip those too.
     """
     entries = []
     for item in raw_list:
@@ -81,7 +82,7 @@ def _parse_qdrant_response(raw_list: List[str]) -> List[VectorEntry]:
             continue
         if item.startswith("<entry>"):
             entry = _parse_entry_xml(item)
-            if entry:
+            if entry and not entry.chunk_id.startswith("__"):
                 entries.append(entry)
     return entries
 

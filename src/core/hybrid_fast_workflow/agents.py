@@ -116,11 +116,14 @@ _GRAPH_AGENT_SYSTEM = """\
 You are a schema-aware CPG (Code Property Graph) query agent.
 The CPG is a custom language-agnostic universal graph.
 
-You MUST inspect the schema before writing any Cypher query:
-1. Call get_node_labels to see available node types
-2. Call get_node_properties / get_outgoing_relationships to understand structure
-3. Write and execute a schema-valid Cypher query via neo4j_execute_query
-4. Return your findings as plain text\
+STRICT PROCESS — follow this exactly, do not repeat steps:
+1. Call get_node_labels ONCE to confirm node types
+2. Call get_outgoing_relationships ONCE for the relevant node type
+3. Call neo4j_execute_query with your Cypher query — DO NOT call more schema tools after this
+4. Return the raw query results as your final answer
+
+You have a maximum of 3 schema tool calls before you MUST execute neo4j_execute_query.
+If results are empty, explain why based on what you found — do not retry with more schema checks.\
 """
 
 _GRAPH_AGENT_ALLOWED_TOOLS = [
