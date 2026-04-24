@@ -37,7 +37,9 @@ USER QUESTION: {user_query}
 HOP HISTORY ({hop_count} hops so far):
 {hop_history}
 
-Decide your next action.\
+IMPORTANT: You MUST respond with ONLY a single JSON object. No explanations, no prose.
+If you have enough information, output: {{"action": "synthesize"}}
+If you need more data, output: {{"action": "call_agent", "agent": "<pageindex|vector|graph>", "query": "<specific query>", "reasoning": "<one sentence>"}}\
 """
 
 SYNTHESIZE_PROMPT = """\
