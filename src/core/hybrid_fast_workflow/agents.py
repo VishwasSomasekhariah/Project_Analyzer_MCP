@@ -10,6 +10,7 @@ import asyncio
 import json
 import logging
 import os
+import re
 import subprocess
 import tempfile
 from typing import Any, Dict
@@ -17,6 +18,7 @@ from typing import Any, Dict
 from src.core.graph_rag.adapters.session_pool import MCPSessionPool
 from src.core.graph_rag.schema.dynamic_schema_manager import DynamicSchemaManager
 from src.core.graph_rag.tools.manager import ToolManager
+from src.core.hybrid_fast_workflow.utils import parse_llm_json
 
 logger = logging.getLogger(__name__)
 
@@ -203,8 +205,8 @@ class GraphAgent:
                 conversation.append(f"ASSISTANT: {raw_content}")
 
                 try:
-                    action = json.loads(raw_content)
-                except json.JSONDecodeError:
+                    action = parse_llm_json(raw_content)
+                except (json.JSONDecodeError, ValueError):
                     logger.warning(f"[GraphAgent] non-JSON response: {raw_content[:200]}")
                     break
 

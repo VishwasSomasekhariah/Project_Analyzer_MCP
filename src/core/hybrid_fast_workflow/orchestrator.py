@@ -26,6 +26,7 @@ from langgraph.graph import StateGraph, END
 from src.core.hybrid_fast_workflow.agents import GraphAgent, PageIndexAgent, VectorAgent
 from src.core.hybrid_fast_workflow.models import HopEntry, OrchestratorState
 from src.core.hybrid_fast_workflow.prompts import ORCHESTRATOR_SYSTEM, ORCHESTRATOR_USER, SYNTHESIZE_PROMPT
+from src.core.hybrid_fast_workflow.utils import parse_llm_json
 from src.core.resilient_llm_service import ResilientLLMService
 
 logger = logging.getLogger(__name__)
@@ -79,8 +80,8 @@ async def orchestrate_step(state: OrchestratorState) -> Dict:
         return {"next_action": "synthesize", "error_log": state["error_log"] + [response.error]}
 
     try:
-        decision = json.loads(response.content)
-    except json.JSONDecodeError:
+        decision = parse_llm_json(response.content)
+    except (json.JSONDecodeError, ValueError):
         logger.warning(f"[Orchestrator] non-JSON decision: {response.content[:200]}")
         return {"next_action": "synthesize"}
 
