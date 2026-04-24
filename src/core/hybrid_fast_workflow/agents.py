@@ -158,6 +158,7 @@ _GRAPH_AGENT_ALLOWED_TOOLS = [
 
 # MCP-prefixed names used by the Claude SDK fallback
 _GRAPH_AGENT_SDK_ALLOWED_TOOLS = [
+    "mcp__schema_tools__get_schema_overview",
     "mcp__schema_tools__get_node_labels",
     "mcp__schema_tools__get_node_properties",
     "mcp__schema_tools__get_valid_pairs",
