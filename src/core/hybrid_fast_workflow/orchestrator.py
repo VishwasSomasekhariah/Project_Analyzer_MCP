@@ -116,7 +116,11 @@ def _format_hop_history(hops: list) -> str:
         return "(none)"
     lines = []
     for i, hop in enumerate(hops, 1):
-        lines.append(f"Hop {i} [{hop.agent.upper()}]\nQuery: {hop.query}\nResult:\n{hop.result}")
+        section = f"Hop {i} [{hop.agent.upper()}]\nQuery: {hop.query}\nResult:\n{hop.result}"
+        if hop.citations:
+            cit_lines = "\n".join(f"  • {c.format()}" for c in hop.citations)
+            section += f"\nCitations:\n{cit_lines}"
+        lines.append(section)
     return "\n\n".join(lines)
 
 
@@ -231,6 +235,9 @@ async def call_agent(state: OrchestratorState) -> Dict:
 
     logger.info(f"[Orchestrator] calling {agent_name} agent: {agent_query[:80]}")
 
+    # Pass hop_number into config so agents can stamp citations
+    config["hop_number"] = state["hop_count"] + 1
+
     if agent_name == "pageindex":
         result = await PageIndexAgent().run(agent_query, config, context)
     elif agent_name == "vector":
@@ -244,6 +251,7 @@ async def call_agent(state: OrchestratorState) -> Dict:
         agent=agent_name,
         query=agent_query,
         result=result.get("answer", ""),
+        citations=result.get("citations", []),
         raw=result,
     )
 
@@ -256,7 +264,7 @@ async def call_agent(state: OrchestratorState) -> Dict:
 
 
 async def synthesize_answer(state: OrchestratorState) -> Dict:
-    """Final LLM call — combines all hop results into a coherent answer."""
+    """Final LLM call — combines all hop results into a coherent referenced answer."""
     llm_service: Any = state["llm_service"]
     user_query: str = state["user_query"]
     hop_history: list = state["hop_history"]
@@ -351,14 +359,42 @@ class HybridFastWorkflow:
                 await pool.release_session(sid)
 
         hops = final_state.get("hop_history", [])
+
+        # Aggregate deduplicated citations across all hops
+        seen_ids: set = set()
+        all_citations = []
+        for hop in hops:
+            for c in hop.citations:
+                if c.citation_id not in seen_ids:
+                    seen_ids.add(c.citation_id)
+                    all_citations.append({
+                        "citation_id": c.citation_id,
+                        "agent": c.agent,
+                        "retrieval_method": c.retrieval_method,
+                        "hop_number": c.hop_number,
+                        "file_path": c.file_path,
+                        "entity_name": c.entity_name,
+                        "start_line": c.start_line,
+                        "end_line": c.end_line,
+                        "evidence_text": c.evidence_text,
+                        "relevance_score": c.relevance_score,
+                        "query_used": c.query_used,
+                    })
+
         return {
             "status": "success",
             "user_query": user_query,
             "answer": final_state.get("final_answer", ""),
             "hop_count": final_state.get("hop_count", 0),
             "hops": [
-                {"agent": h.agent, "query": h.query, "result": h.result}
+                {
+                    "agent": h.agent,
+                    "query": h.query,
+                    "result": h.result,
+                    "citations": [c.citation_id for c in h.citations],
+                }
                 for h in hops
             ],
+            "citations": all_citations,
             "error_log": final_state.get("error_log", []),
         }

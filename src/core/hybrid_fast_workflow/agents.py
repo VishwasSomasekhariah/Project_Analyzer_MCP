@@ -19,10 +19,100 @@ from src.core.graph_rag.adapters.session_pool import MCPSessionPool
 from src.core.graph_rag.core.config import SystemConfig
 from src.core.graph_rag.schema.dynamic_schema_manager import DynamicSchemaManager
 from src.core.graph_rag.tools.manager import ToolManager
+from src.core.hybrid_fast_workflow.models import Citation, make_citation_id
 from src.core.hybrid_fast_workflow.utils import parse_llm_json
 from src.core.retrieval.hybrid_vector_retriever import HybridVectorRetriever
 
 logger = logging.getLogger(__name__)
+
+
+# ── Citation extractors ───────────────────────────────────────────────────────
+
+def _extract_pageindex_citations(raw_results: list, query: str, hop_number: int) -> list:
+    citations = []
+    for r in raw_results:
+        if not isinstance(r, dict):
+            continue
+        node_id = r.get("node_id", "")
+        path = r.get("path", "")
+        file_path = node_id.split(":")[0] if ":" in node_id else path
+        entity_name = path.split("/")[-1] if path else node_id
+        score = float(r.get("score", 0.0))
+        evidence = (r.get("scoring_text") or r.get("md_content", ""))[:300]
+        citations.append(Citation(
+            citation_id=make_citation_id("pageindex", file_path, entity_name, hop_number),
+            agent="pageindex",
+            retrieval_method="mcts",
+            hop_number=hop_number,
+            file_path=file_path,
+            entity_name=entity_name,
+            evidence_text=evidence,
+            relevance_score=score,
+            query_used=query,
+            raw_metadata=r,
+        ))
+    return citations
+
+
+def _extract_vector_citations(raw_results: list, query: str, hop_number: int) -> list:
+    citations = []
+    for r in raw_results:
+        if not isinstance(r, dict):
+            continue
+        meta = r.get("metadata", {})
+        file_path = meta.get("file_path", "")
+        entity_name = (meta.get("name") or meta.get("function_name")
+                       or os.path.splitext(os.path.basename(file_path))[0])
+        start_line = int(meta.get("start_line", 0))
+        end_line = int(meta.get("end_line", 0))
+        evidence = r.get("content", "")[:300]
+        citations.append(Citation(
+            citation_id=make_citation_id("vector", file_path, entity_name, hop_number),
+            agent="vector",
+            retrieval_method="hybrid_bm25_rrf",
+            hop_number=hop_number,
+            file_path=file_path,
+            entity_name=entity_name,
+            start_line=start_line,
+            end_line=end_line,
+            evidence_text=evidence,
+            relevance_score=float(meta.get("relevance_score", 0.0)),
+            query_used=query,
+            raw_metadata=meta,
+        ))
+    return citations
+
+
+def _extract_graph_citations(cypher_results: list, cypher_query: str, query: str, hop_number: int) -> list:
+    """Extract citations from neo4j_execute_query result rows."""
+    citations = []
+    for row in cypher_results:
+        if not isinstance(row, dict):
+            continue
+        file_path = ""
+        for key in row:
+            if "file_path" in key.lower() or "file" in key.lower():
+                file_path = str(row[key])
+                break
+        entity_parts = []
+        for key in ["t.name", "f.name", "name", "scope", "class_name", "type_name"]:
+            if key in row and row[key]:
+                entity_parts.append(str(row[key]))
+        entity_name = ".".join(entity_parts) if entity_parts else ""
+        if not file_path and not entity_name:
+            continue
+        citations.append(Citation(
+            citation_id=make_citation_id("graph", file_path, entity_name, hop_number),
+            agent="graph",
+            retrieval_method="cpg_cypher",
+            hop_number=hop_number,
+            file_path=file_path,
+            entity_name=entity_name,
+            query_used=cypher_query,
+            raw_metadata=row,
+        ))
+    return citations
+
 
 # ── PageIndex ────────────────────────────────────────────────────────────────
 
@@ -61,14 +151,17 @@ class PageIndexAgent:
 
         try:
             data = json.loads(result.stdout)
+            raw_results = data.get("results", [])
+            citations = _extract_pageindex_citations(raw_results, query, config.get("hop_number", 0))
             return {
                 "answer": data.get("response") or data.get("answer", ""),
-                "raw_results": data.get("results", []),
+                "raw_results": raw_results,
+                "citations": citations,
                 "confidence": data.get("confidence_score", 0.0),
                 "sufficient": True,
             }
         except json.JSONDecodeError as e:
-            return {"answer": "", "raw_results": [], "error": str(e), "sufficient": False}
+            return {"answer": "", "raw_results": [], "citations": [], "error": str(e), "sufficient": False}
 
 
 # ── Vector ───────────────────────────────────────────────────────────────────
@@ -100,8 +193,9 @@ class VectorAgent:
             results = await retriever.search(search_query, top_k=top_k)
 
             summary = "\n\n".join(r["content"] for r in results)
+            citations = _extract_vector_citations(results, search_query, config.get("hop_number", 0))
             logger.info(f"[VectorAgent] {len(results)} results after BM25+RRF reranking")
-            return {"answer": summary, "raw_results": results, "sufficient": bool(results)}
+            return {"answer": summary, "raw_results": results, "citations": citations, "sufficient": bool(results)}
 
         except Exception as e:
             logger.error(f"[VectorAgent] failed: {e}")
@@ -139,9 +233,25 @@ Before each tool call or query, think through your reasoning explicitly. Ask you
 - If your first query returns empty results, reason about why and try a different approach
 - Properties may contain rich data beyond simple identifiers — explore them
 
-**Output**
-Return your findings as a clear plain-text summary of what you found, including relevant \
-values from the query results.\
+**Output format (strict JSON, no markdown)**
+Return a JSON object with this exact structure:
+{
+  "answer": "<clear plain-text summary of findings>",
+  "citations": [
+    {
+      "file_path": "<file path from query results, or empty string>",
+      "entity_name": "<class or function name from results>",
+      "start_line": 0,
+      "end_line": 0,
+      "evidence_text": "<relevant snippet or property value>",
+      "cypher_used": "<the Cypher query that returned this result>"
+    }
+  ],
+  "sufficient": true
+}
+
+Include one citation entry per distinct entity found in the Cypher results.
+If no results were found, return an empty citations array and explain why in answer.\
 """
 
 _GRAPH_AGENT_ALLOWED_TOOLS = [
@@ -233,6 +343,7 @@ class GraphAgent:
             ]
 
             last_cypher = ""
+            all_cypher_results: list = []  # accumulate rows from all neo4j_execute_query calls
 
             for attempt in range(self._max_iterations):
                 logger.info(f"[GraphAgent] attempt {attempt + 1}/{self._max_iterations}")
@@ -243,6 +354,7 @@ class GraphAgent:
                     tools=tools,
                     tool_choice="auto",
                     temperature=0.1,
+                    response_format={"type": "json_object"},
                     agent_context={
                         "agent_id": "graph_agent_fast",
                         "allowed_tools": _GRAPH_AGENT_SDK_ALLOWED_TOOLS,
@@ -264,6 +376,14 @@ class GraphAgent:
                             result = await tool_manager.execute_tool(tool_name, args)
                         except Exception as e:
                             result = json.dumps({"error": str(e)})
+                        # Capture Cypher result rows for citation extraction
+                        if tool_name == "neo4j_execute_query":
+                            try:
+                                parsed = json.loads(result) if isinstance(result, str) else result
+                                rows = parsed.get("results", []) if isinstance(parsed, dict) else []
+                                all_cypher_results.extend(rows)
+                            except Exception:
+                                pass
                         messages.append({
                             "role": "tool",
                             "tool_call_id": tc.id,
@@ -271,17 +391,51 @@ class GraphAgent:
                         })
                     continue
 
-                # Final text answer
-                answer = msg.content or ""
-                logger.info(f"[GraphAgent] complete: {answer[:100]}")
+                # Final JSON response — parse answer + citations
+                raw_content = msg.content or ""
+                try:
+                    parsed = parse_llm_json(raw_content)
+                    answer = parsed.get("answer", raw_content)
+                    sufficient = parsed.get("sufficient", True)
+                    # Build citations from the structured JSON response
+                    citations = []
+                    hop_number = config.get("hop_number", 0)
+                    for item in parsed.get("citations", []):
+                        fp = item.get("file_path", "")
+                        en = item.get("entity_name", "")
+                        if not fp and not en:
+                            continue
+                        citations.append(Citation(
+                            citation_id=make_citation_id("graph", fp, en, hop_number),
+                            agent="graph",
+                            retrieval_method="cpg_cypher",
+                            hop_number=hop_number,
+                            file_path=fp,
+                            entity_name=en,
+                            start_line=int(item.get("start_line", 0)),
+                            end_line=int(item.get("end_line", 0)),
+                            evidence_text=item.get("evidence_text", ""),
+                            query_used=item.get("cypher_used", last_cypher),
+                            raw_metadata=item,
+                        ))
+                except (json.JSONDecodeError, ValueError):
+                    answer = raw_content
+                    citations = _extract_graph_citations(all_cypher_results, last_cypher, query, config.get("hop_number", 0))
+                    sufficient = True
+
+                logger.info(f"[GraphAgent] complete: {answer[:100]}, {len(citations)} citations")
                 return {
                     "answer": answer,
                     "cypher_used": last_cypher,
-                    "raw_results": [],
-                    "sufficient": True,
+                    "raw_results": all_cypher_results,
+                    "citations": citations,
+                    "sufficient": sufficient,
                 }
 
-            return {"answer": "Graph agent exhausted retries.", "raw_results": [], "sufficient": False}
+            citations = _extract_graph_citations(
+                all_cypher_results, last_cypher, query, config.get("hop_number", 0)
+            )
+            return {"answer": "Graph agent exhausted retries.", "raw_results": all_cypher_results, "citations": citations, "sufficient": False}
 
         except Exception as e:
             logger.error(f"[GraphAgent] failed: {e}")

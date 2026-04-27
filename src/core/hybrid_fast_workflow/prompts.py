@@ -55,14 +55,19 @@ Output a single JSON object. No tools to call. No skills to invoke. Just JSON.\
 
 SYNTHESIZE_PROMPT = """\
 You are a precise code analyst. Based on the retrieval results below, provide a complete, \
-accurate answer to the user's question. Cite which agent(s) provided the supporting evidence.
+accurate answer to the user's question.
+
+Each hop includes Citations — structured references showing exactly where the evidence \
+came from (file path, entity name, retrieval method). Reference these citations explicitly \
+in your answer using the format: [EntityName in file/path.ext] when making a claim.
 
 USER QUESTION: {user_query}
 
-RETRIEVAL RESULTS:
+RETRIEVAL RESULTS (with citations):
 {hop_history}
 
-Provide a clear, direct answer. If results are insufficient, state what is missing.\
+Write a clear, direct answer. For every factual claim, cite the specific file and entity \
+that supports it. If results are insufficient for any part of the question, say so.\
 """
 
 GRAPH_AGENT_SYSTEM = """\
