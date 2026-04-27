@@ -56,7 +56,7 @@ class ProperlyFixedComparativeAnalyzer:
         self.neo4j_config = "/opt/genpod/neo4j_config.json"
         self.test_scenario_filter = test_scenario_filter
         self.retriever_combination = retriever_combination
-        self.tool = tool  # "hybrid" | "vector" | "pageindex" | "cpg"
+        self.tool = tool  # "hybrid" | "hybrid_fast" | "vector" | "pageindex" | "cpg"
 
         # Configure vector database settings
         self.vector_db = vector_db
@@ -1098,6 +1098,80 @@ class ProperlyFixedComparativeAnalyzer:
                 except Exception as cleanup_error:
                     logger.warning(f"Session cleanup warning: {cleanup_error}")
 
+    async def run_hybrid_fast_query(self, query: str) -> Dict[str, Any]:
+        """Run query using the query_hybrid_fast_rag MCP tool."""
+        start_time = time.time()
+        session = None
+
+        try:
+            session = await self.create_mcp_session_with_timeout()
+
+            result = await session.call_tool(
+                "query_hybrid_fast_rag",
+                {
+                    "user_query": query,
+                    "project_path": self.project_path,
+                    "collection_name": self.collection_name,
+                    "neo4j_config_path": self.neo4j_config,
+                    "qdrant_config_path": self.vector_config,
+                    "max_hops": 5,
+                    "max_results": 5,
+                }
+            )
+
+            result_content = result.content[0] if isinstance(result.content, list) else result.content
+            content_text = result_content.text if hasattr(result_content, 'text') else str(result_content)
+            response_time_ms = int((time.time() - start_time) * 1000)
+
+            try:
+                result_data = json.loads(content_text)
+                return {
+                    "status": result_data.get("status", "success"),
+                    "ai_response": result_data.get("answer", ""),
+                    "response": result_data.get("answer", ""),
+                    "raw_results": result_data.get("citations", []),
+                    "hops": result_data.get("hops", []),
+                    "hop_count": result_data.get("hop_count", 0),
+                    "citations": result_data.get("citations", []),
+                    "response_time_ms": response_time_ms,
+                    "error": result_data.get("error", ""),
+                    "metadata": {"hop_count": result_data.get("hop_count", 0)},
+                }
+            except json.JSONDecodeError:
+                return {
+                    "status": "error",
+                    "ai_response": content_text,
+                    "response": content_text,
+                    "raw_results": [],
+                    "hops": [],
+                    "hop_count": 0,
+                    "citations": [],
+                    "response_time_ms": response_time_ms,
+                    "error": "JSON parse error",
+                    "metadata": {},
+                }
+
+        except Exception as e:
+            logger.error(f"❌ Hybrid Fast RAG query failed: {e}")
+            return {
+                "status": "error",
+                "ai_response": "",
+                "response": "",
+                "raw_results": [],
+                "hops": [],
+                "hop_count": 0,
+                "citations": [],
+                "response_time_ms": int((time.time() - start_time) * 1000),
+                "error": str(e),
+                "metadata": {},
+            }
+        finally:
+            if session is not None:
+                try:
+                    await session.disconnect()
+                except Exception as cleanup_error:
+                    logger.warning(f"Session cleanup warning: {cleanup_error}")
+
     async def run_comparative_analysis(self) -> tuple[List[Dict[str, Any]], str]:
         """Run comparative analysis across all filtered scenarios with incremental saving and resume capability."""
         # Load existing results if any
@@ -1165,6 +1239,30 @@ class ProperlyFixedComparativeAnalyzer:
                         'confidence':  cpg_metadata.get('confidence', 0.0),
                         'suggestions': []
                     }
+                }
+
+            elif self.tool == "hybrid_fast":
+                fast_result = await self.run_hybrid_fast_query(scenario['query'])
+                # Map hybrid_fast result to hybrid fields for evaluation framework compatibility
+                hybrid_result = {
+                    "status": fast_result["status"],
+                    "response": fast_result["ai_response"],
+                    "ai_response": fast_result["ai_response"],
+                    "raw_results": fast_result["citations"],
+                    "response_time_ms": fast_result["response_time_ms"],
+                    "error": fast_result["error"],
+                    "metadata": fast_result["metadata"],
+                    "synthesis": {"answer": fast_result["ai_response"], "confidence": 0.0},
+                    "intent_analysis": {},
+                    "critic_validation": {},
+                    "cross_validation": {},
+                    "pageindex_full_response": {},
+                    "vector_full_response": {},
+                    "cpg_full_response": {},
+                    # Fast-workflow specific fields
+                    "hops": fast_result["hops"],
+                    "hop_count": fast_result["hop_count"],
+                    "citations": fast_result["citations"],
                 }
 
             elif self.tool == "vector":
@@ -1464,8 +1562,8 @@ def main():
     parser.add_argument("--retriever-combination", type=str, default="pageindex_vector_graph",
                        help="Retriever combination: pageindex_vector_graph (default), pageindex_vector, pageindex_graph, pageindex_and_graph, pageindex_and_vector")
     parser.add_argument("--tool", type=str, default="hybrid",
-                       choices=["hybrid", "vector", "pageindex", "cpg"],
-                       help="Tool to run per scenario: hybrid (default), vector, pageindex, cpg")
+                       choices=["hybrid", "hybrid_fast", "vector", "pageindex", "cpg"],
+                       help="Tool to run per scenario: hybrid (default), hybrid_fast, vector, pageindex, cpg")
 
     args = parser.parse_args()
 

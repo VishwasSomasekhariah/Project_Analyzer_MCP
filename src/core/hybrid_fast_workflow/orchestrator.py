@@ -385,6 +385,9 @@ class HybridFastWorkflow:
             "status": "success",
             "user_query": user_query,
             "answer": final_state.get("final_answer", ""),
+            # Alias for downstream compatibility with other RAG workflows
+            "ai_response": final_state.get("final_answer", ""),
+            "response": final_state.get("final_answer", ""),
             "hop_count": final_state.get("hop_count", 0),
             "hops": [
                 {
@@ -396,5 +399,7 @@ class HybridFastWorkflow:
                 for h in hops
             ],
             "citations": all_citations,
+            # Citations exposed as raw_results for evaluation framework compatibility
+            "raw_results": all_citations,
             "error_log": final_state.get("error_log", []),
         }
