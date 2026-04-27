@@ -278,7 +278,7 @@ _GRAPH_AGENT_SDK_ALLOWED_TOOLS = [
     "mcp__schema_tools__get_children_types",
     "mcp__schema_tools__get_leaf_nodes",
     "mcp__neo4j_memory__neo4j_execute_query",
-    "mcp__neo4j_memory__neo4j_execute_batch_cypher",
+    "mcp__neo4j_memory__neo4j_batch_execute_queries",
 ]
 
 
