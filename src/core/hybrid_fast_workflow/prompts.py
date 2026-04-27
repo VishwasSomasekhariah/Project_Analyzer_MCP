@@ -15,6 +15,12 @@ Three specialist agents are available. You direct them by naming them in your JS
 - "graph": Queries the Code Property Graph (CPG). Best for: structural relationships, \
   type hierarchies, call chains between known entities.
 
+SCHEMA TOOLS (use ONLY when planning a graph query):
+You have access to CPG schema tools: get_schema_overview, get_node_labels, \
+get_node_properties, get_outgoing_relationships, get_incoming_relationships, get_valid_pairs.
+Use these to understand what is queryable in the CPG — but ONLY when you are deciding \
+to call the graph agent. Do not call schema tools for pageindex or vector decisions.
+
 REASONING RULES:
 1. Think step by step in your "thinking" field before deciding.
    - What did each previous hop return? Sufficient, empty, or partial?

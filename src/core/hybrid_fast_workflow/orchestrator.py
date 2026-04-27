@@ -57,6 +57,60 @@ _ORCHESTRATOR_SDK_ALLOWED_TOOLS = [
 ]
 
 
+async def _ensure_schema_client(config: Dict) -> None:
+    """
+    Lazily initialize the schema-aware orchestrator client the first time
+    the orchestrator needs to reason about graph queries.
+    Subsequent calls are no-ops (client already in config).
+    """
+    if config.get("_orchestrator_client"):
+        return  # already initialized
+
+    try:
+        import json as _json
+        neo4j_config_path = config.get("neo4j_config_path", "/opt/genpod/neo4j_config.json")
+        schema_path = config.get("schema_path", "/opt/genpod/src/schemas/project_knowledgebase_graph_schema.yaml")
+
+        with open(neo4j_config_path) as f:
+            neo4j_cfg = _json.load(f)
+
+        pool = MCPSessionPool(neo4j_cfg, sse_timeout=300)
+        sid, session = await pool.acquire_session("orchestrator")
+        config["_orchestrator_pool"] = pool
+        config["_orchestrator_session_id"] = sid
+
+        system_config = SystemConfig(
+            mcp_config_path=neo4j_config_path,
+            yaml_schema_path=schema_path,
+            llm_config={"fallback_max_turns": 5},
+        )
+        yaml_schema = system_config.get_yaml_schema()
+        cypher_adapter = MCPCypherAdapter(session)
+        schema_manager = DynamicSchemaManager(cypher_server=cypher_adapter, yaml_schema=yaml_schema)
+        await schema_manager.initialize_background()
+        tool_manager = ToolManager(session, schema_manager, agent_id="orchestrator")
+
+        orchestrator_tools = [
+            t for t in tool_manager.tools
+            if t.get("function", {}).get("name") in _ORCHESTRATOR_ALLOWED_TOOLS
+        ]
+
+        llm_config = system_config.get_llm_config()
+        client = llm_config.create_client()
+        if hasattr(client, "enable_per_agent_mode"):
+            client.enable_per_agent_mode()
+        if hasattr(client, "set_tool_context"):
+            client.set_tool_context(schema_manager, session)
+
+        config["_orchestrator_client"] = client
+        config["_orchestrator_tools"] = orchestrator_tools
+        config["_orchestrator_llm_config"] = llm_config
+        logger.info("[Orchestrator] schema client initialized for graph-aware planning")
+
+    except Exception as e:
+        logger.warning(f"[Orchestrator] schema client init failed: {e}")
+
+
 def _format_hop_history(hops: list) -> str:
     if not hops:
         return "(none)"
@@ -86,7 +140,12 @@ async def orchestrate_step(state: OrchestratorState) -> Dict:
         logger.info("[Orchestrator] max hops reached — forcing synthesize")
         return {"next_action": "synthesize"}
 
-    # Use schema-aware client if available, otherwise fall back to llm_service
+    # Initialize schema client on hop 0 so the orchestrator knows the CPG structure upfront.
+    # Schema tools are only relevant when deciding to call the graph agent — the prompt
+    # instructs the LLM to use them only in that context.
+    if hop_count == 0:
+        await _ensure_schema_client(config)
+
     orchestrator_client = config.get("_orchestrator_client")
     orchestrator_tools = config.get("_orchestrator_tools", [])
     llm_config = config.get("_orchestrator_llm_config")
@@ -263,52 +322,9 @@ class HybridFastWorkflow:
         llm_service = ResilientLLMService({})
         config = config or {}
         config.setdefault("max_hops", self._max_hops)
-
-        # Build schema-aware orchestrator client (shared across all hops)
-        neo4j_pool = None
-        neo4j_session_id = None
-        try:
-            neo4j_config_path = config.get("neo4j_config_path", "/opt/genpod/neo4j_config.json")
-            schema_path = config.get("schema_path", "/opt/genpod/src/schemas/project_knowledgebase_graph_schema.yaml")
-
-            import json as _json
-            with open(neo4j_config_path) as f:
-                neo4j_cfg = _json.load(f)
-
-            neo4j_pool = MCPSessionPool(neo4j_cfg, sse_timeout=300)
-            neo4j_session_id, neo4j_session = await neo4j_pool.acquire_session("orchestrator")
-
-            system_config = SystemConfig(
-                mcp_config_path=neo4j_config_path,
-                yaml_schema_path=schema_path,
-                llm_config={"fallback_max_turns": 5},  # short turns — planning only
-            )
-            yaml_schema = system_config.get_yaml_schema()
-            cypher_adapter = MCPCypherAdapter(neo4j_session)
-            schema_manager = DynamicSchemaManager(cypher_server=cypher_adapter, yaml_schema=yaml_schema)
-            await schema_manager.initialize_background()
-            tool_manager = ToolManager(neo4j_session, schema_manager, agent_id="orchestrator")
-
-            # Schema tools only — no execute permission
-            orchestrator_tools = [
-                t for t in tool_manager.tools
-                if t.get("function", {}).get("name") in _ORCHESTRATOR_ALLOWED_TOOLS
-            ]
-
-            llm_config = system_config.get_llm_config()
-            orchestrator_client = llm_config.create_client()
-            if hasattr(orchestrator_client, "enable_per_agent_mode"):
-                orchestrator_client.enable_per_agent_mode()
-            if hasattr(orchestrator_client, "set_tool_context"):
-                orchestrator_client.set_tool_context(schema_manager, neo4j_session)
-
-            config["_orchestrator_client"] = orchestrator_client
-            config["_orchestrator_tools"] = orchestrator_tools
-            config["_orchestrator_llm_config"] = llm_config
-            logger.info("[HybridFastWorkflow] schema-aware orchestrator initialized")
-
-        except Exception as e:
-            logger.warning(f"[HybridFastWorkflow] schema orchestrator init failed, using fallback: {e}")
+        # Schema client is initialized lazily in orchestrate_step only when graph is considered
+        config.setdefault("_orchestrator_pool", None)
+        config.setdefault("_orchestrator_session_id", None)
 
         initial_state: OrchestratorState = {
             "user_query": user_query,
@@ -328,8 +344,11 @@ class HybridFastWorkflow:
         try:
             final_state = await self._workflow.ainvoke(initial_state)
         finally:
-            if neo4j_pool and neo4j_session_id:
-                await neo4j_pool.release_session(neo4j_session_id)
+            # Release lazy-initialized orchestrator schema session if created
+            pool = config.get("_orchestrator_pool")
+            sid = config.get("_orchestrator_session_id")
+            if pool and sid:
+                await pool.release_session(sid)
 
         hops = final_state.get("hop_history", [])
         return {
