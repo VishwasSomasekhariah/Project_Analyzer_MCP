@@ -1380,7 +1380,87 @@ def register_all_tools(mcp: FastMCP):
                 "message": f"❌ Hybrid RAG failed with exception: {str(e)}"
             }
 
+    @mcp.tool()
+    async def query_hybrid_fast_rag(
+        user_query: str,
+        project_path: str = "/opt/HelloWorldApp",
+        mcts_iterations: int = 20,
+        collection_name: str = "HelloWorldApp_pageindex_v3",
+        neo4j_config_path: str = "/opt/genpod/neo4j_config.json",
+        qdrant_config_path: str = "/opt/genpod/qdrant_config.json",
+        schema_path: str = "/opt/genpod/src/schemas/project_knowledgebase_graph_schema.yaml",
+        max_hops: int = 5,
+        max_results: int = 5,
+    ) -> dict:
+        """
+        🚀 HYBRID FAST RAG: Multi-hop orchestrator for quick, precise code analysis.
 
+        An orchestrator LLM dynamically routes queries across three database agents
+        in a multi-hop trajectory — querying PageIndex, Vector, and Graph databases
+        in whatever order and combination best answers the question.
+
+        USE THIS TOOL WHEN:
+        - You need a faster response than query_hybrid_rag
+        - The query benefits from multi-hop reasoning across databases
+        - You want the orchestrator to decide the retrieval strategy adaptively
+
+        USE query_hybrid_rag WHEN:
+        - You need the most comprehensive analysis (full synthesis + critic validation)
+        - Query complexity requires the full multi-agent CPG workflow
+
+        AGENTS:
+        - PageIndex: file hierarchy navigation via MCTS
+        - Vector: semantic search via Qdrant MCP (direct tool call)
+        - Graph: schema-aware CPG queries via Neo4j MCP (ReAct loop with schema tools)
+
+        Args:
+            user_query: Natural language question about the codebase
+            project_path: Path to project root for PageIndex
+            mcts_iterations: MCTS iterations for PageIndex (default: 20)
+            collection_name: Qdrant collection for vector search
+            neo4j_config_path: Neo4j MCP server config
+            qdrant_config_path: Qdrant MCP server config
+            schema_path: CPG schema YAML for graph agent
+            max_hops: Maximum orchestrator hops before forcing synthesis (default: 5)
+            max_results: Max results per vector search (default: 5)
+
+        Returns:
+            dict with answer, hop_count, hops (trajectory), error_log
+        """
+        try:
+            import logging
+            logger = logging.getLogger(__name__)
+            logger.info(f"🚀 Hybrid Fast RAG starting: {user_query}")
+
+            from src.core.hybrid_fast_workflow import HybridFastWorkflow
+
+            workflow = HybridFastWorkflow(max_hops=max_hops)
+
+            config = {
+                "project_path": project_path,
+                "mcts_iterations": mcts_iterations,
+                "collection_name": collection_name,
+                "neo4j_config_path": neo4j_config_path,
+                "qdrant_config_path": qdrant_config_path,
+                "schema_path": schema_path,
+                "max_results": max_results,
+            }
+
+            result = await workflow.run_analysis(user_query=user_query, config=config)
+
+            logger.info(f"✅ Hybrid Fast RAG complete: {result.get('hop_count', 0)} hops")
+            return result
+
+        except Exception as e:
+            import traceback
+            logger.error(f"❌ Hybrid Fast RAG failed: {e}")
+            return {
+                "status": "error",
+                "tool_name": "query_hybrid_fast_rag",
+                "error": str(e),
+                "traceback": traceback.format_exc(),
+                "user_query": user_query,
+            }
 
     # # ===== [LEGACY] Pure Query Tools (No Side Effects) =====
     
