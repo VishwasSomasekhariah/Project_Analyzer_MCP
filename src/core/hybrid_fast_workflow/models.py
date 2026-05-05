@@ -77,13 +77,10 @@ class OrchestratorState(TypedDict):
     final_answer: Optional[str]
     error_log: List[str]
     hop_count: int
-    # Routing fields
-    next_action: Optional[str]
-    _pending_agent: Optional[str]
-    _pending_query: Optional[str]
-    _pending_reasoning: Optional[str]
     # Routing fields — set by orchestrate_step, consumed by conditional edge / call_agent
-    next_action: Optional[str]       # "call_agent" | "synthesize"
+    next_action: Optional[str]       # "call_agent" | "synthesize" | "continue"
     _pending_agent: Optional[str]    # "pageindex" | "vector" | "graph"
     _pending_query: Optional[str]
     _pending_reasoning: Optional[str]
+    # Consensus check fields
+    consensus_note: Optional[str]    # discrepancy description injected by consensus_check

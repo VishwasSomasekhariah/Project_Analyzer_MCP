@@ -96,6 +96,37 @@ OUTPUT when done (strict JSON):
 }\
 """
 
+CONSENSUS_PROMPT = """\
+You are evaluating whether two retrieval results from different agents agree sufficiently \
+to synthesize a final answer, or whether ambiguity requires further investigation.
+
+USER QUESTION: {user_query}
+
+HOP 1 [{agent_1}]:
+Query: {query_1}
+Result: {result_1}
+Citations:
+{citations_1}
+
+HOP 2 [{agent_2}]:
+Query: {query_2}
+Result: {result_2}
+Citations:
+{citations_2}
+
+Evaluate:
+1. Do both results address the same aspect of the user question?
+2. Are there contradictions or gaps that make synthesis unreliable?
+3. Is the combined evidence sufficient to answer the question accurately?
+
+Output strict JSON, no markdown:
+{{
+  "verdict": "consensus" | "ambiguous",
+  "reasoning": "<one sentence explaining why>",
+  "discrepancy": "<specific contradiction or gap found — empty string if consensus>"
+}}\
+"""
+
 VECTOR_AGENT_SYSTEM = """\
 You are a vector search agent. Search the Qdrant collection for semantically relevant \
 code chunks and summarize the findings relevant to the query.

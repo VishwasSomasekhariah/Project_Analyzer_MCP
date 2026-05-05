@@ -30,13 +30,20 @@ from src.core.graph_rag.schema.dynamic_schema_manager import DynamicSchemaManage
 from src.core.graph_rag.tools.manager import ToolManager
 from src.core.hybrid_fast_workflow.agents import GraphAgent, PageIndexAgent, VectorAgent
 from src.core.hybrid_fast_workflow.models import HopEntry, OrchestratorState
-from src.core.hybrid_fast_workflow.prompts import ORCHESTRATOR_SYSTEM, ORCHESTRATOR_USER, SYNTHESIZE_PROMPT
+from src.core.hybrid_fast_workflow.prompts import CONSENSUS_PROMPT, ORCHESTRATOR_SYSTEM, ORCHESTRATOR_USER, SYNTHESIZE_PROMPT
 from src.core.hybrid_fast_workflow.utils import parse_llm_json
 from src.core.resilient_llm_service import ResilientLLMService
 
 logger = logging.getLogger(__name__)
 
 _DEFAULT_MAX_HOPS = 5
+
+# Complement agent for consensus check: whichever agent was NOT used in hop 1
+_CONSENSUS_COMPLEMENT = {
+    "pageindex": "graph",
+    "vector": "graph",
+    "graph": "vector",
+}
 
 # Schema tools the orchestrator may use to plan graph queries — no execute permission
 _ORCHESTRATOR_ALLOWED_TOOLS = [
@@ -159,6 +166,9 @@ async def orchestrate_step(state: OrchestratorState) -> Dict:
         hop_count=hop_count,
         hop_history=_format_hop_history(hop_history),
     )
+    consensus_note = state.get("consensus_note")
+    if consensus_note:
+        user_prompt += f"\n\nCONSENSUS CHECK NOTE:\n{consensus_note}\nUse this discrepancy to guide your next retrieval decision."
 
     messages = [
         {"role": "system", "content": ORCHESTRATOR_SYSTEM},
@@ -288,7 +298,114 @@ async def synthesize_answer(state: OrchestratorState) -> Dict:
     return {"final_answer": answer}
 
 
+async def consensus_check(state: OrchestratorState) -> Dict:
+    """
+    Single-hop consensus gate triggered when orchestrator wants to synthesize after exactly
+    one agent call. Calls the complement agent with the same query and asks the LLM whether
+    both results agree.
+
+    Complement rule: pageindex/vector → graph, graph → vector.
+
+    - consensus  → next_action = "synthesize" (proceed normally)
+    - ambiguous  → next_action = "continue" (re-enter orchestrate_step with discrepancy note)
+
+    Feature flag: config["enable_consensus_check"] (default True). Set False to skip.
+    """
+    user_query: str = state["user_query"]
+    hop_history: list = state["hop_history"]
+    llm_service: Any = state["llm_service"]
+    config: Dict = state["config"]
+
+    first_hop = hop_history[0]
+    complement = _CONSENSUS_COMPLEMENT.get(first_hop.agent, "vector")
+
+    logger.info(f"[ConsensusCheck] hop 1 used {first_hop.agent} — calling {complement} for consensus")
+
+    config["hop_number"] = state["hop_count"] + 1
+    context = _format_hop_history(hop_history)
+
+    if complement == "graph":
+        result = await GraphAgent().run(user_query, config, context)
+    else:
+        result = await VectorAgent().run(user_query, config, context)
+
+    hop = HopEntry(
+        agent=complement,
+        query=user_query,
+        result=result.get("answer", ""),
+        citations=result.get("citations", []),
+        raw=result,
+    )
+    updated_history = hop_history + [hop]
+    updated_hop_count = state["hop_count"] + 1
+
+    prompt = CONSENSUS_PROMPT.format(
+        user_query=user_query,
+        agent_1=first_hop.agent,
+        query_1=first_hop.query,
+        result_1=first_hop.result,
+        citations_1="\n".join(c.format() for c in first_hop.citations) or "(none)",
+        agent_2=complement,
+        query_2=user_query,
+        result_2=hop.result,
+        citations_2="\n".join(c.format() for c in hop.citations) or "(none)",
+    )
+
+    resp = await llm_service.generate_response(
+        prompt=prompt,
+        system_prompt="You are a precise evidence evaluator. Output only valid JSON.",
+        json_mode=True,
+        temperature=0.0,
+        max_tokens=500,
+        use_cache=False,
+    )
+
+    verdict_data = {}
+    if not resp.error:
+        try:
+            verdict_data = parse_llm_json(resp.content)
+        except Exception:
+            logger.warning(f"[ConsensusCheck] verdict parse failed: {resp.content[:100]}")
+
+    verdict = verdict_data.get("verdict", "consensus")
+    reasoning = verdict_data.get("reasoning", "")
+    discrepancy = verdict_data.get("discrepancy", "")
+
+    logger.info(f"[ConsensusCheck] verdict={verdict} — {reasoning}")
+
+    if verdict == "consensus":
+        return {
+            "hop_history": updated_history,
+            "hop_count": updated_hop_count,
+            "next_action": "synthesize",
+            "consensus_note": None,
+        }
+
+    note = (
+        f"Consensus check found ambiguity after calling {first_hop.agent} and {complement}: "
+        f"{discrepancy}"
+    )
+    logger.info(f"[ConsensusCheck] ambiguous — routing back to orchestrator: {note}")
+    return {
+        "hop_history": updated_history,
+        "hop_count": updated_hop_count,
+        "next_action": "continue",
+        "consensus_note": note,
+    }
+
+
 def _route(state: OrchestratorState) -> str:
+    action = state.get("next_action", "synthesize")
+    if (
+        action == "synthesize"
+        and state.get("hop_count", 0) == 1
+        and state["config"].get("enable_consensus_check", True)
+    ):
+        return "consensus_check"
+    return action
+
+
+def _consensus_route(state: OrchestratorState) -> str:
     return state.get("next_action", "synthesize")
 
 
@@ -299,6 +416,7 @@ def build_workflow() -> StateGraph:
 
     graph.add_node("orchestrate_step", orchestrate_step)
     graph.add_node("call_agent", call_agent)
+    graph.add_node("consensus_check", consensus_check)
     graph.add_node("synthesize_answer", synthesize_answer)
 
     graph.set_entry_point("orchestrate_step")
@@ -309,9 +427,18 @@ def build_workflow() -> StateGraph:
         {
             "call_agent": "call_agent",
             "synthesize": "synthesize_answer",
+            "consensus_check": "consensus_check",
         },
     )
     graph.add_edge("call_agent", "orchestrate_step")
+    graph.add_conditional_edges(
+        "consensus_check",
+        _consensus_route,
+        {
+            "synthesize": "synthesize_answer",
+            "continue": "orchestrate_step",
+        },
+    )
     graph.add_edge("synthesize_answer", END)
 
     return graph.compile()
@@ -346,6 +473,7 @@ class HybridFastWorkflow:
             "_pending_agent": None,
             "_pending_query": None,
             "_pending_reasoning": None,
+            "consensus_note": None,
         }
 
         logger.info(f"[HybridFastWorkflow] starting: '{user_query}'")
