@@ -2,7 +2,7 @@
 Database agents for the Hybrid Fast Workflow.
 
 Each agent encapsulates access to one data source:
-- PageIndexAgent : file-hierarchy MCTS via codebase-vector-rag CLI subprocess
+- PageIndexAgent : file-hierarchy MCTS via genpod-semantic-rag CLI subprocess
 - VectorAgent    : semantic search via direct Qdrant MCP session (qdrant-find)
 - GraphAgent     : CPG queries via Neo4j MCP session + schema-aware ReAct loop
 """
@@ -117,16 +117,16 @@ def _extract_graph_citations(cypher_results: list, cypher_query: str, query: str
 # ── PageIndex ────────────────────────────────────────────────────────────────
 
 class PageIndexAgent:
-    """Calls codebase-vector-rag --retriever pageindex as a subprocess."""
+    """Calls genpod-semantic-rag --retriever pageindex as a subprocess."""
 
     async def run(self, query: str, config: Dict[str, Any], context: str = "") -> Dict[str, Any]:
         project_path = config.get("project_path", "/opt/HelloWorldApp")
         mcts_iterations = config.get("mcts_iterations", 20)
-        codebase_rag_config = config.get("codebase_rag_config")
+        semantic_rag_config = config.get("codebase_rag_config")
 
-        cli = ["codebase-vector-rag"]
-        if codebase_rag_config:
-            cli += ["--config", codebase_rag_config]
+        cli = ["genpod-semantic-rag"]
+        if semantic_rag_config:
+            cli += ["--config", semantic_rag_config]
         cli += [
             "query", query,
             "--retriever", "pageindex",

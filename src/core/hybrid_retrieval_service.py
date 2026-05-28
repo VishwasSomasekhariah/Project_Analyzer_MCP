@@ -225,7 +225,7 @@ class HybridRetrievalService:
             # Create enhanced query with entity context
             enhanced_query = self._enhance_query_for_vector(user_query, entities)
             
-            # Implement vector search using codebase-vector-rag CLI (same as query_vector_only)
+            # Implement vector search using genpod-semantic-rag CLI (same as query_vector_only)
             logger.info(f"🔍 HYBRID VECTOR DEBUG - Executing vector search with query: {enhanced_query}")
             
             import subprocess
@@ -234,7 +234,7 @@ class HybridRetrievalService:
             
             # Build CLI command (same as query_vector_only)
             cli_command = [
-                "codebase-vector-rag", "query", enhanced_query,
+                "genpod-semantic-rag", "query", enhanced_query,
                 "--collection-name", vector_params.get("collection_name", ""),
                 "--max-results", str(vector_params.get("max_results", 10)),
                 "--output-format", "json"

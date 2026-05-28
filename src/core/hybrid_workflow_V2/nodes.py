@@ -293,7 +293,7 @@ Return ONLY a valid JSON object with this exact structure:
         """
         Node: Execute high-level PageIndex retrieval (primary path).
 
-        Calls codebase-vector-rag --retriever pageindex --project-path <path>.
+        Calls genpod-semantic-rag --retriever pageindex --project-path <path>.
         Determines sufficiency via:
           • non-empty results
           • answer length >= _PAGEINDEX_SUFFICIENCY_MIN_ANSWER_CHARS
@@ -313,7 +313,7 @@ Return ONLY a valid JSON object with this exact structure:
             project_path = pageindex_config.get("project_path")
             mcts_iterations = pageindex_config.get("mcts_iterations", 20)
             enable_ai = pageindex_config.get("enable_ai", True)
-            codebase_rag_config = pageindex_config.get("config_path")  # optional --config
+            semantic_rag_config = pageindex_config.get("config_path")  # optional --config
 
             if not project_path:
                 logger.warning("⚠️ pageindex_config.project_path not set — skipping PageIndex, routing to fallback")
@@ -331,9 +331,9 @@ Return ONLY a valid JSON object with this exact structure:
                     "pageindex_learnings": {"failure_reason": "project_path not configured"},
                 }
 
-            cli_command = ["codebase-vector-rag"]
-            if codebase_rag_config:
-                cli_command += ["--config", codebase_rag_config]
+            cli_command = ["genpod-semantic-rag"]
+            if semantic_rag_config:
+                cli_command += ["--config", semantic_rag_config]
             cli_command += [
                 "query", user_query,
                 "--retriever", "pageindex",
@@ -348,7 +348,7 @@ Return ONLY a valid JSON object with this exact structure:
             start_time = asyncio.get_event_loop().time()
 
             # Use a temp file for stderr instead of a pipe to prevent grandchild
-            # processes (e.g. Claude SDK spawned by codebase-vector-rag) from
+            # processes (e.g. Claude SDK spawned by genpod-semantic-rag) from
             # inheriting the pipe and keeping it open indefinitely.
             with tempfile.NamedTemporaryFile(mode='w', suffix='.stderr', delete=False) as _stderr_f:
                 _stderr_path = _stderr_f.name
@@ -662,7 +662,7 @@ Unsupported claims (claims made but not backed by evidence):
 
     async def vector_retrieval(self, state: HybridState) -> Dict[str, Any]:
         """
-        Node: Execute vector retrieval using codebase-vector-rag CLI.
+        Node: Execute vector retrieval using genpod-semantic-rag CLI.
 
         Skipped (returns empty result) when the combination does not include
         vector: PAGEINDEX_GRAPH or PAGEINDEX_AND_GRAPH.
@@ -706,9 +706,9 @@ Unsupported claims (claims made but not backed by evidence):
             enable_reasoning = vector_config.get("enable_reasoning", True)
             max_branches = vector_config.get("max_branches", 2)
 
-            # Build CLI command for codebase-vector-rag (following query_vector_only pattern)
+            # Build CLI command for genpod-semantic-rag (following query_vector_only pattern)
             cli_command = [
-                "codebase-vector-rag", 
+                "genpod-semantic-rag", 
                 "--config", config_path, 
                 "query", user_query,
                 "--collection-name", collection_name,
@@ -727,7 +727,7 @@ Unsupported claims (claims made but not backed by evidence):
             start_time = asyncio.get_event_loop().time()
 
             # Use a temp file for stderr instead of a pipe to prevent grandchild
-            # processes (e.g. Claude SDK spawned by codebase-vector-rag) from
+            # processes (e.g. Claude SDK spawned by genpod-semantic-rag) from
             # inheriting the pipe and keeping it open indefinitely.
             with tempfile.NamedTemporaryFile(mode='w', suffix='.stderr', delete=False) as _stderr_f:
                 _stderr_path = _stderr_f.name
@@ -857,8 +857,8 @@ Unsupported claims (claims made but not backed by evidence):
     #             project_name="HelloWorldApp",
     #             neo4j_config="/opt/genpod/neo4j_config.json",
     #             project_path="/opt/HelloWorldApp/",
-    #             mappings_path="/opt/genpod/project_analyzer_cli/project_analyzer/parsing_utils/mappings.yaml",
-    #             queries_path="/opt/genpod/project_analyzer_cli/project_analyzer/final_queries",
+    #             mappings_path="/opt/genpod/genpod-graph-indexer/project_analyzer/parsing_utils/mappings.yaml",
+    #             queries_path="/opt/genpod/genpod-graph-indexer/project_analyzer/final_queries",
     #             max_iterations=max_iterations  # Use config value instead of hardcoded 10
     #         )
 

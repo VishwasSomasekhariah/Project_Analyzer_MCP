@@ -313,7 +313,7 @@ class ClaudeSDKFallback:
             self._logger.error(f"claude_agent_sdk not installed: {e}")
             raise RuntimeError(
                 "claude_agent_sdk is required for Claude SDK fallback. "
-                "Install with: pip install codebase-vector-rag[fallback]"
+                "Install with: pip install genpod-semantic-rag[fallback]"
             ) from e
 
         effective_system_prompt = system_prompt or self._system_prompt

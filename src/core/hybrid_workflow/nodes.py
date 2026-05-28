@@ -261,7 +261,7 @@ Return ONLY a valid JSON object with this exact structure:
     
     async def vector_retrieval(self, state: HybridState) -> Dict[str, Any]:
         """
-        Node: Execute vector retrieval using codebase-vector-rag CLI.
+        Node: Execute vector retrieval using genpod-semantic-rag CLI.
 
         Runs the vector search with enhanced queries based on intent analysis.
         """
@@ -282,9 +282,9 @@ Return ONLY a valid JSON object with this exact structure:
             enable_reasoning = vector_config.get("enable_reasoning", True)
             max_branches = vector_config.get("max_branches", 2)
 
-            # Build CLI command for codebase-vector-rag (following query_vector_only pattern)
+            # Build CLI command for genpod-semantic-rag (following query_vector_only pattern)
             cli_command = [
-                "codebase-vector-rag", 
+                "genpod-semantic-rag", 
                 "--config", config_path, 
                 "query", user_query,
                 "--collection-name", collection_name,
@@ -397,7 +397,7 @@ Return ONLY a valid JSON object with this exact structure:
 
     async def pageindex_retrieval(self, state: HybridState) -> Dict[str, Any]:
         """
-        Node: Execute PageIndex retrieval using codebase-vector-rag CLI with --retriever pageindex.
+        Node: Execute PageIndex retrieval using genpod-semantic-rag CLI with --retriever pageindex.
 
         Uses MCTS-based file tree navigation instead of vector similarity search.
         """
@@ -416,7 +416,7 @@ Return ONLY a valid JSON object with this exact structure:
 
             # Build CLI command for pageindex retrieval
             cli_command = [
-                "codebase-vector-rag",
+                "genpod-semantic-rag",
                 "--config", config_path,
                 "query", user_query,
                 "--retriever", "pageindex",
@@ -549,8 +549,8 @@ Return ONLY a valid JSON object with this exact structure:
     #             project_name="HelloWorldApp",
     #             neo4j_config="/opt/genpod/neo4j_config.json",
     #             project_path="/opt/HelloWorldApp/",
-    #             mappings_path="/opt/genpod/project_analyzer_cli/project_analyzer/parsing_utils/mappings.yaml",
-    #             queries_path="/opt/genpod/project_analyzer_cli/project_analyzer/final_queries",
+    #             mappings_path="/opt/genpod/genpod-graph-indexer/project_analyzer/parsing_utils/mappings.yaml",
+    #             queries_path="/opt/genpod/genpod-graph-indexer/project_analyzer/final_queries",
     #             max_iterations=max_iterations  # Use config value instead of hardcoded 10
     #         )
 
