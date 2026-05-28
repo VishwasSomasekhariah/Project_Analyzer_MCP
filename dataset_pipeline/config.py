@@ -24,8 +24,8 @@ class PipelineConfig:
     neo4j_config: str = str(_GENPOD / "neo4j_config.json")
     qdrant_config: str = str(_GENPOD / "qdrant_config.json")
     collection_name: str = "HelloWorldApp_pageindex_v3"
-    mappings_path: str = str(_GENPOD / "project_analyzer_cli/project_analyzer/parsing_utils/mappings.yaml")
-    queries_path: str = str(_GENPOD / "project_analyzer_cli/project_analyzer/final_queries")
+    mappings_path: str = str(_GENPOD / "genpod-graph-indexer/project_analyzer/parsing_utils/mappings.yaml")
+    queries_path: str = str(_GENPOD / "genpod-graph-indexer/project_analyzer/final_queries")
 
     # --- Stage 1 ---
     gt_variants_per_query: int = 7
