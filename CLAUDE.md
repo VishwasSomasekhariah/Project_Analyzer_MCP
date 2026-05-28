@@ -2,9 +2,9 @@
 
 ## Project Overview
 This is a Model Context Protocol (MCP) Server project focused on Project Analysis using Code Property Graphs (CPG) and Vectors. The project implements intelligent RAG (Retrieval-Augmented Generation) workflows for code understanding and analysis.
-There are Two CLI's we use, `project-analyzer` and `codebase-vector-rag`.
-`project-analyzer` CLI uses Neo4j MCP server in the backend, so that must be running.
-`codebase-vector-rag` CLI uses Chroma MCP server but in stdio mode, so this comes up running run time.
+There are Two CLI's we use, `genpod-graph-indexer` and `genpod-semantic-rag`.
+`genpod-graph-indexer` CLI uses Neo4j MCP server in the backend, so that must be running.
+`genpod-semantic-rag` CLI uses Qdrant MCP server (mcp-server-qdrant) over SSE transport on port 8200, so that must be running.
 Because project-analyzer communicates with Neo4j MCP server we must pass a Neo4j MCP Config file to the cli during execution so that it know where to send its requests.
 Always use `mcp_use` module's MCPClient and MCPSession to communicate with the MCP servers.
 Don't confuse database MCP servers with the Main Project Server and Any component we build as part of the main MCP server must only interact with the CLI tools and never with other MCP servers directly.

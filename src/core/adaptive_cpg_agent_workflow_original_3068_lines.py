@@ -2979,8 +2979,8 @@ async def create_adaptive_cpg_workflow() -> AdaptiveCPGAgentWorkflow:
 async def execute_adaptive_cpg_workflow(user_query: str, project_name: str = "HelloWorldApp",
                                        neo4j_config: str = "/opt/genpod/neo4j_config.json",
                                        project_path: str = "/opt/HelloWorldApp/",
-                                       mappings_path: str = "/opt/genpod/project_analyzer_cli/project_analyzer/parsing_utils/mappings.yaml",
-                                       queries_path: str = "/opt/genpod/project_analyzer_cli/project_analyzer/final_queries",
+                                       mappings_path: str = "/opt/genpod/genpod-graph-indexer/project_analyzer/parsing_utils/mappings.yaml",
+                                       queries_path: str = "/opt/genpod/genpod-graph-indexer/project_analyzer/final_queries",
                                        max_iterations: int = 10) -> Dict[str, Any]:
     """
     Main function to execute the adaptive CPG workflow
@@ -3037,8 +3037,8 @@ async def main():
             project_name="HelloWorldApp",
             neo4j_config="/opt/genpod/neo4j_config.json",
             project_path="/opt/HelloWorldApp/",
-            mappings_path="/opt/genpod/project_analyzer_cli/project_analyzer/parsing_utils/mappings.yaml",
-            queries_path="/opt/genpod/project_analyzer_cli/project_analyzer/final_queries",
+            mappings_path="/opt/genpod/genpod-graph-indexer/project_analyzer/parsing_utils/mappings.yaml",
+            queries_path="/opt/genpod/genpod-graph-indexer/project_analyzer/final_queries",
             max_iterations=10
         )
         

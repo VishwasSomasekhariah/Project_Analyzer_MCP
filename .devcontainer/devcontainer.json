@@ -26,7 +26,7 @@
     "mounts": [
       "source=${localWorkspaceFolder},target=/opt/genpod,type=bind,consistency=cached"
     ],
-    "postCreateCommand": "pip install -e ./project_analyzer_cli && pip install -r requirements.txt"
+    "postCreateCommand": "pip install -e ./genpod-graph-indexer && pip install -r requirements.txt"
 
   }
   
