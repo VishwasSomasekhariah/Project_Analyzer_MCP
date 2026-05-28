@@ -1,0 +1,32 @@
+{
+    "name": "Project Analyzer MCP Dev",
+    "context": "..",
+    "dockerFile": "../Dockerfile",
+    "workspaceFolder": "/opt/genpod",
+    "containerName": "project-analyzer-dev",
+    "customizations": {
+      "vscode": {
+        "extensions": [
+          "ms-python.python",
+          "ms-azuretools.vscode-docker",
+          "streetsidesoftware.code-spell-checker",
+          "ms-python.vscode-pylance"
+        ],
+        "settings": {
+                "editor.formatOnSave": true,
+                "python.linting.enabled": true,
+                "terminal.integrated.shell.linux": "/bin/bash",
+                "python.pythonPath": "/usr/local/bin/python3",
+                "python.debugging.puppyPauseOnEntry": false,
+                "python.debugging.puppyRemoteRoot": "/opt/genpod"
+            }
+        }
+    },
+    "remoteUser": "root",
+    "mounts": [
+      "source=${localWorkspaceFolder},target=/opt/genpod,type=bind,consistency=cached"
+    ],
+    "postCreateCommand": "pip install -e ./project_analyzer_cli && pip install -r requirements.txt"
+
+  }
+  

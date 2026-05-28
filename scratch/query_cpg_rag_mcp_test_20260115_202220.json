@@ -1,0 +1,464 @@
+{
+  "status": "success",
+  "tool_name": "query_cpg_rag",
+  "workflow_type": "4_agent_team",
+  "user_query": "What variable name stores the formatted message in WorkerZ?",
+  "project_name": "HelloWorldApp",
+  "response": {
+    "answer": "{\"type\": \"object\"}",
+    "confidence": "medium",
+    "status": "success"
+  },
+  "citations": [
+    {
+      "claim": "WorkerZ class does not exist in the codebase",
+      "source_file": null,
+      "source_line": null,
+      "source_location": null,
+      "entity_name": null,
+      "entity_type": null,
+      "evidence": {
+        "summary": "Direct search for Type node with name 'WorkerZ' returned 0 results. Query executed successfully but found no matching entities."
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (t:Type {name: 'WorkerZ'}) RETURN t.name, id(t), t.file_path, t.type_kind",
+      "verification_query": "MATCH (t:Type {name: 'WorkerZ'}) RETURN t.name, id(t), t.file_path, t.type_kind",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "No type entities with names containing 'workerz' (case-insensitive) exist in the codebase",
+      "source_file": null,
+      "source_line": null,
+      "source_location": null,
+      "entity_name": null,
+      "entity_type": null,
+      "evidence": {
+        "summary": "Case-insensitive pattern search using 'toLower(t.name) CONTAINS 'workerz'' returned 0 results, confirming no similar named types exist."
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (t:Type) WHERE toLower(t.name) CONTAINS 'workerz' RETURN t.name, id(t), t.file_path, t.type_kind",
+      "verification_query": "MATCH (t:Type) WHERE toLower(t.name) CONTAINS 'workerz' RETURN t.name, id(t), t.file_path, t.type_kind",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "WorkerZ class has no associated variables or fields",
+      "source_file": null,
+      "source_line": null,
+      "source_location": null,
+      "entity_name": null,
+      "entity_type": null,
+      "evidence": {
+        "summary": "Relationship traversal query searching for CONTAINS relationships from WorkerZ to Variable nodes returned 0 results."
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (t:Type {name: 'WorkerZ'})-[:CONTAINS]->(v:Variable) RETURN t.name, v.name, v.type, v.file_path, id(v)",
+      "verification_query": "MATCH (t:Type {name: 'WorkerZ'})-[:CONTAINS]->(v:Variable) RETURN t.name, v.name, v.type, v.file_path, id(v)",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "WorkerZ class contains no variables or fields",
+      "source_file": null,
+      "source_line": null,
+      "source_location": null,
+      "entity_name": null,
+      "entity_type": null,
+      "evidence": {
+        "summary": "CONTAINS relationship query from WorkerZ Type to Variable nodes returned 0 results. Query executed successfully but found no variable entities associated with WorkerZ."
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (t:Type {name: 'WorkerZ'})-[:CONTAINS]->(v:Variable) RETURN t.name, v.name, v.type, v.file_path, v.modifier, id(v) ORDER BY v.name",
+      "verification_query": "MATCH (t:Type {name: 'WorkerZ'})-[:CONTAINS]->(v:Variable) RETURN t.name, v.name, v.type, v.file_path, v.modifier, id(v) ORDER BY v.name",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "WorkerZ type does not exist in the codebase",
+      "source_file": null,
+      "source_line": null,
+      "source_location": null,
+      "entity_name": null,
+      "entity_type": null,
+      "evidence": {
+        "summary": "Direct search for Type node with name 'WorkerZ' returned 0 results. Query executed successfully but found no matching type entity."
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (t:Type {name: 'WorkerZ'}) RETURN t.name, t.file_path, t.type_kind, id(t)",
+      "verification_query": "MATCH (t:Type {name: 'WorkerZ'}) RETURN t.name, t.file_path, t.type_kind, id(t)",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "No types with names containing 'workerz' have any associated variables",
+      "source_file": null,
+      "source_line": null,
+      "source_location": null,
+      "entity_name": null,
+      "entity_type": null,
+      "evidence": {
+        "summary": "Case-insensitive pattern search for types containing 'workerz' with CONTAINS relationships to variables returned 0 results. No matching type-variable combinations found."
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (t:Type)-[:CONTAINS]->(v:Variable) WHERE toLower(t.name) CONTAINS 'workerz' RETURN t.name, v.name, v.type, v.file_path, id(v) ORDER BY t.name, v.name",
+      "verification_query": "MATCH (t:Type)-[:CONTAINS]->(v:Variable) WHERE toLower(t.name) CONTAINS 'workerz' RETURN t.name, v.name, v.type, v.file_path, id(v) ORDER BY t.name, v.name",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "WorkerZ class contains no functions",
+      "source_file": null,
+      "source_line": null,
+      "source_location": null,
+      "entity_name": null,
+      "entity_type": null,
+      "evidence": {
+        "summary": "CONTAINS relationship query from WorkerZ Type to Function nodes returned 0 results. Query executed successfully but found no function entities associated with WorkerZ."
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (t:Type {name: 'WorkerZ'})-[:CONTAINS]->(f:Function) RETURN t.name, f.name, f.file_path, f.modifier, id(f) ORDER BY f.name",
+      "verification_query": "MATCH (t:Type {name: 'WorkerZ'})-[:CONTAINS]->(f:Function) RETURN t.name, f.name, f.file_path, f.modifier, id(f) ORDER BY f.name",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "WorkerZ class contains no message formatting functions",
+      "source_file": null,
+      "source_line": null,
+      "source_location": null,
+      "entity_name": null,
+      "entity_type": null,
+      "evidence": {
+        "summary": "Targeted search for functions containing 'format' or 'message' in their names within WorkerZ Type returned 0 results. No formatting-related functions found associated with WorkerZ."
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (t:Type {name: 'WorkerZ'})-[:CONTAINS]->(f:Function) WHERE toLower(f.name) CONTAINS 'format' OR toLower(f.name) CONTAINS 'message' RETURN t.name, f.name, f.file_path, f.modifier, id(f) ORDER BY f.name",
+      "verification_query": "MATCH (t:Type {name: 'WorkerZ'})-[:CONTAINS]->(f:Function) WHERE toLower(f.name) CONTAINS 'format' OR toLower(f.name) CONTAINS 'message' RETURN t.name, f.name, f.file_path, f.modifier, id(f) ORDER BY f.name",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "No types containing 'workerz' have message formatting functions",
+      "source_file": null,
+      "source_line": null,
+      "source_location": null,
+      "entity_name": null,
+      "entity_type": null,
+      "evidence": {
+        "summary": "Case-insensitive search for types containing 'workerz' with CONTAINS relationships to functions named with 'format' or 'message' returned 0 results. No matching type-function combinations found."
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (t:Type)-[:CONTAINS]->(f:Function) WHERE toLower(t.name) CONTAINS 'workerz' AND (toLower(f.name) CONTAINS 'format' OR toLower(f.name) CONTAINS 'message') RETURN t.name, f.name, f.file_path, f.modifier, id(f) ORDER BY t.name, f.name",
+      "verification_query": "MATCH (t:Type)-[:CONTAINS]->(f:Function) WHERE toLower(t.name) CONTAINS 'workerz' AND (toLower(f.name) CONTAINS 'format' OR toLower(f.name) CONTAINS 'message') RETURN t.name, f.name, f.file_path, f.modifier, id(f) ORDER BY t.name, f.name",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "WorkerZ class contains no message-related variables",
+      "source_file": null,
+      "source_line": null,
+      "source_location": null,
+      "entity_name": null,
+      "entity_type": null,
+      "evidence": {
+        "summary": "Search for variables with names containing 'message', 'formatted', 'result', or 'output' within WorkerZ Type returned 0 results. Query executed successfully but found no message-related variable entities."
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (t:Type {name: 'WorkerZ'})-[:CONTAINS]->(v:Variable) WHERE toLower(v.name) CONTAINS 'message' OR toLower(v.name) CONTAINS 'formatted' OR toLower(v.name) CONTAINS 'result' OR toLower(v.name) CONTAINS 'output' RETURN t.name, v.name, v.type, v.file_path, v.modifier, id(v) ORDER BY v.name",
+      "verification_query": "MATCH (t:Type {name: 'WorkerZ'})-[:CONTAINS]->(v:Variable) WHERE toLower(v.name) CONTAINS 'message' OR toLower(v.name) CONTAINS 'formatted' OR toLower(v.name) CONTAINS 'result' OR toLower(v.name) CONTAINS 'output' RETURN t.name, v.name, v.type, v.file_path, v.modifier, id(v) ORDER BY v.name",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "WorkerZ class contains no variables of any type",
+      "source_file": null,
+      "source_line": null,
+      "source_location": null,
+      "entity_name": null,
+      "entity_type": null,
+      "evidence": {
+        "summary": "General search for all variables contained within WorkerZ Type using CONTAINS relationship returned 0 results. No variable entities of any kind found associated with WorkerZ."
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (t:Type {name: 'WorkerZ'})-[:CONTAINS]->(v:Variable) RETURN t.name, v.name, v.type, v.file_path, v.modifier, v.type_kind, id(v) ORDER BY v.name",
+      "verification_query": "MATCH (t:Type {name: 'WorkerZ'})-[:CONTAINS]->(v:Variable) RETURN t.name, v.name, v.type, v.file_path, v.modifier, v.type_kind, id(v) ORDER BY v.name",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "WorkerZ class contains no string-type variables for message storage",
+      "source_file": null,
+      "source_line": null,
+      "source_location": null,
+      "entity_name": null,
+      "entity_type": null,
+      "evidence": {
+        "summary": "Search for variables with string, text, or character types within WorkerZ Type returned 0 results. No string-based variables that could store formatted messages found."
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (t:Type {name: 'WorkerZ'})-[:CONTAINS]->(v:Variable) WHERE toLower(v.type) CONTAINS 'string' OR toLower(v.type) CONTAINS 'text' OR toLower(v.type) CONTAINS 'char' RETURN t.name, v.name, v.type, v.file_path, v.modifier, id(v) ORDER BY v.name",
+      "verification_query": "MATCH (t:Type {name: 'WorkerZ'})-[:CONTAINS]->(v:Variable) WHERE toLower(v.type) CONTAINS 'string' OR toLower(v.type) CONTAINS 'text' OR toLower(v.type) CONTAINS 'char' RETURN t.name, v.name, v.type, v.file_path, v.modifier, id(v) ORDER BY v.name",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    }
+  ],
+  "raw_results": [
+    {
+      "claim": "WorkerZ class does not exist in the codebase",
+      "source_file": null,
+      "source_line": null,
+      "source_location": null,
+      "entity_name": null,
+      "entity_type": null,
+      "evidence": {
+        "summary": "Direct search for Type node with name 'WorkerZ' returned 0 results. Query executed successfully but found no matching entities."
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (t:Type {name: 'WorkerZ'}) RETURN t.name, id(t), t.file_path, t.type_kind",
+      "verification_query": "MATCH (t:Type {name: 'WorkerZ'}) RETURN t.name, id(t), t.file_path, t.type_kind",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "No type entities with names containing 'workerz' (case-insensitive) exist in the codebase",
+      "source_file": null,
+      "source_line": null,
+      "source_location": null,
+      "entity_name": null,
+      "entity_type": null,
+      "evidence": {
+        "summary": "Case-insensitive pattern search using 'toLower(t.name) CONTAINS 'workerz'' returned 0 results, confirming no similar named types exist."
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (t:Type) WHERE toLower(t.name) CONTAINS 'workerz' RETURN t.name, id(t), t.file_path, t.type_kind",
+      "verification_query": "MATCH (t:Type) WHERE toLower(t.name) CONTAINS 'workerz' RETURN t.name, id(t), t.file_path, t.type_kind",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "WorkerZ class has no associated variables or fields",
+      "source_file": null,
+      "source_line": null,
+      "source_location": null,
+      "entity_name": null,
+      "entity_type": null,
+      "evidence": {
+        "summary": "Relationship traversal query searching for CONTAINS relationships from WorkerZ to Variable nodes returned 0 results."
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (t:Type {name: 'WorkerZ'})-[:CONTAINS]->(v:Variable) RETURN t.name, v.name, v.type, v.file_path, id(v)",
+      "verification_query": "MATCH (t:Type {name: 'WorkerZ'})-[:CONTAINS]->(v:Variable) RETURN t.name, v.name, v.type, v.file_path, id(v)",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "WorkerZ class contains no variables or fields",
+      "source_file": null,
+      "source_line": null,
+      "source_location": null,
+      "entity_name": null,
+      "entity_type": null,
+      "evidence": {
+        "summary": "CONTAINS relationship query from WorkerZ Type to Variable nodes returned 0 results. Query executed successfully but found no variable entities associated with WorkerZ."
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (t:Type {name: 'WorkerZ'})-[:CONTAINS]->(v:Variable) RETURN t.name, v.name, v.type, v.file_path, v.modifier, id(v) ORDER BY v.name",
+      "verification_query": "MATCH (t:Type {name: 'WorkerZ'})-[:CONTAINS]->(v:Variable) RETURN t.name, v.name, v.type, v.file_path, v.modifier, id(v) ORDER BY v.name",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "WorkerZ type does not exist in the codebase",
+      "source_file": null,
+      "source_line": null,
+      "source_location": null,
+      "entity_name": null,
+      "entity_type": null,
+      "evidence": {
+        "summary": "Direct search for Type node with name 'WorkerZ' returned 0 results. Query executed successfully but found no matching type entity."
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (t:Type {name: 'WorkerZ'}) RETURN t.name, t.file_path, t.type_kind, id(t)",
+      "verification_query": "MATCH (t:Type {name: 'WorkerZ'}) RETURN t.name, t.file_path, t.type_kind, id(t)",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "No types with names containing 'workerz' have any associated variables",
+      "source_file": null,
+      "source_line": null,
+      "source_location": null,
+      "entity_name": null,
+      "entity_type": null,
+      "evidence": {
+        "summary": "Case-insensitive pattern search for types containing 'workerz' with CONTAINS relationships to variables returned 0 results. No matching type-variable combinations found."
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (t:Type)-[:CONTAINS]->(v:Variable) WHERE toLower(t.name) CONTAINS 'workerz' RETURN t.name, v.name, v.type, v.file_path, id(v) ORDER BY t.name, v.name",
+      "verification_query": "MATCH (t:Type)-[:CONTAINS]->(v:Variable) WHERE toLower(t.name) CONTAINS 'workerz' RETURN t.name, v.name, v.type, v.file_path, id(v) ORDER BY t.name, v.name",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "WorkerZ class contains no functions",
+      "source_file": null,
+      "source_line": null,
+      "source_location": null,
+      "entity_name": null,
+      "entity_type": null,
+      "evidence": {
+        "summary": "CONTAINS relationship query from WorkerZ Type to Function nodes returned 0 results. Query executed successfully but found no function entities associated with WorkerZ."
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (t:Type {name: 'WorkerZ'})-[:CONTAINS]->(f:Function) RETURN t.name, f.name, f.file_path, f.modifier, id(f) ORDER BY f.name",
+      "verification_query": "MATCH (t:Type {name: 'WorkerZ'})-[:CONTAINS]->(f:Function) RETURN t.name, f.name, f.file_path, f.modifier, id(f) ORDER BY f.name",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "WorkerZ class contains no message formatting functions",
+      "source_file": null,
+      "source_line": null,
+      "source_location": null,
+      "entity_name": null,
+      "entity_type": null,
+      "evidence": {
+        "summary": "Targeted search for functions containing 'format' or 'message' in their names within WorkerZ Type returned 0 results. No formatting-related functions found associated with WorkerZ."
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (t:Type {name: 'WorkerZ'})-[:CONTAINS]->(f:Function) WHERE toLower(f.name) CONTAINS 'format' OR toLower(f.name) CONTAINS 'message' RETURN t.name, f.name, f.file_path, f.modifier, id(f) ORDER BY f.name",
+      "verification_query": "MATCH (t:Type {name: 'WorkerZ'})-[:CONTAINS]->(f:Function) WHERE toLower(f.name) CONTAINS 'format' OR toLower(f.name) CONTAINS 'message' RETURN t.name, f.name, f.file_path, f.modifier, id(f) ORDER BY f.name",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "No types containing 'workerz' have message formatting functions",
+      "source_file": null,
+      "source_line": null,
+      "source_location": null,
+      "entity_name": null,
+      "entity_type": null,
+      "evidence": {
+        "summary": "Case-insensitive search for types containing 'workerz' with CONTAINS relationships to functions named with 'format' or 'message' returned 0 results. No matching type-function combinations found."
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (t:Type)-[:CONTAINS]->(f:Function) WHERE toLower(t.name) CONTAINS 'workerz' AND (toLower(f.name) CONTAINS 'format' OR toLower(f.name) CONTAINS 'message') RETURN t.name, f.name, f.file_path, f.modifier, id(f) ORDER BY t.name, f.name",
+      "verification_query": "MATCH (t:Type)-[:CONTAINS]->(f:Function) WHERE toLower(t.name) CONTAINS 'workerz' AND (toLower(f.name) CONTAINS 'format' OR toLower(f.name) CONTAINS 'message') RETURN t.name, f.name, f.file_path, f.modifier, id(f) ORDER BY t.name, f.name",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "WorkerZ class contains no message-related variables",
+      "source_file": null,
+      "source_line": null,
+      "source_location": null,
+      "entity_name": null,
+      "entity_type": null,
+      "evidence": {
+        "summary": "Search for variables with names containing 'message', 'formatted', 'result', or 'output' within WorkerZ Type returned 0 results. Query executed successfully but found no message-related variable entities."
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (t:Type {name: 'WorkerZ'})-[:CONTAINS]->(v:Variable) WHERE toLower(v.name) CONTAINS 'message' OR toLower(v.name) CONTAINS 'formatted' OR toLower(v.name) CONTAINS 'result' OR toLower(v.name) CONTAINS 'output' RETURN t.name, v.name, v.type, v.file_path, v.modifier, id(v) ORDER BY v.name",
+      "verification_query": "MATCH (t:Type {name: 'WorkerZ'})-[:CONTAINS]->(v:Variable) WHERE toLower(v.name) CONTAINS 'message' OR toLower(v.name) CONTAINS 'formatted' OR toLower(v.name) CONTAINS 'result' OR toLower(v.name) CONTAINS 'output' RETURN t.name, v.name, v.type, v.file_path, v.modifier, id(v) ORDER BY v.name",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "WorkerZ class contains no variables of any type",
+      "source_file": null,
+      "source_line": null,
+      "source_location": null,
+      "entity_name": null,
+      "entity_type": null,
+      "evidence": {
+        "summary": "General search for all variables contained within WorkerZ Type using CONTAINS relationship returned 0 results. No variable entities of any kind found associated with WorkerZ."
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (t:Type {name: 'WorkerZ'})-[:CONTAINS]->(v:Variable) RETURN t.name, v.name, v.type, v.file_path, v.modifier, v.type_kind, id(v) ORDER BY v.name",
+      "verification_query": "MATCH (t:Type {name: 'WorkerZ'})-[:CONTAINS]->(v:Variable) RETURN t.name, v.name, v.type, v.file_path, v.modifier, v.type_kind, id(v) ORDER BY v.name",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "WorkerZ class contains no string-type variables for message storage",
+      "source_file": null,
+      "source_line": null,
+      "source_location": null,
+      "entity_name": null,
+      "entity_type": null,
+      "evidence": {
+        "summary": "Search for variables with string, text, or character types within WorkerZ Type returned 0 results. No string-based variables that could store formatted messages found."
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (t:Type {name: 'WorkerZ'})-[:CONTAINS]->(v:Variable) WHERE toLower(v.type) CONTAINS 'string' OR toLower(v.type) CONTAINS 'text' OR toLower(v.type) CONTAINS 'char' RETURN t.name, v.name, v.type, v.file_path, v.modifier, id(v) ORDER BY v.name",
+      "verification_query": "MATCH (t:Type {name: 'WorkerZ'})-[:CONTAINS]->(v:Variable) WHERE toLower(v.type) CONTAINS 'string' OR toLower(v.type) CONTAINS 'text' OR toLower(v.type) CONTAINS 'char' RETURN t.name, v.name, v.type, v.file_path, v.modifier, id(v) ORDER BY v.name",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    }
+  ],
+  "verified_count": 12,
+  "unverified_count": 0,
+  "total_citations": 12,
+  "sub_queries_count": 4,
+  "llm_calls_count": 42,
+  "execution_time_ms": 740638,
+  "token_usage": {
+    "total_tokens": 30109,
+    "total_prompt_tokens": 326,
+    "total_completion_tokens": 29783,
+    "call_count": 42,
+    "by_agent_role": {
+      "cot_agent": 1753,
+      "tot_orchestrator": 2845,
+      "thinker": 8658,
+      "thinking_validator": 3454,
+      "cypher_validator": 7876,
+      "executor_verifier": 5523
+    }
+  },
+  "total_tokens_used": 30109,
+  "total_input_tokens": 326,
+  "total_output_tokens": 29783,
+  "agent_workflow": "4_agent_team",
+  "agent_metadata": {
+    "llm_model": "gpt-4o",
+    "max_cot_iterations": 15,
+    "parallel_agents": true,
+    "verification_enabled": true,
+    "entity_resolution_enabled": true,
+    "observer_enabled": false,
+    "use_4_agent_team": true,
+    "four_agent_max_iterations": 3
+  },
+  "cli_parameters_used": {
+    "config_path": "/opt/genpod/neo4j_config.json",
+    "schema_path": "/opt/genpod/src/schemas/project_knowledgebase_graph_schema.yaml",
+    "llm_model": "gpt-4o"
+  },
+  "message": "4-Agent Team CPG RAG completed successfully (740638ms)"
+}

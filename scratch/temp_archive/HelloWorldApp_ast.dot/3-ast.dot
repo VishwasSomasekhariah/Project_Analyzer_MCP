@@ -1,0 +1,24 @@
+digraph "Notify" {  
+node [shape="rect"];  
+"111669149699" [label = <METHOD, 20<BR/>Notify> ]
+"115964116996" [label = <PARAM, 20<BR/>this> ]
+"115964116997" [label = <PARAM, 20<BR/>string message> ]
+"25769803780" [label = <BLOCK, 21<BR/>&lt;empty&gt;> ]
+"30064771082" [label = <WriteLine, 22<BR/>Console.WriteLine($&quot;Manager received notificati...> ]
+"68719476747" [label = <IDENTIFIER, 22<BR/>Console<BR/>Console.WriteLine($&quot;Manager received notificati...> ]
+"30064771083" [label = <&lt;operator&gt;.formatString, 22<BR/>$&quot;Manager received notification: {message}&quot;> ]
+"90194313218" [label = <LITERAL, 22<BR/>Manager received notification:<BR/>$&quot;Manager received notification: {message}&quot;> ]
+"68719476748" [label = <IDENTIFIER, 22<BR/>string message<BR/>$&quot;Manager received notification: {message}&quot;> ]
+"133143986182" [label = <MODIFIER, 20<BR/>PUBLIC> ]
+"128849018883" [label = <METHOD_RETURN, 20<BR/>System.Void> ]
+  "111669149699" -> "115964116996" 
+  "111669149699" -> "115964116997" 
+  "111669149699" -> "25769803780" 
+  "111669149699" -> "133143986182" 
+  "111669149699" -> "128849018883" 
+  "25769803780" -> "30064771082" 
+  "30064771082" -> "68719476747" 
+  "30064771082" -> "30064771083" 
+  "30064771083" -> "90194313218" 
+  "30064771083" -> "68719476748" 
+}

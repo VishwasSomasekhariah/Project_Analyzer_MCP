@@ -1,0 +1,9 @@
+{
+  "status": "error",
+  "tool_name": "query_cpg_rag",
+  "error": "The api_key client option must be set either by passing api_key to the client or by setting the OPENAI_API_KEY environment variable",
+  "traceback": "Traceback (most recent call last):\n  File \"/opt/genpod/src/project_analyzer_tool/tools.py\", line 2743, in query_cpg_rag\n    await system.initialize()\n  File \"/opt/genpod/src/core/graph_rag/orchestrators/multi_agent_cot.py\", line 91, in initialize\n    self._openai = self._llm_config.create_client()\n                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/genpod/src/core/graph_rag/core/config.py\", line 186, in create_client\n    return ResilientLLMClient(\n           ^^^^^^^^^^^^^^^^^^^\n  File \"/opt/genpod/src/core/graph_rag/core/llm_client.py\", line 119, in __init__\n    self._primary = OpenAI(**primary_kwargs)\n                    ^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/local/lib/python3.12/site-packages/openai/_client.py\", line 130, in __init__\n    raise OpenAIError(\nopenai.OpenAIError: The api_key client option must be set either by passing api_key to the client or by setting the OPENAI_API_KEY environment variable\n",
+  "user_query": "What variable name stores the formatted message in WorkerZ?",
+  "project_name": "HelloWorldApp",
+  "message": "Multi-Agent CPG RAG failed: The api_key client option must be set either by passing api_key to the client or by setting the OPENAI_API_KEY environment variable"
+}

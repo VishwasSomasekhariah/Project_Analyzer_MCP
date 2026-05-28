@@ -1,0 +1,86 @@
+{
+  "test_run_timestamp": "2025-12-12T22:29:50.223847",
+  "configuration": {
+    "use_4_agent_team": true,
+    "four_agent_max_iterations": 3,
+    "max_cot_iterations": 15,
+    "llm_model": "gpt-4o"
+  },
+  "queries": [
+    {
+      "query_number": 1,
+      "query": "What are the key methods in the HelloWorldApp and their cyclomatic complexity?",
+      "status": "error",
+      "answer": "The 'HelloWorldApp' project contains several key classes and methods. The 'WorkerFactory' class includes a method named 'CreateWorkers'. The 'WorkerC', 'WorkerB', and 'WorkerA' classes each have a constructor and a 'Process' method. The 'TestAliases' class contains a method named 'TestMethod'. The 'Program' class has a 'Main' method, and the 'Manager' class includes 'Run' and 'Notify' methods. However, the cyclomatic complexity of these methods has not been verified.",
+      "confidence": "high",
+      "citations": [],
+      "execution_time_ms": 201488,
+      "sub_queries_count": 3,
+      "llm_calls_count": 92,
+      "token_usage": null,
+      "error": "'AggregatedTokenUsage' object has no attribute 'prompt_tokens'"
+    },
+    {
+      "query_number": 2,
+      "query": "Analyze the overall architecture of the HelloWorldApp.",
+      "status": "error",
+      "answer": "The HelloWorldApp project has a structured architecture with several verified components. It includes a namespace called 'HelloWorldApp.Utilities', which is defined in the 'Helper.cs' file. This file is part of the project and has been verified by its checksum. The project does not contain a function named 'main', which is typically expected in applications, suggesting that the entry point might be defined differently or the project might be a library. Additionally, the project includes a 'WorkerFactory' class, which is a public static class defined in 'WorkerFactory.cs'. Another class, 'WorkerC', implements the 'IWorker' interface and is defined in 'WorkerC.cs'. These components suggest a modular design, possibly with a focus on utility functions and worker management.",
+      "confidence": "high",
+      "citations": [],
+      "execution_time_ms": 287763,
+      "sub_queries_count": 5,
+      "llm_calls_count": 145,
+      "token_usage": null,
+      "error": "'AggregatedTokenUsage' object has no attribute 'prompt_tokens'"
+    },
+    {
+      "query_number": 3,
+      "query": "What is the exact method signature of the CreateWorkers method in the WorkerFactory class?",
+      "status": "error",
+      "answer": "The CreateWorkers method in the WorkerFactory class is a public static method that returns an IEnumerable<IWorker> and takes a single parameter of type INotifier. It is defined in the HelloWorldApp/WorkerFactory.cs file.",
+      "confidence": "high",
+      "citations": [],
+      "execution_time_ms": 77504,
+      "sub_queries_count": 3,
+      "llm_calls_count": 38,
+      "token_usage": null,
+      "error": "'AggregatedTokenUsage' object has no attribute 'prompt_tokens'"
+    },
+    {
+      "query_number": 4,
+      "query": "What are the two parameters passed to Helper.FormatMessage?",
+      "status": "error",
+      "answer": "The 'Helper.FormatMessage' method is defined in the 'Helper' class located in the 'HelloWorldApp/Utilities/Helper.cs' file. This method takes two parameters: 'string workerName' and 'string text'. An example of its usage can be found in the 'WorkerA.cs' file, where it is called with the arguments \"WorkerA\" and \"Hello from A\". There are no calls to 'Helper.FormatMessage' in the 'WorkerB.cs' and 'WorkerC.cs' files.",
+      "confidence": "high",
+      "citations": [],
+      "execution_time_ms": 186146,
+      "sub_queries_count": 5,
+      "llm_calls_count": 90,
+      "token_usage": null,
+      "error": "'AggregatedTokenUsage' object has no attribute 'prompt_tokens'"
+    },
+    {
+      "query_number": 5,
+      "query": "What is the role of WorkerZ in the project?",
+      "status": "error",
+      "answer": "The role of 'WorkerZ' in the project cannot be determined because 'WorkerZ' does not exist in the codebase. There are no classes, types, or references to 'WorkerZ' in any part of the codebase, including functions, blocks, statements, or literals.",
+      "confidence": "high",
+      "citations": [],
+      "execution_time_ms": 127600,
+      "sub_queries_count": 5,
+      "llm_calls_count": 69,
+      "token_usage": null,
+      "error": "'AggregatedTokenUsage' object has no attribute 'prompt_tokens'"
+    }
+  ],
+  "summary": {
+    "total_queries": 5,
+    "successful_queries": 0,
+    "failed_queries": 5,
+    "total_citations": 0,
+    "total_verified_citations": 0,
+    "total_execution_time_ms": 0,
+    "total_tokens": 0,
+    "total_llm_calls": 0
+  }
+}

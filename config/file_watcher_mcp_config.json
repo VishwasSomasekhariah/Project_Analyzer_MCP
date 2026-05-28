@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "mcp-analysis-server": {
+      "type": "http",
+      "url": "http://localhost:9000/sse"
+    }
+  }
+}

@@ -1,0 +1,10 @@
+2025-07-16 18:32:01,016 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-16 18:32:01,043 - __main__ - INFO - ✅ LLM generated 2 queries for category: Technical
+2025-07-16 18:32:32,729 - __main__ - ERROR - CPG query failed: Request timed out after 30.0 seconds
+2025-07-16 18:32:32,738 - asyncio - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x72762ef41160>
+2025-07-16 18:33:04,247 - __main__ - ERROR - Comprehensive query failed: Request timed out after 30.0 seconds
+2025-07-16 18:33:37,566 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-16 18:33:37,567 - __main__ - INFO - ✅ LLM generated 2 queries for category: Technical
+2025-07-16 18:33:37,571 - asyncio - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x72762edf4a70>

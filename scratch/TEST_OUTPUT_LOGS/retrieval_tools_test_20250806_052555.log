@@ -1,0 +1,12 @@
+2025-08-06 05:25:55,261 - __main__ - INFO - Test results will be saved to: retrieval_tools_test_results_20250806_052555.json
+2025-08-06 05:25:55,262 - __main__ - INFO - Logs will be saved to: retrieval_tools_test_20250806_052555.log
+2025-08-06 05:25:55,271 - mcp.client.sse - INFO - Connecting to SSE endpoint: http://localhost:9000/sse
+2025-08-06 05:25:55,453 - httpx - INFO - HTTP Request: GET http://localhost:9000/sse "HTTP/1.1 200 OK"
+2025-08-06 05:25:55,455 - mcp.client.sse - INFO - Received endpoint URL: http://localhost:9000/messages/?session_id=b3f482e4532c47029b52b1cbba7f6f27
+2025-08-06 05:25:55,456 - mcp.client.sse - INFO - Starting post writer with endpoint URL: http://localhost:9000/messages/?session_id=b3f482e4532c47029b52b1cbba7f6f27
+2025-08-06 05:25:55,475 - httpx - INFO - HTTP Request: POST http://localhost:9000/messages/?session_id=b3f482e4532c47029b52b1cbba7f6f27 "HTTP/1.1 202 Accepted"
+2025-08-06 05:25:55,494 - httpx - INFO - HTTP Request: POST http://localhost:9000/messages/?session_id=b3f482e4532c47029b52b1cbba7f6f27 "HTTP/1.1 202 Accepted"
+2025-08-06 05:25:55,498 - httpx - INFO - HTTP Request: POST http://localhost:9000/messages/?session_id=b3f482e4532c47029b52b1cbba7f6f27 "HTTP/1.1 202 Accepted"
+2025-08-06 05:25:55,516 - __main__ - INFO - Starting vector_only test
+2025-08-06 05:25:55,516 - __main__ - INFO - Test query: Find WorkerA.cs file
+2025-08-06 05:25:55,522 - httpx - INFO - HTTP Request: POST http://localhost:9000/messages/?session_id=b3f482e4532c47029b52b1cbba7f6f27 "HTTP/1.1 202 Accepted"

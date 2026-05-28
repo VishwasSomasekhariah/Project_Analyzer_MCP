@@ -1,0 +1,5 @@
+2025-08-06 13:25:00,909 - __main__ - INFO - Test results will be saved to: retrieval_tools_test_results_20250806_132500.json
+2025-08-06 13:25:00,943 - __main__ - INFO - Logs will be saved to: retrieval_tools_test_20250806_132500.log
+2025-08-06 13:25:00,977 - mcp.client.sse - INFO - Connecting to SSE endpoint: http://localhost:9000/sse
+2025-08-06 13:25:01,225 - mcp_use - ERROR - Error in SseConnectionManager task: unhandled errors in a TaskGroup (1 sub-exception)
+2025-08-06 13:25:01,227 - mcp_use - ERROR - Failed to connect to MCP implementation via HTTP/SSE: unhandled errors in a TaskGroup (1 sub-exception)

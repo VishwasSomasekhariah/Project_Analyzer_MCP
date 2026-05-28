@@ -1,0 +1,904 @@
+query_id,user_query,query_category,query_subcategory,scenario_type,timestamp,vector_status,vector_response,vector_response_time_ms,vector_error,cpg_status,cpg_response,cpg_response_time_ms,cpg_error,comprehensive_status,comprehensive_response,comprehensive_response_time_ms,comprehensive_error
+T001,Analyze the overall architecture of the HelloWorldApp. What are the main components and how do they interact?,Technical,Architecture,analysis,20250716_193712,success,"╭──────────────────────────────────────────────────────────────────────────────╮
+│ 🔍 Semantic Code Query                                                       │
+│                                                                              │
+│ Query: 'Analyze the overall architecture of the HelloWorldApp. What are the  │
+│ main components and how do they interact?'                                   │
+│ Collection: helloworldapp-fresh-test                                         │
+│ Max Results: 15                                                              │
+│ Search Mode: Hybrid                                                          │
+│ AI Response: Enabled                                                         │
+╰──────────────────────────────────────────────────────────────────────────────╯
+{
+  ""query"": ""Analyze the overall architecture of the HelloWorldApp. What are the 
+main components and how do they interact?"",
+  ""response"": ""The HelloWorldApp consists of three primary components: Manager, 
+Worker, and WorkerFactory. The Manager class orchestrates the workflow by 
+invoking the Run method, which creates multiple workers using the WorkerFactory.
+Each worker, such as WorkerA, WorkerB, and WorkerC, implements the IWorker 
+interface and performs its specific task. Notifications from the workers are 
+handled by the Notify method in the Manager class. The Main method in the 
+Program class serves as the entry point, initializing a Manager object and 
+initiating the work process. This architecture follows a well-organized approach
+where the Manager controls the actions of the workers through defined interfaces
+and method calls, establishing a cohesive and structured system."",
+  ""results"": [
+    {
+      ""chunk_id"": ""unknown"",
+      ""content"": ""# Architectural Pattern: Manager\n\n## Manager 
+Components:\n### Manager (/opt/HelloWorldApp/HelloWorldApp/Manager.cs):\npublic 
+class Manager : INotifier\n    {\n        public void Run()\n        {\n        
+Console.WriteLine(\""Manager starting work...\"");\n            
+IEnumerable<IWorker> workers = WorkerFactory.CreateWorkers(this);\n\n           
+// one-to-many: Manager invokes all workers\n            foreach (var worker in 
+workers)\n            {\n                worker.Process();\n            }\n     
+}\n\n        // many-to-one: workers call back here\n        public void 
+Notify(string message)\n        {\n            Console.WriteLine($\""Manager 
+received notification: {message}\"");\n        }\n    }\n"",
+      ""metadata"": {
+        ""file_path"": 
+""/opt/HelloWorldApp/relationship_patterns/Manager_pattern.md"",
+        ""language"": ""csharp"",
+        ""chunk_type"": ""class"",
+        ""name"": ""Manager_Pattern"",
+        ""start_line"": 1,
+        ""end_line"": 6,
+        ""return_type"": """",
+        ""parameter_types"": [],
+        ""symbol_kind"": null,
+        ""visibility"": null,
+        ""imports"": [],
+        ""references_count"": 0,
+        ""is_exported"": false,
+        ""has_errors"": false,
+        ""has_warnings"": false,
+        ""diagnostics"": [],
+        ""dependencies"": [],
+        ""dependents"": [],
+        ""lsp_enhanced"": false,
+        ""has_cross_file_deps"": false,
+        ""cross_file_references"": [],
+        ""definitions_count"": 0,
+        ""type_definitions_count"": 0,
+        ""implementations_count"": 0,
+        ""total_relationships"": 0,
+        ""relationship_diversity"": 0,
+        ""is_heavily_referenced"": false,
+        ""is_interface_implementer"": false,
+        ""has_complex_types"": false,
+        ""relationships"": {},
+        ""ai_summary"": """",
+        ""complexity_score"": null
+      },
+      ""score"": 0.6408337346684376,
+      ""distance"": 0.3591662653315624,
+      ""retrieval_method"": ""llamaindex_hybrid""
+    },
+    {
+      ""chunk_id"": ""unknown"",
+      ""content"": ""# Architectural Pattern: Worker\n\n## Worker Components:\n### 
+IWorker (/opt/HelloWorldApp/HelloWorldApp/IWorker.cs):\npublic interface 
+IWorker\n    {\n        void Process();\n    }\n\n### WorkerA 
+(/opt/HelloWorldApp/HelloWorldApp/WorkerA.cs):\npublic class WorkerA : IWorker\n
+{\n        private readonly INotifier _notifier;\n\n        public 
+WorkerA(INotifier notifier)\n        {\n            _notifier = notifier;\n     
+}\n\n        public void Process()\n        {\n            string msg = 
+Utilities.Helper.FormatMessage(\""WorkerA\"", \""Hello from A\"");\n            
+System.Console.WriteLine(msg);\n            _notifier.Notify(\""WorkerA has 
+finished processing.\"");\n        }\n    }\n\n### WorkerA 
+(/opt/HelloWorldApp/HelloWorldApp/WorkerA.cs):\npublic WorkerA(INotifier 
+notifier)\n        {\n            _notifier = notifier;\n        }\n\n### 
+WorkerB (/opt/HelloWorldApp/HelloWorldApp/WorkerB.cs):\npublic class WorkerB : 
+IWorker\n    {\n        private readonly INotifier _notifier;\n\n        public 
+WorkerB(INotifier notifier)\n        {\n            _notifier = notifier;\n     
+}\n\n        public void Process()\n        {\n            string msg = 
+Utilities.Helper.FormatMessage(\""WorkerB\"", \""Greetings from B\"");\n            
+System.Console.WriteLine(msg);\n            _notifier.Notify(\""WorkerB has 
+finished processing.\"");\n        }\n    }\n\n### WorkerB 
+(/opt/HelloWorldApp/HelloWorldApp/WorkerB.cs):\npublic WorkerB(INotifier 
+notifier)\n        {\n            _notifier = notifier;\n        }\n\n### 
+WorkerC (/opt/HelloWorldApp/HelloWorldApp/WorkerC.cs):\npublic class WorkerC : 
+IWorker\n    {\n        private readonly INotifier _notifier;\n\n        public 
+WorkerC(INotifier notifier)\n        {\n            _notifier = notifier;\n     
+}\n\n        public void Process()\n        {\n            string msg = 
+Utilities.Helper.FormatMessage(\""WorkerC\"", \""Hi there, C here\"");\n            
+System.Console.WriteLine(msg);\n            _notifier.Notify(\""WorkerC has 
+finished processing.\"");\n        }\n    }\n\n### WorkerC 
+(/opt/HelloWorldApp/HelloWorldApp/WorkerC.cs):\npublic WorkerC(INotifier 
+notifier)\n        {\n            _notifier = notifier;\n        }\n\n### 
+WorkerFactory (/opt/HelloWorldApp/HelloWorldApp/WorkerFactory.cs):\npublic 
+static class WorkerFactory\n    {\n        public static IEnumerable<IWorker> 
+CreateWorkers(INotifier notifier)\n        {\n            // create multiple 
+workers, each knows how to call back\n            return new List<IWorker>\n    
+{\n                new WorkerA(notifier),\n                new 
+WorkerB(notifier),\n                new WorkerC(notifier)\n            };\n     
+}\n    }\n\n### CreateWorkers 
+(/opt/HelloWorldApp/HelloWorldApp/WorkerFactory.cs):\npublic static 
+IEnumerable<IWorker> CreateWorkers(INotifier notifier)\n        {\n            
+// create multiple workers, each knows how to call back\n            return new 
+List<IWorker>\n            {\n                new WorkerA(notifier),\n          
+new WorkerB(notifier),\n                new WorkerC(notifier)\n            };\n 
+}\n"",
+      ""metadata"": {
+        ""file_path"": 
+""/opt/HelloWorldApp/relationship_patterns/Worker_pattern.md"",
+        ""language"": ""csharp"",
+        ""chunk_type"": ""class"",
+        ""name"": ""Worker_Pattern"",
+        ""start_line"": 1,
+        ""end_line"": 30,
+        ""return_type"": """",
+        ""parameter_types"": [],
+        ""symbol_kind"": null,
+        ""visibility"": null,
+        ""imports"": [],
+        ""references_count"": 0,
+        ""is_exported"": false,
+        ""has_errors"": false,
+        ""has_warnings"": false,
+        ""diagnostics"": [],
+        ""dependencies"": [],
+        ""dependents"": [],
+        ""lsp_enhanced"": false,
+        ""has_cross_file_deps"": false,
+        ""cross_file_references"": [],
+        ""definitions_count"": 0,
+        ""type_definitions_count"": 0,
+        ""implementations_count"": 0,
+        ""total_relationships"": 0,
+        ""relationship_diversity"": 0,
+        ""is_heavily_referenced"": false,
+        ""is_interface_implementer"": false,
+        ""has_complex_types"": false,
+        ""relationships"": {},
+        ""ai_summary"": """",
+        ""complexity_score"": null
+      },
+      ""score"": 0.6358546369628126,
+      ""distance"": 0.36414536303718736,
+      ""retrieval_method"": ""llamaindex_hybrid""
+    },
+    {
+      ""chunk_id"": ""unknown"",
+      ""content"": ""# Architectural Pattern: Factory\n\n## Factory 
+Components:\n### WorkerFactory 
+(/opt/HelloWorldApp/HelloWorldApp/WorkerFactory.cs):\npublic static class 
+WorkerFactory\n    {\n        public static IEnumerable<IWorker> 
+CreateWorkers(INotifier notifier)\n        {\n            // create multiple 
+workers, each knows how to call back\n            return new List<IWorker>\n    
+{\n                new WorkerA(notifier),\n                new 
+WorkerB(notifier),\n                new WorkerC(notifier)\n            };\n     
+}\n    }\n"",
+      ""metadata"": {
+        ""file_path"": 
+""/opt/HelloWorldApp/relationship_patterns/Factory_pattern.md"",
+        ""language"": ""csharp"",
+        ""chunk_type"": ""class"",
+        ""name"": ""Factory_Pattern"",
+        ""start_line"": 1,
+        ""end_line"": 6,
+        ""return_type"": """",
+        ""parameter_types"": [],
+        ""symbol_kind"": null,
+        ""visibility"": null,
+        ""imports"": [],
+        ""references_count"": 0,
+        ""is_exported"": false,
+        ""has_errors"": false,
+        ""has_warnings"": false,
+        ""diagnostics"": [],
+        ""dependencies"": [],
+        ""dependents"": [],
+        ""lsp_enhanced"": false,
+        ""has_cross_file_deps"": false,
+        ""cross_file_references"": [],
+        ""definitions_count"": 0,
+        ""type_definitions_count"": 0,
+        ""implementations_count"": 0,
+        ""total_relationships"": 0,
+        ""relationship_diversity"": 0,
+        ""is_heavily_referenced"": false,
+        ""is_interface_implementer"": false,
+        ""has_complex_types"": false,
+        ""relationships"": {},
+        ""ai_summary"": """",
+        ""complexity_score"": null
+      },
+      ""score"": 0.6118074929228151,
+      ""distance"": 0.3881925070771849,
+      ""retrieval_method"": ""llamaindex_hybrid""
+    },
+    {
+      ""chunk_id"": ""unknown"",
+      ""content"": ""using System;"",
+      ""metadata"": {
+        ""file_path"": ""/opt/HelloWorldApp/HelloWorldApp/Program.cs"",
+        ""language"": ""csharp"",
+        ""chunk_type"": ""import"",
+        ""name"": ""System"",
+        ""start_line"": 1,
+        ""end_line"": 1,
+        ""return_type"": """",
+        ""parameter_types"": [],
+        ""symbol_kind"": null,
+        ""visibility"": null,
+        ""imports"": [],
+        ""references_count"": 0,
+        ""is_exported"": false,
+        ""has_errors"": false,
+        ""has_warnings"": false,
+        ""diagnostics"": [],
+        ""dependencies"": [],
+        ""dependents"": [],
+        ""lsp_enhanced"": false,
+        ""has_cross_file_deps"": false,
+        ""cross_file_references"": [],
+        ""definitions_count"": 0,
+        ""type_definitions_count"": 0,
+        ""implementations_count"": 0,
+        ""total_relationships"": 0,
+        ""relationship_diversity"": 0,
+        ""is_heavily_referenced"": false,
+        ""is_interface_implementer"": false,
+        ""has_complex_types"": false,
+        ""relationships"": {},
+        ""ai_summary"": ""This code imports the System namespace, which provides 
+fundamental classes and base classes that define commonly-used types and 
+functions in C#. It enables access to essential functionalities such as data 
+types, collections, and input/output operations. This import is crucial for the 
+larger application as it lays the groundwork for utilizing built-in features and
+libraries throughout the program."",
+        ""complexity_score"": null
+      },
+      ""score"": 0.6053373700054722,
+      ""distance"": 0.39466262999452784,
+      ""retrieval_method"": ""llamaindex_hybrid""
+    },
+    {
+      ""chunk_id"": ""unknown"",
+      ""content"": ""using System;"",
+      ""metadata"": {
+        ""file_path"": ""/opt/HelloWorldApp/HelloWorldApp/Manager.cs"",
+        ""language"": ""csharp"",
+        ""chunk_type"": ""import"",
+        ""name"": ""System"",
+        ""start_line"": 1,
+        ""end_line"": 1,
+        ""return_type"": """",
+        ""parameter_types"": [],
+        ""symbol_kind"": null,
+        ""visibility"": null,
+        ""imports"": [],
+        ""references_count"": 0,
+        ""is_exported"": false,
+        ""has_errors"": false,
+        ""has_warnings"": false,
+        ""diagnostics"": [],
+        ""dependencies"": [],
+        ""dependents"": [],
+        ""lsp_enhanced"": false,
+        ""has_cross_file_deps"": false,
+        ""cross_file_references"": [],
+        ""definitions_count"": 0,
+        ""type_definitions_count"": 0,
+        ""implementations_count"": 0,
+        ""total_relationships"": 0,
+        ""relationship_diversity"": 0,
+        ""is_heavily_referenced"": false,
+        ""is_interface_implementer"": false,
+        ""has_complex_types"": false,
+        ""relationships"": {},
+        ""ai_summary"": ""This code imports the System namespace, which provides 
+essential classes and functionalities for common programming tasks in C#. It 
+allows access to fundamental types, collections, and utilities, enabling 
+developers to utilize built-in features without needing to fully qualify their 
+names. This import is a foundational step in the larger application, 
+facilitating the use of core functionalities throughout the Manager.cs file and 
+any other files that may reference it."",
+        ""complexity_score"": null
+      },
+      ""score"": 0.605312188494659,
+      ""distance"": 0.39468781150534105,
+      ""retrieval_method"": ""llamaindex_hybrid""
+    },
+    {
+      ""chunk_id"": ""unknown"",
+      ""content"": ""# Method Call Chain: WorkerA -> Run -> Notify -> Main -> 
+FormatMessage -> Process -> WorkerB -> WorkerC -> CreateWorkers\n\n## Call 
+Flow:\n### WorkerA (/opt/HelloWorldApp/HelloWorldApp/WorkerA.cs):\npublic 
+WorkerA(INotifier notifier)\n        {\n            _notifier = notifier;\n     
+}\n\n#### Calls:\n- HelloWorldApp called in INotifier.cs:1\n- HelloWorldApp 
+called in IWorker.cs:1\n- HelloWorldApp called in Manager.cs:4\n- HelloWorldApp 
+called in Program.cs:3\n- HelloWorldApp called in Helper.cs:1\n- HelloWorldApp 
+called in WorkerA.cs:2\n- HelloWorldApp called in WorkerB.cs:1\n- HelloWorldApp 
+called in WorkerC.cs:1\n- WorkerA called in WorkerA.cs:8\n- WorkerA called in 
+WorkerFactory.cs:12\n\n### Run 
+(/opt/HelloWorldApp/HelloWorldApp/Manager.cs):\npublic void Run()\n        {\n  
+Console.WriteLine(\""Manager starting work...\"");\n            
+IEnumerable<IWorker> workers = WorkerFactory.CreateWorkers(this);\n\n           
+// one-to-many: Manager invokes all workers\n            foreach (var worker in 
+workers)\n            {\n                worker.Process();\n            }\n     
+}\n\n#### Calls:\n- HelloWorldApp called in INotifier.cs:1\n- HelloWorldApp 
+called in IWorker.cs:1\n- HelloWorldApp called in Manager.cs:4\n- HelloWorldApp 
+called in Program.cs:3\n- HelloWorldApp called in Helper.cs:1\n- HelloWorldApp 
+called in WorkerA.cs:2\n- HelloWorldApp called in WorkerB.cs:1\n- HelloWorldApp 
+called in WorkerC.cs:1\n- Manager called in Manager.cs:6\n- Manager called in 
+Program.cs:9\n- Run called in Manager.cs:8\n- Run called in Program.cs:10\n\n###
+Notify (/opt/HelloWorldApp/HelloWorldApp/Manager.cs):\npublic void Notify(string
+message)\n        {\n            Console.WriteLine($\""Manager received 
+notification: {message}\"");\n        }\n\n#### Calls:\n- HelloWorldApp called in
+INotifier.cs:1\n- HelloWorldApp called in IWorker.cs:1\n- HelloWorldApp called 
+in Manager.cs:4\n- HelloWorldApp called in Program.cs:3\n- HelloWorldApp called 
+in Helper.cs:1\n- HelloWorldApp called in WorkerA.cs:2\n- HelloWorldApp called 
+in WorkerB.cs:1\n- HelloWorldApp called in WorkerC.cs:1\n- Manager called in 
+Manager.cs:6\n- Manager called in Program.cs:9\n- Notify called in 
+INotifier.cs:5\n- Notify called in Manager.cs:21\n- Notify called in 
+WorkerA.cs:17\n- Notify called in WorkerB.cs:16\n- Notify called in 
+WorkerC.cs:16\n\n### Main (/opt/HelloWorldApp/HelloWorldApp/Program.cs):\nstatic
+void Main(string[] args)\n        {\n            Manager manager = new 
+Manager();\n            manager.Run();\n            Console.WriteLine(\""All work
+completed. Press any key to exit.\"");\n            Console.ReadKey();\n        
+}\n\n#### Calls:\n- HelloWorldApp called in INotifier.cs:1\n- HelloWorldApp 
+called in IWorker.cs:1\n- HelloWorldApp called in Manager.cs:4\n- HelloWorldApp 
+called in Program.cs:3\n- HelloWorldApp called in Helper.cs:1\n- HelloWorldApp 
+called in WorkerA.cs:2\n- HelloWorldApp called in WorkerB.cs:1\n- HelloWorldApp 
+called in WorkerC.cs:1\n- Program called in Program.cs:5\n- Main called in 
+Program.cs:7\n\n### FormatMessage 
+(/opt/HelloWorldApp/HelloWorldApp/Utilities/Helper.cs):\npublic static string 
+FormatMessage(string workerName, string text)\n        {\n            return 
+$\""[{workerName}] {text}\"";\n        }\n\n#### Calls:\n- Utilities called in 
+INotifier.cs:1\n- Utilities called in IWorker.cs:1\n- Utilities called in 
+Manager.cs:4\n- Utilities called in Program.cs:3\n- Utilities called in 
+Helper.cs:1\n- Utilities called in WorkerA.cs:2\n- Utilities called in 
+WorkerB.cs:1\n- Utilities called in WorkerC.cs:1\n- Helper called in 
+Helper.cs:3\n- Helper called in WorkerA.cs:15\n- Helper called in 
+WorkerB.cs:14\n- Helper called in WorkerC.cs:14\n- FormatMessage called in 
+Helper.cs:5\n- FormatMessage called in WorkerA.cs:15\n- FormatMessage called in 
+WorkerB.cs:14\n- FormatMessage called in WorkerC.cs:14\n\n### Process 
+(/opt/HelloWorldApp/HelloWorldApp/WorkerC.cs):\npublic void Process()\n        
+{\n            string msg = Utilities.Helper.FormatMessage(\""WorkerC\"", \""Hi 
+there, C here\"");\n            System.Console.WriteLine(msg);\n            
+_notifier.Notify(\""WorkerC has finished processing.\"");\n        }\n\n#### 
+Calls:\n- HelloWorldApp called in INotifier.cs:1\n- HelloWorldApp called in 
+IWorker.cs:1\n- HelloWorldApp called in Manager.cs:4\n- HelloWorldApp called in 
+Program.cs:3\n- HelloWorldApp called in Helper.cs:1\n- HelloWorldApp called in 
+WorkerA.cs:2\n- HelloWorldApp called in WorkerB.cs:1\n- HelloWorldApp called in 
+WorkerC.cs:1\n- WorkerC called in WorkerC.cs:3\n- WorkerC called in 
+WorkerFactory.cs:14\n- Process called in IWorker.cs:5\n- Process called in 
+Manager.cs:16\n- Process called in WorkerA.cs:13\n- Process called in 
+WorkerB.cs:12\n- Process called in WorkerC.cs:12\n\n### WorkerB 
+(/opt/HelloWorldApp/HelloWorldApp/WorkerB.cs):\npublic WorkerB(INotifier 
+notifier)\n        {\n            _notifier = notifier;\n        }\n\n#### 
+Calls:\n- HelloWorldApp called in INotifier.cs:1\n- HelloWorldApp called in 
+IWorker.cs:1\n- HelloWorldApp called in Manager.cs:4\n- HelloWorldApp called in 
+Program.cs:3\n- HelloWorldApp called in Helper.cs:1\n- HelloWorldApp called in 
+WorkerA.cs:2\n- HelloWorldApp called in WorkerB.cs:1\n- HelloWorldApp called in 
+WorkerC.cs:1\n- WorkerB called in WorkerB.cs:7\n- WorkerB called in 
+WorkerFactory.cs:13\n\n### WorkerC 
+(/opt/HelloWorldApp/HelloWorldApp/WorkerC.cs):\npublic WorkerC(INotifier 
+notifier)\n        {\n            _notifier = notifier;\n        }\n\n#### 
+Calls:\n- HelloWorldApp called in INotifier.cs:1\n- HelloWorldApp called in 
+IWorker.cs:1\n- HelloWorldApp called in Manager.cs:4\n- HelloWorldApp called in 
+Program.cs:3\n- HelloWorldApp called in Helper.cs:1\n- HelloWorldApp called in 
+WorkerA.cs:2\n- HelloWorldApp called in WorkerB.cs:1\n- HelloWorldApp called in 
+WorkerC.cs:1\n- WorkerC called in WorkerC.cs:7\n- WorkerC called in 
+WorkerFactory.cs:14\n\n### CreateWorkers 
+(/opt/HelloWorldApp/HelloWorldApp/WorkerFactory.cs):\npublic static 
+IEnumerable<IWorker> CreateWorkers(INotifier notifier)\n        {\n            
+// create multiple workers, each knows how to call back\n            return new 
+List<IWorker>\n            {\n                new WorkerA(notifier),\n          
+new WorkerB(notifier),\n                new WorkerC(notifier)\n            };\n 
+}\n\n#### Calls:\n- HelloWorldApp called in INotifier.cs:1\n- HelloWorldApp 
+called in IWorker.cs:1\n- HelloWorldApp called in Manager.cs:4\n- HelloWorldApp 
+called in Program.cs:3\n- HelloWorldApp called in Helper.cs:1\n- HelloWorldApp 
+called in WorkerA.cs:2\n- HelloWorldApp called in WorkerB.cs:1\n- HelloWorldApp 
+called in WorkerC.cs:1\n- WorkerFactory called in Manager.cs:11\n- WorkerFactory
+called in WorkerFactory.cs:5\n- CreateWorkers called in Manager.cs:11\n- 
+CreateWorkers called in WorkerFactory.cs:7\n"",
+      ""metadata"": {
+        ""file_path"": 
+""/opt/HelloWorldApp/relationship_calls/call_chain_9_methods.md"",
+        ""language"": ""csharp"",
+        ""chunk_type"": ""method"",
+        ""name"": 
+""CallChain_WorkerA_Run_Notify_Main_FormatMessage_Process_WorkerB_WorkerC_CreateW
+orkers"",
+        ""start_line"": 1,
+        ""end_line"": 158,
+        ""return_type"": """",
+        ""parameter_types"": [],
+        ""symbol_kind"": null,
+        ""visibility"": null,
+        ""imports"": [],
+        ""references_count"": 0,
+        ""is_exported"": false,
+        ""has_errors"": false,
+        ""has_warnings"": false,
+        ""diagnostics"": [],
+        ""dependencies"": [],
+        ""dependents"": [],
+        ""lsp_enhanced"": false,
+        ""has_cross_file_deps"": false,
+        ""cross_file_references"": [],
+        ""definitions_count"": 0,
+        ""type_definitions_count"": 0,
+        ""implementations_count"": 0,
+        ""total_relationships"": 0,
+        ""relationship_diversity"": 0,
+        ""is_heavily_referenced"": false,
+        ""is_interface_implementer"": false,
+        ""has_complex_types"": false,
+        ""relationships"": {},
+        ""ai_summary"": """",
+        ""complexity_score"": null
+      },
+      ""score"": 0.6016674228919067,
+      ""distance"": 0.39833257710809333,
+      ""retrieval_method"": ""llamaindex_hybrid""
+    },
+    {
+      ""chunk_id"": ""unknown"",
+      ""content"": ""class Program\n    {\n        static void Main(string[] 
+args)\n        {\n            Manager manager = new Manager();\n            
+manager.Run();\n            Console.WriteLine(\""All work completed. Press any 
+key to exit.\"");\n            Console.ReadKey();\n        }\n    }"",
+      ""metadata"": {
+        ""file_path"": ""/opt/HelloWorldApp/HelloWorldApp/Program.cs"",
+        ""language"": ""csharp"",
+        ""chunk_type"": ""class"",
+        ""name"": ""Program"",
+        ""start_line"": 5,
+        ""end_line"": 14,
+        ""return_type"": ""csharp"",
+        ""parameter_types"": [],
+        ""symbol_kind"": null,
+        ""visibility"": null,
+        ""imports"": [],
+        ""references_count"": 10,
+        ""is_exported"": false,
+        ""has_errors"": false,
+        ""has_warnings"": false,
+        ""diagnostics"": [],
+        ""dependencies"": [],
+        ""dependents"": [],
+        ""lsp_enhanced"": false,
+        ""has_cross_file_deps"": false,
+        ""cross_file_references"": [],
+        ""definitions_count"": 0,
+        ""type_definitions_count"": 0,
+        ""implementations_count"": 0,
+        ""total_relationships"": 0,
+        ""relationship_diversity"": 0,
+        ""is_heavily_referenced"": false,
+        ""is_interface_implementer"": false,
+        ""has_complex_types"": false,
+        ""relationships"": {},
+        ""ai_summary"": ""The `Program` class serves as the entry point for the 
+application, executing the `Main` method which initializes a `Manager` instance 
+and calls its `Run` method to perform the main operations of the application. 
+After the operations are completed, it prompts the user to press any key before 
+exiting, ensuring a smooth termination experience. This design encapsulates the 
+application's core functionality within the `Manager` class, promoting 
+separation of concerns and enhancing maintainability."",
+        ""complexity_score"": null
+      },
+      ""score"": 0.6014683279896681,
+      ""distance"": 0.3985316720103319,
+      ""retrieval_method"": ""llamaindex_hybrid""
+    },
+    {
+      ""chunk_id"": ""unknown"",
+      ""content"": ""static void Main(string[] args)\n        {\n            
+Manager manager = new Manager();\n            manager.Run();\n            
+Console.WriteLine(\""All work completed. Press any key to exit.\"");\n            
+Console.ReadKey();\n        }"",
+      ""metadata"": {
+        ""file_path"": ""/opt/HelloWorldApp/HelloWorldApp/Program.cs"",
+        ""language"": ""csharp"",
+        ""chunk_type"": ""method"",
+        ""name"": ""Main"",
+        ""start_line"": 7,
+        ""end_line"": 13,
+        ""return_type"": ""csharp"",
+        ""parameter_types"": [],
+        ""symbol_kind"": null,
+        ""visibility"": null,
+        ""imports"": [],
+        ""references_count"": 10,
+        ""is_exported"": false,
+        ""has_errors"": false,
+        ""has_warnings"": false,
+        ""diagnostics"": [],
+        ""dependencies"": [],
+        ""dependents"": [],
+        ""lsp_enhanced"": false,
+        ""has_cross_file_deps"": false,
+        ""cross_file_references"": [],
+        ""definitions_count"": 0,
+        ""type_definitions_count"": 0,
+        ""implementations_count"": 0,
+        ""total_relationships"": 0,
+        ""relationship_diversity"": 0,
+        ""is_heavily_referenced"": false,
+        ""is_interface_implementer"": false,
+        ""has_complex_types"": false,
+        ""relationships"": {},
+        ""ai_summary"": ""The `Main` method serves as the entry point for the 
+application, initializing a `Manager` instance and invoking its `Run` method to 
+execute the primary functionality. After the `Run` method completes, it prompts 
+the user to press any key before exiting, indicating that all tasks have been 
+finished. This structure follows a common design pattern for console 
+applications, where the `Main` method orchestrates the flow of execution and 
+user interaction."",
+        ""complexity_score"": null
+      },
+      ""score"": 0.5994297753948116,
+      ""distance"": 0.40057022460518843,
+      ""retrieval_method"": ""llamaindex_hybrid""
+    },
+    {
+      ""chunk_id"": ""unknown"",
+      ""content"": ""using System.Collections.Generic;"",
+      ""metadata"": {
+        ""file_path"": ""/opt/HelloWorldApp/HelloWorldApp/Manager.cs"",
+        ""language"": ""csharp"",
+        ""chunk_type"": ""import"",
+        ""name"": ""System"",
+        ""start_line"": 2,
+        ""end_line"": 2,
+        ""return_type"": """",
+        ""parameter_types"": [],
+        ""symbol_kind"": null,
+        ""visibility"": null,
+        ""imports"": [],
+        ""references_count"": 0,
+        ""is_exported"": false,
+        ""has_errors"": false,
+        ""has_warnings"": false,
+        ""diagnostics"": [],
+        ""dependencies"": [],
+        ""dependents"": [],
+        ""lsp_enhanced"": false,
+        ""has_cross_file_deps"": false,
+        ""cross_file_references"": [],
+        ""definitions_count"": 0,
+        ""type_definitions_count"": 0,
+        ""implementations_count"": 0,
+        ""total_relationships"": 0,
+        ""relationship_diversity"": 0,
+        ""is_heavily_referenced"": false,
+        ""is_interface_implementer"": false,
+        ""has_complex_types"": false,
+        ""relationships"": {},
+        ""ai_summary"": ""This code imports the `System.Collections.Generic` 
+namespace, which provides classes and interfaces for working with collections, 
+such as lists, dictionaries, and queues. By including this namespace, the code 
+can leverage generic collection types that enhance type safety and performance. 
+This import is essential for managing data structures efficiently within the 
+larger application, likely facilitating operations on collections throughout the
+`Manager.cs` file."",
+        ""complexity_score"": null
+      },
+      ""score"": 0.5976021484735873,
+      ""distance"": 0.4023978515264127,
+      ""retrieval_method"": ""llamaindex_hybrid""
+    },
+    {
+      ""chunk_id"": ""unknown"",
+      ""content"": ""using System.Collections.Generic;"",
+      ""metadata"": {
+        ""file_path"": ""/opt/HelloWorldApp/HelloWorldApp/WorkerFactory.cs"",
+        ""language"": ""csharp"",
+        ""chunk_type"": ""import"",
+        ""name"": ""System"",
+        ""start_line"": 1,
+        ""end_line"": 1,
+        ""return_type"": """",
+        ""parameter_types"": [],
+        ""symbol_kind"": null,
+        ""visibility"": null,
+        ""imports"": [],
+        ""references_count"": 0,
+        ""is_exported"": false,
+        ""has_errors"": false,
+        ""has_warnings"": false,
+        ""diagnostics"": [],
+        ""dependencies"": [],
+        ""dependents"": [],
+        ""lsp_enhanced"": false,
+        ""has_cross_file_deps"": false,
+        ""cross_file_references"": [],
+        ""definitions_count"": 0,
+        ""type_definitions_count"": 0,
+        ""implementations_count"": 0,
+        ""total_relationships"": 0,
+        ""relationship_diversity"": 0,
+        ""is_heavily_referenced"": false,
+        ""is_interface_implementer"": false,
+        ""has_complex_types"": false,
+        ""relationships"": {},
+        ""ai_summary"": ""This code imports the `System.Collections.Generic` 
+namespace, which provides classes and interfaces for working with generic 
+collections, such as lists, dictionaries, and queues. This functionality is 
+essential for managing collections of data in a type-safe manner, allowing for 
+improved performance and code clarity. By including this namespace, the 
+`WorkerFactory.cs` file can utilize generic collection types, which likely 
+supports the overall architecture of the application by facilitating efficient 
+data handling and manipulation within the worker factory design."",
+        ""complexity_score"": null
+      },
+      ""score"": 0.5974984436199686,
+      ""distance"": 0.4025015563800314,
+      ""retrieval_method"": ""llamaindex_hybrid""
+    },
+    {
+      ""chunk_id"": ""unknown"",
+      ""content"": ""namespace HelloWorldApp.Utilities\n{\n    public static class 
+Helper\n    {\n        public static string FormatMessage(string workerName, 
+string text)\n        {\n            return $\""[{workerName}] {text}\"";\n       
+}\n    }\n}"",
+      ""metadata"": {
+        ""file_path"": ""/opt/HelloWorldApp/HelloWorldApp/Utilities/Helper.cs"",
+        ""language"": ""csharp"",
+        ""chunk_type"": ""namespace"",
+        ""name"": ""HelloWorldApp"",
+        ""start_line"": 1,
+        ""end_line"": 10,
+        ""return_type"": ""csharp"",
+        ""parameter_types"": [],
+        ""symbol_kind"": null,
+        ""visibility"": null,
+        ""imports"": [],
+        ""references_count"": 16,
+        ""is_exported"": false,
+        ""has_errors"": false,
+        ""has_warnings"": false,
+        ""diagnostics"": [],
+        ""dependencies"": [],
+        ""dependents"": [],
+        ""lsp_enhanced"": false,
+        ""has_cross_file_deps"": false,
+        ""cross_file_references"": [],
+        ""definitions_count"": 0,
+        ""type_definitions_count"": 0,
+        ""implementations_count"": 0,
+        ""total_relationships"": 0,
+        ""relationship_diversity"": 0,
+        ""is_heavily_referenced"": false,
+        ""is_interface_implementer"": false,
+        ""has_complex_types"": false,
+        ""relationships"": {},
+        ""ai_summary"": ""The `Helper` class in the `HelloWorldApp.Utilities` 
+namespace provides a static method, `FormatMessage`, which formats a message by 
+prepending the worker's name to the provided text within square brackets. This 
+utility function promotes code reusability and consistency in message formatting
+across the application. By being a static class, it allows for easy access 
+without needing to instantiate an object, fitting seamlessly into the larger 
+system where formatted messages are likely used for logging or user 
+notifications."",
+        ""complexity_score"": null
+      },
+      ""score"": 0.5936987162471477,
+      ""distance"": 0.40630128375285235,
+      ""retrieval_method"": ""llamaindex_hybrid""
+    },
+    {
+      ""chunk_id"": ""unknown"",
+      ""content"": ""public void Process()\n        {\n            string msg = 
+Utilities.Helper.FormatMessage(\""WorkerC\"", \""Hi there, C here\"");\n            
+System.Console.WriteLine(msg);\n            _notifier.Notify(\""WorkerC has 
+finished processing.\"");\n        }"",
+      ""metadata"": {
+        ""file_path"": ""/opt/HelloWorldApp/HelloWorldApp/WorkerC.cs"",
+        ""language"": ""csharp"",
+        ""chunk_type"": ""method"",
+        ""name"": ""Process"",
+        ""start_line"": 12,
+        ""end_line"": 17,
+        ""return_type"": ""csharp"",
+        ""parameter_types"": [],
+        ""symbol_kind"": null,
+        ""visibility"": null,
+        ""imports"": [],
+        ""references_count"": 15,
+        ""is_exported"": false,
+        ""has_errors"": false,
+        ""has_warnings"": false,
+        ""diagnostics"": [],
+        ""dependencies"": [],
+        ""dependents"": [],
+        ""lsp_enhanced"": false,
+        ""has_cross_file_deps"": false,
+        ""cross_file_references"": [],
+        ""definitions_count"": 0,
+        ""type_definitions_count"": 0,
+        ""implementations_count"": 0,
+        ""total_relationships"": 0,
+        ""relationship_diversity"": 0,
+        ""is_heavily_referenced"": false,
+        ""is_interface_implementer"": false,
+        ""has_complex_types"": false,
+        ""relationships"": {},
+        ""ai_summary"": ""The `Process` method formats a message using a helper 
+utility, outputs it to the console, and then notifies a notifier object that 
+processing has completed. Key functionality includes message formatting and 
+notification, indicating a clear separation of concerns through the use of a 
+helper method and a notifier. This design pattern promotes modularity and 
+reusability, suggesting that `Process` is part of a larger system where 
+different workers perform tasks and communicate their status."",
+        ""complexity_score"": null
+      },
+      ""score"": 0.5796162107899344,
+      ""distance"": 0.4203837892100656,
+      ""retrieval_method"": ""llamaindex_hybrid""
+    },
+    {
+      ""chunk_id"": ""unknown"",
+      ""content"": ""public void Process()\n        {\n            string msg = 
+Utilities.Helper.FormatMessage(\""WorkerA\"", \""Hello from A\"");\n            
+System.Console.WriteLine(msg);\n            _notifier.Notify(\""WorkerA has 
+finished processing.\"");\n        }"",
+      ""metadata"": {
+        ""file_path"": ""/opt/HelloWorldApp/HelloWorldApp/WorkerA.cs"",
+        ""language"": ""csharp"",
+        ""chunk_type"": ""method"",
+        ""name"": ""Process"",
+        ""start_line"": 13,
+        ""end_line"": 18,
+        ""return_type"": ""csharp"",
+        ""parameter_types"": [],
+        ""symbol_kind"": null,
+        ""visibility"": null,
+        ""imports"": [],
+        ""references_count"": 15,
+        ""is_exported"": false,
+        ""has_errors"": false,
+        ""has_warnings"": false,
+        ""diagnostics"": [],
+        ""dependencies"": [],
+        ""dependents"": [],
+        ""lsp_enhanced"": false,
+        ""has_cross_file_deps"": false,
+        ""cross_file_references"": [],
+        ""definitions_count"": 0,
+        ""type_definitions_count"": 0,
+        ""implementations_count"": 0,
+        ""total_relationships"": 0,
+        ""relationship_diversity"": 0,
+        ""is_heavily_referenced"": false,
+        ""is_interface_implementer"": false,
+        ""has_complex_types"": false,
+        ""relationships"": {},
+        ""ai_summary"": ""The `Process` method formats a message indicating that 
+\""WorkerA\"" is active, outputs this message to the console, and then notifies a 
+notifier object that the processing has completed. Key functionality includes 
+message formatting via a utility helper and notification signaling, which 
+suggests a design pattern focused on separation of concerns and event-driven 
+communication. This method likely plays a role in a larger system where multiple
+worker components operate concurrently, providing feedback and status updates to
+other system parts or users."",
+        ""complexity_score"": null
+      },
+      ""score"": 0.5779214899915494,
+      ""distance"": 0.42207851000845065,
+      ""retrieval_method"": ""llamaindex_hybrid""
+    },
+    {
+      ""chunk_id"": ""unknown"",
+      ""content"": ""public void Process()\n        {\n            string msg = 
+Utilities.Helper.FormatMessage(\""WorkerB\"", \""Greetings from B\"");\n            
+System.Console.WriteLine(msg);\n            _notifier.Notify(\""WorkerB has 
+finished processing.\"");\n        }"",
+      ""metadata"": {
+        ""file_path"": ""/opt/HelloWorldApp/HelloWorldApp/WorkerB.cs"",
+        ""language"": ""csharp"",
+        ""chunk_type"": ""method"",
+        ""name"": ""Process"",
+        ""start_line"": 12,
+        ""end_line"": 17,
+        ""return_type"": ""csharp"",
+        ""parameter_types"": [],
+        ""symbol_kind"": null,
+        ""visibility"": null,
+        ""imports"": [],
+        ""references_count"": 15,
+        ""is_exported"": false,
+        ""has_errors"": false,
+        ""has_warnings"": false,
+        ""diagnostics"": [],
+        ""dependencies"": [],
+        ""dependents"": [],
+        ""lsp_enhanced"": false,
+        ""has_cross_file_deps"": false,
+        ""cross_file_references"": [],
+        ""definitions_count"": 0,
+        ""type_definitions_count"": 0,
+        ""implementations_count"": 0,
+        ""total_relationships"": 0,
+        ""relationship_diversity"": 0,
+        ""is_heavily_referenced"": false,
+        ""is_interface_implementer"": false,
+        ""has_complex_types"": false,
+        ""relationships"": {},
+        ""ai_summary"": ""The `Process` method formats a greeting message using a 
+helper utility and outputs it to the console, followed by notifying a notifier 
+object that the processing has completed. Key functionality includes message 
+formatting and notification, indicating a clear separation of concerns through 
+the use of utility and notifier classes. This method likely serves as a worker 
+in a larger system that involves multiple processing components, enhancing 
+modularity and maintainability."",
+        ""complexity_score"": null
+      },
+      ""score"": 0.5762944217539205,
+      ""distance"": 0.42370557824607946,
+      ""retrieval_method"": ""llamaindex_hybrid""
+    },
+    {
+      ""chunk_id"": ""unknown"",
+      ""content"": ""public void Run()\n        {\n            
+Console.WriteLine(\""Manager starting work...\"");\n            
+IEnumerable<IWorker> workers = WorkerFactory.CreateWorkers(this);\n\n           
+// one-to-many: Manager invokes all workers\n            foreach (var worker in 
+workers)\n            {\n                worker.Process();\n            }\n     
+}"",
+      ""metadata"": {
+        ""file_path"": ""/opt/HelloWorldApp/HelloWorldApp/Manager.cs"",
+        ""language"": ""csharp"",
+        ""chunk_type"": ""method"",
+        ""name"": ""Run"",
+        ""start_line"": 8,
+        ""end_line"": 18,
+        ""return_type"": ""csharp"",
+        ""parameter_types"": [],
+        ""symbol_kind"": null,
+        ""visibility"": null,
+        ""imports"": [],
+        ""references_count"": 12,
+        ""is_exported"": false,
+        ""has_errors"": false,
+        ""has_warnings"": false,
+        ""diagnostics"": [],
+        ""dependencies"": [],
+        ""dependents"": [],
+        ""lsp_enhanced"": false,
+        ""has_cross_file_deps"": false,
+        ""cross_file_references"": [],
+        ""definitions_count"": 0,
+        ""type_definitions_count"": 0,
+        ""implementations_count"": 0,
+        ""total_relationships"": 0,
+        ""relationship_diversity"": 0,
+        ""is_heavily_referenced"": false,
+        ""is_interface_implementer"": false,
+        ""has_complex_types"": false,
+        ""relationships"": {},
+        ""ai_summary"": ""The `Run` method in the `Manager` class initiates the 
+workflow by logging a start message and creating a collection of worker 
+instances through the `WorkerFactory`. It then iterates over each worker, 
+invoking their `Process` method, which suggests a one-to-many relationship where
+the manager coordinates multiple workers. This design follows the Factory 
+pattern for worker creation and emphasizes a clear separation of 
+responsibilities, positioning the manager as a central orchestrator within the 
+application's architecture."",
+        ""complexity_score"": null
+      },
+      ""score"": 0.5697335406481511,
+      ""distance"": 0.43026645935184893,
+      ""retrieval_method"": ""llamaindex_hybrid""
+    }
+  ],
+  ""total_results"": 15,
+  ""processing_time"": 12.688380241394043,
+  ""metadata"": {
+    ""retrieval_method"": ""llamaindex_hybrid"",
+    ""max_results"": 15,
+    ""threshold"": 0.1,
+    ""languages"": null,
+    ""file_pattern"": null,
+    ""chunk_types"": null
+  },
+  ""has_diagram"": false,
+  ""diagram_content"": null,
+  ""confidence_score"": null
+}
+",29136,"JSON parsing failed, using raw output",error,,5108,No module named 'project_analyzer',error,,31506,Request timed out after 30.0 seconds

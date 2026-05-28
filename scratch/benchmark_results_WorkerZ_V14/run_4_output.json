@@ -1,0 +1,112 @@
+{
+  "status": "success",
+  "response": "I searched the codebase but couldn't find any data matching your query: 'What are the exact two parameters passed to Helper.FormatMessage by WorkerZ?'. This could mean:\n1. The data doesn't exist in the project\n2. The query needs to be more specific\n3. The data exists but under different naming/structure",
+  "query_history": [],
+  "iterations_used": 1,
+  "final_results": [],
+  "intent": {
+    "intent_type": "lookup",
+    "confidence": 0.95,
+    "reasoning": "The user's query is focused on retrieving specific information about the parameters passed to a function by a particular component (WorkerZ). This indicates a need for precise data retrieval rather than understanding broader architectural patterns or relationships.",
+    "expected_result_type": "The expected result is a list or description of the exact two parameters passed to the Helper.FormatMessage function by WorkerZ.",
+    "_token_updates": {
+      "llm_call_history": [
+        {
+          "call_type": "intent_analysis",
+          "timestamp": 1764176940.756423,
+          "model_name": "gpt-4o-2024-08-06",
+          "input_tokens": 132,
+          "output_tokens": 97,
+          "total_tokens": 229,
+          "input_cost_usd": 0.00396,
+          "output_cost_usd": 0.00291,
+          "total_cost_usd": 0.00687,
+          "latency_seconds": 2.542,
+          "call_purpose": "Analyze user query intent",
+          "approach_index": null
+        }
+      ],
+      "total_input_tokens": 132,
+      "total_output_tokens": 97,
+      "total_tokens_used": 229,
+      "total_estimated_cost_usd": 0.00687,
+      "models_used": [
+        "gpt-4o-2024-08-06"
+      ]
+    }
+  },
+  "workflow": "langgraph_agent",
+  "organized_data": null,
+  "architectural_summary": {},
+  "synthesis_context_used": 0,
+  "raw_query_results": [],
+  "all_executed_queries": [],
+  "total_tokens_used": 229,
+  "total_input_tokens": 132,
+  "total_output_tokens": 97,
+  "total_estimated_cost_usd": 0.00687,
+  "discovery_research_tokens": 0,
+  "think_tokens": 0,
+  "generate_tokens": 0,
+  "rethink_tokens": 0,
+  "diagnostics_tokens": 0,
+  "refinement_tokens": 0,
+  "sufficiency_check_tokens": 0,
+  "synthesis_tokens": 0,
+  "tokens_per_approach": {},
+  "cost_per_approach": {},
+  "tokens_per_data_point": null,
+  "cost_per_data_point": null,
+  "models_used": [
+    "gpt-4o-2024-08-06"
+  ],
+  "primary_model": "gpt-4-turbo",
+  "llm_call_history": [
+    {
+      "call_type": "intent_analysis",
+      "timestamp": 1764176940.756423,
+      "model_name": "gpt-4o-2024-08-06",
+      "input_tokens": 132,
+      "output_tokens": 97,
+      "total_tokens": 229,
+      "input_cost_usd": 0.00396,
+      "output_cost_usd": 0.00291,
+      "total_cost_usd": 0.00687,
+      "latency_seconds": 2.542,
+      "call_purpose": "Analyze user query intent",
+      "approach_index": null
+    }
+  ],
+  "raw_results": [],
+  "executed_queries": [],
+  "approach_statuses": {},
+  "failed_approaches": [],
+  "approach_execution_traces": {},
+  "approach_raw_results": {},
+  "agent_metadata": {
+    "neo4j_version": "",
+    "schema_nodes": 10,
+    "total_queries_executed": 0,
+    "total_raw_results": 0,
+    "workflow_nodes_executed": 7,
+    "agents_involved": [
+      "environment",
+      "discovery",
+      "intent",
+      "query_generator",
+      "expansion",
+      "synthesis"
+    ],
+    "modular_workflow_version": "2.0.0",
+    "pydantic_validation_enabled": true,
+    "research_based_discovery": false,
+    "context_manager_used": false,
+    "metadata": {
+      "project_path": null,
+      "mappings_path": null,
+      "queries_path": null,
+      "neo4j_config": "neo4j_config.json"
+    }
+  },
+  "error": null
+}

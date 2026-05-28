@@ -1,0 +1,10 @@
+digraph "FormatMessage" {  
+node [shape="rect"];  
+"146028888064" [label = <RETURN, 6<BR/>return $&quot;[{workerName}] {text}&quot;;> ]
+"30064771089" [label = <&lt;operator&gt;.formatString, 6<BR/>$&quot;[{workerName}] {text}&quot;> ]
+"111669149701" [label = <METHOD, 4<BR/>FormatMessage> ]
+"128849018885" [label = <METHOD_RETURN, 4<BR/>System.String> ]
+  "146028888064" -> "128849018885" 
+  "30064771089" -> "146028888064" 
+  "111669149701" -> "30064771089" 
+}

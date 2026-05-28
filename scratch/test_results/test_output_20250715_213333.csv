@@ -1,0 +1,3 @@
+query_id,user_query,vector_status,cpg_status,comprehensive_status
+T001,Test query 1,success,success,success
+T002,Test query 2,success,success,success

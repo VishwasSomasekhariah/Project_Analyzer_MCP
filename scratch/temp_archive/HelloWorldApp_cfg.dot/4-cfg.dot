@@ -1,0 +1,16 @@
+digraph "Main" {  
+node [shape="rect"];  
+"30064771084" [label = <&lt;operator&gt;.assignment, 8<BR/>manager = new Manager()> ]
+"30064771086" [label = <Run, 9<BR/>manager.Run()> ]
+"30064771087" [label = <WriteLine, 10<BR/>Console.WriteLine(&quot;All work completed. Press an...> ]
+"30064771088" [label = <ReadKey, 11<BR/>Console.ReadKey()> ]
+"30064771085" [label = <&lt;init&gt;, 8<BR/>new Manager()> ]
+"111669149700" [label = <METHOD, 6<BR/>Main> ]
+"128849018884" [label = <METHOD_RETURN, 6<BR/>System.Void> ]
+  "30064771084" -> "30064771086" 
+  "30064771086" -> "30064771087" 
+  "30064771087" -> "30064771088" 
+  "30064771088" -> "128849018884" 
+  "30064771085" -> "30064771084" 
+  "111669149700" -> "30064771085" 
+}

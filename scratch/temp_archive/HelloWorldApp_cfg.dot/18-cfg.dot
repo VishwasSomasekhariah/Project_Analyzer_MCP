@@ -1,0 +1,6 @@
+digraph "&lt;init&gt;" {  
+node [shape="rect"];  
+"111669149714" [label = <METHOD<BR/>&lt;init&gt;> ]
+"128849018898" [label = <METHOD_RETURN<BR/>ANY> ]
+  "111669149714" -> "128849018898" 
+}

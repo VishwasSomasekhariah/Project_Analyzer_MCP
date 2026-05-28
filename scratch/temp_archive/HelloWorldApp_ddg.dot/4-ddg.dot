@@ -1,0 +1,34 @@
+digraph "Main" {  
+node [shape="rect"];  
+"111669149700" [label = <METHOD, 6<BR/>Main> ]
+"128849018884" [label = <METHOD_RETURN, 6<BR/>System.Void> ]
+"115964116998" [label = <PARAM, 6<BR/>string[] args> ]
+"30064771084" [label = <&lt;operator&gt;.assignment, 8<BR/>manager = new Manager()> ]
+"30064771086" [label = <Run, 9<BR/>manager.Run()> ]
+"30064771087" [label = <WriteLine, 10<BR/>Console.WriteLine(&quot;All work completed. Press an...> ]
+"30064771088" [label = <ReadKey, 11<BR/>Console.ReadKey()> ]
+"30064771084" [label = <&lt;operator&gt;.assignment, 8<BR/>manager = new Manager()> ]
+"30064771084" [label = <&lt;operator&gt;.assignment, 8<BR/>manager = new Manager()> ]
+"30064771086" [label = <Run, 9<BR/>manager.Run()> ]
+"30064771087" [label = <WriteLine, 10<BR/>Console.WriteLine(&quot;All work completed. Press an...> ]
+"30064771087" [label = <WriteLine, 10<BR/>Console.WriteLine(&quot;All work completed. Press an...> ]
+"30064771088" [label = <ReadKey, 11<BR/>Console.ReadKey()> ]
+"30064771085" [label = <&lt;init&gt;, 8<BR/>new Manager()> ]
+  "115964116998" -> "128849018884"  [ label = "args"] 
+  "30064771084" -> "128849018884"  [ label = "new Manager()"] 
+  "30064771084" -> "128849018884"  [ label = "manager = new Manager()"] 
+  "30064771086" -> "128849018884"  [ label = "manager"] 
+  "30064771086" -> "128849018884"  [ label = "manager.Run()"] 
+  "30064771087" -> "128849018884"  [ label = "Console.WriteLine(&quot;All work completed. Press any key to exit.&quot;)"] 
+  "30064771088" -> "128849018884"  [ label = "Console"] 
+  "30064771088" -> "128849018884"  [ label = "Console.ReadKey()"] 
+  "30064771085" -> "128849018884"  [ label = "this"] 
+  "111669149700" -> "115964116998" 
+  "30064771085" -> "30064771084"  [ label = "this"] 
+  "30064771084" -> "30064771086"  [ label = "manager = new Manager()"] 
+  "111669149700" -> "30064771086" 
+  "111669149700" -> "30064771087" 
+  "30064771087" -> "30064771088"  [ label = "Console"] 
+  "111669149700" -> "30064771088" 
+  "111669149700" -> "30064771085" 
+}

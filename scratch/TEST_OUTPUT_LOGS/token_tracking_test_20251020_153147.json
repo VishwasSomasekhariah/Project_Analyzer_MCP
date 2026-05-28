@@ -1,0 +1,2096 @@
+{
+  "test_suite": "parallel_execution_token_tracking",
+  "timestamp": "20251020_153147",
+  "total_execution_time_seconds": 330.92954897880554,
+  "queries_tested": 3,
+  "overall_validation": {
+    "total_checks_passed": 6,
+    "total_checks": 18,
+    "success_rate": 0.3333333333333333
+  },
+  "results": [
+    {
+      "query_id": "T001",
+      "query_text": "Analyze the overall architecture of the HelloWorldApp. What are the main components and how do they interact?",
+      "category": "Technical",
+      "subcategory": "Architecture",
+      "timestamp": "20251020_152801",
+      "status": "success",
+      "response_time_seconds": 104.7556083202362,
+      "discovered_data_count": 209,
+      "approaches_count": 4,
+      "answer": "The HelloWorldApp is a .NET application targeting the .NET 9.0 framework and is configured to produce an executable output [0]. The architecture of the application is composed of several main components, each serving a distinct role:\n\n1. **Program.cs**: This is the entry point of the application. It likely contains the `Main` method which initiates the execution of the program [8].\n\n2. **Interfaces**: The application defines interfaces such as `INotifier` and `IWorker`, which are likely used to define contracts for notification and worker functionalities, respectively [5, 6].\n\n3. **Workers**: There are multiple worker classes (`WorkerA.cs`, `WorkerB.cs`, `WorkerC.cs`) that presumably implement the `IWorker` interface. These classes are responsible for executing specific tasks within the application [10, 11, 12].\n\n4. **Manager.cs**: This component likely manages the workflow of the application, coordinating between different workers and possibly utilizing collections to manage tasks or data [7].\n\n5. **Utilities**: The `Helper.cs` file located in the `Utilities` directory suggests the presence of utility functions that assist in various operations across the application [4].\n\n6. **WorkerFactory.cs**: This component is likely responsible for creating instances of worker classes, possibly implementing a factory pattern to manage the creation logic [13].\n\nThese components interact through defined interfaces and classes, with the `Program.cs` serving as the orchestrator that initializes and coordinates the execution flow. The use of interfaces like `INotifier` and `IWorker` suggests a design that emphasizes modularity and flexibility, allowing different implementations to be swapped or extended with minimal impact on the overall system.",
+      "token_tracking": {
+        "total_tokens_used": 0,
+        "total_input_tokens": 0,
+        "total_output_tokens": 0,
+        "total_estimated_cost_usd": 0.0,
+        "per_step": {
+          "think_tokens": 0,
+          "generate_tokens": 0,
+          "rethink_tokens": 0,
+          "diagnostics_tokens": 0,
+          "refinement_tokens": 0,
+          "sufficiency_check_tokens": 0,
+          "synthesis_tokens": 0
+        },
+        "per_approach": {},
+        "models_used": [],
+        "llm_call_count": 0,
+        "llm_call_breakdown": {}
+      },
+      "validation": {
+        "checks_passed": 2,
+        "checks_total": 6,
+        "success_rate": 0.3333333333333333
+      },
+      "full_result": {
+        "status": "success",
+        "tool_name": "query_cpg_rag",
+        "workflow_type": "langgraph_agent_rag",
+        "user_query": "Analyze the overall architecture of the HelloWorldApp. What are the main components and how do they interact?",
+        "project_name": "HelloWorldApp",
+        "response": "The HelloWorldApp is a .NET application targeting the .NET 9.0 framework and is configured to produce an executable output [0]. The architecture of the application is composed of several main components, each serving a distinct role:\n\n1. **Program.cs**: This is the entry point of the application. It likely contains the `Main` method which initiates the execution of the program [8].\n\n2. **Interfaces**: The application defines interfaces such as `INotifier` and `IWorker`, which are likely used to define contracts for notification and worker functionalities, respectively [5, 6].\n\n3. **Workers**: There are multiple worker classes (`WorkerA.cs`, `WorkerB.cs`, `WorkerC.cs`) that presumably implement the `IWorker` interface. These classes are responsible for executing specific tasks within the application [10, 11, 12].\n\n4. **Manager.cs**: This component likely manages the workflow of the application, coordinating between different workers and possibly utilizing collections to manage tasks or data [7].\n\n5. **Utilities**: The `Helper.cs` file located in the `Utilities` directory suggests the presence of utility functions that assist in various operations across the application [4].\n\n6. **WorkerFactory.cs**: This component is likely responsible for creating instances of worker classes, possibly implementing a factory pattern to manage the creation logic [13].\n\nThese components interact through defined interfaces and classes, with the `Program.cs` serving as the orchestrator that initializes and coordinates the execution flow. The use of interfaces like `INotifier` and `IWorker` suggests a design that emphasizes modularity and flexibility, allowing different implementations to be swapped or extended with minimal impact on the overall system.",
+        "discovered_data": [
+          {
+            "p.dependencies": {},
+            "p.target_framework": "net9.0",
+            "p.output_type": "Exe",
+            "p.config_metadata": {
+              ".gitignore": {
+                "format": "text",
+                "file_type": "git_ignore",
+                "line_count": 36
+              },
+              "project_analysis/ctags_analysis.json": {
+                "format": "json",
+                "file_type": "generic_json"
+              },
+              "HelloWorldApp/HelloWorldApp.csproj": {
+                "format": "xml",
+                "file_type": "dotnet_project",
+                "target_framework": "net9.0",
+                "output_type": "Exe",
+                "properties": {
+                  "OutputType": "Exe",
+                  "TargetFramework": "net9.0",
+                  "RootNamespace": "HelloWorldApp",
+                  "ImplicitUsings": "enable"
+                }
+              },
+              "HelloWorldApp/project_analysis/ctags_analysis.json": {
+                "format": "json",
+                "file_type": "generic_json"
+              }
+            }
+          },
+          {
+            "p.dependencies": {},
+            "p.target_framework": "net9.0",
+            "p.output_type": "Exe",
+            "p.config_metadata": {
+              ".gitignore": {
+                "format": "text",
+                "file_type": "git_ignore",
+                "line_count": 36
+              },
+              "project_analysis/ctags_analysis.json": {
+                "format": "json",
+                "file_type": "generic_json"
+              },
+              "HelloWorldApp/HelloWorldApp.csproj": {
+                "format": "xml",
+                "file_type": "dotnet_project",
+                "target_framework": "net9.0",
+                "output_type": "Exe",
+                "properties": {
+                  "OutputType": "Exe",
+                  "TargetFramework": "net9.0",
+                  "RootNamespace": "HelloWorldApp",
+                  "ImplicitUsings": "enable"
+                }
+              },
+              "HelloWorldApp/project_analysis/ctags_analysis.json": {
+                "format": "json",
+                "file_type": "generic_json"
+              }
+            }
+          },
+          {
+            "p.dependencies": {},
+            "p.target_framework": "net9.0",
+            "p.output_type": "Exe",
+            "p.config_metadata": {
+              ".gitignore": {
+                "format": "text",
+                "file_type": "git_ignore",
+                "line_count": 36
+              },
+              "project_analysis/ctags_analysis.json": {
+                "format": "json",
+                "file_type": "generic_json"
+              },
+              "HelloWorldApp/HelloWorldApp.csproj": {
+                "format": "xml",
+                "file_type": "dotnet_project",
+                "target_framework": "net9.0",
+                "output_type": "Exe",
+                "properties": {
+                  "OutputType": "Exe",
+                  "TargetFramework": "net9.0",
+                  "RootNamespace": "HelloWorldApp",
+                  "ImplicitUsings": "enable"
+                }
+              },
+              "HelloWorldApp/project_analysis/ctags_analysis.json": {
+                "format": "json",
+                "file_type": "generic_json"
+              }
+            }
+          },
+          {
+            "p.dependencies": {},
+            "p.target_framework": "net9.0",
+            "p.output_type": "Exe",
+            "p.config_metadata": {
+              ".gitignore": {
+                "format": "text",
+                "file_type": "git_ignore",
+                "line_count": 36
+              },
+              "project_analysis/ctags_analysis.json": {
+                "format": "json",
+                "file_type": "generic_json"
+              },
+              "HelloWorldApp/HelloWorldApp.csproj": {
+                "format": "xml",
+                "file_type": "dotnet_project",
+                "target_framework": "net9.0",
+                "output_type": "Exe",
+                "properties": {
+                  "OutputType": "Exe",
+                  "TargetFramework": "net9.0",
+                  "RootNamespace": "HelloWorldApp",
+                  "ImplicitUsings": "enable"
+                }
+              },
+              "HelloWorldApp/project_analysis/ctags_analysis.json": {
+                "format": "json",
+                "file_type": "generic_json"
+              }
+            }
+          },
+          {
+            "f.name": "Helper.cs",
+            "f.file_path": "HelloWorldApp/Utilities/Helper.cs",
+            "f.imports": [],
+            "f.import_aliases": {}
+          },
+          {
+            "f.name": "INotifier.cs",
+            "f.file_path": "HelloWorldApp/INotifier.cs",
+            "f.imports": [],
+            "f.import_aliases": {}
+          },
+          {
+            "f.name": "IWorker.cs",
+            "f.file_path": "HelloWorldApp/IWorker.cs",
+            "f.imports": [],
+            "f.import_aliases": {}
+          },
+          {
+            "f.name": "Manager.cs",
+            "f.file_path": "HelloWorldApp/Manager.cs",
+            "f.imports": [
+              "System",
+              "System.Collections.Generic"
+            ],
+            "f.import_aliases": {}
+          },
+          {
+            "f.name": "Program.cs",
+            "f.file_path": "HelloWorldApp/Program.cs",
+            "f.imports": [
+              "System"
+            ],
+            "f.import_aliases": {}
+          },
+          {
+            "f.name": "TestAliases.cs",
+            "f.file_path": "HelloWorldApp/TestAliases.cs",
+            "f.imports": [
+              "System",
+              "System.Collections.Generic",
+              "System.Console"
+            ],
+            "f.import_aliases": {
+              "MyGeneric": "System.Collections.Generic"
+            }
+          },
+          {
+            "f.name": "WorkerA.cs",
+            "f.file_path": "HelloWorldApp/WorkerA.cs",
+            "f.imports": [],
+            "f.import_aliases": {}
+          },
+          {
+            "f.name": "WorkerB.cs",
+            "f.file_path": "HelloWorldApp/WorkerB.cs",
+            "f.imports": [],
+            "f.import_aliases": {}
+          },
+          {
+            "f.name": "WorkerC.cs",
+            "f.file_path": "HelloWorldApp/WorkerC.cs",
+            "f.imports": [],
+            "f.import_aliases": {}
+          },
+          {
+            "f.name": "WorkerFactory.cs",
+            "f.file_path": "HelloWorldApp/WorkerFactory.cs",
+            "f.imports": [
+              "System.Collections.Generic"
+            ],
+            "f.import_aliases": {}
+          },
+          {
+            "f.name": "Worker_test.cs",
+            "f.file_path": "HelloWorldApp/Worker_test.cs",
+            "f.imports": [],
+            "f.import_aliases": {}
+          },
+          {
+            "f.name": "Helper.cs",
+            "f.file_path": "HelloWorldApp/Utilities/Helper.cs",
+            "f.imports": [],
+            "f.import_aliases": {}
+          },
+          {
+            "f.name": "INotifier.cs",
+            "f.file_path": "HelloWorldApp/INotifier.cs",
+            "f.imports": [],
+            "f.import_aliases": {}
+          },
+          {
+            "f.name": "IWorker.cs",
+            "f.file_path": "HelloWorldApp/IWorker.cs",
+            "f.imports": [],
+            "f.import_aliases": {}
+          },
+          {
+            "f.name": "Manager.cs",
+            "f.file_path": "HelloWorldApp/Manager.cs",
+            "f.imports": [
+              "System",
+              "System.Collections.Generic"
+            ],
+            "f.import_aliases": {}
+          },
+          {
+            "f.name": "Program.cs",
+            "f.file_path": "HelloWorldApp/Program.cs",
+            "f.imports": [
+              "System"
+            ],
+            "f.import_aliases": {}
+          },
+          {
+            "f.name": "TestAliases.cs",
+            "f.file_path": "HelloWorldApp/TestAliases.cs",
+            "f.imports": [
+              "System",
+              "System.Collections.Generic",
+              "System.Console"
+            ],
+            "f.import_aliases": {
+              "MyGeneric": "System.Collections.Generic"
+            }
+          },
+          {
+            "f.name": "WorkerA.cs",
+            "f.file_path": "HelloWorldApp/WorkerA.cs",
+            "f.imports": [],
+            "f.import_aliases": {}
+          },
+          {
+            "f.name": "WorkerB.cs",
+            "f.file_path": "HelloWorldApp/WorkerB.cs",
+            "f.imports": [],
+            "f.import_aliases": {}
+          },
+          {
+            "f.name": "WorkerC.cs",
+            "f.file_path": "HelloWorldApp/WorkerC.cs",
+            "f.imports": [],
+            "f.import_aliases": {}
+          },
+          {
+            "f.name": "WorkerFactory.cs",
+            "f.file_path": "HelloWorldApp/WorkerFactory.cs",
+            "f.imports": [
+              "System.Collections.Generic"
+            ],
+            "f.import_aliases": {}
+          },
+          {
+            "f.name": "Worker_test.cs",
+            "f.file_path": "HelloWorldApp/Worker_test.cs",
+            "f.imports": [],
+            "f.import_aliases": {}
+          },
+          {
+            "f.name": "Helper.cs",
+            "f.file_path": "HelloWorldApp/Utilities/Helper.cs",
+            "f.imports": [],
+            "f.import_aliases": {}
+          },
+          {
+            "f.name": "INotifier.cs",
+            "f.file_path": "HelloWorldApp/INotifier.cs",
+            "f.imports": [],
+            "f.import_aliases": {}
+          },
+          {
+            "f.name": "IWorker.cs",
+            "f.file_path": "HelloWorldApp/IWorker.cs",
+            "f.imports": [],
+            "f.import_aliases": {}
+          },
+          {
+            "f.name": "Manager.cs",
+            "f.file_path": "HelloWorldApp/Manager.cs",
+            "f.imports": [
+              "System",
+              "System.Collections.Generic"
+            ],
+            "f.import_aliases": {}
+          },
+          {
+            "f.name": "Program.cs",
+            "f.file_path": "HelloWorldApp/Program.cs",
+            "f.imports": [
+              "System"
+            ],
+            "f.import_aliases": {}
+          },
+          {
+            "f.name": "TestAliases.cs",
+            "f.file_path": "HelloWorldApp/TestAliases.cs",
+            "f.imports": [
+              "System",
+              "System.Collections.Generic",
+              "System.Console"
+            ],
+            "f.import_aliases": {
+              "MyGeneric": "System.Collections.Generic"
+            }
+          },
+          {
+            "f.name": "WorkerA.cs",
+            "f.file_path": "HelloWorldApp/WorkerA.cs",
+            "f.imports": [],
+            "f.import_aliases": {}
+          },
+          {
+            "f.name": "WorkerB.cs",
+            "f.file_path": "HelloWorldApp/WorkerB.cs",
+            "f.imports": [],
+            "f.import_aliases": {}
+          },
+          {
+            "f.name": "WorkerC.cs",
+            "f.file_path": "HelloWorldApp/WorkerC.cs",
+            "f.imports": [],
+            "f.import_aliases": {}
+          },
+          {
+            "f.name": "WorkerFactory.cs",
+            "f.file_path": "HelloWorldApp/WorkerFactory.cs",
+            "f.imports": [
+              "System.Collections.Generic"
+            ],
+            "f.import_aliases": {}
+          },
+          {
+            "f.name": "Worker_test.cs",
+            "f.file_path": "HelloWorldApp/Worker_test.cs",
+            "f.imports": [],
+            "f.import_aliases": {}
+          },
+          {
+            "f.name": "Helper.cs",
+            "f.file_path": "HelloWorldApp/Utilities/Helper.cs",
+            "f.imports": [],
+            "f.import_aliases": {}
+          },
+          {
+            "f.name": "INotifier.cs",
+            "f.file_path": "HelloWorldApp/INotifier.cs",
+            "f.imports": [],
+            "f.import_aliases": {}
+          },
+          {
+            "f.name": "IWorker.cs",
+            "f.file_path": "HelloWorldApp/IWorker.cs",
+            "f.imports": [],
+            "f.import_aliases": {}
+          },
+          {
+            "f.name": "Manager.cs",
+            "f.file_path": "HelloWorldApp/Manager.cs",
+            "f.imports": [
+              "System",
+              "System.Collections.Generic"
+            ],
+            "f.import_aliases": {}
+          },
+          {
+            "f.name": "Program.cs",
+            "f.file_path": "HelloWorldApp/Program.cs",
+            "f.imports": [
+              "System"
+            ],
+            "f.import_aliases": {}
+          },
+          {
+            "f.name": "TestAliases.cs",
+            "f.file_path": "HelloWorldApp/TestAliases.cs",
+            "f.imports": [
+              "System",
+              "System.Collections.Generic",
+              "System.Console"
+            ],
+            "f.import_aliases": {
+              "MyGeneric": "System.Collections.Generic"
+            }
+          },
+          {
+            "f.name": "WorkerA.cs",
+            "f.file_path": "HelloWorldApp/WorkerA.cs",
+            "f.imports": [],
+            "f.import_aliases": {}
+          },
+          {
+            "f.name": "WorkerB.cs",
+            "f.file_path": "HelloWorldApp/WorkerB.cs",
+            "f.imports": [],
+            "f.import_aliases": {}
+          },
+          {
+            "f.name": "WorkerC.cs",
+            "f.file_path": "HelloWorldApp/WorkerC.cs",
+            "f.imports": [],
+            "f.import_aliases": {}
+          },
+          {
+            "f.name": "WorkerFactory.cs",
+            "f.file_path": "HelloWorldApp/WorkerFactory.cs",
+            "f.imports": [
+              "System.Collections.Generic"
+            ],
+            "f.import_aliases": {}
+          },
+          {
+            "f.name": "Worker_test.cs",
+            "f.file_path": "HelloWorldApp/Worker_test.cs",
+            "f.imports": [],
+            "f.import_aliases": {}
+          },
+          {
+            "f.name": "Helper.cs",
+            "f.file_path": "HelloWorldApp/Utilities/Helper.cs",
+            "f.imports": [],
+            "f.import_aliases": {}
+          },
+          {
+            "f.name": "INotifier.cs",
+            "f.file_path": "HelloWorldApp/INotifier.cs",
+            "f.imports": [],
+            "f.import_aliases": {}
+          },
+          {
+            "f.name": "IWorker.cs",
+            "f.file_path": "HelloWorldApp/IWorker.cs",
+            "f.imports": [],
+            "f.import_aliases": {}
+          },
+          {
+            "f.name": "Manager.cs",
+            "f.file_path": "HelloWorldApp/Manager.cs",
+            "f.imports": [
+              "System",
+              "System.Collections.Generic"
+            ],
+            "f.import_aliases": {}
+          },
+          {
+            "f.name": "Program.cs",
+            "f.file_path": "HelloWorldApp/Program.cs",
+            "f.imports": [
+              "System"
+            ],
+            "f.import_aliases": {}
+          },
+          {
+            "f.name": "TestAliases.cs",
+            "f.file_path": "HelloWorldApp/TestAliases.cs",
+            "f.imports": [
+              "System",
+              "System.Collections.Generic",
+              "System.Console"
+            ],
+            "f.import_aliases": {
+              "MyGeneric": "System.Collections.Generic"
+            }
+          },
+          {
+            "f.name": "WorkerA.cs",
+            "f.file_path": "HelloWorldApp/WorkerA.cs",
+            "f.imports": [],
+            "f.import_aliases": {}
+          },
+          {
+            "f.name": "WorkerB.cs",
+            "f.file_path": "HelloWorldApp/WorkerB.cs",
+            "f.imports": [],
+            "f.import_aliases": {}
+          },
+          {
+            "f.name": "WorkerC.cs",
+            "f.file_path": "HelloWorldApp/WorkerC.cs",
+            "f.imports": [],
+            "f.import_aliases": {}
+          },
+          {
+            "f.name": "WorkerFactory.cs",
+            "f.file_path": "HelloWorldApp/WorkerFactory.cs",
+            "f.imports": [
+              "System.Collections.Generic"
+            ],
+            "f.import_aliases": {}
+          },
+          {
+            "f.name": "Worker_test.cs",
+            "f.file_path": "HelloWorldApp/Worker_test.cs",
+            "f.imports": [],
+            "f.import_aliases": {}
+          },
+          {
+            "t.name": "WorkerFactory",
+            "t.type_kind": "class",
+            "t.access_modifier": null,
+            "t.file_path": "HelloWorldApp/WorkerFactory.cs",
+            "t.fields": null,
+            "t.documentation": null
+          },
+          {
+            "t.name": "WorkerC",
+            "t.type_kind": "class",
+            "t.access_modifier": null,
+            "t.file_path": "HelloWorldApp/WorkerC.cs",
+            "t.fields": null,
+            "t.documentation": null
+          },
+          {
+            "t.name": "WorkerB",
+            "t.type_kind": "class",
+            "t.access_modifier": null,
+            "t.file_path": "HelloWorldApp/WorkerB.cs",
+            "t.fields": null,
+            "t.documentation": null
+          },
+          {
+            "t.name": "WorkerA",
+            "t.type_kind": "class",
+            "t.access_modifier": null,
+            "t.file_path": "HelloWorldApp/WorkerA.cs",
+            "t.fields": null,
+            "t.documentation": null
+          },
+          {
+            "t.name": "TestAliases",
+            "t.type_kind": "class",
+            "t.access_modifier": null,
+            "t.file_path": "HelloWorldApp/TestAliases.cs",
+            "t.fields": null,
+            "t.documentation": null
+          },
+          {
+            "t.name": "Program",
+            "t.type_kind": "class",
+            "t.access_modifier": null,
+            "t.file_path": "HelloWorldApp/Program.cs",
+            "t.fields": null,
+            "t.documentation": null
+          },
+          {
+            "t.name": "Manager",
+            "t.type_kind": "class",
+            "t.access_modifier": null,
+            "t.file_path": "HelloWorldApp/Manager.cs",
+            "t.fields": null,
+            "t.documentation": null
+          },
+          {
+            "t.name": "IWorker",
+            "t.type_kind": "interface",
+            "t.access_modifier": null,
+            "t.file_path": "HelloWorldApp/IWorker.cs",
+            "t.fields": null,
+            "t.documentation": null
+          },
+          {
+            "t.name": "INotifier",
+            "t.type_kind": "interface",
+            "t.access_modifier": null,
+            "t.file_path": "HelloWorldApp/INotifier.cs",
+            "t.fields": null,
+            "t.documentation": null
+          },
+          {
+            "t.name": "WorkerFactory",
+            "t.type_kind": "class",
+            "t.access_modifier": null,
+            "t.file_path": "HelloWorldApp/WorkerFactory.cs",
+            "t.fields": null,
+            "t.documentation": null
+          },
+          {
+            "t.name": "WorkerC",
+            "t.type_kind": "class",
+            "t.access_modifier": null,
+            "t.file_path": "HelloWorldApp/WorkerC.cs",
+            "t.fields": null,
+            "t.documentation": null
+          },
+          {
+            "t.name": "WorkerB",
+            "t.type_kind": "class",
+            "t.access_modifier": null,
+            "t.file_path": "HelloWorldApp/WorkerB.cs",
+            "t.fields": null,
+            "t.documentation": null
+          },
+          {
+            "t.name": "WorkerA",
+            "t.type_kind": "class",
+            "t.access_modifier": null,
+            "t.file_path": "HelloWorldApp/WorkerA.cs",
+            "t.fields": null,
+            "t.documentation": null
+          },
+          {
+            "t.name": "TestAliases",
+            "t.type_kind": "class",
+            "t.access_modifier": null,
+            "t.file_path": "HelloWorldApp/TestAliases.cs",
+            "t.fields": null,
+            "t.documentation": null
+          },
+          {
+            "t.name": "Program",
+            "t.type_kind": "class",
+            "t.access_modifier": null,
+            "t.file_path": "HelloWorldApp/Program.cs",
+            "t.fields": null,
+            "t.documentation": null
+          },
+          {
+            "t.name": "Manager",
+            "t.type_kind": "class",
+            "t.access_modifier": null,
+            "t.file_path": "HelloWorldApp/Manager.cs",
+            "t.fields": null,
+            "t.documentation": null
+          },
+          {
+            "t.name": "IWorker",
+            "t.type_kind": "interface",
+            "t.access_modifier": null,
+            "t.file_path": "HelloWorldApp/IWorker.cs",
+            "t.fields": null,
+            "t.documentation": null
+          },
+          {
+            "t.name": "INotifier",
+            "t.type_kind": "interface",
+            "t.access_modifier": null,
+            "t.file_path": "HelloWorldApp/INotifier.cs",
+            "t.fields": null,
+            "t.documentation": null
+          },
+          {
+            "t.name": "WorkerFactory",
+            "t.type_kind": "class",
+            "t.access_modifier": null,
+            "t.file_path": "HelloWorldApp/WorkerFactory.cs",
+            "t.fields": null,
+            "t.documentation": null
+          },
+          {
+            "t.name": "WorkerC",
+            "t.type_kind": "class",
+            "t.access_modifier": null,
+            "t.file_path": "HelloWorldApp/WorkerC.cs",
+            "t.fields": null,
+            "t.documentation": null
+          },
+          {
+            "t.name": "WorkerB",
+            "t.type_kind": "class",
+            "t.access_modifier": null,
+            "t.file_path": "HelloWorldApp/WorkerB.cs",
+            "t.fields": null,
+            "t.documentation": null
+          },
+          {
+            "t.name": "WorkerA",
+            "t.type_kind": "class",
+            "t.access_modifier": null,
+            "t.file_path": "HelloWorldApp/WorkerA.cs",
+            "t.fields": null,
+            "t.documentation": null
+          },
+          {
+            "t.name": "TestAliases",
+            "t.type_kind": "class",
+            "t.access_modifier": null,
+            "t.file_path": "HelloWorldApp/TestAliases.cs",
+            "t.fields": null,
+            "t.documentation": null
+          },
+          {
+            "t.name": "Program",
+            "t.type_kind": "class",
+            "t.access_modifier": null,
+            "t.file_path": "HelloWorldApp/Program.cs",
+            "t.fields": null,
+            "t.documentation": null
+          },
+          {
+            "t.name": "Manager",
+            "t.type_kind": "class",
+            "t.access_modifier": null,
+            "t.file_path": "HelloWorldApp/Manager.cs",
+            "t.fields": null,
+            "t.documentation": null
+          },
+          {
+            "t.name": "IWorker",
+            "t.type_kind": "interface",
+            "t.access_modifier": null,
+            "t.file_path": "HelloWorldApp/IWorker.cs",
+            "t.fields": null,
+            "t.documentation": null
+          },
+          {
+            "t.name": "INotifier",
+            "t.type_kind": "interface",
+            "t.access_modifier": null,
+            "t.file_path": "HelloWorldApp/INotifier.cs",
+            "t.fields": null,
+            "t.documentation": null
+          },
+          {
+            "t.name": "INotifier",
+            "t.type_kind": "interface",
+            "t.access_modifier": null,
+            "t.file_path": "HelloWorldApp/INotifier.cs",
+            "t.fields": null,
+            "t.documentation": null
+          },
+          {
+            "t.name": "IWorker",
+            "t.type_kind": "interface",
+            "t.access_modifier": null,
+            "t.file_path": "HelloWorldApp/IWorker.cs",
+            "t.fields": null,
+            "t.documentation": null
+          },
+          {
+            "t.name": "Manager",
+            "t.type_kind": "class",
+            "t.access_modifier": null,
+            "t.file_path": "HelloWorldApp/Manager.cs",
+            "t.fields": null,
+            "t.documentation": null
+          },
+          {
+            "t.name": "Program",
+            "t.type_kind": "class",
+            "t.access_modifier": null,
+            "t.file_path": "HelloWorldApp/Program.cs",
+            "t.fields": null,
+            "t.documentation": null
+          },
+          {
+            "t.name": "TestAliases",
+            "t.type_kind": "class",
+            "t.access_modifier": null,
+            "t.file_path": "HelloWorldApp/TestAliases.cs",
+            "t.fields": null,
+            "t.documentation": null
+          },
+          {
+            "t.name": "WorkerA",
+            "t.type_kind": "class",
+            "t.access_modifier": null,
+            "t.file_path": "HelloWorldApp/WorkerA.cs",
+            "t.fields": null,
+            "t.documentation": null
+          },
+          {
+            "t.name": "WorkerB",
+            "t.type_kind": "class",
+            "t.access_modifier": null,
+            "t.file_path": "HelloWorldApp/WorkerB.cs",
+            "t.fields": null,
+            "t.documentation": null
+          },
+          {
+            "t.name": "WorkerC",
+            "t.type_kind": "class",
+            "t.access_modifier": null,
+            "t.file_path": "HelloWorldApp/WorkerC.cs",
+            "t.fields": null,
+            "t.documentation": null
+          },
+          {
+            "t.name": "WorkerFactory",
+            "t.type_kind": "class",
+            "t.access_modifier": null,
+            "t.file_path": "HelloWorldApp/WorkerFactory.cs",
+            "t.fields": null,
+            "t.documentation": null
+          },
+          {
+            "t.name": "WorkerFactory",
+            "t.type_kind": "class",
+            "t.access_modifier": null,
+            "t.file_path": "HelloWorldApp/WorkerFactory.cs",
+            "t.fields": null,
+            "t.documentation": null
+          },
+          {
+            "t.name": "WorkerC",
+            "t.type_kind": "class",
+            "t.access_modifier": null,
+            "t.file_path": "HelloWorldApp/WorkerC.cs",
+            "t.fields": null,
+            "t.documentation": null
+          },
+          {
+            "t.name": "WorkerB",
+            "t.type_kind": "class",
+            "t.access_modifier": null,
+            "t.file_path": "HelloWorldApp/WorkerB.cs",
+            "t.fields": null,
+            "t.documentation": null
+          },
+          {
+            "t.name": "WorkerA",
+            "t.type_kind": "class",
+            "t.access_modifier": null,
+            "t.file_path": "HelloWorldApp/WorkerA.cs",
+            "t.fields": null,
+            "t.documentation": null
+          },
+          {
+            "t.name": "TestAliases",
+            "t.type_kind": "class",
+            "t.access_modifier": null,
+            "t.file_path": "HelloWorldApp/TestAliases.cs",
+            "t.fields": null,
+            "t.documentation": null
+          },
+          {
+            "t.name": "Program",
+            "t.type_kind": "class",
+            "t.access_modifier": null,
+            "t.file_path": "HelloWorldApp/Program.cs",
+            "t.fields": null,
+            "t.documentation": null
+          },
+          {
+            "t.name": "Manager",
+            "t.type_kind": "class",
+            "t.access_modifier": null,
+            "t.file_path": "HelloWorldApp/Manager.cs",
+            "t.fields": null,
+            "t.documentation": null
+          },
+          {
+            "t.name": "IWorker",
+            "t.type_kind": "interface",
+            "t.access_modifier": null,
+            "t.file_path": "HelloWorldApp/IWorker.cs",
+            "t.fields": null,
+            "t.documentation": null
+          },
+          {
+            "t.name": "INotifier",
+            "t.type_kind": "interface",
+            "t.access_modifier": null,
+            "t.file_path": "HelloWorldApp/INotifier.cs",
+            "t.fields": null,
+            "t.documentation": null
+          },
+          {
+            "t.name": "WorkerFactory",
+            "type(r)": "IMPLEMENTS",
+            "base.name": "WorkerFactory"
+          },
+          {
+            "t.name": "WorkerC",
+            "type(r)": "IMPLEMENTS",
+            "base.name": "WorkerC"
+          },
+          {
+            "t.name": "WorkerC",
+            "type(r)": "IMPLEMENTS",
+            "base.name": "WorkerC"
+          },
+          {
+            "t.name": "WorkerC",
+            "type(r)": "IMPLEMENTS",
+            "base.name": "WorkerB"
+          },
+          {
+            "t.name": "WorkerC",
+            "type(r)": "IMPLEMENTS",
+            "base.name": "WorkerA"
+          },
+          {
+            "t.name": "WorkerC",
+            "type(r)": "IMPLEMENTS",
+            "base.name": "IWorker"
+          },
+          {
+            "t.name": "WorkerB",
+            "type(r)": "IMPLEMENTS",
+            "base.name": "WorkerC"
+          },
+          {
+            "t.name": "WorkerB",
+            "type(r)": "IMPLEMENTS",
+            "base.name": "WorkerB"
+          },
+          {
+            "t.name": "WorkerB",
+            "type(r)": "IMPLEMENTS",
+            "base.name": "WorkerB"
+          },
+          {
+            "t.name": "WorkerB",
+            "type(r)": "IMPLEMENTS",
+            "base.name": "WorkerA"
+          },
+          {
+            "t.name": "WorkerB",
+            "type(r)": "IMPLEMENTS",
+            "base.name": "IWorker"
+          },
+          {
+            "t.name": "WorkerA",
+            "type(r)": "IMPLEMENTS",
+            "base.name": "WorkerC"
+          },
+          {
+            "t.name": "WorkerA",
+            "type(r)": "IMPLEMENTS",
+            "base.name": "WorkerB"
+          },
+          {
+            "t.name": "WorkerA",
+            "type(r)": "IMPLEMENTS",
+            "base.name": "WorkerA"
+          },
+          {
+            "t.name": "WorkerA",
+            "type(r)": "IMPLEMENTS",
+            "base.name": "WorkerA"
+          },
+          {
+            "t.name": "WorkerA",
+            "type(r)": "IMPLEMENTS",
+            "base.name": "IWorker"
+          },
+          {
+            "t.name": "TestAliases",
+            "type(r)": "IMPLEMENTS",
+            "base.name": "TestAliases"
+          },
+          {
+            "t.name": "Program",
+            "type(r)": "IMPLEMENTS",
+            "base.name": "Program"
+          },
+          {
+            "t.name": "Manager",
+            "type(r)": "IMPLEMENTS",
+            "base.name": "Manager"
+          },
+          {
+            "t.name": "Manager",
+            "type(r)": "IMPLEMENTS",
+            "base.name": "Manager"
+          },
+          {
+            "t.name": "Manager",
+            "type(r)": "IMPLEMENTS",
+            "base.name": "INotifier"
+          },
+          {
+            "t.name": "WorkerFactory",
+            "type(r)": "IMPLEMENTS",
+            "base.name": "WorkerFactory"
+          },
+          {
+            "t.name": "WorkerC",
+            "type(r)": "IMPLEMENTS",
+            "base.name": "WorkerC"
+          },
+          {
+            "t.name": "WorkerC",
+            "type(r)": "IMPLEMENTS",
+            "base.name": "WorkerC"
+          },
+          {
+            "t.name": "WorkerC",
+            "type(r)": "IMPLEMENTS",
+            "base.name": "WorkerB"
+          },
+          {
+            "t.name": "WorkerC",
+            "type(r)": "IMPLEMENTS",
+            "base.name": "WorkerA"
+          },
+          {
+            "t.name": "WorkerC",
+            "type(r)": "IMPLEMENTS",
+            "base.name": "IWorker"
+          },
+          {
+            "t.name": "WorkerB",
+            "type(r)": "IMPLEMENTS",
+            "base.name": "WorkerC"
+          },
+          {
+            "t.name": "WorkerB",
+            "type(r)": "IMPLEMENTS",
+            "base.name": "WorkerB"
+          },
+          {
+            "t.name": "WorkerB",
+            "type(r)": "IMPLEMENTS",
+            "base.name": "WorkerB"
+          },
+          {
+            "t.name": "WorkerB",
+            "type(r)": "IMPLEMENTS",
+            "base.name": "WorkerA"
+          },
+          {
+            "t.name": "WorkerB",
+            "type(r)": "IMPLEMENTS",
+            "base.name": "IWorker"
+          },
+          {
+            "t.name": "WorkerA",
+            "type(r)": "IMPLEMENTS",
+            "base.name": "WorkerC"
+          },
+          {
+            "t.name": "WorkerA",
+            "type(r)": "IMPLEMENTS",
+            "base.name": "WorkerB"
+          },
+          {
+            "t.name": "WorkerA",
+            "type(r)": "IMPLEMENTS",
+            "base.name": "WorkerA"
+          },
+          {
+            "t.name": "WorkerA",
+            "type(r)": "IMPLEMENTS",
+            "base.name": "WorkerA"
+          },
+          {
+            "t.name": "WorkerA",
+            "type(r)": "IMPLEMENTS",
+            "base.name": "IWorker"
+          },
+          {
+            "t.name": "TestAliases",
+            "type(r)": "IMPLEMENTS",
+            "base.name": "TestAliases"
+          },
+          {
+            "t.name": "Program",
+            "type(r)": "IMPLEMENTS",
+            "base.name": "Program"
+          },
+          {
+            "t.name": "Manager",
+            "type(r)": "IMPLEMENTS",
+            "base.name": "Manager"
+          },
+          {
+            "t.name": "Manager",
+            "type(r)": "IMPLEMENTS",
+            "base.name": "Manager"
+          },
+          {
+            "t.name": "Manager",
+            "type(r)": "IMPLEMENTS",
+            "base.name": "INotifier"
+          },
+          {
+            "t.name": "WorkerFactory",
+            "type(r)": "IMPLEMENTS",
+            "base.name": "WorkerFactory"
+          },
+          {
+            "t.name": "WorkerC",
+            "type(r)": "IMPLEMENTS",
+            "base.name": "WorkerC"
+          },
+          {
+            "t.name": "WorkerC",
+            "type(r)": "IMPLEMENTS",
+            "base.name": "WorkerC"
+          },
+          {
+            "t.name": "WorkerC",
+            "type(r)": "IMPLEMENTS",
+            "base.name": "WorkerB"
+          },
+          {
+            "t.name": "WorkerC",
+            "type(r)": "IMPLEMENTS",
+            "base.name": "WorkerA"
+          },
+          {
+            "t.name": "WorkerC",
+            "type(r)": "IMPLEMENTS",
+            "base.name": "IWorker"
+          },
+          {
+            "t.name": "WorkerB",
+            "type(r)": "IMPLEMENTS",
+            "base.name": "WorkerC"
+          },
+          {
+            "t.name": "WorkerB",
+            "type(r)": "IMPLEMENTS",
+            "base.name": "WorkerB"
+          },
+          {
+            "t.name": "WorkerB",
+            "type(r)": "IMPLEMENTS",
+            "base.name": "WorkerB"
+          },
+          {
+            "t.name": "WorkerB",
+            "type(r)": "IMPLEMENTS",
+            "base.name": "WorkerA"
+          },
+          {
+            "t.name": "WorkerB",
+            "type(r)": "IMPLEMENTS",
+            "base.name": "IWorker"
+          },
+          {
+            "t.name": "WorkerA",
+            "type(r)": "IMPLEMENTS",
+            "base.name": "WorkerC"
+          },
+          {
+            "t.name": "WorkerA",
+            "type(r)": "IMPLEMENTS",
+            "base.name": "WorkerB"
+          },
+          {
+            "t.name": "WorkerA",
+            "type(r)": "IMPLEMENTS",
+            "base.name": "WorkerA"
+          },
+          {
+            "t.name": "WorkerA",
+            "type(r)": "IMPLEMENTS",
+            "base.name": "WorkerA"
+          },
+          {
+            "t.name": "WorkerA",
+            "type(r)": "IMPLEMENTS",
+            "base.name": "IWorker"
+          },
+          {
+            "t.name": "TestAliases",
+            "type(r)": "IMPLEMENTS",
+            "base.name": "TestAliases"
+          },
+          {
+            "t.name": "Program",
+            "type(r)": "IMPLEMENTS",
+            "base.name": "Program"
+          },
+          {
+            "t.name": "Manager",
+            "type(r)": "IMPLEMENTS",
+            "base.name": "Manager"
+          },
+          {
+            "t.name": "Manager",
+            "type(r)": "IMPLEMENTS",
+            "base.name": "Manager"
+          },
+          {
+            "t.name": "Manager",
+            "type(r)": "IMPLEMENTS",
+            "base.name": "INotifier"
+          },
+          {
+            "t.name": "Manager",
+            "relationship": "IMPLEMENTS",
+            "base.name": "Manager"
+          },
+          {
+            "t.name": "Manager",
+            "relationship": "IMPLEMENTS",
+            "base.name": "Manager"
+          },
+          {
+            "t.name": "Manager",
+            "relationship": "IMPLEMENTS",
+            "base.name": "INotifier"
+          },
+          {
+            "t.name": "Program",
+            "relationship": "IMPLEMENTS",
+            "base.name": "Program"
+          },
+          {
+            "t.name": "TestAliases",
+            "relationship": "IMPLEMENTS",
+            "base.name": "TestAliases"
+          },
+          {
+            "t.name": "WorkerA",
+            "relationship": "IMPLEMENTS",
+            "base.name": "WorkerC"
+          },
+          {
+            "t.name": "WorkerA",
+            "relationship": "IMPLEMENTS",
+            "base.name": "WorkerB"
+          },
+          {
+            "t.name": "WorkerA",
+            "relationship": "IMPLEMENTS",
+            "base.name": "WorkerA"
+          },
+          {
+            "t.name": "WorkerA",
+            "relationship": "IMPLEMENTS",
+            "base.name": "WorkerA"
+          },
+          {
+            "t.name": "WorkerA",
+            "relationship": "IMPLEMENTS",
+            "base.name": "IWorker"
+          },
+          {
+            "t.name": "WorkerB",
+            "relationship": "IMPLEMENTS",
+            "base.name": "WorkerC"
+          },
+          {
+            "t.name": "WorkerB",
+            "relationship": "IMPLEMENTS",
+            "base.name": "WorkerB"
+          },
+          {
+            "t.name": "WorkerB",
+            "relationship": "IMPLEMENTS",
+            "base.name": "WorkerB"
+          },
+          {
+            "t.name": "WorkerB",
+            "relationship": "IMPLEMENTS",
+            "base.name": "WorkerA"
+          },
+          {
+            "t.name": "WorkerB",
+            "relationship": "IMPLEMENTS",
+            "base.name": "IWorker"
+          },
+          {
+            "t.name": "WorkerC",
+            "relationship": "IMPLEMENTS",
+            "base.name": "WorkerC"
+          },
+          {
+            "t.name": "WorkerC",
+            "relationship": "IMPLEMENTS",
+            "base.name": "WorkerC"
+          },
+          {
+            "t.name": "WorkerC",
+            "relationship": "IMPLEMENTS",
+            "base.name": "WorkerB"
+          },
+          {
+            "t.name": "WorkerC",
+            "relationship": "IMPLEMENTS",
+            "base.name": "WorkerA"
+          },
+          {
+            "t.name": "WorkerC",
+            "relationship": "IMPLEMENTS",
+            "base.name": "IWorker"
+          },
+          {
+            "t.name": "WorkerFactory",
+            "relationship": "IMPLEMENTS",
+            "base.name": "WorkerFactory"
+          },
+          {
+            "t.name": "WorkerFactory",
+            "type(r)": "IMPLEMENTS",
+            "base.name": "WorkerFactory"
+          },
+          {
+            "t.name": "WorkerC",
+            "type(r)": "IMPLEMENTS",
+            "base.name": "WorkerC"
+          },
+          {
+            "t.name": "WorkerC",
+            "type(r)": "IMPLEMENTS",
+            "base.name": "WorkerC"
+          },
+          {
+            "t.name": "WorkerC",
+            "type(r)": "IMPLEMENTS",
+            "base.name": "WorkerB"
+          },
+          {
+            "t.name": "WorkerC",
+            "type(r)": "IMPLEMENTS",
+            "base.name": "WorkerA"
+          },
+          {
+            "t.name": "WorkerC",
+            "type(r)": "IMPLEMENTS",
+            "base.name": "IWorker"
+          },
+          {
+            "t.name": "WorkerB",
+            "type(r)": "IMPLEMENTS",
+            "base.name": "WorkerC"
+          },
+          {
+            "t.name": "WorkerB",
+            "type(r)": "IMPLEMENTS",
+            "base.name": "WorkerB"
+          },
+          {
+            "t.name": "WorkerB",
+            "type(r)": "IMPLEMENTS",
+            "base.name": "WorkerB"
+          },
+          {
+            "t.name": "WorkerB",
+            "type(r)": "IMPLEMENTS",
+            "base.name": "WorkerA"
+          },
+          {
+            "t.name": "WorkerB",
+            "type(r)": "IMPLEMENTS",
+            "base.name": "IWorker"
+          },
+          {
+            "t.name": "WorkerA",
+            "type(r)": "IMPLEMENTS",
+            "base.name": "WorkerC"
+          },
+          {
+            "t.name": "WorkerA",
+            "type(r)": "IMPLEMENTS",
+            "base.name": "WorkerB"
+          },
+          {
+            "t.name": "WorkerA",
+            "type(r)": "IMPLEMENTS",
+            "base.name": "WorkerA"
+          },
+          {
+            "t.name": "WorkerA",
+            "type(r)": "IMPLEMENTS",
+            "base.name": "WorkerA"
+          },
+          {
+            "t.name": "WorkerA",
+            "type(r)": "IMPLEMENTS",
+            "base.name": "IWorker"
+          },
+          {
+            "t.name": "TestAliases",
+            "type(r)": "IMPLEMENTS",
+            "base.name": "TestAliases"
+          },
+          {
+            "t.name": "Program",
+            "type(r)": "IMPLEMENTS",
+            "base.name": "Program"
+          },
+          {
+            "t.name": "Manager",
+            "type(r)": "IMPLEMENTS",
+            "base.name": "Manager"
+          },
+          {
+            "t.name": "Manager",
+            "type(r)": "IMPLEMENTS",
+            "base.name": "Manager"
+          },
+          {
+            "t.name": "Manager",
+            "type(r)": "IMPLEMENTS",
+            "base.name": "INotifier"
+          }
+        ],
+        "query_history": [],
+        "final_results": [],
+        "raw_query_results": [],
+        "all_executed_queries": [],
+        "raw_results": [],
+        "agent_workflow": "langgraph_agent",
+        "agent_metadata": {
+          "neo4j_version": "",
+          "schema_nodes": 10,
+          "total_queries_executed": 0,
+          "total_raw_results": 0,
+          "workflow_nodes_executed": 7,
+          "agents_involved": [
+            "environment",
+            "discovery",
+            "intent",
+            "query_generator",
+            "expansion",
+            "synthesis"
+          ],
+          "modular_workflow_version": "2.0.0",
+          "pydantic_validation_enabled": true,
+          "research_based_discovery": true,
+          "context_manager_used": false,
+          "metadata": {
+            "project_path": "/opt/HelloWorldApp",
+            "mappings_path": "/opt/genpod/project_analyzer_cli/project_analyzer/parsing_utils/mappings.yaml",
+            "queries_path": "/opt/genpod/project_analyzer_cli/project_analyzer/final_queries",
+            "neo4j_config": "/opt/genpod/neo4j_config.json"
+          }
+        },
+        "iterations_used": 1,
+        "intent_analysis": {
+          "intent_type": "architectural",
+          "confidence": 0.95,
+          "reasoning": "The user is asking for an analysis of the overall architecture of the HelloWorldApp, which involves understanding the structure, main components, and their interactions. This request is focused on the architectural aspects rather than retrieving specific data or combining both lookup and architectural analysis.",
+          "expected_result_type": "The expected result is a detailed description of the HelloWorldApp's architecture, including its main components and how they interact with each other.",
+          "_token_updates": {
+            "llm_call_history": [
+              {
+                "call_type": "intent_analysis",
+                "timestamp": 1760974002.4241998,
+                "model_name": "gpt-4o-2024-08-06",
+                "input_tokens": 138,
+                "output_tokens": 111,
+                "total_tokens": 249,
+                "input_cost_usd": 0.0041400000000000005,
+                "output_cost_usd": 0.00333,
+                "total_cost_usd": 0.00747,
+                "latency_seconds": 1.592,
+                "call_purpose": "Analyze user query intent",
+                "approach_index": null
+              }
+            ],
+            "total_input_tokens": 138,
+            "total_output_tokens": 111,
+            "total_tokens_used": 249,
+            "total_estimated_cost_usd": 0.00747,
+            "models_used": [
+              "gpt-4o-2024-08-06"
+            ]
+          }
+        },
+        "approach_statuses": {
+          "0": "success",
+          "1": "success",
+          "2": "success",
+          "3": "success"
+        },
+        "failed_approaches": [],
+        "cli_parameters_used": {
+          "config_path": "/opt/genpod/neo4j_config.json",
+          "project_path": "/opt/HelloWorldApp",
+          "mappings_path": "/opt/genpod/project_analyzer_cli/project_analyzer/parsing_utils/mappings.yaml",
+          "queries_path": "/opt/genpod/project_analyzer_cli/project_analyzer/final_queries",
+          "max_results": 100
+        },
+        "message": "✅ Enhanced CPG RAG completed successfully using LangGraph agents"
+      }
+    },
+    {
+      "query_id": "F001",
+      "query_text": "What is the core business logic of the HelloWorldApp? How do the workers coordinate?",
+      "category": "Functional",
+      "subcategory": "Business Logic",
+      "timestamp": "20251020_152939",
+      "status": "success",
+      "response_time_seconds": 98.34780192375183,
+      "discovered_data_count": 46,
+      "approaches_count": 4,
+      "answer": "The core business logic of the HelloWorldApp revolves around a set of worker classes (WorkerA, WorkerB, and WorkerC) that perform specific tasks and notify a manager upon completion. Each worker class has a `Process` method that formats a message and writes it to the console, then uses a notifier to signal that it has finished processing. For example, WorkerA's `Process` method formats a message saying \"Hello from A\" and notifies the manager that it has completed its task [5]. Similarly, WorkerB and WorkerC have their own `Process` methods with distinct messages [2, 3].\n\nThe coordination among workers is managed by a `Manager` class, which uses a `WorkerFactory` to create instances of these workers. The `Manager` then invokes the `Process` method on each worker in a one-to-many relationship, ensuring that all workers perform their tasks [9]. This setup allows for a structured and coordinated execution of tasks by different workers, with the manager overseeing the process and receiving notifications upon each worker's completion.",
+      "token_tracking": {
+        "total_tokens_used": 0,
+        "total_input_tokens": 0,
+        "total_output_tokens": 0,
+        "total_estimated_cost_usd": 0.0,
+        "per_step": {
+          "think_tokens": 0,
+          "generate_tokens": 0,
+          "rethink_tokens": 0,
+          "diagnostics_tokens": 0,
+          "refinement_tokens": 0,
+          "sufficiency_check_tokens": 0,
+          "synthesis_tokens": 0
+        },
+        "per_approach": {},
+        "models_used": [],
+        "llm_call_count": 0,
+        "llm_call_breakdown": {}
+      },
+      "validation": {
+        "checks_passed": 2,
+        "checks_total": 6,
+        "success_rate": 0.3333333333333333
+      },
+      "full_result": {
+        "status": "success",
+        "tool_name": "query_cpg_rag",
+        "workflow_type": "langgraph_agent_rag",
+        "user_query": "What is the core business logic of the HelloWorldApp? How do the workers coordinate?",
+        "project_name": "HelloWorldApp",
+        "response": "The core business logic of the HelloWorldApp revolves around a set of worker classes (WorkerA, WorkerB, and WorkerC) that perform specific tasks and notify a manager upon completion. Each worker class has a `Process` method that formats a message and writes it to the console, then uses a notifier to signal that it has finished processing. For example, WorkerA's `Process` method formats a message saying \"Hello from A\" and notifies the manager that it has completed its task [5]. Similarly, WorkerB and WorkerC have their own `Process` methods with distinct messages [2, 3].\n\nThe coordination among workers is managed by a `Manager` class, which uses a `WorkerFactory` to create instances of these workers. The `Manager` then invokes the `Process` method on each worker in a one-to-many relationship, ensuring that all workers perform their tasks [9]. This setup allows for a structured and coordinated execution of tasks by different workers, with the manager overseeing the process and receiving notifications upon each worker's completion.",
+        "discovered_data": [
+          {
+            "t.name": "WorkerFactory",
+            "t.documentation": null,
+            "fn.name": "CreateWorkers",
+            "fn.body": null
+          },
+          {
+            "t.name": "WorkerC",
+            "t.documentation": null,
+            "fn.name": "WorkerC",
+            "fn.body": null
+          },
+          {
+            "t.name": "WorkerC",
+            "t.documentation": null,
+            "fn.name": "Process",
+            "fn.body": "{\n            string msg = Utilities.Helper.FormatMessage(\"WorkerC\", \"Hi there, C here\");\n            System.Console.WriteLine(msg);\n            _notifier.Notify(\"WorkerC has finished processing.\");\n        }"
+          },
+          {
+            "t.name": "WorkerB",
+            "t.documentation": null,
+            "fn.name": "Process",
+            "fn.body": "{\n            string msg = Utilities.Helper.FormatMessage(\"WorkerB\", \"Greetings from B\");\n            System.Console.WriteLine(msg);\n            _notifier.Notify(\"WorkerB has finished processing.\");\n        }"
+          },
+          {
+            "t.name": "WorkerB",
+            "t.documentation": null,
+            "fn.name": "WorkerB",
+            "fn.body": null
+          },
+          {
+            "t.name": "WorkerA",
+            "t.documentation": null,
+            "fn.name": "Process",
+            "fn.body": "{\n            string msg = Utilities.Helper.FormatMessage(\"WorkerA\", \"Hello from A\");\n            System.Console.WriteLine(msg);\n            _notifier.Notify(\"WorkerA has finished processing.\");\n        }"
+          },
+          {
+            "t.name": "WorkerA",
+            "t.documentation": null,
+            "fn.name": "WorkerA",
+            "fn.body": null
+          },
+          {
+            "t.name": "TestAliases",
+            "t.documentation": null,
+            "fn.name": "TestMethod",
+            "fn.body": "{\n            MyGeneric.List<string> items = new MyGeneric.List<string>();\n            WriteLine(\"Testing aliases\");\n        }"
+          },
+          {
+            "t.name": "Program",
+            "t.documentation": null,
+            "fn.name": "Main",
+            "fn.body": null
+          },
+          {
+            "t.name": "Manager",
+            "t.documentation": null,
+            "fn.name": "Run",
+            "fn.body": "{\n            Console.WriteLine(\"Manager starting work...\");\n            IEnumerable<IWorker> workers = WorkerFactory.CreateWorkers(this);\n\n            // one-to-many: Manager invokes all workers\n            foreach (var worker in workers)\n            {\n                worker.Process();\n            }\n        }"
+          },
+          {
+            "t.name": "Manager",
+            "t.documentation": null,
+            "fn.name": "Notify",
+            "fn.body": null
+          },
+          {
+            "typeName": "WorkerFactory",
+            "functionName": "CreateWorkers",
+            "functionBody": null,
+            "typeDocumentation": null
+          },
+          {
+            "typeName": "WorkerC",
+            "functionName": "WorkerC",
+            "functionBody": null,
+            "typeDocumentation": null
+          },
+          {
+            "typeName": "WorkerC",
+            "functionName": "Process",
+            "functionBody": "{\n            string msg = Utilities.Helper.FormatMessage(\"WorkerC\", \"Hi there, C here\");\n            System.Console.WriteLine(msg);\n            _notifier.Notify(\"WorkerC has finished processing.\");\n        }",
+            "typeDocumentation": null
+          },
+          {
+            "typeName": "WorkerB",
+            "functionName": "Process",
+            "functionBody": "{\n            string msg = Utilities.Helper.FormatMessage(\"WorkerB\", \"Greetings from B\");\n            System.Console.WriteLine(msg);\n            _notifier.Notify(\"WorkerB has finished processing.\");\n        }",
+            "typeDocumentation": null
+          },
+          {
+            "typeName": "WorkerB",
+            "functionName": "WorkerB",
+            "functionBody": null,
+            "typeDocumentation": null
+          },
+          {
+            "typeName": "WorkerA",
+            "functionName": "Process",
+            "functionBody": "{\n            string msg = Utilities.Helper.FormatMessage(\"WorkerA\", \"Hello from A\");\n            System.Console.WriteLine(msg);\n            _notifier.Notify(\"WorkerA has finished processing.\");\n        }",
+            "typeDocumentation": null
+          },
+          {
+            "typeName": "WorkerA",
+            "functionName": "WorkerA",
+            "functionBody": null,
+            "typeDocumentation": null
+          },
+          {
+            "t.name": "WorkerFactory",
+            "fn.name": "CreateWorkers",
+            "fn.body": null,
+            "t.documentation": null
+          },
+          {
+            "t.name": "WorkerC",
+            "fn.name": "WorkerC",
+            "fn.body": null,
+            "t.documentation": null
+          },
+          {
+            "t.name": "WorkerC",
+            "fn.name": "Process",
+            "fn.body": "{\n            string msg = Utilities.Helper.FormatMessage(\"WorkerC\", \"Hi there, C here\");\n            System.Console.WriteLine(msg);\n            _notifier.Notify(\"WorkerC has finished processing.\");\n        }",
+            "t.documentation": null
+          },
+          {
+            "t.name": "WorkerB",
+            "fn.name": "Process",
+            "fn.body": "{\n            string msg = Utilities.Helper.FormatMessage(\"WorkerB\", \"Greetings from B\");\n            System.Console.WriteLine(msg);\n            _notifier.Notify(\"WorkerB has finished processing.\");\n        }",
+            "t.documentation": null
+          },
+          {
+            "t.name": "WorkerB",
+            "fn.name": "WorkerB",
+            "fn.body": null,
+            "t.documentation": null
+          },
+          {
+            "t.name": "WorkerA",
+            "fn.name": "Process",
+            "fn.body": "{\n            string msg = Utilities.Helper.FormatMessage(\"WorkerA\", \"Hello from A\");\n            System.Console.WriteLine(msg);\n            _notifier.Notify(\"WorkerA has finished processing.\");\n        }",
+            "t.documentation": null
+          },
+          {
+            "t.name": "WorkerA",
+            "fn.name": "WorkerA",
+            "fn.body": null,
+            "t.documentation": null
+          },
+          {
+            "t.name": "WorkerFactory",
+            "fn.name": "CreateWorkers",
+            "fn.body": null,
+            "t.documentation": null
+          },
+          {
+            "t.name": "WorkerC",
+            "fn.name": "WorkerC",
+            "fn.body": null,
+            "t.documentation": null
+          },
+          {
+            "t.name": "WorkerC",
+            "fn.name": "Process",
+            "fn.body": "{\n            string msg = Utilities.Helper.FormatMessage(\"WorkerC\", \"Hi there, C here\");\n            System.Console.WriteLine(msg);\n            _notifier.Notify(\"WorkerC has finished processing.\");\n        }",
+            "t.documentation": null
+          },
+          {
+            "t.name": "WorkerB",
+            "fn.name": "Process",
+            "fn.body": "{\n            string msg = Utilities.Helper.FormatMessage(\"WorkerB\", \"Greetings from B\");\n            System.Console.WriteLine(msg);\n            _notifier.Notify(\"WorkerB has finished processing.\");\n        }",
+            "t.documentation": null
+          },
+          {
+            "t.name": "WorkerB",
+            "fn.name": "WorkerB",
+            "fn.body": null,
+            "t.documentation": null
+          },
+          {
+            "t.name": "WorkerA",
+            "fn.name": "Process",
+            "fn.body": "{\n            string msg = Utilities.Helper.FormatMessage(\"WorkerA\", \"Hello from A\");\n            System.Console.WriteLine(msg);\n            _notifier.Notify(\"WorkerA has finished processing.\");\n        }",
+            "t.documentation": null
+          },
+          {
+            "t.name": "WorkerA",
+            "fn.name": "WorkerA",
+            "fn.body": null,
+            "t.documentation": null
+          },
+          {
+            "t.name": "WorkerFactory",
+            "fn.name": "CreateWorkers",
+            "fn.body": null,
+            "t.documentation": null
+          },
+          {
+            "t.name": "WorkerC",
+            "fn.name": "WorkerC",
+            "fn.body": null,
+            "t.documentation": null
+          },
+          {
+            "t.name": "WorkerC",
+            "fn.name": "Process",
+            "fn.body": "{\n            string msg = Utilities.Helper.FormatMessage(\"WorkerC\", \"Hi there, C here\");\n            System.Console.WriteLine(msg);\n            _notifier.Notify(\"WorkerC has finished processing.\");\n        }",
+            "t.documentation": null
+          },
+          {
+            "t.name": "WorkerB",
+            "fn.name": "Process",
+            "fn.body": "{\n            string msg = Utilities.Helper.FormatMessage(\"WorkerB\", \"Greetings from B\");\n            System.Console.WriteLine(msg);\n            _notifier.Notify(\"WorkerB has finished processing.\");\n        }",
+            "t.documentation": null
+          },
+          {
+            "t.name": "WorkerB",
+            "fn.name": "WorkerB",
+            "fn.body": null,
+            "t.documentation": null
+          },
+          {
+            "t.name": "WorkerA",
+            "fn.name": "Process",
+            "fn.body": "{\n            string msg = Utilities.Helper.FormatMessage(\"WorkerA\", \"Hello from A\");\n            System.Console.WriteLine(msg);\n            _notifier.Notify(\"WorkerA has finished processing.\");\n        }",
+            "t.documentation": null
+          },
+          {
+            "t.name": "WorkerA",
+            "fn.name": "WorkerA",
+            "fn.body": null,
+            "t.documentation": null
+          },
+          {
+            "t.name": "WorkerFactory",
+            "fn.name": "CreateWorkers",
+            "fn.body": null,
+            "t.documentation": null
+          },
+          {
+            "t.name": "WorkerC",
+            "fn.name": "WorkerC",
+            "fn.body": null,
+            "t.documentation": null
+          },
+          {
+            "t.name": "WorkerC",
+            "fn.name": "Process",
+            "fn.body": "{\n            string msg = Utilities.Helper.FormatMessage(\"WorkerC\", \"Hi there, C here\");\n            System.Console.WriteLine(msg);\n            _notifier.Notify(\"WorkerC has finished processing.\");\n        }",
+            "t.documentation": null
+          },
+          {
+            "t.name": "WorkerB",
+            "fn.name": "Process",
+            "fn.body": "{\n            string msg = Utilities.Helper.FormatMessage(\"WorkerB\", \"Greetings from B\");\n            System.Console.WriteLine(msg);\n            _notifier.Notify(\"WorkerB has finished processing.\");\n        }",
+            "t.documentation": null
+          },
+          {
+            "t.name": "WorkerB",
+            "fn.name": "WorkerB",
+            "fn.body": null,
+            "t.documentation": null
+          },
+          {
+            "t.name": "WorkerA",
+            "fn.name": "Process",
+            "fn.body": "{\n            string msg = Utilities.Helper.FormatMessage(\"WorkerA\", \"Hello from A\");\n            System.Console.WriteLine(msg);\n            _notifier.Notify(\"WorkerA has finished processing.\");\n        }",
+            "t.documentation": null
+          },
+          {
+            "t.name": "WorkerA",
+            "fn.name": "WorkerA",
+            "fn.body": null,
+            "t.documentation": null
+          }
+        ],
+        "query_history": [],
+        "final_results": [],
+        "raw_query_results": [],
+        "all_executed_queries": [],
+        "raw_results": [],
+        "agent_workflow": "langgraph_agent",
+        "agent_metadata": {
+          "neo4j_version": "",
+          "schema_nodes": 10,
+          "total_queries_executed": 0,
+          "total_raw_results": 0,
+          "workflow_nodes_executed": 7,
+          "agents_involved": [
+            "environment",
+            "discovery",
+            "intent",
+            "query_generator",
+            "expansion",
+            "synthesis"
+          ],
+          "modular_workflow_version": "2.0.0",
+          "pydantic_validation_enabled": true,
+          "research_based_discovery": true,
+          "context_manager_used": false,
+          "metadata": {
+            "project_path": "/opt/HelloWorldApp",
+            "mappings_path": "/opt/genpod/project_analyzer_cli/project_analyzer/parsing_utils/mappings.yaml",
+            "queries_path": "/opt/genpod/project_analyzer_cli/project_analyzer/final_queries",
+            "neo4j_config": "/opt/genpod/neo4j_config.json"
+          }
+        },
+        "iterations_used": 1,
+        "intent_analysis": {
+          "intent_type": "architectural",
+          "confidence": 0.95,
+          "reasoning": "The user's query focuses on understanding the core business logic and coordination of workers within the HelloWorldApp. This indicates an interest in the overall structure, relationships, and patterns of the application's architecture rather than seeking specific data or functions. The user is likely looking for a high-level explanation of how components interact and function together.",
+          "expected_result_type": "An explanation of the core business logic and the coordination mechanism among workers within the HelloWorldApp, detailing the architectural design and interactions.",
+          "_token_updates": {
+            "llm_call_history": [
+              {
+                "call_type": "intent_analysis",
+                "timestamp": 1760974105.6004045,
+                "model_name": "gpt-4o-2024-08-06",
+                "input_tokens": 135,
+                "output_tokens": 122,
+                "total_tokens": 257,
+                "input_cost_usd": 0.00405,
+                "output_cost_usd": 0.0036599999999999996,
+                "total_cost_usd": 0.00771,
+                "latency_seconds": 3.687,
+                "call_purpose": "Analyze user query intent",
+                "approach_index": null
+              }
+            ],
+            "total_input_tokens": 135,
+            "total_output_tokens": 122,
+            "total_tokens_used": 257,
+            "total_estimated_cost_usd": 0.00771,
+            "models_used": [
+              "gpt-4o-2024-08-06"
+            ]
+          }
+        },
+        "approach_statuses": {
+          "0": "success",
+          "1": "success",
+          "2": "success",
+          "3": "success"
+        },
+        "failed_approaches": [],
+        "cli_parameters_used": {
+          "config_path": "/opt/genpod/neo4j_config.json",
+          "project_path": "/opt/HelloWorldApp",
+          "mappings_path": "/opt/genpod/project_analyzer_cli/project_analyzer/parsing_utils/mappings.yaml",
+          "queries_path": "/opt/genpod/project_analyzer_cli/project_analyzer/final_queries",
+          "max_results": 100
+        },
+        "message": "✅ Enhanced CPG RAG completed successfully using LangGraph agents"
+      }
+    },
+    {
+      "query_id": "T038",
+      "query_text": "What is the exact method signature of the CreateWorkers method in the WorkerFactory class?",
+      "category": "Technical",
+      "subcategory": "Method Signatures",
+      "timestamp": "20251020_153147",
+      "status": "success",
+      "response_time_seconds": 127.81920313835144,
+      "discovered_data_count": 5,
+      "approaches_count": 4,
+      "answer": "The exact method signature of the `CreateWorkers` method in the `WorkerFactory` class is `IEnumerable<IWorker> CreateWorkers(INotifier notifier)`. This method takes a single parameter of type `INotifier` and returns an `IEnumerable<IWorker>`.",
+      "token_tracking": {
+        "total_tokens_used": 0,
+        "total_input_tokens": 0,
+        "total_output_tokens": 0,
+        "total_estimated_cost_usd": 0.0,
+        "per_step": {
+          "think_tokens": 0,
+          "generate_tokens": 0,
+          "rethink_tokens": 0,
+          "diagnostics_tokens": 0,
+          "refinement_tokens": 0,
+          "sufficiency_check_tokens": 0,
+          "synthesis_tokens": 0
+        },
+        "per_approach": {},
+        "models_used": [],
+        "llm_call_count": 0,
+        "llm_call_breakdown": {}
+      },
+      "validation": {
+        "checks_passed": 2,
+        "checks_total": 6,
+        "success_rate": 0.3333333333333333
+      },
+      "full_result": {
+        "status": "success",
+        "tool_name": "query_cpg_rag",
+        "workflow_type": "langgraph_agent_rag",
+        "user_query": "What is the exact method signature of the CreateWorkers method in the WorkerFactory class?",
+        "project_name": "HelloWorldApp",
+        "response": "The exact method signature of the `CreateWorkers` method in the `WorkerFactory` class is `IEnumerable<IWorker> CreateWorkers(INotifier notifier)`. This method takes a single parameter of type `INotifier` and returns an `IEnumerable<IWorker>`.",
+        "discovered_data": [
+          {
+            "fn.name": "CreateWorkers",
+            "fn.parameters": "(INotifier notifier)",
+            "fn.return_type": "IEnumerable<IWorker>",
+            "fn.type_parameters": null
+          },
+          {
+            "fn.name": "CreateWorkers",
+            "fn.parameters": "(INotifier notifier)",
+            "fn.return_type": "IEnumerable<IWorker>",
+            "fn.type_parameters": null
+          },
+          {
+            "file": "HelloWorldApp/WorkerFactory.cs",
+            "fn.parameters": "(INotifier notifier)",
+            "fn.return_type": "IEnumerable<IWorker>"
+          },
+          {
+            "file": "HelloWorldApp/WorkerFactory.cs",
+            "fn.parameters": "(INotifier notifier)",
+            "fn.return_type": "IEnumerable<IWorker>"
+          },
+          {
+            "file": "HelloWorldApp/WorkerFactory.cs",
+            "fn.parameters": "(INotifier notifier)",
+            "fn.return_type": "IEnumerable<IWorker>"
+          }
+        ],
+        "query_history": [],
+        "final_results": [],
+        "raw_query_results": [],
+        "all_executed_queries": [],
+        "raw_results": [],
+        "agent_workflow": "langgraph_agent",
+        "agent_metadata": {
+          "neo4j_version": "",
+          "schema_nodes": 10,
+          "total_queries_executed": 0,
+          "total_raw_results": 0,
+          "workflow_nodes_executed": 7,
+          "agents_involved": [
+            "environment",
+            "discovery",
+            "intent",
+            "query_generator",
+            "expansion",
+            "synthesis"
+          ],
+          "modular_workflow_version": "2.0.0",
+          "pydantic_validation_enabled": true,
+          "research_based_discovery": true,
+          "context_manager_used": false,
+          "metadata": {
+            "project_path": "/opt/HelloWorldApp",
+            "mappings_path": "/opt/genpod/project_analyzer_cli/project_analyzer/parsing_utils/mappings.yaml",
+            "queries_path": "/opt/genpod/project_analyzer_cli/project_analyzer/final_queries",
+            "neo4j_config": "/opt/genpod/neo4j_config.json"
+          }
+        },
+        "iterations_used": 1,
+        "intent_analysis": {
+          "intent_type": "lookup",
+          "confidence": 0.95,
+          "reasoning": "The user's query is focused on retrieving a specific piece of information, namely the exact method signature of the CreateWorkers method in the WorkerFactory class. This indicates a need for precise data retrieval rather than understanding broader architectural patterns or relationships.",
+          "expected_result_type": "The expected result is the exact method signature, including the method name, return type, and parameters, if any, as defined in the WorkerFactory class.",
+          "_token_updates": {
+            "llm_call_history": [
+              {
+                "call_type": "intent_analysis",
+                "timestamp": 1760974226.252156,
+                "model_name": "gpt-4o-2024-08-06",
+                "input_tokens": 134,
+                "output_tokens": 109,
+                "total_tokens": 243,
+                "input_cost_usd": 0.00402,
+                "output_cost_usd": 0.00327,
+                "total_cost_usd": 0.00729,
+                "latency_seconds": 2.274,
+                "call_purpose": "Analyze user query intent",
+                "approach_index": null
+              }
+            ],
+            "total_input_tokens": 134,
+            "total_output_tokens": 109,
+            "total_tokens_used": 243,
+            "total_estimated_cost_usd": 0.00729,
+            "models_used": [
+              "gpt-4o-2024-08-06"
+            ]
+          }
+        },
+        "approach_statuses": {
+          "0": "success",
+          "1": "success",
+          "2": "success",
+          "3": "success"
+        },
+        "failed_approaches": [],
+        "cli_parameters_used": {
+          "config_path": "/opt/genpod/neo4j_config.json",
+          "project_path": "/opt/HelloWorldApp",
+          "mappings_path": "/opt/genpod/project_analyzer_cli/project_analyzer/parsing_utils/mappings.yaml",
+          "queries_path": "/opt/genpod/project_analyzer_cli/project_analyzer/final_queries",
+          "max_results": 100
+        },
+        "message": "✅ Enhanced CPG RAG completed successfully using LangGraph agents"
+      }
+    }
+  ]
+}

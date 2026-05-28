@@ -1,0 +1,6 @@
+digraph "&lt;operator&gt;.lessThan" {  
+node [shape="rect"];  
+"111669149708" [label = <METHOD<BR/>&lt;operator&gt;.lessThan> ]
+"128849018892" [label = <METHOD_RETURN<BR/>ANY> ]
+  "111669149708" -> "128849018892" 
+}

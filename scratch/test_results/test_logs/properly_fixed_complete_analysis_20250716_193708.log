@@ -1,0 +1,32 @@
+2025-07-16 19:37:46,378 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-16 19:37:46,391 - __main__ - INFO - ✅ LLM generated 4 queries for category: Technical
+2025-07-16 19:37:46,397 - __main__ - ERROR - CPG query failed: No module named 'project_analyzer'
+2025-07-16 19:38:17,903 - __main__ - ERROR - Comprehensive query failed: Request timed out after 30.0 seconds
+2025-07-16 19:38:18,336 - asyncio - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7f7beafc3b30>
+🎯 Running with scenario filter: 1
+🚀 Starting Properly Fixed Comparative Analysis Suite
+📊 Total scenarios to run: 1
+🕐 Timestamp: 20250716_193712
+🔧 Vector-RAG: Using JSON output format
+🔧 CPG: Using improved LLM generation with fallbacks
+================================================================================
+
+[1/1] Processing: T001 - Technical
+Query: Analyze the overall architecture of the HelloWorldApp. What are the main components and how do they ...
+  ✅ Vector: success (29136ms)
+  ✅ CPG: error (5108ms)
+  ✅ Comprehensive: error (31506ms)
+
+✅ Results saved to:
+  📄 CSV: /opt/genpod/test_results/properly_fixed_comparative_analysis_20250716_193817.csv
+  📊 Excel: /opt/genpod/test_results/properly_fixed_comparative_analysis_20250716_193817.xlsx
+📊 Total scenarios processed: 1
+
+📈 Success Rates:
+  Vector: 1/1 (100.0%)
+  CPG: 0/1 (0.0%)
+  Comprehensive: 0/1 (0.0%)
+
+🎉 Properly Fixed Comparative Analysis completed!
+📁 Results saved to CSV and Excel formats

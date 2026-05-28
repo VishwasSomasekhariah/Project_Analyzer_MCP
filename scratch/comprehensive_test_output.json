@@ -1,0 +1,1232 @@
+{
+  "test_file": "/opt/genpod/ComprehensiveTestFile.cs",
+  "total_lines": 412,
+  "results": {
+    "existing": {
+      "query_name": "Existing Queries",
+      "total_captures": 343,
+      "capture_counts": {
+        "using.definition": 7,
+        "using.alias": 2,
+        "using.name": 6,
+        "namespace.definition": 1,
+        "namespace.name": 1,
+        "namespace.body": 1,
+        "interface.definition": 1,
+        "interface.name": 1,
+        "interface.body": 1,
+        "property.definition": 5,
+        "property.type": 5,
+        "property.name": 5,
+        "property.accessors": 4,
+        "class.definition": 9,
+        "class.name": 9,
+        "class.body": 9,
+        "field.definition": 24,
+        "field.type": 24,
+        "field.name": 24,
+        "field.initializer": 20,
+        "constructor.definition": 3,
+        "constructor.name": 3,
+        "constructor.parameters": 3,
+        "parameter.definition": 8,
+        "parameter.type": 8,
+        "parameter.name": 8,
+        "constructor.body": 3,
+        "property.arrow_clause": 1,
+        "method.definition": 22,
+        "method.name": 23,
+        "method.parameters": 23,
+        "method.body": 22,
+        "local_variable.definition": 15,
+        "local_variable.name": 15,
+        "local_variable.initializer": 15,
+        "method.definition.expression_bodied": 1,
+        "method.arrow_body": 1,
+        "struct.definition": 1,
+        "struct.name": 1,
+        "struct.body": 1,
+        "enum.definition": 1,
+        "enum.name": 1,
+        "enum.body": 1,
+        "delegate.definition": 1,
+        "delegate.return_type": 1,
+        "delegate.name": 1,
+        "delegate.parameters": 1
+      },
+      "examples": {
+        "using.definition": [
+          {
+            "line": 6,
+            "text": "using System;",
+            "node_type": "using_directive"
+          },
+          {
+            "line": 6,
+            "text": "using System;",
+            "node_type": "using_directive"
+          },
+          {
+            "line": 7,
+            "text": "using System.Collections.Generic;",
+            "node_type": "using_directive"
+          }
+        ],
+        "using.alias": [
+          {
+            "line": 6,
+            "text": "System",
+            "node_type": "identifier"
+          },
+          {
+            "line": 10,
+            "text": "Collections",
+            "node_type": "identifier"
+          }
+        ],
+        "using.name": [
+          {
+            "line": 6,
+            "text": "System",
+            "node_type": "identifier"
+          },
+          {
+            "line": 7,
+            "text": "System.Collections.Generic",
+            "node_type": "qualified_name"
+          },
+          {
+            "line": 8,
+            "text": "System.Linq",
+            "node_type": "qualified_name"
+          }
+        ],
+        "namespace.definition": [
+          {
+            "line": 12,
+            "text": "namespace TestNamespace.SubNamespace\r\n{\r\n    /// <summary>\r\n    /// XML document...",
+            "node_type": "namespace_declaration"
+          }
+        ],
+        "namespace.name": [
+          {
+            "line": 12,
+            "text": "TestNamespace.SubNamespace",
+            "node_type": "qualified_name"
+          }
+        ],
+        "namespace.body": [
+          {
+            "line": 13,
+            "text": "{\r\n    /// <summary>\r\n    /// XML documentation comment for testing\r\n    /// </s...",
+            "node_type": "declaration_list"
+          }
+        ],
+        "interface.definition": [
+          {
+            "line": 17,
+            "text": "public interface ITestInterface\r\n    {\r\n        void InterfaceMethod();\r\n       ...",
+            "node_type": "interface_declaration"
+          }
+        ],
+        "interface.name": [
+          {
+            "line": 17,
+            "text": "ITestInterface",
+            "node_type": "identifier"
+          }
+        ],
+        "interface.body": [
+          {
+            "line": 18,
+            "text": "{\r\n        void InterfaceMethod();\r\n        int InterfaceProperty { get; set; }\r...",
+            "node_type": "declaration_list"
+          }
+        ],
+        "property.definition": [
+          {
+            "line": 20,
+            "text": "int InterfaceProperty { get; set; }",
+            "node_type": "property_declaration"
+          },
+          {
+            "line": 74,
+            "text": "public int PropertyWithAccessors\r\n        {\r\n            get\r\n            {\r\n   ...",
+            "node_type": "property_declaration"
+          },
+          {
+            "line": 89,
+            "text": "public string AutoProperty { get; set; }",
+            "node_type": "property_declaration"
+          }
+        ],
+        "property.type": [
+          {
+            "line": 20,
+            "text": "int",
+            "node_type": "predefined_type"
+          },
+          {
+            "line": 74,
+            "text": "int",
+            "node_type": "predefined_type"
+          },
+          {
+            "line": 89,
+            "text": "string",
+            "node_type": "predefined_type"
+          }
+        ],
+        "property.name": [
+          {
+            "line": 20,
+            "text": "InterfaceProperty",
+            "node_type": "identifier"
+          },
+          {
+            "line": 74,
+            "text": "PropertyWithAccessors",
+            "node_type": "identifier"
+          },
+          {
+            "line": 89,
+            "text": "AutoProperty",
+            "node_type": "identifier"
+          }
+        ],
+        "property.accessors": [
+          {
+            "line": 20,
+            "text": "{ get; set; }",
+            "node_type": "accessor_list"
+          },
+          {
+            "line": 75,
+            "text": "{\r\n            get\r\n            {\r\n                Console.WriteLine(\"Get access...",
+            "node_type": "accessor_list"
+          },
+          {
+            "line": 89,
+            "text": "{ get; set; }",
+            "node_type": "accessor_list"
+          }
+        ],
+        "class.definition": [
+          {
+            "line": 24,
+            "text": "public class LiteralTestClass\r\n    {\r\n        // String literals\r\n        privat...",
+            "node_type": "class_declaration"
+          },
+          {
+            "line": 58,
+            "text": "public class BlockTestClass : ITestInterface\r\n    {\r\n        private int _field;...",
+            "node_type": "class_declaration"
+          },
+          {
+            "line": 322,
+            "text": "public class OuterClass\r\n    {\r\n        public class NestedClass\r\n        {\r\n   ...",
+            "node_type": "class_declaration"
+          }
+        ],
+        "class.name": [
+          {
+            "line": 24,
+            "text": "LiteralTestClass",
+            "node_type": "identifier"
+          },
+          {
+            "line": 58,
+            "text": "BlockTestClass",
+            "node_type": "identifier"
+          },
+          {
+            "line": 322,
+            "text": "OuterClass",
+            "node_type": "identifier"
+          }
+        ],
+        "class.body": [
+          {
+            "line": 25,
+            "text": "{\r\n        // String literals\r\n        private string regularString = \"Hello, Wo...",
+            "node_type": "declaration_list"
+          },
+          {
+            "line": 59,
+            "text": "{\r\n        private int _field;\r\n        private readonly string _readonlyField =...",
+            "node_type": "declaration_list"
+          },
+          {
+            "line": 323,
+            "text": "{\r\n        public class NestedClass\r\n        {\r\n            public void NestedMe...",
+            "node_type": "declaration_list"
+          }
+        ],
+        "field.definition": [
+          {
+            "line": 27,
+            "text": "private string regularString = \"Hello, World!\";",
+            "node_type": "field_declaration"
+          },
+          {
+            "line": 28,
+            "text": "private string interpolatedString = $\"Value is {42}\";",
+            "node_type": "field_declaration"
+          },
+          {
+            "line": 29,
+            "text": "private string verbatimString = @\"C:\\Windows\\System32\\config.sys\";",
+            "node_type": "field_declaration"
+          }
+        ],
+        "field.type": [
+          {
+            "line": 27,
+            "text": "string",
+            "node_type": "predefined_type"
+          },
+          {
+            "line": 28,
+            "text": "string",
+            "node_type": "predefined_type"
+          },
+          {
+            "line": 29,
+            "text": "string",
+            "node_type": "predefined_type"
+          }
+        ],
+        "field.name": [
+          {
+            "line": 27,
+            "text": "regularString",
+            "node_type": "identifier"
+          },
+          {
+            "line": 28,
+            "text": "interpolatedString",
+            "node_type": "identifier"
+          },
+          {
+            "line": 29,
+            "text": "verbatimString",
+            "node_type": "identifier"
+          }
+        ],
+        "field.initializer": [
+          {
+            "line": 27,
+            "text": "\"Hello, World!\"",
+            "node_type": "string_literal"
+          },
+          {
+            "line": 28,
+            "text": "$\"Value is {42}\"",
+            "node_type": "interpolated_string_expression"
+          },
+          {
+            "line": 29,
+            "text": "@\"C:\\Windows\\System32\\config.sys\"",
+            "node_type": "verbatim_string_literal"
+          }
+        ],
+        "constructor.definition": [
+          {
+            "line": 67,
+            "text": "public BlockTestClass(int value)\r\n        {\r\n            _field = value;\r\n      ...",
+            "node_type": "constructor_declaration"
+          },
+          {
+            "line": 367,
+            "text": "public GenericClass(T value)\r\n        {\r\n            _value = value;\r\n        }",
+            "node_type": "constructor_declaration"
+          },
+          {
+            "line": 384,
+            "text": "public TestStruct(int x, int y)\r\n        {\r\n            X = x;\r\n            Y = ...",
+            "node_type": "constructor_declaration"
+          }
+        ],
+        "constructor.name": [
+          {
+            "line": 67,
+            "text": "BlockTestClass",
+            "node_type": "identifier"
+          },
+          {
+            "line": 367,
+            "text": "GenericClass",
+            "node_type": "identifier"
+          },
+          {
+            "line": 384,
+            "text": "TestStruct",
+            "node_type": "identifier"
+          }
+        ],
+        "constructor.parameters": [
+          {
+            "line": 67,
+            "text": "(int value)",
+            "node_type": "parameter_list"
+          },
+          {
+            "line": 367,
+            "text": "(T value)",
+            "node_type": "parameter_list"
+          },
+          {
+            "line": 384,
+            "text": "(int x, int y)",
+            "node_type": "parameter_list"
+          }
+        ],
+        "parameter.definition": [
+          {
+            "line": 67,
+            "text": "int value",
+            "node_type": "parameter"
+          },
+          {
+            "line": 103,
+            "text": "int x",
+            "node_type": "parameter"
+          },
+          {
+            "line": 203,
+            "text": "int value",
+            "node_type": "parameter"
+          }
+        ],
+        "parameter.type": [
+          {
+            "line": 67,
+            "text": "int",
+            "node_type": "predefined_type"
+          },
+          {
+            "line": 103,
+            "text": "int",
+            "node_type": "predefined_type"
+          },
+          {
+            "line": 203,
+            "text": "int",
+            "node_type": "predefined_type"
+          }
+        ],
+        "parameter.name": [
+          {
+            "line": 67,
+            "text": "value",
+            "node_type": "identifier"
+          },
+          {
+            "line": 103,
+            "text": "x",
+            "node_type": "identifier"
+          },
+          {
+            "line": 203,
+            "text": "value",
+            "node_type": "identifier"
+          }
+        ],
+        "constructor.body": [
+          {
+            "line": 68,
+            "text": "{\r\n            _field = value;\r\n            Console.WriteLine(\"Constructor execu...",
+            "node_type": "block"
+          },
+          {
+            "line": 368,
+            "text": "{\r\n            _value = value;\r\n        }",
+            "node_type": "block"
+          },
+          {
+            "line": 385,
+            "text": "{\r\n            X = x;\r\n            Y = y;\r\n        }",
+            "node_type": "block"
+          }
+        ],
+        "property.arrow_clause": [
+          {
+            "line": 92,
+            "text": "=> _field * 2",
+            "node_type": "arrow_expression_clause"
+          }
+        ],
+        "method.definition": [
+          {
+            "line": 95,
+            "text": "void ITestInterface.InterfaceMethod()\r\n        {\r\n            Console.WriteLine(...",
+            "node_type": "method_declaration"
+          },
+          {
+            "line": 103,
+            "text": "public void IfElseTest(int x)\r\n        {\r\n            if (x > 0)\r\n            {\r...",
+            "node_type": "method_declaration"
+          },
+          {
+            "line": 120,
+            "text": "public void ForLoopTest()\r\n        {\r\n            for (int i = 0; i < 10; i++)\r\n...",
+            "node_type": "method_declaration"
+          }
+        ],
+        "method.name": [
+          {
+            "line": 95,
+            "text": "InterfaceMethod",
+            "node_type": "identifier"
+          },
+          {
+            "line": 103,
+            "text": "IfElseTest",
+            "node_type": "identifier"
+          },
+          {
+            "line": 120,
+            "text": "ForLoopTest",
+            "node_type": "identifier"
+          }
+        ],
+        "method.parameters": [
+          {
+            "line": 95,
+            "text": "()",
+            "node_type": "parameter_list"
+          },
+          {
+            "line": 103,
+            "text": "(int x)",
+            "node_type": "parameter_list"
+          },
+          {
+            "line": 120,
+            "text": "()",
+            "node_type": "parameter_list"
+          }
+        ],
+        "method.body": [
+          {
+            "line": 96,
+            "text": "{\r\n            Console.WriteLine(\"Interface method\");\r\n        }",
+            "node_type": "block"
+          },
+          {
+            "line": 104,
+            "text": "{\r\n            if (x > 0)\r\n            {\r\n                Console.WriteLine(\"Pos...",
+            "node_type": "block"
+          },
+          {
+            "line": 121,
+            "text": "{\r\n            for (int i = 0; i < 10; i++)\r\n            {\r\n                Cons...",
+            "node_type": "block"
+          }
+        ],
+        "local_variable.definition": [
+          {
+            "line": 131,
+            "text": "var numbers = new[] { 1, 2, 3, 4, 5 };",
+            "node_type": "local_declaration_statement"
+          },
+          {
+            "line": 141,
+            "text": "int counter = 0;",
+            "node_type": "local_declaration_statement"
+          },
+          {
+            "line": 152,
+            "text": "int counter = 0;",
+            "node_type": "local_declaration_statement"
+          }
+        ],
+        "local_variable.name": [
+          {
+            "line": 131,
+            "text": "numbers",
+            "node_type": "identifier"
+          },
+          {
+            "line": 141,
+            "text": "counter",
+            "node_type": "identifier"
+          },
+          {
+            "line": 152,
+            "text": "counter",
+            "node_type": "identifier"
+          }
+        ],
+        "local_variable.initializer": [
+          {
+            "line": 131,
+            "text": "new[] { 1, 2, 3, 4, 5 }",
+            "node_type": "implicit_array_creation_expression"
+          },
+          {
+            "line": 141,
+            "text": "0",
+            "node_type": "integer_literal"
+          },
+          {
+            "line": 152,
+            "text": "0",
+            "node_type": "integer_literal"
+          }
+        ],
+        "method.definition.expression_bodied": [
+          {
+            "line": 277,
+            "text": "public int ExpressionMethod(int x) => x * 2;",
+            "node_type": "method_declaration"
+          }
+        ],
+        "method.arrow_body": [
+          {
+            "line": 277,
+            "text": "=> x * 2",
+            "node_type": "arrow_expression_clause"
+          }
+        ],
+        "struct.definition": [
+          {
+            "line": 379,
+            "text": "public struct TestStruct\r\n    {\r\n        public int X;\r\n        public int Y;\r\n\r...",
+            "node_type": "struct_declaration"
+          }
+        ],
+        "struct.name": [
+          {
+            "line": 379,
+            "text": "TestStruct",
+            "node_type": "identifier"
+          }
+        ],
+        "struct.body": [
+          {
+            "line": 380,
+            "text": "{\r\n        public int X;\r\n        public int Y;\r\n\r\n        public TestStruct(int...",
+            "node_type": "declaration_list"
+          }
+        ],
+        "enum.definition": [
+          {
+            "line": 392,
+            "text": "public enum TestEnum\r\n    {\r\n        First = 1,\r\n        Second = 2,\r\n        Th...",
+            "node_type": "enum_declaration"
+          }
+        ],
+        "enum.name": [
+          {
+            "line": 392,
+            "text": "TestEnum",
+            "node_type": "identifier"
+          }
+        ],
+        "enum.body": [
+          {
+            "line": 393,
+            "text": "{\r\n        First = 1,\r\n        Second = 2,\r\n        Third = 3\r\n    }",
+            "node_type": "enum_member_declaration_list"
+          }
+        ],
+        "delegate.definition": [
+          {
+            "line": 400,
+            "text": "public delegate void TestDelegate(string message);",
+            "node_type": "delegate_declaration"
+          }
+        ],
+        "delegate.return_type": [
+          {
+            "line": 400,
+            "text": "void",
+            "node_type": "predefined_type"
+          }
+        ],
+        "delegate.name": [
+          {
+            "line": 400,
+            "text": "TestDelegate",
+            "node_type": "identifier"
+          }
+        ],
+        "delegate.parameters": [
+          {
+            "line": 400,
+            "text": "(string message)",
+            "node_type": "parameter_list"
+          }
+        ]
+      }
+    },
+    "literals": {
+      "query_name": "Literal Queries",
+      "total_captures": 143,
+      "capture_counts": {
+        "literal.comment": 52,
+        "literal.string": 24,
+        "literal.string.interpolated": 4,
+        "literal.number.integer": 52,
+        "literal.string.verbatim": 2,
+        "literal.number.real": 3,
+        "literal.boolean": 3,
+        "literal.null": 1,
+        "literal.character": 2
+      },
+      "examples": {
+        "literal.comment": [
+          {
+            "line": 1,
+            "text": "// Single-line comment at top",
+            "node_type": "comment"
+          },
+          {
+            "line": 2,
+            "text": "/* Multi-line comment\r\n   spanning multiple lines\r\n   to test comment capture */",
+            "node_type": "comment"
+          },
+          {
+            "line": 10,
+            "text": "// Alias import",
+            "node_type": "comment"
+          }
+        ],
+        "literal.string": [
+          {
+            "line": 27,
+            "text": "\"Hello, World!\"",
+            "node_type": "string_literal"
+          },
+          {
+            "line": 61,
+            "text": "\"initialized\"",
+            "node_type": "string_literal"
+          },
+          {
+            "line": 70,
+            "text": "\"Constructor executed\"",
+            "node_type": "string_literal"
+          }
+        ],
+        "literal.string.interpolated": [
+          {
+            "line": 28,
+            "text": "$\"Value is {42}\"",
+            "node_type": "interpolated_string_expression"
+          },
+          {
+            "line": 170,
+            "text": "$\"Error: {ex.Message}\"",
+            "node_type": "interpolated_string_expression"
+          },
+          {
+            "line": 174,
+            "text": "$\"General error: {ex.Message}\"",
+            "node_type": "interpolated_string_expression"
+          }
+        ],
+        "literal.number.integer": [
+          {
+            "line": 28,
+            "text": "42",
+            "node_type": "integer_literal"
+          },
+          {
+            "line": 35,
+            "text": "42",
+            "node_type": "integer_literal"
+          },
+          {
+            "line": 36,
+            "text": "42L",
+            "node_type": "integer_literal"
+          }
+        ],
+        "literal.string.verbatim": [
+          {
+            "line": 29,
+            "text": "@\"C:\\Windows\\System32\\config.sys\"",
+            "node_type": "verbatim_string_literal"
+          },
+          {
+            "line": 30,
+            "text": "@\"Line 1\r\nLine 2\r\nLine 3\"",
+            "node_type": "verbatim_string_literal"
+          }
+        ],
+        "literal.number.real": [
+          {
+            "line": 37,
+            "text": "3.14f",
+            "node_type": "real_literal"
+          },
+          {
+            "line": 38,
+            "text": "3.14159",
+            "node_type": "real_literal"
+          },
+          {
+            "line": 39,
+            "text": "99.99m",
+            "node_type": "real_literal"
+          }
+        ],
+        "literal.boolean": [
+          {
+            "line": 46,
+            "text": "true",
+            "node_type": "boolean_literal"
+          },
+          {
+            "line": 47,
+            "text": "false",
+            "node_type": "boolean_literal"
+          },
+          {
+            "line": 251,
+            "text": "true",
+            "node_type": "boolean_literal"
+          }
+        ],
+        "literal.null": [
+          {
+            "line": 50,
+            "text": "null",
+            "node_type": "null_literal"
+          }
+        ],
+        "literal.character": [
+          {
+            "line": 53,
+            "text": "'A'",
+            "node_type": "character_literal"
+          },
+          {
+            "line": 54,
+            "text": "'\\n'",
+            "node_type": "character_literal"
+          }
+        ]
+      }
+    },
+    "blocks": {
+      "query_name": "Block Queries",
+      "total_captures": 50,
+      "capture_counts": {
+        "block.constructor": 3,
+        "block.accessor": 2,
+        "block.method": 22,
+        "block.if": 6,
+        "block.for": 3,
+        "block.foreach": 1,
+        "block.while": 2,
+        "block.do": 1,
+        "block.try": 2,
+        "block.catch": 3,
+        "block.finally": 1,
+        "block.using": 1,
+        "block.lock": 1,
+        "block.switch": 1,
+        "block.lambda": 1
+      },
+      "examples": {
+        "block.constructor": [
+          {
+            "line": 68,
+            "text": "{\r\n            _field = value;\r\n            Console.WriteLine(\"Constructor execu...",
+            "node_type": "block"
+          },
+          {
+            "line": 368,
+            "text": "{\r\n            _value = value;\r\n        }",
+            "node_type": "block"
+          },
+          {
+            "line": 385,
+            "text": "{\r\n            X = x;\r\n            Y = y;\r\n        }",
+            "node_type": "block"
+          }
+        ],
+        "block.accessor": [
+          {
+            "line": 77,
+            "text": "{\r\n                Console.WriteLine(\"Get accessor\");\r\n                return _f...",
+            "node_type": "block"
+          },
+          {
+            "line": 82,
+            "text": "{\r\n                Console.WriteLine(\"Set accessor\");\r\n                _field = ...",
+            "node_type": "block"
+          }
+        ],
+        "block.method": [
+          {
+            "line": 96,
+            "text": "{\r\n            Console.WriteLine(\"Interface method\");\r\n        }",
+            "node_type": "block"
+          },
+          {
+            "line": 104,
+            "text": "{\r\n            if (x > 0)\r\n            {\r\n                Console.WriteLine(\"Pos...",
+            "node_type": "block"
+          },
+          {
+            "line": 121,
+            "text": "{\r\n            for (int i = 0; i < 10; i++)\r\n            {\r\n                Cons...",
+            "node_type": "block"
+          }
+        ],
+        "block.if": [
+          {
+            "line": 106,
+            "text": "{\r\n                Console.WriteLine(\"Positive\");\r\n            }",
+            "node_type": "block"
+          },
+          {
+            "line": 110,
+            "text": "{\r\n                Console.WriteLine(\"Negative\");\r\n            }",
+            "node_type": "block"
+          },
+          {
+            "line": 114,
+            "text": "{\r\n                Console.WriteLine(\"Zero\");\r\n            }",
+            "node_type": "block"
+          }
+        ],
+        "block.for": [
+          {
+            "line": 123,
+            "text": "{\r\n                Console.WriteLine(i);\r\n            }",
+            "node_type": "block"
+          },
+          {
+            "line": 254,
+            "text": "{\r\n                    while (i > 0)\r\n                    {\r\n                   ...",
+            "node_type": "block"
+          },
+          {
+            "line": 303,
+            "text": "{\r\n                if (i == 5)\r\n                    break;\r\n                if (...",
+            "node_type": "block"
+          }
+        ],
+        "block.foreach": [
+          {
+            "line": 133,
+            "text": "{\r\n                Console.WriteLine(num);\r\n            }",
+            "node_type": "block"
+          }
+        ],
+        "block.while": [
+          {
+            "line": 143,
+            "text": "{\r\n                Console.WriteLine(counter);\r\n                counter++;\r\n    ...",
+            "node_type": "block"
+          },
+          {
+            "line": 256,
+            "text": "{\r\n                        try\r\n                        {\r\n                     ...",
+            "node_type": "block"
+          }
+        ],
+        "block.do": [
+          {
+            "line": 154,
+            "text": "{\r\n                Console.WriteLine(counter);\r\n                counter++;\r\n    ...",
+            "node_type": "block"
+          }
+        ],
+        "block.try": [
+          {
+            "line": 164,
+            "text": "{\r\n                int result = 10 / 0;\r\n                Console.WriteLine(resul...",
+            "node_type": "block"
+          },
+          {
+            "line": 258,
+            "text": "{\r\n                            Console.WriteLine($\"Nested: {i}\");\r\n             ...",
+            "node_type": "block"
+          }
+        ],
+        "block.catch": [
+          {
+            "line": 169,
+            "text": "{\r\n                Console.WriteLine($\"Error: {ex.Message}\");\r\n            }",
+            "node_type": "block"
+          },
+          {
+            "line": 173,
+            "text": "{\r\n                Console.WriteLine($\"General error: {ex.Message}\");\r\n         ...",
+            "node_type": "block"
+          },
+          {
+            "line": 263,
+            "text": "{\r\n                            // Empty catch\r\n                        }",
+            "node_type": "block"
+          }
+        ],
+        "block.finally": [
+          {
+            "line": 177,
+            "text": "{\r\n                Console.WriteLine(\"Finally block executed\");\r\n            }",
+            "node_type": "block"
+          }
+        ],
+        "block.using": [
+          {
+            "line": 186,
+            "text": "{\r\n                var content = resource.ReadToEnd();\r\n                Console....",
+            "node_type": "block"
+          }
+        ],
+        "block.lock": [
+          {
+            "line": 197,
+            "text": "{\r\n                Console.WriteLine(\"Inside lock\");\r\n            }",
+            "node_type": "block"
+          }
+        ],
+        "block.switch": [
+          {
+            "line": 206,
+            "text": "{\r\n                case 1:\r\n                    Console.WriteLine(\"One\");\r\n     ...",
+            "node_type": "switch_body"
+          }
+        ],
+        "block.lambda": [
+          {
+            "line": 224,
+            "text": "{\r\n                int result = a + b;\r\n                return result;\r\n        ...",
+            "node_type": "block"
+          }
+        ]
+      }
+    },
+    "statements": {
+      "query_name": "Statement Queries",
+      "total_captures": 86,
+      "capture_counts": {
+        "statement.expression": 38,
+        "statement.return": 4,
+        "statement.if": 7,
+        "statement.for": 3,
+        "statement.declaration": 15,
+        "statement.foreach": 1,
+        "statement.while": 2,
+        "statement.do": 1,
+        "statement.try": 2,
+        "statement.using": 1,
+        "statement.lock": 1,
+        "statement.switch": 1,
+        "statement.break": 5,
+        "statement.yield": 3,
+        "statement.throw": 1,
+        "statement.continue": 1
+      },
+      "examples": {
+        "statement.expression": [
+          {
+            "line": 69,
+            "text": "_field = value;",
+            "node_type": "expression_statement"
+          },
+          {
+            "line": 70,
+            "text": "Console.WriteLine(\"Constructor executed\");",
+            "node_type": "expression_statement"
+          },
+          {
+            "line": 78,
+            "text": "Console.WriteLine(\"Get accessor\");",
+            "node_type": "expression_statement"
+          }
+        ],
+        "statement.return": [
+          {
+            "line": 79,
+            "text": "return _field;",
+            "node_type": "return_statement"
+          },
+          {
+            "line": 226,
+            "text": "return result;",
+            "node_type": "return_statement"
+          },
+          {
+            "line": 292,
+            "text": "return;",
+            "node_type": "return_statement"
+          }
+        ],
+        "statement.if": [
+          {
+            "line": 105,
+            "text": "if (x > 0)\r\n            {\r\n                Console.WriteLine(\"Positive\");\r\n     ...",
+            "node_type": "if_statement"
+          },
+          {
+            "line": 109,
+            "text": "if (x < 0)\r\n            {\r\n                Console.WriteLine(\"Negative\");\r\n     ...",
+            "node_type": "if_statement"
+          },
+          {
+            "line": 251,
+            "text": "if (true)\r\n            {\r\n                for (int i = 0; i < 3; i++)\r\n         ...",
+            "node_type": "if_statement"
+          }
+        ],
+        "statement.for": [
+          {
+            "line": 122,
+            "text": "for (int i = 0; i < 10; i++)\r\n            {\r\n                Console.WriteLine(i...",
+            "node_type": "for_statement"
+          },
+          {
+            "line": 253,
+            "text": "for (int i = 0; i < 3; i++)\r\n                {\r\n                    while (i > 0...",
+            "node_type": "for_statement"
+          },
+          {
+            "line": 302,
+            "text": "for (int i = 0; i < 10; i++)\r\n            {\r\n                if (i == 5)\r\n      ...",
+            "node_type": "for_statement"
+          }
+        ],
+        "statement.declaration": [
+          {
+            "line": 131,
+            "text": "var numbers = new[] { 1, 2, 3, 4, 5 };",
+            "node_type": "local_declaration_statement"
+          },
+          {
+            "line": 141,
+            "text": "int counter = 0;",
+            "node_type": "local_declaration_statement"
+          },
+          {
+            "line": 152,
+            "text": "int counter = 0;",
+            "node_type": "local_declaration_statement"
+          }
+        ],
+        "statement.foreach": [
+          {
+            "line": 132,
+            "text": "foreach (var num in numbers)\r\n            {\r\n                Console.WriteLine(n...",
+            "node_type": "foreach_statement"
+          }
+        ],
+        "statement.while": [
+          {
+            "line": 142,
+            "text": "while (counter < 5)\r\n            {\r\n                Console.WriteLine(counter);\r...",
+            "node_type": "while_statement"
+          },
+          {
+            "line": 255,
+            "text": "while (i > 0)\r\n                    {\r\n                        try\r\n             ...",
+            "node_type": "while_statement"
+          }
+        ],
+        "statement.do": [
+          {
+            "line": 153,
+            "text": "do\r\n            {\r\n                Console.WriteLine(counter);\r\n                ...",
+            "node_type": "do_statement"
+          }
+        ],
+        "statement.try": [
+          {
+            "line": 163,
+            "text": "try\r\n            {\r\n                int result = 10 / 0;\r\n                Consol...",
+            "node_type": "try_statement"
+          },
+          {
+            "line": 257,
+            "text": "try\r\n                        {\r\n                            Console.WriteLine($\"...",
+            "node_type": "try_statement"
+          }
+        ],
+        "statement.using": [
+          {
+            "line": 185,
+            "text": "using (var resource = new System.IO.StringReader(\"test\"))\r\n            {\r\n      ...",
+            "node_type": "using_statement"
+          }
+        ],
+        "statement.lock": [
+          {
+            "line": 196,
+            "text": "lock (_lockObject)\r\n            {\r\n                Console.WriteLine(\"Inside loc...",
+            "node_type": "lock_statement"
+          }
+        ],
+        "statement.switch": [
+          {
+            "line": 205,
+            "text": "switch (value)\r\n            {\r\n                case 1:\r\n                    Cons...",
+            "node_type": "switch_statement"
+          }
+        ],
+        "statement.break": [
+          {
+            "line": 209,
+            "text": "break;",
+            "node_type": "break_statement"
+          },
+          {
+            "line": 212,
+            "text": "break;",
+            "node_type": "break_statement"
+          },
+          {
+            "line": 215,
+            "text": "break;",
+            "node_type": "break_statement"
+          }
+        ],
+        "statement.yield": [
+          {
+            "line": 243,
+            "text": "yield return 1;",
+            "node_type": "yield_statement"
+          },
+          {
+            "line": 244,
+            "text": "yield return 2;",
+            "node_type": "yield_statement"
+          },
+          {
+            "line": 245,
+            "text": "yield return 3;",
+            "node_type": "yield_statement"
+          }
+        ],
+        "statement.throw": [
+          {
+            "line": 298,
+            "text": "throw new ArgumentException(\"Value cannot be negative\");",
+            "node_type": "throw_statement"
+          }
+        ],
+        "statement.continue": [
+          {
+            "line": 307,
+            "text": "continue;",
+            "node_type": "continue_statement"
+          }
+        ]
+      }
+    }
+  },
+  "summary": {
+    "total_captures": 622,
+    "by_category": {
+      "existing": 343,
+      "literals": 143,
+      "blocks": 50
+    }
+  }
+}

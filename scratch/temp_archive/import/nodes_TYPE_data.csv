@@ -1,0 +1,17 @@
+163208757248,TYPE,ANY,ANY,ANY
+163208757249,TYPE,HelloWorldApp.INotifier,INotifier,HelloWorldApp.INotifier
+163208757250,TYPE,HelloWorldApp.IWorker,IWorker,HelloWorldApp.IWorker
+163208757251,TYPE,HelloWorldApp.Manager,Manager,HelloWorldApp.Manager
+163208757252,TYPE,HelloWorldApp.Program,Program,HelloWorldApp.Program
+163208757253,TYPE,HelloWorldApp.Utilities.Helper,Helper,HelloWorldApp.Utilities.Helper
+163208757254,TYPE,HelloWorldApp.WorkerC,WorkerC,HelloWorldApp.WorkerC
+163208757255,TYPE,HelloWorldApp.WorkerFactory,WorkerFactory,HelloWorldApp.WorkerFactory
+163208757256,TYPE,IEnumerable,IEnumerable,IEnumerable
+163208757257,TYPE,List,List,List
+163208757258,TYPE,System.Console,Console,System.Console
+163208757259,TYPE,System.ConsoleKeyInfo,ConsoleKeyInfo,System.ConsoleKeyInfo
+163208757260,TYPE,System.Int32,Int32,System.Int32
+163208757261,TYPE,System.String,String,System.String
+163208757262,TYPE,System.String[],String[],System.String[]
+163208757263,TYPE,System.Void,Void,System.Void
+163208757264,TYPE,var,var,var

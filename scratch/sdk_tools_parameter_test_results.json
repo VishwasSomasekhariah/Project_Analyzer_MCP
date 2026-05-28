@@ -1,0 +1,21 @@
+{
+  "test_1_mcp_allowed_tools": {
+    "test": "mcp_servers_with_allowed_tools",
+    "read_called": true,
+    "mcp_tool_called": false,
+    "tools_attempted": [
+      "Read",
+      "Bash",
+      "Bash"
+    ],
+    "verdict": "\u274c FAIL - Read not blocked"
+  },
+  "test_2_tools_none": {
+    "test": "tools_none",
+    "read_called": true,
+    "tools_attempted": [
+      "Read"
+    ],
+    "verdict": "\u274c FAIL - Read called"
+  }
+}

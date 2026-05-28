@@ -1,0 +1,7 @@
+146028888064,RETURN,-1,,"return $""[{workerName}] {text}"";",12,6,,,1
+146028888065,RETURN,-1,,"return new List<IWorker>
+            {
+                new WorkerA(notifier),
+                new WorkerB(notifier),
+                new WorkerC(notifier)
+            };",12,9,,,1

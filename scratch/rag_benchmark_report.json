@@ -1,0 +1,1698 @@
+{
+  "metadata": {
+    "csv_file": "/opt/Test_Suite_Benchmarking/properly_fixed_comparative_analysis_20250718_172420.csv",
+    "evaluation_date": "2025-07-22T14:45:18.006005",
+    "total_scenarios": 37,
+    "approaches_evaluated": [
+      "vector",
+      "cpg",
+      "comprehensive"
+    ],
+    "benchmark_methodology": "Weighted multi-dimensional scoring (0-100 scale)",
+    "best_overall_approach": "vector",
+    "best_overall_score": 43.5135135135135
+  },
+  "benchmark_weights": {
+    "context_precision": 0.25,
+    "context_recall": 0.25,
+    "faithfulness": 0.25,
+    "answer_relevancy": 0.25
+  },
+  "ground_truth_structure": {
+    "total_scenarios": 37,
+    "categories": [
+      "Integration",
+      "Bug Analysis",
+      "Feature Addition",
+      "Non-Functional",
+      "Technical",
+      "Modernization",
+      "Modification",
+      "Functional"
+    ],
+    "codebase_elements": {
+      "classes": 7,
+      "interfaces": 2,
+      "methods": 6,
+      "patterns": 4,
+      "architecture": 4,
+      "files": 9,
+      "dependencies": 3,
+      "namespaces": 2
+    }
+  },
+  "overall_results": {
+    "vector": {
+      "scenarios": [
+        {
+          "context_precision": 0.0,
+          "context_recall": 0.0,
+          "faithfulness": 0.0,
+          "answer_relevancy": 0.0,
+          "success_rate": 1.0,
+          "response_time_ms": 50076,
+          "query_id": "T001",
+          "query_category": "Technical",
+          "approach": "vector",
+          "benchmark_score": 0.0
+        },
+        {
+          "context_precision": 0.0,
+          "context_recall": 0.0,
+          "faithfulness": 0.0,
+          "answer_relevancy": 0.0,
+          "success_rate": 1.0,
+          "response_time_ms": 21481,
+          "query_id": "T002",
+          "query_category": "Technical",
+          "approach": "vector",
+          "benchmark_score": 0.0
+        },
+        {
+          "context_precision": 0.4,
+          "context_recall": 0.2,
+          "faithfulness": 0.4,
+          "answer_relevancy": 0.5,
+          "success_rate": 1.0,
+          "response_time_ms": 23574,
+          "query_id": "T003",
+          "query_category": "Technical",
+          "approach": "vector",
+          "benchmark_score": 37.5
+        },
+        {
+          "context_precision": 0.7,
+          "context_recall": 0.5,
+          "faithfulness": 0.7,
+          "answer_relevancy": 0.7,
+          "success_rate": 1.0,
+          "response_time_ms": 24449,
+          "query_id": "T004",
+          "query_category": "Technical",
+          "approach": "vector",
+          "benchmark_score": 64.99999999999999
+        },
+        {
+          "context_precision": 0.2,
+          "context_recall": 0.1,
+          "faithfulness": 0.2,
+          "answer_relevancy": 0.3,
+          "success_rate": 1.0,
+          "response_time_ms": 23498,
+          "query_id": "T005",
+          "query_category": "Technical",
+          "approach": "vector",
+          "benchmark_score": 20.0
+        },
+        {
+          "context_precision": 0.7,
+          "context_recall": 0.6,
+          "faithfulness": 0.7,
+          "answer_relevancy": 0.75,
+          "success_rate": 1.0,
+          "response_time_ms": 27568,
+          "query_id": "F001",
+          "query_category": "Functional",
+          "approach": "vector",
+          "benchmark_score": 68.75
+        },
+        {
+          "context_precision": 0.7,
+          "context_recall": 0.6,
+          "faithfulness": 0.7,
+          "answer_relevancy": 0.75,
+          "success_rate": 1.0,
+          "response_time_ms": 25936,
+          "query_id": "F002",
+          "query_category": "Functional",
+          "approach": "vector",
+          "benchmark_score": 68.75
+        },
+        {
+          "context_precision": 0.7,
+          "context_recall": 0.6,
+          "faithfulness": 0.7,
+          "answer_relevancy": 0.8,
+          "success_rate": 1.0,
+          "response_time_ms": 23464,
+          "query_id": "F003",
+          "query_category": "Functional",
+          "approach": "vector",
+          "benchmark_score": 70.0
+        },
+        {
+          "context_precision": 0.8,
+          "context_recall": 0.7,
+          "faithfulness": 0.8,
+          "answer_relevancy": 0.85,
+          "success_rate": 1.0,
+          "response_time_ms": 25012,
+          "query_id": "F004",
+          "query_category": "Functional",
+          "approach": "vector",
+          "benchmark_score": 78.75
+        },
+        {
+          "context_precision": 0.8,
+          "context_recall": 0.6,
+          "faithfulness": 0.8,
+          "answer_relevancy": 0.9,
+          "success_rate": 1.0,
+          "response_time_ms": 23080,
+          "query_id": "F005",
+          "query_category": "Functional",
+          "approach": "vector",
+          "benchmark_score": 77.5
+        },
+        {
+          "context_precision": 0.1,
+          "context_recall": 0.0,
+          "faithfulness": 0.1,
+          "answer_relevancy": 0.1,
+          "success_rate": 1.0,
+          "response_time_ms": 21531,
+          "query_id": "NF001",
+          "query_category": "Non-Functional",
+          "approach": "vector",
+          "benchmark_score": 7.500000000000001
+        },
+        {
+          "context_precision": 0.5,
+          "context_recall": 0.3,
+          "faithfulness": 0.5,
+          "answer_relevancy": 0.6,
+          "success_rate": 1.0,
+          "response_time_ms": 26511,
+          "query_id": "NF002",
+          "query_category": "Non-Functional",
+          "approach": "vector",
+          "benchmark_score": 47.5
+        },
+        {
+          "context_precision": 0.4,
+          "context_recall": 0.2,
+          "faithfulness": 0.4,
+          "answer_relevancy": 0.5,
+          "success_rate": 1.0,
+          "response_time_ms": 23539,
+          "query_id": "NF003",
+          "query_category": "Non-Functional",
+          "approach": "vector",
+          "benchmark_score": 37.5
+        },
+        {
+          "context_precision": 0.0,
+          "context_recall": 0.0,
+          "faithfulness": 0.0,
+          "answer_relevancy": 0.0,
+          "success_rate": 1.0,
+          "response_time_ms": 23639,
+          "query_id": "NF004",
+          "query_category": "Non-Functional",
+          "approach": "vector",
+          "benchmark_score": 0.0
+        },
+        {
+          "context_precision": 0.6,
+          "context_recall": 0.4,
+          "faithfulness": 0.6,
+          "answer_relevancy": 0.7,
+          "success_rate": 1.0,
+          "response_time_ms": 22269,
+          "query_id": "NF005",
+          "query_category": "Non-Functional",
+          "approach": "vector",
+          "benchmark_score": 57.49999999999999
+        },
+        {
+          "context_precision": 0.2,
+          "context_recall": 0.1,
+          "faithfulness": 0.2,
+          "answer_relevancy": 0.2,
+          "success_rate": 1.0,
+          "response_time_ms": 23476,
+          "query_id": "NF006",
+          "query_category": "Non-Functional",
+          "approach": "vector",
+          "benchmark_score": 17.5
+        },
+        {
+          "context_precision": 0.4,
+          "context_recall": 0.2,
+          "faithfulness": 0.4,
+          "answer_relevancy": 0.5,
+          "success_rate": 1.0,
+          "response_time_ms": 22609,
+          "query_id": "M001",
+          "query_category": "Modification",
+          "approach": "vector",
+          "benchmark_score": 37.5
+        },
+        {
+          "context_precision": 0.6,
+          "context_recall": 0.4,
+          "faithfulness": 0.6,
+          "answer_relevancy": 0.7,
+          "success_rate": 1.0,
+          "response_time_ms": 27594,
+          "query_id": "M002",
+          "query_category": "Modification",
+          "approach": "vector",
+          "benchmark_score": 57.49999999999999
+        },
+        {
+          "context_precision": 0.4,
+          "context_recall": 0.2,
+          "faithfulness": 0.4,
+          "answer_relevancy": 0.5,
+          "success_rate": 1.0,
+          "response_time_ms": 26038,
+          "query_id": "M003",
+          "query_category": "Modification",
+          "approach": "vector",
+          "benchmark_score": 37.5
+        },
+        {
+          "context_precision": 0.5,
+          "context_recall": 0.3,
+          "faithfulness": 0.5,
+          "answer_relevancy": 0.6,
+          "success_rate": 1.0,
+          "response_time_ms": 20940,
+          "query_id": "M004",
+          "query_category": "Modification",
+          "approach": "vector",
+          "benchmark_score": 47.5
+        },
+        {
+          "context_precision": 0.5,
+          "context_recall": 0.2,
+          "faithfulness": 0.5,
+          "answer_relevancy": 0.6,
+          "success_rate": 1.0,
+          "response_time_ms": 24969,
+          "query_id": "M005",
+          "query_category": "Modification",
+          "approach": "vector",
+          "benchmark_score": 44.99999999999999
+        },
+        {
+          "context_precision": 0.7,
+          "context_recall": 0.6,
+          "faithfulness": 0.7,
+          "answer_relevancy": 0.75,
+          "success_rate": 1.0,
+          "response_time_ms": 23739,
+          "query_id": "FA001",
+          "query_category": "Feature Addition",
+          "approach": "vector",
+          "benchmark_score": 68.75
+        },
+        {
+          "context_precision": 0.6,
+          "context_recall": 0.3,
+          "faithfulness": 0.6,
+          "answer_relevancy": 0.7,
+          "success_rate": 1.0,
+          "response_time_ms": 32900,
+          "query_id": "FA002",
+          "query_category": "Feature Addition",
+          "approach": "vector",
+          "benchmark_score": 55.00000000000001
+        },
+        {
+          "context_precision": 0.5,
+          "context_recall": 0.3,
+          "faithfulness": 0.5,
+          "answer_relevancy": 0.6,
+          "success_rate": 1.0,
+          "response_time_ms": 41254,
+          "query_id": "FA003",
+          "query_category": "Feature Addition",
+          "approach": "vector",
+          "benchmark_score": 47.5
+        },
+        {
+          "context_precision": 0.7,
+          "context_recall": 0.6,
+          "faithfulness": 0.7,
+          "answer_relevancy": 0.8,
+          "success_rate": 1.0,
+          "response_time_ms": 35556,
+          "query_id": "FA004",
+          "query_category": "Feature Addition",
+          "approach": "vector",
+          "benchmark_score": 70.0
+        },
+        {
+          "context_precision": 0.4,
+          "context_recall": 0.2,
+          "faithfulness": 0.4,
+          "answer_relevancy": 0.5,
+          "success_rate": 1.0,
+          "response_time_ms": 23816,
+          "query_id": "FA005",
+          "query_category": "Feature Addition",
+          "approach": "vector",
+          "benchmark_score": 37.5
+        },
+        {
+          "context_precision": 0.5,
+          "context_recall": 0.2,
+          "faithfulness": 0.5,
+          "answer_relevancy": 0.6,
+          "success_rate": 1.0,
+          "response_time_ms": 23957,
+          "query_id": "MOD001",
+          "query_category": "Modernization",
+          "approach": "vector",
+          "benchmark_score": 44.99999999999999
+        },
+        {
+          "context_precision": 0.6,
+          "context_recall": 0.4,
+          "faithfulness": 0.6,
+          "answer_relevancy": 0.7,
+          "success_rate": 1.0,
+          "response_time_ms": 28570,
+          "query_id": "MOD002",
+          "query_category": "Modernization",
+          "approach": "vector",
+          "benchmark_score": 57.49999999999999
+        },
+        {
+          "context_precision": 0.5,
+          "context_recall": 0.2,
+          "faithfulness": 0.5,
+          "answer_relevancy": 0.6,
+          "success_rate": 1.0,
+          "response_time_ms": 32491,
+          "query_id": "MOD003",
+          "query_category": "Modernization",
+          "approach": "vector",
+          "benchmark_score": 44.99999999999999
+        },
+        {
+          "context_precision": 0.7,
+          "context_recall": 0.5,
+          "faithfulness": 0.7,
+          "answer_relevancy": 0.8,
+          "success_rate": 1.0,
+          "response_time_ms": 27276,
+          "query_id": "MOD004",
+          "query_category": "Modernization",
+          "approach": "vector",
+          "benchmark_score": 67.5
+        },
+        {
+          "context_precision": 0.4,
+          "context_recall": 0.2,
+          "faithfulness": 0.4,
+          "answer_relevancy": 0.5,
+          "success_rate": 1.0,
+          "response_time_ms": 27796,
+          "query_id": "MOD005",
+          "query_category": "Modernization",
+          "approach": "vector",
+          "benchmark_score": 37.5
+        },
+        {
+          "context_precision": 0.4,
+          "context_recall": 0.3,
+          "faithfulness": 0.4,
+          "answer_relevancy": 0.5,
+          "success_rate": 1.0,
+          "response_time_ms": 34445,
+          "query_id": "BUG001",
+          "query_category": "Bug Analysis",
+          "approach": "vector",
+          "benchmark_score": 40.0
+        },
+        {
+          "context_precision": 0.2,
+          "context_recall": 0.1,
+          "faithfulness": 0.2,
+          "answer_relevancy": 0.3,
+          "success_rate": 1.0,
+          "response_time_ms": 23971,
+          "query_id": "BUG002",
+          "query_category": "Bug Analysis",
+          "approach": "vector",
+          "benchmark_score": 20.0
+        },
+        {
+          "context_precision": 0.4,
+          "context_recall": 0.3,
+          "faithfulness": 0.4,
+          "answer_relevancy": 0.5,
+          "success_rate": 1.0,
+          "response_time_ms": 25658,
+          "query_id": "BUG003",
+          "query_category": "Bug Analysis",
+          "approach": "vector",
+          "benchmark_score": 40.0
+        },
+        {
+          "context_precision": 0.3,
+          "context_recall": 0.1,
+          "faithfulness": 0.3,
+          "answer_relevancy": 0.2,
+          "success_rate": 1.0,
+          "response_time_ms": 28285,
+          "query_id": "INT001",
+          "query_category": "Integration",
+          "approach": "vector",
+          "benchmark_score": 22.499999999999996
+        },
+        {
+          "context_precision": 0.4,
+          "context_recall": 0.3,
+          "faithfulness": 0.4,
+          "answer_relevancy": 0.5,
+          "success_rate": 1.0,
+          "response_time_ms": 23052,
+          "query_id": "INT002",
+          "query_category": "Integration",
+          "approach": "vector",
+          "benchmark_score": 40.0
+        },
+        {
+          "context_precision": 0.4,
+          "context_recall": 0.2,
+          "faithfulness": 0.4,
+          "answer_relevancy": 0.5,
+          "success_rate": 1.0,
+          "response_time_ms": 24680,
+          "query_id": "INT003",
+          "query_category": "Integration",
+          "approach": "vector",
+          "benchmark_score": 37.5
+        }
+      ],
+      "aggregate_metrics": {
+        "context_precision": 0.45675675675675664,
+        "context_recall": 0.2972972972972973,
+        "faithfulness": 0.45675675675675664,
+        "answer_relevancy": 0.5297297297297298
+      },
+      "overall_benchmark_score": 43.5135135135135,
+      "scenario_count": 37
+    },
+    "cpg": {
+      "scenarios": [
+        {
+          "context_precision": 0.5,
+          "context_recall": 0.3,
+          "faithfulness": 0.5,
+          "answer_relevancy": 0.4,
+          "success_rate": 1.0,
+          "response_time_ms": 21608,
+          "query_id": "T001",
+          "query_category": "Technical",
+          "approach": "cpg",
+          "benchmark_score": 42.50000000000001
+        },
+        {
+          "context_precision": 0.7,
+          "context_recall": 0.4,
+          "faithfulness": 0.7,
+          "answer_relevancy": 0.6,
+          "success_rate": 1.0,
+          "response_time_ms": 15183,
+          "query_id": "T002",
+          "query_category": "Technical",
+          "approach": "cpg",
+          "benchmark_score": 60.0
+        },
+        {
+          "context_precision": 0.5,
+          "context_recall": 0.4,
+          "faithfulness": 0.5,
+          "answer_relevancy": 0.6,
+          "success_rate": 1.0,
+          "response_time_ms": 14489,
+          "query_id": "T003",
+          "query_category": "Technical",
+          "approach": "cpg",
+          "benchmark_score": 50.0
+        },
+        {
+          "context_precision": 0.3,
+          "context_recall": 0.2,
+          "faithfulness": 0.3,
+          "answer_relevancy": 0.25,
+          "success_rate": 1.0,
+          "response_time_ms": 14696,
+          "query_id": "T004",
+          "query_category": "Technical",
+          "approach": "cpg",
+          "benchmark_score": 26.25
+        },
+        {
+          "context_precision": 0.5,
+          "context_recall": 0.2,
+          "faithfulness": 0.5,
+          "answer_relevancy": 0.6,
+          "success_rate": 1.0,
+          "response_time_ms": 7117,
+          "query_id": "T005",
+          "query_category": "Technical",
+          "approach": "cpg",
+          "benchmark_score": 44.99999999999999
+        },
+        {
+          "context_precision": 0.2,
+          "context_recall": 0.1,
+          "faithfulness": 0.2,
+          "answer_relevancy": 0.15,
+          "success_rate": 1.0,
+          "response_time_ms": 16032,
+          "query_id": "F001",
+          "query_category": "Functional",
+          "approach": "cpg",
+          "benchmark_score": 16.25
+        },
+        {
+          "context_precision": 0.5,
+          "context_recall": 0.2,
+          "faithfulness": 0.5,
+          "answer_relevancy": 0.4,
+          "success_rate": 1.0,
+          "response_time_ms": 20497,
+          "query_id": "F002",
+          "query_category": "Functional",
+          "approach": "cpg",
+          "benchmark_score": 40.0
+        },
+        {
+          "context_precision": 0.0,
+          "context_recall": 0.0,
+          "faithfulness": 0.0,
+          "answer_relevancy": 0.0,
+          "success_rate": 1.0,
+          "response_time_ms": 13578,
+          "query_id": "F003",
+          "query_category": "Functional",
+          "approach": "cpg",
+          "benchmark_score": 0.0
+        },
+        {
+          "context_precision": 0.2,
+          "context_recall": 0.1,
+          "faithfulness": 0.2,
+          "answer_relevancy": 0.15,
+          "success_rate": 1.0,
+          "response_time_ms": 14553,
+          "query_id": "F004",
+          "query_category": "Functional",
+          "approach": "cpg",
+          "benchmark_score": 16.25
+        },
+        {
+          "context_precision": 0.2,
+          "context_recall": 0.1,
+          "faithfulness": 0.2,
+          "answer_relevancy": 0.15,
+          "success_rate": 1.0,
+          "response_time_ms": 16600,
+          "query_id": "F005",
+          "query_category": "Functional",
+          "approach": "cpg",
+          "benchmark_score": 16.25
+        },
+        {
+          "context_precision": 0.2,
+          "context_recall": 0.1,
+          "faithfulness": 0.2,
+          "answer_relevancy": 0.15,
+          "success_rate": 1.0,
+          "response_time_ms": 13916,
+          "query_id": "NF001",
+          "query_category": "Non-Functional",
+          "approach": "cpg",
+          "benchmark_score": 16.25
+        },
+        {
+          "context_precision": 0.0,
+          "context_recall": 0.0,
+          "faithfulness": 0.0,
+          "answer_relevancy": 0.0,
+          "success_rate": 1.0,
+          "response_time_ms": 16309,
+          "query_id": "NF002",
+          "query_category": "Non-Functional",
+          "approach": "cpg",
+          "benchmark_score": 0.0
+        },
+        {
+          "context_precision": 0.2,
+          "context_recall": 0.1,
+          "faithfulness": 0.2,
+          "answer_relevancy": 0.15,
+          "success_rate": 1.0,
+          "response_time_ms": 14240,
+          "query_id": "NF003",
+          "query_category": "Non-Functional",
+          "approach": "cpg",
+          "benchmark_score": 16.25
+        },
+        {
+          "context_precision": 0.1,
+          "context_recall": 0.0,
+          "faithfulness": 0.1,
+          "answer_relevancy": 0.1,
+          "success_rate": 1.0,
+          "response_time_ms": 15237,
+          "query_id": "NF004",
+          "query_category": "Non-Functional",
+          "approach": "cpg",
+          "benchmark_score": 7.500000000000001
+        },
+        {
+          "context_precision": 0.0,
+          "context_recall": 0.0,
+          "faithfulness": 0.0,
+          "answer_relevancy": 0.0,
+          "success_rate": 1.0,
+          "response_time_ms": 14485,
+          "query_id": "NF005",
+          "query_category": "Non-Functional",
+          "approach": "cpg",
+          "benchmark_score": 0.0
+        },
+        {
+          "context_precision": 0.3,
+          "context_recall": 0.2,
+          "faithfulness": 0.3,
+          "answer_relevancy": 0.25,
+          "success_rate": 1.0,
+          "response_time_ms": 14449,
+          "query_id": "NF006",
+          "query_category": "Non-Functional",
+          "approach": "cpg",
+          "benchmark_score": 26.25
+        },
+        {
+          "context_precision": 0.0,
+          "context_recall": 0.0,
+          "faithfulness": 0.0,
+          "answer_relevancy": 0.0,
+          "success_rate": 1.0,
+          "response_time_ms": 14449,
+          "query_id": "M001",
+          "query_category": "Modification",
+          "approach": "cpg",
+          "benchmark_score": 0.0
+        },
+        {
+          "context_precision": 0.2,
+          "context_recall": 0.1,
+          "faithfulness": 0.2,
+          "answer_relevancy": 0.15,
+          "success_rate": 1.0,
+          "response_time_ms": 18801,
+          "query_id": "M002",
+          "query_category": "Modification",
+          "approach": "cpg",
+          "benchmark_score": 16.25
+        },
+        {
+          "context_precision": 0.3,
+          "context_recall": 0.1,
+          "faithfulness": 0.3,
+          "answer_relevancy": 0.2,
+          "success_rate": 1.0,
+          "response_time_ms": 18940,
+          "query_id": "M003",
+          "query_category": "Modification",
+          "approach": "cpg",
+          "benchmark_score": 22.499999999999996
+        },
+        {
+          "context_precision": 0.0,
+          "context_recall": 0.0,
+          "faithfulness": 0.0,
+          "answer_relevancy": 0.0,
+          "success_rate": 1.0,
+          "response_time_ms": 14047,
+          "query_id": "M004",
+          "query_category": "Modification",
+          "approach": "cpg",
+          "benchmark_score": 0.0
+        },
+        {
+          "context_precision": 0.0,
+          "context_recall": 0.0,
+          "faithfulness": 0.0,
+          "answer_relevancy": 0.0,
+          "success_rate": 1.0,
+          "response_time_ms": 16301,
+          "query_id": "M005",
+          "query_category": "Modification",
+          "approach": "cpg",
+          "benchmark_score": 0.0
+        },
+        {
+          "context_precision": 0.2,
+          "context_recall": 0.1,
+          "faithfulness": 0.2,
+          "answer_relevancy": 0.15,
+          "success_rate": 1.0,
+          "response_time_ms": 24844,
+          "query_id": "FA001",
+          "query_category": "Feature Addition",
+          "approach": "cpg",
+          "benchmark_score": 16.25
+        },
+        {
+          "context_precision": 0.3,
+          "context_recall": 0.1,
+          "faithfulness": 0.3,
+          "answer_relevancy": 0.2,
+          "success_rate": 1.0,
+          "response_time_ms": 32509,
+          "query_id": "FA002",
+          "query_category": "Feature Addition",
+          "approach": "cpg",
+          "benchmark_score": 22.499999999999996
+        },
+        {
+          "context_precision": 0.0,
+          "context_recall": 0.0,
+          "faithfulness": 0.0,
+          "answer_relevancy": 0.0,
+          "success_rate": 1.0,
+          "response_time_ms": 25445,
+          "query_id": "FA003",
+          "query_category": "Feature Addition",
+          "approach": "cpg",
+          "benchmark_score": 0.0
+        },
+        {
+          "context_precision": 0.0,
+          "context_recall": 0.0,
+          "faithfulness": 0.0,
+          "answer_relevancy": 0.0,
+          "success_rate": 1.0,
+          "response_time_ms": 16071,
+          "query_id": "FA004",
+          "query_category": "Feature Addition",
+          "approach": "cpg",
+          "benchmark_score": 0.0
+        },
+        {
+          "context_precision": 0.2,
+          "context_recall": 0.1,
+          "faithfulness": 0.2,
+          "answer_relevancy": 0.15,
+          "success_rate": 1.0,
+          "response_time_ms": 16085,
+          "query_id": "FA005",
+          "query_category": "Feature Addition",
+          "approach": "cpg",
+          "benchmark_score": 16.25
+        },
+        {
+          "context_precision": 0.0,
+          "context_recall": 0.0,
+          "faithfulness": 0.0,
+          "answer_relevancy": 0.0,
+          "success_rate": 1.0,
+          "response_time_ms": 15459,
+          "query_id": "MOD001",
+          "query_category": "Modernization",
+          "approach": "cpg",
+          "benchmark_score": 0.0
+        },
+        {
+          "context_precision": 0.2,
+          "context_recall": 0.1,
+          "faithfulness": 0.2,
+          "answer_relevancy": 0.15,
+          "success_rate": 1.0,
+          "response_time_ms": 15123,
+          "query_id": "MOD002",
+          "query_category": "Modernization",
+          "approach": "cpg",
+          "benchmark_score": 16.25
+        },
+        {
+          "context_precision": 0.0,
+          "context_recall": 0.0,
+          "faithfulness": 0.0,
+          "answer_relevancy": 0.0,
+          "success_rate": 1.0,
+          "response_time_ms": 16675,
+          "query_id": "MOD003",
+          "query_category": "Modernization",
+          "approach": "cpg",
+          "benchmark_score": 0.0
+        },
+        {
+          "context_precision": 0.0,
+          "context_recall": 0.0,
+          "faithfulness": 0.0,
+          "answer_relevancy": 0.0,
+          "success_rate": 1.0,
+          "response_time_ms": 21787,
+          "query_id": "MOD004",
+          "query_category": "Modernization",
+          "approach": "cpg",
+          "benchmark_score": 0.0
+        },
+        {
+          "context_precision": 0.1,
+          "context_recall": 0.0,
+          "faithfulness": 0.1,
+          "answer_relevancy": 0.1,
+          "success_rate": 1.0,
+          "response_time_ms": 18318,
+          "query_id": "MOD005",
+          "query_category": "Modernization",
+          "approach": "cpg",
+          "benchmark_score": 7.500000000000001
+        },
+        {
+          "context_precision": 0.0,
+          "context_recall": 0.0,
+          "faithfulness": 0.0,
+          "answer_relevancy": 0.0,
+          "success_rate": 1.0,
+          "response_time_ms": 21332,
+          "query_id": "BUG001",
+          "query_category": "Bug Analysis",
+          "approach": "cpg",
+          "benchmark_score": 0.0
+        },
+        {
+          "context_precision": 0.5,
+          "context_recall": 0.2,
+          "faithfulness": 0.5,
+          "answer_relevancy": 0.4,
+          "success_rate": 1.0,
+          "response_time_ms": 15716,
+          "query_id": "BUG002",
+          "query_category": "Bug Analysis",
+          "approach": "cpg",
+          "benchmark_score": 40.0
+        },
+        {
+          "context_precision": 0.0,
+          "context_recall": 0.0,
+          "faithfulness": 0.0,
+          "answer_relevancy": 0.0,
+          "success_rate": 1.0,
+          "response_time_ms": 30208,
+          "query_id": "BUG003",
+          "query_category": "Bug Analysis",
+          "approach": "cpg",
+          "benchmark_score": 0.0
+        },
+        {
+          "context_precision": 0.0,
+          "context_recall": 0.0,
+          "faithfulness": 0.0,
+          "answer_relevancy": 0.0,
+          "success_rate": 1.0,
+          "response_time_ms": 16734,
+          "query_id": "INT001",
+          "query_category": "Integration",
+          "approach": "cpg",
+          "benchmark_score": 0.0
+        },
+        {
+          "context_precision": 0.3,
+          "context_recall": 0.1,
+          "faithfulness": 0.3,
+          "answer_relevancy": 0.2,
+          "success_rate": 1.0,
+          "response_time_ms": 13760,
+          "query_id": "INT002",
+          "query_category": "Integration",
+          "approach": "cpg",
+          "benchmark_score": 22.499999999999996
+        },
+        {
+          "context_precision": 0.0,
+          "context_recall": 0.0,
+          "faithfulness": 0.0,
+          "answer_relevancy": 0.0,
+          "success_rate": 1.0,
+          "response_time_ms": 14719,
+          "query_id": "INT003",
+          "query_category": "Integration",
+          "approach": "cpg",
+          "benchmark_score": 0.0
+        }
+      ],
+      "aggregate_metrics": {
+        "context_precision": 0.1810810810810811,
+        "context_recall": 0.0891891891891892,
+        "faithfulness": 0.1810810810810811,
+        "answer_relevancy": 0.15270270270270273
+      },
+      "overall_benchmark_score": 15.101351351351353,
+      "scenario_count": 37
+    },
+    "comprehensive": {
+      "scenarios": [
+        {
+          "context_precision": 0.0,
+          "context_recall": 0.0,
+          "faithfulness": 0.0,
+          "answer_relevancy": 0.0,
+          "success_rate": 1.0,
+          "response_time_ms": 52461,
+          "query_id": "T001",
+          "query_category": "Technical",
+          "approach": "comprehensive",
+          "benchmark_score": 0.0
+        },
+        {
+          "context_precision": 0.0,
+          "context_recall": 0.0,
+          "faithfulness": 0.0,
+          "answer_relevancy": 0.0,
+          "success_rate": 1.0,
+          "response_time_ms": 47934,
+          "query_id": "T002",
+          "query_category": "Technical",
+          "approach": "comprehensive",
+          "benchmark_score": 0.0
+        },
+        {
+          "context_precision": 0.0,
+          "context_recall": 0.0,
+          "faithfulness": 0.0,
+          "answer_relevancy": 0.0,
+          "success_rate": 1.0,
+          "response_time_ms": 60945,
+          "query_id": "T003",
+          "query_category": "Technical",
+          "approach": "comprehensive",
+          "benchmark_score": 0.0
+        },
+        {
+          "context_precision": 0.0,
+          "context_recall": 0.0,
+          "faithfulness": 0.0,
+          "answer_relevancy": 0.0,
+          "success_rate": 1.0,
+          "response_time_ms": 50672,
+          "query_id": "T004",
+          "query_category": "Technical",
+          "approach": "comprehensive",
+          "benchmark_score": 0.0
+        },
+        {
+          "context_precision": 0.0,
+          "context_recall": 0.0,
+          "faithfulness": 0.0,
+          "answer_relevancy": 0.0,
+          "success_rate": 1.0,
+          "response_time_ms": 56751,
+          "query_id": "T005",
+          "query_category": "Technical",
+          "approach": "comprehensive",
+          "benchmark_score": 0.0
+        },
+        {
+          "context_precision": 0.0,
+          "context_recall": 0.0,
+          "faithfulness": 0.0,
+          "answer_relevancy": 0.0,
+          "success_rate": 1.0,
+          "response_time_ms": 53308,
+          "query_id": "F001",
+          "query_category": "Functional",
+          "approach": "comprehensive",
+          "benchmark_score": 0.0
+        },
+        {
+          "context_precision": 0.0,
+          "context_recall": 0.0,
+          "faithfulness": 0.0,
+          "answer_relevancy": 0.0,
+          "success_rate": 1.0,
+          "response_time_ms": 45114,
+          "query_id": "F002",
+          "query_category": "Functional",
+          "approach": "comprehensive",
+          "benchmark_score": 0.0
+        },
+        {
+          "context_precision": 0.6,
+          "context_recall": 0.4,
+          "faithfulness": 0.6,
+          "answer_relevancy": 0.7,
+          "success_rate": 1.0,
+          "response_time_ms": 77081,
+          "query_id": "F003",
+          "query_category": "Functional",
+          "approach": "comprehensive",
+          "benchmark_score": 57.49999999999999
+        },
+        {
+          "context_precision": 0.0,
+          "context_recall": 0.0,
+          "faithfulness": 0.0,
+          "answer_relevancy": 0.0,
+          "success_rate": 1.0,
+          "response_time_ms": 55963,
+          "query_id": "F004",
+          "query_category": "Functional",
+          "approach": "comprehensive",
+          "benchmark_score": 0.0
+        },
+        {
+          "context_precision": 0.7,
+          "context_recall": 0.6,
+          "faithfulness": 0.7,
+          "answer_relevancy": 0.75,
+          "success_rate": 1.0,
+          "response_time_ms": 46712,
+          "query_id": "F005",
+          "query_category": "Functional",
+          "approach": "comprehensive",
+          "benchmark_score": 68.75
+        },
+        {
+          "context_precision": 0.2,
+          "context_recall": 0.1,
+          "faithfulness": 0.2,
+          "answer_relevancy": 0.3,
+          "success_rate": 1.0,
+          "response_time_ms": 50542,
+          "query_id": "NF001",
+          "query_category": "Non-Functional",
+          "approach": "comprehensive",
+          "benchmark_score": 20.0
+        },
+        {
+          "context_precision": 0.0,
+          "context_recall": 0.0,
+          "faithfulness": 0.0,
+          "answer_relevancy": 0.0,
+          "success_rate": 1.0,
+          "response_time_ms": 57477,
+          "query_id": "NF002",
+          "query_category": "Non-Functional",
+          "approach": "comprehensive",
+          "benchmark_score": 0.0
+        },
+        {
+          "context_precision": 0.0,
+          "context_recall": 0.0,
+          "faithfulness": 0.0,
+          "answer_relevancy": 0.0,
+          "success_rate": 1.0,
+          "response_time_ms": 67593,
+          "query_id": "NF003",
+          "query_category": "Non-Functional",
+          "approach": "comprehensive",
+          "benchmark_score": 0.0
+        },
+        {
+          "context_precision": 0.0,
+          "context_recall": 0.0,
+          "faithfulness": 0.0,
+          "answer_relevancy": 0.0,
+          "success_rate": 1.0,
+          "response_time_ms": 48415,
+          "query_id": "NF004",
+          "query_category": "Non-Functional",
+          "approach": "comprehensive",
+          "benchmark_score": 0.0
+        },
+        {
+          "context_precision": 0.0,
+          "context_recall": 0.0,
+          "faithfulness": 0.0,
+          "answer_relevancy": 0.0,
+          "success_rate": 1.0,
+          "response_time_ms": 57633,
+          "query_id": "NF005",
+          "query_category": "Non-Functional",
+          "approach": "comprehensive",
+          "benchmark_score": 0.0
+        },
+        {
+          "context_precision": 0.0,
+          "context_recall": 0.0,
+          "faithfulness": 0.0,
+          "answer_relevancy": 0.0,
+          "success_rate": 1.0,
+          "response_time_ms": 51121,
+          "query_id": "NF006",
+          "query_category": "Non-Functional",
+          "approach": "comprehensive",
+          "benchmark_score": 0.0
+        },
+        {
+          "context_precision": 0.0,
+          "context_recall": 0.0,
+          "faithfulness": 0.0,
+          "answer_relevancy": 0.0,
+          "success_rate": 1.0,
+          "response_time_ms": 81205,
+          "query_id": "M001",
+          "query_category": "Modification",
+          "approach": "comprehensive",
+          "benchmark_score": 0.0
+        },
+        {
+          "context_precision": 0.0,
+          "context_recall": 0.0,
+          "faithfulness": 0.0,
+          "answer_relevancy": 0.0,
+          "success_rate": 1.0,
+          "response_time_ms": 61258,
+          "query_id": "M002",
+          "query_category": "Modification",
+          "approach": "comprehensive",
+          "benchmark_score": 0.0
+        },
+        {
+          "context_precision": 0.0,
+          "context_recall": 0.0,
+          "faithfulness": 0.0,
+          "answer_relevancy": 0.0,
+          "success_rate": 1.0,
+          "response_time_ms": 60268,
+          "query_id": "M003",
+          "query_category": "Modification",
+          "approach": "comprehensive",
+          "benchmark_score": 0.0
+        },
+        {
+          "context_precision": 0.4,
+          "context_recall": 0.2,
+          "faithfulness": 0.4,
+          "answer_relevancy": 0.5,
+          "success_rate": 1.0,
+          "response_time_ms": 54456,
+          "query_id": "M004",
+          "query_category": "Modification",
+          "approach": "comprehensive",
+          "benchmark_score": 37.5
+        },
+        {
+          "context_precision": 0.2,
+          "context_recall": 0.1,
+          "faithfulness": 0.2,
+          "answer_relevancy": 0.3,
+          "success_rate": 1.0,
+          "response_time_ms": 50297,
+          "query_id": "M005",
+          "query_category": "Modification",
+          "approach": "comprehensive",
+          "benchmark_score": 20.0
+        },
+        {
+          "context_precision": 0.0,
+          "context_recall": 0.0,
+          "faithfulness": 0.0,
+          "answer_relevancy": 0.0,
+          "success_rate": 1.0,
+          "response_time_ms": 58986,
+          "query_id": "FA001",
+          "query_category": "Feature Addition",
+          "approach": "comprehensive",
+          "benchmark_score": 0.0
+        },
+        {
+          "context_precision": 0.2,
+          "context_recall": 0.1,
+          "faithfulness": 0.2,
+          "answer_relevancy": 0.3,
+          "success_rate": 1.0,
+          "response_time_ms": 127402,
+          "query_id": "FA002",
+          "query_category": "Feature Addition",
+          "approach": "comprehensive",
+          "benchmark_score": 20.0
+        },
+        {
+          "context_precision": 0.0,
+          "context_recall": 0.0,
+          "faithfulness": 0.0,
+          "answer_relevancy": 0.0,
+          "success_rate": 1.0,
+          "response_time_ms": 114105,
+          "query_id": "FA003",
+          "query_category": "Feature Addition",
+          "approach": "comprehensive",
+          "benchmark_score": 0.0
+        },
+        {
+          "context_precision": 0.0,
+          "context_recall": 0.0,
+          "faithfulness": 0.0,
+          "answer_relevancy": 0.0,
+          "success_rate": 1.0,
+          "response_time_ms": 58953,
+          "query_id": "FA004",
+          "query_category": "Feature Addition",
+          "approach": "comprehensive",
+          "benchmark_score": 0.0
+        },
+        {
+          "context_precision": 0.4,
+          "context_recall": 0.2,
+          "faithfulness": 0.4,
+          "answer_relevancy": 0.5,
+          "success_rate": 1.0,
+          "response_time_ms": 53525,
+          "query_id": "FA005",
+          "query_category": "Feature Addition",
+          "approach": "comprehensive",
+          "benchmark_score": 37.5
+        },
+        {
+          "context_precision": 0.6,
+          "context_recall": 0.5,
+          "faithfulness": 0.6,
+          "answer_relevancy": 0.7,
+          "success_rate": 1.0,
+          "response_time_ms": 63405,
+          "query_id": "MOD001",
+          "query_category": "Modernization",
+          "approach": "comprehensive",
+          "benchmark_score": 60.00000000000001
+        },
+        {
+          "context_precision": 0.0,
+          "context_recall": 0.0,
+          "faithfulness": 0.0,
+          "answer_relevancy": 0.0,
+          "success_rate": 1.0,
+          "response_time_ms": 58645,
+          "query_id": "MOD002",
+          "query_category": "Modernization",
+          "approach": "comprehensive",
+          "benchmark_score": 0.0
+        },
+        {
+          "context_precision": 0.5,
+          "context_recall": 0.3,
+          "faithfulness": 0.5,
+          "answer_relevancy": 0.6,
+          "success_rate": 1.0,
+          "response_time_ms": 59934,
+          "query_id": "MOD003",
+          "query_category": "Modernization",
+          "approach": "comprehensive",
+          "benchmark_score": 47.5
+        },
+        {
+          "context_precision": 0.7,
+          "context_recall": 0.6,
+          "faithfulness": 0.7,
+          "answer_relevancy": 0.75,
+          "success_rate": 1.0,
+          "response_time_ms": 69229,
+          "query_id": "MOD004",
+          "query_category": "Modernization",
+          "approach": "comprehensive",
+          "benchmark_score": 68.75
+        },
+        {
+          "context_precision": 0.0,
+          "context_recall": 0.0,
+          "faithfulness": 0.0,
+          "answer_relevancy": 0.0,
+          "success_rate": 1.0,
+          "response_time_ms": 63207,
+          "query_id": "MOD005",
+          "query_category": "Modernization",
+          "approach": "comprehensive",
+          "benchmark_score": 0.0
+        },
+        {
+          "context_precision": 0.4,
+          "context_recall": 0.3,
+          "faithfulness": 0.4,
+          "answer_relevancy": 0.5,
+          "success_rate": 1.0,
+          "response_time_ms": 78435,
+          "query_id": "BUG001",
+          "query_category": "Bug Analysis",
+          "approach": "comprehensive",
+          "benchmark_score": 40.0
+        },
+        {
+          "context_precision": 0.5,
+          "context_recall": 0.2,
+          "faithfulness": 0.5,
+          "answer_relevancy": 0.6,
+          "success_rate": 1.0,
+          "response_time_ms": 53295,
+          "query_id": "BUG002",
+          "query_category": "Bug Analysis",
+          "approach": "comprehensive",
+          "benchmark_score": 44.99999999999999
+        },
+        {
+          "context_precision": 0.4,
+          "context_recall": 0.3,
+          "faithfulness": 0.4,
+          "answer_relevancy": 0.5,
+          "success_rate": 1.0,
+          "response_time_ms": 82206,
+          "query_id": "BUG003",
+          "query_category": "Bug Analysis",
+          "approach": "comprehensive",
+          "benchmark_score": 40.0
+        },
+        {
+          "context_precision": 0.5,
+          "context_recall": 0.2,
+          "faithfulness": 0.5,
+          "answer_relevancy": 0.4,
+          "success_rate": 1.0,
+          "response_time_ms": 52390,
+          "query_id": "INT001",
+          "query_category": "Integration",
+          "approach": "comprehensive",
+          "benchmark_score": 40.0
+        },
+        {
+          "context_precision": 0.2,
+          "context_recall": 0.1,
+          "faithfulness": 0.2,
+          "answer_relevancy": 0.3,
+          "success_rate": 1.0,
+          "response_time_ms": 49917,
+          "query_id": "INT002",
+          "query_category": "Integration",
+          "approach": "comprehensive",
+          "benchmark_score": 20.0
+        },
+        {
+          "context_precision": 0.2,
+          "context_recall": 0.1,
+          "faithfulness": 0.2,
+          "answer_relevancy": 0.3,
+          "success_rate": 1.0,
+          "response_time_ms": 47726,
+          "query_id": "INT003",
+          "query_category": "Integration",
+          "approach": "comprehensive",
+          "benchmark_score": 20.0
+        }
+      ],
+      "aggregate_metrics": {
+        "context_precision": 0.18108108108108112,
+        "context_recall": 0.11621621621621618,
+        "faithfulness": 0.18108108108108112,
+        "answer_relevancy": 0.21621621621621623
+      },
+      "overall_benchmark_score": 17.364864864864867,
+      "scenario_count": 37
+    }
+  },
+  "category_analysis": {
+    "vector": {
+      "Technical": {
+        "benchmark_score": 24.5,
+        "scenario_count": 5,
+        "metrics": {
+          "context_precision": 0.26,
+          "context_recall": 0.15999999999999998,
+          "faithfulness": 0.26,
+          "answer_relevancy": 0.3
+        }
+      },
+      "Functional": {
+        "benchmark_score": 72.74999999999999,
+        "scenario_count": 5,
+        "metrics": {
+          "context_precision": 0.7399999999999999,
+          "context_recall": 0.62,
+          "faithfulness": 0.7399999999999999,
+          "answer_relevancy": 0.8099999999999999
+        }
+      },
+      "Non-Functional": {
+        "benchmark_score": 27.916666666666668,
+        "scenario_count": 6,
+        "metrics": {
+          "context_precision": 0.3,
+          "context_recall": 0.16666666666666666,
+          "faithfulness": 0.3,
+          "answer_relevancy": 0.35000000000000003
+        }
+      },
+      "Modification": {
+        "benchmark_score": 44.99999999999999,
+        "scenario_count": 5,
+        "metrics": {
+          "context_precision": 0.48,
+          "context_recall": 0.26,
+          "faithfulness": 0.48,
+          "answer_relevancy": 0.58
+        }
+      },
+      "Feature Addition": {
+        "benchmark_score": 55.75,
+        "scenario_count": 5,
+        "metrics": {
+          "context_precision": 0.58,
+          "context_recall": 0.39999999999999997,
+          "faithfulness": 0.58,
+          "answer_relevancy": 0.6699999999999999
+        }
+      },
+      "Modernization": {
+        "benchmark_score": 50.5,
+        "scenario_count": 5,
+        "metrics": {
+          "context_precision": 0.5399999999999999,
+          "context_recall": 0.3,
+          "faithfulness": 0.5399999999999999,
+          "answer_relevancy": 0.64
+        }
+      },
+      "Bug Analysis": {
+        "benchmark_score": 33.33333333333333,
+        "scenario_count": 3,
+        "metrics": {
+          "context_precision": 0.3333333333333333,
+          "context_recall": 0.2333333333333333,
+          "faithfulness": 0.3333333333333333,
+          "answer_relevancy": 0.43333333333333335
+        }
+      },
+      "Integration": {
+        "benchmark_score": 33.333333333333336,
+        "scenario_count": 3,
+        "metrics": {
+          "context_precision": 0.3666666666666667,
+          "context_recall": 0.20000000000000004,
+          "faithfulness": 0.3666666666666667,
+          "answer_relevancy": 0.39999999999999997
+        }
+      }
+    },
+    "cpg": {
+      "Technical": {
+        "benchmark_score": 44.75,
+        "scenario_count": 5,
+        "metrics": {
+          "context_precision": 0.5,
+          "context_recall": 0.3,
+          "faithfulness": 0.5,
+          "answer_relevancy": 0.49000000000000005
+        }
+      },
+      "Functional": {
+        "benchmark_score": 17.75,
+        "scenario_count": 5,
+        "metrics": {
+          "context_precision": 0.21999999999999997,
+          "context_recall": 0.1,
+          "faithfulness": 0.21999999999999997,
+          "answer_relevancy": 0.17
+        }
+      },
+      "Non-Functional": {
+        "benchmark_score": 11.041666666666668,
+        "scenario_count": 6,
+        "metrics": {
+          "context_precision": 0.13333333333333333,
+          "context_recall": 0.06666666666666667,
+          "faithfulness": 0.13333333333333333,
+          "answer_relevancy": 0.10833333333333334
+        }
+      },
+      "Modification": {
+        "benchmark_score": 7.75,
+        "scenario_count": 5,
+        "metrics": {
+          "context_precision": 0.1,
+          "context_recall": 0.04,
+          "faithfulness": 0.1,
+          "answer_relevancy": 0.06999999999999999
+        }
+      },
+      "Feature Addition": {
+        "benchmark_score": 10.999999999999998,
+        "scenario_count": 5,
+        "metrics": {
+          "context_precision": 0.13999999999999999,
+          "context_recall": 0.06000000000000001,
+          "faithfulness": 0.13999999999999999,
+          "answer_relevancy": 0.1
+        }
+      },
+      "Modernization": {
+        "benchmark_score": 4.75,
+        "scenario_count": 5,
+        "metrics": {
+          "context_precision": 0.06000000000000001,
+          "context_recall": 0.02,
+          "faithfulness": 0.06000000000000001,
+          "answer_relevancy": 0.05
+        }
+      },
+      "Bug Analysis": {
+        "benchmark_score": 13.333333333333334,
+        "scenario_count": 3,
+        "metrics": {
+          "context_precision": 0.16666666666666666,
+          "context_recall": 0.06666666666666667,
+          "faithfulness": 0.16666666666666666,
+          "answer_relevancy": 0.13333333333333333
+        }
+      },
+      "Integration": {
+        "benchmark_score": 7.5,
+        "scenario_count": 3,
+        "metrics": {
+          "context_precision": 0.09999999999999999,
+          "context_recall": 0.03333333333333333,
+          "faithfulness": 0.09999999999999999,
+          "answer_relevancy": 0.06666666666666667
+        }
+      }
+    },
+    "comprehensive": {
+      "Technical": {
+        "benchmark_score": 0.0,
+        "scenario_count": 5,
+        "metrics": {
+          "context_precision": 0.0,
+          "context_recall": 0.0,
+          "faithfulness": 0.0,
+          "answer_relevancy": 0.0
+        }
+      },
+      "Functional": {
+        "benchmark_score": 25.25,
+        "scenario_count": 5,
+        "metrics": {
+          "context_precision": 0.25999999999999995,
+          "context_recall": 0.2,
+          "faithfulness": 0.25999999999999995,
+          "answer_relevancy": 0.29
+        }
+      },
+      "Non-Functional": {
+        "benchmark_score": 3.3333333333333335,
+        "scenario_count": 6,
+        "metrics": {
+          "context_precision": 0.03333333333333333,
+          "context_recall": 0.016666666666666666,
+          "faithfulness": 0.03333333333333333,
+          "answer_relevancy": 0.049999999999999996
+        }
+      },
+      "Modification": {
+        "benchmark_score": 11.500000000000002,
+        "scenario_count": 5,
+        "metrics": {
+          "context_precision": 0.12000000000000002,
+          "context_recall": 0.06000000000000001,
+          "faithfulness": 0.12000000000000002,
+          "answer_relevancy": 0.16
+        }
+      },
+      "Feature Addition": {
+        "benchmark_score": 11.500000000000002,
+        "scenario_count": 5,
+        "metrics": {
+          "context_precision": 0.12000000000000002,
+          "context_recall": 0.06000000000000001,
+          "faithfulness": 0.12000000000000002,
+          "answer_relevancy": 0.16
+        }
+      },
+      "Modernization": {
+        "benchmark_score": 35.25,
+        "scenario_count": 5,
+        "metrics": {
+          "context_precision": 0.36,
+          "context_recall": 0.27999999999999997,
+          "faithfulness": 0.36,
+          "answer_relevancy": 0.41
+        }
+      },
+      "Bug Analysis": {
+        "benchmark_score": 41.666666666666664,
+        "scenario_count": 3,
+        "metrics": {
+          "context_precision": 0.43333333333333335,
+          "context_recall": 0.26666666666666666,
+          "faithfulness": 0.43333333333333335,
+          "answer_relevancy": 0.5333333333333333
+        }
+      },
+      "Integration": {
+        "benchmark_score": 26.666666666666668,
+        "scenario_count": 3,
+        "metrics": {
+          "context_precision": 0.3,
+          "context_recall": 0.13333333333333333,
+          "faithfulness": 0.3,
+          "answer_relevancy": 0.3333333333333333
+        }
+      }
+    }
+  },
+  "benchmark_summary": {
+    "ranking": [
+      [
+        "vector",
+        43.5135135135135
+      ],
+      [
+        "comprehensive",
+        17.364864864864867
+      ],
+      [
+        "cpg",
+        15.101351351351353
+      ]
+    ],
+    "score_distribution": {
+      "vector": {
+        "excellent": 0,
+        "good": 4,
+        "fair": 9,
+        "needs_work": 24
+      },
+      "cpg": {
+        "excellent": 0,
+        "good": 0,
+        "fair": 1,
+        "needs_work": 36
+      },
+      "comprehensive": {
+        "excellent": 0,
+        "good": 0,
+        "fair": 4,
+        "needs_work": 33
+      }
+    }
+  }
+}

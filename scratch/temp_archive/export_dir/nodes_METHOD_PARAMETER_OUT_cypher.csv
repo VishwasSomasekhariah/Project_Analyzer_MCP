@@ -1,0 +1,15 @@
+LOAD CSV FROM 'file:/nodes_METHOD_PARAMETER_OUT_data.csv' AS line
+CREATE (:METHOD_PARAMETER_OUT {
+id: toInteger(line[0]),
+CODE: line[2],
+COLUMN_NUMBER: toInteger(line[3]),
+EVALUATION_STRATEGY: line[4],
+INDEX: toInteger(line[5]),
+IS_VARIADIC: toBoolean(line[6]),
+LINE_NUMBER: toInteger(line[7]),
+NAME: line[8],
+OFFSET: line[9],
+OFFSET_END: line[10],
+ORDER: toInteger(line[11]),
+TYPE_FULL_NAME: line[12]
+});

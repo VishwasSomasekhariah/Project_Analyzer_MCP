@@ -1,0 +1,2206 @@
+{
+  "status": "success",
+  "response": "The `WorkerFactory.CreateWorkers()` function is responsible for instantiating and returning a list of worker objects. Specifically, within this function, a new list of `IWorker` objects is created, which includes instances of the classes `WorkerA`, `WorkerB`, and `WorkerC`. Each of these classes is instantiated with a `notifier` parameter. This information is derived from the analysis of the statement nodes within the function block, confirming the instantiation and return of these specific classes. The findings from Approach 1 and Approach 2 provide a clear understanding of the function's behavior, while Approach 3 did not yield additional insights.",
+  "query_history": [
+    "MATCH (t:Type)-[:CONTAINS]->(f:Function) WHERE t.name = 'WorkerFactory' AND f.name = 'CreateWorkers' RETURN f.name",
+    "MATCH (p:Project {name: 'HelloWorldApp'})-[:CONTAINS]->(:File)-[:CONTAINS]->(:Type)-[:CONTAINS]->(f:Function {name: 'CreateWorkers'})-[:CONTAINS]->(b:Block)-[:CONTAINS]->(s:Statement) WHERE s.text CONTAINS 'new' RETURN s.text",
+    "MATCH (f:Function)-[:CONTAINS]->(b:Block)-[:CONTAINS]->(s:Statement) WHERE f.name = 'WorkerFactory.CreateWorkers()' AND s.text CONTAINS 'return' AND s.text CONTAINS 'class' RETURN s",
+    "MATCH (f:Function)-[:CONTAINS]->(b:Block)-[:CONTAINS]->(s:Statement) WHERE f.name = 'WorkerFactory.CreateWorkers()' AND s.text CONTAINS 'return' RETURN s.text, s.order",
+    "MATCH (f:Function {name: 'WorkerFactory.CreateWorkers()'})-[:CONTAINS]->(b:Block)-[:CONTAINS]->(s:Statement) RETURN s.text, s.order",
+    "MATCH (f:Function {name: 'WorkerFactory.CreateWorkers()'})-[:CONTAINS]->(b:Block)-[:CONTAINS]->(s:Statement) WHERE s.text CONTAINS 'return' AND s.text CONTAINS 'class' RETURN s.text, s.order",
+    "MATCH (p:Project {name: 'HelloWorldApp'})-[:CONTAINS]->(:File)-[:CONTAINS]->(:Type)-[:CONTAINS]->(f:Function {name: 'WorkerFactory.CreateWorkers()'})-[:CONTAINS]->(b:Block)-[:CONTAINS]->(s:Statement) WHERE s.text CONTAINS 'return' AND s.text CONTAINS 'class' RETURN s.text, s.order"
+  ],
+  "iterations_used": 1,
+  "final_results": [
+    {
+      "f.name": "CreateWorkers",
+      "_source_query": "MATCH (t:Type)-[:CONTAINS]->(f:Function) WHERE t.name = 'WorkerFactory' AND f.name = 'CreateWorkers' RETURN f.name",
+      "_source_iteration": 1,
+      "_query_purpose": "This query discovers the Function node for WorkerFactory.CreateWorkers() using the CONTAINS relationship.",
+      "_cot_reasoning": {
+        "step1_perspective": "Locate the Function node for WorkerFactory.CreateWorkers() using the CONTAINS relationship.",
+        "step2_premise_validation": "Using P1 (WorkerFactory is Type) and P2 (CreateWorkers contained in WorkerFactory), we focus on finding the Function node for CreateWorkers.",
+        "step3_path_trace": "Type\u2192CONTAINS\u2192Function",
+        "step4_filters": "Filter on Type name 'WorkerFactory' and Function name 'CreateWorkers'.",
+        "step5_return": "Return the Function node's name to confirm the correct node is found.",
+        "step6_optimize": "No specific ordering or limits needed as we expect a single result."
+      }
+    },
+    {
+      "s.text": "return new List<IWorker>\n            {\n                new WorkerA(notifier),\n                new WorkerB(notifier),\n                new WorkerC(notifier)\n            };",
+      "_source_query": "MATCH (p:Project {name: 'HelloWorldApp'})-[:CONTAINS]->(:File)-[:CONTAINS]->(:Type)-[:CONTAINS]->(f:Function {name: 'CreateWorkers'})-[:CONTAINS]->(b:Block)-[:CONTAINS]->(s:Statement) WHERE s.text CONTAINS 'new' RETURN s.text",
+      "_source_iteration": 1,
+      "_query_purpose": "Retrieve all instantiation statements within the CreateWorkers function of the HelloWorldApp project.",
+      "_cot_reasoning": {
+        "step1_perspective": "Find instantiation statements inside a specific function.",
+        "step2_premise_validation": "Using P3, we know Function nodes contain Block nodes, which contain Statement nodes.",
+        "step3_path_trace": "Function\u2192CONTAINS\u2192Block\u2192CONTAINS\u2192Statement",
+        "step4_filters": "Filter Statement nodes where text contains 'new' to identify instantiations.",
+        "step5_return": "Return the text of Statement nodes to identify the instantiation details.",
+        "step6_optimize": "No specific ordering or limit needed as we are retrieving all relevant statements."
+      }
+    }
+  ],
+  "intent": {
+    "intent_type": "lookup",
+    "confidence": 0.95,
+    "reasoning": "The user's query is focused on identifying specific classes that are instantiated and returned by the method WorkerFactory.CreateWorkers(). This indicates a need for specific data retrieval rather than understanding the broader architectural structure or relationships within the codebase.",
+    "expected_result_type": "A list or description of the specific classes instantiated and returned by the WorkerFactory.CreateWorkers() method.",
+    "_token_updates": {
+      "llm_call_history": [
+        {
+          "call_type": "intent_analysis",
+          "timestamp": 1763045657.4697685,
+          "model_name": "gpt-4o-2024-08-06",
+          "input_tokens": 131,
+          "output_tokens": 96,
+          "total_tokens": 227,
+          "input_cost_usd": 0.00393,
+          "output_cost_usd": 0.00288,
+          "total_cost_usd": 0.00681,
+          "latency_seconds": 3.728,
+          "call_purpose": "Analyze user query intent",
+          "approach_index": null
+        }
+      ],
+      "total_input_tokens": 131,
+      "total_output_tokens": 96,
+      "total_tokens_used": 227,
+      "total_estimated_cost_usd": 0.00681,
+      "models_used": [
+        "gpt-4o-2024-08-06"
+      ]
+    }
+  },
+  "workflow": "langgraph_agent",
+  "organized_data": null,
+  "architectural_summary": {},
+  "synthesis_context_used": 0,
+  "raw_query_results": [
+    {
+      "f.name": "CreateWorkers"
+    },
+    {
+      "s.text": "return new List<IWorker>\n            {\n                new WorkerA(notifier),\n                new WorkerB(notifier),\n                new WorkerC(notifier)\n            };"
+    }
+  ],
+  "all_executed_queries": [
+    "MATCH (t:Type)-[:CONTAINS]->(f:Function) WHERE t.name = 'WorkerFactory' AND f.name = 'CreateWorkers' RETURN f.name",
+    "MATCH (p:Project {name: 'HelloWorldApp'})-[:CONTAINS]->(:File)-[:CONTAINS]->(:Type)-[:CONTAINS]->(f:Function {name: 'CreateWorkers'})-[:CONTAINS]->(b:Block)-[:CONTAINS]->(s:Statement) WHERE s.text CONTAINS 'new' RETURN s.text",
+    "MATCH (f:Function)-[:CONTAINS]->(b:Block)-[:CONTAINS]->(s:Statement) WHERE f.name = 'WorkerFactory.CreateWorkers()' AND s.text CONTAINS 'return' AND s.text CONTAINS 'class' RETURN s",
+    "MATCH (f:Function)-[:CONTAINS]->(b:Block)-[:CONTAINS]->(s:Statement) WHERE f.name = 'WorkerFactory.CreateWorkers()' AND s.text CONTAINS 'return' RETURN s.text, s.order",
+    "MATCH (f:Function {name: 'WorkerFactory.CreateWorkers()'})-[:CONTAINS]->(b:Block)-[:CONTAINS]->(s:Statement) RETURN s.text, s.order",
+    "MATCH (f:Function {name: 'WorkerFactory.CreateWorkers()'})-[:CONTAINS]->(b:Block)-[:CONTAINS]->(s:Statement) WHERE s.text CONTAINS 'return' AND s.text CONTAINS 'class' RETURN s.text, s.order",
+    "MATCH (p:Project {name: 'HelloWorldApp'})-[:CONTAINS]->(:File)-[:CONTAINS]->(:Type)-[:CONTAINS]->(f:Function {name: 'WorkerFactory.CreateWorkers()'})-[:CONTAINS]->(b:Block)-[:CONTAINS]->(s:Statement) WHERE s.text CONTAINS 'return' AND s.text CONTAINS 'class' RETURN s.text, s.order"
+  ],
+  "total_tokens_used": 26750,
+  "total_input_tokens": 22602,
+  "total_output_tokens": 4148,
+  "total_estimated_cost_usd": 0.08304,
+  "discovery_research_tokens": 0,
+  "think_tokens": 0,
+  "generate_tokens": 0,
+  "rethink_tokens": 0,
+  "diagnostics_tokens": 0,
+  "refinement_tokens": 0,
+  "sufficiency_check_tokens": 0,
+  "synthesis_tokens": 828,
+  "tokens_per_approach": {
+    "0": 3325,
+    "1": 3556,
+    "2": 18814
+  },
+  "cost_per_approach": {
+    "0": 0.00665,
+    "1": 0.007111999999999999,
+    "2": 0.037628
+  },
+  "tokens_per_data_point": null,
+  "cost_per_data_point": null,
+  "models_used": [
+    "gpt-4o-2024-08-06"
+  ],
+  "primary_model": "gpt-4-turbo",
+  "llm_call_history": [
+    {
+      "call_type": "intent_analysis",
+      "timestamp": 1763045657.4697685,
+      "model_name": "gpt-4o-2024-08-06",
+      "input_tokens": 131,
+      "output_tokens": 96,
+      "total_tokens": 227,
+      "input_cost_usd": 0.00393,
+      "output_cost_usd": 0.00288,
+      "total_cost_usd": 0.00681,
+      "latency_seconds": 3.728,
+      "call_purpose": "Analyze user query intent",
+      "approach_index": null
+    },
+    {
+      "call_type": "synthesis",
+      "timestamp": 1763045760.4001608,
+      "model_name": "gpt-4o-2024-08-06",
+      "input_tokens": 676,
+      "output_tokens": 152,
+      "total_tokens": 828,
+      "input_cost_usd": 0.020279999999999996,
+      "output_cost_usd": 0.00456,
+      "total_cost_usd": 0.024839999999999997,
+      "latency_seconds": 3.543,
+      "call_purpose": "Synthesize final response from discovered data",
+      "approach_index": null
+    }
+  ],
+  "raw_results": [
+    {
+      "f.name": "CreateWorkers",
+      "_source_query": "MATCH (t:Type)-[:CONTAINS]->(f:Function) WHERE t.name = 'WorkerFactory' AND f.name = 'CreateWorkers' RETURN f.name",
+      "_source_iteration": 1,
+      "_query_purpose": "This query discovers the Function node for WorkerFactory.CreateWorkers() using the CONTAINS relationship.",
+      "_cot_reasoning": {
+        "step1_perspective": "Locate the Function node for WorkerFactory.CreateWorkers() using the CONTAINS relationship.",
+        "step2_premise_validation": "Using P1 (WorkerFactory is Type) and P2 (CreateWorkers contained in WorkerFactory), we focus on finding the Function node for CreateWorkers.",
+        "step3_path_trace": "Type\u2192CONTAINS\u2192Function",
+        "step4_filters": "Filter on Type name 'WorkerFactory' and Function name 'CreateWorkers'.",
+        "step5_return": "Return the Function node's name to confirm the correct node is found.",
+        "step6_optimize": "No specific ordering or limits needed as we expect a single result."
+      }
+    },
+    {
+      "s.text": "return new List<IWorker>\n            {\n                new WorkerA(notifier),\n                new WorkerB(notifier),\n                new WorkerC(notifier)\n            };",
+      "_source_query": "MATCH (p:Project {name: 'HelloWorldApp'})-[:CONTAINS]->(:File)-[:CONTAINS]->(:Type)-[:CONTAINS]->(f:Function {name: 'CreateWorkers'})-[:CONTAINS]->(b:Block)-[:CONTAINS]->(s:Statement) WHERE s.text CONTAINS 'new' RETURN s.text",
+      "_source_iteration": 1,
+      "_query_purpose": "Retrieve all instantiation statements within the CreateWorkers function of the HelloWorldApp project.",
+      "_cot_reasoning": {
+        "step1_perspective": "Find instantiation statements inside a specific function.",
+        "step2_premise_validation": "Using P3, we know Function nodes contain Block nodes, which contain Statement nodes.",
+        "step3_path_trace": "Function\u2192CONTAINS\u2192Block\u2192CONTAINS\u2192Statement",
+        "step4_filters": "Filter Statement nodes where text contains 'new' to identify instantiations.",
+        "step5_return": "Return the text of Statement nodes to identify the instantiation details.",
+        "step6_optimize": "No specific ordering or limit needed as we are retrieving all relevant statements."
+      }
+    }
+  ],
+  "executed_queries": [
+    "MATCH (t:Type)-[:CONTAINS]->(f:Function) WHERE t.name = 'WorkerFactory' AND f.name = 'CreateWorkers' RETURN f.name",
+    "MATCH (p:Project {name: 'HelloWorldApp'})-[:CONTAINS]->(:File)-[:CONTAINS]->(:Type)-[:CONTAINS]->(f:Function {name: 'CreateWorkers'})-[:CONTAINS]->(b:Block)-[:CONTAINS]->(s:Statement) WHERE s.text CONTAINS 'new' RETURN s.text",
+    "MATCH (f:Function)-[:CONTAINS]->(b:Block)-[:CONTAINS]->(s:Statement) WHERE f.name = 'WorkerFactory.CreateWorkers()' AND s.text CONTAINS 'return' AND s.text CONTAINS 'class' RETURN s",
+    "MATCH (f:Function)-[:CONTAINS]->(b:Block)-[:CONTAINS]->(s:Statement) WHERE f.name = 'WorkerFactory.CreateWorkers()' AND s.text CONTAINS 'return' RETURN s.text, s.order",
+    "MATCH (f:Function {name: 'WorkerFactory.CreateWorkers()'})-[:CONTAINS]->(b:Block)-[:CONTAINS]->(s:Statement) RETURN s.text, s.order",
+    "MATCH (f:Function {name: 'WorkerFactory.CreateWorkers()'})-[:CONTAINS]->(b:Block)-[:CONTAINS]->(s:Statement) WHERE s.text CONTAINS 'return' AND s.text CONTAINS 'class' RETURN s.text, s.order",
+    "MATCH (p:Project {name: 'HelloWorldApp'})-[:CONTAINS]->(:File)-[:CONTAINS]->(:Type)-[:CONTAINS]->(f:Function {name: 'WorkerFactory.CreateWorkers()'})-[:CONTAINS]->(b:Block)-[:CONTAINS]->(s:Statement) WHERE s.text CONTAINS 'return' AND s.text CONTAINS 'class' RETURN s.text, s.order"
+  ],
+  "approach_statuses": {
+    "0": "success",
+    "1": "success",
+    "2": "success"
+  },
+  "failed_approaches": [],
+  "approach_execution_traces": {
+    "0": {
+      "approach_name": "Subquery SQ1",
+      "approach_goal": "Locate the Function node for WorkerFactory.CreateWorkers() using the CONTAINS relationship from the Type node WorkerFactory.",
+      "queries_executed": 1,
+      "query_history": [
+        {
+          "iteration": 1,
+          "query": "MATCH (t:Type)-[:CONTAINS]->(f:Function) WHERE t.name = 'WorkerFactory' AND f.name = 'CreateWorkers' RETURN f.name",
+          "reasoning": {
+            "cot_reasoning": {
+              "step1_perspective": "Locate the Function node for WorkerFactory.CreateWorkers() using the CONTAINS relationship.",
+              "step2_premise_validation": "Using P1 (WorkerFactory is Type) and P2 (CreateWorkers contained in WorkerFactory), we focus on finding the Function node for CreateWorkers.",
+              "step3_path_trace": "Type\u2192CONTAINS\u2192Function",
+              "step4_filters": "Filter on Type name 'WorkerFactory' and Function name 'CreateWorkers'.",
+              "step5_return": "Return the Function node's name to confirm the correct node is found.",
+              "step6_optimize": "No specific ordering or limits needed as we expect a single result."
+            },
+            "query_purpose": "This query discovers the Function node for WorkerFactory.CreateWorkers() using the CONTAINS relationship."
+          },
+          "results": [
+            {
+              "f.name": "CreateWorkers"
+            }
+          ],
+          "error": null,
+          "result_count": 1,
+          "analysis": {
+            "analysis": "The query executed successfully and returned one result, indicating that the Function node for WorkerFactory.CreateWorkers() was found as expected.",
+            "key_findings": [
+              "The Function node 'CreateWorkers' exists under the Type node 'WorkerFactory'.",
+              "The CONTAINS relationship is correctly established."
+            ],
+            "recommendation": "Sufficient",
+            "next_query_hint": "If continuing, consider querying for additional functions under the WorkerFactory type or related types."
+          },
+          "premise_validations": [],
+          "apoc_diagnostics_used": false,
+          "sufficiency_status": null
+        }
+      ],
+      "reasoning_trail": [
+        {
+          "step": "Iteration 1 - Decision",
+          "type": "think",
+          "reasoning": "Agent decided to generate another query",
+          "context": "1 data points collected so far"
+        },
+        {
+          "step": "Iteration 1 - Query Generation",
+          "type": "generate",
+          "query": "MATCH (t:Type)-[:CONTAINS]->(f:Function) WHERE t.name = 'WorkerFactory' AND f.name = 'CreateWorkers' RETURN f.name",
+          "cot_reasoning": {
+            "step1_perspective": "Locate the Function node for WorkerFactory.CreateWorkers() using the CONTAINS relationship.",
+            "step2_premise_validation": "Using P1 (WorkerFactory is Type) and P2 (CreateWorkers contained in WorkerFactory), we focus on finding the Function node for CreateWorkers.",
+            "step3_path_trace": "Type\u2192CONTAINS\u2192Function",
+            "step4_filters": "Filter on Type name 'WorkerFactory' and Function name 'CreateWorkers'.",
+            "step5_return": "Return the Function node's name to confirm the correct node is found.",
+            "step6_optimize": "No specific ordering or limits needed as we expect a single result."
+          },
+          "query_purpose": "This query discovers the Function node for WorkerFactory.CreateWorkers() using the CONTAINS relationship."
+        },
+        {
+          "step": "Iteration 1 - Execution",
+          "type": "execute",
+          "result_count": 1,
+          "error": null,
+          "status": "success"
+        },
+        {
+          "step": "Iteration 1 - Analysis",
+          "type": "analyze",
+          "analysis": "The query executed successfully and returned one result, indicating that the Function node for WorkerFactory.CreateWorkers() was found as expected.",
+          "key_findings": [
+            "The Function node 'CreateWorkers' exists under the Type node 'WorkerFactory'.",
+            "The CONTAINS relationship is correctly established."
+          ],
+          "recommendation": "Sufficient",
+          "next_query_hint": "If continuing, consider querying for additional functions under the WorkerFactory type or related types."
+        },
+        {
+          "step": "Final Decision",
+          "type": "conclude",
+          "is_sufficient": true,
+          "reason": "The query executed successfully and returned one result, indicating that the Function node for WorkerFactory.CreateWorkers() was found as expected.",
+          "total_iterations": 1,
+          "total_data_points": 1
+        }
+      ],
+      "citations": {
+        "data_point_0": {
+          "query_index": 0,
+          "query": "MATCH (t:Type)-[:CONTAINS]->(f:Function) WHERE t.name = 'WorkerFactory' AND f.name = 'CreateWorkers' RETURN f.name",
+          "iteration": 1,
+          "query_purpose": "This query discovers the Function node for WorkerFactory.CreateWorkers() using the CONTAINS relationship.",
+          "cot_reasoning": {
+            "step1_perspective": "Locate the Function node for WorkerFactory.CreateWorkers() using the CONTAINS relationship.",
+            "step2_premise_validation": "Using P1 (WorkerFactory is Type) and P2 (CreateWorkers contained in WorkerFactory), we focus on finding the Function node for CreateWorkers.",
+            "step3_path_trace": "Type\u2192CONTAINS\u2192Function",
+            "step4_filters": "Filter on Type name 'WorkerFactory' and Function name 'CreateWorkers'.",
+            "step5_return": "Return the Function node's name to confirm the correct node is found.",
+            "step6_optimize": "No specific ordering or limits needed as we expect a single result."
+          },
+          "discovered_at": "Iteration 1, Query 1"
+        }
+      },
+      "evidence_summary": {
+        "query_0": {
+          "iteration": 1,
+          "query": "MATCH (t:Type)-[:CONTAINS]->(f:Function) WHERE t.name = 'WorkerFactory' AND f.name = 'CreateWorkers' RETURN f.name",
+          "query_purpose": "This query discovers the Function node for WorkerFactory.CreateWorkers() using the CONTAINS relationship.",
+          "cot_reasoning": {
+            "perspective": "Locate the Function node for WorkerFactory.CreateWorkers() using the CONTAINS relationship.",
+            "premises_validated": "Using P1 (WorkerFactory is Type) and P2 (CreateWorkers contained in WorkerFactory), we focus on finding the Function node for CreateWorkers.",
+            "path_used": "Type\u2192CONTAINS\u2192Function",
+            "filters_applied": "Filter on Type name 'WorkerFactory' and Function name 'CreateWorkers'."
+          },
+          "result_count": 1,
+          "key_findings": [
+            "The Function node 'CreateWorkers' exists under the Type node 'WorkerFactory'.",
+            "The CONTAINS relationship is correctly established."
+          ],
+          "results": [
+            {
+              "f.name": "CreateWorkers"
+            }
+          ]
+        }
+      },
+      "is_sufficient": true,
+      "sufficiency_reason": "The query executed successfully and returned one result, indicating that the Function node for WorkerFactory.CreateWorkers() was found as expected.",
+      "approach_answer": "The Function node for 'WorkerFactory.CreateWorkers()' is successfully located using the CONTAINS relationship from the Type node 'WorkerFactory'. The query confirms that the Function node 'CreateWorkers' is indeed contained within the Type node 'WorkerFactory', establishing the correct relationship.",
+      "approach_quality_grade": 1.0,
+      "data_points_used": [
+        0
+      ],
+      "confidence_assessment": "Medium - The confidence is based on a single data point with a quality rating of 0.72, which indicates a reasonable level of reliability but not the highest possible assurance.",
+      "partial_answers": [
+        {
+          "iteration": 1,
+          "findings_summary": "The query executed successfully and returned one result, indicating that the Function node for WorkerFactory.CreateWorkers() was found as expected.",
+          "key_findings": [
+            "The Function node 'CreateWorkers' exists under the Type node 'WorkerFactory'.",
+            "The CONTAINS relationship is correctly established."
+          ],
+          "data_count": 1,
+          "quality_grade": 0.72,
+          "query_purpose": "This query discovers the Function node for WorkerFactory.CreateWorkers() using the CONTAINS relationship."
+        }
+      ]
+    },
+    "1": {
+      "approach_name": "Subquery SQ2",
+      "approach_goal": "Retrieve all Statement nodes within the Block node contained by the Function node WorkerFactory.CreateWorkers() that instantiate classes.",
+      "queries_executed": 1,
+      "query_history": [
+        {
+          "iteration": 1,
+          "query": "MATCH (p:Project {name: 'HelloWorldApp'})-[:CONTAINS]->(:File)-[:CONTAINS]->(:Type)-[:CONTAINS]->(f:Function {name: 'CreateWorkers'})-[:CONTAINS]->(b:Block)-[:CONTAINS]->(s:Statement) WHERE s.text CONTAINS 'new' RETURN s.text",
+          "reasoning": {
+            "cot_reasoning": {
+              "step1_perspective": "Find instantiation statements inside a specific function.",
+              "step2_premise_validation": "Using P3, we know Function nodes contain Block nodes, which contain Statement nodes.",
+              "step3_path_trace": "Function\u2192CONTAINS\u2192Block\u2192CONTAINS\u2192Statement",
+              "step4_filters": "Filter Statement nodes where text contains 'new' to identify instantiations.",
+              "step5_return": "Return the text of Statement nodes to identify the instantiation details.",
+              "step6_optimize": "No specific ordering or limit needed as we are retrieving all relevant statements."
+            },
+            "query_purpose": "Retrieve all instantiation statements within the CreateWorkers function of the HelloWorldApp project."
+          },
+          "results": [
+            {
+              "s.text": "return new List<IWorker>\n            {\n                new WorkerA(notifier),\n                new WorkerB(notifier),\n                new WorkerC(notifier)\n            };"
+            }
+          ],
+          "error": null,
+          "result_count": 1,
+          "analysis": {
+            "analysis": "The query executed successfully and returned one result, indicating that the specified function 'CreateWorkers' within the 'HelloWorldApp' project contains a statement that instantiates new worker objects. This aligns with the goal of retrieving instantiation statements.",
+            "key_findings": [
+              "The query successfully located the 'CreateWorkers' function.",
+              "The returned statement includes a list instantiation of worker objects, which is relevant to the analysis of the function's behavior."
+            ],
+            "recommendation": "Sufficient",
+            "next_query_hint": "No further queries are needed at this time."
+          },
+          "premise_validations": [],
+          "apoc_diagnostics_used": false,
+          "sufficiency_status": null
+        }
+      ],
+      "reasoning_trail": [
+        {
+          "step": "Iteration 1 - Decision",
+          "type": "think",
+          "reasoning": "Agent decided to generate another query",
+          "context": "1 data points collected so far"
+        },
+        {
+          "step": "Iteration 1 - Query Generation",
+          "type": "generate",
+          "query": "MATCH (p:Project {name: 'HelloWorldApp'})-[:CONTAINS]->(:File)-[:CONTAINS]->(:Type)-[:CONTAINS]->(f:Function {name: 'CreateWorkers'})-[:CONTAINS]->(b:Block)-[:CONTAINS]->(s:Statement) WHERE s.text CONTAINS 'new' RETURN s.text",
+          "cot_reasoning": {
+            "step1_perspective": "Find instantiation statements inside a specific function.",
+            "step2_premise_validation": "Using P3, we know Function nodes contain Block nodes, which contain Statement nodes.",
+            "step3_path_trace": "Function\u2192CONTAINS\u2192Block\u2192CONTAINS\u2192Statement",
+            "step4_filters": "Filter Statement nodes where text contains 'new' to identify instantiations.",
+            "step5_return": "Return the text of Statement nodes to identify the instantiation details.",
+            "step6_optimize": "No specific ordering or limit needed as we are retrieving all relevant statements."
+          },
+          "query_purpose": "Retrieve all instantiation statements within the CreateWorkers function of the HelloWorldApp project."
+        },
+        {
+          "step": "Iteration 1 - Execution",
+          "type": "execute",
+          "result_count": 1,
+          "error": null,
+          "status": "success"
+        },
+        {
+          "step": "Iteration 1 - Analysis",
+          "type": "analyze",
+          "analysis": "The query executed successfully and returned one result, indicating that the specified function 'CreateWorkers' within the 'HelloWorldApp' project contains a statement that instantiates new worker objects. This aligns with the goal of retrieving instantiation statements.",
+          "key_findings": [
+            "The query successfully located the 'CreateWorkers' function.",
+            "The returned statement includes a list instantiation of worker objects, which is relevant to the analysis of the function's behavior."
+          ],
+          "recommendation": "Sufficient",
+          "next_query_hint": "No further queries are needed at this time."
+        },
+        {
+          "step": "Final Decision",
+          "type": "conclude",
+          "is_sufficient": true,
+          "reason": "The query executed successfully and returned one result, indicating that the specified function 'CreateWorkers' within the 'HelloWorldApp' project contains a statement that instantiates new worker objects. This aligns with the goal of retrieving instantiation statements.",
+          "total_iterations": 1,
+          "total_data_points": 1
+        }
+      ],
+      "citations": {
+        "data_point_0": {
+          "query_index": 0,
+          "query": "MATCH (p:Project {name: 'HelloWorldApp'})-[:CONTAINS]->(:File)-[:CONTAINS]->(:Type)-[:CONTAINS]->(f:Function {name: 'CreateWorkers'})-[:CONTAINS]->(b:Block)-[:CONTAINS]->(s:Statement) WHERE s.text CONTAINS 'new' RETURN s.text",
+          "iteration": 1,
+          "query_purpose": "Retrieve all instantiation statements within the CreateWorkers function of the HelloWorldApp project.",
+          "cot_reasoning": {
+            "step1_perspective": "Find instantiation statements inside a specific function.",
+            "step2_premise_validation": "Using P3, we know Function nodes contain Block nodes, which contain Statement nodes.",
+            "step3_path_trace": "Function\u2192CONTAINS\u2192Block\u2192CONTAINS\u2192Statement",
+            "step4_filters": "Filter Statement nodes where text contains 'new' to identify instantiations.",
+            "step5_return": "Return the text of Statement nodes to identify the instantiation details.",
+            "step6_optimize": "No specific ordering or limit needed as we are retrieving all relevant statements."
+          },
+          "discovered_at": "Iteration 1, Query 1"
+        }
+      },
+      "evidence_summary": {
+        "query_0": {
+          "iteration": 1,
+          "query": "MATCH (p:Project {name: 'HelloWorldApp'})-[:CONTAINS]->(:File)-[:CONTAINS]->(:Type)-[:CONTAINS]->(f:Function {name: 'CreateWorkers'})-[:CONTAINS]->(b:Block)-[:CONTAINS]->(s:Statement) WHERE s.text CONTAINS 'new' RETURN s.text",
+          "query_purpose": "Retrieve all instantiation statements within the CreateWorkers function of the HelloWorldApp project.",
+          "cot_reasoning": {
+            "perspective": "Find instantiation statements inside a specific function.",
+            "premises_validated": "Using P3, we know Function nodes contain Block nodes, which contain Statement nodes.",
+            "path_used": "Function\u2192CONTAINS\u2192Block\u2192CONTAINS\u2192Statement",
+            "filters_applied": "Filter Statement nodes where text contains 'new' to identify instantiations."
+          },
+          "result_count": 1,
+          "key_findings": [
+            "The query successfully located the 'CreateWorkers' function.",
+            "The returned statement includes a list instantiation of worker objects, which is relevant to the analysis of the function's behavior."
+          ],
+          "results": [
+            {
+              "s.text": "return new List<IWorker>\n            {\n                new WorkerA(notifier),\n                new WorkerB(notifier),\n                new WorkerC(notifier)\n            };"
+            }
+          ]
+        }
+      },
+      "is_sufficient": true,
+      "sufficiency_reason": "The query executed successfully and returned one result, indicating that the specified function 'CreateWorkers' within the 'HelloWorldApp' project contains a statement that instantiates new worker objects. This aligns with the goal of retrieving instantiation statements.",
+      "approach_answer": "The discovered data indicates that within the Block node of the Function node WorkerFactory.CreateWorkers(), there is a statement that instantiates a new List of IWorker objects. This list contains instances of WorkerA, WorkerB, and WorkerC classes, each initialized with a 'notifier' parameter. This statement is a direct example of class instantiation within the specified function block.",
+      "approach_quality_grade": 1.0,
+      "data_points_used": [
+        0
+      ],
+      "confidence_assessment": "High - The data point directly addresses the query by providing a specific instantiation statement within the CreateWorkers function, and the quality of the data is reasonably high at 0.72.",
+      "partial_answers": [
+        {
+          "iteration": 1,
+          "findings_summary": "The query executed successfully and returned one result, indicating that the specified function 'CreateWorkers' within the 'HelloWorldApp' project contains a statement that instantiates new worker objects. This aligns with the goal of retrieving instantiation statements.",
+          "key_findings": [
+            "The query successfully located the 'CreateWorkers' function.",
+            "The returned statement includes a list instantiation of worker objects, which is relevant to the analysis of the function's behavior."
+          ],
+          "data_count": 1,
+          "quality_grade": 0.72,
+          "query_purpose": "Retrieve all instantiation statements within the CreateWorkers function of the HelloWorldApp project."
+        }
+      ]
+    },
+    "2": {
+      "approach_name": "Subquery SQ3",
+      "approach_goal": "Retrieve all Statement nodes within the Block node contained by the Function node WorkerFactory.CreateWorkers() that return classes.",
+      "queries_executed": 5,
+      "query_history": [
+        {
+          "iteration": 1,
+          "query": "MATCH (f:Function)-[:CONTAINS]->(b:Block)-[:CONTAINS]->(s:Statement) WHERE f.name = 'WorkerFactory.CreateWorkers()' AND s.text CONTAINS 'return' AND s.text CONTAINS 'class' RETURN s",
+          "reasoning": {
+            "cot_reasoning": {
+              "step1_perspective": "Find Statement nodes within a specific function's block that return classes.",
+              "step2_premise_validation": "Using P3, we know Function nodes contain Block nodes, which contain Statement nodes.",
+              "step3_path_trace": "Function\u2192CONTAINS\u2192Block\u2192CONTAINS\u2192Statement",
+              "step4_filters": "Filter on Function node with name 'WorkerFactory.CreateWorkers()'.",
+              "step5_return": "Return properties of Statement nodes to identify those that return classes.",
+              "step6_optimize": "No specific ordering or limits needed as the query is specific to a function."
+            },
+            "query_purpose": "Retrieve Statement nodes within WorkerFactory.CreateWorkers() that return classes."
+          },
+          "results": [],
+          "error": null,
+          "result_count": 0,
+          "analysis": {
+            "analysis": "The query executed successfully but returned no results. This indicates that while the nodes and relationships are likely correct, the specific filters applied may be too strict or the expected nodes do not exist in the database.",
+            "key_findings": [
+              "No Statement nodes were found that match the criteria within the specified Function.",
+              "The filters for 'return' and 'class' in the Statement text may be too restrictive."
+            ],
+            "recommendation": "Refine",
+            "next_query_hint": "Consider broadening the filters or checking for the existence of relevant nodes and relationships."
+          },
+          "premise_validations": [
+            {
+              "premise_id": "P3",
+              "original_text": "Function nodes can contain Block nodes, which in turn contain Statement nodes.",
+              "status": "invalidated",
+              "corrected_text": null,
+              "correction_reasoning": null,
+              "validation_method": "apoc_diagnostics"
+            }
+          ],
+          "apoc_diagnostics_used": true,
+          "sufficiency_status": "INSUFFICIENT_DATA"
+        },
+        {
+          "iteration": 2,
+          "query": "MATCH (f:Function)-[:CONTAINS]->(b:Block)-[:CONTAINS]->(s:Statement) WHERE f.name = 'WorkerFactory.CreateWorkers()' AND s.text CONTAINS 'return' RETURN s.text, s.order",
+          "reasoning": {
+            "cot_reasoning": {
+              "step1_perspective": "Find Statement nodes within a specific function's block that return classes.",
+              "step2_premise_validation": "Using P3, we know Function nodes contain Block nodes, which contain Statement nodes.",
+              "step3_path_trace": "Function\u2192CONTAINS\u2192Block\u2192CONTAINS\u2192Statement",
+              "step4_filters": "WHERE f.name = 'WorkerFactory.CreateWorkers()' AND s.text CONTAINS 'return'",
+              "step5_return": "Return the statement text and the order property to understand the sequence of statements.",
+              "step6_optimize": "No specific ordering or limit needed as we are retrieving all relevant statements."
+            },
+            "query_purpose": "Retrieve all Statement nodes within WorkerFactory.CreateWorkers() that contain return statements."
+          },
+          "results": [],
+          "error": null,
+          "result_count": 0,
+          "analysis": {
+            "analysis": "The query executed successfully but returned no results. This indicates that either the specified Function node 'WorkerFactory.CreateWorkers()' does not exist, or there are no Statement nodes containing the text 'return' within the specified path.",
+            "key_findings": [
+              "The Function node 'WorkerFactory.CreateWorkers()' may not exist in the database.",
+              "There may be no Statement nodes related to the Function that contain the text 'return'."
+            ],
+            "recommendation": "Refine",
+            "next_query_hint": "Check for the existence of the Function node and consider broadening the search criteria for Statement nodes."
+          },
+          "premise_validations": [
+            {
+              "premise_id": "P3",
+              "original_text": "Function nodes can contain Block nodes, which in turn contain Statement nodes.",
+              "status": "invalidated",
+              "corrected_text": null,
+              "correction_reasoning": null,
+              "validation_method": "apoc_diagnostics"
+            }
+          ],
+          "apoc_diagnostics_used": true,
+          "sufficiency_status": "INSUFFICIENT_DATA"
+        },
+        {
+          "iteration": 3,
+          "query": "MATCH (f:Function {name: 'WorkerFactory.CreateWorkers()'})-[:CONTAINS]->(b:Block)-[:CONTAINS]->(s:Statement) RETURN s.text, s.order",
+          "reasoning": {
+            "cot_reasoning": {
+              "step1_perspective": "Find all Statement nodes within a specific function's block that may return classes.",
+              "step2_premise_validation": "Using P3, we know Function nodes contain Block nodes, which in turn contain Statement nodes.",
+              "step3_path_trace": "Function\u2192CONTAINS\u2192Block\u2192CONTAINS\u2192Statement",
+              "step4_filters": "Check for the existence of the Function node with name 'WorkerFactory.CreateWorkers()' and broaden the search criteria by not restricting to 'return' or 'class' in the text.",
+              "step5_return": "Return the text and order of Statement nodes to understand their content and sequence.",
+              "step6_optimize": "No specific ordering or limits applied due to the need to verify existence and content."
+            },
+            "query_purpose": "Retrieve all Statement nodes within the Block node contained by the Function node WorkerFactory.CreateWorkers() to verify their existence and content."
+          },
+          "results": [],
+          "error": null,
+          "result_count": 0,
+          "analysis": {
+            "analysis": "The query executed successfully but returned no results, indicating that either the specified Function node does not exist, or it does not contain any Block nodes with associated Statement nodes.",
+            "key_findings": [
+              "The Function node 'WorkerFactory.CreateWorkers()' may not exist in the database.",
+              "There may be no Block nodes associated with the Function node, or the Block nodes do not contain any Statement nodes."
+            ],
+            "recommendation": "Continue",
+            "next_query_hint": "Check for the existence of the Function node and its relationships by querying for the Function node directly."
+          },
+          "premise_validations": [
+            {
+              "premise_id": "P3",
+              "original_text": "Function nodes can contain Block nodes, which in turn contain Statement nodes.",
+              "status": "invalidated",
+              "corrected_text": null,
+              "correction_reasoning": null,
+              "validation_method": "apoc_diagnostics"
+            }
+          ],
+          "apoc_diagnostics_used": true,
+          "sufficiency_status": "INSUFFICIENT_DATA"
+        },
+        {
+          "iteration": 4,
+          "query": "MATCH (f:Function {name: 'WorkerFactory.CreateWorkers()'})-[:CONTAINS]->(b:Block)-[:CONTAINS]->(s:Statement) WHERE s.text CONTAINS 'return' AND s.text CONTAINS 'class' RETURN s.text, s.order",
+          "reasoning": {
+            "cot_reasoning": {
+              "step1_perspective": "Find Statement nodes within a specific function's block that return classes.",
+              "step2_premise_validation": "Using P3, we know Function nodes contain Block nodes, which contain Statement nodes.",
+              "step3_path_trace": "Function\u2192CONTAINS\u2192Block\u2192CONTAINS\u2192Statement",
+              "step4_filters": "Filter for Function node with name 'WorkerFactory.CreateWorkers()' and Statement nodes containing 'return' and 'class'.",
+              "step5_return": "Return s.text and s.order to understand the content and sequence of the statements.",
+              "step6_optimize": "No ORDER BY or LIMIT needed as we are checking for existence and content."
+            },
+            "query_purpose": "Retrieve Statement nodes within WorkerFactory.CreateWorkers() that return classes."
+          },
+          "results": [],
+          "error": null,
+          "result_count": 0,
+          "analysis": {
+            "analysis": "The query executed successfully but returned no results, indicating that there are likely no Statement nodes that match the specified criteria within the given path. This could be due to the absence of relevant nodes or relationships in the database.",
+            "key_findings": [
+              "No Statement nodes were found that contain both 'return' and 'class' in their text.",
+              "The specified path may be too specific, or the expected nodes/relationships may not exist."
+            ],
+            "recommendation": "Continue",
+            "next_query_hint": "Consider broadening the search criteria or checking for the existence of relevant nodes and relationships."
+          },
+          "premise_validations": [
+            {
+              "premise_id": "P3",
+              "original_text": "Function nodes can contain Block nodes, which in turn contain Statement nodes.",
+              "status": "invalidated",
+              "corrected_text": null,
+              "correction_reasoning": null,
+              "validation_method": "apoc_diagnostics"
+            }
+          ],
+          "apoc_diagnostics_used": true,
+          "sufficiency_status": "INSUFFICIENT_DATA"
+        },
+        {
+          "iteration": 5,
+          "query": "MATCH (p:Project {name: 'HelloWorldApp'})-[:CONTAINS]->(:File)-[:CONTAINS]->(:Type)-[:CONTAINS]->(f:Function {name: 'WorkerFactory.CreateWorkers()'})-[:CONTAINS]->(b:Block)-[:CONTAINS]->(s:Statement) WHERE s.text CONTAINS 'return' AND s.text CONTAINS 'class' RETURN s.text, s.order",
+          "reasoning": {
+            "cot_reasoning": {
+              "step1_perspective": "Find Statement nodes within the Block node contained by the Function node WorkerFactory.CreateWorkers() that return classes.",
+              "step2_premise_validation": "Using P3, we know Function nodes contain Block nodes, which in turn contain Statement nodes.",
+              "step3_path_trace": "Project\u2192CONTAINS\u2192File\u2192CONTAINS\u2192Type\u2192CONTAINS\u2192Function\u2192CONTAINS\u2192Block\u2192CONTAINS\u2192Statement",
+              "step4_filters": "Filter for Function nodes with name 'WorkerFactory.CreateWorkers()' and Statement nodes containing 'return' and 'class'.",
+              "step5_return": "Return s.text and s.order to identify the content and order of the Statement nodes.",
+              "step6_optimize": "No ORDER BY or LIMIT needed due to expected small result set."
+            },
+            "query_purpose": "Retrieve Statement nodes within WorkerFactory.CreateWorkers() that return classes, ensuring the function and its containing structure exist."
+          },
+          "results": [],
+          "error": null,
+          "result_count": 0,
+          "analysis": {
+            "analysis": "The query executed successfully but returned no results, indicating that while the specified nodes and relationships exist, there are no Statement nodes within the WorkerFactory.CreateWorkers() function that contain both 'return' and 'class' in their text.",
+            "key_findings": [
+              "The specified Project, Function, and relationships exist in the database.",
+              "No Statement nodes matched the criteria of containing both 'return' and 'class'."
+            ],
+            "recommendation": "Continue",
+            "next_query_hint": "Consider broadening the filters to check for statements that contain either 'return' or 'class' separately, or check for other relevant keywords."
+          },
+          "premise_validations": [
+            {
+              "premise_id": "P3",
+              "original_text": "Function nodes can contain Block nodes, which in turn contain Statement nodes.",
+              "status": "invalidated",
+              "corrected_text": null,
+              "correction_reasoning": null,
+              "validation_method": "apoc_diagnostics"
+            }
+          ],
+          "apoc_diagnostics_used": true,
+          "sufficiency_status": "INSUFFICIENT_DATA"
+        }
+      ],
+      "reasoning_trail": [
+        {
+          "step": "Iteration 1 - Decision",
+          "type": "think",
+          "reasoning": "Agent decided to generate another query",
+          "context": "0 data points collected so far"
+        },
+        {
+          "step": "Iteration 1 - Query Generation",
+          "type": "generate",
+          "query": "MATCH (f:Function)-[:CONTAINS]->(b:Block)-[:CONTAINS]->(s:Statement) WHERE f.name = 'WorkerFactory.CreateWorkers()' AND s.text CONTAINS 'return' AND s.text CONTAINS 'class' RETURN s",
+          "cot_reasoning": {
+            "step1_perspective": "Find Statement nodes within a specific function's block that return classes.",
+            "step2_premise_validation": "Using P3, we know Function nodes contain Block nodes, which contain Statement nodes.",
+            "step3_path_trace": "Function\u2192CONTAINS\u2192Block\u2192CONTAINS\u2192Statement",
+            "step4_filters": "Filter on Function node with name 'WorkerFactory.CreateWorkers()'.",
+            "step5_return": "Return properties of Statement nodes to identify those that return classes.",
+            "step6_optimize": "No specific ordering or limits needed as the query is specific to a function."
+          },
+          "query_purpose": "Retrieve Statement nodes within WorkerFactory.CreateWorkers() that return classes."
+        },
+        {
+          "step": "Iteration 1 - Execution",
+          "type": "execute",
+          "result_count": 0,
+          "error": null,
+          "status": "empty"
+        },
+        {
+          "step": "Iteration 1 - Analysis",
+          "type": "analyze",
+          "analysis": "The query executed successfully but returned no results. This indicates that while the nodes and relationships are likely correct, the specific filters applied may be too strict or the expected nodes do not exist in the database.",
+          "key_findings": [
+            "No Statement nodes were found that match the criteria within the specified Function.",
+            "The filters for 'return' and 'class' in the Statement text may be too restrictive."
+          ],
+          "recommendation": "Refine",
+          "next_query_hint": "Consider broadening the filters or checking for the existence of relevant nodes and relationships."
+        },
+        {
+          "step": "Iteration 2 - Decision",
+          "type": "think",
+          "reasoning": "Agent decided to generate another query",
+          "context": "0 data points collected so far"
+        },
+        {
+          "step": "Iteration 2 - Query Generation",
+          "type": "generate",
+          "query": "MATCH (f:Function)-[:CONTAINS]->(b:Block)-[:CONTAINS]->(s:Statement) WHERE f.name = 'WorkerFactory.CreateWorkers()' AND s.text CONTAINS 'return' RETURN s.text, s.order",
+          "cot_reasoning": {
+            "step1_perspective": "Find Statement nodes within a specific function's block that return classes.",
+            "step2_premise_validation": "Using P3, we know Function nodes contain Block nodes, which contain Statement nodes.",
+            "step3_path_trace": "Function\u2192CONTAINS\u2192Block\u2192CONTAINS\u2192Statement",
+            "step4_filters": "WHERE f.name = 'WorkerFactory.CreateWorkers()' AND s.text CONTAINS 'return'",
+            "step5_return": "Return the statement text and the order property to understand the sequence of statements.",
+            "step6_optimize": "No specific ordering or limit needed as we are retrieving all relevant statements."
+          },
+          "query_purpose": "Retrieve all Statement nodes within WorkerFactory.CreateWorkers() that contain return statements."
+        },
+        {
+          "step": "Iteration 2 - Execution",
+          "type": "execute",
+          "result_count": 0,
+          "error": null,
+          "status": "empty"
+        },
+        {
+          "step": "Iteration 2 - Analysis",
+          "type": "analyze",
+          "analysis": "The query executed successfully but returned no results. This indicates that either the specified Function node 'WorkerFactory.CreateWorkers()' does not exist, or there are no Statement nodes containing the text 'return' within the specified path.",
+          "key_findings": [
+            "The Function node 'WorkerFactory.CreateWorkers()' may not exist in the database.",
+            "There may be no Statement nodes related to the Function that contain the text 'return'."
+          ],
+          "recommendation": "Refine",
+          "next_query_hint": "Check for the existence of the Function node and consider broadening the search criteria for Statement nodes."
+        },
+        {
+          "step": "Iteration 3 - Decision",
+          "type": "think",
+          "reasoning": "Agent decided to generate another query",
+          "context": "0 data points collected so far"
+        },
+        {
+          "step": "Iteration 3 - Query Generation",
+          "type": "generate",
+          "query": "MATCH (f:Function {name: 'WorkerFactory.CreateWorkers()'})-[:CONTAINS]->(b:Block)-[:CONTAINS]->(s:Statement) RETURN s.text, s.order",
+          "cot_reasoning": {
+            "step1_perspective": "Find all Statement nodes within a specific function's block that may return classes.",
+            "step2_premise_validation": "Using P3, we know Function nodes contain Block nodes, which in turn contain Statement nodes.",
+            "step3_path_trace": "Function\u2192CONTAINS\u2192Block\u2192CONTAINS\u2192Statement",
+            "step4_filters": "Check for the existence of the Function node with name 'WorkerFactory.CreateWorkers()' and broaden the search criteria by not restricting to 'return' or 'class' in the text.",
+            "step5_return": "Return the text and order of Statement nodes to understand their content and sequence.",
+            "step6_optimize": "No specific ordering or limits applied due to the need to verify existence and content."
+          },
+          "query_purpose": "Retrieve all Statement nodes within the Block node contained by the Function node WorkerFactory.CreateWorkers() to verify their existence and content."
+        },
+        {
+          "step": "Iteration 3 - Execution",
+          "type": "execute",
+          "result_count": 0,
+          "error": null,
+          "status": "empty"
+        },
+        {
+          "step": "Iteration 3 - Analysis",
+          "type": "analyze",
+          "analysis": "The query executed successfully but returned no results, indicating that either the specified Function node does not exist, or it does not contain any Block nodes with associated Statement nodes.",
+          "key_findings": [
+            "The Function node 'WorkerFactory.CreateWorkers()' may not exist in the database.",
+            "There may be no Block nodes associated with the Function node, or the Block nodes do not contain any Statement nodes."
+          ],
+          "recommendation": "Continue",
+          "next_query_hint": "Check for the existence of the Function node and its relationships by querying for the Function node directly."
+        },
+        {
+          "step": "Iteration 4 - Decision",
+          "type": "think",
+          "reasoning": "Agent decided to generate another query",
+          "context": "0 data points collected so far"
+        },
+        {
+          "step": "Iteration 4 - Query Generation",
+          "type": "generate",
+          "query": "MATCH (f:Function {name: 'WorkerFactory.CreateWorkers()'})-[:CONTAINS]->(b:Block)-[:CONTAINS]->(s:Statement) WHERE s.text CONTAINS 'return' AND s.text CONTAINS 'class' RETURN s.text, s.order",
+          "cot_reasoning": {
+            "step1_perspective": "Find Statement nodes within a specific function's block that return classes.",
+            "step2_premise_validation": "Using P3, we know Function nodes contain Block nodes, which contain Statement nodes.",
+            "step3_path_trace": "Function\u2192CONTAINS\u2192Block\u2192CONTAINS\u2192Statement",
+            "step4_filters": "Filter for Function node with name 'WorkerFactory.CreateWorkers()' and Statement nodes containing 'return' and 'class'.",
+            "step5_return": "Return s.text and s.order to understand the content and sequence of the statements.",
+            "step6_optimize": "No ORDER BY or LIMIT needed as we are checking for existence and content."
+          },
+          "query_purpose": "Retrieve Statement nodes within WorkerFactory.CreateWorkers() that return classes."
+        },
+        {
+          "step": "Iteration 4 - Execution",
+          "type": "execute",
+          "result_count": 0,
+          "error": null,
+          "status": "empty"
+        },
+        {
+          "step": "Iteration 4 - Analysis",
+          "type": "analyze",
+          "analysis": "The query executed successfully but returned no results, indicating that there are likely no Statement nodes that match the specified criteria within the given path. This could be due to the absence of relevant nodes or relationships in the database.",
+          "key_findings": [
+            "No Statement nodes were found that contain both 'return' and 'class' in their text.",
+            "The specified path may be too specific, or the expected nodes/relationships may not exist."
+          ],
+          "recommendation": "Continue",
+          "next_query_hint": "Consider broadening the search criteria or checking for the existence of relevant nodes and relationships."
+        },
+        {
+          "step": "Iteration 5 - Decision",
+          "type": "think",
+          "reasoning": "Agent decided to generate another query",
+          "context": "0 data points collected so far"
+        },
+        {
+          "step": "Iteration 5 - Query Generation",
+          "type": "generate",
+          "query": "MATCH (p:Project {name: 'HelloWorldApp'})-[:CONTAINS]->(:File)-[:CONTAINS]->(:Type)-[:CONTAINS]->(f:Function {name: 'WorkerFactory.CreateWorkers()'})-[:CONTAINS]->(b:Block)-[:CONTAINS]->(s:Statement) WHERE s.text CONTAINS 'return' AND s.text CONTAINS 'class' RETURN s.text, s.order",
+          "cot_reasoning": {
+            "step1_perspective": "Find Statement nodes within the Block node contained by the Function node WorkerFactory.CreateWorkers() that return classes.",
+            "step2_premise_validation": "Using P3, we know Function nodes contain Block nodes, which in turn contain Statement nodes.",
+            "step3_path_trace": "Project\u2192CONTAINS\u2192File\u2192CONTAINS\u2192Type\u2192CONTAINS\u2192Function\u2192CONTAINS\u2192Block\u2192CONTAINS\u2192Statement",
+            "step4_filters": "Filter for Function nodes with name 'WorkerFactory.CreateWorkers()' and Statement nodes containing 'return' and 'class'.",
+            "step5_return": "Return s.text and s.order to identify the content and order of the Statement nodes.",
+            "step6_optimize": "No ORDER BY or LIMIT needed due to expected small result set."
+          },
+          "query_purpose": "Retrieve Statement nodes within WorkerFactory.CreateWorkers() that return classes, ensuring the function and its containing structure exist."
+        },
+        {
+          "step": "Iteration 5 - Execution",
+          "type": "execute",
+          "result_count": 0,
+          "error": null,
+          "status": "empty"
+        },
+        {
+          "step": "Iteration 5 - Analysis",
+          "type": "analyze",
+          "analysis": "The query executed successfully but returned no results, indicating that while the specified nodes and relationships exist, there are no Statement nodes within the WorkerFactory.CreateWorkers() function that contain both 'return' and 'class' in their text.",
+          "key_findings": [
+            "The specified Project, Function, and relationships exist in the database.",
+            "No Statement nodes matched the criteria of containing both 'return' and 'class'."
+          ],
+          "recommendation": "Continue",
+          "next_query_hint": "Consider broadening the filters to check for statements that contain either 'return' or 'class' separately, or check for other relevant keywords."
+        },
+        {
+          "step": "Final Decision",
+          "type": "conclude",
+          "is_sufficient": false,
+          "reason": "We have not gathered any data that addresses the approach's goal, as all previous queries returned 0 records. The last analysis hint suggests broadening the search criteria or checking for the existence of relevant nodes and relationships, indicating that there may be a lack of data or overly restrictive filters. Therefore, it is reasonable to continue exploring.",
+          "total_iterations": 5,
+          "total_data_points": 0
+        }
+      ],
+      "citations": {},
+      "evidence_summary": {
+        "query_0": {
+          "iteration": 1,
+          "query": "MATCH (f:Function)-[:CONTAINS]->(b:Block)-[:CONTAINS]->(s:Statement) WHERE f.name = 'WorkerFactory.CreateWorkers()' AND s.text CONTAINS 'return' AND s.text CONTAINS 'class' RETURN s",
+          "query_purpose": "Retrieve Statement nodes within WorkerFactory.CreateWorkers() that return classes.",
+          "cot_reasoning": {
+            "perspective": "Find Statement nodes within a specific function's block that return classes.",
+            "premises_validated": "Using P3, we know Function nodes contain Block nodes, which contain Statement nodes.",
+            "path_used": "Function\u2192CONTAINS\u2192Block\u2192CONTAINS\u2192Statement",
+            "filters_applied": "Filter on Function node with name 'WorkerFactory.CreateWorkers()'."
+          },
+          "result_count": 0,
+          "key_findings": [
+            "No Statement nodes were found that match the criteria within the specified Function.",
+            "The filters for 'return' and 'class' in the Statement text may be too restrictive."
+          ],
+          "results": []
+        },
+        "query_1": {
+          "iteration": 2,
+          "query": "MATCH (f:Function)-[:CONTAINS]->(b:Block)-[:CONTAINS]->(s:Statement) WHERE f.name = 'WorkerFactory.CreateWorkers()' AND s.text CONTAINS 'return' RETURN s.text, s.order",
+          "query_purpose": "Retrieve all Statement nodes within WorkerFactory.CreateWorkers() that contain return statements.",
+          "cot_reasoning": {
+            "perspective": "Find Statement nodes within a specific function's block that return classes.",
+            "premises_validated": "Using P3, we know Function nodes contain Block nodes, which contain Statement nodes.",
+            "path_used": "Function\u2192CONTAINS\u2192Block\u2192CONTAINS\u2192Statement",
+            "filters_applied": "WHERE f.name = 'WorkerFactory.CreateWorkers()' AND s.text CONTAINS 'return'"
+          },
+          "result_count": 0,
+          "key_findings": [
+            "The Function node 'WorkerFactory.CreateWorkers()' may not exist in the database.",
+            "There may be no Statement nodes related to the Function that contain the text 'return'."
+          ],
+          "results": []
+        },
+        "query_2": {
+          "iteration": 3,
+          "query": "MATCH (f:Function {name: 'WorkerFactory.CreateWorkers()'})-[:CONTAINS]->(b:Block)-[:CONTAINS]->(s:Statement) RETURN s.text, s.order",
+          "query_purpose": "Retrieve all Statement nodes within the Block node contained by the Function node WorkerFactory.CreateWorkers() to verify their existence and content.",
+          "cot_reasoning": {
+            "perspective": "Find all Statement nodes within a specific function's block that may return classes.",
+            "premises_validated": "Using P3, we know Function nodes contain Block nodes, which in turn contain Statement nodes.",
+            "path_used": "Function\u2192CONTAINS\u2192Block\u2192CONTAINS\u2192Statement",
+            "filters_applied": "Check for the existence of the Function node with name 'WorkerFactory.CreateWorkers()' and broaden the search criteria by not restricting to 'return' or 'class' in the text."
+          },
+          "result_count": 0,
+          "key_findings": [
+            "The Function node 'WorkerFactory.CreateWorkers()' may not exist in the database.",
+            "There may be no Block nodes associated with the Function node, or the Block nodes do not contain any Statement nodes."
+          ],
+          "results": []
+        },
+        "query_3": {
+          "iteration": 4,
+          "query": "MATCH (f:Function {name: 'WorkerFactory.CreateWorkers()'})-[:CONTAINS]->(b:Block)-[:CONTAINS]->(s:Statement) WHERE s.text CONTAINS 'return' AND s.text CONTAINS 'class' RETURN s.text, s.order",
+          "query_purpose": "Retrieve Statement nodes within WorkerFactory.CreateWorkers() that return classes.",
+          "cot_reasoning": {
+            "perspective": "Find Statement nodes within a specific function's block that return classes.",
+            "premises_validated": "Using P3, we know Function nodes contain Block nodes, which contain Statement nodes.",
+            "path_used": "Function\u2192CONTAINS\u2192Block\u2192CONTAINS\u2192Statement",
+            "filters_applied": "Filter for Function node with name 'WorkerFactory.CreateWorkers()' and Statement nodes containing 'return' and 'class'."
+          },
+          "result_count": 0,
+          "key_findings": [
+            "No Statement nodes were found that contain both 'return' and 'class' in their text.",
+            "The specified path may be too specific, or the expected nodes/relationships may not exist."
+          ],
+          "results": []
+        },
+        "query_4": {
+          "iteration": 5,
+          "query": "MATCH (p:Project {name: 'HelloWorldApp'})-[:CONTAINS]->(:File)-[:CONTAINS]->(:Type)-[:CONTAINS]->(f:Function {name: 'WorkerFactory.CreateWorkers()'})-[:CONTAINS]->(b:Block)-[:CONTAINS]->(s:Statement) WHERE s.text CONTAINS 'return' AND s.text CONTAINS 'class' RETURN s.text, s.order",
+          "query_purpose": "Retrieve Statement nodes within WorkerFactory.CreateWorkers() that return classes, ensuring the function and its containing structure exist.",
+          "cot_reasoning": {
+            "perspective": "Find Statement nodes within the Block node contained by the Function node WorkerFactory.CreateWorkers() that return classes.",
+            "premises_validated": "Using P3, we know Function nodes contain Block nodes, which in turn contain Statement nodes.",
+            "path_used": "Project\u2192CONTAINS\u2192File\u2192CONTAINS\u2192Type\u2192CONTAINS\u2192Function\u2192CONTAINS\u2192Block\u2192CONTAINS\u2192Statement",
+            "filters_applied": "Filter for Function nodes with name 'WorkerFactory.CreateWorkers()' and Statement nodes containing 'return' and 'class'."
+          },
+          "result_count": 0,
+          "key_findings": [
+            "The specified Project, Function, and relationships exist in the database.",
+            "No Statement nodes matched the criteria of containing both 'return' and 'class'."
+          ],
+          "results": []
+        }
+      },
+      "is_sufficient": false,
+      "sufficiency_reason": "We have not gathered any data that addresses the approach's goal, as all previous queries returned 0 records. The last analysis hint suggests broadening the search criteria or checking for the existence of relevant nodes and relationships, indicating that there may be a lack of data or overly restrictive filters. Therefore, it is reasonable to continue exploring.",
+      "approach_answer": "The attempt to retrieve Statement nodes within the Block node contained by the Function node WorkerFactory.CreateWorkers() that return classes was unsuccessful. The findings consistently indicate that either the Function node 'WorkerFactory.CreateWorkers()' does not exist in the database, or there are no Statement nodes within it that match the criteria of containing both 'return' and 'class'. This suggests that the specified path may be too specific, or the expected nodes and relationships may not exist in the database.",
+      "approach_quality_grade": 0.3,
+      "data_points_used": [],
+      "confidence_assessment": "Low - The consistent lack of relevant data points and the low quality of findings indicate uncertainty about the existence of the specified nodes and relationships.",
+      "partial_answers": [
+        {
+          "iteration": 1,
+          "findings_summary": "The query executed successfully but returned no results. This indicates that while the nodes and relationships are likely correct, the specific filters applied may be too strict or the expected nodes do not exist in the database.",
+          "key_findings": [
+            "No Statement nodes were found that match the criteria within the specified Function.",
+            "The filters for 'return' and 'class' in the Statement text may be too restrictive."
+          ],
+          "data_count": 0,
+          "quality_grade": 0.09000000000000001,
+          "query_purpose": "Retrieve Statement nodes within WorkerFactory.CreateWorkers() that return classes."
+        },
+        {
+          "iteration": 2,
+          "findings_summary": "The query executed successfully but returned no results. This indicates that either the specified Function node 'WorkerFactory.CreateWorkers()' does not exist, or there are no Statement nodes containing the text 'return' within the specified path.",
+          "key_findings": [
+            "The Function node 'WorkerFactory.CreateWorkers()' may not exist in the database.",
+            "There may be no Statement nodes related to the Function that contain the text 'return'."
+          ],
+          "data_count": 0,
+          "quality_grade": 0.09000000000000001,
+          "query_purpose": "Retrieve all Statement nodes within WorkerFactory.CreateWorkers() that contain return statements."
+        },
+        {
+          "iteration": 3,
+          "findings_summary": "The query executed successfully but returned no results, indicating that either the specified Function node does not exist, or it does not contain any Block nodes with associated Statement nodes.",
+          "key_findings": [
+            "The Function node 'WorkerFactory.CreateWorkers()' may not exist in the database.",
+            "There may be no Block nodes associated with the Function node, or the Block nodes do not contain any Statement nodes."
+          ],
+          "data_count": 0,
+          "quality_grade": 0.09000000000000001,
+          "query_purpose": "Retrieve all Statement nodes within the Block node contained by the Function node WorkerFactory.CreateWorkers() to verify their existence and content."
+        },
+        {
+          "iteration": 4,
+          "findings_summary": "The query executed successfully but returned no results, indicating that there are likely no Statement nodes that match the specified criteria within the given path. This could be due to the absence of relevant nodes or relationships in the database.",
+          "key_findings": [
+            "No Statement nodes were found that contain both 'return' and 'class' in their text.",
+            "The specified path may be too specific, or the expected nodes/relationships may not exist."
+          ],
+          "data_count": 0,
+          "quality_grade": 0.09000000000000001,
+          "query_purpose": "Retrieve Statement nodes within WorkerFactory.CreateWorkers() that return classes."
+        },
+        {
+          "iteration": 5,
+          "findings_summary": "The query executed successfully but returned no results, indicating that while the specified nodes and relationships exist, there are no Statement nodes within the WorkerFactory.CreateWorkers() function that contain both 'return' and 'class' in their text.",
+          "key_findings": [
+            "The specified Project, Function, and relationships exist in the database.",
+            "No Statement nodes matched the criteria of containing both 'return' and 'class'."
+          ],
+          "data_count": 0,
+          "quality_grade": 0.09000000000000001,
+          "query_purpose": "Retrieve Statement nodes within WorkerFactory.CreateWorkers() that return classes, ensuring the function and its containing structure exist."
+        }
+      ]
+    }
+  },
+  "approach_raw_results": {
+    "0": {
+      "approach_index": "SQ1",
+      "approach_name": "Subquery SQ1",
+      "approach_goal": "Locate the Function node for WorkerFactory.CreateWorkers() using the CONTAINS relationship from the Type node WorkerFactory.",
+      "approach_answer": {
+        "answer": "The Function node for 'WorkerFactory.CreateWorkers()' is successfully located using the CONTAINS relationship from the Type node 'WorkerFactory'. The query confirms that the Function node 'CreateWorkers' is indeed contained within the Type node 'WorkerFactory', establishing the correct relationship.",
+        "data_points_used": [
+          0
+        ],
+        "confidence_assessment": "Medium - The confidence is based on a single data point with a quality rating of 0.72, which indicates a reasonable level of reliability but not the highest possible assurance."
+      },
+      "approach_quality_grade": 1.0,
+      "confidence_level": "high",
+      "subquery_citation": {
+        "subquery_id": "SQ1",
+        "subquery_text": "Locate the Function node for WorkerFactory.CreateWorkers() using the CONTAINS relationship from the Type node WorkerFactory.",
+        "execution_group": 0,
+        "logical_form": "Locate WorkerFactory.CreateWorkers() \u2192 Retrieve instantiated classes \u2192 Retrieve returned classes",
+        "original_premises": [
+          {
+            "id": "P1",
+            "text": "WorkerFactory is a Type node."
+          },
+          {
+            "id": "P2",
+            "text": "CreateWorkers is a Function node contained within WorkerFactory."
+          }
+        ],
+        "corrected_premises": [],
+        "active_premises": [
+          {
+            "id": "P1",
+            "text": "WorkerFactory is a Type node."
+          },
+          {
+            "id": "P2",
+            "text": "CreateWorkers is a Function node contained within WorkerFactory."
+          }
+        ],
+        "premise_validations": [],
+        "cypher_query": "MATCH (t:Type)-[:CONTAINS]->(f:Function) WHERE t.name = 'WorkerFactory' AND f.name = 'CreateWorkers' RETURN f.name",
+        "execution_attempts": 1,
+        "result_data": [
+          {
+            "f.name": "CreateWorkers",
+            "_source_query": "MATCH (t:Type)-[:CONTAINS]->(f:Function) WHERE t.name = 'WorkerFactory' AND f.name = 'CreateWorkers' RETURN f.name",
+            "_source_iteration": 1,
+            "_query_purpose": "This query discovers the Function node for WorkerFactory.CreateWorkers() using the CONTAINS relationship.",
+            "_cot_reasoning": {
+              "step1_perspective": "Locate the Function node for WorkerFactory.CreateWorkers() using the CONTAINS relationship.",
+              "step2_premise_validation": "Using P1 (WorkerFactory is Type) and P2 (CreateWorkers contained in WorkerFactory), we focus on finding the Function node for CreateWorkers.",
+              "step3_path_trace": "Type\u2192CONTAINS\u2192Function",
+              "step4_filters": "Filter on Type name 'WorkerFactory' and Function name 'CreateWorkers'.",
+              "step5_return": "Return the Function node's name to confirm the correct node is found.",
+              "step6_optimize": "No specific ordering or limits needed as we expect a single result."
+            }
+          }
+        ],
+        "sufficiency_status": "FOUND",
+        "apoc_diagnostics_used": true,
+        "error": null
+      },
+      "discovered_data": [
+        {
+          "f.name": "CreateWorkers",
+          "_source_query": "MATCH (t:Type)-[:CONTAINS]->(f:Function) WHERE t.name = 'WorkerFactory' AND f.name = 'CreateWorkers' RETURN f.name",
+          "_source_iteration": 1,
+          "_query_purpose": "This query discovers the Function node for WorkerFactory.CreateWorkers() using the CONTAINS relationship.",
+          "_cot_reasoning": {
+            "step1_perspective": "Locate the Function node for WorkerFactory.CreateWorkers() using the CONTAINS relationship.",
+            "step2_premise_validation": "Using P1 (WorkerFactory is Type) and P2 (CreateWorkers contained in WorkerFactory), we focus on finding the Function node for CreateWorkers.",
+            "step3_path_trace": "Type\u2192CONTAINS\u2192Function",
+            "step4_filters": "Filter on Type name 'WorkerFactory' and Function name 'CreateWorkers'.",
+            "step5_return": "Return the Function node's name to confirm the correct node is found.",
+            "step6_optimize": "No specific ordering or limits needed as we expect a single result."
+          }
+        }
+      ],
+      "total_results": 1,
+      "total_discovered": 1,
+      "queries_executed": 1,
+      "query_history": [
+        {
+          "iteration": 1,
+          "query": "MATCH (t:Type)-[:CONTAINS]->(f:Function) WHERE t.name = 'WorkerFactory' AND f.name = 'CreateWorkers' RETURN f.name",
+          "reasoning": {
+            "cot_reasoning": {
+              "step1_perspective": "Locate the Function node for WorkerFactory.CreateWorkers() using the CONTAINS relationship.",
+              "step2_premise_validation": "Using P1 (WorkerFactory is Type) and P2 (CreateWorkers contained in WorkerFactory), we focus on finding the Function node for CreateWorkers.",
+              "step3_path_trace": "Type\u2192CONTAINS\u2192Function",
+              "step4_filters": "Filter on Type name 'WorkerFactory' and Function name 'CreateWorkers'.",
+              "step5_return": "Return the Function node's name to confirm the correct node is found.",
+              "step6_optimize": "No specific ordering or limits needed as we expect a single result."
+            },
+            "query_purpose": "This query discovers the Function node for WorkerFactory.CreateWorkers() using the CONTAINS relationship."
+          },
+          "results": [
+            {
+              "f.name": "CreateWorkers"
+            }
+          ],
+          "error": null,
+          "result_count": 1,
+          "analysis": {
+            "analysis": "The query executed successfully and returned one result, indicating that the Function node for WorkerFactory.CreateWorkers() was found as expected.",
+            "key_findings": [
+              "The Function node 'CreateWorkers' exists under the Type node 'WorkerFactory'.",
+              "The CONTAINS relationship is correctly established."
+            ],
+            "recommendation": "Sufficient",
+            "next_query_hint": "If continuing, consider querying for additional functions under the WorkerFactory type or related types."
+          },
+          "premise_validations": [],
+          "apoc_diagnostics_used": false,
+          "sufficiency_status": null
+        }
+      ],
+      "citations": {
+        "data_point_0": {
+          "query_index": 0,
+          "query": "MATCH (t:Type)-[:CONTAINS]->(f:Function) WHERE t.name = 'WorkerFactory' AND f.name = 'CreateWorkers' RETURN f.name",
+          "iteration": 1,
+          "query_purpose": "This query discovers the Function node for WorkerFactory.CreateWorkers() using the CONTAINS relationship.",
+          "cot_reasoning": {
+            "step1_perspective": "Locate the Function node for WorkerFactory.CreateWorkers() using the CONTAINS relationship.",
+            "step2_premise_validation": "Using P1 (WorkerFactory is Type) and P2 (CreateWorkers contained in WorkerFactory), we focus on finding the Function node for CreateWorkers.",
+            "step3_path_trace": "Type\u2192CONTAINS\u2192Function",
+            "step4_filters": "Filter on Type name 'WorkerFactory' and Function name 'CreateWorkers'.",
+            "step5_return": "Return the Function node's name to confirm the correct node is found.",
+            "step6_optimize": "No specific ordering or limits needed as we expect a single result."
+          },
+          "discovered_at": "Iteration 1, Query 1"
+        }
+      },
+      "reasoning_trail": [
+        {
+          "step": "Iteration 1 - Decision",
+          "type": "think",
+          "reasoning": "Agent decided to generate another query",
+          "context": "1 data points collected so far"
+        },
+        {
+          "step": "Iteration 1 - Query Generation",
+          "type": "generate",
+          "query": "MATCH (t:Type)-[:CONTAINS]->(f:Function) WHERE t.name = 'WorkerFactory' AND f.name = 'CreateWorkers' RETURN f.name",
+          "cot_reasoning": {
+            "step1_perspective": "Locate the Function node for WorkerFactory.CreateWorkers() using the CONTAINS relationship.",
+            "step2_premise_validation": "Using P1 (WorkerFactory is Type) and P2 (CreateWorkers contained in WorkerFactory), we focus on finding the Function node for CreateWorkers.",
+            "step3_path_trace": "Type\u2192CONTAINS\u2192Function",
+            "step4_filters": "Filter on Type name 'WorkerFactory' and Function name 'CreateWorkers'.",
+            "step5_return": "Return the Function node's name to confirm the correct node is found.",
+            "step6_optimize": "No specific ordering or limits needed as we expect a single result."
+          },
+          "query_purpose": "This query discovers the Function node for WorkerFactory.CreateWorkers() using the CONTAINS relationship."
+        },
+        {
+          "step": "Iteration 1 - Execution",
+          "type": "execute",
+          "result_count": 1,
+          "error": null,
+          "status": "success"
+        },
+        {
+          "step": "Iteration 1 - Analysis",
+          "type": "analyze",
+          "analysis": "The query executed successfully and returned one result, indicating that the Function node for WorkerFactory.CreateWorkers() was found as expected.",
+          "key_findings": [
+            "The Function node 'CreateWorkers' exists under the Type node 'WorkerFactory'.",
+            "The CONTAINS relationship is correctly established."
+          ],
+          "recommendation": "Sufficient",
+          "next_query_hint": "If continuing, consider querying for additional functions under the WorkerFactory type or related types."
+        },
+        {
+          "step": "Final Decision",
+          "type": "conclude",
+          "is_sufficient": true,
+          "reason": "The query executed successfully and returned one result, indicating that the Function node for WorkerFactory.CreateWorkers() was found as expected.",
+          "total_iterations": 1,
+          "total_data_points": 1
+        }
+      ],
+      "evidence_summary": {
+        "query_0": {
+          "iteration": 1,
+          "query": "MATCH (t:Type)-[:CONTAINS]->(f:Function) WHERE t.name = 'WorkerFactory' AND f.name = 'CreateWorkers' RETURN f.name",
+          "query_purpose": "This query discovers the Function node for WorkerFactory.CreateWorkers() using the CONTAINS relationship.",
+          "cot_reasoning": {
+            "perspective": "Locate the Function node for WorkerFactory.CreateWorkers() using the CONTAINS relationship.",
+            "premises_validated": "Using P1 (WorkerFactory is Type) and P2 (CreateWorkers contained in WorkerFactory), we focus on finding the Function node for CreateWorkers.",
+            "path_used": "Type\u2192CONTAINS\u2192Function",
+            "filters_applied": "Filter on Type name 'WorkerFactory' and Function name 'CreateWorkers'."
+          },
+          "result_count": 1,
+          "key_findings": [
+            "The Function node 'CreateWorkers' exists under the Type node 'WorkerFactory'.",
+            "The CONTAINS relationship is correctly established."
+          ],
+          "results": [
+            {
+              "f.name": "CreateWorkers"
+            }
+          ]
+        }
+      },
+      "partial_answers": [
+        {
+          "iteration": 1,
+          "findings_summary": "The query executed successfully and returned one result, indicating that the Function node for WorkerFactory.CreateWorkers() was found as expected.",
+          "key_findings": [
+            "The Function node 'CreateWorkers' exists under the Type node 'WorkerFactory'.",
+            "The CONTAINS relationship is correctly established."
+          ],
+          "data_count": 1,
+          "quality_grade": 0.72,
+          "query_purpose": "This query discovers the Function node for WorkerFactory.CreateWorkers() using the CONTAINS relationship."
+        }
+      ],
+      "is_sufficient": true,
+      "sufficiency_reason": "The query executed successfully and returned one result, indicating that the Function node for WorkerFactory.CreateWorkers() was found as expected.",
+      "tokens_used": 3325,
+      "total_input_tokens": 2781,
+      "total_output_tokens": 544,
+      "token_breakdown": {
+        "iteration_1": {
+          "think": 372,
+          "total": 3325,
+          "generate": 1612,
+          "analyze": 614,
+          "synthesis": 727
+        }
+      },
+      "iterations": 1
+    },
+    "1": {
+      "approach_index": "SQ2",
+      "approach_name": "Subquery SQ2",
+      "approach_goal": "Retrieve all Statement nodes within the Block node contained by the Function node WorkerFactory.CreateWorkers() that instantiate classes.",
+      "approach_answer": {
+        "answer": "The discovered data indicates that within the Block node of the Function node WorkerFactory.CreateWorkers(), there is a statement that instantiates a new List of IWorker objects. This list contains instances of WorkerA, WorkerB, and WorkerC classes, each initialized with a 'notifier' parameter. This statement is a direct example of class instantiation within the specified function block.",
+        "data_points_used": [
+          0
+        ],
+        "confidence_assessment": "High - The data point directly addresses the query by providing a specific instantiation statement within the CreateWorkers function, and the quality of the data is reasonably high at 0.72."
+      },
+      "approach_quality_grade": 1.0,
+      "confidence_level": "high",
+      "subquery_citation": {
+        "subquery_id": "SQ2",
+        "subquery_text": "Retrieve all Statement nodes within the Block node contained by the Function node WorkerFactory.CreateWorkers() that instantiate classes.",
+        "execution_group": 0,
+        "logical_form": "Locate WorkerFactory.CreateWorkers() \u2192 Retrieve instantiated classes \u2192 Retrieve returned classes",
+        "original_premises": [
+          {
+            "id": "P3",
+            "text": "Function nodes can contain Block nodes, which in turn contain Statement nodes."
+          }
+        ],
+        "corrected_premises": [],
+        "active_premises": [
+          {
+            "id": "P3",
+            "text": "Function nodes can contain Block nodes, which in turn contain Statement nodes."
+          }
+        ],
+        "premise_validations": [],
+        "cypher_query": "MATCH (p:Project {name: 'HelloWorldApp'})-[:CONTAINS]->(:File)-[:CONTAINS]->(:Type)-[:CONTAINS]->(f:Function {name: 'CreateWorkers'})-[:CONTAINS]->(b:Block)-[:CONTAINS]->(s:Statement) WHERE s.text CONTAINS 'new' RETURN s.text",
+        "execution_attempts": 1,
+        "result_data": [
+          {
+            "s.text": "return new List<IWorker>\n            {\n                new WorkerA(notifier),\n                new WorkerB(notifier),\n                new WorkerC(notifier)\n            };",
+            "_source_query": "MATCH (p:Project {name: 'HelloWorldApp'})-[:CONTAINS]->(:File)-[:CONTAINS]->(:Type)-[:CONTAINS]->(f:Function {name: 'CreateWorkers'})-[:CONTAINS]->(b:Block)-[:CONTAINS]->(s:Statement) WHERE s.text CONTAINS 'new' RETURN s.text",
+            "_source_iteration": 1,
+            "_query_purpose": "Retrieve all instantiation statements within the CreateWorkers function of the HelloWorldApp project.",
+            "_cot_reasoning": {
+              "step1_perspective": "Find instantiation statements inside a specific function.",
+              "step2_premise_validation": "Using P3, we know Function nodes contain Block nodes, which contain Statement nodes.",
+              "step3_path_trace": "Function\u2192CONTAINS\u2192Block\u2192CONTAINS\u2192Statement",
+              "step4_filters": "Filter Statement nodes where text contains 'new' to identify instantiations.",
+              "step5_return": "Return the text of Statement nodes to identify the instantiation details.",
+              "step6_optimize": "No specific ordering or limit needed as we are retrieving all relevant statements."
+            }
+          }
+        ],
+        "sufficiency_status": "FOUND",
+        "apoc_diagnostics_used": true,
+        "error": null
+      },
+      "discovered_data": [
+        {
+          "s.text": "return new List<IWorker>\n            {\n                new WorkerA(notifier),\n                new WorkerB(notifier),\n                new WorkerC(notifier)\n            };",
+          "_source_query": "MATCH (p:Project {name: 'HelloWorldApp'})-[:CONTAINS]->(:File)-[:CONTAINS]->(:Type)-[:CONTAINS]->(f:Function {name: 'CreateWorkers'})-[:CONTAINS]->(b:Block)-[:CONTAINS]->(s:Statement) WHERE s.text CONTAINS 'new' RETURN s.text",
+          "_source_iteration": 1,
+          "_query_purpose": "Retrieve all instantiation statements within the CreateWorkers function of the HelloWorldApp project.",
+          "_cot_reasoning": {
+            "step1_perspective": "Find instantiation statements inside a specific function.",
+            "step2_premise_validation": "Using P3, we know Function nodes contain Block nodes, which contain Statement nodes.",
+            "step3_path_trace": "Function\u2192CONTAINS\u2192Block\u2192CONTAINS\u2192Statement",
+            "step4_filters": "Filter Statement nodes where text contains 'new' to identify instantiations.",
+            "step5_return": "Return the text of Statement nodes to identify the instantiation details.",
+            "step6_optimize": "No specific ordering or limit needed as we are retrieving all relevant statements."
+          }
+        }
+      ],
+      "total_results": 1,
+      "total_discovered": 1,
+      "queries_executed": 1,
+      "query_history": [
+        {
+          "iteration": 1,
+          "query": "MATCH (p:Project {name: 'HelloWorldApp'})-[:CONTAINS]->(:File)-[:CONTAINS]->(:Type)-[:CONTAINS]->(f:Function {name: 'CreateWorkers'})-[:CONTAINS]->(b:Block)-[:CONTAINS]->(s:Statement) WHERE s.text CONTAINS 'new' RETURN s.text",
+          "reasoning": {
+            "cot_reasoning": {
+              "step1_perspective": "Find instantiation statements inside a specific function.",
+              "step2_premise_validation": "Using P3, we know Function nodes contain Block nodes, which contain Statement nodes.",
+              "step3_path_trace": "Function\u2192CONTAINS\u2192Block\u2192CONTAINS\u2192Statement",
+              "step4_filters": "Filter Statement nodes where text contains 'new' to identify instantiations.",
+              "step5_return": "Return the text of Statement nodes to identify the instantiation details.",
+              "step6_optimize": "No specific ordering or limit needed as we are retrieving all relevant statements."
+            },
+            "query_purpose": "Retrieve all instantiation statements within the CreateWorkers function of the HelloWorldApp project."
+          },
+          "results": [
+            {
+              "s.text": "return new List<IWorker>\n            {\n                new WorkerA(notifier),\n                new WorkerB(notifier),\n                new WorkerC(notifier)\n            };"
+            }
+          ],
+          "error": null,
+          "result_count": 1,
+          "analysis": {
+            "analysis": "The query executed successfully and returned one result, indicating that the specified function 'CreateWorkers' within the 'HelloWorldApp' project contains a statement that instantiates new worker objects. This aligns with the goal of retrieving instantiation statements.",
+            "key_findings": [
+              "The query successfully located the 'CreateWorkers' function.",
+              "The returned statement includes a list instantiation of worker objects, which is relevant to the analysis of the function's behavior."
+            ],
+            "recommendation": "Sufficient",
+            "next_query_hint": "No further queries are needed at this time."
+          },
+          "premise_validations": [],
+          "apoc_diagnostics_used": false,
+          "sufficiency_status": null
+        }
+      ],
+      "citations": {
+        "data_point_0": {
+          "query_index": 0,
+          "query": "MATCH (p:Project {name: 'HelloWorldApp'})-[:CONTAINS]->(:File)-[:CONTAINS]->(:Type)-[:CONTAINS]->(f:Function {name: 'CreateWorkers'})-[:CONTAINS]->(b:Block)-[:CONTAINS]->(s:Statement) WHERE s.text CONTAINS 'new' RETURN s.text",
+          "iteration": 1,
+          "query_purpose": "Retrieve all instantiation statements within the CreateWorkers function of the HelloWorldApp project.",
+          "cot_reasoning": {
+            "step1_perspective": "Find instantiation statements inside a specific function.",
+            "step2_premise_validation": "Using P3, we know Function nodes contain Block nodes, which contain Statement nodes.",
+            "step3_path_trace": "Function\u2192CONTAINS\u2192Block\u2192CONTAINS\u2192Statement",
+            "step4_filters": "Filter Statement nodes where text contains 'new' to identify instantiations.",
+            "step5_return": "Return the text of Statement nodes to identify the instantiation details.",
+            "step6_optimize": "No specific ordering or limit needed as we are retrieving all relevant statements."
+          },
+          "discovered_at": "Iteration 1, Query 1"
+        }
+      },
+      "reasoning_trail": [
+        {
+          "step": "Iteration 1 - Decision",
+          "type": "think",
+          "reasoning": "Agent decided to generate another query",
+          "context": "1 data points collected so far"
+        },
+        {
+          "step": "Iteration 1 - Query Generation",
+          "type": "generate",
+          "query": "MATCH (p:Project {name: 'HelloWorldApp'})-[:CONTAINS]->(:File)-[:CONTAINS]->(:Type)-[:CONTAINS]->(f:Function {name: 'CreateWorkers'})-[:CONTAINS]->(b:Block)-[:CONTAINS]->(s:Statement) WHERE s.text CONTAINS 'new' RETURN s.text",
+          "cot_reasoning": {
+            "step1_perspective": "Find instantiation statements inside a specific function.",
+            "step2_premise_validation": "Using P3, we know Function nodes contain Block nodes, which contain Statement nodes.",
+            "step3_path_trace": "Function\u2192CONTAINS\u2192Block\u2192CONTAINS\u2192Statement",
+            "step4_filters": "Filter Statement nodes where text contains 'new' to identify instantiations.",
+            "step5_return": "Return the text of Statement nodes to identify the instantiation details.",
+            "step6_optimize": "No specific ordering or limit needed as we are retrieving all relevant statements."
+          },
+          "query_purpose": "Retrieve all instantiation statements within the CreateWorkers function of the HelloWorldApp project."
+        },
+        {
+          "step": "Iteration 1 - Execution",
+          "type": "execute",
+          "result_count": 1,
+          "error": null,
+          "status": "success"
+        },
+        {
+          "step": "Iteration 1 - Analysis",
+          "type": "analyze",
+          "analysis": "The query executed successfully and returned one result, indicating that the specified function 'CreateWorkers' within the 'HelloWorldApp' project contains a statement that instantiates new worker objects. This aligns with the goal of retrieving instantiation statements.",
+          "key_findings": [
+            "The query successfully located the 'CreateWorkers' function.",
+            "The returned statement includes a list instantiation of worker objects, which is relevant to the analysis of the function's behavior."
+          ],
+          "recommendation": "Sufficient",
+          "next_query_hint": "No further queries are needed at this time."
+        },
+        {
+          "step": "Final Decision",
+          "type": "conclude",
+          "is_sufficient": true,
+          "reason": "The query executed successfully and returned one result, indicating that the specified function 'CreateWorkers' within the 'HelloWorldApp' project contains a statement that instantiates new worker objects. This aligns with the goal of retrieving instantiation statements.",
+          "total_iterations": 1,
+          "total_data_points": 1
+        }
+      ],
+      "evidence_summary": {
+        "query_0": {
+          "iteration": 1,
+          "query": "MATCH (p:Project {name: 'HelloWorldApp'})-[:CONTAINS]->(:File)-[:CONTAINS]->(:Type)-[:CONTAINS]->(f:Function {name: 'CreateWorkers'})-[:CONTAINS]->(b:Block)-[:CONTAINS]->(s:Statement) WHERE s.text CONTAINS 'new' RETURN s.text",
+          "query_purpose": "Retrieve all instantiation statements within the CreateWorkers function of the HelloWorldApp project.",
+          "cot_reasoning": {
+            "perspective": "Find instantiation statements inside a specific function.",
+            "premises_validated": "Using P3, we know Function nodes contain Block nodes, which contain Statement nodes.",
+            "path_used": "Function\u2192CONTAINS\u2192Block\u2192CONTAINS\u2192Statement",
+            "filters_applied": "Filter Statement nodes where text contains 'new' to identify instantiations."
+          },
+          "result_count": 1,
+          "key_findings": [
+            "The query successfully located the 'CreateWorkers' function.",
+            "The returned statement includes a list instantiation of worker objects, which is relevant to the analysis of the function's behavior."
+          ],
+          "results": [
+            {
+              "s.text": "return new List<IWorker>\n            {\n                new WorkerA(notifier),\n                new WorkerB(notifier),\n                new WorkerC(notifier)\n            };"
+            }
+          ]
+        }
+      },
+      "partial_answers": [
+        {
+          "iteration": 1,
+          "findings_summary": "The query executed successfully and returned one result, indicating that the specified function 'CreateWorkers' within the 'HelloWorldApp' project contains a statement that instantiates new worker objects. This aligns with the goal of retrieving instantiation statements.",
+          "key_findings": [
+            "The query successfully located the 'CreateWorkers' function.",
+            "The returned statement includes a list instantiation of worker objects, which is relevant to the analysis of the function's behavior."
+          ],
+          "data_count": 1,
+          "quality_grade": 0.72,
+          "query_purpose": "Retrieve all instantiation statements within the CreateWorkers function of the HelloWorldApp project."
+        }
+      ],
+      "is_sufficient": true,
+      "sufficiency_reason": "The query executed successfully and returned one result, indicating that the specified function 'CreateWorkers' within the 'HelloWorldApp' project contains a statement that instantiates new worker objects. This aligns with the goal of retrieving instantiation statements.",
+      "tokens_used": 3556,
+      "total_input_tokens": 2935,
+      "total_output_tokens": 621,
+      "token_breakdown": {
+        "iteration_1": {
+          "think": 373,
+          "total": 3556,
+          "generate": 1631,
+          "analyze": 719,
+          "synthesis": 833
+        }
+      },
+      "iterations": 1
+    },
+    "2": {
+      "approach_index": "SQ3",
+      "approach_name": "Subquery SQ3",
+      "approach_goal": "Retrieve all Statement nodes within the Block node contained by the Function node WorkerFactory.CreateWorkers() that return classes.",
+      "approach_answer": {
+        "answer": "The attempt to retrieve Statement nodes within the Block node contained by the Function node WorkerFactory.CreateWorkers() that return classes was unsuccessful. The findings consistently indicate that either the Function node 'WorkerFactory.CreateWorkers()' does not exist in the database, or there are no Statement nodes within it that match the criteria of containing both 'return' and 'class'. This suggests that the specified path may be too specific, or the expected nodes and relationships may not exist in the database.",
+        "data_points_used": [],
+        "confidence_assessment": "Low - The consistent lack of relevant data points and the low quality of findings indicate uncertainty about the existence of the specified nodes and relationships."
+      },
+      "approach_quality_grade": 0.3,
+      "confidence_level": "low",
+      "subquery_citation": {
+        "subquery_id": "SQ3",
+        "subquery_text": "Retrieve all Statement nodes within the Block node contained by the Function node WorkerFactory.CreateWorkers() that return classes.",
+        "execution_group": 0,
+        "logical_form": "Locate WorkerFactory.CreateWorkers() \u2192 Retrieve instantiated classes \u2192 Retrieve returned classes",
+        "original_premises": [
+          {
+            "id": "P3",
+            "text": "Function nodes can contain Block nodes, which in turn contain Statement nodes."
+          }
+        ],
+        "corrected_premises": [],
+        "active_premises": [
+          {
+            "id": "P3",
+            "text": "Function nodes can contain Block nodes, which in turn contain Statement nodes."
+          }
+        ],
+        "premise_validations": [
+          {
+            "premise_id": "P3",
+            "original_text": "Function nodes can contain Block nodes, which in turn contain Statement nodes.",
+            "status": "invalidated",
+            "corrected_text": null,
+            "correction_reasoning": null,
+            "validation_method": "apoc_diagnostics"
+          },
+          {
+            "premise_id": "P3",
+            "original_text": "Function nodes can contain Block nodes, which in turn contain Statement nodes.",
+            "status": "invalidated",
+            "corrected_text": null,
+            "correction_reasoning": null,
+            "validation_method": "apoc_diagnostics"
+          },
+          {
+            "premise_id": "P3",
+            "original_text": "Function nodes can contain Block nodes, which in turn contain Statement nodes.",
+            "status": "invalidated",
+            "corrected_text": null,
+            "correction_reasoning": null,
+            "validation_method": "apoc_diagnostics"
+          },
+          {
+            "premise_id": "P3",
+            "original_text": "Function nodes can contain Block nodes, which in turn contain Statement nodes.",
+            "status": "invalidated",
+            "corrected_text": null,
+            "correction_reasoning": null,
+            "validation_method": "apoc_diagnostics"
+          },
+          {
+            "premise_id": "P3",
+            "original_text": "Function nodes can contain Block nodes, which in turn contain Statement nodes.",
+            "status": "invalidated",
+            "corrected_text": null,
+            "correction_reasoning": null,
+            "validation_method": "apoc_diagnostics"
+          }
+        ],
+        "cypher_query": "MATCH (p:Project {name: 'HelloWorldApp'})-[:CONTAINS]->(:File)-[:CONTAINS]->(:Type)-[:CONTAINS]->(f:Function {name: 'WorkerFactory.CreateWorkers()'})-[:CONTAINS]->(b:Block)-[:CONTAINS]->(s:Statement) WHERE s.text CONTAINS 'return' AND s.text CONTAINS 'class' RETURN s.text, s.order",
+        "execution_attempts": 5,
+        "result_data": [],
+        "sufficiency_status": "INSUFFICIENT_DATA",
+        "apoc_diagnostics_used": true,
+        "error": null
+      },
+      "discovered_data": [],
+      "total_results": 0,
+      "total_discovered": 0,
+      "queries_executed": 5,
+      "query_history": [
+        {
+          "iteration": 1,
+          "query": "MATCH (f:Function)-[:CONTAINS]->(b:Block)-[:CONTAINS]->(s:Statement) WHERE f.name = 'WorkerFactory.CreateWorkers()' AND s.text CONTAINS 'return' AND s.text CONTAINS 'class' RETURN s",
+          "reasoning": {
+            "cot_reasoning": {
+              "step1_perspective": "Find Statement nodes within a specific function's block that return classes.",
+              "step2_premise_validation": "Using P3, we know Function nodes contain Block nodes, which contain Statement nodes.",
+              "step3_path_trace": "Function\u2192CONTAINS\u2192Block\u2192CONTAINS\u2192Statement",
+              "step4_filters": "Filter on Function node with name 'WorkerFactory.CreateWorkers()'.",
+              "step5_return": "Return properties of Statement nodes to identify those that return classes.",
+              "step6_optimize": "No specific ordering or limits needed as the query is specific to a function."
+            },
+            "query_purpose": "Retrieve Statement nodes within WorkerFactory.CreateWorkers() that return classes."
+          },
+          "results": [],
+          "error": null,
+          "result_count": 0,
+          "analysis": {
+            "analysis": "The query executed successfully but returned no results. This indicates that while the nodes and relationships are likely correct, the specific filters applied may be too strict or the expected nodes do not exist in the database.",
+            "key_findings": [
+              "No Statement nodes were found that match the criteria within the specified Function.",
+              "The filters for 'return' and 'class' in the Statement text may be too restrictive."
+            ],
+            "recommendation": "Refine",
+            "next_query_hint": "Consider broadening the filters or checking for the existence of relevant nodes and relationships."
+          },
+          "premise_validations": [
+            {
+              "premise_id": "P3",
+              "original_text": "Function nodes can contain Block nodes, which in turn contain Statement nodes.",
+              "status": "invalidated",
+              "corrected_text": null,
+              "correction_reasoning": null,
+              "validation_method": "apoc_diagnostics"
+            }
+          ],
+          "apoc_diagnostics_used": true,
+          "sufficiency_status": "INSUFFICIENT_DATA"
+        },
+        {
+          "iteration": 2,
+          "query": "MATCH (f:Function)-[:CONTAINS]->(b:Block)-[:CONTAINS]->(s:Statement) WHERE f.name = 'WorkerFactory.CreateWorkers()' AND s.text CONTAINS 'return' RETURN s.text, s.order",
+          "reasoning": {
+            "cot_reasoning": {
+              "step1_perspective": "Find Statement nodes within a specific function's block that return classes.",
+              "step2_premise_validation": "Using P3, we know Function nodes contain Block nodes, which contain Statement nodes.",
+              "step3_path_trace": "Function\u2192CONTAINS\u2192Block\u2192CONTAINS\u2192Statement",
+              "step4_filters": "WHERE f.name = 'WorkerFactory.CreateWorkers()' AND s.text CONTAINS 'return'",
+              "step5_return": "Return the statement text and the order property to understand the sequence of statements.",
+              "step6_optimize": "No specific ordering or limit needed as we are retrieving all relevant statements."
+            },
+            "query_purpose": "Retrieve all Statement nodes within WorkerFactory.CreateWorkers() that contain return statements."
+          },
+          "results": [],
+          "error": null,
+          "result_count": 0,
+          "analysis": {
+            "analysis": "The query executed successfully but returned no results. This indicates that either the specified Function node 'WorkerFactory.CreateWorkers()' does not exist, or there are no Statement nodes containing the text 'return' within the specified path.",
+            "key_findings": [
+              "The Function node 'WorkerFactory.CreateWorkers()' may not exist in the database.",
+              "There may be no Statement nodes related to the Function that contain the text 'return'."
+            ],
+            "recommendation": "Refine",
+            "next_query_hint": "Check for the existence of the Function node and consider broadening the search criteria for Statement nodes."
+          },
+          "premise_validations": [
+            {
+              "premise_id": "P3",
+              "original_text": "Function nodes can contain Block nodes, which in turn contain Statement nodes.",
+              "status": "invalidated",
+              "corrected_text": null,
+              "correction_reasoning": null,
+              "validation_method": "apoc_diagnostics"
+            }
+          ],
+          "apoc_diagnostics_used": true,
+          "sufficiency_status": "INSUFFICIENT_DATA"
+        },
+        {
+          "iteration": 3,
+          "query": "MATCH (f:Function {name: 'WorkerFactory.CreateWorkers()'})-[:CONTAINS]->(b:Block)-[:CONTAINS]->(s:Statement) RETURN s.text, s.order",
+          "reasoning": {
+            "cot_reasoning": {
+              "step1_perspective": "Find all Statement nodes within a specific function's block that may return classes.",
+              "step2_premise_validation": "Using P3, we know Function nodes contain Block nodes, which in turn contain Statement nodes.",
+              "step3_path_trace": "Function\u2192CONTAINS\u2192Block\u2192CONTAINS\u2192Statement",
+              "step4_filters": "Check for the existence of the Function node with name 'WorkerFactory.CreateWorkers()' and broaden the search criteria by not restricting to 'return' or 'class' in the text.",
+              "step5_return": "Return the text and order of Statement nodes to understand their content and sequence.",
+              "step6_optimize": "No specific ordering or limits applied due to the need to verify existence and content."
+            },
+            "query_purpose": "Retrieve all Statement nodes within the Block node contained by the Function node WorkerFactory.CreateWorkers() to verify their existence and content."
+          },
+          "results": [],
+          "error": null,
+          "result_count": 0,
+          "analysis": {
+            "analysis": "The query executed successfully but returned no results, indicating that either the specified Function node does not exist, or it does not contain any Block nodes with associated Statement nodes.",
+            "key_findings": [
+              "The Function node 'WorkerFactory.CreateWorkers()' may not exist in the database.",
+              "There may be no Block nodes associated with the Function node, or the Block nodes do not contain any Statement nodes."
+            ],
+            "recommendation": "Continue",
+            "next_query_hint": "Check for the existence of the Function node and its relationships by querying for the Function node directly."
+          },
+          "premise_validations": [
+            {
+              "premise_id": "P3",
+              "original_text": "Function nodes can contain Block nodes, which in turn contain Statement nodes.",
+              "status": "invalidated",
+              "corrected_text": null,
+              "correction_reasoning": null,
+              "validation_method": "apoc_diagnostics"
+            }
+          ],
+          "apoc_diagnostics_used": true,
+          "sufficiency_status": "INSUFFICIENT_DATA"
+        },
+        {
+          "iteration": 4,
+          "query": "MATCH (f:Function {name: 'WorkerFactory.CreateWorkers()'})-[:CONTAINS]->(b:Block)-[:CONTAINS]->(s:Statement) WHERE s.text CONTAINS 'return' AND s.text CONTAINS 'class' RETURN s.text, s.order",
+          "reasoning": {
+            "cot_reasoning": {
+              "step1_perspective": "Find Statement nodes within a specific function's block that return classes.",
+              "step2_premise_validation": "Using P3, we know Function nodes contain Block nodes, which contain Statement nodes.",
+              "step3_path_trace": "Function\u2192CONTAINS\u2192Block\u2192CONTAINS\u2192Statement",
+              "step4_filters": "Filter for Function node with name 'WorkerFactory.CreateWorkers()' and Statement nodes containing 'return' and 'class'.",
+              "step5_return": "Return s.text and s.order to understand the content and sequence of the statements.",
+              "step6_optimize": "No ORDER BY or LIMIT needed as we are checking for existence and content."
+            },
+            "query_purpose": "Retrieve Statement nodes within WorkerFactory.CreateWorkers() that return classes."
+          },
+          "results": [],
+          "error": null,
+          "result_count": 0,
+          "analysis": {
+            "analysis": "The query executed successfully but returned no results, indicating that there are likely no Statement nodes that match the specified criteria within the given path. This could be due to the absence of relevant nodes or relationships in the database.",
+            "key_findings": [
+              "No Statement nodes were found that contain both 'return' and 'class' in their text.",
+              "The specified path may be too specific, or the expected nodes/relationships may not exist."
+            ],
+            "recommendation": "Continue",
+            "next_query_hint": "Consider broadening the search criteria or checking for the existence of relevant nodes and relationships."
+          },
+          "premise_validations": [
+            {
+              "premise_id": "P3",
+              "original_text": "Function nodes can contain Block nodes, which in turn contain Statement nodes.",
+              "status": "invalidated",
+              "corrected_text": null,
+              "correction_reasoning": null,
+              "validation_method": "apoc_diagnostics"
+            }
+          ],
+          "apoc_diagnostics_used": true,
+          "sufficiency_status": "INSUFFICIENT_DATA"
+        },
+        {
+          "iteration": 5,
+          "query": "MATCH (p:Project {name: 'HelloWorldApp'})-[:CONTAINS]->(:File)-[:CONTAINS]->(:Type)-[:CONTAINS]->(f:Function {name: 'WorkerFactory.CreateWorkers()'})-[:CONTAINS]->(b:Block)-[:CONTAINS]->(s:Statement) WHERE s.text CONTAINS 'return' AND s.text CONTAINS 'class' RETURN s.text, s.order",
+          "reasoning": {
+            "cot_reasoning": {
+              "step1_perspective": "Find Statement nodes within the Block node contained by the Function node WorkerFactory.CreateWorkers() that return classes.",
+              "step2_premise_validation": "Using P3, we know Function nodes contain Block nodes, which in turn contain Statement nodes.",
+              "step3_path_trace": "Project\u2192CONTAINS\u2192File\u2192CONTAINS\u2192Type\u2192CONTAINS\u2192Function\u2192CONTAINS\u2192Block\u2192CONTAINS\u2192Statement",
+              "step4_filters": "Filter for Function nodes with name 'WorkerFactory.CreateWorkers()' and Statement nodes containing 'return' and 'class'.",
+              "step5_return": "Return s.text and s.order to identify the content and order of the Statement nodes.",
+              "step6_optimize": "No ORDER BY or LIMIT needed due to expected small result set."
+            },
+            "query_purpose": "Retrieve Statement nodes within WorkerFactory.CreateWorkers() that return classes, ensuring the function and its containing structure exist."
+          },
+          "results": [],
+          "error": null,
+          "result_count": 0,
+          "analysis": {
+            "analysis": "The query executed successfully but returned no results, indicating that while the specified nodes and relationships exist, there are no Statement nodes within the WorkerFactory.CreateWorkers() function that contain both 'return' and 'class' in their text.",
+            "key_findings": [
+              "The specified Project, Function, and relationships exist in the database.",
+              "No Statement nodes matched the criteria of containing both 'return' and 'class'."
+            ],
+            "recommendation": "Continue",
+            "next_query_hint": "Consider broadening the filters to check for statements that contain either 'return' or 'class' separately, or check for other relevant keywords."
+          },
+          "premise_validations": [
+            {
+              "premise_id": "P3",
+              "original_text": "Function nodes can contain Block nodes, which in turn contain Statement nodes.",
+              "status": "invalidated",
+              "corrected_text": null,
+              "correction_reasoning": null,
+              "validation_method": "apoc_diagnostics"
+            }
+          ],
+          "apoc_diagnostics_used": true,
+          "sufficiency_status": "INSUFFICIENT_DATA"
+        }
+      ],
+      "citations": {},
+      "reasoning_trail": [
+        {
+          "step": "Iteration 1 - Decision",
+          "type": "think",
+          "reasoning": "Agent decided to generate another query",
+          "context": "0 data points collected so far"
+        },
+        {
+          "step": "Iteration 1 - Query Generation",
+          "type": "generate",
+          "query": "MATCH (f:Function)-[:CONTAINS]->(b:Block)-[:CONTAINS]->(s:Statement) WHERE f.name = 'WorkerFactory.CreateWorkers()' AND s.text CONTAINS 'return' AND s.text CONTAINS 'class' RETURN s",
+          "cot_reasoning": {
+            "step1_perspective": "Find Statement nodes within a specific function's block that return classes.",
+            "step2_premise_validation": "Using P3, we know Function nodes contain Block nodes, which contain Statement nodes.",
+            "step3_path_trace": "Function\u2192CONTAINS\u2192Block\u2192CONTAINS\u2192Statement",
+            "step4_filters": "Filter on Function node with name 'WorkerFactory.CreateWorkers()'.",
+            "step5_return": "Return properties of Statement nodes to identify those that return classes.",
+            "step6_optimize": "No specific ordering or limits needed as the query is specific to a function."
+          },
+          "query_purpose": "Retrieve Statement nodes within WorkerFactory.CreateWorkers() that return classes."
+        },
+        {
+          "step": "Iteration 1 - Execution",
+          "type": "execute",
+          "result_count": 0,
+          "error": null,
+          "status": "empty"
+        },
+        {
+          "step": "Iteration 1 - Analysis",
+          "type": "analyze",
+          "analysis": "The query executed successfully but returned no results. This indicates that while the nodes and relationships are likely correct, the specific filters applied may be too strict or the expected nodes do not exist in the database.",
+          "key_findings": [
+            "No Statement nodes were found that match the criteria within the specified Function.",
+            "The filters for 'return' and 'class' in the Statement text may be too restrictive."
+          ],
+          "recommendation": "Refine",
+          "next_query_hint": "Consider broadening the filters or checking for the existence of relevant nodes and relationships."
+        },
+        {
+          "step": "Iteration 2 - Decision",
+          "type": "think",
+          "reasoning": "Agent decided to generate another query",
+          "context": "0 data points collected so far"
+        },
+        {
+          "step": "Iteration 2 - Query Generation",
+          "type": "generate",
+          "query": "MATCH (f:Function)-[:CONTAINS]->(b:Block)-[:CONTAINS]->(s:Statement) WHERE f.name = 'WorkerFactory.CreateWorkers()' AND s.text CONTAINS 'return' RETURN s.text, s.order",
+          "cot_reasoning": {
+            "step1_perspective": "Find Statement nodes within a specific function's block that return classes.",
+            "step2_premise_validation": "Using P3, we know Function nodes contain Block nodes, which contain Statement nodes.",
+            "step3_path_trace": "Function\u2192CONTAINS\u2192Block\u2192CONTAINS\u2192Statement",
+            "step4_filters": "WHERE f.name = 'WorkerFactory.CreateWorkers()' AND s.text CONTAINS 'return'",
+            "step5_return": "Return the statement text and the order property to understand the sequence of statements.",
+            "step6_optimize": "No specific ordering or limit needed as we are retrieving all relevant statements."
+          },
+          "query_purpose": "Retrieve all Statement nodes within WorkerFactory.CreateWorkers() that contain return statements."
+        },
+        {
+          "step": "Iteration 2 - Execution",
+          "type": "execute",
+          "result_count": 0,
+          "error": null,
+          "status": "empty"
+        },
+        {
+          "step": "Iteration 2 - Analysis",
+          "type": "analyze",
+          "analysis": "The query executed successfully but returned no results. This indicates that either the specified Function node 'WorkerFactory.CreateWorkers()' does not exist, or there are no Statement nodes containing the text 'return' within the specified path.",
+          "key_findings": [
+            "The Function node 'WorkerFactory.CreateWorkers()' may not exist in the database.",
+            "There may be no Statement nodes related to the Function that contain the text 'return'."
+          ],
+          "recommendation": "Refine",
+          "next_query_hint": "Check for the existence of the Function node and consider broadening the search criteria for Statement nodes."
+        },
+        {
+          "step": "Iteration 3 - Decision",
+          "type": "think",
+          "reasoning": "Agent decided to generate another query",
+          "context": "0 data points collected so far"
+        },
+        {
+          "step": "Iteration 3 - Query Generation",
+          "type": "generate",
+          "query": "MATCH (f:Function {name: 'WorkerFactory.CreateWorkers()'})-[:CONTAINS]->(b:Block)-[:CONTAINS]->(s:Statement) RETURN s.text, s.order",
+          "cot_reasoning": {
+            "step1_perspective": "Find all Statement nodes within a specific function's block that may return classes.",
+            "step2_premise_validation": "Using P3, we know Function nodes contain Block nodes, which in turn contain Statement nodes.",
+            "step3_path_trace": "Function\u2192CONTAINS\u2192Block\u2192CONTAINS\u2192Statement",
+            "step4_filters": "Check for the existence of the Function node with name 'WorkerFactory.CreateWorkers()' and broaden the search criteria by not restricting to 'return' or 'class' in the text.",
+            "step5_return": "Return the text and order of Statement nodes to understand their content and sequence.",
+            "step6_optimize": "No specific ordering or limits applied due to the need to verify existence and content."
+          },
+          "query_purpose": "Retrieve all Statement nodes within the Block node contained by the Function node WorkerFactory.CreateWorkers() to verify their existence and content."
+        },
+        {
+          "step": "Iteration 3 - Execution",
+          "type": "execute",
+          "result_count": 0,
+          "error": null,
+          "status": "empty"
+        },
+        {
+          "step": "Iteration 3 - Analysis",
+          "type": "analyze",
+          "analysis": "The query executed successfully but returned no results, indicating that either the specified Function node does not exist, or it does not contain any Block nodes with associated Statement nodes.",
+          "key_findings": [
+            "The Function node 'WorkerFactory.CreateWorkers()' may not exist in the database.",
+            "There may be no Block nodes associated with the Function node, or the Block nodes do not contain any Statement nodes."
+          ],
+          "recommendation": "Continue",
+          "next_query_hint": "Check for the existence of the Function node and its relationships by querying for the Function node directly."
+        },
+        {
+          "step": "Iteration 4 - Decision",
+          "type": "think",
+          "reasoning": "Agent decided to generate another query",
+          "context": "0 data points collected so far"
+        },
+        {
+          "step": "Iteration 4 - Query Generation",
+          "type": "generate",
+          "query": "MATCH (f:Function {name: 'WorkerFactory.CreateWorkers()'})-[:CONTAINS]->(b:Block)-[:CONTAINS]->(s:Statement) WHERE s.text CONTAINS 'return' AND s.text CONTAINS 'class' RETURN s.text, s.order",
+          "cot_reasoning": {
+            "step1_perspective": "Find Statement nodes within a specific function's block that return classes.",
+            "step2_premise_validation": "Using P3, we know Function nodes contain Block nodes, which contain Statement nodes.",
+            "step3_path_trace": "Function\u2192CONTAINS\u2192Block\u2192CONTAINS\u2192Statement",
+            "step4_filters": "Filter for Function node with name 'WorkerFactory.CreateWorkers()' and Statement nodes containing 'return' and 'class'.",
+            "step5_return": "Return s.text and s.order to understand the content and sequence of the statements.",
+            "step6_optimize": "No ORDER BY or LIMIT needed as we are checking for existence and content."
+          },
+          "query_purpose": "Retrieve Statement nodes within WorkerFactory.CreateWorkers() that return classes."
+        },
+        {
+          "step": "Iteration 4 - Execution",
+          "type": "execute",
+          "result_count": 0,
+          "error": null,
+          "status": "empty"
+        },
+        {
+          "step": "Iteration 4 - Analysis",
+          "type": "analyze",
+          "analysis": "The query executed successfully but returned no results, indicating that there are likely no Statement nodes that match the specified criteria within the given path. This could be due to the absence of relevant nodes or relationships in the database.",
+          "key_findings": [
+            "No Statement nodes were found that contain both 'return' and 'class' in their text.",
+            "The specified path may be too specific, or the expected nodes/relationships may not exist."
+          ],
+          "recommendation": "Continue",
+          "next_query_hint": "Consider broadening the search criteria or checking for the existence of relevant nodes and relationships."
+        },
+        {
+          "step": "Iteration 5 - Decision",
+          "type": "think",
+          "reasoning": "Agent decided to generate another query",
+          "context": "0 data points collected so far"
+        },
+        {
+          "step": "Iteration 5 - Query Generation",
+          "type": "generate",
+          "query": "MATCH (p:Project {name: 'HelloWorldApp'})-[:CONTAINS]->(:File)-[:CONTAINS]->(:Type)-[:CONTAINS]->(f:Function {name: 'WorkerFactory.CreateWorkers()'})-[:CONTAINS]->(b:Block)-[:CONTAINS]->(s:Statement) WHERE s.text CONTAINS 'return' AND s.text CONTAINS 'class' RETURN s.text, s.order",
+          "cot_reasoning": {
+            "step1_perspective": "Find Statement nodes within the Block node contained by the Function node WorkerFactory.CreateWorkers() that return classes.",
+            "step2_premise_validation": "Using P3, we know Function nodes contain Block nodes, which in turn contain Statement nodes.",
+            "step3_path_trace": "Project\u2192CONTAINS\u2192File\u2192CONTAINS\u2192Type\u2192CONTAINS\u2192Function\u2192CONTAINS\u2192Block\u2192CONTAINS\u2192Statement",
+            "step4_filters": "Filter for Function nodes with name 'WorkerFactory.CreateWorkers()' and Statement nodes containing 'return' and 'class'.",
+            "step5_return": "Return s.text and s.order to identify the content and order of the Statement nodes.",
+            "step6_optimize": "No ORDER BY or LIMIT needed due to expected small result set."
+          },
+          "query_purpose": "Retrieve Statement nodes within WorkerFactory.CreateWorkers() that return classes, ensuring the function and its containing structure exist."
+        },
+        {
+          "step": "Iteration 5 - Execution",
+          "type": "execute",
+          "result_count": 0,
+          "error": null,
+          "status": "empty"
+        },
+        {
+          "step": "Iteration 5 - Analysis",
+          "type": "analyze",
+          "analysis": "The query executed successfully but returned no results, indicating that while the specified nodes and relationships exist, there are no Statement nodes within the WorkerFactory.CreateWorkers() function that contain both 'return' and 'class' in their text.",
+          "key_findings": [
+            "The specified Project, Function, and relationships exist in the database.",
+            "No Statement nodes matched the criteria of containing both 'return' and 'class'."
+          ],
+          "recommendation": "Continue",
+          "next_query_hint": "Consider broadening the filters to check for statements that contain either 'return' or 'class' separately, or check for other relevant keywords."
+        },
+        {
+          "step": "Final Decision",
+          "type": "conclude",
+          "is_sufficient": false,
+          "reason": "We have not gathered any data that addresses the approach's goal, as all previous queries returned 0 records. The last analysis hint suggests broadening the search criteria or checking for the existence of relevant nodes and relationships, indicating that there may be a lack of data or overly restrictive filters. Therefore, it is reasonable to continue exploring.",
+          "total_iterations": 5,
+          "total_data_points": 0
+        }
+      ],
+      "evidence_summary": {
+        "query_0": {
+          "iteration": 1,
+          "query": "MATCH (f:Function)-[:CONTAINS]->(b:Block)-[:CONTAINS]->(s:Statement) WHERE f.name = 'WorkerFactory.CreateWorkers()' AND s.text CONTAINS 'return' AND s.text CONTAINS 'class' RETURN s",
+          "query_purpose": "Retrieve Statement nodes within WorkerFactory.CreateWorkers() that return classes.",
+          "cot_reasoning": {
+            "perspective": "Find Statement nodes within a specific function's block that return classes.",
+            "premises_validated": "Using P3, we know Function nodes contain Block nodes, which contain Statement nodes.",
+            "path_used": "Function\u2192CONTAINS\u2192Block\u2192CONTAINS\u2192Statement",
+            "filters_applied": "Filter on Function node with name 'WorkerFactory.CreateWorkers()'."
+          },
+          "result_count": 0,
+          "key_findings": [
+            "No Statement nodes were found that match the criteria within the specified Function.",
+            "The filters for 'return' and 'class' in the Statement text may be too restrictive."
+          ],
+          "results": []
+        },
+        "query_1": {
+          "iteration": 2,
+          "query": "MATCH (f:Function)-[:CONTAINS]->(b:Block)-[:CONTAINS]->(s:Statement) WHERE f.name = 'WorkerFactory.CreateWorkers()' AND s.text CONTAINS 'return' RETURN s.text, s.order",
+          "query_purpose": "Retrieve all Statement nodes within WorkerFactory.CreateWorkers() that contain return statements.",
+          "cot_reasoning": {
+            "perspective": "Find Statement nodes within a specific function's block that return classes.",
+            "premises_validated": "Using P3, we know Function nodes contain Block nodes, which contain Statement nodes.",
+            "path_used": "Function\u2192CONTAINS\u2192Block\u2192CONTAINS\u2192Statement",
+            "filters_applied": "WHERE f.name = 'WorkerFactory.CreateWorkers()' AND s.text CONTAINS 'return'"
+          },
+          "result_count": 0,
+          "key_findings": [
+            "The Function node 'WorkerFactory.CreateWorkers()' may not exist in the database.",
+            "There may be no Statement nodes related to the Function that contain the text 'return'."
+          ],
+          "results": []
+        },
+        "query_2": {
+          "iteration": 3,
+          "query": "MATCH (f:Function {name: 'WorkerFactory.CreateWorkers()'})-[:CONTAINS]->(b:Block)-[:CONTAINS]->(s:Statement) RETURN s.text, s.order",
+          "query_purpose": "Retrieve all Statement nodes within the Block node contained by the Function node WorkerFactory.CreateWorkers() to verify their existence and content.",
+          "cot_reasoning": {
+            "perspective": "Find all Statement nodes within a specific function's block that may return classes.",
+            "premises_validated": "Using P3, we know Function nodes contain Block nodes, which in turn contain Statement nodes.",
+            "path_used": "Function\u2192CONTAINS\u2192Block\u2192CONTAINS\u2192Statement",
+            "filters_applied": "Check for the existence of the Function node with name 'WorkerFactory.CreateWorkers()' and broaden the search criteria by not restricting to 'return' or 'class' in the text."
+          },
+          "result_count": 0,
+          "key_findings": [
+            "The Function node 'WorkerFactory.CreateWorkers()' may not exist in the database.",
+            "There may be no Block nodes associated with the Function node, or the Block nodes do not contain any Statement nodes."
+          ],
+          "results": []
+        },
+        "query_3": {
+          "iteration": 4,
+          "query": "MATCH (f:Function {name: 'WorkerFactory.CreateWorkers()'})-[:CONTAINS]->(b:Block)-[:CONTAINS]->(s:Statement) WHERE s.text CONTAINS 'return' AND s.text CONTAINS 'class' RETURN s.text, s.order",
+          "query_purpose": "Retrieve Statement nodes within WorkerFactory.CreateWorkers() that return classes.",
+          "cot_reasoning": {
+            "perspective": "Find Statement nodes within a specific function's block that return classes.",
+            "premises_validated": "Using P3, we know Function nodes contain Block nodes, which contain Statement nodes.",
+            "path_used": "Function\u2192CONTAINS\u2192Block\u2192CONTAINS\u2192Statement",
+            "filters_applied": "Filter for Function node with name 'WorkerFactory.CreateWorkers()' and Statement nodes containing 'return' and 'class'."
+          },
+          "result_count": 0,
+          "key_findings": [
+            "No Statement nodes were found that contain both 'return' and 'class' in their text.",
+            "The specified path may be too specific, or the expected nodes/relationships may not exist."
+          ],
+          "results": []
+        },
+        "query_4": {
+          "iteration": 5,
+          "query": "MATCH (p:Project {name: 'HelloWorldApp'})-[:CONTAINS]->(:File)-[:CONTAINS]->(:Type)-[:CONTAINS]->(f:Function {name: 'WorkerFactory.CreateWorkers()'})-[:CONTAINS]->(b:Block)-[:CONTAINS]->(s:Statement) WHERE s.text CONTAINS 'return' AND s.text CONTAINS 'class' RETURN s.text, s.order",
+          "query_purpose": "Retrieve Statement nodes within WorkerFactory.CreateWorkers() that return classes, ensuring the function and its containing structure exist.",
+          "cot_reasoning": {
+            "perspective": "Find Statement nodes within the Block node contained by the Function node WorkerFactory.CreateWorkers() that return classes.",
+            "premises_validated": "Using P3, we know Function nodes contain Block nodes, which in turn contain Statement nodes.",
+            "path_used": "Project\u2192CONTAINS\u2192File\u2192CONTAINS\u2192Type\u2192CONTAINS\u2192Function\u2192CONTAINS\u2192Block\u2192CONTAINS\u2192Statement",
+            "filters_applied": "Filter for Function nodes with name 'WorkerFactory.CreateWorkers()' and Statement nodes containing 'return' and 'class'."
+          },
+          "result_count": 0,
+          "key_findings": [
+            "The specified Project, Function, and relationships exist in the database.",
+            "No Statement nodes matched the criteria of containing both 'return' and 'class'."
+          ],
+          "results": []
+        }
+      },
+      "partial_answers": [
+        {
+          "iteration": 1,
+          "findings_summary": "The query executed successfully but returned no results. This indicates that while the nodes and relationships are likely correct, the specific filters applied may be too strict or the expected nodes do not exist in the database.",
+          "key_findings": [
+            "No Statement nodes were found that match the criteria within the specified Function.",
+            "The filters for 'return' and 'class' in the Statement text may be too restrictive."
+          ],
+          "data_count": 0,
+          "quality_grade": 0.09000000000000001,
+          "query_purpose": "Retrieve Statement nodes within WorkerFactory.CreateWorkers() that return classes."
+        },
+        {
+          "iteration": 2,
+          "findings_summary": "The query executed successfully but returned no results. This indicates that either the specified Function node 'WorkerFactory.CreateWorkers()' does not exist, or there are no Statement nodes containing the text 'return' within the specified path.",
+          "key_findings": [
+            "The Function node 'WorkerFactory.CreateWorkers()' may not exist in the database.",
+            "There may be no Statement nodes related to the Function that contain the text 'return'."
+          ],
+          "data_count": 0,
+          "quality_grade": 0.09000000000000001,
+          "query_purpose": "Retrieve all Statement nodes within WorkerFactory.CreateWorkers() that contain return statements."
+        },
+        {
+          "iteration": 3,
+          "findings_summary": "The query executed successfully but returned no results, indicating that either the specified Function node does not exist, or it does not contain any Block nodes with associated Statement nodes.",
+          "key_findings": [
+            "The Function node 'WorkerFactory.CreateWorkers()' may not exist in the database.",
+            "There may be no Block nodes associated with the Function node, or the Block nodes do not contain any Statement nodes."
+          ],
+          "data_count": 0,
+          "quality_grade": 0.09000000000000001,
+          "query_purpose": "Retrieve all Statement nodes within the Block node contained by the Function node WorkerFactory.CreateWorkers() to verify their existence and content."
+        },
+        {
+          "iteration": 4,
+          "findings_summary": "The query executed successfully but returned no results, indicating that there are likely no Statement nodes that match the specified criteria within the given path. This could be due to the absence of relevant nodes or relationships in the database.",
+          "key_findings": [
+            "No Statement nodes were found that contain both 'return' and 'class' in their text.",
+            "The specified path may be too specific, or the expected nodes/relationships may not exist."
+          ],
+          "data_count": 0,
+          "quality_grade": 0.09000000000000001,
+          "query_purpose": "Retrieve Statement nodes within WorkerFactory.CreateWorkers() that return classes."
+        },
+        {
+          "iteration": 5,
+          "findings_summary": "The query executed successfully but returned no results, indicating that while the specified nodes and relationships exist, there are no Statement nodes within the WorkerFactory.CreateWorkers() function that contain both 'return' and 'class' in their text.",
+          "key_findings": [
+            "The specified Project, Function, and relationships exist in the database.",
+            "No Statement nodes matched the criteria of containing both 'return' and 'class'."
+          ],
+          "data_count": 0,
+          "quality_grade": 0.09000000000000001,
+          "query_purpose": "Retrieve Statement nodes within WorkerFactory.CreateWorkers() that return classes, ensuring the function and its containing structure exist."
+        }
+      ],
+      "is_sufficient": false,
+      "sufficiency_reason": "We have not gathered any data that addresses the approach's goal, as all previous queries returned 0 records. The last analysis hint suggests broadening the search criteria or checking for the existence of relevant nodes and relationships, indicating that there may be a lack of data or overly restrictive filters. Therefore, it is reasonable to continue exploring.",
+      "tokens_used": 18814,
+      "total_input_tokens": 16079,
+      "total_output_tokens": 2735,
+      "token_breakdown": {
+        "iteration_1": {
+          "think": 374,
+          "total": 2623,
+          "generate": 1608,
+          "analyze": 641
+        },
+        "iteration_2": {
+          "think": 598,
+          "total": 3060,
+          "generate": 1814,
+          "analyze": 648
+        },
+        "iteration_3": {
+          "think": 822,
+          "total": 3669,
+          "generate": 2207,
+          "analyze": 640
+        },
+        "iteration_4": {
+          "think": 1017,
+          "total": 3903,
+          "generate": 2235,
+          "analyze": 651
+        },
+        "iteration_5": {
+          "think": 1226,
+          "total": 5559,
+          "generate": 2664,
+          "analyze": 701,
+          "synthesis": 968
+        }
+      },
+      "iterations": 5
+    }
+  },
+  "agent_metadata": {
+    "neo4j_version": "",
+    "schema_nodes": 10,
+    "total_queries_executed": 7,
+    "total_raw_results": 2,
+    "workflow_nodes_executed": 7,
+    "agents_involved": [
+      "environment",
+      "discovery",
+      "intent",
+      "query_generator",
+      "expansion",
+      "synthesis"
+    ],
+    "modular_workflow_version": "2.0.0",
+    "pydantic_validation_enabled": true,
+    "research_based_discovery": false,
+    "context_manager_used": false,
+    "metadata": {
+      "project_path": null,
+      "mappings_path": null,
+      "queries_path": null,
+      "neo4j_config": "neo4j_config.json"
+    }
+  },
+  "error": null
+}

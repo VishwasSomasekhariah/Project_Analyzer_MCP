@@ -1,0 +1,1006 @@
+{
+  "status": "success",
+  "tool_name": "query_cpg_rag",
+  "workflow_type": "langgraph_agent_rag",
+  "user_query": "How many workers are there in the HelloWorldApp?",
+  "project_name": "HelloWorldApp",
+  "response": {
+    "answer": "The number of workers in the HelloWorldApp could not be determined from the available data.",
+    "details": "The research approach focused on a file-based worker search but did not yield any significant findings or queries related to the number of workers in the HelloWorldApp. The effectiveness of this approach was rated at 0.2, and the sufficiency was deemed false with a confidence of 0.5.",
+    "confidence": 0.5,
+    "status": "not_found",
+    "suggestions": [
+      "Consider exploring other parts of the codebase or documentation that might define worker configurations.",
+      "Review any configuration files or deployment scripts that might specify worker counts.",
+      "Consult with team members or documentation that might provide insights into the worker setup for HelloWorldApp."
+    ]
+  },
+  "discovered_data": [
+    {
+      "p.config_metadata": {
+        ".gitignore": {
+          "format": "text",
+          "file_type": "git_ignore",
+          "line_count": 36
+        },
+        "project_analysis/ctags_analysis.json": {
+          "format": "json",
+          "file_type": "generic_json"
+        },
+        "HelloWorldApp/HelloWorldApp.csproj": {
+          "format": "xml",
+          "file_type": "dotnet_project",
+          "target_framework": "net9.0",
+          "output_type": "Exe",
+          "properties": {
+            "OutputType": "Exe",
+            "TargetFramework": "net9.0",
+            "RootNamespace": "HelloWorldApp",
+            "ImplicitUsings": "enable"
+          }
+        },
+        "HelloWorldApp/project_analysis/ctags_analysis.json": {
+          "format": "json",
+          "file_type": "generic_json"
+        }
+      }
+    },
+    {
+      "worker_count": 0
+    },
+    {
+      "f.name": "Worker_test.cs",
+      "v.initial_value": null
+    },
+    {
+      "f.name": "WorkerFactory.cs",
+      "v.initial_value": null
+    },
+    {
+      "f.name": "WorkerC.cs",
+      "v.initial_value": null
+    },
+    {
+      "f.name": "WorkerB.cs",
+      "v.initial_value": null
+    },
+    {
+      "f.name": "WorkerA.cs",
+      "v.initial_value": null
+    },
+    {
+      "f.name": "IWorker.cs",
+      "v.initial_value": null
+    },
+    {
+      "count(s)": 0
+    }
+  ],
+  "query_history": [
+    {
+      "query_number": 1,
+      "cypher_query": "MATCH (p:Project {name: 'HelloWorldApp'}) RETURN p.config_metadata LIMIT 75",
+      "status": "success",
+      "data": [
+        {
+          "p.config_metadata": {
+            ".gitignore": {
+              "format": "text",
+              "file_type": "git_ignore",
+              "line_count": 36
+            },
+            "project_analysis/ctags_analysis.json": {
+              "format": "json",
+              "file_type": "generic_json"
+            },
+            "HelloWorldApp/HelloWorldApp.csproj": {
+              "format": "xml",
+              "file_type": "dotnet_project",
+              "target_framework": "net9.0",
+              "output_type": "Exe",
+              "properties": {
+                "OutputType": "Exe",
+                "TargetFramework": "net9.0",
+                "RootNamespace": "HelloWorldApp",
+                "ImplicitUsings": "enable"
+              }
+            },
+            "HelloWorldApp/project_analysis/ctags_analysis.json": {
+              "format": "json",
+              "file_type": "generic_json"
+            }
+          }
+        }
+      ],
+      "approach_name": "Project Config Metadata Inspection"
+    },
+    {
+      "query_number": 2,
+      "cypher_query": "MATCH (p:Project {name: 'HelloWorldApp'})-[:CONTAINS]->(f:File)-[:CONTAINS]->(v:Variable {name: 'workers'}) RETURN count(v) AS worker_count LIMIT 150",
+      "status": "success",
+      "data": [
+        {
+          "worker_count": 0
+        }
+      ],
+      "approach_name": "Variable Declaration Count"
+    },
+    {
+      "query_number": 1,
+      "cypher_query": "MATCH (p:Project {name: 'HelloWorldApp'})-[:CONTAINS]->(f:File) WHERE toLower(f.name) CONTAINS 'worker' OPTIONAL MATCH (f)-[:CONTAINS]->(v:Variable {name: 'workers'}) RETURN f.name, v.initial_value LIMIT 150",
+      "status": "success",
+      "data": [
+        {
+          "f.name": "Worker_test.cs",
+          "v.initial_value": null
+        },
+        {
+          "f.name": "WorkerFactory.cs",
+          "v.initial_value": null
+        },
+        {
+          "f.name": "WorkerC.cs",
+          "v.initial_value": null
+        },
+        {
+          "f.name": "WorkerB.cs",
+          "v.initial_value": null
+        },
+        {
+          "f.name": "WorkerA.cs",
+          "v.initial_value": null
+        },
+        {
+          "f.name": "IWorker.cs",
+          "v.initial_value": null
+        }
+      ],
+      "approach_name": "File-Based Worker Search"
+    },
+    {
+      "query_number": 2,
+      "cypher_query": "MATCH (p:Project {name: 'HelloWorldApp'})-[:CONTAINS]->(f:File) WHERE toLower(f.name) CONTAINS 'worker' OPTIONAL MATCH (f)-[:CONTAINS]->(l:Literal) RETURN f.name, l.value LIMIT 150",
+      "status": "success",
+      "data": [
+        {
+          "f.name": "Worker_test.cs",
+          "l.value": null
+        },
+        {
+          "f.name": "WorkerFactory.cs",
+          "l.value": null
+        },
+        {
+          "f.name": "WorkerC.cs",
+          "l.value": null
+        },
+        {
+          "f.name": "WorkerB.cs",
+          "l.value": null
+        },
+        {
+          "f.name": "WorkerA.cs",
+          "l.value": null
+        },
+        {
+          "f.name": "IWorker.cs",
+          "l.value": null
+        }
+      ],
+      "approach_name": "File-Based Worker Search"
+    },
+    {
+      "query_number": 3,
+      "cypher_query": "MATCH (p:Project {name: 'HelloWorldApp'})-[:CONTAINS]->(f:File) WHERE toLower(f.name) CONTAINS 'worker' OPTIONAL MATCH (f)-[:CONTAINS]->(s:Statement) RETURN f.name, s.text LIMIT 150",
+      "status": "success",
+      "data": [
+        {
+          "f.name": "Worker_test.cs",
+          "s.text": null
+        },
+        {
+          "f.name": "WorkerFactory.cs",
+          "s.text": null
+        },
+        {
+          "f.name": "WorkerC.cs",
+          "s.text": null
+        },
+        {
+          "f.name": "WorkerB.cs",
+          "s.text": null
+        },
+        {
+          "f.name": "WorkerA.cs",
+          "s.text": null
+        },
+        {
+          "f.name": "IWorker.cs",
+          "s.text": null
+        }
+      ],
+      "approach_name": "File-Based Worker Search"
+    },
+    {
+      "query_number": 4,
+      "cypher_query": "MATCH (p:Project {name: 'HelloWorldApp'})-[:CONTAINS]->(f:File)-[:CONTAINS]->(fn:Function)-[:USES_TYPE]->(t:Type {name: 'Worker'}) RETURN COUNT(fn) AS worker_count LIMIT 150",
+      "status": "success",
+      "data": [
+        {
+          "worker_count": 0
+        }
+      ],
+      "approach_name": "Worker Type Usage"
+    },
+    {
+      "query_number": 5,
+      "cypher_query": "MATCH (p:Project {name: 'HelloWorldApp'})-[:CONTAINS]->(f:File)-[:CONTAINS]->(b:Block)-[:CONTAINS]->(s:Statement) WHERE s.text CONTAINS 'new Worker' RETURN count(s) LIMIT 150",
+      "status": "success",
+      "data": [
+        {
+          "count(s)": 0
+        }
+      ],
+      "approach_name": "Constructor Instantiation Search"
+    }
+  ],
+  "final_results": [
+    {
+      "p.config_metadata": {
+        ".gitignore": {
+          "format": "text",
+          "file_type": "git_ignore",
+          "line_count": 36
+        },
+        "project_analysis/ctags_analysis.json": {
+          "format": "json",
+          "file_type": "generic_json"
+        },
+        "HelloWorldApp/HelloWorldApp.csproj": {
+          "format": "xml",
+          "file_type": "dotnet_project",
+          "target_framework": "net9.0",
+          "output_type": "Exe",
+          "properties": {
+            "OutputType": "Exe",
+            "TargetFramework": "net9.0",
+            "RootNamespace": "HelloWorldApp",
+            "ImplicitUsings": "enable"
+          }
+        },
+        "HelloWorldApp/project_analysis/ctags_analysis.json": {
+          "format": "json",
+          "file_type": "generic_json"
+        }
+      }
+    },
+    {
+      "worker_count": 0
+    },
+    {
+      "f.name": "Worker_test.cs",
+      "v.initial_value": null
+    },
+    {
+      "f.name": "WorkerFactory.cs",
+      "v.initial_value": null
+    },
+    {
+      "f.name": "WorkerC.cs",
+      "v.initial_value": null
+    },
+    {
+      "f.name": "WorkerB.cs",
+      "v.initial_value": null
+    },
+    {
+      "f.name": "WorkerA.cs",
+      "v.initial_value": null
+    },
+    {
+      "f.name": "IWorker.cs",
+      "v.initial_value": null
+    },
+    {
+      "count(s)": 0
+    }
+  ],
+  "raw_query_results": [
+    {
+      "cycle_number": 1,
+      "query_number": 1,
+      "approach_name": "Project Config Metadata Inspection",
+      "cypher_query": "MATCH (p:Project {name: 'HelloWorldApp'}) RETURN p.config_metadata LIMIT 75",
+      "execution_status": "success",
+      "execution_time": 0,
+      "results_count": 1,
+      "data": [
+        {
+          "p.config_metadata": {
+            ".gitignore": {
+              "format": "text",
+              "file_type": "git_ignore",
+              "line_count": 36
+            },
+            "project_analysis/ctags_analysis.json": {
+              "format": "json",
+              "file_type": "generic_json"
+            },
+            "HelloWorldApp/HelloWorldApp.csproj": {
+              "format": "xml",
+              "file_type": "dotnet_project",
+              "target_framework": "net9.0",
+              "output_type": "Exe",
+              "properties": {
+                "OutputType": "Exe",
+                "TargetFramework": "net9.0",
+                "RootNamespace": "HelloWorldApp",
+                "ImplicitUsings": "enable"
+              }
+            },
+            "HelloWorldApp/project_analysis/ctags_analysis.json": {
+              "format": "json",
+              "file_type": "generic_json"
+            }
+          }
+        }
+      ],
+      "timestamp": 1760714216.4705892,
+      "query": "MATCH (p:Project {name: 'HelloWorldApp'}) RETURN p.config_metadata LIMIT 75",
+      "purpose": "Project Config Metadata Inspection",
+      "error": null,
+      "syntax_error": false,
+      "empty_result": false,
+      "followup_analysis": null
+    },
+    {
+      "cycle_number": 2,
+      "query_number": 1,
+      "approach_name": "Variable Declaration Count",
+      "cypher_query": "MATCH (p:Project {name: 'HelloWorldApp'})-[:CONTAINS]->(f:File)-[:CONTAINS]->(v:Variable {name: 'workers'}) RETURN count(v) AS worker_count LIMIT 150",
+      "execution_status": "success",
+      "execution_time": 0,
+      "results_count": 1,
+      "data": [
+        {
+          "worker_count": 0
+        }
+      ],
+      "timestamp": 1760714216.4705982,
+      "query": "MATCH (p:Project {name: 'HelloWorldApp'})-[:CONTAINS]->(f:File)-[:CONTAINS]->(v:Variable {name: 'workers'}) RETURN count(v) AS worker_count LIMIT 150",
+      "purpose": "Variable Declaration Count",
+      "error": null,
+      "syntax_error": false,
+      "empty_result": false,
+      "followup_analysis": null
+    },
+    {
+      "cycle_number": 5,
+      "query_number": 1,
+      "approach_name": "File-Based Worker Search",
+      "cypher_query": "MATCH (p:Project {name: 'HelloWorldApp'})-[:CONTAINS]->(f:File) WHERE toLower(f.name) CONTAINS 'worker' OPTIONAL MATCH (f)-[:CONTAINS]->(v:Variable {name: 'workers'}) RETURN f.name, v.initial_value LIMIT 150",
+      "execution_status": "success",
+      "execution_time": 0,
+      "results_count": 6,
+      "data": [
+        {
+          "f.name": "Worker_test.cs",
+          "v.initial_value": null
+        },
+        {
+          "f.name": "WorkerFactory.cs",
+          "v.initial_value": null
+        },
+        {
+          "f.name": "WorkerC.cs",
+          "v.initial_value": null
+        },
+        {
+          "f.name": "WorkerB.cs",
+          "v.initial_value": null
+        },
+        {
+          "f.name": "WorkerA.cs",
+          "v.initial_value": null
+        },
+        {
+          "f.name": "IWorker.cs",
+          "v.initial_value": null
+        }
+      ],
+      "timestamp": 1760714216.470603,
+      "query": "MATCH (p:Project {name: 'HelloWorldApp'})-[:CONTAINS]->(f:File) WHERE toLower(f.name) CONTAINS 'worker' OPTIONAL MATCH (f)-[:CONTAINS]->(v:Variable {name: 'workers'}) RETURN f.name, v.initial_value LIMIT 150",
+      "purpose": "File-Based Worker Search",
+      "error": null,
+      "syntax_error": false,
+      "empty_result": false,
+      "followup_analysis": null
+    },
+    {
+      "cycle_number": 5,
+      "query_number": 2,
+      "approach_name": "File-Based Worker Search",
+      "cypher_query": "MATCH (p:Project {name: 'HelloWorldApp'})-[:CONTAINS]->(f:File) WHERE toLower(f.name) CONTAINS 'worker' OPTIONAL MATCH (f)-[:CONTAINS]->(l:Literal) RETURN f.name, l.value LIMIT 150",
+      "execution_status": "success",
+      "execution_time": 0,
+      "results_count": 6,
+      "data": [
+        {
+          "f.name": "Worker_test.cs",
+          "l.value": null
+        },
+        {
+          "f.name": "WorkerFactory.cs",
+          "l.value": null
+        },
+        {
+          "f.name": "WorkerC.cs",
+          "l.value": null
+        },
+        {
+          "f.name": "WorkerB.cs",
+          "l.value": null
+        },
+        {
+          "f.name": "WorkerA.cs",
+          "l.value": null
+        },
+        {
+          "f.name": "IWorker.cs",
+          "l.value": null
+        }
+      ],
+      "timestamp": 1760714216.4706042,
+      "query": "MATCH (p:Project {name: 'HelloWorldApp'})-[:CONTAINS]->(f:File) WHERE toLower(f.name) CONTAINS 'worker' OPTIONAL MATCH (f)-[:CONTAINS]->(l:Literal) RETURN f.name, l.value LIMIT 150",
+      "purpose": "File-Based Worker Search",
+      "error": null,
+      "syntax_error": false,
+      "empty_result": false,
+      "followup_analysis": null
+    },
+    {
+      "cycle_number": 5,
+      "query_number": 3,
+      "approach_name": "File-Based Worker Search",
+      "cypher_query": "MATCH (p:Project {name: 'HelloWorldApp'})-[:CONTAINS]->(f:File) WHERE toLower(f.name) CONTAINS 'worker' OPTIONAL MATCH (f)-[:CONTAINS]->(s:Statement) RETURN f.name, s.text LIMIT 150",
+      "execution_status": "success",
+      "execution_time": 0,
+      "results_count": 6,
+      "data": [
+        {
+          "f.name": "Worker_test.cs",
+          "s.text": null
+        },
+        {
+          "f.name": "WorkerFactory.cs",
+          "s.text": null
+        },
+        {
+          "f.name": "WorkerC.cs",
+          "s.text": null
+        },
+        {
+          "f.name": "WorkerB.cs",
+          "s.text": null
+        },
+        {
+          "f.name": "WorkerA.cs",
+          "s.text": null
+        },
+        {
+          "f.name": "IWorker.cs",
+          "s.text": null
+        }
+      ],
+      "timestamp": 1760714216.4706054,
+      "query": "MATCH (p:Project {name: 'HelloWorldApp'})-[:CONTAINS]->(f:File) WHERE toLower(f.name) CONTAINS 'worker' OPTIONAL MATCH (f)-[:CONTAINS]->(s:Statement) RETURN f.name, s.text LIMIT 150",
+      "purpose": "File-Based Worker Search",
+      "error": null,
+      "syntax_error": false,
+      "empty_result": false,
+      "followup_analysis": null
+    },
+    {
+      "cycle_number": 6,
+      "query_number": 1,
+      "approach_name": "Worker Type Usage",
+      "cypher_query": "MATCH (p:Project {name: 'HelloWorldApp'})-[:CONTAINS]->(f:File)-[:CONTAINS]->(fn:Function)-[:USES_TYPE]->(t:Type {name: 'Worker'}) RETURN COUNT(fn) AS worker_count LIMIT 150",
+      "execution_status": "success",
+      "execution_time": 0,
+      "results_count": 1,
+      "data": [
+        {
+          "worker_count": 0
+        }
+      ],
+      "timestamp": 1760714216.4706075,
+      "query": "MATCH (p:Project {name: 'HelloWorldApp'})-[:CONTAINS]->(f:File)-[:CONTAINS]->(fn:Function)-[:USES_TYPE]->(t:Type {name: 'Worker'}) RETURN COUNT(fn) AS worker_count LIMIT 150",
+      "purpose": "Worker Type Usage",
+      "error": null,
+      "syntax_error": false,
+      "empty_result": false,
+      "followup_analysis": null
+    },
+    {
+      "cycle_number": 7,
+      "query_number": 1,
+      "approach_name": "Constructor Instantiation Search",
+      "cypher_query": "MATCH (p:Project {name: 'HelloWorldApp'})-[:CONTAINS]->(f:File)-[:CONTAINS]->(b:Block)-[:CONTAINS]->(s:Statement) WHERE s.text CONTAINS 'new Worker' RETURN count(s) LIMIT 150",
+      "execution_status": "success",
+      "execution_time": 0,
+      "results_count": 1,
+      "data": [
+        {
+          "count(s)": 0
+        }
+      ],
+      "timestamp": 1760714216.4706097,
+      "query": "MATCH (p:Project {name: 'HelloWorldApp'})-[:CONTAINS]->(f:File)-[:CONTAINS]->(b:Block)-[:CONTAINS]->(s:Statement) WHERE s.text CONTAINS 'new Worker' RETURN count(s) LIMIT 150",
+      "purpose": "Constructor Instantiation Search",
+      "error": null,
+      "syntax_error": false,
+      "empty_result": false,
+      "followup_analysis": null
+    }
+  ],
+  "all_executed_queries": [
+    {
+      "query_number": 1,
+      "cypher_query": "MATCH (p:Project {name: 'HelloWorldApp'}) RETURN p.config_metadata LIMIT 75",
+      "status": "success",
+      "data": [
+        {
+          "p.config_metadata": {
+            ".gitignore": {
+              "format": "text",
+              "file_type": "git_ignore",
+              "line_count": 36
+            },
+            "project_analysis/ctags_analysis.json": {
+              "format": "json",
+              "file_type": "generic_json"
+            },
+            "HelloWorldApp/HelloWorldApp.csproj": {
+              "format": "xml",
+              "file_type": "dotnet_project",
+              "target_framework": "net9.0",
+              "output_type": "Exe",
+              "properties": {
+                "OutputType": "Exe",
+                "TargetFramework": "net9.0",
+                "RootNamespace": "HelloWorldApp",
+                "ImplicitUsings": "enable"
+              }
+            },
+            "HelloWorldApp/project_analysis/ctags_analysis.json": {
+              "format": "json",
+              "file_type": "generic_json"
+            }
+          }
+        }
+      ],
+      "approach_name": "Project Config Metadata Inspection"
+    },
+    {
+      "query_number": 2,
+      "cypher_query": "MATCH (p:Project {name: 'HelloWorldApp'})-[:CONTAINS]->(f:File)-[:CONTAINS]->(v:Variable {name: 'workers'}) RETURN count(v) AS worker_count LIMIT 150",
+      "status": "success",
+      "data": [
+        {
+          "worker_count": 0
+        }
+      ],
+      "approach_name": "Variable Declaration Count"
+    },
+    {
+      "query_number": 1,
+      "cypher_query": "MATCH (p:Project {name: 'HelloWorldApp'})-[:CONTAINS]->(f:File) WHERE toLower(f.name) CONTAINS 'worker' OPTIONAL MATCH (f)-[:CONTAINS]->(v:Variable {name: 'workers'}) RETURN f.name, v.initial_value LIMIT 150",
+      "status": "success",
+      "data": [
+        {
+          "f.name": "Worker_test.cs",
+          "v.initial_value": null
+        },
+        {
+          "f.name": "WorkerFactory.cs",
+          "v.initial_value": null
+        },
+        {
+          "f.name": "WorkerC.cs",
+          "v.initial_value": null
+        },
+        {
+          "f.name": "WorkerB.cs",
+          "v.initial_value": null
+        },
+        {
+          "f.name": "WorkerA.cs",
+          "v.initial_value": null
+        },
+        {
+          "f.name": "IWorker.cs",
+          "v.initial_value": null
+        }
+      ],
+      "approach_name": "File-Based Worker Search"
+    },
+    {
+      "query_number": 2,
+      "cypher_query": "MATCH (p:Project {name: 'HelloWorldApp'})-[:CONTAINS]->(f:File) WHERE toLower(f.name) CONTAINS 'worker' OPTIONAL MATCH (f)-[:CONTAINS]->(l:Literal) RETURN f.name, l.value LIMIT 150",
+      "status": "success",
+      "data": [
+        {
+          "f.name": "Worker_test.cs",
+          "l.value": null
+        },
+        {
+          "f.name": "WorkerFactory.cs",
+          "l.value": null
+        },
+        {
+          "f.name": "WorkerC.cs",
+          "l.value": null
+        },
+        {
+          "f.name": "WorkerB.cs",
+          "l.value": null
+        },
+        {
+          "f.name": "WorkerA.cs",
+          "l.value": null
+        },
+        {
+          "f.name": "IWorker.cs",
+          "l.value": null
+        }
+      ],
+      "approach_name": "File-Based Worker Search"
+    },
+    {
+      "query_number": 3,
+      "cypher_query": "MATCH (p:Project {name: 'HelloWorldApp'})-[:CONTAINS]->(f:File) WHERE toLower(f.name) CONTAINS 'worker' OPTIONAL MATCH (f)-[:CONTAINS]->(s:Statement) RETURN f.name, s.text LIMIT 150",
+      "status": "success",
+      "data": [
+        {
+          "f.name": "Worker_test.cs",
+          "s.text": null
+        },
+        {
+          "f.name": "WorkerFactory.cs",
+          "s.text": null
+        },
+        {
+          "f.name": "WorkerC.cs",
+          "s.text": null
+        },
+        {
+          "f.name": "WorkerB.cs",
+          "s.text": null
+        },
+        {
+          "f.name": "WorkerA.cs",
+          "s.text": null
+        },
+        {
+          "f.name": "IWorker.cs",
+          "s.text": null
+        }
+      ],
+      "approach_name": "File-Based Worker Search"
+    },
+    {
+      "query_number": 4,
+      "cypher_query": "MATCH (p:Project {name: 'HelloWorldApp'})-[:CONTAINS]->(f:File)-[:CONTAINS]->(fn:Function)-[:USES_TYPE]->(t:Type {name: 'Worker'}) RETURN COUNT(fn) AS worker_count LIMIT 150",
+      "status": "success",
+      "data": [
+        {
+          "worker_count": 0
+        }
+      ],
+      "approach_name": "Worker Type Usage"
+    },
+    {
+      "query_number": 5,
+      "cypher_query": "MATCH (p:Project {name: 'HelloWorldApp'})-[:CONTAINS]->(f:File)-[:CONTAINS]->(b:Block)-[:CONTAINS]->(s:Statement) WHERE s.text CONTAINS 'new Worker' RETURN count(s) LIMIT 150",
+      "status": "success",
+      "data": [
+        {
+          "count(s)": 0
+        }
+      ],
+      "approach_name": "Constructor Instantiation Search"
+    }
+  ],
+  "raw_results": [
+    {
+      "cycle_number": 1,
+      "query_number": 1,
+      "approach_name": "Project Config Metadata Inspection",
+      "cypher_query": "MATCH (p:Project {name: 'HelloWorldApp'}) RETURN p.config_metadata LIMIT 75",
+      "execution_status": "success",
+      "execution_time": 0,
+      "results_count": 1,
+      "data": [
+        {
+          "p.config_metadata": {
+            ".gitignore": {
+              "format": "text",
+              "file_type": "git_ignore",
+              "line_count": 36
+            },
+            "project_analysis/ctags_analysis.json": {
+              "format": "json",
+              "file_type": "generic_json"
+            },
+            "HelloWorldApp/HelloWorldApp.csproj": {
+              "format": "xml",
+              "file_type": "dotnet_project",
+              "target_framework": "net9.0",
+              "output_type": "Exe",
+              "properties": {
+                "OutputType": "Exe",
+                "TargetFramework": "net9.0",
+                "RootNamespace": "HelloWorldApp",
+                "ImplicitUsings": "enable"
+              }
+            },
+            "HelloWorldApp/project_analysis/ctags_analysis.json": {
+              "format": "json",
+              "file_type": "generic_json"
+            }
+          }
+        }
+      ],
+      "timestamp": 1760714216.4705892,
+      "query": "MATCH (p:Project {name: 'HelloWorldApp'}) RETURN p.config_metadata LIMIT 75",
+      "purpose": "Project Config Metadata Inspection",
+      "error": null,
+      "syntax_error": false,
+      "empty_result": false,
+      "followup_analysis": null
+    },
+    {
+      "cycle_number": 2,
+      "query_number": 1,
+      "approach_name": "Variable Declaration Count",
+      "cypher_query": "MATCH (p:Project {name: 'HelloWorldApp'})-[:CONTAINS]->(f:File)-[:CONTAINS]->(v:Variable {name: 'workers'}) RETURN count(v) AS worker_count LIMIT 150",
+      "execution_status": "success",
+      "execution_time": 0,
+      "results_count": 1,
+      "data": [
+        {
+          "worker_count": 0
+        }
+      ],
+      "timestamp": 1760714216.4705982,
+      "query": "MATCH (p:Project {name: 'HelloWorldApp'})-[:CONTAINS]->(f:File)-[:CONTAINS]->(v:Variable {name: 'workers'}) RETURN count(v) AS worker_count LIMIT 150",
+      "purpose": "Variable Declaration Count",
+      "error": null,
+      "syntax_error": false,
+      "empty_result": false,
+      "followup_analysis": null
+    },
+    {
+      "cycle_number": 5,
+      "query_number": 1,
+      "approach_name": "File-Based Worker Search",
+      "cypher_query": "MATCH (p:Project {name: 'HelloWorldApp'})-[:CONTAINS]->(f:File) WHERE toLower(f.name) CONTAINS 'worker' OPTIONAL MATCH (f)-[:CONTAINS]->(v:Variable {name: 'workers'}) RETURN f.name, v.initial_value LIMIT 150",
+      "execution_status": "success",
+      "execution_time": 0,
+      "results_count": 6,
+      "data": [
+        {
+          "f.name": "Worker_test.cs",
+          "v.initial_value": null
+        },
+        {
+          "f.name": "WorkerFactory.cs",
+          "v.initial_value": null
+        },
+        {
+          "f.name": "WorkerC.cs",
+          "v.initial_value": null
+        },
+        {
+          "f.name": "WorkerB.cs",
+          "v.initial_value": null
+        },
+        {
+          "f.name": "WorkerA.cs",
+          "v.initial_value": null
+        },
+        {
+          "f.name": "IWorker.cs",
+          "v.initial_value": null
+        }
+      ],
+      "timestamp": 1760714216.470603,
+      "query": "MATCH (p:Project {name: 'HelloWorldApp'})-[:CONTAINS]->(f:File) WHERE toLower(f.name) CONTAINS 'worker' OPTIONAL MATCH (f)-[:CONTAINS]->(v:Variable {name: 'workers'}) RETURN f.name, v.initial_value LIMIT 150",
+      "purpose": "File-Based Worker Search",
+      "error": null,
+      "syntax_error": false,
+      "empty_result": false,
+      "followup_analysis": null
+    },
+    {
+      "cycle_number": 5,
+      "query_number": 2,
+      "approach_name": "File-Based Worker Search",
+      "cypher_query": "MATCH (p:Project {name: 'HelloWorldApp'})-[:CONTAINS]->(f:File) WHERE toLower(f.name) CONTAINS 'worker' OPTIONAL MATCH (f)-[:CONTAINS]->(l:Literal) RETURN f.name, l.value LIMIT 150",
+      "execution_status": "success",
+      "execution_time": 0,
+      "results_count": 6,
+      "data": [
+        {
+          "f.name": "Worker_test.cs",
+          "l.value": null
+        },
+        {
+          "f.name": "WorkerFactory.cs",
+          "l.value": null
+        },
+        {
+          "f.name": "WorkerC.cs",
+          "l.value": null
+        },
+        {
+          "f.name": "WorkerB.cs",
+          "l.value": null
+        },
+        {
+          "f.name": "WorkerA.cs",
+          "l.value": null
+        },
+        {
+          "f.name": "IWorker.cs",
+          "l.value": null
+        }
+      ],
+      "timestamp": 1760714216.4706042,
+      "query": "MATCH (p:Project {name: 'HelloWorldApp'})-[:CONTAINS]->(f:File) WHERE toLower(f.name) CONTAINS 'worker' OPTIONAL MATCH (f)-[:CONTAINS]->(l:Literal) RETURN f.name, l.value LIMIT 150",
+      "purpose": "File-Based Worker Search",
+      "error": null,
+      "syntax_error": false,
+      "empty_result": false,
+      "followup_analysis": null
+    },
+    {
+      "cycle_number": 5,
+      "query_number": 3,
+      "approach_name": "File-Based Worker Search",
+      "cypher_query": "MATCH (p:Project {name: 'HelloWorldApp'})-[:CONTAINS]->(f:File) WHERE toLower(f.name) CONTAINS 'worker' OPTIONAL MATCH (f)-[:CONTAINS]->(s:Statement) RETURN f.name, s.text LIMIT 150",
+      "execution_status": "success",
+      "execution_time": 0,
+      "results_count": 6,
+      "data": [
+        {
+          "f.name": "Worker_test.cs",
+          "s.text": null
+        },
+        {
+          "f.name": "WorkerFactory.cs",
+          "s.text": null
+        },
+        {
+          "f.name": "WorkerC.cs",
+          "s.text": null
+        },
+        {
+          "f.name": "WorkerB.cs",
+          "s.text": null
+        },
+        {
+          "f.name": "WorkerA.cs",
+          "s.text": null
+        },
+        {
+          "f.name": "IWorker.cs",
+          "s.text": null
+        }
+      ],
+      "timestamp": 1760714216.4706054,
+      "query": "MATCH (p:Project {name: 'HelloWorldApp'})-[:CONTAINS]->(f:File) WHERE toLower(f.name) CONTAINS 'worker' OPTIONAL MATCH (f)-[:CONTAINS]->(s:Statement) RETURN f.name, s.text LIMIT 150",
+      "purpose": "File-Based Worker Search",
+      "error": null,
+      "syntax_error": false,
+      "empty_result": false,
+      "followup_analysis": null
+    },
+    {
+      "cycle_number": 6,
+      "query_number": 1,
+      "approach_name": "Worker Type Usage",
+      "cypher_query": "MATCH (p:Project {name: 'HelloWorldApp'})-[:CONTAINS]->(f:File)-[:CONTAINS]->(fn:Function)-[:USES_TYPE]->(t:Type {name: 'Worker'}) RETURN COUNT(fn) AS worker_count LIMIT 150",
+      "execution_status": "success",
+      "execution_time": 0,
+      "results_count": 1,
+      "data": [
+        {
+          "worker_count": 0
+        }
+      ],
+      "timestamp": 1760714216.4706075,
+      "query": "MATCH (p:Project {name: 'HelloWorldApp'})-[:CONTAINS]->(f:File)-[:CONTAINS]->(fn:Function)-[:USES_TYPE]->(t:Type {name: 'Worker'}) RETURN COUNT(fn) AS worker_count LIMIT 150",
+      "purpose": "Worker Type Usage",
+      "error": null,
+      "syntax_error": false,
+      "empty_result": false,
+      "followup_analysis": null
+    },
+    {
+      "cycle_number": 7,
+      "query_number": 1,
+      "approach_name": "Constructor Instantiation Search",
+      "cypher_query": "MATCH (p:Project {name: 'HelloWorldApp'})-[:CONTAINS]->(f:File)-[:CONTAINS]->(b:Block)-[:CONTAINS]->(s:Statement) WHERE s.text CONTAINS 'new Worker' RETURN count(s) LIMIT 150",
+      "execution_status": "success",
+      "execution_time": 0,
+      "results_count": 1,
+      "data": [
+        {
+          "count(s)": 0
+        }
+      ],
+      "timestamp": 1760714216.4706097,
+      "query": "MATCH (p:Project {name: 'HelloWorldApp'})-[:CONTAINS]->(f:File)-[:CONTAINS]->(b:Block)-[:CONTAINS]->(s:Statement) WHERE s.text CONTAINS 'new Worker' RETURN count(s) LIMIT 150",
+      "purpose": "Constructor Instantiation Search",
+      "error": null,
+      "syntax_error": false,
+      "empty_result": false,
+      "followup_analysis": null
+    }
+  ],
+  "agent_workflow": "langgraph_agent",
+  "agent_metadata": {
+    "neo4j_version": "",
+    "schema_nodes": 10,
+    "total_queries_executed": 7,
+    "total_raw_results": 7,
+    "workflow_nodes_executed": 7,
+    "agents_involved": [
+      "environment",
+      "discovery",
+      "intent",
+      "query_generator",
+      "expansion",
+      "synthesis"
+    ],
+    "modular_workflow_version": "2.0.0",
+    "pydantic_validation_enabled": true,
+    "research_based_discovery": true,
+    "context_manager_used": true,
+    "metadata": {
+      "project_path": "/opt/HelloWorldApp",
+      "mappings_path": "/opt/genpod/project_analyzer_cli/project_analyzer/parsing_utils/mappings.yaml",
+      "queries_path": "/opt/genpod/project_analyzer_cli/project_analyzer/final_queries",
+      "neo4j_config": "/opt/genpod/neo4j_config.json"
+    }
+  },
+  "iterations_used": 1,
+  "intent_analysis": {
+    "intent_type": "lookup",
+    "confidence": 0.95,
+    "reasoning": "The user's query is focused on retrieving a specific piece of information, namely the number of workers in the HelloWorldApp. This indicates a lookup intent as the user is seeking a direct answer rather than understanding the structure or relationships within the application.",
+    "expected_result_type": "A numerical value representing the count of workers in the HelloWorldApp."
+  },
+  "approach_statuses": {
+    "0": "success",
+    "1": "success",
+    "2": "failed",
+    "3": "failed",
+    "4": "success",
+    "5": "success",
+    "6": "success"
+  },
+  "failed_approaches": [
+    2,
+    3
+  ],
+  "cli_parameters_used": {
+    "config_path": "/opt/genpod/neo4j_config.json",
+    "project_path": "/opt/HelloWorldApp",
+    "mappings_path": "/opt/genpod/project_analyzer_cli/project_analyzer/parsing_utils/mappings.yaml",
+    "queries_path": "/opt/genpod/project_analyzer_cli/project_analyzer/final_queries",
+    "max_results": 100
+  },
+  "message": "\u2705 Enhanced CPG RAG completed successfully using LangGraph agents"
+}

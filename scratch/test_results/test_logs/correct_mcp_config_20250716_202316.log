@@ -1,0 +1,191 @@
+2025-07-16 20:23:50,881 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-16 20:23:50,889 - __main__ - INFO - ✅ LLM generated 2 queries for category: Technical
+2025-07-16 20:23:52,166 - __main__ - ERROR - CPG query failed: HTTP error 202: Accepted
+2025-07-16 20:23:52,178 - asyncio - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x784f2855e2d0>
+2025-07-16 20:23:52,179 - asyncio - ERROR - Unclosed connector
+connections: ['deque([(<aiohttp.client_proto.ResponseHandler object at 0x784f28551f70>, 1278.778946068), (<aiohttp.client_proto.ResponseHandler object at 0x784f28551c10>, 1278.790004759)])']
+connector: <aiohttp.connector.TCPConnector object at 0x784f2855fcb0>
+2025-07-16 20:23:53,462 - __main__ - ERROR - Comprehensive query failed: HTTP error 202: Accepted
+2025-07-16 20:24:21,945 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-16 20:24:21,962 - __main__ - INFO - ✅ LLM generated 2 queries for category: Technical
+2025-07-16 20:24:21,984 - asyncio - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x784f28c16e70>
+2025-07-16 20:24:21,985 - asyncio - ERROR - Unclosed connector
+connections: ['deque([(<aiohttp.client_proto.ResponseHandler object at 0x784f28551fd0>, 1280.074215427), (<aiohttp.client_proto.ResponseHandler object at 0x784f28551c10>, 1308.598748997)])']
+connector: <aiohttp.connector.TCPConnector object at 0x784f2850e2a0>
+2025-07-16 20:24:24,480 - __main__ - ERROR - CPG query failed: HTTP error 202: Accepted
+2025-07-16 20:24:24,493 - asyncio - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x784f28583380>
+2025-07-16 20:24:24,494 - asyncio - ERROR - Unclosed connector
+connections: ['deque([(<aiohttp.client_proto.ResponseHandler object at 0x784f28552390>, 1311.094814641), (<aiohttp.client_proto.ResponseHandler object at 0x784f28551c10>, 1311.107729818)])']
+connector: <aiohttp.connector.TCPConnector object at 0x784f28583260>
+2025-07-16 20:24:25,884 - __main__ - ERROR - Comprehensive query failed: HTTP error 202: Accepted
+2025-07-16 20:24:49,521 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-16 20:24:49,522 - __main__ - INFO - ✅ LLM generated 2 queries for category: Technical
+2025-07-16 20:24:49,529 - asyncio - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x784f28663260>
+2025-07-16 20:24:49,529 - asyncio - ERROR - Unclosed connector
+connections: ['deque([(<aiohttp.client_proto.ResponseHandler object at 0x784f28551c10>, 1336.145900801)])']
+connector: <aiohttp.connector.TCPConnector object at 0x784f28663d70>
+2025-07-16 20:24:50,752 - __main__ - ERROR - CPG query failed: HTTP error 202: Accepted
+2025-07-16 20:24:50,756 - asyncio - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x784f283e0ef0>
+2025-07-16 20:24:50,756 - asyncio - ERROR - Unclosed connector
+connections: ['deque([(<aiohttp.client_proto.ResponseHandler object at 0x784f28552750>, 1337.369435231), (<aiohttp.client_proto.ResponseHandler object at 0x784f28551c10>, 1337.372692045)])']
+connector: <aiohttp.connector.TCPConnector object at 0x784f283e1040>
+2025-07-16 20:24:52,023 - __main__ - ERROR - Comprehensive query failed: HTTP error 202: Accepted
+2025-07-16 20:25:16,230 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-16 20:25:16,231 - __main__ - INFO - ✅ LLM generated 2 queries for category: Technical
+2025-07-16 20:25:16,240 - asyncio - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x784f28583ec0>
+2025-07-16 20:25:16,240 - asyncio - ERROR - Unclosed connector
+connections: ['deque([(<aiohttp.client_proto.ResponseHandler object at 0x784f28551c10>, 1362.856144758)])']
+connector: <aiohttp.connector.TCPConnector object at 0x784f28581b50>
+2025-07-16 20:25:17,952 - __main__ - ERROR - CPG query failed: HTTP error 202: Accepted
+2025-07-16 20:25:17,953 - asyncio - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x784f283e2b70>
+2025-07-16 20:25:17,954 - asyncio - ERROR - Unclosed connector
+connections: ['deque([(<aiohttp.client_proto.ResponseHandler object at 0x784f28551c10>, 1364.56944675), (<aiohttp.client_proto.ResponseHandler object at 0x784f28552270>, 1364.569725067)])']
+connector: <aiohttp.connector.TCPConnector object at 0x784f283e2c00>
+2025-07-16 20:25:19,276 - __main__ - ERROR - Comprehensive query failed: HTTP error 202: Accepted
+2025-07-16 20:25:46,245 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-16 20:25:46,252 - __main__ - INFO - ✅ LLM generated 1 queries for category: Technical
+2025-07-16 20:25:46,260 - asyncio - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x784f28581d00>
+2025-07-16 20:25:46,260 - asyncio - ERROR - Unclosed connector
+connections: ['deque([(<aiohttp.client_proto.ResponseHandler object at 0x784f28552270>, 1392.879055421)])']
+connector: <aiohttp.connector.TCPConnector object at 0x784f28583ce0>
+2025-07-16 20:25:47,788 - __main__ - ERROR - CPG query failed: HTTP error 202: Accepted
+2025-07-16 20:25:47,795 - asyncio - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x784f285818e0>
+2025-07-16 20:25:47,795 - asyncio - ERROR - Unclosed connector
+connections: ['deque([(<aiohttp.client_proto.ResponseHandler object at 0x784f28552c90>, 1394.40741638), (<aiohttp.client_proto.ResponseHandler object at 0x784f28552270>, 1394.413920242)])']
+connector: <aiohttp.connector.TCPConnector object at 0x784f285830b0>
+2025-07-16 20:25:49,029 - __main__ - ERROR - Comprehensive query failed: HTTP error 202: Accepted
+2025-07-16 20:26:11,631 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-16 20:26:11,632 - __main__ - INFO - ✅ LLM generated 2 queries for category: Functional
+2025-07-16 20:26:11,637 - asyncio - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x784f28582d50>
+2025-07-16 20:26:11,638 - asyncio - ERROR - Unclosed connector
+connections: ['deque([(<aiohttp.client_proto.ResponseHandler object at 0x784f28552270>, 1418.262392491)])']
+connector: <aiohttp.connector.TCPConnector object at 0x784f28583650>
+2025-07-16 20:26:12,891 - __main__ - ERROR - CPG query failed: HTTP error 202: Accepted
+2025-07-16 20:26:12,891 - asyncio - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x784f283e21e0>
+2025-07-16 20:26:12,892 - asyncio - ERROR - Unclosed connector
+connections: ['deque([(<aiohttp.client_proto.ResponseHandler object at 0x784f28551f10>, 1419.515876179), (<aiohttp.client_proto.ResponseHandler object at 0x784f28552c90>, 1419.51605975)])']
+connector: <aiohttp.connector.TCPConnector object at 0x784f283e1c70>
+2025-07-16 20:26:14,144 - __main__ - ERROR - Comprehensive query failed: HTTP error 202: Accepted
+2025-07-16 20:26:40,440 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-16 20:26:40,441 - __main__ - INFO - ✅ LLM generated 2 queries for category: Functional
+2025-07-16 20:26:40,447 - asyncio - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x784f28581b50>
+2025-07-16 20:26:40,448 - asyncio - ERROR - Unclosed connector
+connections: ['deque([(<aiohttp.client_proto.ResponseHandler object at 0x784f28552c90>, 1420.768634719), (<aiohttp.client_proto.ResponseHandler object at 0x784f28552b70>, 1420.768684059)])']
+connector: <aiohttp.connector.TCPConnector object at 0x784f28581d00>
+2025-07-16 20:26:41,731 - __main__ - ERROR - CPG query failed: HTTP error 202: Accepted
+2025-07-16 20:26:41,735 - asyncio - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x784f283e0bc0>
+2025-07-16 20:26:41,736 - asyncio - ERROR - Unclosed connector
+connections: ['deque([(<aiohttp.client_proto.ResponseHandler object at 0x784f28553350>, 1448.358314312), (<aiohttp.client_proto.ResponseHandler object at 0x784f28552b70>, 1448.36242829)])']
+connector: <aiohttp.connector.TCPConnector object at 0x784f283e0c80>
+2025-07-16 20:26:42,961 - __main__ - ERROR - Comprehensive query failed: HTTP error 202: Accepted
+2025-07-16 20:27:09,935 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-16 20:27:09,937 - __main__ - INFO - ✅ LLM generated 2 queries for category: Functional
+2025-07-16 20:27:09,943 - asyncio - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x784f283e0cb0>
+2025-07-16 20:27:09,944 - asyncio - ERROR - Unclosed connector
+connections: ['deque([(<aiohttp.client_proto.ResponseHandler object at 0x784f28552b70>, 1449.58873809), (<aiohttp.client_proto.ResponseHandler object at 0x784f28553230>, 1449.588773018)])']
+connector: <aiohttp.connector.TCPConnector object at 0x784f283e1310>
+2025-07-16 20:27:11,191 - __main__ - ERROR - CPG query failed: HTTP error 202: Accepted
+2025-07-16 20:27:11,191 - asyncio - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x784f283f5340>
+2025-07-16 20:27:11,192 - asyncio - ERROR - Unclosed connector
+connections: ['deque([(<aiohttp.client_proto.ResponseHandler object at 0x784f28553230>, 1477.82113175), (<aiohttp.client_proto.ResponseHandler object at 0x784f285536b0>, 1477.82135985)])']
+connector: <aiohttp.connector.TCPConnector object at 0x784f283f5430>
+2025-07-16 20:27:12,423 - __main__ - ERROR - Comprehensive query failed: HTTP error 202: Accepted
+2025-07-16 20:27:36,485 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-16 20:27:36,487 - __main__ - INFO - ✅ LLM generated 2 queries for category: Functional
+2025-07-16 20:27:36,492 - asyncio - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x784f283f4530>
+2025-07-16 20:27:36,492 - asyncio - ERROR - Unclosed connector
+connections: ['deque([(<aiohttp.client_proto.ResponseHandler object at 0x784f285536b0>, 1503.125196452)])']
+connector: <aiohttp.connector.TCPConnector object at 0x784f283f43e0>
+2025-07-16 20:27:37,765 - __main__ - ERROR - CPG query failed: HTTP error 202: Accepted
+2025-07-16 20:27:37,769 - asyncio - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x784f283e3fe0>
+2025-07-16 20:27:37,770 - asyncio - ERROR - Unclosed connector
+connections: ['deque([(<aiohttp.client_proto.ResponseHandler object at 0x784f28553050>, 1504.398545127), (<aiohttp.client_proto.ResponseHandler object at 0x784f285536b0>, 1504.40230439)])']
+connector: <aiohttp.connector.TCPConnector object at 0x784f283e3b00>
+2025-07-16 20:27:39,082 - __main__ - ERROR - Comprehensive query failed: HTTP error 202: Accepted
+2025-07-16 20:28:02,067 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-16 20:28:02,068 - __main__ - INFO - ✅ LLM generated 2 queries for category: Functional
+2025-07-16 20:28:02,074 - asyncio - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x784f283e1ca0>
+2025-07-16 20:28:02,076 - asyncio - ERROR - Unclosed connector
+connections: ['deque([(<aiohttp.client_proto.ResponseHandler object at 0x784f285536b0>, 1528.710826567)])']
+connector: <aiohttp.connector.TCPConnector object at 0x784f283e0a40>
+2025-07-16 20:28:03,286 - __main__ - ERROR - CPG query failed: HTTP error 202: Accepted
+2025-07-16 20:28:03,291 - asyncio - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x784f283e1010>
+2025-07-16 20:28:03,292 - asyncio - ERROR - Unclosed connector
+connections: ['deque([(<aiohttp.client_proto.ResponseHandler object at 0x784f285536b0>, 1529.922211082), (<aiohttp.client_proto.ResponseHandler object at 0x784f28553d10>, 1529.922253124)])']
+connector: <aiohttp.connector.TCPConnector object at 0x784f283e1970>
+2025-07-16 20:28:04,529 - __main__ - ERROR - Comprehensive query failed: HTTP error 202: Accepted
+2025-07-16 20:28:26,007 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-16 20:28:26,009 - __main__ - INFO - ✅ LLM generated 2 queries for category: Non-Functional
+2025-07-16 20:28:26,013 - asyncio - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x784f283e11f0>
+2025-07-16 20:28:26,014 - asyncio - ERROR - Unclosed connector
+connections: ['deque([(<aiohttp.client_proto.ResponseHandler object at 0x784f28552c90>, 1531.165113704), (<aiohttp.client_proto.ResponseHandler object at 0x784f28553890>, 1531.165150041)])']
+connector: <aiohttp.connector.TCPConnector object at 0x784f283e10a0>
+2025-07-16 20:28:27,341 - __main__ - ERROR - CPG query failed: HTTP error 202: Accepted
+2025-07-16 20:28:27,348 - asyncio - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x784f28582de0>
+2025-07-16 20:28:27,349 - asyncio - ERROR - Unclosed connector
+connections: ['deque([(<aiohttp.client_proto.ResponseHandler object at 0x784f28553f50>, 1553.980476466), (<aiohttp.client_proto.ResponseHandler object at 0x784f28553890>, 1553.987715625)])']
+connector: <aiohttp.connector.TCPConnector object at 0x784f28583680>
+2025-07-16 20:28:28,647 - __main__ - ERROR - Comprehensive query failed: HTTP error 202: Accepted
+2025-07-16 20:29:01,448 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-16 20:29:01,451 - __main__ - INFO - ✅ LLM generated 2 queries for category: Non-Functional
+2025-07-16 20:29:01,456 - asyncio - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x784f283e3470>
+2025-07-16 20:29:01,456 - asyncio - ERROR - Unclosed connector
+connections: ['deque([(<aiohttp.client_proto.ResponseHandler object at 0x784f28553890>, 1588.097335476)])']
+connector: <aiohttp.connector.TCPConnector object at 0x784f283e0440>
+2025-07-16 20:29:02,782 - __main__ - ERROR - CPG query failed: HTTP error 202: Accepted
+2025-07-16 20:29:02,788 - asyncio - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x784f283f4c50>
+2025-07-16 20:29:02,789 - asyncio - ERROR - Unclosed connector
+connections: ['deque([(<aiohttp.client_proto.ResponseHandler object at 0x784f283e4530>, 1589.423372006), (<aiohttp.client_proto.ResponseHandler object at 0x784f28553890>, 1589.429974513)])']
+connector: <aiohttp.connector.TCPConnector object at 0x784f283f4380>
+2025-07-16 20:29:04,025 - __main__ - ERROR - Comprehensive query failed: HTTP error 202: Accepted
+2025-07-16 20:29:30,557 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-16 20:29:30,558 - __main__ - INFO - ✅ LLM generated 2 queries for category: Non-Functional
+2025-07-16 20:29:30,562 - asyncio - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x784f283e2060>
+2025-07-16 20:29:30,563 - asyncio - ERROR - Unclosed connector
+connections: ['deque([(<aiohttp.client_proto.ResponseHandler object at 0x784f28553890>, 1590.666997571), (<aiohttp.client_proto.ResponseHandler object at 0x784f283e45f0>, 1590.667046609)])']
+connector: <aiohttp.connector.TCPConnector object at 0x784f283e2720>
+2025-07-16 20:29:31,796 - __main__ - ERROR - CPG query failed: HTTP error 202: Accepted
+2025-07-16 20:29:31,800 - asyncio - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x784f283f57c0>
+2025-07-16 20:29:31,800 - asyncio - ERROR - Unclosed connector
+connections: ['deque([(<aiohttp.client_proto.ResponseHandler object at 0x784f283e40b0>, 1618.440300721), (<aiohttp.client_proto.ResponseHandler object at 0x784f28553890>, 1618.444502035)])']
+connector: <aiohttp.connector.TCPConnector object at 0x784f283f6e10>
+2025-07-16 20:29:33,041 - __main__ - ERROR - Comprehensive query failed: HTTP error 202: Accepted
+2025-07-16 20:29:52,910 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-16 20:29:52,926 - __main__ - INFO - 🔄 Using fallback queries for category: Non-Functional
+2025-07-16 20:29:52,931 - asyncio - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x784f283e11f0>
+2025-07-16 20:29:52,932 - asyncio - ERROR - Unclosed connector
+connections: ['deque([(<aiohttp.client_proto.ResponseHandler object at 0x784f28553890>, 1639.578205338)])']
+connector: <aiohttp.connector.TCPConnector object at 0x784f283e0920>
+2025-07-16 20:29:54,213 - __main__ - ERROR - CPG query failed: HTTP error 202: Accepted
+2025-07-16 20:29:54,218 - asyncio - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x784f28582db0>
+2025-07-16 20:29:54,219 - asyncio - ERROR - Unclosed connector
+connections: ['deque([(<aiohttp.client_proto.ResponseHandler object at 0x784f28553cb0>, 1640.860306086), (<aiohttp.client_proto.ResponseHandler object at 0x784f28553890>, 1640.865038793)])']
+connector: <aiohttp.connector.TCPConnector object at 0x784f28583170>
+2025-07-16 20:29:55,561 - __main__ - ERROR - Comprehensive query failed: HTTP error 202: Accepted

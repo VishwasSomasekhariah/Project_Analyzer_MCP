@@ -1,0 +1,943 @@
+2025-07-15 21:37:31,823 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-15 21:37:31,832 - __main__ - INFO - ✅ LLM generated 2 queries for category: Technical
+2025-07-15 21:37:31,852 - mcp.client.sse - INFO - Connecting to SSE endpoint: http://host.docker.internal:9000/sse
+2025-07-15 21:37:32,174 - httpx - INFO - HTTP Request: GET http://host.docker.internal:9000/sse "HTTP/1.1 200 OK"
+2025-07-15 21:37:32,175 - mcp.client.sse - INFO - Received endpoint URL: http://host.docker.internal:9000/messages/?session_id=142257a25a5748208f010191e9e36480
+2025-07-15 21:37:32,175 - mcp.client.sse - INFO - Starting post writer with endpoint URL: http://host.docker.internal:9000/messages/?session_id=142257a25a5748208f010191e9e36480
+2025-07-15 21:37:32,457 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=142257a25a5748208f010191e9e36480 "HTTP/1.1 202 Accepted"
+2025-07-15 21:37:32,489 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=142257a25a5748208f010191e9e36480 "HTTP/1.1 202 Accepted"
+2025-07-15 21:37:32,510 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=142257a25a5748208f010191e9e36480 "HTTP/1.1 202 Accepted"
+2025-07-15 21:37:32,546 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=142257a25a5748208f010191e9e36480 "HTTP/1.1 202 Accepted"
+2025-07-15 21:37:36,987 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=142257a25a5748208f010191e9e36480 "HTTP/1.1 202 Accepted"
+2025-07-15 21:37:41,843 - mcp.client.sse - INFO - Connecting to SSE endpoint: http://host.docker.internal:9000/sse
+2025-07-15 21:37:42,223 - httpx - INFO - HTTP Request: GET http://host.docker.internal:9000/sse "HTTP/1.1 200 OK"
+2025-07-15 21:37:42,225 - mcp.client.sse - INFO - Received endpoint URL: http://host.docker.internal:9000/messages/?session_id=b197445768c440fca99a17f4b57180d9
+2025-07-15 21:37:42,225 - mcp.client.sse - INFO - Starting post writer with endpoint URL: http://host.docker.internal:9000/messages/?session_id=b197445768c440fca99a17f4b57180d9
+2025-07-15 21:37:42,544 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=b197445768c440fca99a17f4b57180d9 "HTTP/1.1 202 Accepted"
+2025-07-15 21:37:42,556 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=b197445768c440fca99a17f4b57180d9 "HTTP/1.1 202 Accepted"
+2025-07-15 21:37:42,608 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=b197445768c440fca99a17f4b57180d9 "HTTP/1.1 202 Accepted"
+2025-07-15 21:37:42,634 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=b197445768c440fca99a17f4b57180d9 "HTTP/1.1 202 Accepted"
+2025-07-15 21:38:51,948 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-15 21:38:51,950 - __main__ - INFO - ✅ LLM generated 2 queries for category: Technical
+2025-07-15 21:38:51,955 - mcp.client.sse - INFO - Connecting to SSE endpoint: http://host.docker.internal:9000/sse
+2025-07-15 21:38:52,264 - httpx - INFO - HTTP Request: GET http://host.docker.internal:9000/sse "HTTP/1.1 200 OK"
+2025-07-15 21:38:52,264 - mcp.client.sse - INFO - Received endpoint URL: http://host.docker.internal:9000/messages/?session_id=2ef6a7c3ce674627ab2ff9a9385a1f6d
+2025-07-15 21:38:52,265 - mcp.client.sse - INFO - Starting post writer with endpoint URL: http://host.docker.internal:9000/messages/?session_id=2ef6a7c3ce674627ab2ff9a9385a1f6d
+2025-07-15 21:38:52,462 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=2ef6a7c3ce674627ab2ff9a9385a1f6d "HTTP/1.1 202 Accepted"
+2025-07-15 21:38:52,468 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=2ef6a7c3ce674627ab2ff9a9385a1f6d "HTTP/1.1 202 Accepted"
+2025-07-15 21:38:52,475 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=2ef6a7c3ce674627ab2ff9a9385a1f6d "HTTP/1.1 202 Accepted"
+2025-07-15 21:38:52,482 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=2ef6a7c3ce674627ab2ff9a9385a1f6d "HTTP/1.1 202 Accepted"
+2025-07-15 21:38:55,710 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=2ef6a7c3ce674627ab2ff9a9385a1f6d "HTTP/1.1 202 Accepted"
+2025-07-15 21:38:58,748 - mcp.client.sse - INFO - Connecting to SSE endpoint: http://host.docker.internal:9000/sse
+2025-07-15 21:38:58,984 - httpx - INFO - HTTP Request: GET http://host.docker.internal:9000/sse "HTTP/1.1 200 OK"
+2025-07-15 21:38:58,986 - mcp.client.sse - INFO - Received endpoint URL: http://host.docker.internal:9000/messages/?session_id=8f4b11ac47fd4c348b65fa8078fd9ec3
+2025-07-15 21:38:58,986 - mcp.client.sse - INFO - Starting post writer with endpoint URL: http://host.docker.internal:9000/messages/?session_id=8f4b11ac47fd4c348b65fa8078fd9ec3
+2025-07-15 21:38:59,174 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=8f4b11ac47fd4c348b65fa8078fd9ec3 "HTTP/1.1 202 Accepted"
+2025-07-15 21:38:59,181 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=8f4b11ac47fd4c348b65fa8078fd9ec3 "HTTP/1.1 202 Accepted"
+2025-07-15 21:38:59,186 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=8f4b11ac47fd4c348b65fa8078fd9ec3 "HTTP/1.1 202 Accepted"
+2025-07-15 21:38:59,194 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=8f4b11ac47fd4c348b65fa8078fd9ec3 "HTTP/1.1 202 Accepted"
+2025-07-15 21:39:51,118 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-15 21:39:51,121 - __main__ - INFO - ✅ LLM generated 2 queries for category: Technical
+2025-07-15 21:39:51,127 - mcp.client.sse - INFO - Connecting to SSE endpoint: http://host.docker.internal:9000/sse
+2025-07-15 21:39:51,343 - httpx - INFO - HTTP Request: GET http://host.docker.internal:9000/sse "HTTP/1.1 200 OK"
+2025-07-15 21:39:51,344 - mcp.client.sse - INFO - Received endpoint URL: http://host.docker.internal:9000/messages/?session_id=bdb37f6d59af4190b7df1730aeb643c3
+2025-07-15 21:39:51,345 - mcp.client.sse - INFO - Starting post writer with endpoint URL: http://host.docker.internal:9000/messages/?session_id=bdb37f6d59af4190b7df1730aeb643c3
+2025-07-15 21:39:51,545 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=bdb37f6d59af4190b7df1730aeb643c3 "HTTP/1.1 202 Accepted"
+2025-07-15 21:39:51,551 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=bdb37f6d59af4190b7df1730aeb643c3 "HTTP/1.1 202 Accepted"
+2025-07-15 21:39:51,556 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=bdb37f6d59af4190b7df1730aeb643c3 "HTTP/1.1 202 Accepted"
+2025-07-15 21:39:51,563 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=bdb37f6d59af4190b7df1730aeb643c3 "HTTP/1.1 202 Accepted"
+2025-07-15 21:39:54,836 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=bdb37f6d59af4190b7df1730aeb643c3 "HTTP/1.1 202 Accepted"
+2025-07-15 21:39:58,115 - mcp.client.sse - INFO - Connecting to SSE endpoint: http://host.docker.internal:9000/sse
+2025-07-15 21:39:58,369 - httpx - INFO - HTTP Request: GET http://host.docker.internal:9000/sse "HTTP/1.1 200 OK"
+2025-07-15 21:39:58,370 - mcp.client.sse - INFO - Received endpoint URL: http://host.docker.internal:9000/messages/?session_id=295b5782944b46f7b598cccbe4ac932c
+2025-07-15 21:39:58,370 - mcp.client.sse - INFO - Starting post writer with endpoint URL: http://host.docker.internal:9000/messages/?session_id=295b5782944b46f7b598cccbe4ac932c
+2025-07-15 21:39:58,566 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=295b5782944b46f7b598cccbe4ac932c "HTTP/1.1 202 Accepted"
+2025-07-15 21:39:58,572 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=295b5782944b46f7b598cccbe4ac932c "HTTP/1.1 202 Accepted"
+2025-07-15 21:39:58,577 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=295b5782944b46f7b598cccbe4ac932c "HTTP/1.1 202 Accepted"
+2025-07-15 21:39:58,585 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=295b5782944b46f7b598cccbe4ac932c "HTTP/1.1 202 Accepted"
+2025-07-15 21:41:01,019 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-15 21:41:01,021 - __main__ - INFO - ✅ LLM generated 2 queries for category: Technical
+2025-07-15 21:41:01,026 - mcp.client.sse - INFO - Connecting to SSE endpoint: http://host.docker.internal:9000/sse
+2025-07-15 21:41:01,265 - httpx - INFO - HTTP Request: GET http://host.docker.internal:9000/sse "HTTP/1.1 200 OK"
+2025-07-15 21:41:01,265 - mcp.client.sse - INFO - Received endpoint URL: http://host.docker.internal:9000/messages/?session_id=b5303220e3b349ae9e8669922a0d3303
+2025-07-15 21:41:01,266 - mcp.client.sse - INFO - Starting post writer with endpoint URL: http://host.docker.internal:9000/messages/?session_id=b5303220e3b349ae9e8669922a0d3303
+2025-07-15 21:41:01,490 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=b5303220e3b349ae9e8669922a0d3303 "HTTP/1.1 202 Accepted"
+2025-07-15 21:41:01,497 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=b5303220e3b349ae9e8669922a0d3303 "HTTP/1.1 202 Accepted"
+2025-07-15 21:41:01,502 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=b5303220e3b349ae9e8669922a0d3303 "HTTP/1.1 202 Accepted"
+2025-07-15 21:41:01,512 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=b5303220e3b349ae9e8669922a0d3303 "HTTP/1.1 202 Accepted"
+2025-07-15 21:41:04,696 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=b5303220e3b349ae9e8669922a0d3303 "HTTP/1.1 202 Accepted"
+2025-07-15 21:41:07,979 - mcp.client.sse - INFO - Connecting to SSE endpoint: http://host.docker.internal:9000/sse
+2025-07-15 21:41:08,233 - httpx - INFO - HTTP Request: GET http://host.docker.internal:9000/sse "HTTP/1.1 200 OK"
+2025-07-15 21:41:08,234 - mcp.client.sse - INFO - Received endpoint URL: http://host.docker.internal:9000/messages/?session_id=ab956a5945f64cfa8cf79e9aa4abbc16
+2025-07-15 21:41:08,234 - mcp.client.sse - INFO - Starting post writer with endpoint URL: http://host.docker.internal:9000/messages/?session_id=ab956a5945f64cfa8cf79e9aa4abbc16
+2025-07-15 21:41:08,552 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=ab956a5945f64cfa8cf79e9aa4abbc16 "HTTP/1.1 202 Accepted"
+2025-07-15 21:41:08,560 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=ab956a5945f64cfa8cf79e9aa4abbc16 "HTTP/1.1 202 Accepted"
+2025-07-15 21:41:08,566 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=ab956a5945f64cfa8cf79e9aa4abbc16 "HTTP/1.1 202 Accepted"
+2025-07-15 21:41:08,576 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=ab956a5945f64cfa8cf79e9aa4abbc16 "HTTP/1.1 202 Accepted"
+2025-07-15 21:42:03,605 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-15 21:42:03,608 - __main__ - INFO - ✅ LLM generated 1 queries for category: Technical
+2025-07-15 21:42:03,611 - mcp.client.sse - INFO - Connecting to SSE endpoint: http://host.docker.internal:9000/sse
+2025-07-15 21:42:03,856 - httpx - INFO - HTTP Request: GET http://host.docker.internal:9000/sse "HTTP/1.1 200 OK"
+2025-07-15 21:42:03,857 - mcp.client.sse - INFO - Received endpoint URL: http://host.docker.internal:9000/messages/?session_id=8a8ecc24448a41c093c0753b3fec28a8
+2025-07-15 21:42:03,858 - mcp.client.sse - INFO - Starting post writer with endpoint URL: http://host.docker.internal:9000/messages/?session_id=8a8ecc24448a41c093c0753b3fec28a8
+2025-07-15 21:42:04,067 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=8a8ecc24448a41c093c0753b3fec28a8 "HTTP/1.1 202 Accepted"
+2025-07-15 21:42:04,076 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=8a8ecc24448a41c093c0753b3fec28a8 "HTTP/1.1 202 Accepted"
+2025-07-15 21:42:04,082 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=8a8ecc24448a41c093c0753b3fec28a8 "HTTP/1.1 202 Accepted"
+2025-07-15 21:42:04,089 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=8a8ecc24448a41c093c0753b3fec28a8 "HTTP/1.1 202 Accepted"
+2025-07-15 21:42:08,181 - mcp.client.sse - INFO - Connecting to SSE endpoint: http://host.docker.internal:9000/sse
+2025-07-15 21:42:08,762 - httpx - INFO - HTTP Request: GET http://host.docker.internal:9000/sse "HTTP/1.1 200 OK"
+2025-07-15 21:42:08,763 - mcp.client.sse - INFO - Received endpoint URL: http://host.docker.internal:9000/messages/?session_id=3609514f0b2540748a6a9b5bd669bd7c
+2025-07-15 21:42:08,764 - mcp.client.sse - INFO - Starting post writer with endpoint URL: http://host.docker.internal:9000/messages/?session_id=3609514f0b2540748a6a9b5bd669bd7c
+2025-07-15 21:42:09,081 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=3609514f0b2540748a6a9b5bd669bd7c "HTTP/1.1 202 Accepted"
+2025-07-15 21:42:09,090 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=3609514f0b2540748a6a9b5bd669bd7c "HTTP/1.1 202 Accepted"
+2025-07-15 21:42:09,095 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=3609514f0b2540748a6a9b5bd669bd7c "HTTP/1.1 202 Accepted"
+2025-07-15 21:42:09,153 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=3609514f0b2540748a6a9b5bd669bd7c "HTTP/1.1 202 Accepted"
+2025-07-15 21:43:10,009 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-15 21:43:10,016 - __main__ - INFO - ✅ LLM generated 2 queries for category: Functional
+2025-07-15 21:43:10,022 - mcp.client.sse - INFO - Connecting to SSE endpoint: http://host.docker.internal:9000/sse
+2025-07-15 21:43:10,242 - httpx - INFO - HTTP Request: GET http://host.docker.internal:9000/sse "HTTP/1.1 200 OK"
+2025-07-15 21:43:10,243 - mcp.client.sse - INFO - Received endpoint URL: http://host.docker.internal:9000/messages/?session_id=232dfa41a6a04cfc9aedcc5b9c42693c
+2025-07-15 21:43:10,243 - mcp.client.sse - INFO - Starting post writer with endpoint URL: http://host.docker.internal:9000/messages/?session_id=232dfa41a6a04cfc9aedcc5b9c42693c
+2025-07-15 21:43:10,443 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=232dfa41a6a04cfc9aedcc5b9c42693c "HTTP/1.1 202 Accepted"
+2025-07-15 21:43:10,492 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=232dfa41a6a04cfc9aedcc5b9c42693c "HTTP/1.1 202 Accepted"
+2025-07-15 21:43:10,504 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=232dfa41a6a04cfc9aedcc5b9c42693c "HTTP/1.1 202 Accepted"
+2025-07-15 21:43:10,513 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=232dfa41a6a04cfc9aedcc5b9c42693c "HTTP/1.1 202 Accepted"
+2025-07-15 21:43:14,368 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=232dfa41a6a04cfc9aedcc5b9c42693c "HTTP/1.1 202 Accepted"
+2025-07-15 21:43:18,018 - mcp.client.sse - INFO - Connecting to SSE endpoint: http://host.docker.internal:9000/sse
+2025-07-15 21:43:18,267 - httpx - INFO - HTTP Request: GET http://host.docker.internal:9000/sse "HTTP/1.1 200 OK"
+2025-07-15 21:43:18,268 - mcp.client.sse - INFO - Received endpoint URL: http://host.docker.internal:9000/messages/?session_id=094ca3453aca43ad964c10b463d0d09c
+2025-07-15 21:43:18,268 - mcp.client.sse - INFO - Starting post writer with endpoint URL: http://host.docker.internal:9000/messages/?session_id=094ca3453aca43ad964c10b463d0d09c
+2025-07-15 21:43:18,468 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=094ca3453aca43ad964c10b463d0d09c "HTTP/1.1 202 Accepted"
+2025-07-15 21:43:18,474 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=094ca3453aca43ad964c10b463d0d09c "HTTP/1.1 202 Accepted"
+2025-07-15 21:43:18,479 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=094ca3453aca43ad964c10b463d0d09c "HTTP/1.1 202 Accepted"
+2025-07-15 21:43:18,488 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=094ca3453aca43ad964c10b463d0d09c "HTTP/1.1 202 Accepted"
+2025-07-15 21:44:18,905 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-15 21:44:18,908 - __main__ - INFO - ✅ LLM generated 1 queries for category: Functional
+2025-07-15 21:44:18,913 - mcp.client.sse - INFO - Connecting to SSE endpoint: http://host.docker.internal:9000/sse
+2025-07-15 21:44:19,273 - httpx - INFO - HTTP Request: GET http://host.docker.internal:9000/sse "HTTP/1.1 200 OK"
+2025-07-15 21:44:19,274 - mcp.client.sse - INFO - Received endpoint URL: http://host.docker.internal:9000/messages/?session_id=a0a0dd2e10dc461497d4c4d903184d2f
+2025-07-15 21:44:19,275 - mcp.client.sse - INFO - Starting post writer with endpoint URL: http://host.docker.internal:9000/messages/?session_id=a0a0dd2e10dc461497d4c4d903184d2f
+2025-07-15 21:44:19,615 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=a0a0dd2e10dc461497d4c4d903184d2f "HTTP/1.1 202 Accepted"
+2025-07-15 21:44:19,627 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=a0a0dd2e10dc461497d4c4d903184d2f "HTTP/1.1 202 Accepted"
+2025-07-15 21:44:19,638 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=a0a0dd2e10dc461497d4c4d903184d2f "HTTP/1.1 202 Accepted"
+2025-07-15 21:44:19,653 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=a0a0dd2e10dc461497d4c4d903184d2f "HTTP/1.1 202 Accepted"
+2025-07-15 21:44:23,498 - mcp.client.sse - INFO - Connecting to SSE endpoint: http://host.docker.internal:9000/sse
+2025-07-15 21:44:24,516 - httpx - INFO - HTTP Request: GET http://host.docker.internal:9000/sse "HTTP/1.1 200 OK"
+2025-07-15 21:44:24,722 - mcp.client.sse - INFO - Received endpoint URL: http://host.docker.internal:9000/messages/?session_id=a8f0905042ff4d4e97cbc02568e2b346
+2025-07-15 21:44:24,722 - mcp.client.sse - INFO - Starting post writer with endpoint URL: http://host.docker.internal:9000/messages/?session_id=a8f0905042ff4d4e97cbc02568e2b346
+2025-07-15 21:44:25,003 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=a8f0905042ff4d4e97cbc02568e2b346 "HTTP/1.1 202 Accepted"
+2025-07-15 21:44:25,010 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=a8f0905042ff4d4e97cbc02568e2b346 "HTTP/1.1 202 Accepted"
+2025-07-15 21:44:25,018 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=a8f0905042ff4d4e97cbc02568e2b346 "HTTP/1.1 202 Accepted"
+2025-07-15 21:44:25,027 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=a8f0905042ff4d4e97cbc02568e2b346 "HTTP/1.1 202 Accepted"
+2025-07-15 21:45:25,761 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-15 21:45:25,763 - __main__ - INFO - ✅ LLM generated 2 queries for category: Functional
+2025-07-15 21:45:25,765 - mcp.client.sse - INFO - Connecting to SSE endpoint: http://host.docker.internal:9000/sse
+2025-07-15 21:45:26,041 - httpx - INFO - HTTP Request: GET http://host.docker.internal:9000/sse "HTTP/1.1 200 OK"
+2025-07-15 21:45:26,042 - mcp.client.sse - INFO - Received endpoint URL: http://host.docker.internal:9000/messages/?session_id=97b36031083740cb8447d6d464c9421f
+2025-07-15 21:45:26,043 - mcp.client.sse - INFO - Starting post writer with endpoint URL: http://host.docker.internal:9000/messages/?session_id=97b36031083740cb8447d6d464c9421f
+2025-07-15 21:45:26,249 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=97b36031083740cb8447d6d464c9421f "HTTP/1.1 202 Accepted"
+2025-07-15 21:45:26,255 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=97b36031083740cb8447d6d464c9421f "HTTP/1.1 202 Accepted"
+2025-07-15 21:45:26,260 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=97b36031083740cb8447d6d464c9421f "HTTP/1.1 202 Accepted"
+2025-07-15 21:45:26,268 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=97b36031083740cb8447d6d464c9421f "HTTP/1.1 202 Accepted"
+2025-07-15 21:45:29,474 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=97b36031083740cb8447d6d464c9421f "HTTP/1.1 202 Accepted"
+2025-07-15 21:45:33,004 - mcp.client.sse - INFO - Connecting to SSE endpoint: http://host.docker.internal:9000/sse
+2025-07-15 21:45:33,245 - httpx - INFO - HTTP Request: GET http://host.docker.internal:9000/sse "HTTP/1.1 200 OK"
+2025-07-15 21:45:33,245 - mcp.client.sse - INFO - Received endpoint URL: http://host.docker.internal:9000/messages/?session_id=c6ee9be37cef4d48955f574206cd168b
+2025-07-15 21:45:33,246 - mcp.client.sse - INFO - Starting post writer with endpoint URL: http://host.docker.internal:9000/messages/?session_id=c6ee9be37cef4d48955f574206cd168b
+2025-07-15 21:45:33,453 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=c6ee9be37cef4d48955f574206cd168b "HTTP/1.1 202 Accepted"
+2025-07-15 21:45:33,458 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=c6ee9be37cef4d48955f574206cd168b "HTTP/1.1 202 Accepted"
+2025-07-15 21:45:33,464 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=c6ee9be37cef4d48955f574206cd168b "HTTP/1.1 202 Accepted"
+2025-07-15 21:45:33,471 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=c6ee9be37cef4d48955f574206cd168b "HTTP/1.1 202 Accepted"
+2025-07-15 21:46:34,861 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-15 21:46:34,862 - __main__ - INFO - ✅ LLM generated 2 queries for category: Functional
+2025-07-15 21:46:34,865 - mcp.client.sse - INFO - Connecting to SSE endpoint: http://host.docker.internal:9000/sse
+2025-07-15 21:46:35,100 - httpx - INFO - HTTP Request: GET http://host.docker.internal:9000/sse "HTTP/1.1 200 OK"
+2025-07-15 21:46:35,101 - mcp.client.sse - INFO - Received endpoint URL: http://host.docker.internal:9000/messages/?session_id=f298ea15fc4c4da3be028bdfeba6d5b8
+2025-07-15 21:46:35,102 - mcp.client.sse - INFO - Starting post writer with endpoint URL: http://host.docker.internal:9000/messages/?session_id=f298ea15fc4c4da3be028bdfeba6d5b8
+2025-07-15 21:46:35,330 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=f298ea15fc4c4da3be028bdfeba6d5b8 "HTTP/1.1 202 Accepted"
+2025-07-15 21:46:35,335 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=f298ea15fc4c4da3be028bdfeba6d5b8 "HTTP/1.1 202 Accepted"
+2025-07-15 21:46:35,341 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=f298ea15fc4c4da3be028bdfeba6d5b8 "HTTP/1.1 202 Accepted"
+2025-07-15 21:46:35,349 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=f298ea15fc4c4da3be028bdfeba6d5b8 "HTTP/1.1 202 Accepted"
+2025-07-15 21:46:38,671 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=f298ea15fc4c4da3be028bdfeba6d5b8 "HTTP/1.1 202 Accepted"
+2025-07-15 21:46:41,791 - mcp.client.sse - INFO - Connecting to SSE endpoint: http://host.docker.internal:9000/sse
+2025-07-15 21:46:42,030 - httpx - INFO - HTTP Request: GET http://host.docker.internal:9000/sse "HTTP/1.1 200 OK"
+2025-07-15 21:46:42,030 - mcp.client.sse - INFO - Received endpoint URL: http://host.docker.internal:9000/messages/?session_id=df70a5a5e3864588837fa708977f9d85
+2025-07-15 21:46:42,031 - mcp.client.sse - INFO - Starting post writer with endpoint URL: http://host.docker.internal:9000/messages/?session_id=df70a5a5e3864588837fa708977f9d85
+2025-07-15 21:46:42,246 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=df70a5a5e3864588837fa708977f9d85 "HTTP/1.1 202 Accepted"
+2025-07-15 21:46:42,251 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=df70a5a5e3864588837fa708977f9d85 "HTTP/1.1 202 Accepted"
+2025-07-15 21:46:42,258 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=df70a5a5e3864588837fa708977f9d85 "HTTP/1.1 202 Accepted"
+2025-07-15 21:46:42,265 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=df70a5a5e3864588837fa708977f9d85 "HTTP/1.1 202 Accepted"
+2025-07-15 21:47:44,428 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-15 21:47:44,430 - __main__ - INFO - ✅ LLM generated 2 queries for category: Functional
+2025-07-15 21:47:44,432 - mcp.client.sse - INFO - Connecting to SSE endpoint: http://host.docker.internal:9000/sse
+2025-07-15 21:47:44,686 - httpx - INFO - HTTP Request: GET http://host.docker.internal:9000/sse "HTTP/1.1 200 OK"
+2025-07-15 21:47:44,687 - mcp.client.sse - INFO - Received endpoint URL: http://host.docker.internal:9000/messages/?session_id=e38997316cd7416db5b0b67f9aea8d5a
+2025-07-15 21:47:44,687 - mcp.client.sse - INFO - Starting post writer with endpoint URL: http://host.docker.internal:9000/messages/?session_id=e38997316cd7416db5b0b67f9aea8d5a
+2025-07-15 21:47:44,918 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=e38997316cd7416db5b0b67f9aea8d5a "HTTP/1.1 202 Accepted"
+2025-07-15 21:47:44,928 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=e38997316cd7416db5b0b67f9aea8d5a "HTTP/1.1 202 Accepted"
+2025-07-15 21:47:44,934 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=e38997316cd7416db5b0b67f9aea8d5a "HTTP/1.1 202 Accepted"
+2025-07-15 21:47:44,943 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=e38997316cd7416db5b0b67f9aea8d5a "HTTP/1.1 202 Accepted"
+2025-07-15 21:47:48,151 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=e38997316cd7416db5b0b67f9aea8d5a "HTTP/1.1 202 Accepted"
+2025-07-15 21:47:51,213 - mcp.client.sse - INFO - Connecting to SSE endpoint: http://host.docker.internal:9000/sse
+2025-07-15 21:47:51,554 - httpx - INFO - HTTP Request: GET http://host.docker.internal:9000/sse "HTTP/1.1 200 OK"
+2025-07-15 21:47:51,555 - mcp.client.sse - INFO - Received endpoint URL: http://host.docker.internal:9000/messages/?session_id=9edc79de7fca4fff88098d6b184b846a
+2025-07-15 21:47:51,555 - mcp.client.sse - INFO - Starting post writer with endpoint URL: http://host.docker.internal:9000/messages/?session_id=9edc79de7fca4fff88098d6b184b846a
+2025-07-15 21:47:51,774 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=9edc79de7fca4fff88098d6b184b846a "HTTP/1.1 202 Accepted"
+2025-07-15 21:47:51,780 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=9edc79de7fca4fff88098d6b184b846a "HTTP/1.1 202 Accepted"
+2025-07-15 21:47:51,786 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=9edc79de7fca4fff88098d6b184b846a "HTTP/1.1 202 Accepted"
+2025-07-15 21:47:51,794 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=9edc79de7fca4fff88098d6b184b846a "HTTP/1.1 202 Accepted"
+2025-07-15 21:48:53,344 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-15 21:48:53,346 - __main__ - INFO - ✅ LLM generated 2 queries for category: Non-Functional
+2025-07-15 21:48:53,351 - mcp.client.sse - INFO - Connecting to SSE endpoint: http://host.docker.internal:9000/sse
+2025-07-15 21:48:53,595 - httpx - INFO - HTTP Request: GET http://host.docker.internal:9000/sse "HTTP/1.1 200 OK"
+2025-07-15 21:48:53,596 - mcp.client.sse - INFO - Received endpoint URL: http://host.docker.internal:9000/messages/?session_id=f1417227580d473784445daf5d3ec182
+2025-07-15 21:48:53,596 - mcp.client.sse - INFO - Starting post writer with endpoint URL: http://host.docker.internal:9000/messages/?session_id=f1417227580d473784445daf5d3ec182
+2025-07-15 21:48:53,815 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=f1417227580d473784445daf5d3ec182 "HTTP/1.1 202 Accepted"
+2025-07-15 21:48:53,823 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=f1417227580d473784445daf5d3ec182 "HTTP/1.1 202 Accepted"
+2025-07-15 21:48:53,828 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=f1417227580d473784445daf5d3ec182 "HTTP/1.1 202 Accepted"
+2025-07-15 21:48:53,837 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=f1417227580d473784445daf5d3ec182 "HTTP/1.1 202 Accepted"
+2025-07-15 21:48:56,909 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=f1417227580d473784445daf5d3ec182 "HTTP/1.1 202 Accepted"
+2025-07-15 21:48:59,868 - mcp.client.sse - INFO - Connecting to SSE endpoint: http://host.docker.internal:9000/sse
+2025-07-15 21:49:00,105 - httpx - INFO - HTTP Request: GET http://host.docker.internal:9000/sse "HTTP/1.1 200 OK"
+2025-07-15 21:49:00,106 - mcp.client.sse - INFO - Received endpoint URL: http://host.docker.internal:9000/messages/?session_id=37989368bb6e459d9aa9d0c9f4a2ab20
+2025-07-15 21:49:00,106 - mcp.client.sse - INFO - Starting post writer with endpoint URL: http://host.docker.internal:9000/messages/?session_id=37989368bb6e459d9aa9d0c9f4a2ab20
+2025-07-15 21:49:00,318 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=37989368bb6e459d9aa9d0c9f4a2ab20 "HTTP/1.1 202 Accepted"
+2025-07-15 21:49:00,323 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=37989368bb6e459d9aa9d0c9f4a2ab20 "HTTP/1.1 202 Accepted"
+2025-07-15 21:49:00,328 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=37989368bb6e459d9aa9d0c9f4a2ab20 "HTTP/1.1 202 Accepted"
+2025-07-15 21:49:00,340 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=37989368bb6e459d9aa9d0c9f4a2ab20 "HTTP/1.1 202 Accepted"
+2025-07-15 21:50:01,322 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-15 21:50:01,324 - __main__ - INFO - ✅ LLM generated 2 queries for category: Non-Functional
+2025-07-15 21:50:01,328 - mcp.client.sse - INFO - Connecting to SSE endpoint: http://host.docker.internal:9000/sse
+2025-07-15 21:50:01,600 - httpx - INFO - HTTP Request: GET http://host.docker.internal:9000/sse "HTTP/1.1 200 OK"
+2025-07-15 21:50:01,601 - mcp.client.sse - INFO - Received endpoint URL: http://host.docker.internal:9000/messages/?session_id=31118c1334fb4024bea3168652538745
+2025-07-15 21:50:01,601 - mcp.client.sse - INFO - Starting post writer with endpoint URL: http://host.docker.internal:9000/messages/?session_id=31118c1334fb4024bea3168652538745
+2025-07-15 21:50:01,808 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=31118c1334fb4024bea3168652538745 "HTTP/1.1 202 Accepted"
+2025-07-15 21:50:01,814 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=31118c1334fb4024bea3168652538745 "HTTP/1.1 202 Accepted"
+2025-07-15 21:50:01,818 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=31118c1334fb4024bea3168652538745 "HTTP/1.1 202 Accepted"
+2025-07-15 21:50:01,828 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=31118c1334fb4024bea3168652538745 "HTTP/1.1 202 Accepted"
+2025-07-15 21:50:04,812 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=31118c1334fb4024bea3168652538745 "HTTP/1.1 202 Accepted"
+2025-07-15 21:50:08,000 - mcp.client.sse - INFO - Connecting to SSE endpoint: http://host.docker.internal:9000/sse
+2025-07-15 21:50:08,332 - httpx - INFO - HTTP Request: GET http://host.docker.internal:9000/sse "HTTP/1.1 200 OK"
+2025-07-15 21:50:08,333 - mcp.client.sse - INFO - Received endpoint URL: http://host.docker.internal:9000/messages/?session_id=1279d1ad2d4c448fb8624389917d9f4f
+2025-07-15 21:50:08,334 - mcp.client.sse - INFO - Starting post writer with endpoint URL: http://host.docker.internal:9000/messages/?session_id=1279d1ad2d4c448fb8624389917d9f4f
+2025-07-15 21:50:08,634 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=1279d1ad2d4c448fb8624389917d9f4f "HTTP/1.1 202 Accepted"
+2025-07-15 21:50:08,643 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=1279d1ad2d4c448fb8624389917d9f4f "HTTP/1.1 202 Accepted"
+2025-07-15 21:50:08,652 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=1279d1ad2d4c448fb8624389917d9f4f "HTTP/1.1 202 Accepted"
+2025-07-15 21:50:08,679 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=1279d1ad2d4c448fb8624389917d9f4f "HTTP/1.1 202 Accepted"
+2025-07-15 21:51:16,696 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-15 21:51:16,698 - __main__ - INFO - ✅ LLM generated 2 queries for category: Non-Functional
+2025-07-15 21:51:16,702 - mcp.client.sse - INFO - Connecting to SSE endpoint: http://host.docker.internal:9000/sse
+2025-07-15 21:51:17,081 - httpx - INFO - HTTP Request: GET http://host.docker.internal:9000/sse "HTTP/1.1 200 OK"
+2025-07-15 21:51:17,082 - mcp.client.sse - INFO - Received endpoint URL: http://host.docker.internal:9000/messages/?session_id=93eb8b31286f442295f5bc753e39410b
+2025-07-15 21:51:17,082 - mcp.client.sse - INFO - Starting post writer with endpoint URL: http://host.docker.internal:9000/messages/?session_id=93eb8b31286f442295f5bc753e39410b
+2025-07-15 21:51:17,347 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=93eb8b31286f442295f5bc753e39410b "HTTP/1.1 202 Accepted"
+2025-07-15 21:51:17,366 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=93eb8b31286f442295f5bc753e39410b "HTTP/1.1 202 Accepted"
+2025-07-15 21:51:17,376 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=93eb8b31286f442295f5bc753e39410b "HTTP/1.1 202 Accepted"
+2025-07-15 21:51:17,384 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=93eb8b31286f442295f5bc753e39410b "HTTP/1.1 202 Accepted"
+2025-07-15 21:51:20,555 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=93eb8b31286f442295f5bc753e39410b "HTTP/1.1 202 Accepted"
+2025-07-15 21:51:24,380 - mcp.client.sse - INFO - Connecting to SSE endpoint: http://host.docker.internal:9000/sse
+2025-07-15 21:51:24,992 - httpx - INFO - HTTP Request: GET http://host.docker.internal:9000/sse "HTTP/1.1 200 OK"
+2025-07-15 21:51:24,993 - mcp.client.sse - INFO - Received endpoint URL: http://host.docker.internal:9000/messages/?session_id=594c8ee601244da3bce05e8c646ff283
+2025-07-15 21:51:24,994 - mcp.client.sse - INFO - Starting post writer with endpoint URL: http://host.docker.internal:9000/messages/?session_id=594c8ee601244da3bce05e8c646ff283
+2025-07-15 21:51:25,362 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=594c8ee601244da3bce05e8c646ff283 "HTTP/1.1 202 Accepted"
+2025-07-15 21:51:25,374 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=594c8ee601244da3bce05e8c646ff283 "HTTP/1.1 202 Accepted"
+2025-07-15 21:51:25,383 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=594c8ee601244da3bce05e8c646ff283 "HTTP/1.1 202 Accepted"
+2025-07-15 21:51:25,401 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=594c8ee601244da3bce05e8c646ff283 "HTTP/1.1 202 Accepted"
+2025-07-15 21:52:29,394 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-15 21:52:29,396 - __main__ - INFO - ✅ LLM generated 2 queries for category: Non-Functional
+2025-07-15 21:52:29,401 - mcp.client.sse - INFO - Connecting to SSE endpoint: http://host.docker.internal:9000/sse
+2025-07-15 21:52:29,753 - httpx - INFO - HTTP Request: GET http://host.docker.internal:9000/sse "HTTP/1.1 200 OK"
+2025-07-15 21:52:29,753 - mcp.client.sse - INFO - Received endpoint URL: http://host.docker.internal:9000/messages/?session_id=d61207b6a5e94a14825bb571c125021b
+2025-07-15 21:52:29,754 - mcp.client.sse - INFO - Starting post writer with endpoint URL: http://host.docker.internal:9000/messages/?session_id=d61207b6a5e94a14825bb571c125021b
+2025-07-15 21:52:30,032 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=d61207b6a5e94a14825bb571c125021b "HTTP/1.1 202 Accepted"
+2025-07-15 21:52:30,041 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=d61207b6a5e94a14825bb571c125021b "HTTP/1.1 202 Accepted"
+2025-07-15 21:52:30,050 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=d61207b6a5e94a14825bb571c125021b "HTTP/1.1 202 Accepted"
+2025-07-15 21:52:30,063 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=d61207b6a5e94a14825bb571c125021b "HTTP/1.1 202 Accepted"
+2025-07-15 21:52:33,468 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=d61207b6a5e94a14825bb571c125021b "HTTP/1.1 202 Accepted"
+2025-07-15 21:52:37,087 - mcp.client.sse - INFO - Connecting to SSE endpoint: http://host.docker.internal:9000/sse
+2025-07-15 21:52:37,402 - httpx - INFO - HTTP Request: GET http://host.docker.internal:9000/sse "HTTP/1.1 200 OK"
+2025-07-15 21:52:37,403 - mcp.client.sse - INFO - Received endpoint URL: http://host.docker.internal:9000/messages/?session_id=91ecd98d520a408c8cd7458b12ca851c
+2025-07-15 21:52:37,404 - mcp.client.sse - INFO - Starting post writer with endpoint URL: http://host.docker.internal:9000/messages/?session_id=91ecd98d520a408c8cd7458b12ca851c
+2025-07-15 21:52:37,695 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=91ecd98d520a408c8cd7458b12ca851c "HTTP/1.1 202 Accepted"
+2025-07-15 21:52:37,704 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=91ecd98d520a408c8cd7458b12ca851c "HTTP/1.1 202 Accepted"
+2025-07-15 21:52:37,715 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=91ecd98d520a408c8cd7458b12ca851c "HTTP/1.1 202 Accepted"
+2025-07-15 21:52:37,730 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=91ecd98d520a408c8cd7458b12ca851c "HTTP/1.1 202 Accepted"
+2025-07-15 21:53:38,343 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-15 21:53:38,345 - __main__ - INFO - ✅ LLM generated 2 queries for category: Non-Functional
+2025-07-15 21:53:38,348 - mcp.client.sse - INFO - Connecting to SSE endpoint: http://host.docker.internal:9000/sse
+2025-07-15 21:53:38,574 - httpx - INFO - HTTP Request: GET http://host.docker.internal:9000/sse "HTTP/1.1 200 OK"
+2025-07-15 21:53:38,575 - mcp.client.sse - INFO - Received endpoint URL: http://host.docker.internal:9000/messages/?session_id=584af91ae0a64be9aaf2571168e29239
+2025-07-15 21:53:38,575 - mcp.client.sse - INFO - Starting post writer with endpoint URL: http://host.docker.internal:9000/messages/?session_id=584af91ae0a64be9aaf2571168e29239
+2025-07-15 21:53:38,793 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=584af91ae0a64be9aaf2571168e29239 "HTTP/1.1 202 Accepted"
+2025-07-15 21:53:38,798 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=584af91ae0a64be9aaf2571168e29239 "HTTP/1.1 202 Accepted"
+2025-07-15 21:53:38,805 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=584af91ae0a64be9aaf2571168e29239 "HTTP/1.1 202 Accepted"
+2025-07-15 21:53:38,812 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=584af91ae0a64be9aaf2571168e29239 "HTTP/1.1 202 Accepted"
+2025-07-15 21:53:42,365 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=584af91ae0a64be9aaf2571168e29239 "HTTP/1.1 202 Accepted"
+2025-07-15 21:53:45,818 - mcp.client.sse - INFO - Connecting to SSE endpoint: http://host.docker.internal:9000/sse
+2025-07-15 21:53:46,132 - httpx - INFO - HTTP Request: GET http://host.docker.internal:9000/sse "HTTP/1.1 200 OK"
+2025-07-15 21:53:46,132 - mcp.client.sse - INFO - Received endpoint URL: http://host.docker.internal:9000/messages/?session_id=1cace8d2713d4c80a69dead6be7d1138
+2025-07-15 21:53:46,133 - mcp.client.sse - INFO - Starting post writer with endpoint URL: http://host.docker.internal:9000/messages/?session_id=1cace8d2713d4c80a69dead6be7d1138
+2025-07-15 21:53:46,372 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=1cace8d2713d4c80a69dead6be7d1138 "HTTP/1.1 202 Accepted"
+2025-07-15 21:53:46,378 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=1cace8d2713d4c80a69dead6be7d1138 "HTTP/1.1 202 Accepted"
+2025-07-15 21:53:46,385 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=1cace8d2713d4c80a69dead6be7d1138 "HTTP/1.1 202 Accepted"
+2025-07-15 21:53:46,393 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=1cace8d2713d4c80a69dead6be7d1138 "HTTP/1.1 202 Accepted"
+2025-07-15 21:55:17,956 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-15 21:55:17,961 - __main__ - INFO - ✅ LLM generated 2 queries for category: Non-Functional
+2025-07-15 21:55:17,966 - mcp.client.sse - INFO - Connecting to SSE endpoint: http://host.docker.internal:9000/sse
+2025-07-15 21:55:18,261 - httpx - INFO - HTTP Request: GET http://host.docker.internal:9000/sse "HTTP/1.1 200 OK"
+2025-07-15 21:55:18,262 - mcp.client.sse - INFO - Received endpoint URL: http://host.docker.internal:9000/messages/?session_id=62dc3f4092044b09a60391c17b40100f
+2025-07-15 21:55:18,262 - mcp.client.sse - INFO - Starting post writer with endpoint URL: http://host.docker.internal:9000/messages/?session_id=62dc3f4092044b09a60391c17b40100f
+2025-07-15 21:55:18,511 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=62dc3f4092044b09a60391c17b40100f "HTTP/1.1 202 Accepted"
+2025-07-15 21:55:18,517 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=62dc3f4092044b09a60391c17b40100f "HTTP/1.1 202 Accepted"
+2025-07-15 21:55:18,523 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=62dc3f4092044b09a60391c17b40100f "HTTP/1.1 202 Accepted"
+2025-07-15 21:55:18,532 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=62dc3f4092044b09a60391c17b40100f "HTTP/1.1 202 Accepted"
+2025-07-15 21:55:22,380 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=62dc3f4092044b09a60391c17b40100f "HTTP/1.1 202 Accepted"
+2025-07-15 21:55:26,367 - mcp.client.sse - INFO - Connecting to SSE endpoint: http://host.docker.internal:9000/sse
+2025-07-15 21:55:26,695 - httpx - INFO - HTTP Request: GET http://host.docker.internal:9000/sse "HTTP/1.1 200 OK"
+2025-07-15 21:55:26,696 - mcp.client.sse - INFO - Received endpoint URL: http://host.docker.internal:9000/messages/?session_id=a93199b342e64c7ba727483629a4699f
+2025-07-15 21:55:26,697 - mcp.client.sse - INFO - Starting post writer with endpoint URL: http://host.docker.internal:9000/messages/?session_id=a93199b342e64c7ba727483629a4699f
+2025-07-15 21:55:26,948 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=a93199b342e64c7ba727483629a4699f "HTTP/1.1 202 Accepted"
+2025-07-15 21:55:26,960 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=a93199b342e64c7ba727483629a4699f "HTTP/1.1 202 Accepted"
+2025-07-15 21:55:26,969 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=a93199b342e64c7ba727483629a4699f "HTTP/1.1 202 Accepted"
+2025-07-15 21:55:27,024 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=a93199b342e64c7ba727483629a4699f "HTTP/1.1 202 Accepted"
+2025-07-15 21:56:34,909 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-15 21:56:34,912 - __main__ - INFO - ✅ LLM generated 2 queries for category: Modification
+2025-07-15 21:56:34,915 - mcp.client.sse - INFO - Connecting to SSE endpoint: http://host.docker.internal:9000/sse
+2025-07-15 21:56:35,180 - httpx - INFO - HTTP Request: GET http://host.docker.internal:9000/sse "HTTP/1.1 200 OK"
+2025-07-15 21:56:35,181 - mcp.client.sse - INFO - Received endpoint URL: http://host.docker.internal:9000/messages/?session_id=85fa664b8c924f66a2e721bff5fe694e
+2025-07-15 21:56:35,181 - mcp.client.sse - INFO - Starting post writer with endpoint URL: http://host.docker.internal:9000/messages/?session_id=85fa664b8c924f66a2e721bff5fe694e
+2025-07-15 21:56:35,447 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=85fa664b8c924f66a2e721bff5fe694e "HTTP/1.1 202 Accepted"
+2025-07-15 21:56:35,458 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=85fa664b8c924f66a2e721bff5fe694e "HTTP/1.1 202 Accepted"
+2025-07-15 21:56:35,465 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=85fa664b8c924f66a2e721bff5fe694e "HTTP/1.1 202 Accepted"
+2025-07-15 21:56:35,522 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=85fa664b8c924f66a2e721bff5fe694e "HTTP/1.1 202 Accepted"
+2025-07-15 21:56:39,314 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=85fa664b8c924f66a2e721bff5fe694e "HTTP/1.1 202 Accepted"
+2025-07-15 21:56:43,383 - mcp.client.sse - INFO - Connecting to SSE endpoint: http://host.docker.internal:9000/sse
+2025-07-15 21:56:43,776 - httpx - INFO - HTTP Request: GET http://host.docker.internal:9000/sse "HTTP/1.1 200 OK"
+2025-07-15 21:56:43,777 - mcp.client.sse - INFO - Received endpoint URL: http://host.docker.internal:9000/messages/?session_id=6fd6f7fd7152400f825f3b095744aa7d
+2025-07-15 21:56:43,778 - mcp.client.sse - INFO - Starting post writer with endpoint URL: http://host.docker.internal:9000/messages/?session_id=6fd6f7fd7152400f825f3b095744aa7d
+2025-07-15 21:56:44,067 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=6fd6f7fd7152400f825f3b095744aa7d "HTTP/1.1 202 Accepted"
+2025-07-15 21:56:44,078 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=6fd6f7fd7152400f825f3b095744aa7d "HTTP/1.1 202 Accepted"
+2025-07-15 21:56:44,099 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=6fd6f7fd7152400f825f3b095744aa7d "HTTP/1.1 202 Accepted"
+2025-07-15 21:56:44,110 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=6fd6f7fd7152400f825f3b095744aa7d "HTTP/1.1 202 Accepted"
+2025-07-15 21:58:01,061 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-15 21:58:01,063 - __main__ - INFO - ✅ LLM generated 2 queries for category: Modification
+2025-07-15 21:58:01,066 - mcp.client.sse - INFO - Connecting to SSE endpoint: http://host.docker.internal:9000/sse
+2025-07-15 21:58:01,354 - httpx - INFO - HTTP Request: GET http://host.docker.internal:9000/sse "HTTP/1.1 200 OK"
+2025-07-15 21:58:01,355 - mcp.client.sse - INFO - Received endpoint URL: http://host.docker.internal:9000/messages/?session_id=98090893beb142ebbf93d8f5cd99b0c9
+2025-07-15 21:58:01,355 - mcp.client.sse - INFO - Starting post writer with endpoint URL: http://host.docker.internal:9000/messages/?session_id=98090893beb142ebbf93d8f5cd99b0c9
+2025-07-15 21:58:01,562 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=98090893beb142ebbf93d8f5cd99b0c9 "HTTP/1.1 202 Accepted"
+2025-07-15 21:58:01,568 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=98090893beb142ebbf93d8f5cd99b0c9 "HTTP/1.1 202 Accepted"
+2025-07-15 21:58:01,574 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=98090893beb142ebbf93d8f5cd99b0c9 "HTTP/1.1 202 Accepted"
+2025-07-15 21:58:02,941 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=98090893beb142ebbf93d8f5cd99b0c9 "HTTP/1.1 202 Accepted"
+2025-07-15 21:58:06,155 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=98090893beb142ebbf93d8f5cd99b0c9 "HTTP/1.1 202 Accepted"
+2025-07-15 21:58:09,223 - mcp.client.sse - INFO - Connecting to SSE endpoint: http://host.docker.internal:9000/sse
+2025-07-15 21:58:09,490 - httpx - INFO - HTTP Request: GET http://host.docker.internal:9000/sse "HTTP/1.1 200 OK"
+2025-07-15 21:58:09,491 - mcp.client.sse - INFO - Received endpoint URL: http://host.docker.internal:9000/messages/?session_id=65e6749a9a9c4cfeb3c7b5e7bbbfbf01
+2025-07-15 21:58:09,491 - mcp.client.sse - INFO - Starting post writer with endpoint URL: http://host.docker.internal:9000/messages/?session_id=65e6749a9a9c4cfeb3c7b5e7bbbfbf01
+2025-07-15 21:58:09,696 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=65e6749a9a9c4cfeb3c7b5e7bbbfbf01 "HTTP/1.1 202 Accepted"
+2025-07-15 21:58:09,704 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=65e6749a9a9c4cfeb3c7b5e7bbbfbf01 "HTTP/1.1 202 Accepted"
+2025-07-15 21:58:09,711 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=65e6749a9a9c4cfeb3c7b5e7bbbfbf01 "HTTP/1.1 202 Accepted"
+2025-07-15 21:58:09,720 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=65e6749a9a9c4cfeb3c7b5e7bbbfbf01 "HTTP/1.1 202 Accepted"
+2025-07-15 21:59:11,603 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-15 21:59:11,604 - __main__ - INFO - ✅ LLM generated 2 queries for category: Modification
+2025-07-15 21:59:11,607 - mcp.client.sse - INFO - Connecting to SSE endpoint: http://host.docker.internal:9000/sse
+2025-07-15 21:59:11,956 - httpx - INFO - HTTP Request: GET http://host.docker.internal:9000/sse "HTTP/1.1 200 OK"
+2025-07-15 21:59:11,957 - mcp.client.sse - INFO - Received endpoint URL: http://host.docker.internal:9000/messages/?session_id=b15ebc845eff43009d9d04d0960f1a21
+2025-07-15 21:59:11,957 - mcp.client.sse - INFO - Starting post writer with endpoint URL: http://host.docker.internal:9000/messages/?session_id=b15ebc845eff43009d9d04d0960f1a21
+2025-07-15 21:59:12,192 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=b15ebc845eff43009d9d04d0960f1a21 "HTTP/1.1 202 Accepted"
+2025-07-15 21:59:12,199 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=b15ebc845eff43009d9d04d0960f1a21 "HTTP/1.1 202 Accepted"
+2025-07-15 21:59:12,204 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=b15ebc845eff43009d9d04d0960f1a21 "HTTP/1.1 202 Accepted"
+2025-07-15 21:59:12,213 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=b15ebc845eff43009d9d04d0960f1a21 "HTTP/1.1 202 Accepted"
+2025-07-15 21:59:20,537 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=b15ebc845eff43009d9d04d0960f1a21 "HTTP/1.1 202 Accepted"
+2025-07-15 21:59:24,923 - mcp.client.sse - INFO - Connecting to SSE endpoint: http://host.docker.internal:9000/sse
+2025-07-15 21:59:25,457 - httpx - INFO - HTTP Request: GET http://host.docker.internal:9000/sse "HTTP/1.1 200 OK"
+2025-07-15 21:59:25,458 - mcp.client.sse - INFO - Received endpoint URL: http://host.docker.internal:9000/messages/?session_id=fff49b3cbbb04cbea5b15d07efdb315e
+2025-07-15 21:59:25,458 - mcp.client.sse - INFO - Starting post writer with endpoint URL: http://host.docker.internal:9000/messages/?session_id=fff49b3cbbb04cbea5b15d07efdb315e
+2025-07-15 21:59:25,754 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=fff49b3cbbb04cbea5b15d07efdb315e "HTTP/1.1 202 Accepted"
+2025-07-15 21:59:25,763 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=fff49b3cbbb04cbea5b15d07efdb315e "HTTP/1.1 202 Accepted"
+2025-07-15 21:59:25,772 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=fff49b3cbbb04cbea5b15d07efdb315e "HTTP/1.1 202 Accepted"
+2025-07-15 21:59:25,781 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=fff49b3cbbb04cbea5b15d07efdb315e "HTTP/1.1 202 Accepted"
+2025-07-15 22:00:40,199 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-15 22:00:40,201 - __main__ - INFO - ✅ LLM generated 2 queries for category: Modification
+2025-07-15 22:00:40,203 - mcp.client.sse - INFO - Connecting to SSE endpoint: http://host.docker.internal:9000/sse
+2025-07-15 22:00:40,561 - httpx - INFO - HTTP Request: GET http://host.docker.internal:9000/sse "HTTP/1.1 200 OK"
+2025-07-15 22:00:40,561 - mcp.client.sse - INFO - Received endpoint URL: http://host.docker.internal:9000/messages/?session_id=aa9bae58d3eb4f28bafaee4936121b05
+2025-07-15 22:00:40,562 - mcp.client.sse - INFO - Starting post writer with endpoint URL: http://host.docker.internal:9000/messages/?session_id=aa9bae58d3eb4f28bafaee4936121b05
+2025-07-15 22:00:40,908 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=aa9bae58d3eb4f28bafaee4936121b05 "HTTP/1.1 202 Accepted"
+2025-07-15 22:00:40,926 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=aa9bae58d3eb4f28bafaee4936121b05 "HTTP/1.1 202 Accepted"
+2025-07-15 22:00:40,974 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=aa9bae58d3eb4f28bafaee4936121b05 "HTTP/1.1 202 Accepted"
+2025-07-15 22:00:40,992 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=aa9bae58d3eb4f28bafaee4936121b05 "HTTP/1.1 202 Accepted"
+2025-07-15 22:00:44,505 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=aa9bae58d3eb4f28bafaee4936121b05 "HTTP/1.1 202 Accepted"
+2025-07-15 22:00:47,765 - mcp.client.sse - INFO - Connecting to SSE endpoint: http://host.docker.internal:9000/sse
+2025-07-15 22:00:48,037 - httpx - INFO - HTTP Request: GET http://host.docker.internal:9000/sse "HTTP/1.1 200 OK"
+2025-07-15 22:00:48,038 - mcp.client.sse - INFO - Received endpoint URL: http://host.docker.internal:9000/messages/?session_id=b637df0431244c02b2ef0fbc72871d1e
+2025-07-15 22:00:48,038 - mcp.client.sse - INFO - Starting post writer with endpoint URL: http://host.docker.internal:9000/messages/?session_id=b637df0431244c02b2ef0fbc72871d1e
+2025-07-15 22:00:48,249 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=b637df0431244c02b2ef0fbc72871d1e "HTTP/1.1 202 Accepted"
+2025-07-15 22:00:48,255 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=b637df0431244c02b2ef0fbc72871d1e "HTTP/1.1 202 Accepted"
+2025-07-15 22:00:48,261 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=b637df0431244c02b2ef0fbc72871d1e "HTTP/1.1 202 Accepted"
+2025-07-15 22:00:48,269 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=b637df0431244c02b2ef0fbc72871d1e "HTTP/1.1 202 Accepted"
+2025-07-15 22:01:51,527 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-15 22:01:51,529 - __main__ - INFO - ✅ LLM generated 2 queries for category: Modification
+2025-07-15 22:01:51,532 - mcp.client.sse - INFO - Connecting to SSE endpoint: http://host.docker.internal:9000/sse
+2025-07-15 22:01:51,801 - httpx - INFO - HTTP Request: GET http://host.docker.internal:9000/sse "HTTP/1.1 200 OK"
+2025-07-15 22:01:51,802 - mcp.client.sse - INFO - Received endpoint URL: http://host.docker.internal:9000/messages/?session_id=4319c4f050d5452c8d5e638d48e714cf
+2025-07-15 22:01:51,802 - mcp.client.sse - INFO - Starting post writer with endpoint URL: http://host.docker.internal:9000/messages/?session_id=4319c4f050d5452c8d5e638d48e714cf
+2025-07-15 22:01:52,022 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=4319c4f050d5452c8d5e638d48e714cf "HTTP/1.1 202 Accepted"
+2025-07-15 22:01:52,028 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=4319c4f050d5452c8d5e638d48e714cf "HTTP/1.1 202 Accepted"
+2025-07-15 22:01:52,034 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=4319c4f050d5452c8d5e638d48e714cf "HTTP/1.1 202 Accepted"
+2025-07-15 22:01:52,041 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=4319c4f050d5452c8d5e638d48e714cf "HTTP/1.1 202 Accepted"
+2025-07-15 22:01:55,510 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=4319c4f050d5452c8d5e638d48e714cf "HTTP/1.1 202 Accepted"
+2025-07-15 22:01:58,981 - mcp.client.sse - INFO - Connecting to SSE endpoint: http://host.docker.internal:9000/sse
+2025-07-15 22:01:59,281 - httpx - INFO - HTTP Request: GET http://host.docker.internal:9000/sse "HTTP/1.1 200 OK"
+2025-07-15 22:01:59,282 - mcp.client.sse - INFO - Received endpoint URL: http://host.docker.internal:9000/messages/?session_id=f1abbd44ca6440c89332b46c0850e92c
+2025-07-15 22:01:59,282 - mcp.client.sse - INFO - Starting post writer with endpoint URL: http://host.docker.internal:9000/messages/?session_id=f1abbd44ca6440c89332b46c0850e92c
+2025-07-15 22:01:59,505 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=f1abbd44ca6440c89332b46c0850e92c "HTTP/1.1 202 Accepted"
+2025-07-15 22:01:59,511 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=f1abbd44ca6440c89332b46c0850e92c "HTTP/1.1 202 Accepted"
+2025-07-15 22:01:59,517 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=f1abbd44ca6440c89332b46c0850e92c "HTTP/1.1 202 Accepted"
+2025-07-15 22:01:59,525 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=f1abbd44ca6440c89332b46c0850e92c "HTTP/1.1 202 Accepted"
+2025-07-15 22:02:59,349 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-15 22:02:59,351 - __main__ - INFO - ✅ LLM generated 2 queries for category: Feature Addition
+2025-07-15 22:02:59,355 - mcp.client.sse - INFO - Connecting to SSE endpoint: http://host.docker.internal:9000/sse
+2025-07-15 22:02:59,647 - httpx - INFO - HTTP Request: GET http://host.docker.internal:9000/sse "HTTP/1.1 200 OK"
+2025-07-15 22:02:59,648 - mcp.client.sse - INFO - Received endpoint URL: http://host.docker.internal:9000/messages/?session_id=1c03330f9c8843958c3b2006875c25ab
+2025-07-15 22:02:59,649 - mcp.client.sse - INFO - Starting post writer with endpoint URL: http://host.docker.internal:9000/messages/?session_id=1c03330f9c8843958c3b2006875c25ab
+2025-07-15 22:02:59,936 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=1c03330f9c8843958c3b2006875c25ab "HTTP/1.1 202 Accepted"
+2025-07-15 22:02:59,950 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=1c03330f9c8843958c3b2006875c25ab "HTTP/1.1 202 Accepted"
+2025-07-15 22:02:59,962 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=1c03330f9c8843958c3b2006875c25ab "HTTP/1.1 202 Accepted"
+2025-07-15 22:02:59,972 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=1c03330f9c8843958c3b2006875c25ab "HTTP/1.1 202 Accepted"
+2025-07-15 22:03:03,371 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=1c03330f9c8843958c3b2006875c25ab "HTTP/1.1 202 Accepted"
+2025-07-15 22:03:06,947 - mcp.client.sse - INFO - Connecting to SSE endpoint: http://host.docker.internal:9000/sse
+2025-07-15 22:03:07,314 - httpx - INFO - HTTP Request: GET http://host.docker.internal:9000/sse "HTTP/1.1 200 OK"
+2025-07-15 22:03:07,314 - mcp.client.sse - INFO - Received endpoint URL: http://host.docker.internal:9000/messages/?session_id=8431e74422154c079da783804ae20b87
+2025-07-15 22:03:07,315 - mcp.client.sse - INFO - Starting post writer with endpoint URL: http://host.docker.internal:9000/messages/?session_id=8431e74422154c079da783804ae20b87
+2025-07-15 22:03:07,546 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=8431e74422154c079da783804ae20b87 "HTTP/1.1 202 Accepted"
+2025-07-15 22:03:07,554 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=8431e74422154c079da783804ae20b87 "HTTP/1.1 202 Accepted"
+2025-07-15 22:03:07,559 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=8431e74422154c079da783804ae20b87 "HTTP/1.1 202 Accepted"
+2025-07-15 22:03:07,571 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=8431e74422154c079da783804ae20b87 "HTTP/1.1 202 Accepted"
+2025-07-15 22:04:10,191 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-15 22:04:10,193 - __main__ - INFO - ✅ LLM generated 2 queries for category: Feature Addition
+2025-07-15 22:04:10,196 - mcp.client.sse - INFO - Connecting to SSE endpoint: http://host.docker.internal:9000/sse
+2025-07-15 22:04:10,540 - httpx - INFO - HTTP Request: GET http://host.docker.internal:9000/sse "HTTP/1.1 200 OK"
+2025-07-15 22:04:10,541 - mcp.client.sse - INFO - Received endpoint URL: http://host.docker.internal:9000/messages/?session_id=d89fc4fb24824a23938f070dbe4b9c7a
+2025-07-15 22:04:10,541 - mcp.client.sse - INFO - Starting post writer with endpoint URL: http://host.docker.internal:9000/messages/?session_id=d89fc4fb24824a23938f070dbe4b9c7a
+2025-07-15 22:04:10,860 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=d89fc4fb24824a23938f070dbe4b9c7a "HTTP/1.1 202 Accepted"
+2025-07-15 22:04:10,912 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=d89fc4fb24824a23938f070dbe4b9c7a "HTTP/1.1 202 Accepted"
+2025-07-15 22:04:10,919 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=d89fc4fb24824a23938f070dbe4b9c7a "HTTP/1.1 202 Accepted"
+2025-07-15 22:04:10,971 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=d89fc4fb24824a23938f070dbe4b9c7a "HTTP/1.1 202 Accepted"
+2025-07-15 22:04:15,268 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=d89fc4fb24824a23938f070dbe4b9c7a "HTTP/1.1 202 Accepted"
+2025-07-15 22:04:18,888 - mcp.client.sse - INFO - Connecting to SSE endpoint: http://host.docker.internal:9000/sse
+2025-07-15 22:04:19,298 - httpx - INFO - HTTP Request: GET http://host.docker.internal:9000/sse "HTTP/1.1 200 OK"
+2025-07-15 22:04:19,299 - mcp.client.sse - INFO - Received endpoint URL: http://host.docker.internal:9000/messages/?session_id=75645fc6447a49f19f9738ab11ff15ea
+2025-07-15 22:04:19,299 - mcp.client.sse - INFO - Starting post writer with endpoint URL: http://host.docker.internal:9000/messages/?session_id=75645fc6447a49f19f9738ab11ff15ea
+2025-07-15 22:04:19,571 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=75645fc6447a49f19f9738ab11ff15ea "HTTP/1.1 202 Accepted"
+2025-07-15 22:04:19,577 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=75645fc6447a49f19f9738ab11ff15ea "HTTP/1.1 202 Accepted"
+2025-07-15 22:04:19,585 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=75645fc6447a49f19f9738ab11ff15ea "HTTP/1.1 202 Accepted"
+2025-07-15 22:04:19,635 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=75645fc6447a49f19f9738ab11ff15ea "HTTP/1.1 202 Accepted"
+2025-07-15 22:05:21,893 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-15 22:05:21,895 - __main__ - INFO - ✅ LLM generated 2 queries for category: Feature Addition
+2025-07-15 22:05:21,900 - mcp.client.sse - INFO - Connecting to SSE endpoint: http://host.docker.internal:9000/sse
+2025-07-15 22:05:22,154 - httpx - INFO - HTTP Request: GET http://host.docker.internal:9000/sse "HTTP/1.1 200 OK"
+2025-07-15 22:05:22,155 - mcp.client.sse - INFO - Received endpoint URL: http://host.docker.internal:9000/messages/?session_id=9d7d0947d4e84ffeaa391ad8787297a7
+2025-07-15 22:05:22,156 - mcp.client.sse - INFO - Starting post writer with endpoint URL: http://host.docker.internal:9000/messages/?session_id=9d7d0947d4e84ffeaa391ad8787297a7
+2025-07-15 22:05:22,404 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=9d7d0947d4e84ffeaa391ad8787297a7 "HTTP/1.1 202 Accepted"
+2025-07-15 22:05:22,413 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=9d7d0947d4e84ffeaa391ad8787297a7 "HTTP/1.1 202 Accepted"
+2025-07-15 22:05:22,420 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=9d7d0947d4e84ffeaa391ad8787297a7 "HTTP/1.1 202 Accepted"
+2025-07-15 22:05:22,434 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=9d7d0947d4e84ffeaa391ad8787297a7 "HTTP/1.1 202 Accepted"
+2025-07-15 22:05:26,019 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=9d7d0947d4e84ffeaa391ad8787297a7 "HTTP/1.1 202 Accepted"
+2025-07-15 22:05:29,584 - mcp.client.sse - INFO - Connecting to SSE endpoint: http://host.docker.internal:9000/sse
+2025-07-15 22:05:29,951 - httpx - INFO - HTTP Request: GET http://host.docker.internal:9000/sse "HTTP/1.1 200 OK"
+2025-07-15 22:05:29,951 - mcp.client.sse - INFO - Received endpoint URL: http://host.docker.internal:9000/messages/?session_id=e4cfb774e55544ca94f4a537c328a161
+2025-07-15 22:05:29,952 - mcp.client.sse - INFO - Starting post writer with endpoint URL: http://host.docker.internal:9000/messages/?session_id=e4cfb774e55544ca94f4a537c328a161
+2025-07-15 22:05:30,288 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=e4cfb774e55544ca94f4a537c328a161 "HTTP/1.1 202 Accepted"
+2025-07-15 22:05:30,294 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=e4cfb774e55544ca94f4a537c328a161 "HTTP/1.1 202 Accepted"
+2025-07-15 22:05:30,301 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=e4cfb774e55544ca94f4a537c328a161 "HTTP/1.1 202 Accepted"
+2025-07-15 22:05:30,310 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=e4cfb774e55544ca94f4a537c328a161 "HTTP/1.1 202 Accepted"
+2025-07-15 22:06:34,796 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-15 22:06:34,798 - __main__ - INFO - ✅ LLM generated 2 queries for category: Feature Addition
+2025-07-15 22:06:34,804 - mcp.client.sse - INFO - Connecting to SSE endpoint: http://host.docker.internal:9000/sse
+2025-07-15 22:06:35,182 - httpx - INFO - HTTP Request: GET http://host.docker.internal:9000/sse "HTTP/1.1 200 OK"
+2025-07-15 22:06:35,183 - mcp.client.sse - INFO - Received endpoint URL: http://host.docker.internal:9000/messages/?session_id=647572c465f04f228d3ca18ce9722298
+2025-07-15 22:06:35,183 - mcp.client.sse - INFO - Starting post writer with endpoint URL: http://host.docker.internal:9000/messages/?session_id=647572c465f04f228d3ca18ce9722298
+2025-07-15 22:06:35,470 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=647572c465f04f228d3ca18ce9722298 "HTTP/1.1 202 Accepted"
+2025-07-15 22:06:35,523 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=647572c465f04f228d3ca18ce9722298 "HTTP/1.1 202 Accepted"
+2025-07-15 22:06:35,532 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=647572c465f04f228d3ca18ce9722298 "HTTP/1.1 202 Accepted"
+2025-07-15 22:06:35,543 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=647572c465f04f228d3ca18ce9722298 "HTTP/1.1 202 Accepted"
+2025-07-15 22:06:39,806 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=647572c465f04f228d3ca18ce9722298 "HTTP/1.1 202 Accepted"
+2025-07-15 22:06:44,027 - mcp.client.sse - INFO - Connecting to SSE endpoint: http://host.docker.internal:9000/sse
+2025-07-15 22:06:44,456 - httpx - INFO - HTTP Request: GET http://host.docker.internal:9000/sse "HTTP/1.1 200 OK"
+2025-07-15 22:06:44,458 - mcp.client.sse - INFO - Received endpoint URL: http://host.docker.internal:9000/messages/?session_id=74c7f041ea6f4b719043d5d7d1dd3752
+2025-07-15 22:06:44,459 - mcp.client.sse - INFO - Starting post writer with endpoint URL: http://host.docker.internal:9000/messages/?session_id=74c7f041ea6f4b719043d5d7d1dd3752
+2025-07-15 22:06:44,799 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=74c7f041ea6f4b719043d5d7d1dd3752 "HTTP/1.1 202 Accepted"
+2025-07-15 22:06:44,807 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=74c7f041ea6f4b719043d5d7d1dd3752 "HTTP/1.1 202 Accepted"
+2025-07-15 22:06:44,814 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=74c7f041ea6f4b719043d5d7d1dd3752 "HTTP/1.1 202 Accepted"
+2025-07-15 22:06:44,824 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=74c7f041ea6f4b719043d5d7d1dd3752 "HTTP/1.1 202 Accepted"
+2025-07-15 22:07:48,579 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-15 22:07:48,586 - __main__ - INFO - ✅ LLM generated 2 queries for category: Feature Addition
+2025-07-15 22:07:48,590 - mcp.client.sse - INFO - Connecting to SSE endpoint: http://host.docker.internal:9000/sse
+2025-07-15 22:07:48,875 - httpx - INFO - HTTP Request: GET http://host.docker.internal:9000/sse "HTTP/1.1 200 OK"
+2025-07-15 22:07:48,875 - mcp.client.sse - INFO - Received endpoint URL: http://host.docker.internal:9000/messages/?session_id=e97e5c479aef48ac8d2e02ea080553c6
+2025-07-15 22:07:48,876 - mcp.client.sse - INFO - Starting post writer with endpoint URL: http://host.docker.internal:9000/messages/?session_id=e97e5c479aef48ac8d2e02ea080553c6
+2025-07-15 22:07:49,102 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=e97e5c479aef48ac8d2e02ea080553c6 "HTTP/1.1 202 Accepted"
+2025-07-15 22:07:49,107 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=e97e5c479aef48ac8d2e02ea080553c6 "HTTP/1.1 202 Accepted"
+2025-07-15 22:07:49,114 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=e97e5c479aef48ac8d2e02ea080553c6 "HTTP/1.1 202 Accepted"
+2025-07-15 22:07:49,122 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=e97e5c479aef48ac8d2e02ea080553c6 "HTTP/1.1 202 Accepted"
+2025-07-15 22:07:52,417 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=e97e5c479aef48ac8d2e02ea080553c6 "HTTP/1.1 202 Accepted"
+2025-07-15 22:07:55,634 - mcp.client.sse - INFO - Connecting to SSE endpoint: http://host.docker.internal:9000/sse
+2025-07-15 22:07:55,915 - httpx - INFO - HTTP Request: GET http://host.docker.internal:9000/sse "HTTP/1.1 200 OK"
+2025-07-15 22:07:55,916 - mcp.client.sse - INFO - Received endpoint URL: http://host.docker.internal:9000/messages/?session_id=fe371c435ae1403ea49ea3d48d7594d0
+2025-07-15 22:07:55,917 - mcp.client.sse - INFO - Starting post writer with endpoint URL: http://host.docker.internal:9000/messages/?session_id=fe371c435ae1403ea49ea3d48d7594d0
+2025-07-15 22:07:56,123 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=fe371c435ae1403ea49ea3d48d7594d0 "HTTP/1.1 202 Accepted"
+2025-07-15 22:07:56,128 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=fe371c435ae1403ea49ea3d48d7594d0 "HTTP/1.1 202 Accepted"
+2025-07-15 22:07:56,134 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=fe371c435ae1403ea49ea3d48d7594d0 "HTTP/1.1 202 Accepted"
+2025-07-15 22:07:56,186 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=fe371c435ae1403ea49ea3d48d7594d0 "HTTP/1.1 202 Accepted"
+2025-07-15 22:08:52,413 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-15 22:08:52,417 - __main__ - INFO - ✅ LLM generated 2 queries for category: Modernization
+2025-07-15 22:08:52,424 - mcp.client.sse - INFO - Connecting to SSE endpoint: http://host.docker.internal:9000/sse
+2025-07-15 22:08:52,658 - httpx - INFO - HTTP Request: GET http://host.docker.internal:9000/sse "HTTP/1.1 200 OK"
+2025-07-15 22:08:52,658 - mcp.client.sse - INFO - Received endpoint URL: http://host.docker.internal:9000/messages/?session_id=e0aeeca3bb7a4486a4294a82197aece9
+2025-07-15 22:08:52,659 - mcp.client.sse - INFO - Starting post writer with endpoint URL: http://host.docker.internal:9000/messages/?session_id=e0aeeca3bb7a4486a4294a82197aece9
+2025-07-15 22:08:52,892 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=e0aeeca3bb7a4486a4294a82197aece9 "HTTP/1.1 202 Accepted"
+2025-07-15 22:08:52,898 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=e0aeeca3bb7a4486a4294a82197aece9 "HTTP/1.1 202 Accepted"
+2025-07-15 22:08:52,904 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=e0aeeca3bb7a4486a4294a82197aece9 "HTTP/1.1 202 Accepted"
+2025-07-15 22:08:52,915 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=e0aeeca3bb7a4486a4294a82197aece9 "HTTP/1.1 202 Accepted"
+2025-07-15 22:08:56,034 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=e0aeeca3bb7a4486a4294a82197aece9 "HTTP/1.1 202 Accepted"
+2025-07-15 22:08:59,304 - mcp.client.sse - INFO - Connecting to SSE endpoint: http://host.docker.internal:9000/sse
+2025-07-15 22:08:59,564 - httpx - INFO - HTTP Request: GET http://host.docker.internal:9000/sse "HTTP/1.1 200 OK"
+2025-07-15 22:08:59,565 - mcp.client.sse - INFO - Received endpoint URL: http://host.docker.internal:9000/messages/?session_id=3fad179c49a54d2290bf574a0fa6c14b
+2025-07-15 22:08:59,565 - mcp.client.sse - INFO - Starting post writer with endpoint URL: http://host.docker.internal:9000/messages/?session_id=3fad179c49a54d2290bf574a0fa6c14b
+2025-07-15 22:08:59,796 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=3fad179c49a54d2290bf574a0fa6c14b "HTTP/1.1 202 Accepted"
+2025-07-15 22:08:59,801 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=3fad179c49a54d2290bf574a0fa6c14b "HTTP/1.1 202 Accepted"
+2025-07-15 22:08:59,850 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=3fad179c49a54d2290bf574a0fa6c14b "HTTP/1.1 202 Accepted"
+2025-07-15 22:08:59,858 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=3fad179c49a54d2290bf574a0fa6c14b "HTTP/1.1 202 Accepted"
+2025-07-15 22:10:10,183 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-15 22:10:10,189 - __main__ - INFO - ✅ LLM generated 2 queries for category: Modernization
+2025-07-15 22:10:10,192 - mcp.client.sse - INFO - Connecting to SSE endpoint: http://host.docker.internal:9000/sse
+2025-07-15 22:10:10,443 - httpx - INFO - HTTP Request: GET http://host.docker.internal:9000/sse "HTTP/1.1 200 OK"
+2025-07-15 22:10:10,444 - mcp.client.sse - INFO - Received endpoint URL: http://host.docker.internal:9000/messages/?session_id=2051f79d976a4709b0bf67e88f713ca4
+2025-07-15 22:10:10,445 - mcp.client.sse - INFO - Starting post writer with endpoint URL: http://host.docker.internal:9000/messages/?session_id=2051f79d976a4709b0bf67e88f713ca4
+2025-07-15 22:10:10,683 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=2051f79d976a4709b0bf67e88f713ca4 "HTTP/1.1 202 Accepted"
+2025-07-15 22:10:10,688 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=2051f79d976a4709b0bf67e88f713ca4 "HTTP/1.1 202 Accepted"
+2025-07-15 22:10:10,695 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=2051f79d976a4709b0bf67e88f713ca4 "HTTP/1.1 202 Accepted"
+2025-07-15 22:10:10,706 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=2051f79d976a4709b0bf67e88f713ca4 "HTTP/1.1 202 Accepted"
+2025-07-15 22:10:13,685 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=2051f79d976a4709b0bf67e88f713ca4 "HTTP/1.1 202 Accepted"
+2025-07-15 22:10:17,129 - mcp.client.sse - INFO - Connecting to SSE endpoint: http://host.docker.internal:9000/sse
+2025-07-15 22:10:17,529 - httpx - INFO - HTTP Request: GET http://host.docker.internal:9000/sse "HTTP/1.1 200 OK"
+2025-07-15 22:10:17,530 - mcp.client.sse - INFO - Received endpoint URL: http://host.docker.internal:9000/messages/?session_id=b7654490e01649b3b1173f72da8c1d19
+2025-07-15 22:10:17,530 - mcp.client.sse - INFO - Starting post writer with endpoint URL: http://host.docker.internal:9000/messages/?session_id=b7654490e01649b3b1173f72da8c1d19
+2025-07-15 22:10:17,758 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=b7654490e01649b3b1173f72da8c1d19 "HTTP/1.1 202 Accepted"
+2025-07-15 22:10:17,764 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=b7654490e01649b3b1173f72da8c1d19 "HTTP/1.1 202 Accepted"
+2025-07-15 22:10:17,814 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=b7654490e01649b3b1173f72da8c1d19 "HTTP/1.1 202 Accepted"
+2025-07-15 22:10:17,826 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=b7654490e01649b3b1173f72da8c1d19 "HTTP/1.1 202 Accepted"
+2025-07-15 22:11:22,428 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-15 22:11:22,429 - __main__ - INFO - ✅ LLM generated 2 queries for category: Modernization
+2025-07-15 22:11:22,432 - mcp.client.sse - INFO - Connecting to SSE endpoint: http://host.docker.internal:9000/sse
+2025-07-15 22:11:22,703 - httpx - INFO - HTTP Request: GET http://host.docker.internal:9000/sse "HTTP/1.1 200 OK"
+2025-07-15 22:11:22,703 - mcp.client.sse - INFO - Received endpoint URL: http://host.docker.internal:9000/messages/?session_id=62c5d1cea4a0490997c8586e12746c23
+2025-07-15 22:11:22,704 - mcp.client.sse - INFO - Starting post writer with endpoint URL: http://host.docker.internal:9000/messages/?session_id=62c5d1cea4a0490997c8586e12746c23
+2025-07-15 22:11:22,913 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=62c5d1cea4a0490997c8586e12746c23 "HTTP/1.1 202 Accepted"
+2025-07-15 22:11:22,919 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=62c5d1cea4a0490997c8586e12746c23 "HTTP/1.1 202 Accepted"
+2025-07-15 22:11:22,925 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=62c5d1cea4a0490997c8586e12746c23 "HTTP/1.1 202 Accepted"
+2025-07-15 22:11:22,933 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=62c5d1cea4a0490997c8586e12746c23 "HTTP/1.1 202 Accepted"
+2025-07-15 22:11:26,018 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=62c5d1cea4a0490997c8586e12746c23 "HTTP/1.1 202 Accepted"
+2025-07-15 22:11:29,275 - mcp.client.sse - INFO - Connecting to SSE endpoint: http://host.docker.internal:9000/sse
+2025-07-15 22:11:29,571 - httpx - INFO - HTTP Request: GET http://host.docker.internal:9000/sse "HTTP/1.1 200 OK"
+2025-07-15 22:11:29,575 - mcp.client.sse - INFO - Received endpoint URL: http://host.docker.internal:9000/messages/?session_id=c8a87d2b12a84a9babaab532b9762e5a
+2025-07-15 22:11:29,576 - mcp.client.sse - INFO - Starting post writer with endpoint URL: http://host.docker.internal:9000/messages/?session_id=c8a87d2b12a84a9babaab532b9762e5a
+2025-07-15 22:11:29,801 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=c8a87d2b12a84a9babaab532b9762e5a "HTTP/1.1 202 Accepted"
+2025-07-15 22:11:29,808 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=c8a87d2b12a84a9babaab532b9762e5a "HTTP/1.1 202 Accepted"
+2025-07-15 22:11:29,815 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=c8a87d2b12a84a9babaab532b9762e5a "HTTP/1.1 202 Accepted"
+2025-07-15 22:11:29,832 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=c8a87d2b12a84a9babaab532b9762e5a "HTTP/1.1 202 Accepted"
+2025-07-15 22:12:44,051 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-15 22:12:44,054 - __main__ - INFO - ✅ LLM generated 2 queries for category: Modernization
+2025-07-15 22:12:44,062 - mcp.client.sse - INFO - Connecting to SSE endpoint: http://host.docker.internal:9000/sse
+2025-07-15 22:12:44,301 - httpx - INFO - HTTP Request: GET http://host.docker.internal:9000/sse "HTTP/1.1 200 OK"
+2025-07-15 22:12:44,302 - mcp.client.sse - INFO - Received endpoint URL: http://host.docker.internal:9000/messages/?session_id=1c22d8b1d90c4b16a1b6cbd530fc08e5
+2025-07-15 22:12:44,303 - mcp.client.sse - INFO - Starting post writer with endpoint URL: http://host.docker.internal:9000/messages/?session_id=1c22d8b1d90c4b16a1b6cbd530fc08e5
+2025-07-15 22:12:44,536 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=1c22d8b1d90c4b16a1b6cbd530fc08e5 "HTTP/1.1 202 Accepted"
+2025-07-15 22:12:44,546 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=1c22d8b1d90c4b16a1b6cbd530fc08e5 "HTTP/1.1 202 Accepted"
+2025-07-15 22:12:44,555 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=1c22d8b1d90c4b16a1b6cbd530fc08e5 "HTTP/1.1 202 Accepted"
+2025-07-15 22:12:44,567 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=1c22d8b1d90c4b16a1b6cbd530fc08e5 "HTTP/1.1 202 Accepted"
+2025-07-15 22:12:47,909 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=1c22d8b1d90c4b16a1b6cbd530fc08e5 "HTTP/1.1 202 Accepted"
+2025-07-15 22:12:51,252 - mcp.client.sse - INFO - Connecting to SSE endpoint: http://host.docker.internal:9000/sse
+2025-07-15 22:12:51,507 - httpx - INFO - HTTP Request: GET http://host.docker.internal:9000/sse "HTTP/1.1 200 OK"
+2025-07-15 22:12:51,507 - mcp.client.sse - INFO - Received endpoint URL: http://host.docker.internal:9000/messages/?session_id=bd6526729e444aaa895a0b411ae14fe2
+2025-07-15 22:12:51,507 - mcp.client.sse - INFO - Starting post writer with endpoint URL: http://host.docker.internal:9000/messages/?session_id=bd6526729e444aaa895a0b411ae14fe2
+2025-07-15 22:12:51,725 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=bd6526729e444aaa895a0b411ae14fe2 "HTTP/1.1 202 Accepted"
+2025-07-15 22:12:51,742 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=bd6526729e444aaa895a0b411ae14fe2 "HTTP/1.1 202 Accepted"
+2025-07-15 22:12:51,779 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=bd6526729e444aaa895a0b411ae14fe2 "HTTP/1.1 202 Accepted"
+2025-07-15 22:12:51,791 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=bd6526729e444aaa895a0b411ae14fe2 "HTTP/1.1 202 Accepted"
+2025-07-15 22:13:52,877 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-15 22:13:52,880 - __main__ - INFO - ✅ LLM generated 2 queries for category: Modernization
+2025-07-15 22:13:52,888 - mcp.client.sse - INFO - Connecting to SSE endpoint: http://host.docker.internal:9000/sse
+2025-07-15 22:13:53,139 - httpx - INFO - HTTP Request: GET http://host.docker.internal:9000/sse "HTTP/1.1 200 OK"
+2025-07-15 22:13:53,140 - mcp.client.sse - INFO - Received endpoint URL: http://host.docker.internal:9000/messages/?session_id=6ca511824ec74212bb42b4e8f4f14bbb
+2025-07-15 22:13:53,141 - mcp.client.sse - INFO - Starting post writer with endpoint URL: http://host.docker.internal:9000/messages/?session_id=6ca511824ec74212bb42b4e8f4f14bbb
+2025-07-15 22:13:53,373 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=6ca511824ec74212bb42b4e8f4f14bbb "HTTP/1.1 202 Accepted"
+2025-07-15 22:13:53,379 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=6ca511824ec74212bb42b4e8f4f14bbb "HTTP/1.1 202 Accepted"
+2025-07-15 22:13:53,433 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=6ca511824ec74212bb42b4e8f4f14bbb "HTTP/1.1 202 Accepted"
+2025-07-15 22:13:53,448 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=6ca511824ec74212bb42b4e8f4f14bbb "HTTP/1.1 202 Accepted"
+2025-07-15 22:13:56,474 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=6ca511824ec74212bb42b4e8f4f14bbb "HTTP/1.1 202 Accepted"
+2025-07-15 22:13:59,603 - mcp.client.sse - INFO - Connecting to SSE endpoint: http://host.docker.internal:9000/sse
+2025-07-15 22:13:59,846 - httpx - INFO - HTTP Request: GET http://host.docker.internal:9000/sse "HTTP/1.1 200 OK"
+2025-07-15 22:13:59,846 - mcp.client.sse - INFO - Received endpoint URL: http://host.docker.internal:9000/messages/?session_id=94e0362e6e7248368206925ccd6ab687
+2025-07-15 22:13:59,847 - mcp.client.sse - INFO - Starting post writer with endpoint URL: http://host.docker.internal:9000/messages/?session_id=94e0362e6e7248368206925ccd6ab687
+2025-07-15 22:14:00,060 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=94e0362e6e7248368206925ccd6ab687 "HTTP/1.1 202 Accepted"
+2025-07-15 22:14:00,066 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=94e0362e6e7248368206925ccd6ab687 "HTTP/1.1 202 Accepted"
+2025-07-15 22:14:00,072 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=94e0362e6e7248368206925ccd6ab687 "HTTP/1.1 202 Accepted"
+2025-07-15 22:14:00,081 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=94e0362e6e7248368206925ccd6ab687 "HTTP/1.1 202 Accepted"
+2025-07-15 22:15:03,499 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-15 22:15:03,503 - __main__ - INFO - ✅ LLM generated 2 queries for category: Bug Analysis
+2025-07-15 22:15:03,507 - mcp.client.sse - INFO - Connecting to SSE endpoint: http://host.docker.internal:9000/sse
+2025-07-15 22:15:03,812 - httpx - INFO - HTTP Request: GET http://host.docker.internal:9000/sse "HTTP/1.1 200 OK"
+2025-07-15 22:15:03,813 - mcp.client.sse - INFO - Received endpoint URL: http://host.docker.internal:9000/messages/?session_id=60c0c45f23ae43eaaefd31d5ed5a2466
+2025-07-15 22:15:03,814 - mcp.client.sse - INFO - Starting post writer with endpoint URL: http://host.docker.internal:9000/messages/?session_id=60c0c45f23ae43eaaefd31d5ed5a2466
+2025-07-15 22:15:04,029 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=60c0c45f23ae43eaaefd31d5ed5a2466 "HTTP/1.1 202 Accepted"
+2025-07-15 22:15:04,035 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=60c0c45f23ae43eaaefd31d5ed5a2466 "HTTP/1.1 202 Accepted"
+2025-07-15 22:15:04,041 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=60c0c45f23ae43eaaefd31d5ed5a2466 "HTTP/1.1 202 Accepted"
+2025-07-15 22:15:04,057 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=60c0c45f23ae43eaaefd31d5ed5a2466 "HTTP/1.1 202 Accepted"
+2025-07-15 22:15:07,204 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=60c0c45f23ae43eaaefd31d5ed5a2466 "HTTP/1.1 202 Accepted"
+2025-07-15 22:15:10,297 - mcp.client.sse - INFO - Connecting to SSE endpoint: http://host.docker.internal:9000/sse
+2025-07-15 22:15:10,536 - httpx - INFO - HTTP Request: GET http://host.docker.internal:9000/sse "HTTP/1.1 200 OK"
+2025-07-15 22:15:10,537 - mcp.client.sse - INFO - Received endpoint URL: http://host.docker.internal:9000/messages/?session_id=9417204e0e9d4d7c9f082f2d51c90eff
+2025-07-15 22:15:10,537 - mcp.client.sse - INFO - Starting post writer with endpoint URL: http://host.docker.internal:9000/messages/?session_id=9417204e0e9d4d7c9f082f2d51c90eff
+2025-07-15 22:15:10,759 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=9417204e0e9d4d7c9f082f2d51c90eff "HTTP/1.1 202 Accepted"
+2025-07-15 22:15:10,765 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=9417204e0e9d4d7c9f082f2d51c90eff "HTTP/1.1 202 Accepted"
+2025-07-15 22:15:10,772 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=9417204e0e9d4d7c9f082f2d51c90eff "HTTP/1.1 202 Accepted"
+2025-07-15 22:15:10,821 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=9417204e0e9d4d7c9f082f2d51c90eff "HTTP/1.1 202 Accepted"
+2025-07-15 22:16:07,052 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-15 22:16:07,053 - __main__ - INFO - ✅ LLM generated 2 queries for category: Bug Analysis
+2025-07-15 22:16:07,058 - mcp.client.sse - INFO - Connecting to SSE endpoint: http://host.docker.internal:9000/sse
+2025-07-15 22:16:07,366 - httpx - INFO - HTTP Request: GET http://host.docker.internal:9000/sse "HTTP/1.1 200 OK"
+2025-07-15 22:16:07,367 - mcp.client.sse - INFO - Received endpoint URL: http://host.docker.internal:9000/messages/?session_id=1a510d4fae5344758166a223c8d7ea55
+2025-07-15 22:16:07,368 - mcp.client.sse - INFO - Starting post writer with endpoint URL: http://host.docker.internal:9000/messages/?session_id=1a510d4fae5344758166a223c8d7ea55
+2025-07-15 22:16:07,704 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=1a510d4fae5344758166a223c8d7ea55 "HTTP/1.1 202 Accepted"
+2025-07-15 22:16:07,713 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=1a510d4fae5344758166a223c8d7ea55 "HTTP/1.1 202 Accepted"
+2025-07-15 22:16:07,721 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=1a510d4fae5344758166a223c8d7ea55 "HTTP/1.1 202 Accepted"
+2025-07-15 22:16:07,732 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=1a510d4fae5344758166a223c8d7ea55 "HTTP/1.1 202 Accepted"
+2025-07-15 22:16:11,977 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=1a510d4fae5344758166a223c8d7ea55 "HTTP/1.1 202 Accepted"
+2025-07-15 22:16:15,637 - mcp.client.sse - INFO - Connecting to SSE endpoint: http://host.docker.internal:9000/sse
+2025-07-15 22:16:15,895 - httpx - INFO - HTTP Request: GET http://host.docker.internal:9000/sse "HTTP/1.1 200 OK"
+2025-07-15 22:16:15,896 - mcp.client.sse - INFO - Received endpoint URL: http://host.docker.internal:9000/messages/?session_id=fd5e12ca81094296b14bc76ad9774fac
+2025-07-15 22:16:15,898 - mcp.client.sse - INFO - Starting post writer with endpoint URL: http://host.docker.internal:9000/messages/?session_id=fd5e12ca81094296b14bc76ad9774fac
+2025-07-15 22:16:16,123 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=fd5e12ca81094296b14bc76ad9774fac "HTTP/1.1 202 Accepted"
+2025-07-15 22:16:16,130 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=fd5e12ca81094296b14bc76ad9774fac "HTTP/1.1 202 Accepted"
+2025-07-15 22:16:16,136 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=fd5e12ca81094296b14bc76ad9774fac "HTTP/1.1 202 Accepted"
+2025-07-15 22:16:16,145 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=fd5e12ca81094296b14bc76ad9774fac "HTTP/1.1 202 Accepted"
+2025-07-15 22:17:16,890 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-15 22:17:16,893 - __main__ - INFO - ✅ LLM generated 2 queries for category: Bug Analysis
+2025-07-15 22:17:16,904 - mcp.client.sse - INFO - Connecting to SSE endpoint: http://host.docker.internal:9000/sse
+2025-07-15 22:17:17,181 - httpx - INFO - HTTP Request: GET http://host.docker.internal:9000/sse "HTTP/1.1 200 OK"
+2025-07-15 22:17:17,182 - mcp.client.sse - INFO - Received endpoint URL: http://host.docker.internal:9000/messages/?session_id=a620e401525442ddbbc58f1cf437a458
+2025-07-15 22:17:17,183 - mcp.client.sse - INFO - Starting post writer with endpoint URL: http://host.docker.internal:9000/messages/?session_id=a620e401525442ddbbc58f1cf437a458
+2025-07-15 22:17:17,459 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=a620e401525442ddbbc58f1cf437a458 "HTTP/1.1 202 Accepted"
+2025-07-15 22:17:17,468 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=a620e401525442ddbbc58f1cf437a458 "HTTP/1.1 202 Accepted"
+2025-07-15 22:17:17,478 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=a620e401525442ddbbc58f1cf437a458 "HTTP/1.1 202 Accepted"
+2025-07-15 22:17:17,496 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=a620e401525442ddbbc58f1cf437a458 "HTTP/1.1 202 Accepted"
+2025-07-15 22:17:20,958 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=a620e401525442ddbbc58f1cf437a458 "HTTP/1.1 202 Accepted"
+2025-07-15 22:17:24,259 - mcp.client.sse - INFO - Connecting to SSE endpoint: http://host.docker.internal:9000/sse
+2025-07-15 22:17:24,573 - httpx - INFO - HTTP Request: GET http://host.docker.internal:9000/sse "HTTP/1.1 200 OK"
+2025-07-15 22:17:24,574 - mcp.client.sse - INFO - Received endpoint URL: http://host.docker.internal:9000/messages/?session_id=f8433010db4d47d2b5743c8d173063bb
+2025-07-15 22:17:24,575 - mcp.client.sse - INFO - Starting post writer with endpoint URL: http://host.docker.internal:9000/messages/?session_id=f8433010db4d47d2b5743c8d173063bb
+2025-07-15 22:17:24,849 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=f8433010db4d47d2b5743c8d173063bb "HTTP/1.1 202 Accepted"
+2025-07-15 22:17:24,855 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=f8433010db4d47d2b5743c8d173063bb "HTTP/1.1 202 Accepted"
+2025-07-15 22:17:24,861 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=f8433010db4d47d2b5743c8d173063bb "HTTP/1.1 202 Accepted"
+2025-07-15 22:17:24,870 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=f8433010db4d47d2b5743c8d173063bb "HTTP/1.1 202 Accepted"
+2025-07-15 22:18:21,570 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-15 22:18:21,574 - __main__ - INFO - ✅ LLM generated 2 queries for category: Integration
+2025-07-15 22:18:21,576 - mcp.client.sse - INFO - Connecting to SSE endpoint: http://host.docker.internal:9000/sse
+2025-07-15 22:18:21,856 - httpx - INFO - HTTP Request: GET http://host.docker.internal:9000/sse "HTTP/1.1 200 OK"
+2025-07-15 22:18:21,857 - mcp.client.sse - INFO - Received endpoint URL: http://host.docker.internal:9000/messages/?session_id=96ab71a2b5be44c99a3f051a68b88739
+2025-07-15 22:18:21,857 - mcp.client.sse - INFO - Starting post writer with endpoint URL: http://host.docker.internal:9000/messages/?session_id=96ab71a2b5be44c99a3f051a68b88739
+2025-07-15 22:18:22,105 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=96ab71a2b5be44c99a3f051a68b88739 "HTTP/1.1 202 Accepted"
+2025-07-15 22:18:22,113 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=96ab71a2b5be44c99a3f051a68b88739 "HTTP/1.1 202 Accepted"
+2025-07-15 22:18:22,120 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=96ab71a2b5be44c99a3f051a68b88739 "HTTP/1.1 202 Accepted"
+2025-07-15 22:18:22,130 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=96ab71a2b5be44c99a3f051a68b88739 "HTTP/1.1 202 Accepted"
+2025-07-15 22:18:25,378 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=96ab71a2b5be44c99a3f051a68b88739 "HTTP/1.1 202 Accepted"
+2025-07-15 22:18:28,488 - mcp.client.sse - INFO - Connecting to SSE endpoint: http://host.docker.internal:9000/sse
+2025-07-15 22:18:28,768 - httpx - INFO - HTTP Request: GET http://host.docker.internal:9000/sse "HTTP/1.1 200 OK"
+2025-07-15 22:18:28,769 - mcp.client.sse - INFO - Received endpoint URL: http://host.docker.internal:9000/messages/?session_id=943a8037084b4ece8f545d05277b53f5
+2025-07-15 22:18:28,769 - mcp.client.sse - INFO - Starting post writer with endpoint URL: http://host.docker.internal:9000/messages/?session_id=943a8037084b4ece8f545d05277b53f5
+2025-07-15 22:18:29,057 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=943a8037084b4ece8f545d05277b53f5 "HTTP/1.1 202 Accepted"
+2025-07-15 22:18:29,063 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=943a8037084b4ece8f545d05277b53f5 "HTTP/1.1 202 Accepted"
+2025-07-15 22:18:29,071 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=943a8037084b4ece8f545d05277b53f5 "HTTP/1.1 202 Accepted"
+2025-07-15 22:18:29,080 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=943a8037084b4ece8f545d05277b53f5 "HTTP/1.1 202 Accepted"
+🎯 Running with scenario filter: None
+🚀 Starting Properly Fixed Comparative Analysis Suite
+📊 Total scenarios to run: 37
+🕐 Timestamp: 20250715_213657
+🔧 Vector-RAG: Using JSON output format
+🔧 CPG: Using improved LLM generation with fallbacks
+================================================================================
+
+[1/37] Processing: T001 - Technical
+Query: Analyze the overall architecture of the HelloWorldApp. What are the main components and how do they ...
+  ✅ Vector: success (30563ms)
+  ✅ CPG: success (13474ms)
+  ✅ Comprehensive: success (43081ms)
+
+[2/37] Processing: T002 - Technical
+Query: Find all classes in the HelloWorldApp that implement specific design patterns like Factory, Observer...
+  ✅ Vector: success (21280ms)
+  ✅ CPG: success (12545ms)
+  ✅ Comprehensive: success (31744ms)
+
+[3/37] Processing: T003 - Technical
+Query: What are the dependencies and relationships between different classes in the HelloWorldApp?...
+  ✅ Vector: success (17508ms)
+  ✅ CPG: success (10112ms)
+  ✅ Comprehensive: success (39803ms)
+
+[4/37] Processing: T004 - Technical
+Query: Analyze the class hierarchy and inheritance structure in the HelloWorldApp....
+  ✅ Vector: success (19403ms)
+  ✅ CPG: success (10656ms)
+  ✅ Comprehensive: success (36146ms)
+
+[5/37] Processing: T005 - Technical
+Query: What are the key methods in the HelloWorldApp and their cyclomatic complexity?...
+  ✅ Vector: success (18005ms)
+  ✅ CPG: success (6048ms)
+  ✅ Comprehensive: success (40204ms)
+
+[6/37] Processing: F001 - Functional
+Query: What is the core business logic of the HelloWorldApp? How do the workers coordinate?...
+  ✅ Vector: success (16374ms)
+  ✅ CPG: success (13258ms)
+  ✅ Comprehensive: success (39236ms)
+
+[7/37] Processing: F002 - Functional
+Query: Trace the data flow through the HelloWorldApp from Manager to Workers....
+  ✅ Vector: success (18588ms)
+  ✅ CPG: success (7653ms)
+  ✅ Comprehensive: success (40779ms)
+
+[8/37] Processing: F003 - Functional
+Query: How do the workers communicate with the Manager in the HelloWorldApp?...
+  ✅ Vector: success (17169ms)
+  ✅ CPG: success (11557ms)
+  ✅ Comprehensive: success (43381ms)
+
+[9/37] Processing: F004 - Functional
+Query: How is the WorkerFactory used in the HelloWorldApp and what does it create?...
+  ✅ Vector: success (15746ms)
+  ✅ CPG: success (9658ms)
+  ✅ Comprehensive: success (42676ms)
+
+[10/37] Processing: F005 - Functional
+Query: How does the notification system work in the HelloWorldApp?...
+  ✅ Vector: success (17126ms)
+  ✅ CPG: success (9617ms)
+  ✅ Comprehensive: success (42855ms)
+
+[11/37] Processing: NF001 - Non-Functional
+Query: What error handling mechanisms are present in the HelloWorldApp?...
+  ✅ Vector: success (15054ms)
+  ✅ CPG: success (10746ms)
+  ✅ Comprehensive: success (35929ms)
+
+[12/37] Processing: NF002 - Non-Functional
+Query: Assess the code quality of the HelloWorldApp. What are the main issues?...
+  ✅ Vector: success (21051ms)
+  ✅ CPG: success (11151ms)
+  ✅ Comprehensive: success (47359ms)
+
+[13/37] Processing: NF003 - Non-Functional
+Query: What are the performance characteristics and potential bottlenecks in the HelloWorldApp?...
+  ✅ Vector: success (17826ms)
+  ✅ CPG: success (11192ms)
+  ✅ Comprehensive: success (40353ms)
+
+[14/37] Processing: NF004 - Non-Functional
+Query: What security vulnerabilities or concerns exist in the HelloWorldApp?...
+  ✅ Vector: success (22215ms)
+  ✅ CPG: success (10138ms)
+  ✅ Comprehensive: success (41789ms)
+
+[15/37] Processing: NF005 - Non-Functional
+Query: How maintainable is the HelloWorldApp code? What would make it easier to maintain?...
+  ✅ Vector: success (16456ms)
+  ✅ CPG: success (10481ms)
+  ✅ Comprehensive: success (36381ms)
+
+[16/37] Processing: NF006 - Non-Functional
+Query: What testing strategies would be appropriate for the HelloWorldApp? Where should tests be added?...
+  ✅ Vector: success (20158ms)
+  ✅ CPG: success (44008ms)
+  ✅ Comprehensive: success (45219ms)
+
+[17/37] Processing: M001 - Modification
+Query: How would you refactor the HelloWorldApp to use async/await patterns for better performance?...
+  ✅ Vector: success (20710ms)
+  ✅ CPG: success (11079ms)
+  ✅ Comprehensive: success (54118ms)
+
+[18/37] Processing: M002 - Modification
+Query: How would you improve error handling in the HelloWorldApp with try-catch blocks and logging?...
+  ✅ Vector: success (21128ms)
+  ✅ CPG: success (10599ms)
+  ✅ Comprehensive: success (42087ms)
+
+[19/37] Processing: M003 - Modification
+Query: How would you integrate comprehensive logging throughout the HelloWorldApp?...
+  ✅ Vector: success (18039ms)
+  ✅ CPG: success (15571ms)
+  ✅ Comprehensive: success (55229ms)
+
+[20/37] Processing: M004 - Modification
+Query: How would you add configuration management to the HelloWorldApp?...
+  ✅ Vector: success (16752ms)
+  ✅ CPG: success (10860ms)
+  ✅ Comprehensive: success (39879ms)
+
+[21/37] Processing: M005 - Modification
+Query: How would you implement dependency injection in the HelloWorldApp?...
+  ✅ Vector: success (20216ms)
+  ✅ CPG: success (11119ms)
+  ✅ Comprehensive: success (34893ms)
+
+[22/37] Processing: FA001 - Feature Addition
+Query: How would you add a priority system to the workers in the HelloWorldApp?...
+  ✅ Vector: success (19782ms)
+  ✅ CPG: success (13291ms)
+  ✅ Comprehensive: success (38844ms)
+
+[23/37] Processing: FA002 - Feature Addition
+Query: How would you add worker status tracking to the HelloWorldApp?...
+  ✅ Vector: success (20698ms)
+  ✅ CPG: success (12394ms)
+  ✅ Comprehensive: success (37688ms)
+
+[24/37] Processing: FA003 - Feature Addition
+Query: How would you add result collection and aggregation to the HelloWorldApp?...
+  ✅ Vector: success (21348ms)
+  ✅ CPG: success (11655ms)
+  ✅ Comprehensive: success (43247ms)
+
+[25/37] Processing: FA004 - Feature Addition
+Query: How would you add parallel processing capabilities to the HelloWorldApp?...
+  ✅ Vector: success (18838ms)
+  ✅ CPG: success (12361ms)
+  ✅ Comprehensive: success (43669ms)
+
+[26/37] Processing: FA005 - Feature Addition
+Query: How would you add worker lifecycle management to the HelloWorldApp?...
+  ✅ Vector: success (18198ms)
+  ✅ CPG: success (9739ms)
+  ✅ Comprehensive: success (35818ms)
+
+[27/37] Processing: MOD001 - Modernization
+Query: How would you modernize the HelloWorldApp to use .NET 9 features?...
+  ✅ Vector: success (17911ms)
+  ✅ CPG: success (9937ms)
+  ✅ Comprehensive: success (46466ms)
+
+[28/37] Processing: MOD002 - Modernization
+Query: How would you update the HelloWorldApp to use modern design patterns?...
+  ✅ Vector: success (18798ms)
+  ✅ CPG: success (12552ms)
+  ✅ Comprehensive: success (43165ms)
+
+[29/37] Processing: MOD003 - Modernization
+Query: How would you convert the HelloWorldApp to a web API?...
+  ✅ Vector: success (17809ms)
+  ✅ CPG: success (11179ms)
+  ✅ Comprehensive: success (48192ms)
+
+[30/37] Processing: MOD004 - Modernization
+Query: How would you make the HelloWorldApp cloud-native?...
+  ✅ Vector: success (23413ms)
+  ✅ CPG: success (10370ms)
+  ✅ Comprehensive: success (41237ms)
+
+[31/37] Processing: MOD005 - Modernization
+Query: How would you implement reactive programming patterns in the HelloWorldApp?...
+  ✅ Vector: success (16544ms)
+  ✅ CPG: success (10568ms)
+  ✅ Comprehensive: success (43870ms)
+
+[32/37] Processing: BUG001 - Bug Analysis
+Query: What potential null reference issues exist in the HelloWorldApp?...
+  ✅ Vector: success (16032ms)
+  ✅ CPG: success (10791ms)
+  ✅ Comprehensive: success (38145ms)
+
+[33/37] Processing: BUG002 - Bug Analysis
+Query: Are there any resource leaks or disposal issues in the HelloWorldApp?...
+  ✅ Vector: success (16042ms)
+  ✅ CPG: success (11151ms)
+  ✅ Comprehensive: success (39866ms)
+
+[34/37] Processing: BUG003 - Bug Analysis
+Query: What potential concurrency issues exist in the HelloWorldApp?...
+  ✅ Vector: success (17358ms)
+  ✅ CPG: success (11396ms)
+  ✅ Comprehensive: success (34305ms)
+
+[35/37] Processing: INT001 - Integration
+Query: How would you integrate the HelloWorldApp with a database?...
+  ✅ Vector: success (18731ms)
+  ✅ CPG: success (11192ms)2025-07-15 22:19:28,106 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-15 22:19:28,107 - __main__ - INFO - ✅ LLM generated 2 queries for category: Integration
+2025-07-15 22:19:28,113 - mcp.client.sse - INFO - Connecting to SSE endpoint: http://host.docker.internal:9000/sse
+2025-07-15 22:19:28,360 - httpx - INFO - HTTP Request: GET http://host.docker.internal:9000/sse "HTTP/1.1 200 OK"
+2025-07-15 22:19:28,361 - mcp.client.sse - INFO - Received endpoint URL: http://host.docker.internal:9000/messages/?session_id=0c1f04f5d88b4e749b0ab03ea9375602
+2025-07-15 22:19:28,362 - mcp.client.sse - INFO - Starting post writer with endpoint URL: http://host.docker.internal:9000/messages/?session_id=0c1f04f5d88b4e749b0ab03ea9375602
+2025-07-15 22:19:28,638 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=0c1f04f5d88b4e749b0ab03ea9375602 "HTTP/1.1 202 Accepted"
+2025-07-15 22:19:28,644 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=0c1f04f5d88b4e749b0ab03ea9375602 "HTTP/1.1 202 Accepted"
+2025-07-15 22:19:28,651 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=0c1f04f5d88b4e749b0ab03ea9375602 "HTTP/1.1 202 Accepted"
+2025-07-15 22:19:28,665 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=0c1f04f5d88b4e749b0ab03ea9375602 "HTTP/1.1 202 Accepted"
+2025-07-15 22:19:31,673 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=0c1f04f5d88b4e749b0ab03ea9375602 "HTTP/1.1 202 Accepted"
+2025-07-15 22:19:35,321 - mcp.client.sse - INFO - Connecting to SSE endpoint: http://host.docker.internal:9000/sse
+2025-07-15 22:19:35,610 - httpx - INFO - HTTP Request: GET http://host.docker.internal:9000/sse "HTTP/1.1 200 OK"
+2025-07-15 22:19:35,611 - mcp.client.sse - INFO - Received endpoint URL: http://host.docker.internal:9000/messages/?session_id=8e4d3698d0d043bdbc49c2dfdd66a7f8
+2025-07-15 22:19:35,611 - mcp.client.sse - INFO - Starting post writer with endpoint URL: http://host.docker.internal:9000/messages/?session_id=8e4d3698d0d043bdbc49c2dfdd66a7f8
+2025-07-15 22:19:35,844 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=8e4d3698d0d043bdbc49c2dfdd66a7f8 "HTTP/1.1 202 Accepted"
+2025-07-15 22:19:35,850 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=8e4d3698d0d043bdbc49c2dfdd66a7f8 "HTTP/1.1 202 Accepted"
+2025-07-15 22:19:35,855 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=8e4d3698d0d043bdbc49c2dfdd66a7f8 "HTTP/1.1 202 Accepted"
+2025-07-15 22:19:35,864 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=8e4d3698d0d043bdbc49c2dfdd66a7f8 "HTTP/1.1 202 Accepted"
+2025-07-15 22:20:35,998 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-15 22:20:36,000 - __main__ - INFO - ✅ LLM generated 2 queries for category: Integration
+2025-07-15 22:20:36,007 - mcp.client.sse - INFO - Connecting to SSE endpoint: http://host.docker.internal:9000/sse
+2025-07-15 22:20:36,287 - httpx - INFO - HTTP Request: GET http://host.docker.internal:9000/sse "HTTP/1.1 200 OK"
+2025-07-15 22:20:36,288 - mcp.client.sse - INFO - Received endpoint URL: http://host.docker.internal:9000/messages/?session_id=a1405faca3c1476586f6351f26de18aa
+2025-07-15 22:20:36,289 - mcp.client.sse - INFO - Starting post writer with endpoint URL: http://host.docker.internal:9000/messages/?session_id=a1405faca3c1476586f6351f26de18aa
+2025-07-15 22:20:36,501 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=a1405faca3c1476586f6351f26de18aa "HTTP/1.1 202 Accepted"
+2025-07-15 22:20:36,506 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=a1405faca3c1476586f6351f26de18aa "HTTP/1.1 202 Accepted"
+2025-07-15 22:20:36,513 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=a1405faca3c1476586f6351f26de18aa "HTTP/1.1 202 Accepted"
+2025-07-15 22:20:36,521 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=a1405faca3c1476586f6351f26de18aa "HTTP/1.1 202 Accepted"
+2025-07-15 22:20:39,737 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=a1405faca3c1476586f6351f26de18aa "HTTP/1.1 202 Accepted"
+2025-07-15 22:20:42,965 - mcp.client.sse - INFO - Connecting to SSE endpoint: http://host.docker.internal:9000/sse
+2025-07-15 22:20:43,256 - httpx - INFO - HTTP Request: GET http://host.docker.internal:9000/sse "HTTP/1.1 200 OK"
+2025-07-15 22:20:43,257 - mcp.client.sse - INFO - Received endpoint URL: http://host.docker.internal:9000/messages/?session_id=be9ca72cbd614d5795ad1703839a064a
+2025-07-15 22:20:43,257 - mcp.client.sse - INFO - Starting post writer with endpoint URL: http://host.docker.internal:9000/messages/?session_id=be9ca72cbd614d5795ad1703839a064a
+2025-07-15 22:20:43,488 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=be9ca72cbd614d5795ad1703839a064a "HTTP/1.1 202 Accepted"
+2025-07-15 22:20:43,495 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=be9ca72cbd614d5795ad1703839a064a "HTTP/1.1 202 Accepted"
+2025-07-15 22:20:43,502 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=be9ca72cbd614d5795ad1703839a064a "HTTP/1.1 202 Accepted"
+2025-07-15 22:20:43,511 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=be9ca72cbd614d5795ad1703839a064a "HTTP/1.1 202 Accepted"
+
+  ✅ Comprehensive: success (39348ms)
+
+[36/37] Processing: INT002 - Integration
+Query: How would you integrate the HelloWorldApp with a message queue system?...
+  ✅ Vector: success (17166ms)
+  ✅ CPG: success (10316ms)
+  ✅ Comprehensive: success (36132ms)
+
+[37/37] Processing: INT003 - Integration
+Query: How would you integrate the HelloWorldApp with external APIs?...
+  ✅ Vector: success (21783ms)
+  ✅ CPG: success (9728ms)
+  ✅ Comprehensive: success (35512ms)
+
+✅ Results saved to:
+  📄 CSV: /opt/genpod/test_results/properly_fixed_comparative_analysis_20250715_222118.csv
+  📊 Excel: /opt/genpod/test_results/properly_fixed_comparative_analysis_20250715_222118.xlsx
+📊 Total scenarios processed: 37
+
+📈 Success Rates:
+  Vector: 37/37 (100.0%)
+  CPG: 37/37 (100.0%)
+  Comprehensive: 37/37 (100.0%)
+
+🎉 Properly Fixed Comparative Analysis completed!
+📁 Results saved to CSV and Excel formats

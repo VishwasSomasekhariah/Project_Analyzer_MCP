@@ -1,0 +1,15 @@
+LOAD CSV FROM 'file:/nodes_IMPORT_data.csv' AS line
+CREATE (:IMPORT {
+id: toInteger(line[0]),
+CODE: line[2],
+COLUMN_NUMBER: toInteger(line[3]),
+EXPLICIT_AS: line[4],
+IMPORTED_AS: line[5],
+IMPORTED_ENTITY: line[6],
+IS_EXPLICIT: line[7],
+IS_WILDCARD: line[8],
+LINE_NUMBER: toInteger(line[9]),
+OFFSET: line[10],
+OFFSET_END: line[11],
+ORDER: toInteger(line[12])
+});

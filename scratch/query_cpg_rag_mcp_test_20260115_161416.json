@@ -1,0 +1,736 @@
+{
+  "status": "success",
+  "tool_name": "query_cpg_rag",
+  "workflow_type": "4_agent_team",
+  "user_query": "What variable name stores the formatted message in WorkerA?",
+  "project_name": "HelloWorldApp",
+  "response": {
+    "answer": "The variable name that stores the formatted message in WorkerA is 'msg'. This is a local variable of type string declared within the Process method at line 13, column 12 of the HelloWorldApp/WorkerA.cs file. The variable is assigned the result of calling Utilities.Helper.FormatMessage(\"WorkerA\", \"Hello from A\") and is subsequently used in System.Console.WriteLine(msg) to output the formatted message to the console.",
+    "confidence": "high",
+    "status": "success"
+  },
+  "citations": [
+    {
+      "claim": "WorkerA is a public class located in HelloWorldApp/WorkerA.cs",
+      "source_file": "HelloWorldApp/WorkerA.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/WorkerA.cs",
+      "entity_name": "WorkerA",
+      "entity_type": "class",
+      "evidence": {
+        "summary": "Query results show WorkerA as a Type node with name='WorkerA', type_kind='class', modifier='public', and file_path='HelloWorldApp/WorkerA.cs'"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (t:Type) WHERE t.name = 'WorkerA' RETURN t",
+      "verification_query": "MATCH (t:Type) WHERE t.name = 'WorkerA' RETURN t",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "WorkerA class implements the IWorker interface",
+      "source_file": "HelloWorldApp/WorkerA.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/WorkerA.cs",
+      "entity_name": "WorkerA",
+      "entity_type": "class",
+      "evidence": {
+        "summary": "Query results show WorkerA Type node has base_list property containing '[\"IWorker\"]', indicating interface implementation"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (t:Type) WHERE t.name = 'WorkerA' RETURN t",
+      "verification_query": "MATCH (t:Type) WHERE t.name = 'WorkerA' RETURN t",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "WorkerA class contains a Process method",
+      "source_file": "HelloWorldApp/WorkerA.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/WorkerA.cs",
+      "entity_name": "WorkerA",
+      "entity_type": "class",
+      "evidence": {
+        "summary": "WorkerA's symbols_location property contains Process method reference at specific byte positions (232-239) and source points ([11, 20] to [11, 27])"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (t:Type {name: 'WorkerA'})-[r]-(related) RETURN t, type(r) as relationship_type, labels(related) as related_labels, related.name as related_name",
+      "verification_query": "MATCH (t:Type {name: 'WorkerA'})-[r]-(related) RETURN t, type(r) as relationship_type, labels(related) as related_labels, related.name as related_name",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "WorkerA has a constructor that accepts an INotifier parameter",
+      "source_file": "HelloWorldApp/WorkerA.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/WorkerA.cs",
+      "entity_name": "WorkerA",
+      "entity_type": "class",
+      "evidence": {
+        "summary": "WorkerA's body property shows constructor 'public WorkerA(INotifier notifier)' and private field '_notifier' assignment"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (t:Type) WHERE t.name = 'WorkerA' RETURN t",
+      "verification_query": "MATCH (t:Type) WHERE t.name = 'WorkerA' RETURN t",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "WorkerA is referenced by a CreateWorkers function",
+      "source_file": "HelloWorldApp/WorkerA.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/WorkerA.cs",
+      "entity_name": "WorkerA",
+      "entity_type": "class",
+      "evidence": {
+        "summary": "Relationship query shows WorkerA has REFERENCES relationship with Function node named 'CreateWorkers'"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (t:Type {name: 'WorkerA'})-[r]-(related) RETURN t, type(r) as relationship_type, labels(related) as related_labels, related.name as related_name",
+      "verification_query": "MATCH (t:Type {name: 'WorkerA'})-[r]-(related) RETURN t, type(r) as relationship_type, labels(related) as related_labels, related.name as related_name",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "WorkerA has relationships with WorkerB and WorkerC classes",
+      "source_file": "HelloWorldApp/WorkerA.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/WorkerA.cs",
+      "entity_name": "WorkerA",
+      "entity_type": "class",
+      "evidence": {
+        "summary": "Relationship query shows WorkerA has IMPLEMENTS and REFERENCES relationships with Type nodes named 'WorkerB' and 'WorkerC'"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (t:Type {name: 'WorkerA'})-[r]-(related) RETURN t, type(r) as relationship_type, labels(related) as related_labels, related.name as related_name",
+      "verification_query": "MATCH (t:Type {name: 'WorkerA'})-[r]-(related) RETURN t, type(r) as relationship_type, labels(related) as related_labels, related.name as related_name",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "medium"
+    },
+    {
+      "claim": "WorkerA class spans from line 2 column 4 to line 17 column 5 in source file",
+      "source_file": "HelloWorldApp/WorkerA.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/WorkerA.cs",
+      "entity_name": "WorkerA",
+      "entity_type": "class",
+      "evidence": {
+        "summary": "WorkerA Type node properties show start_point='[2, 4]', end_point='[17, 5]', start_byte=30, end_byte=460"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (t:Type) WHERE t.name = 'WorkerA' RETURN t",
+      "verification_query": "MATCH (t:Type) WHERE t.name = 'WorkerA' RETURN t",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "WorkerA class contains a private field named _notifier",
+      "source_file": "HelloWorldApp/WorkerA.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/WorkerA.cs",
+      "entity_name": "WorkerA",
+      "entity_type": "class",
+      "evidence": {
+        "summary": "Query results show _notifier as a Variable node with type_kind='field' located at start_point [4, 8] and end_point [4, 45] in HelloWorldApp/WorkerA.cs"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (t:Type {name: 'WorkerA'})-[:CONTAINS]->(v:Variable) RETURN v.name, v.type_kind, v.file_path, v.start_point, v.end_point, v.symbols_location",
+      "verification_query": "MATCH (t:Type {name: 'WorkerA'})-[:CONTAINS]->(v:Variable) RETURN v.name, v.type_kind, v.file_path, v.start_point, v.end_point, v.symbols_location",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "WorkerA class contains a local variable named msg",
+      "source_file": "HelloWorldApp/WorkerA.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/WorkerA.cs",
+      "entity_name": "WorkerA",
+      "entity_type": "class",
+      "evidence": {
+        "summary": "Query results show msg as a Variable node with type_kind='local_variable' located at start_point [13, 12] and end_point [13, 83] in HelloWorldApp/WorkerA.cs"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (v:Variable) WHERE v.file_path = 'HelloWorldApp/WorkerA.cs' RETURN v.name, v.type_kind, v.start_point, v.end_point ORDER BY v.start_point",
+      "verification_query": "MATCH (v:Variable) WHERE v.file_path = 'HelloWorldApp/WorkerA.cs' RETURN v.name, v.type_kind, v.start_point, v.end_point ORDER BY v.start_point",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "WorkerA class contains exactly one parameter variable",
+      "source_file": "HelloWorldApp/WorkerA.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/WorkerA.cs",
+      "entity_name": "WorkerA",
+      "entity_type": "class",
+      "evidence": {
+        "summary": "Aggregation query shows type_kind='parameter' with count=1 for variables in HelloWorldApp/WorkerA.cs"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (v:Variable) WHERE v.file_path = 'HelloWorldApp/WorkerA.cs' RETURN v.type_kind, collect(v.name) AS variable_names, count(v) AS count ORDER BY v.type_kind",
+      "verification_query": "MATCH (v:Variable) WHERE v.file_path = 'HelloWorldApp/WorkerA.cs' RETURN v.type_kind, collect(v.name) AS variable_names, count(v) AS count ORDER BY v.type_kind",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "WorkerA class has exactly three variables total: one field, one local variable, and one parameter",
+      "source_file": "HelloWorldApp/WorkerA.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/WorkerA.cs",
+      "entity_name": "WorkerA",
+      "entity_type": "class",
+      "evidence": {
+        "summary": "Aggregation query shows three distinct type_kind values (field, local_variable, parameter) each with count=1, totaling 3 variables in HelloWorldApp/WorkerA.cs"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (v:Variable) WHERE v.file_path = 'HelloWorldApp/WorkerA.cs' RETURN v.type_kind, collect(v.name) AS variable_names, count(v) AS count ORDER BY v.type_kind",
+      "verification_query": "MATCH (v:Variable) WHERE v.file_path = 'HelloWorldApp/WorkerA.cs' RETURN v.type_kind, collect(v.name) AS variable_names, count(v) AS count ORDER BY v.type_kind",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "The _notifier field is declared before the msg local variable in the source code",
+      "source_file": "HelloWorldApp/WorkerA.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/WorkerA.cs",
+      "entity_name": "_notifier",
+      "entity_type": "field",
+      "evidence": {
+        "summary": "Ordered query results show _notifier at start_point [4, 8] appears before msg at start_point [13, 12] in the source file"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (v:Variable) WHERE v.file_path = 'HelloWorldApp/WorkerA.cs' RETURN v.name, v.type_kind, v.start_point, v.end_point ORDER BY v.start_point",
+      "verification_query": "MATCH (v:Variable) WHERE v.file_path = 'HelloWorldApp/WorkerA.cs' RETURN v.name, v.type_kind, v.start_point, v.end_point ORDER BY v.start_point",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "WorkerA class contains a Process method that handles message formatting",
+      "source_file": "HelloWorldApp/WorkerA.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/WorkerA.cs",
+      "entity_name": "WorkerA",
+      "entity_type": "class",
+      "evidence": {
+        "summary": "Query results show Process method in WorkerA with body containing 'string msg = Utilities.Helper.FormatMessage(\"WorkerA\", \"Hello from A\");'"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (t:Type {name: 'WorkerA'})-[:CONTAINS]->(f:Function) RETURN f.name, f.body, f.parameters, f.return_type, f.modifier",
+      "verification_query": "MATCH (t:Type {name: 'WorkerA'})-[:CONTAINS]->(f:Function) RETURN f.name, f.body, f.parameters, f.return_type, f.modifier",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "Process method calls Utilities.Helper.FormatMessage with WorkerA identifier and greeting message",
+      "source_file": "HelloWorldApp/WorkerA.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/WorkerA.cs",
+      "entity_name": "Process",
+      "entity_type": "method",
+      "evidence": {
+        "summary": "Method body shows exact call 'Utilities.Helper.FormatMessage(\"WorkerA\", \"Hello from A\")' with string parameters for worker identification and message content"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (t:Type {name: 'WorkerA'})-[:CONTAINS]->(f:Function) WHERE f.body IS NOT NULL AND (toLower(f.body) CONTAINS 'format' OR toLower(f.body) CONTAINS 'message') RETURN f.name, f.body, f.parameters, f.return_type, f.start_point, f.end_point",
+      "verification_query": "MATCH (t:Type {name: 'WorkerA'})-[:CONTAINS]->(f:Function) WHERE f.body IS NOT NULL AND (toLower(f.body) CONTAINS 'format' OR toLower(f.body) CONTAINS 'message') RETURN f.name, f.body, f.parameters, f.return_type, f.start_point, f.end_point",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "Process method outputs formatted message to console using System.Console.WriteLine",
+      "source_file": "HelloWorldApp/WorkerA.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/WorkerA.cs",
+      "entity_name": "Process",
+      "entity_type": "method",
+      "evidence": {
+        "summary": "Method body contains 'System.Console.WriteLine(msg);' where msg is the result from FormatMessage call"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (t:Type {name: 'WorkerA'})-[:CONTAINS]->(f:Function) RETURN f.name, f.body, f.parameters, f.return_type, f.modifier",
+      "verification_query": "MATCH (t:Type {name: 'WorkerA'})-[:CONTAINS]->(f:Function) RETURN f.name, f.body, f.parameters, f.return_type, f.modifier",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "Process method includes notification functionality through _notifier.Notify call",
+      "source_file": "HelloWorldApp/WorkerA.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/WorkerA.cs",
+      "entity_name": "Process",
+      "entity_type": "method",
+      "evidence": {
+        "summary": "Method body shows sequence of operations: message formatting, console output, followed by _notifier.Notify call"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (t:Type {name: 'WorkerA'})-[:CONTAINS]->(f:Function) RETURN f.name, f.body, f.parameters, f.return_type, f.modifier",
+      "verification_query": "MATCH (t:Type {name: 'WorkerA'})-[:CONTAINS]->(f:Function) RETURN f.name, f.body, f.parameters, f.return_type, f.modifier",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "medium"
+    },
+    {
+      "claim": "The msg local variable is declared at line 13 column 12 in WorkerA.cs",
+      "source_file": "HelloWorldApp/WorkerA.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/WorkerA.cs",
+      "entity_name": "msg",
+      "entity_type": "local_variable",
+      "evidence": {
+        "summary": "Query results show msg as a Variable node with type_kind='local_variable', start_point=[13, 12], end_point=[13, 83] in HelloWorldApp/WorkerA.cs"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (v:Variable {name: 'msg'}) WHERE v.file_path = 'HelloWorldApp/WorkerA.cs' RETURN v.name, v.type_kind, v.start_point, v.end_point, v.symbols_location",
+      "verification_query": "MATCH (v:Variable {name: 'msg'}) WHERE v.file_path = 'HelloWorldApp/WorkerA.cs' RETURN v.name, v.type_kind, v.start_point, v.end_point, v.symbols_location",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "The msg variable has REFERENCES relationship with FormatMessage function",
+      "source_file": "HelloWorldApp/WorkerA.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/WorkerA.cs",
+      "entity_name": "msg",
+      "entity_type": "local_variable",
+      "evidence": {
+        "summary": "Relationship query shows msg Variable node connected via REFERENCES relationship to Function node named 'FormatMessage'"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (v:Variable {name: 'msg'})-[r:REFERENCES]-(other) WHERE v.file_path = 'HelloWorldApp/WorkerA.cs' RETURN type(r) AS relationship_type, labels(other) AS other_labels, other.name AS other_name",
+      "verification_query": "MATCH (v:Variable {name: 'msg'})-[r:REFERENCES]-(other) WHERE v.file_path = 'HelloWorldApp/WorkerA.cs' RETURN type(r) AS relationship_type, labels(other) AS other_labels, other.name AS other_name",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "The msg variable is declared with assignment to Utilities.Helper.FormatMessage call",
+      "source_file": "HelloWorldApp/WorkerA.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/WorkerA.cs",
+      "entity_name": "msg",
+      "entity_type": "local_variable",
+      "evidence": {
+        "summary": "Statement query shows declaration statement 'string msg = Utilities.Helper.FormatMessage(\"WorkerA\", \"Hello from A\");' with statement_type='declaration' at start_point [13, 12]"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (s:Statement) WHERE s.file_path = 'HelloWorldApp/WorkerA.cs' AND s.text CONTAINS 'msg' RETURN s.text, s.statement_type, s.start_point, s.end_point ORDER BY s.start_point",
+      "verification_query": "MATCH (s:Statement) WHERE s.file_path = 'HelloWorldApp/WorkerA.cs' AND s.text CONTAINS 'msg' RETURN s.text, s.statement_type, s.start_point, s.end_point ORDER BY s.start_point",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "WorkerA contains at least two statements including msg declaration and console output",
+      "source_file": "HelloWorldApp/WorkerA.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/WorkerA.cs",
+      "entity_name": "WorkerA",
+      "entity_type": "class",
+      "evidence": {
+        "summary": "Statement query shows multiple statements in HelloWorldApp/WorkerA.cs including 'string msg = Utilities.Helper.FormatMessage...' declaration and 'System.Console.WriteLine(msg);' both starting at line 13"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (s:Statement) WHERE s.file_path = 'HelloWorldApp/WorkerA.cs' RETURN s.text, s.statement_type, s.start_point ORDER BY s.start_point",
+      "verification_query": "MATCH (s:Statement) WHERE s.file_path = 'HelloWorldApp/WorkerA.cs' RETURN s.text, s.statement_type, s.start_point ORDER BY s.start_point",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    }
+  ],
+  "raw_results": [
+    {
+      "claim": "WorkerA is a public class located in HelloWorldApp/WorkerA.cs",
+      "source_file": "HelloWorldApp/WorkerA.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/WorkerA.cs",
+      "entity_name": "WorkerA",
+      "entity_type": "class",
+      "evidence": {
+        "summary": "Query results show WorkerA as a Type node with name='WorkerA', type_kind='class', modifier='public', and file_path='HelloWorldApp/WorkerA.cs'"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (t:Type) WHERE t.name = 'WorkerA' RETURN t",
+      "verification_query": "MATCH (t:Type) WHERE t.name = 'WorkerA' RETURN t",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "WorkerA class implements the IWorker interface",
+      "source_file": "HelloWorldApp/WorkerA.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/WorkerA.cs",
+      "entity_name": "WorkerA",
+      "entity_type": "class",
+      "evidence": {
+        "summary": "Query results show WorkerA Type node has base_list property containing '[\"IWorker\"]', indicating interface implementation"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (t:Type) WHERE t.name = 'WorkerA' RETURN t",
+      "verification_query": "MATCH (t:Type) WHERE t.name = 'WorkerA' RETURN t",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "WorkerA class contains a Process method",
+      "source_file": "HelloWorldApp/WorkerA.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/WorkerA.cs",
+      "entity_name": "WorkerA",
+      "entity_type": "class",
+      "evidence": {
+        "summary": "WorkerA's symbols_location property contains Process method reference at specific byte positions (232-239) and source points ([11, 20] to [11, 27])"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (t:Type {name: 'WorkerA'})-[r]-(related) RETURN t, type(r) as relationship_type, labels(related) as related_labels, related.name as related_name",
+      "verification_query": "MATCH (t:Type {name: 'WorkerA'})-[r]-(related) RETURN t, type(r) as relationship_type, labels(related) as related_labels, related.name as related_name",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "WorkerA has a constructor that accepts an INotifier parameter",
+      "source_file": "HelloWorldApp/WorkerA.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/WorkerA.cs",
+      "entity_name": "WorkerA",
+      "entity_type": "class",
+      "evidence": {
+        "summary": "WorkerA's body property shows constructor 'public WorkerA(INotifier notifier)' and private field '_notifier' assignment"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (t:Type) WHERE t.name = 'WorkerA' RETURN t",
+      "verification_query": "MATCH (t:Type) WHERE t.name = 'WorkerA' RETURN t",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "WorkerA is referenced by a CreateWorkers function",
+      "source_file": "HelloWorldApp/WorkerA.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/WorkerA.cs",
+      "entity_name": "WorkerA",
+      "entity_type": "class",
+      "evidence": {
+        "summary": "Relationship query shows WorkerA has REFERENCES relationship with Function node named 'CreateWorkers'"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (t:Type {name: 'WorkerA'})-[r]-(related) RETURN t, type(r) as relationship_type, labels(related) as related_labels, related.name as related_name",
+      "verification_query": "MATCH (t:Type {name: 'WorkerA'})-[r]-(related) RETURN t, type(r) as relationship_type, labels(related) as related_labels, related.name as related_name",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "WorkerA has relationships with WorkerB and WorkerC classes",
+      "source_file": "HelloWorldApp/WorkerA.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/WorkerA.cs",
+      "entity_name": "WorkerA",
+      "entity_type": "class",
+      "evidence": {
+        "summary": "Relationship query shows WorkerA has IMPLEMENTS and REFERENCES relationships with Type nodes named 'WorkerB' and 'WorkerC'"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (t:Type {name: 'WorkerA'})-[r]-(related) RETURN t, type(r) as relationship_type, labels(related) as related_labels, related.name as related_name",
+      "verification_query": "MATCH (t:Type {name: 'WorkerA'})-[r]-(related) RETURN t, type(r) as relationship_type, labels(related) as related_labels, related.name as related_name",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "medium"
+    },
+    {
+      "claim": "WorkerA class spans from line 2 column 4 to line 17 column 5 in source file",
+      "source_file": "HelloWorldApp/WorkerA.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/WorkerA.cs",
+      "entity_name": "WorkerA",
+      "entity_type": "class",
+      "evidence": {
+        "summary": "WorkerA Type node properties show start_point='[2, 4]', end_point='[17, 5]', start_byte=30, end_byte=460"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (t:Type) WHERE t.name = 'WorkerA' RETURN t",
+      "verification_query": "MATCH (t:Type) WHERE t.name = 'WorkerA' RETURN t",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "WorkerA class contains a private field named _notifier",
+      "source_file": "HelloWorldApp/WorkerA.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/WorkerA.cs",
+      "entity_name": "WorkerA",
+      "entity_type": "class",
+      "evidence": {
+        "summary": "Query results show _notifier as a Variable node with type_kind='field' located at start_point [4, 8] and end_point [4, 45] in HelloWorldApp/WorkerA.cs"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (t:Type {name: 'WorkerA'})-[:CONTAINS]->(v:Variable) RETURN v.name, v.type_kind, v.file_path, v.start_point, v.end_point, v.symbols_location",
+      "verification_query": "MATCH (t:Type {name: 'WorkerA'})-[:CONTAINS]->(v:Variable) RETURN v.name, v.type_kind, v.file_path, v.start_point, v.end_point, v.symbols_location",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "WorkerA class contains a local variable named msg",
+      "source_file": "HelloWorldApp/WorkerA.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/WorkerA.cs",
+      "entity_name": "WorkerA",
+      "entity_type": "class",
+      "evidence": {
+        "summary": "Query results show msg as a Variable node with type_kind='local_variable' located at start_point [13, 12] and end_point [13, 83] in HelloWorldApp/WorkerA.cs"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (v:Variable) WHERE v.file_path = 'HelloWorldApp/WorkerA.cs' RETURN v.name, v.type_kind, v.start_point, v.end_point ORDER BY v.start_point",
+      "verification_query": "MATCH (v:Variable) WHERE v.file_path = 'HelloWorldApp/WorkerA.cs' RETURN v.name, v.type_kind, v.start_point, v.end_point ORDER BY v.start_point",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "WorkerA class contains exactly one parameter variable",
+      "source_file": "HelloWorldApp/WorkerA.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/WorkerA.cs",
+      "entity_name": "WorkerA",
+      "entity_type": "class",
+      "evidence": {
+        "summary": "Aggregation query shows type_kind='parameter' with count=1 for variables in HelloWorldApp/WorkerA.cs"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (v:Variable) WHERE v.file_path = 'HelloWorldApp/WorkerA.cs' RETURN v.type_kind, collect(v.name) AS variable_names, count(v) AS count ORDER BY v.type_kind",
+      "verification_query": "MATCH (v:Variable) WHERE v.file_path = 'HelloWorldApp/WorkerA.cs' RETURN v.type_kind, collect(v.name) AS variable_names, count(v) AS count ORDER BY v.type_kind",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "WorkerA class has exactly three variables total: one field, one local variable, and one parameter",
+      "source_file": "HelloWorldApp/WorkerA.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/WorkerA.cs",
+      "entity_name": "WorkerA",
+      "entity_type": "class",
+      "evidence": {
+        "summary": "Aggregation query shows three distinct type_kind values (field, local_variable, parameter) each with count=1, totaling 3 variables in HelloWorldApp/WorkerA.cs"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (v:Variable) WHERE v.file_path = 'HelloWorldApp/WorkerA.cs' RETURN v.type_kind, collect(v.name) AS variable_names, count(v) AS count ORDER BY v.type_kind",
+      "verification_query": "MATCH (v:Variable) WHERE v.file_path = 'HelloWorldApp/WorkerA.cs' RETURN v.type_kind, collect(v.name) AS variable_names, count(v) AS count ORDER BY v.type_kind",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "The _notifier field is declared before the msg local variable in the source code",
+      "source_file": "HelloWorldApp/WorkerA.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/WorkerA.cs",
+      "entity_name": "_notifier",
+      "entity_type": "field",
+      "evidence": {
+        "summary": "Ordered query results show _notifier at start_point [4, 8] appears before msg at start_point [13, 12] in the source file"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (v:Variable) WHERE v.file_path = 'HelloWorldApp/WorkerA.cs' RETURN v.name, v.type_kind, v.start_point, v.end_point ORDER BY v.start_point",
+      "verification_query": "MATCH (v:Variable) WHERE v.file_path = 'HelloWorldApp/WorkerA.cs' RETURN v.name, v.type_kind, v.start_point, v.end_point ORDER BY v.start_point",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "WorkerA class contains a Process method that handles message formatting",
+      "source_file": "HelloWorldApp/WorkerA.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/WorkerA.cs",
+      "entity_name": "WorkerA",
+      "entity_type": "class",
+      "evidence": {
+        "summary": "Query results show Process method in WorkerA with body containing 'string msg = Utilities.Helper.FormatMessage(\"WorkerA\", \"Hello from A\");'"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (t:Type {name: 'WorkerA'})-[:CONTAINS]->(f:Function) RETURN f.name, f.body, f.parameters, f.return_type, f.modifier",
+      "verification_query": "MATCH (t:Type {name: 'WorkerA'})-[:CONTAINS]->(f:Function) RETURN f.name, f.body, f.parameters, f.return_type, f.modifier",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "Process method calls Utilities.Helper.FormatMessage with WorkerA identifier and greeting message",
+      "source_file": "HelloWorldApp/WorkerA.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/WorkerA.cs",
+      "entity_name": "Process",
+      "entity_type": "method",
+      "evidence": {
+        "summary": "Method body shows exact call 'Utilities.Helper.FormatMessage(\"WorkerA\", \"Hello from A\")' with string parameters for worker identification and message content"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (t:Type {name: 'WorkerA'})-[:CONTAINS]->(f:Function) WHERE f.body IS NOT NULL AND (toLower(f.body) CONTAINS 'format' OR toLower(f.body) CONTAINS 'message') RETURN f.name, f.body, f.parameters, f.return_type, f.start_point, f.end_point",
+      "verification_query": "MATCH (t:Type {name: 'WorkerA'})-[:CONTAINS]->(f:Function) WHERE f.body IS NOT NULL AND (toLower(f.body) CONTAINS 'format' OR toLower(f.body) CONTAINS 'message') RETURN f.name, f.body, f.parameters, f.return_type, f.start_point, f.end_point",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "Process method outputs formatted message to console using System.Console.WriteLine",
+      "source_file": "HelloWorldApp/WorkerA.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/WorkerA.cs",
+      "entity_name": "Process",
+      "entity_type": "method",
+      "evidence": {
+        "summary": "Method body contains 'System.Console.WriteLine(msg);' where msg is the result from FormatMessage call"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (t:Type {name: 'WorkerA'})-[:CONTAINS]->(f:Function) RETURN f.name, f.body, f.parameters, f.return_type, f.modifier",
+      "verification_query": "MATCH (t:Type {name: 'WorkerA'})-[:CONTAINS]->(f:Function) RETURN f.name, f.body, f.parameters, f.return_type, f.modifier",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "Process method includes notification functionality through _notifier.Notify call",
+      "source_file": "HelloWorldApp/WorkerA.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/WorkerA.cs",
+      "entity_name": "Process",
+      "entity_type": "method",
+      "evidence": {
+        "summary": "Method body shows sequence of operations: message formatting, console output, followed by _notifier.Notify call"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (t:Type {name: 'WorkerA'})-[:CONTAINS]->(f:Function) RETURN f.name, f.body, f.parameters, f.return_type, f.modifier",
+      "verification_query": "MATCH (t:Type {name: 'WorkerA'})-[:CONTAINS]->(f:Function) RETURN f.name, f.body, f.parameters, f.return_type, f.modifier",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "medium"
+    },
+    {
+      "claim": "The msg local variable is declared at line 13 column 12 in WorkerA.cs",
+      "source_file": "HelloWorldApp/WorkerA.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/WorkerA.cs",
+      "entity_name": "msg",
+      "entity_type": "local_variable",
+      "evidence": {
+        "summary": "Query results show msg as a Variable node with type_kind='local_variable', start_point=[13, 12], end_point=[13, 83] in HelloWorldApp/WorkerA.cs"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (v:Variable {name: 'msg'}) WHERE v.file_path = 'HelloWorldApp/WorkerA.cs' RETURN v.name, v.type_kind, v.start_point, v.end_point, v.symbols_location",
+      "verification_query": "MATCH (v:Variable {name: 'msg'}) WHERE v.file_path = 'HelloWorldApp/WorkerA.cs' RETURN v.name, v.type_kind, v.start_point, v.end_point, v.symbols_location",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "The msg variable has REFERENCES relationship with FormatMessage function",
+      "source_file": "HelloWorldApp/WorkerA.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/WorkerA.cs",
+      "entity_name": "msg",
+      "entity_type": "local_variable",
+      "evidence": {
+        "summary": "Relationship query shows msg Variable node connected via REFERENCES relationship to Function node named 'FormatMessage'"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (v:Variable {name: 'msg'})-[r:REFERENCES]-(other) WHERE v.file_path = 'HelloWorldApp/WorkerA.cs' RETURN type(r) AS relationship_type, labels(other) AS other_labels, other.name AS other_name",
+      "verification_query": "MATCH (v:Variable {name: 'msg'})-[r:REFERENCES]-(other) WHERE v.file_path = 'HelloWorldApp/WorkerA.cs' RETURN type(r) AS relationship_type, labels(other) AS other_labels, other.name AS other_name",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "The msg variable is declared with assignment to Utilities.Helper.FormatMessage call",
+      "source_file": "HelloWorldApp/WorkerA.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/WorkerA.cs",
+      "entity_name": "msg",
+      "entity_type": "local_variable",
+      "evidence": {
+        "summary": "Statement query shows declaration statement 'string msg = Utilities.Helper.FormatMessage(\"WorkerA\", \"Hello from A\");' with statement_type='declaration' at start_point [13, 12]"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (s:Statement) WHERE s.file_path = 'HelloWorldApp/WorkerA.cs' AND s.text CONTAINS 'msg' RETURN s.text, s.statement_type, s.start_point, s.end_point ORDER BY s.start_point",
+      "verification_query": "MATCH (s:Statement) WHERE s.file_path = 'HelloWorldApp/WorkerA.cs' AND s.text CONTAINS 'msg' RETURN s.text, s.statement_type, s.start_point, s.end_point ORDER BY s.start_point",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "WorkerA contains at least two statements including msg declaration and console output",
+      "source_file": "HelloWorldApp/WorkerA.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/WorkerA.cs",
+      "entity_name": "WorkerA",
+      "entity_type": "class",
+      "evidence": {
+        "summary": "Statement query shows multiple statements in HelloWorldApp/WorkerA.cs including 'string msg = Utilities.Helper.FormatMessage...' declaration and 'System.Console.WriteLine(msg);' both starting at line 13"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (s:Statement) WHERE s.file_path = 'HelloWorldApp/WorkerA.cs' RETURN s.text, s.statement_type, s.start_point ORDER BY s.start_point",
+      "verification_query": "MATCH (s:Statement) WHERE s.file_path = 'HelloWorldApp/WorkerA.cs' RETURN s.text, s.statement_type, s.start_point ORDER BY s.start_point",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    }
+  ],
+  "verified_count": 20,
+  "unverified_count": 0,
+  "total_citations": 20,
+  "sub_queries_count": 4,
+  "llm_calls_count": 36,
+  "execution_time_ms": 894886,
+  "token_usage": {
+    "total_tokens": 32286,
+    "total_prompt_tokens": 377,
+    "total_completion_tokens": 31909,
+    "call_count": 36,
+    "by_agent_role": {
+      "cot_agent": 2540,
+      "tot_orchestrator": 1749,
+      "thinker": 9606,
+      "thinking_validator": 2145,
+      "cypher_validator": 7422,
+      "executor_verifier": 8824
+    }
+  },
+  "total_tokens_used": 32286,
+  "total_input_tokens": 377,
+  "total_output_tokens": 31909,
+  "agent_workflow": "4_agent_team",
+  "agent_metadata": {
+    "llm_model": "gpt-4o",
+    "max_cot_iterations": 15,
+    "parallel_agents": true,
+    "verification_enabled": true,
+    "entity_resolution_enabled": true,
+    "observer_enabled": false,
+    "use_4_agent_team": true,
+    "four_agent_max_iterations": 3
+  },
+  "cli_parameters_used": {
+    "config_path": "/opt/genpod/neo4j_config.json",
+    "schema_path": "/opt/genpod/src/schemas/project_knowledgebase_graph_schema.yaml",
+    "llm_model": "gpt-4o"
+  },
+  "message": "4-Agent Team CPG RAG completed successfully (894886ms)"
+}

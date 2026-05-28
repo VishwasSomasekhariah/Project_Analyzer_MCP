@@ -1,0 +1,91 @@
+{
+  "test_run_timestamp": "2025-12-15T19:11:44.276267",
+  "configuration": {
+    "use_4_agent_team": true,
+    "four_agent_max_iterations": 3,
+    "max_cot_iterations": 15,
+    "llm_model": "gpt-4o"
+  },
+  "queries": [
+    {
+      "query_number": 1,
+      "query": "What are the key methods in the HelloWorldApp and their cyclomatic complexity?",
+      "status": "error",
+      "answer": null,
+      "confidence": null,
+      "citations": [],
+      "execution_time_ms": null,
+      "sub_queries_count": null,
+      "llm_calls_count": null,
+      "token_usage": null,
+      "error": "unhandled errors in a TaskGroup (1 sub-exception)",
+      "execution_traces": []
+    },
+    {
+      "query_number": 2,
+      "query": "Analyze the overall architecture of the HelloWorldApp.",
+      "status": "error",
+      "answer": null,
+      "confidence": null,
+      "citations": [],
+      "execution_time_ms": null,
+      "sub_queries_count": null,
+      "llm_calls_count": null,
+      "token_usage": null,
+      "error": "unhandled errors in a TaskGroup (1 sub-exception)",
+      "execution_traces": []
+    },
+    {
+      "query_number": 3,
+      "query": "What is the exact method signature of the CreateWorkers method in the WorkerFactory class?",
+      "status": "error",
+      "answer": null,
+      "confidence": null,
+      "citations": [],
+      "execution_time_ms": null,
+      "sub_queries_count": null,
+      "llm_calls_count": null,
+      "token_usage": null,
+      "error": "unhandled errors in a TaskGroup (1 sub-exception)",
+      "execution_traces": []
+    },
+    {
+      "query_number": 4,
+      "query": "What are the two parameters passed to Helper.FormatMessage?",
+      "status": "error",
+      "answer": null,
+      "confidence": null,
+      "citations": [],
+      "execution_time_ms": null,
+      "sub_queries_count": null,
+      "llm_calls_count": null,
+      "token_usage": null,
+      "error": "unhandled errors in a TaskGroup (1 sub-exception)",
+      "execution_traces": []
+    },
+    {
+      "query_number": 5,
+      "query": "What is the role of WorkerZ in the project?",
+      "status": "error",
+      "answer": null,
+      "confidence": null,
+      "citations": [],
+      "execution_time_ms": null,
+      "sub_queries_count": null,
+      "llm_calls_count": null,
+      "token_usage": null,
+      "error": "unhandled errors in a TaskGroup (1 sub-exception)",
+      "execution_traces": []
+    }
+  ],
+  "summary": {
+    "total_queries": 5,
+    "successful_queries": 0,
+    "failed_queries": 5,
+    "total_citations": 0,
+    "total_verified_citations": 0,
+    "total_execution_time_ms": 0,
+    "total_tokens": 0,
+    "total_llm_calls": 0
+  }
+}

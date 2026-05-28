@@ -1,0 +1,396 @@
+{
+  "status": "success",
+  "tool_name": "query_cpg_rag",
+  "workflow_type": "4_agent_team",
+  "user_query": "What variable name stores the formatted message in WorkerZ?",
+  "project_name": "HelloWorldApp",
+  "response": {
+    "answer": "WorkerZ does not exist in this codebase. The codebase contains WorkerA, WorkerB, and WorkerC classes, but no WorkerZ class. Since WorkerZ doesn't exist, there is no variable that stores formatted messages in WorkerZ. However, the existing Worker classes (WorkerA, WorkerB, WorkerC) all contain a variable named 'msg' which appears to be used for message handling in HelloWorldApp/WorkerA.cs, HelloWorldApp/WorkerB.cs, and HelloWorldApp/WorkerC.cs respectively.",
+    "confidence": "high",
+    "status": "success"
+  },
+  "citations": [
+    {
+      "claim": "No Type entities with 'Worker' in their name exist in the codebase",
+      "source_file": null,
+      "source_line": null,
+      "source_location": null,
+      "entity_name": null,
+      "entity_type": null,
+      "evidence": {
+        "summary": "Direct query of all Type nodes with CONTAINS 'Worker' filter returned 0 rows, indicating no classes, interfaces, structs, or other type definitions contain 'Worker' in their name"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (t:Type) WHERE t.name CONTAINS 'Worker' RETURN t.name as name, t.type_kind as kind, t.file_path as file_path, t.start_point as start_point, t.end_point as end_point ORDER BY t.name",
+      "verification_query": "MATCH (t:Type) WHERE t.name CONTAINS 'Worker' RETURN t.name as name, t.type_kind as kind, t.file_path as file_path, t.start_point as start_point, t.end_point as end_point ORDER BY t.name",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "No entities named 'WorkerZ' exist in the codebase across any node type",
+      "source_file": null,
+      "source_line": null,
+      "source_location": null,
+      "entity_name": null,
+      "entity_type": null,
+      "evidence": {
+        "summary": "Exact match search across Type, Function, Variable, and File nodes for 'WorkerZ' returned 0 results from comprehensive UNION query covering all major entity types"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (t:Type) WHERE t.name = 'WorkerZ' RETURN 'Type' as node_type, t.name as name, t.type_kind as kind, t.file_path as file_path UNION ALL MATCH (f:Function) WHERE f.name = 'WorkerZ' RETURN 'Function' as node_type, f.name as name, f.type_kind as kind, f.file_path as file_path UNION ALL MATCH (v:Variable) WHERE v.name = 'WorkerZ' RETURN 'Variable' as node_type, v.name as name, v.type_kind as kind, v.file_path as file_path UNION ALL MATCH (fi:File) WHERE fi.name = 'WorkerZ' RETURN 'File' as node_type, fi.name as name, fi.type as kind, fi.file_path as file_path",
+      "verification_query": "MATCH (t:Type) WHERE t.name = 'WorkerZ' RETURN 'Type' as node_type, t.name as name, t.type_kind as kind, t.file_path as file_path UNION ALL MATCH (f:Function) WHERE f.name = 'WorkerZ' RETURN 'Function' as node_type, f.name as name, f.type_kind as kind, f.file_path as file_path UNION ALL MATCH (v:Variable) WHERE v.name = 'WorkerZ' RETURN 'Variable' as node_type, v.name as name, v.type_kind as kind, v.file_path as file_path UNION ALL MATCH (fi:File) WHERE fi.name = 'WorkerZ' RETURN 'File' as node_type, fi.name as name, fi.type as kind, fi.file_path as file_path",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "No entities with names containing 'WorkerZ' pattern exist in the codebase",
+      "source_file": null,
+      "source_line": null,
+      "source_location": null,
+      "entity_name": null,
+      "entity_type": null,
+      "evidence": {
+        "summary": "Case-insensitive search and regex pattern matching for '.*[Ww]orker[Zz].*' across all nodes with names returned 0 results, indicating no partial matches or variations of 'WorkerZ'"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (n) WHERE n.name IS NOT NULL AND (toLower(n.name) CONTAINS toLower('WorkerZ') OR n.name =~ '.*[Ww]orker[Zz].*') RETURN labels(n) as node_type, n.name as name, coalesce(n.type_kind, n.type, 'unknown') as kind, n.file_path as file_path ORDER BY n.name",
+      "verification_query": "MATCH (n) WHERE n.name IS NOT NULL AND (toLower(n.name) CONTAINS toLower('WorkerZ') OR n.name =~ '.*[Ww]orker[Zz].*') RETURN labels(n) as node_type, n.name as name, coalesce(n.type_kind, n.type, 'unknown') as kind, n.file_path as file_path ORDER BY n.name",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "No files contain 'WorkerZ' in their path and no Type entities contain 'WorkerZ' in their body content",
+      "source_file": null,
+      "source_line": null,
+      "source_location": null,
+      "entity_name": null,
+      "entity_type": null,
+      "evidence": {
+        "summary": "Content and file path search for 'WorkerZ' returned 0 results, indicating no file paths containing this string and no Type entity body content containing 'WorkerZ'"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (n) WHERE n.file_path CONTAINS 'WorkerZ' RETURN labels(n) as node_type, n.name as name, n.file_path as file_path UNION ALL MATCH (t:Type) WHERE t.body CONTAINS 'WorkerZ' RETURN labels(t) as node_type, t.name as name, t.file_path as file_path",
+      "verification_query": "MATCH (n) WHERE n.file_path CONTAINS 'WorkerZ' RETURN labels(n) as node_type, n.name as name, n.file_path as file_path UNION ALL MATCH (t:Type) WHERE t.body CONTAINS 'WorkerZ' RETURN labels(t) as node_type, t.name as name, t.file_path as file_path",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "WorkerA class contains a field variable named '_notifier'",
+      "source_file": "HelloWorldApp/WorkerA.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/WorkerA.cs",
+      "entity_name": "_notifier",
+      "entity_type": "field",
+      "evidence": {
+        "summary": "Relationship traversal query confirmed WorkerA type contains '_notifier' field variable with kind 'field' and type 'Variable', establishing direct CONTAINS relationship between WorkerA class and this field"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (t:Type)-[:CONTAINS]-(v:Variable) WHERE t.name CONTAINS 'Worker' RETURN t.name as worker_class, v.name as variable_name, v.type_kind as variable_kind, v.type as variable_type, v.file_path as file_path ORDER BY t.name, v.name",
+      "verification_query": "MATCH (t:Type)-[:CONTAINS]-(v:Variable) WHERE t.name CONTAINS 'Worker' RETURN t.name as worker_class, v.name as variable_name, v.type_kind as variable_kind, v.type as variable_type, v.file_path as file_path ORDER BY t.name, v.name",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "WorkerA class contains message-related local variable 'msg'",
+      "source_file": "HelloWorldApp/WorkerA.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/WorkerA.cs",
+      "entity_name": "msg",
+      "entity_type": "local_variable",
+      "evidence": {
+        "summary": "File path search identified 'msg' local variable in WorkerA.cs with variable_kind 'local_variable', confirming message processing capability within the worker class"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (v:Variable) WHERE v.file_path CONTAINS 'Worker' AND (toLower(v.name) CONTAINS 'message' OR toLower(v.name) CONTAINS 'msg' OR toLower(v.name) CONTAINS 'format' OR toLower(v.name) CONTAINS 'text' OR toLower(v.name) CONTAINS 'string' OR toLower(v.name) CONTAINS 'output' OR toLower(v.name) CONTAINS 'log') RETURN v.name as variable_name, v.type_kind as variable_kind, v.file_path as file_path, v.type as variable_type ORDER BY v.file_path, v.name",
+      "verification_query": "MATCH (v:Variable) WHERE v.file_path CONTAINS 'Worker' AND (toLower(v.name) CONTAINS 'message' OR toLower(v.name) CONTAINS 'msg' OR toLower(v.name) CONTAINS 'format' OR toLower(v.name) CONTAINS 'text' OR toLower(v.name) CONTAINS 'string' OR toLower(v.name) CONTAINS 'output' OR toLower(v.name) CONTAINS 'log') RETURN v.name as variable_name, v.type_kind as variable_kind, v.file_path as file_path, v.type as variable_type ORDER BY v.file_path, v.name",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "WorkerA class contains two distinct variables: a field and a local variable",
+      "source_file": "HelloWorldApp/WorkerA.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/WorkerA.cs",
+      "entity_name": "_notifier",
+      "entity_type": "field",
+      "evidence": {
+        "summary": "Comprehensive variable search in worker files returned exactly two variables: '_notifier' (field) and 'msg' (local_variable), both located in HelloWorldApp/WorkerA.cs, demonstrating the complete variable structure of WorkerA class"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (v:Variable) WHERE v.file_path CONTAINS 'Worker' RETURN v.name as variable_name, v.type_kind as variable_kind, v.file_path as file_path, v.type as variable_type ORDER BY v.file_path, v.type_kind, v.name",
+      "verification_query": "MATCH (v:Variable) WHERE v.file_path CONTAINS 'Worker' RETURN v.name as variable_name, v.type_kind as variable_kind, v.file_path as file_path, v.type as variable_type ORDER BY v.file_path, v.type_kind, v.name",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "Worker files contain message-related local variables named 'msg'",
+      "source_file": "HelloWorldApp/WorkerA.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/WorkerA.cs",
+      "entity_name": "msg",
+      "entity_type": "local_variable",
+      "evidence": {
+        "summary": "Query found local variable 'msg' of type 'Variable' with kind 'local_variable' in WorkerA.cs file, confirming presence of message-related variables in worker files"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (v:Variable) WHERE v.file_path CONTAINS 'Worker' AND (toLower(v.name) CONTAINS 'format' OR toLower(v.name) CONTAINS 'message' OR toLower(v.name) CONTAINS 'msg') RETURN v.name as variable_name, v.type_kind as kind, v.file_path as file_path, v.type as variable_type ORDER BY v.file_path, v.name",
+      "verification_query": "MATCH (v:Variable) WHERE v.file_path CONTAINS 'Worker' AND (toLower(v.name) CONTAINS 'format' OR toLower(v.name) CONTAINS 'message' OR toLower(v.name) CONTAINS 'msg') RETURN v.name as variable_name, v.type_kind as kind, v.file_path as file_path, v.type as variable_type ORDER BY v.file_path, v.name",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "INotifier interface contains message-related parameters",
+      "source_file": "HelloWorldApp/INotifier.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/INotifier.cs",
+      "entity_name": "message",
+      "entity_type": "parameter",
+      "evidence": {
+        "summary": "Query identified parameter 'message' with kind 'parameter' in INotifier.cs file, indicating message handling capability in the interface"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (v:Variable) WHERE (toLower(v.name) CONTAINS 'format' OR toLower(v.name) CONTAINS 'message' OR toLower(v.name) CONTAINS 'msg' OR toLower(v.name) CONTAINS 'text' OR toLower(v.name) CONTAINS 'string') RETURN v.name as variable_name, v.type_kind as kind, v.file_path as file_path ORDER BY v.name",
+      "verification_query": "MATCH (v:Variable) WHERE (toLower(v.name) CONTAINS 'format' OR toLower(v.name) CONTAINS 'message' OR toLower(v.name) CONTAINS 'msg' OR toLower(v.name) CONTAINS 'text' OR toLower(v.name) CONTAINS 'string') RETURN v.name as variable_name, v.type_kind as kind, v.file_path as file_path ORDER BY v.name",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "Message-related variables exist in both Worker and interface files",
+      "source_file": "HelloWorldApp/WorkerA.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/WorkerA.cs",
+      "entity_name": "msg",
+      "entity_type": "local_variable",
+      "evidence": {
+        "summary": "Regex pattern search confirmed two distinct message-related variables: 'msg' (local_variable) in WorkerA.cs and 'message' (parameter) in INotifier.cs, spanning both implementation and interface files"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (v:Variable) WHERE v.name =~ '.*(?i)(format|message|msg|text|note|log|output|input).*' RETURN v.name as variable_name, v.type_kind as kind, v.file_path as file_path ORDER BY v.name",
+      "verification_query": "MATCH (v:Variable) WHERE v.name =~ '.*(?i)(format|message|msg|text|note|log|output|input).*' RETURN v.name as variable_name, v.type_kind as kind, v.file_path as file_path ORDER BY v.name",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    }
+  ],
+  "raw_results": [
+    {
+      "claim": "No Type entities with 'Worker' in their name exist in the codebase",
+      "source_file": null,
+      "source_line": null,
+      "source_location": null,
+      "entity_name": null,
+      "entity_type": null,
+      "evidence": {
+        "summary": "Direct query of all Type nodes with CONTAINS 'Worker' filter returned 0 rows, indicating no classes, interfaces, structs, or other type definitions contain 'Worker' in their name"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (t:Type) WHERE t.name CONTAINS 'Worker' RETURN t.name as name, t.type_kind as kind, t.file_path as file_path, t.start_point as start_point, t.end_point as end_point ORDER BY t.name",
+      "verification_query": "MATCH (t:Type) WHERE t.name CONTAINS 'Worker' RETURN t.name as name, t.type_kind as kind, t.file_path as file_path, t.start_point as start_point, t.end_point as end_point ORDER BY t.name",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "No entities named 'WorkerZ' exist in the codebase across any node type",
+      "source_file": null,
+      "source_line": null,
+      "source_location": null,
+      "entity_name": null,
+      "entity_type": null,
+      "evidence": {
+        "summary": "Exact match search across Type, Function, Variable, and File nodes for 'WorkerZ' returned 0 results from comprehensive UNION query covering all major entity types"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (t:Type) WHERE t.name = 'WorkerZ' RETURN 'Type' as node_type, t.name as name, t.type_kind as kind, t.file_path as file_path UNION ALL MATCH (f:Function) WHERE f.name = 'WorkerZ' RETURN 'Function' as node_type, f.name as name, f.type_kind as kind, f.file_path as file_path UNION ALL MATCH (v:Variable) WHERE v.name = 'WorkerZ' RETURN 'Variable' as node_type, v.name as name, v.type_kind as kind, v.file_path as file_path UNION ALL MATCH (fi:File) WHERE fi.name = 'WorkerZ' RETURN 'File' as node_type, fi.name as name, fi.type as kind, fi.file_path as file_path",
+      "verification_query": "MATCH (t:Type) WHERE t.name = 'WorkerZ' RETURN 'Type' as node_type, t.name as name, t.type_kind as kind, t.file_path as file_path UNION ALL MATCH (f:Function) WHERE f.name = 'WorkerZ' RETURN 'Function' as node_type, f.name as name, f.type_kind as kind, f.file_path as file_path UNION ALL MATCH (v:Variable) WHERE v.name = 'WorkerZ' RETURN 'Variable' as node_type, v.name as name, v.type_kind as kind, v.file_path as file_path UNION ALL MATCH (fi:File) WHERE fi.name = 'WorkerZ' RETURN 'File' as node_type, fi.name as name, fi.type as kind, fi.file_path as file_path",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "No entities with names containing 'WorkerZ' pattern exist in the codebase",
+      "source_file": null,
+      "source_line": null,
+      "source_location": null,
+      "entity_name": null,
+      "entity_type": null,
+      "evidence": {
+        "summary": "Case-insensitive search and regex pattern matching for '.*[Ww]orker[Zz].*' across all nodes with names returned 0 results, indicating no partial matches or variations of 'WorkerZ'"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (n) WHERE n.name IS NOT NULL AND (toLower(n.name) CONTAINS toLower('WorkerZ') OR n.name =~ '.*[Ww]orker[Zz].*') RETURN labels(n) as node_type, n.name as name, coalesce(n.type_kind, n.type, 'unknown') as kind, n.file_path as file_path ORDER BY n.name",
+      "verification_query": "MATCH (n) WHERE n.name IS NOT NULL AND (toLower(n.name) CONTAINS toLower('WorkerZ') OR n.name =~ '.*[Ww]orker[Zz].*') RETURN labels(n) as node_type, n.name as name, coalesce(n.type_kind, n.type, 'unknown') as kind, n.file_path as file_path ORDER BY n.name",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "No files contain 'WorkerZ' in their path and no Type entities contain 'WorkerZ' in their body content",
+      "source_file": null,
+      "source_line": null,
+      "source_location": null,
+      "entity_name": null,
+      "entity_type": null,
+      "evidence": {
+        "summary": "Content and file path search for 'WorkerZ' returned 0 results, indicating no file paths containing this string and no Type entity body content containing 'WorkerZ'"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (n) WHERE n.file_path CONTAINS 'WorkerZ' RETURN labels(n) as node_type, n.name as name, n.file_path as file_path UNION ALL MATCH (t:Type) WHERE t.body CONTAINS 'WorkerZ' RETURN labels(t) as node_type, t.name as name, t.file_path as file_path",
+      "verification_query": "MATCH (n) WHERE n.file_path CONTAINS 'WorkerZ' RETURN labels(n) as node_type, n.name as name, n.file_path as file_path UNION ALL MATCH (t:Type) WHERE t.body CONTAINS 'WorkerZ' RETURN labels(t) as node_type, t.name as name, t.file_path as file_path",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "WorkerA class contains a field variable named '_notifier'",
+      "source_file": "HelloWorldApp/WorkerA.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/WorkerA.cs",
+      "entity_name": "_notifier",
+      "entity_type": "field",
+      "evidence": {
+        "summary": "Relationship traversal query confirmed WorkerA type contains '_notifier' field variable with kind 'field' and type 'Variable', establishing direct CONTAINS relationship between WorkerA class and this field"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (t:Type)-[:CONTAINS]-(v:Variable) WHERE t.name CONTAINS 'Worker' RETURN t.name as worker_class, v.name as variable_name, v.type_kind as variable_kind, v.type as variable_type, v.file_path as file_path ORDER BY t.name, v.name",
+      "verification_query": "MATCH (t:Type)-[:CONTAINS]-(v:Variable) WHERE t.name CONTAINS 'Worker' RETURN t.name as worker_class, v.name as variable_name, v.type_kind as variable_kind, v.type as variable_type, v.file_path as file_path ORDER BY t.name, v.name",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "WorkerA class contains message-related local variable 'msg'",
+      "source_file": "HelloWorldApp/WorkerA.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/WorkerA.cs",
+      "entity_name": "msg",
+      "entity_type": "local_variable",
+      "evidence": {
+        "summary": "File path search identified 'msg' local variable in WorkerA.cs with variable_kind 'local_variable', confirming message processing capability within the worker class"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (v:Variable) WHERE v.file_path CONTAINS 'Worker' AND (toLower(v.name) CONTAINS 'message' OR toLower(v.name) CONTAINS 'msg' OR toLower(v.name) CONTAINS 'format' OR toLower(v.name) CONTAINS 'text' OR toLower(v.name) CONTAINS 'string' OR toLower(v.name) CONTAINS 'output' OR toLower(v.name) CONTAINS 'log') RETURN v.name as variable_name, v.type_kind as variable_kind, v.file_path as file_path, v.type as variable_type ORDER BY v.file_path, v.name",
+      "verification_query": "MATCH (v:Variable) WHERE v.file_path CONTAINS 'Worker' AND (toLower(v.name) CONTAINS 'message' OR toLower(v.name) CONTAINS 'msg' OR toLower(v.name) CONTAINS 'format' OR toLower(v.name) CONTAINS 'text' OR toLower(v.name) CONTAINS 'string' OR toLower(v.name) CONTAINS 'output' OR toLower(v.name) CONTAINS 'log') RETURN v.name as variable_name, v.type_kind as variable_kind, v.file_path as file_path, v.type as variable_type ORDER BY v.file_path, v.name",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "WorkerA class contains two distinct variables: a field and a local variable",
+      "source_file": "HelloWorldApp/WorkerA.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/WorkerA.cs",
+      "entity_name": "_notifier",
+      "entity_type": "field",
+      "evidence": {
+        "summary": "Comprehensive variable search in worker files returned exactly two variables: '_notifier' (field) and 'msg' (local_variable), both located in HelloWorldApp/WorkerA.cs, demonstrating the complete variable structure of WorkerA class"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (v:Variable) WHERE v.file_path CONTAINS 'Worker' RETURN v.name as variable_name, v.type_kind as variable_kind, v.file_path as file_path, v.type as variable_type ORDER BY v.file_path, v.type_kind, v.name",
+      "verification_query": "MATCH (v:Variable) WHERE v.file_path CONTAINS 'Worker' RETURN v.name as variable_name, v.type_kind as variable_kind, v.file_path as file_path, v.type as variable_type ORDER BY v.file_path, v.type_kind, v.name",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "Worker files contain message-related local variables named 'msg'",
+      "source_file": "HelloWorldApp/WorkerA.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/WorkerA.cs",
+      "entity_name": "msg",
+      "entity_type": "local_variable",
+      "evidence": {
+        "summary": "Query found local variable 'msg' of type 'Variable' with kind 'local_variable' in WorkerA.cs file, confirming presence of message-related variables in worker files"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (v:Variable) WHERE v.file_path CONTAINS 'Worker' AND (toLower(v.name) CONTAINS 'format' OR toLower(v.name) CONTAINS 'message' OR toLower(v.name) CONTAINS 'msg') RETURN v.name as variable_name, v.type_kind as kind, v.file_path as file_path, v.type as variable_type ORDER BY v.file_path, v.name",
+      "verification_query": "MATCH (v:Variable) WHERE v.file_path CONTAINS 'Worker' AND (toLower(v.name) CONTAINS 'format' OR toLower(v.name) CONTAINS 'message' OR toLower(v.name) CONTAINS 'msg') RETURN v.name as variable_name, v.type_kind as kind, v.file_path as file_path, v.type as variable_type ORDER BY v.file_path, v.name",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "INotifier interface contains message-related parameters",
+      "source_file": "HelloWorldApp/INotifier.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/INotifier.cs",
+      "entity_name": "message",
+      "entity_type": "parameter",
+      "evidence": {
+        "summary": "Query identified parameter 'message' with kind 'parameter' in INotifier.cs file, indicating message handling capability in the interface"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (v:Variable) WHERE (toLower(v.name) CONTAINS 'format' OR toLower(v.name) CONTAINS 'message' OR toLower(v.name) CONTAINS 'msg' OR toLower(v.name) CONTAINS 'text' OR toLower(v.name) CONTAINS 'string') RETURN v.name as variable_name, v.type_kind as kind, v.file_path as file_path ORDER BY v.name",
+      "verification_query": "MATCH (v:Variable) WHERE (toLower(v.name) CONTAINS 'format' OR toLower(v.name) CONTAINS 'message' OR toLower(v.name) CONTAINS 'msg' OR toLower(v.name) CONTAINS 'text' OR toLower(v.name) CONTAINS 'string') RETURN v.name as variable_name, v.type_kind as kind, v.file_path as file_path ORDER BY v.name",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "Message-related variables exist in both Worker and interface files",
+      "source_file": "HelloWorldApp/WorkerA.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/WorkerA.cs",
+      "entity_name": "msg",
+      "entity_type": "local_variable",
+      "evidence": {
+        "summary": "Regex pattern search confirmed two distinct message-related variables: 'msg' (local_variable) in WorkerA.cs and 'message' (parameter) in INotifier.cs, spanning both implementation and interface files"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (v:Variable) WHERE v.name =~ '.*(?i)(format|message|msg|text|note|log|output|input).*' RETURN v.name as variable_name, v.type_kind as kind, v.file_path as file_path ORDER BY v.name",
+      "verification_query": "MATCH (v:Variable) WHERE v.name =~ '.*(?i)(format|message|msg|text|note|log|output|input).*' RETURN v.name as variable_name, v.type_kind as kind, v.file_path as file_path ORDER BY v.name",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    }
+  ],
+  "verified_count": 10,
+  "unverified_count": 0,
+  "total_citations": 10,
+  "sub_queries_count": 4,
+  "llm_calls_count": 42,
+  "execution_time_ms": 915115,
+  "token_usage": {
+    "total_tokens": 34739,
+    "total_prompt_tokens": 379,
+    "total_completion_tokens": 34360,
+    "call_count": 42,
+    "by_agent_role": {
+      "cot_agent": 1871,
+      "tot_orchestrator": 1993,
+      "thinker": 13372,
+      "thinking_validator": 3981,
+      "cypher_validator": 7621,
+      "executor_verifier": 5901
+    }
+  },
+  "total_tokens_used": 34739,
+  "total_input_tokens": 379,
+  "total_output_tokens": 34360,
+  "agent_workflow": "4_agent_team",
+  "agent_metadata": {
+    "llm_model": "gpt-4o",
+    "max_cot_iterations": 15,
+    "parallel_agents": true,
+    "verification_enabled": true,
+    "entity_resolution_enabled": true,
+    "observer_enabled": false,
+    "use_4_agent_team": true,
+    "four_agent_max_iterations": 3
+  },
+  "cli_parameters_used": {
+    "config_path": "/opt/genpod/neo4j_config.json",
+    "schema_path": "/opt/genpod/src/schemas/project_knowledgebase_graph_schema.yaml",
+    "llm_model": "gpt-4o"
+  },
+  "message": "4-Agent Team CPG RAG completed successfully (915115ms)"
+}

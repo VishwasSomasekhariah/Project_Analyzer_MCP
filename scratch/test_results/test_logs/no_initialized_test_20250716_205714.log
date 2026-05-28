@@ -1,0 +1,70 @@
+2025-07-16 20:57:40,470 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-16 20:57:40,482 - __main__ - INFO - ✅ LLM generated 2 queries for category: Technical
+2025-07-16 20:58:11,795 - __main__ - ERROR - CPG query failed: Request timed out after 30.0 seconds
+2025-07-16 20:58:11,800 - asyncio - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x76cb7501f560>
+2025-07-16 20:58:43,024 - __main__ - ERROR - Comprehensive query failed: Request timed out after 30.0 seconds
+2025-07-16 20:59:01,949 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-16 20:59:01,950 - __main__ - INFO - ✅ LLM generated 2 queries for category: Technical
+2025-07-16 20:59:01,955 - asyncio - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x76cb750529f0>
+2025-07-16 20:59:33,325 - __main__ - ERROR - CPG query failed: Request timed out after 30.0 seconds
+2025-07-16 20:59:33,328 - asyncio - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x76cb750c3fb0>
+2025-07-16 21:00:04,561 - __main__ - ERROR - Comprehensive query failed: Request timed out after 30.0 seconds
+2025-07-16 21:00:25,269 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-16 21:00:25,271 - __main__ - INFO - ✅ LLM generated 2 queries for category: Technical
+2025-07-16 21:00:25,276 - asyncio - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x76cb74fea870>
+2025-07-16 21:00:56,528 - __main__ - ERROR - CPG query failed: Request timed out after 30.0 seconds
+2025-07-16 21:00:56,542 - asyncio - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x76cb74f25190>
+2025-07-16 21:01:27,750 - __main__ - ERROR - Comprehensive query failed: Request timed out after 30.0 seconds
+2025-07-16 21:01:48,307 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-16 21:01:48,311 - __main__ - INFO - ✅ LLM generated 2 queries for category: Technical
+2025-07-16 21:01:48,323 - asyncio - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x76cb750c2900>
+2025-07-16 21:02:19,540 - __main__ - ERROR - CPG query failed: Request timed out after 30.0 seconds
+2025-07-16 21:02:19,545 - asyncio - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x76cb74f26ea0>
+2025-07-16 21:02:51,160 - __main__ - ERROR - Comprehensive query failed: Request timed out after 30.0 seconds
+2025-07-16 21:03:11,774 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-16 21:03:11,775 - __main__ - INFO - ✅ LLM generated 1 queries for category: Technical
+2025-07-16 21:03:11,779 - asyncio - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x76cb74f26630>
+2025-07-16 21:03:43,027 - __main__ - ERROR - CPG query failed: Request timed out after 30.0 seconds
+2025-07-16 21:03:43,036 - asyncio - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x76cb750c3470>
+2025-07-16 21:04:14,266 - __main__ - ERROR - Comprehensive query failed: Request timed out after 30.0 seconds
+2025-07-16 21:04:37,852 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-16 21:04:37,854 - __main__ - INFO - ✅ LLM generated 2 queries for category: Functional
+2025-07-16 21:04:37,857 - asyncio - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x76cb750c3740>
+2025-07-16 21:05:09,128 - __main__ - ERROR - CPG query failed: Request timed out after 30.0 seconds
+2025-07-16 21:05:09,136 - asyncio - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x76cb74f27590>
+2025-07-16 21:05:40,384 - __main__ - ERROR - Comprehensive query failed: Request timed out after 30.0 seconds
+2025-07-16 21:06:02,332 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-16 21:06:02,335 - __main__ - INFO - ✅ LLM generated 2 queries for category: Functional
+2025-07-16 21:06:02,345 - asyncio - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x76cb750c3740>
+2025-07-16 21:06:33,713 - __main__ - ERROR - CPG query failed: Request timed out after 30.0 seconds
+2025-07-16 21:06:33,722 - asyncio - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x76cb74f25490>
+2025-07-16 21:07:05,132 - __main__ - ERROR - Comprehensive query failed: Request timed out after 30.0 seconds
+2025-07-16 21:07:25,746 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-16 21:07:25,747 - __main__ - INFO - ✅ LLM generated 2 queries for category: Functional
+2025-07-16 21:07:25,752 - asyncio - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x76cb750c2e10>
+2025-07-16 21:07:56,963 - __main__ - ERROR - CPG query failed: Request timed out after 30.0 seconds
+2025-07-16 21:07:56,972 - asyncio - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x76cb74f3d250>
+2025-07-16 21:08:28,200 - __main__ - ERROR - Comprehensive query failed: Request timed out after 30.0 seconds
+2025-07-16 21:08:59,088 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-16 21:08:59,090 - __main__ - INFO - ✅ LLM generated 2 queries for category: Functional
+2025-07-16 21:08:59,094 - asyncio - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x76cb74f262a0>
+2025-07-16 21:09:30,356 - __main__ - ERROR - CPG query failed: Request timed out after 30.0 seconds
+2025-07-16 21:09:30,369 - asyncio - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x76cb74f3f950>
+2025-07-16 21:10:01,965 - __main__ - ERROR - Comprehensive query failed: Request timed out after 30.0 seconds

@@ -1,0 +1,1824 @@
+{
+  "status": "success",
+  "tool_name": "query_cpg_rag",
+  "workflow_type": "4_agent_team",
+  "user_query": "What is the overall architecture and design patterns used in this project?",
+  "project_name": "HelloWorldApp",
+  "response": {
+    "answer": "This HelloWorldApp project follows a complex multi-layered architecture with several notable design patterns and anti-patterns. The core architecture centers around a Worker-Manager coordination pattern with Factory creation, but exhibits unusual circular implementation relationships that deviate from traditional OOP principles.\n\nKey Architectural Components:\n1. **Entry Point & Coordination Layer**: Program.Main serves as the application entry point, delegating to Manager.Run which orchestrates all worker execution\n\n2. **Interface Abstraction Layer**: Two interfaces define contracts - IWorker (implemented by WorkerA, WorkerB, WorkerC) for processing operations, and INotifier (implemented by Manager) for communication callbacks\n\n3. **Worker Implementation Layer**: Three worker classes (WorkerA, WorkerB, WorkerC) that exhibit highly coupled circular relationships where each worker implements not only the IWorker interface but also the other worker classes as if they were interfaces\n\n4. **Factory Pattern**: WorkerFactory implements a static factory pattern with CreateWorkers method returning IEnumerable<IWorker>, properly abstracting object creation with dependency injection\n\n5. **Utility Layer**: Helper class in HelloWorldApp.Utilities namespace provides static utility functions like FormatMessage\n\nDesign Patterns Identified:\n- **Static Factory Pattern**: WorkerFactory.CreateWorkers with proper interface abstraction and dependency injection\n- **Polymorphism**: IWorker interface enabling interchangeable worker implementations\n- **Callback Pattern**: All worker Process methods call Manager.Notify for communication\n- **Dual Interface Pattern**: IWorker with multiple implementations vs INotifier with single implementation\n\nArchitectural Anti-Patterns:\n- **Circular Class Implementation**: Workers implement each other as classes (not just interfaces), creating tight coupling\n- **High Coupling**: Worker classes exhibit complexity scores of 6 and are classified as 'highly_coupled'\n- **Circular Method Calls**: Each worker's Process method calls the other workers' Process methods\n\nNamespace Organization:\n- HelloWorldApp.Utilities: Contains utility functions (Helper.FormatMessage)\n- Default namespace: Contains core application logic with 9 types and 11 functions\n\nThe project demonstrates both good practices (factory pattern, interface abstraction, dependency injection) and problematic patterns (circular implementations, tight coupling). While it successfully implements polymorphic worker coordination, the circular class relationships create maintenance challenges and violate traditional OOP principles.",
+    "confidence": "high",
+    "status": "success"
+  },
+  "citations": [
+    {
+      "claim": "The project contains 10 total types: 8 classes and 2 interfaces",
+      "source_file": "HelloWorldApp/Utilities/Helper.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/Utilities/Helper.cs",
+      "entity_name": "Helper",
+      "entity_type": "class",
+      "evidence": {
+        "summary": "Query returned 10 distinct type nodes: 8 with type_kind 'class' (Helper, Manager, Program, TestAliases, WorkerA, WorkerB, WorkerC, WorkerFactory) and 2 with type_kind 'interface' (INotifier, IWorker), each with specific file paths"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (t:Type) RETURN t.name as type_name, t.type_kind as type_kind, t.file_path as file_path, t.modifier as access_modifier ORDER BY t.type_kind, t.name",
+      "verification_query": "MATCH (t:Type) RETURN t.name as type_name, t.type_kind as type_kind, t.file_path as file_path, t.modifier as access_modifier ORDER BY t.type_kind, t.name",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "IWorker interface is implemented by three worker classes: WorkerA, WorkerB, and WorkerC",
+      "source_file": "HelloWorldApp/IWorker.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/IWorker.cs",
+      "entity_name": "IWorker",
+      "entity_type": "interface",
+      "evidence": {
+        "summary": "IMPLEMENTS relationships show WorkerA, WorkerB, and WorkerC classes all implement IWorker interface, with consistent interface file path 'HelloWorldApp/IWorker.cs' and respective class file paths"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (class:Type {type_kind: 'class'})-[:IMPLEMENTS]->(interface:Type {type_kind: 'interface'}) RETURN class.name as implementing_class, interface.name as implemented_interface, class.file_path as class_file, interface.file_path as interface_file ORDER BY interface.name, class.name",
+      "verification_query": "MATCH (class:Type {type_kind: 'class'})-[:IMPLEMENTS]->(interface:Type {type_kind: 'interface'}) RETURN class.name as implementing_class, interface.name as implemented_interface, class.file_path as class_file, interface.file_path as interface_file ORDER BY interface.name, class.name",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "Manager class implements the INotifier interface",
+      "source_file": "HelloWorldApp/Manager.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/Manager.cs",
+      "entity_name": "Manager",
+      "entity_type": "class",
+      "evidence": {
+        "summary": "IMPLEMENTS relationship query shows Manager class implementing INotifier interface, with implementing_class 'Manager' and implemented_interface 'INotifier'"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (class:Type {type_kind: 'class'})-[:IMPLEMENTS]->(interface:Type {type_kind: 'interface'}) RETURN class.name as implementing_class, interface.name as implemented_interface, class.file_path as class_file, interface.file_path as interface_file ORDER BY interface.name, class.name",
+      "verification_query": "MATCH (class:Type {type_kind: 'class'})-[:IMPLEMENTS]->(interface:Type {type_kind: 'interface'}) RETURN class.name as implementing_class, interface.name as implemented_interface, class.file_path as class_file, interface.file_path as interface_file ORDER BY interface.name, class.name",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "Worker classes (WorkerA, WorkerB, WorkerC) have circular cross-references to each other",
+      "source_file": "HelloWorldApp/WorkerA.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/WorkerA.cs",
+      "entity_name": "WorkerA",
+      "entity_type": "class",
+      "evidence": {
+        "summary": "REFERENCES relationships show WorkerA references WorkerB and WorkerC, WorkerB references WorkerA and WorkerC, and WorkerC references WorkerA and WorkerB, creating a complete circular reference pattern among all three worker classes"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (t1:Type)-[:REFERENCES]->(t2:Type) WHERE t1 <> t2 RETURN t1.name as referencing_type, t1.type_kind as referencing_kind, t2.name as referenced_type, t2.type_kind as referenced_kind ORDER BY t1.name, t2.name",
+      "verification_query": "MATCH (t1:Type)-[:REFERENCES]->(t2:Type) WHERE t1 <> t2 RETURN t1.name as referencing_type, t1.type_kind as referencing_kind, t2.name as referenced_type, t2.type_kind as referenced_kind ORDER BY t1.name, t2.name",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "Helper and WorkerFactory classes are both public static classes",
+      "source_file": "HelloWorldApp/Utilities/Helper.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/Utilities/Helper.cs",
+      "entity_name": "Helper",
+      "entity_type": "class",
+      "evidence": {
+        "summary": "Type query shows Helper class has access_modifier ['public', 'static'] and WorkerFactory class has access_modifier ['public', 'static'], indicating both are static utility classes"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (t:Type) RETURN t.name as type_name, t.type_kind as type_kind, t.file_path as file_path, t.modifier as access_modifier ORDER BY t.type_kind, t.name",
+      "verification_query": "MATCH (t:Type) RETURN t.name as type_name, t.type_kind as type_kind, t.file_path as file_path, t.modifier as access_modifier ORDER BY t.type_kind, t.name",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "WorkerA, WorkerB, and WorkerC classes each have a public constructor and a public Process method",
+      "source_file": "HelloWorldApp/WorkerA.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/WorkerA.cs",
+      "entity_name": "WorkerA",
+      "entity_type": "class",
+      "evidence": {
+        "summary": "Function query shows each worker class contains two functions: a constructor (function_name matches type_name, function_type 'constructor') and a Process method (function_name 'Process', function_type 'method'), all with 'public' modifier"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (t:Type)-[:CONTAINS]->(f:Function) RETURN t.name as type_name, t.type_kind as type_kind, f.name as function_name, f.modifier as function_modifier, CASE WHEN f.name = t.name THEN 'constructor' ELSE 'method' END as function_type ORDER BY t.name, function_type, f.name",
+      "verification_query": "MATCH (t:Type)-[:CONTAINS]->(f:Function) RETURN t.name as type_name, t.type_kind as type_kind, f.name as function_name, f.modifier as function_modifier, CASE WHEN f.name = t.name THEN 'constructor' ELSE 'method' END as function_type ORDER BY t.name, function_type, f.name",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "Program class contains the main entry point with a static Main method",
+      "source_file": "HelloWorldApp/Program.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/Program.cs",
+      "entity_name": "Program",
+      "entity_type": "class",
+      "evidence": {
+        "summary": "Function query shows Program class contains function 'Main' with modifier 'static' and function_type 'method', indicating the standard application entry point"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (t:Type)-[:CONTAINS]->(f:Function) RETURN t.name as type_name, t.type_kind as type_kind, f.name as function_name, f.modifier as function_modifier, CASE WHEN f.name = t.name THEN 'constructor' ELSE 'method' END as function_type ORDER BY t.name, function_type, f.name",
+      "verification_query": "MATCH (t:Type)-[:CONTAINS]->(f:Function) RETURN t.name as type_name, t.type_kind as type_kind, f.name as function_name, f.modifier as function_modifier, CASE WHEN f.name = t.name THEN 'constructor' ELSE 'method' END as function_type ORDER BY t.name, function_type, f.name",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "Manager class contains both Notify and Run public methods",
+      "source_file": "HelloWorldApp/Manager.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/Manager.cs",
+      "entity_name": "Manager",
+      "entity_type": "class",
+      "evidence": {
+        "summary": "Function query shows Manager class contains two methods: 'Notify' with modifier 'public' and 'Run' with modifier 'public', both of function_type 'method'"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (t:Type)-[:CONTAINS]->(f:Function) RETURN t.name as type_name, t.type_kind as type_kind, f.name as function_name, f.modifier as function_modifier, CASE WHEN f.name = t.name THEN 'constructor' ELSE 'method' END as function_type ORDER BY t.name, function_type, f.name",
+      "verification_query": "MATCH (t:Type)-[:CONTAINS]->(f:Function) RETURN t.name as type_name, t.type_kind as type_kind, f.name as function_name, f.modifier as function_modifier, CASE WHEN f.name = t.name THEN 'constructor' ELSE 'method' END as function_type ORDER BY t.name, function_type, f.name",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "Helper class contains a public static FormatMessage method",
+      "source_file": "HelloWorldApp/Utilities/Helper.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/Utilities/Helper.cs",
+      "entity_name": "Helper",
+      "entity_type": "class",
+      "evidence": {
+        "summary": "Function query shows Helper class contains function 'FormatMessage' with modifier ['public', 'static'] and function_type 'method'"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (t:Type)-[:CONTAINS]->(f:Function) RETURN t.name as type_name, t.type_kind as type_kind, f.name as function_name, f.modifier as function_modifier, CASE WHEN f.name = t.name THEN 'constructor' ELSE 'method' END as function_type ORDER BY t.name, function_type, f.name",
+      "verification_query": "MATCH (t:Type)-[:CONTAINS]->(f:Function) RETURN t.name as type_name, t.type_kind as type_kind, f.name as function_name, f.modifier as function_modifier, CASE WHEN f.name = t.name THEN 'constructor' ELSE 'method' END as function_type ORDER BY t.name, function_type, f.name",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "WorkerFactory class contains a public static CreateWorkers method",
+      "source_file": "HelloWorldApp/WorkerFactory.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/WorkerFactory.cs",
+      "entity_name": "WorkerFactory",
+      "entity_type": "class",
+      "evidence": {
+        "summary": "Function query shows WorkerFactory class contains function 'CreateWorkers' with modifier ['public', 'static'] and function_type 'method'"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (t:Type)-[:CONTAINS]->(f:Function) RETURN t.name as type_name, t.type_kind as type_kind, f.name as function_name, f.modifier as function_modifier, CASE WHEN f.name = t.name THEN 'constructor' ELSE 'method' END as function_type ORDER BY t.name, function_type, f.name",
+      "verification_query": "MATCH (t:Type)-[:CONTAINS]->(f:Function) RETURN t.name as type_name, t.type_kind as type_kind, f.name as function_name, f.modifier as function_modifier, CASE WHEN f.name = t.name THEN 'constructor' ELSE 'method' END as function_type ORDER BY t.name, function_type, f.name",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "HelloWorldApp.Utilities is the only namespace defined in the project",
+      "source_file": "HelloWorldApp/Utilities/Helper.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/Utilities/Helper.cs",
+      "entity_name": "HelloWorldApp.Utilities",
+      "entity_type": "namespace",
+      "evidence": {
+        "summary": "Query returned exactly one namespace record with name 'HelloWorldApp.Utilities' located in file 'HelloWorldApp/Utilities/Helper.cs' spanning from position [0,0] to [9,1]"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (n:Namespace) RETURN n.name as namespace_name, n.file_path as file_path, n.type_kind as type_kind, n.start_point as start_location, n.end_point as end_location ORDER BY n.name",
+      "verification_query": "MATCH (n:Namespace) RETURN n.name as namespace_name, n.file_path as file_path, n.type_kind as type_kind, n.start_point as start_location, n.end_point as end_location ORDER BY n.name",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "HelloWorldApp.Utilities namespace contains exactly one type: the Helper class",
+      "source_file": "HelloWorldApp/Utilities/Helper.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/Utilities/Helper.cs",
+      "entity_name": "HelloWorldApp.Utilities",
+      "entity_type": "namespace",
+      "evidence": {
+        "summary": "CONTAINS relationship query returned one record showing HelloWorldApp.Utilities namespace contains Helper class of type_kind 'class' in the same file path"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (n:Namespace)-[:CONTAINS]->(t:Type) RETURN n.name as namespace_name, t.name as type_name, t.type_kind as type_kind, t.file_path as type_file_path ORDER BY n.name, t.name",
+      "verification_query": "MATCH (n:Namespace)-[:CONTAINS]->(t:Type) RETURN n.name as namespace_name, t.name as type_name, t.type_kind as type_kind, t.file_path as type_file_path ORDER BY n.name, t.name",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "HelloWorldApp.Utilities namespace has self-referential relationships",
+      "source_file": "HelloWorldApp/Utilities/Helper.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/Utilities/Helper.cs",
+      "entity_name": "HelloWorldApp.Utilities",
+      "entity_type": "namespace",
+      "evidence": {
+        "summary": "REFERENCES relationship query returned records showing HelloWorldApp.Utilities namespace references itself (referenced_entity_name: 'HelloWorldApp.Utilities', referenced_entity_type: 'Namespace')"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (n:Namespace)-[:REFERENCES]->(other) RETURN n.name as namespace_name, labels(other)[0] as referenced_entity_type, other.name as referenced_entity_name, other.file_path as referenced_file_path ORDER BY n.name, referenced_entity_type",
+      "verification_query": "MATCH (n:Namespace)-[:REFERENCES]->(other) RETURN n.name as namespace_name, labels(other)[0] as referenced_entity_type, other.name as referenced_entity_name, other.file_path as referenced_file_path ORDER BY n.name, referenced_entity_type",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "medium"
+    },
+    {
+      "claim": "The project has a simple namespace structure with no cross-namespace dependencies",
+      "source_file": "HelloWorldApp/Utilities/Helper.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/Utilities/Helper.cs",
+      "entity_name": "HelloWorldApp.Utilities",
+      "entity_type": "namespace",
+      "evidence": {
+        "summary": "All three queries show only one namespace exists in the project, and the REFERENCES query shows only self-references to the same namespace, indicating no external namespace dependencies"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "Combined analysis from all three queries showing only one namespace with self-references",
+      "verification_query": "Combined analysis from all three queries showing only one namespace with self-references",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "The HelloWorldApp.Utilities namespace spans the entire Helper.cs file",
+      "source_file": "HelloWorldApp/Utilities/Helper.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/Utilities/Helper.cs",
+      "entity_name": "HelloWorldApp.Utilities",
+      "entity_type": "namespace",
+      "evidence": {
+        "summary": "Namespace query shows start_location at [0,0] and end_location at [9,1], indicating the namespace declaration covers the entire file from beginning to end"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (n:Namespace) RETURN n.name as namespace_name, n.file_path as file_path, n.type_kind as type_kind, n.start_point as start_location, n.end_point as end_location ORDER BY n.name",
+      "verification_query": "MATCH (n:Namespace) RETURN n.name as namespace_name, n.file_path as file_path, n.type_kind as type_kind, n.start_point as start_location, n.end_point as end_location ORDER BY n.name",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "The project follows a dual interface pattern with IWorker having multiple implementations and INotifier having a single implementation",
+      "source_file": "HelloWorldApp/IWorker.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/IWorker.cs",
+      "entity_name": "IWorker",
+      "entity_type": "interface",
+      "evidence": {
+        "summary": "Implementation count query shows IWorker has 3 implementations (WorkerA, WorkerB, WorkerC) while INotifier has 1 implementation (Manager), demonstrating different interface usage patterns"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (class:Type {type_kind: 'class'})-[:IMPLEMENTS]->(interface:Type {type_kind: 'interface'}) WITH interface.name as interface_name, collect(class.name) as implementing_classes, count(class) as implementation_count RETURN interface_name, implementing_classes, implementation_count ORDER BY implementation_count DESC, interface_name",
+      "verification_query": "MATCH (class:Type {type_kind: 'class'})-[:IMPLEMENTS]->(interface:Type {type_kind: 'interface'}) WITH interface.name as interface_name, collect(class.name) as implementing_classes, count(class) as implementation_count RETURN interface_name, implementing_classes, implementation_count ORDER BY implementation_count DESC, interface_name",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "All implementing classes and interfaces use public access modifiers, following a consistent visibility pattern",
+      "source_file": "HelloWorldApp/IWorker.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/IWorker.cs",
+      "entity_name": "IWorker",
+      "entity_type": "interface",
+      "evidence": {
+        "summary": "Interface implementation query shows all interfaces have interface_modifier 'public' and all implementing classes have class_modifier 'public', indicating consistent public visibility across the abstraction layer"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (class:Type {type_kind: 'class'})-[:IMPLEMENTS]->(interface:Type {type_kind: 'interface'}) RETURN interface.name as interface_name, interface.modifier as interface_modifier, interface.file_path as interface_file, class.name as implementing_class, class.modifier as class_modifier, class.file_path as class_file ORDER BY interface.name, class.name",
+      "verification_query": "MATCH (class:Type {type_kind: 'class'})-[:IMPLEMENTS]->(interface:Type {type_kind: 'interface'}) RETURN interface.name as interface_name, interface.modifier as interface_modifier, interface.file_path as interface_file, class.name as implementing_class, class.modifier as class_modifier, class.file_path as class_file ORDER BY interface.name, class.name",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "All IWorker implementing classes follow a consistent pattern with a public constructor and a public Process method",
+      "source_file": "HelloWorldApp/WorkerA.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/WorkerA.cs",
+      "entity_name": "WorkerA",
+      "entity_type": "class",
+      "evidence": {
+        "summary": "Function analysis shows each worker class (WorkerA, WorkerB, WorkerC) contains exactly two functions: a constructor (function_name matching class name, function_type 'constructor') and a Process method (function_name 'Process', function_type 'method'), all with 'public' modifiers"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (class:Type)-[:IMPLEMENTS]->(interface:Type {type_kind: 'interface'}) MATCH (class)-[:CONTAINS]->(f:Function) RETURN interface.name as interface_name, class.name as implementing_class, f.name as function_name, f.modifier as function_modifier, CASE WHEN f.name = class.name THEN 'constructor' ELSE 'method' END as function_type ORDER BY interface.name, class.name, function_type, f.name",
+      "verification_query": "MATCH (class:Type)-[:IMPLEMENTS]->(interface:Type {type_kind: 'interface'}) MATCH (class)-[:CONTAINS]->(f:Function) RETURN interface.name as interface_name, class.name as implementing_class, f.name as function_name, f.modifier as function_modifier, CASE WHEN f.name = class.name THEN 'constructor' ELSE 'method' END as function_type ORDER BY interface.name, class.name, function_type, f.name",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "Manager class implementing INotifier contains both Notify and Run public methods",
+      "source_file": "HelloWorldApp/Manager.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/Manager.cs",
+      "entity_name": "Manager",
+      "entity_type": "class",
+      "evidence": {
+        "summary": "Function query shows Manager class implementing INotifier interface contains two methods: 'Notify' and 'Run', both with function_modifier 'public' and function_type 'method'"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (class:Type)-[:IMPLEMENTS]->(interface:Type {type_kind: 'interface'}) MATCH (class)-[:CONTAINS]->(f:Function) RETURN interface.name as interface_name, class.name as implementing_class, f.name as function_name, f.modifier as function_modifier, CASE WHEN f.name = class.name THEN 'constructor' ELSE 'method' END as function_type ORDER BY interface.name, class.name, function_type, f.name",
+      "verification_query": "MATCH (class:Type)-[:IMPLEMENTS]->(interface:Type {type_kind: 'interface'}) MATCH (class)-[:CONTAINS]->(f:Function) RETURN interface.name as interface_name, class.name as implementing_class, f.name as function_name, f.modifier as function_modifier, CASE WHEN f.name = class.name THEN 'constructor' ELSE 'method' END as function_type ORDER BY interface.name, class.name, function_type, f.name",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "Worker classes exhibit circular implementation relationships, where each worker class implements the other worker classes",
+      "source_file": "HelloWorldApp/WorkerA.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/WorkerA.cs",
+      "entity_name": "WorkerA",
+      "entity_type": "class",
+      "evidence": {
+        "summary": "Class-to-class implementation query shows 6 bidirectional relationships: WorkerA implements WorkerB and WorkerC, WorkerB implements WorkerA and WorkerC, WorkerC implements WorkerA and WorkerB, creating a complete circular implementation pattern"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (implementer:Type {type_kind: 'class'})-[:IMPLEMENTS]->(baseClass:Type {type_kind: 'class'}) WHERE implementer <> baseClass RETURN baseClass.name as base_class, implementer.name as derived_class, baseClass.file_path as base_file, implementer.file_path as derived_file ORDER BY base_class, derived_class",
+      "verification_query": "MATCH (implementer:Type {type_kind: 'class'})-[:IMPLEMENTS]->(baseClass:Type {type_kind: 'class'}) WHERE implementer <> baseClass RETURN baseClass.name as base_class, implementer.name as derived_class, baseClass.file_path as base_file, implementer.file_path as derived_file ORDER BY base_class, derived_class",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "The project demonstrates a polymorphic design pattern with IWorker interface enabling interchangeable worker implementations",
+      "source_file": "HelloWorldApp/IWorker.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/IWorker.cs",
+      "entity_name": "IWorker",
+      "entity_type": "interface",
+      "evidence": {
+        "summary": "Combined evidence from interface implementation queries shows IWorker interface with 3 implementations, all having consistent Process method signatures with public modifiers, demonstrating polymorphic abstraction layer for worker functionality"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "Combined analysis from interface implementation and function queries showing consistent polymorphic pattern",
+      "verification_query": "Combined analysis from interface implementation and function queries showing consistent polymorphic pattern",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "WorkerFactory implements a classic static factory pattern with a public static class structure",
+      "source_file": "HelloWorldApp/WorkerFactory.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/WorkerFactory.cs",
+      "entity_name": "WorkerFactory",
+      "entity_type": "class",
+      "evidence": {
+        "summary": "Factory class query shows WorkerFactory with type_kind 'class', class_modifier ['public', 'static'], demonstrating static factory pattern implementation"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (factory:Type {name: 'WorkerFactory'}) RETURN factory.name as factory_name, factory.type_kind as type_kind, factory.modifier as class_modifier, factory.file_path as file_path, factory.body as class_body",
+      "verification_query": "MATCH (factory:Type {name: 'WorkerFactory'}) RETURN factory.name as factory_name, factory.type_kind as type_kind, factory.modifier as class_modifier, factory.file_path as file_path, factory.body as class_body",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "WorkerFactory contains a single CreateWorkers method that serves as the factory method with proper signature and return type",
+      "source_file": "HelloWorldApp/WorkerFactory.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/WorkerFactory.cs",
+      "entity_name": "CreateWorkers",
+      "entity_type": "method",
+      "evidence": {
+        "summary": "Factory method query shows WorkerFactory contains method_name 'CreateWorkers' with method_modifier ['public', 'static'], return_type 'IEnumerable<IWorker>', and parameters '(INotifier notifier)', establishing the factory method pattern"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (factory:Type {name: 'WorkerFactory'})-[:CONTAINS]->(method:Function) RETURN factory.name as factory_class, method.name as method_name, method.type_kind as method_type, method.modifier as method_modifier, method.return_type as return_type, method.parameters as parameters ORDER BY method.name",
+      "verification_query": "MATCH (factory:Type {name: 'WorkerFactory'})-[:CONTAINS]->(method:Function) RETURN factory.name as factory_class, method.name as method_name, method.type_kind as method_type, method.modifier as method_modifier, method.return_type as return_type, method.parameters as parameters ORDER BY method.name",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "CreateWorkers method instantiates all three worker types (WorkerA, WorkerB, WorkerC) by calling their constructors with consistent parameters",
+      "source_file": "HelloWorldApp/WorkerFactory.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/WorkerFactory.cs",
+      "entity_name": "CreateWorkers",
+      "entity_type": "method",
+      "evidence": {
+        "summary": "Constructor call analysis shows CreateWorkers factory_method calling constructors for WorkerA, WorkerB, and WorkerC worker_types, all with identical constructor_params '(INotifier notifier)' and worker_access 'public'"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (factory:Type {name: 'WorkerFactory'})-[:CONTAINS]->(method:Function {name: 'CreateWorkers'}) MATCH (method)-[:CALLS]->(constructor:Function) MATCH (workerType:Type)-[:CONTAINS]->(constructor) WHERE constructor.type_kind = 'constructor' RETURN method.name as factory_method, method.return_type as factory_return_type, constructor.name as constructor_name, workerType.name as worker_type, constructor.parameters as constructor_params, workerType.modifier as worker_access ORDER BY worker_type",
+      "verification_query": "MATCH (factory:Type {name: 'WorkerFactory'})-[:CONTAINS]->(method:Function {name: 'CreateWorkers'}) MATCH (method)-[:CALLS]->(constructor:Function) MATCH (workerType:Type)-[:CONTAINS]->(constructor) WHERE constructor.type_kind = 'constructor' RETURN method.name as factory_method, method.return_type as factory_return_type, constructor.name as constructor_name, workerType.name as worker_type, constructor.parameters as constructor_params, workerType.modifier as worker_access ORDER BY worker_type",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "The factory pattern properly abstracts object creation by returning IWorker interface instances for all three worker implementations",
+      "source_file": "HelloWorldApp/WorkerFactory.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/WorkerFactory.cs",
+      "entity_name": "CreateWorkers",
+      "entity_type": "method",
+      "evidence": {
+        "summary": "Interface abstraction query shows factory_return_type 'IEnumerable<IWorker>' with common_interface 'IWorker', created_worker_types ['WorkerC', 'WorkerB', 'WorkerA'], and worker_count 3, demonstrating proper abstraction through interface return types"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (factory:Type {name: 'WorkerFactory'})-[:CONTAINS]->(method:Function {name: 'CreateWorkers'}) MATCH (method)-[:CALLS]->(constructor:Function) MATCH (workerType:Type)-[:CONTAINS]->(constructor) MATCH (workerType)-[:IMPLEMENTS]->(interface:Type {type_kind: 'interface'}) WHERE constructor.type_kind = 'constructor' RETURN method.return_type as factory_return_type, interface.name as common_interface, collect(workerType.name) as created_worker_types, count(workerType) as worker_count ORDER BY interface.name",
+      "verification_query": "MATCH (factory:Type {name: 'WorkerFactory'})-[:CONTAINS]->(method:Function {name: 'CreateWorkers'}) MATCH (method)-[:CALLS]->(constructor:Function) MATCH (workerType:Type)-[:CONTAINS]->(constructor) MATCH (workerType)-[:IMPLEMENTS]->(interface:Type {type_kind: 'interface'}) WHERE constructor.type_kind = 'constructor' RETURN method.return_type as factory_return_type, interface.name as common_interface, collect(workerType.name) as created_worker_types, count(workerType) as worker_count ORDER BY interface.name",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "WorkerFactory class body implements a concrete List<IWorker> instantiation pattern with dependency injection",
+      "source_file": "HelloWorldApp/WorkerFactory.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/WorkerFactory.cs",
+      "entity_name": "WorkerFactory",
+      "entity_type": "class",
+      "evidence": {
+        "summary": "Class body analysis reveals CreateWorkers method returning 'new List<IWorker>' with concrete worker instantiations (new WorkerA(notifier), new WorkerB(notifier), new WorkerC(notifier)), demonstrating dependency injection pattern with INotifier parameter"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (factory:Type {name: 'WorkerFactory'}) RETURN factory.name as factory_name, factory.type_kind as type_kind, factory.modifier as class_modifier, factory.file_path as file_path, factory.body as class_body",
+      "verification_query": "MATCH (factory:Type {name: 'WorkerFactory'}) RETURN factory.name as factory_name, factory.type_kind as type_kind, factory.modifier as class_modifier, factory.file_path as file_path, factory.body as class_body",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "The application follows a hierarchical call pattern with Program.Main as the entry point calling Manager.Run, which orchestrates worker execution",
+      "source_file": "HelloWorldApp/Program.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/Program.cs",
+      "entity_name": "Main",
+      "entity_type": "method",
+      "evidence": {
+        "summary": "Cross-type call query shows Program.Main (static modifier) calling Manager.Run (public modifier), establishing the primary execution flow from application entry point to worker coordination"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (caller:Function)-[:CALLS]->(callee:Function) MATCH (callerType:Type)-[:CONTAINS]->(caller) MATCH (calleeType:Type)-[:CONTAINS]->(callee) WHERE callerType <> calleeType RETURN callerType.name as caller_type, caller.name as caller_function, caller.modifier as caller_modifier, calleeType.name as callee_type, callee.name as callee_function, callee.modifier as callee_modifier ORDER BY caller_type, caller_function",
+      "verification_query": "MATCH (caller:Function)-[:CALLS]->(callee:Function) MATCH (callerType:Type)-[:CONTAINS]->(caller) MATCH (calleeType:Type)-[:CONTAINS]->(callee) WHERE callerType <> calleeType RETURN callerType.name as caller_type, caller.name as caller_function, caller.modifier as caller_modifier, calleeType.name as callee_type, callee.name as callee_function, callee.modifier as callee_modifier ORDER BY caller_type, caller_function",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "Manager.Run coordinates all worker Process methods, calling WorkerA.Process, WorkerB.Process, and WorkerC.Process",
+      "source_file": "HelloWorldApp/Manager.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/Manager.cs",
+      "entity_name": "Run",
+      "entity_type": "method",
+      "evidence": {
+        "summary": "Function call relationships show Manager.Run as caller_function with three distinct calls to callee_function 'Process' in callee_types WorkerA, WorkerB, and WorkerC, all with public modifiers"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (caller:Function)-[:CALLS]->(callee:Function) MATCH (callerType:Type)-[:CONTAINS]->(caller) MATCH (calleeType:Type)-[:CONTAINS]->(callee) WHERE callerType <> calleeType RETURN callerType.name as caller_type, caller.name as caller_function, caller.modifier as caller_modifier, calleeType.name as callee_type, callee.name as callee_function, callee.modifier as callee_modifier ORDER BY caller_type, caller_function",
+      "verification_query": "MATCH (caller:Function)-[:CALLS]->(callee:Function) MATCH (callerType:Type)-[:CONTAINS]->(caller) MATCH (calleeType:Type)-[:CONTAINS]->(callee) WHERE callerType <> calleeType RETURN callerType.name as caller_type, caller.name as caller_function, caller.modifier as caller_modifier, calleeType.name as callee_type, callee.name as callee_function, callee.modifier as callee_modifier ORDER BY caller_type, caller_function",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "Worker Process methods exhibit circular calling patterns, where each worker calls the other workers' Process methods",
+      "source_file": "HelloWorldApp/WorkerA.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/WorkerA.cs",
+      "entity_name": "Process",
+      "entity_type": "method",
+      "evidence": {
+        "summary": "Circular call detection shows 6 bidirectional relationships: WorkerA.Process calls WorkerB.Process and WorkerC.Process, WorkerB.Process calls WorkerA.Process and WorkerC.Process, WorkerC.Process calls WorkerA.Process and WorkerB.Process"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (f1:Function)-[:CALLS]->(f2:Function)-[:CALLS]->(f1:Function) MATCH (t1:Type)-[:CONTAINS]->(f1) MATCH (t2:Type)-[:CONTAINS]->(f2) WHERE t1 <> t2 RETURN t1.name as type1, f1.name as function1, t2.name as type2, f2.name as function2 ORDER BY type1, function1",
+      "verification_query": "MATCH (f1:Function)-[:CALLS]->(f2:Function)-[:CALLS]->(f1:Function) MATCH (t1:Type)-[:CONTAINS]->(f1) MATCH (t2:Type)-[:CONTAINS]->(f2) WHERE t1 <> t2 RETURN t1.name as type1, f1.name as function1, t2.name as type2, f2.name as function2 ORDER BY type1, function1",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "WorkerFactory.CreateWorkers implements factory pattern by calling constructors of all worker classes",
+      "source_file": "HelloWorldApp/WorkerFactory.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/WorkerFactory.cs",
+      "entity_name": "CreateWorkers",
+      "entity_type": "method",
+      "evidence": {
+        "summary": "Factory pattern query shows CreateWorkers as factory_method calling constructor_names WorkerA, WorkerB, and WorkerC in their respective worker_types, all with public worker_modifier"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (factory:Function)-[:CALLS]->(constructor:Function) MATCH (factoryType:Type {name: 'WorkerFactory'})-[:CONTAINS]->(factory) MATCH (workerType:Type)-[:CONTAINS]->(constructor) WHERE constructor.name = workerType.name RETURN factory.name as factory_method, factoryType.name as factory_type, constructor.name as constructor_name, workerType.name as worker_type, workerType.modifier as worker_modifier ORDER BY worker_type",
+      "verification_query": "MATCH (factory:Function)-[:CALLS]->(constructor:Function) MATCH (factoryType:Type {name: 'WorkerFactory'})-[:CONTAINS]->(factory) MATCH (workerType:Type)-[:CONTAINS]->(constructor) WHERE constructor.name = workerType.name RETURN factory.name as factory_method, factoryType.name as factory_type, constructor.name as constructor_name, workerType.name as worker_type, workerType.modifier as worker_modifier ORDER BY worker_type",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "All worker Process methods call Manager.Notify, establishing a callback communication pattern",
+      "source_file": "HelloWorldApp/WorkerA.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/WorkerA.cs",
+      "entity_name": "Process",
+      "entity_type": "method",
+      "evidence": {
+        "summary": "Cross-type function calls show WorkerA.Process, WorkerB.Process, and WorkerC.Process all making calls to Manager.Notify (public modifier), creating a consistent callback pattern from workers to manager"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (caller:Function)-[:CALLS]->(callee:Function) MATCH (callerType:Type)-[:CONTAINS]->(caller) MATCH (calleeType:Type)-[:CONTAINS]->(callee) WHERE callerType <> calleeType RETURN callerType.name as caller_type, caller.name as caller_function, caller.modifier as caller_modifier, calleeType.name as callee_type, callee.name as callee_function, callee.modifier as callee_modifier ORDER BY caller_type, caller_function",
+      "verification_query": "MATCH (caller:Function)-[:CALLS]->(callee:Function) MATCH (callerType:Type)-[:CONTAINS]->(caller) MATCH (calleeType:Type)-[:CONTAINS]->(callee) WHERE callerType <> calleeType RETURN callerType.name as caller_type, caller.name as caller_function, caller.modifier as caller_modifier, calleeType.name as callee_type, callee.name as callee_function, callee.modifier as callee_modifier ORDER BY caller_type, caller_function",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "WorkerFactory.CreateWorkers is the most active function with 10 outgoing calls, making it a central coordination point",
+      "source_file": "HelloWorldApp/WorkerFactory.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/WorkerFactory.cs",
+      "entity_name": "CreateWorkers",
+      "entity_type": "method",
+      "evidence": {
+        "summary": "Function activity analysis shows WorkerFactory.CreateWorkers with calls_made: 10 (highest among all functions), times_called: 43, modifier ['public', 'static'], and role 'worker', indicating high outbound activity"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (caller:Function)-[:CALLS]->(callee:Function) MATCH (callerType:Type)-[:CONTAINS]->(caller) WITH callerType.name as type_name, caller.name as function_name, caller.modifier as modifier, count(callee) as calls_made OPTIONAL MATCH (caller)<-[:CALLS]-(other:Function) WITH type_name, function_name, modifier, calls_made, count(other) as times_called WHERE calls_made > 0 RETURN type_name, function_name, modifier, calls_made, times_called, CASE WHEN times_called = 0 THEN 'entry_point' WHEN calls_made > times_called THEN 'coordinator' ELSE 'worker' END as role ORDER BY calls_made DESC, times_called ASC",
+      "verification_query": "MATCH (caller:Function)-[:CALLS]->(callee:Function) MATCH (callerType:Type)-[:CONTAINS]->(caller) WITH callerType.name as type_name, caller.name as function_name, caller.modifier as modifier, count(callee) as calls_made OPTIONAL MATCH (caller)<-[:CALLS]-(other:Function) WITH type_name, function_name, modifier, calls_made, count(other) as times_called WHERE calls_made > 0 RETURN type_name, function_name, modifier, calls_made, times_called, CASE WHEN times_called = 0 THEN 'entry_point' WHEN calls_made > times_called THEN 'coordinator' ELSE 'worker' END as role ORDER BY calls_made DESC, times_called ASC",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "All functions are classified as 'worker' role despite having different call patterns, indicating high interconnectedness in the call graph",
+      "source_file": "HelloWorldApp/WorkerFactory.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/WorkerFactory.cs",
+      "entity_name": "CreateWorkers",
+      "entity_type": "method",
+      "evidence": {
+        "summary": "Role analysis shows all functions with role 'worker' and consistently high times_called values (43), indicating no functions qualify as 'entry_point' or 'coordinator' roles due to high interconnectedness"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (caller:Function)-[:CALLS]->(callee:Function) MATCH (callerType:Type)-[:CONTAINS]->(caller) WITH callerType.name as type_name, caller.name as function_name, caller.modifier as modifier, count(callee) as calls_made OPTIONAL MATCH (caller)<-[:CALLS]-(other:Function) WITH type_name, function_name, modifier, calls_made, count(other) as times_called WHERE calls_made > 0 RETURN type_name, function_name, modifier, calls_made, times_called, CASE WHEN times_called = 0 THEN 'entry_point' WHEN calls_made > times_called THEN 'coordinator' ELSE 'worker' END as role ORDER BY calls_made DESC, times_called ASC",
+      "verification_query": "MATCH (caller:Function)-[:CALLS]->(callee:Function) MATCH (callerType:Type)-[:CONTAINS]->(caller) WITH callerType.name as type_name, caller.name as function_name, caller.modifier as modifier, count(callee) as calls_made OPTIONAL MATCH (caller)<-[:CALLS]-(other:Function) WITH type_name, function_name, modifier, calls_made, count(other) as times_called WHERE calls_made > 0 RETURN type_name, function_name, modifier, calls_made, times_called, CASE WHEN times_called = 0 THEN 'entry_point' WHEN calls_made > times_called THEN 'coordinator' ELSE 'worker' END as role ORDER BY calls_made DESC, times_called ASC",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "medium"
+    },
+    {
+      "claim": "The project contains 12 total functions distributed across 8 classes with diverse signatures and purposes",
+      "source_file": "HelloWorldApp/WorkerA.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/WorkerA.cs",
+      "entity_name": "WorkerA",
+      "entity_type": "constructor",
+      "evidence": {
+        "summary": "Function query returned 12 distinct functions: 3 constructors (WorkerA, WorkerB, WorkerC) and 9 methods (CreateWorkers, FormatMessage, Main, Notify, Process x3, Run, TestMethod) with diverse parameters and return types across multiple files"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (f:Function) RETURN f.name as function_name, f.type_kind as function_type, f.modifier as modifier, f.return_type as return_type, f.parameters as parameters, f.file_path as file_path ORDER BY f.type_kind, f.name",
+      "verification_query": "MATCH (f:Function) RETURN f.name as function_name, f.type_kind as function_type, f.modifier as modifier, f.return_type as return_type, f.parameters as parameters, f.file_path as file_path ORDER BY f.type_kind, f.name",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "All worker constructors follow a consistent pattern accepting INotifier notifier parameter",
+      "source_file": "HelloWorldApp/WorkerA.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/WorkerA.cs",
+      "entity_name": "WorkerA",
+      "entity_type": "constructor",
+      "evidence": {
+        "summary": "Function query shows all three worker constructors (WorkerA, WorkerB, WorkerC) have identical signatures with function_type 'constructor', modifier 'public', return_type null, and parameters '(INotifier notifier)'"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (f:Function) RETURN f.name as function_name, f.type_kind as function_type, f.modifier as modifier, f.return_type as return_type, f.parameters as parameters, f.file_path as file_path ORDER BY f.type_kind, f.name",
+      "verification_query": "MATCH (f:Function) RETURN f.name as function_name, f.type_kind as function_type, f.modifier as modifier, f.return_type as return_type, f.parameters as parameters, f.file_path as file_path ORDER BY f.type_kind, f.name",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "The project exhibits three distinct method categories: constructors, static methods, and instance methods",
+      "source_file": "HelloWorldApp/Utilities/Helper.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/Utilities/Helper.cs",
+      "entity_name": "FormatMessage",
+      "entity_type": "method",
+      "evidence": {
+        "summary": "Method categorization query shows clear separation: 3 functions with method_category 'constructor', 3 functions with method_category 'static_method' (FormatMessage, CreateWorkers, Main), and 6 functions with method_category 'instance_method'"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (t:Type)-[:CONTAINS]->(f:Function) RETURN t.name as type_name, t.type_kind as type_kind, t.modifier as type_modifier, f.name as function_name, f.type_kind as function_type, f.modifier as function_modifier, f.return_type as return_type, CASE WHEN f.name = t.name THEN 'constructor' WHEN f.modifier CONTAINS 'static' THEN 'static_method' ELSE 'instance_method' END as method_category ORDER BY t.name, method_category, f.name",
+      "verification_query": "MATCH (t:Type)-[:CONTAINS]->(f:Function) RETURN t.name as type_name, t.type_kind as type_kind, t.modifier as type_modifier, f.name as function_name, f.type_kind as function_type, f.modifier as function_modifier, f.return_type as return_type, CASE WHEN f.name = t.name THEN 'constructor' WHEN f.modifier CONTAINS 'static' THEN 'static_method' ELSE 'instance_method' END as method_category ORDER BY t.name, method_category, f.name",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "Functions demonstrate polymorphic implementations with Manager.Notify implementing INotifier and WorkerA.Process implementing IWorker",
+      "source_file": "HelloWorldApp/Manager.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/Manager.cs",
+      "entity_name": "Notify",
+      "entity_type": "method",
+      "evidence": {
+        "summary": "Relationship query shows Manager.Notify has IMPLEMENTS relationship with target_entity_type 'Type' and target_name 'INotifier', and WorkerA.Process has IMPLEMENTS relationship with target_entity_type 'Type' and target_name 'IWorker'"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (f:Function)-[r]->(other) WHERE type(r) IN ['REFERENCES', 'IMPLEMENTS'] MATCH (t:Type)-[:CONTAINS]->(f) RETURN t.name as containing_type, f.name as function_name, type(r) as relationship_type, labels(other)[0] as target_entity_type, other.name as target_name ORDER BY containing_type, function_name, relationship_type",
+      "verification_query": "MATCH (f:Function)-[r]->(other) WHERE type(r) IN ['REFERENCES', 'IMPLEMENTS'] MATCH (t:Type)-[:CONTAINS]->(f) RETURN t.name as containing_type, f.name as function_name, type(r) as relationship_type, labels(other)[0] as target_entity_type, other.name as target_name ORDER BY containing_type, function_name, relationship_type",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "Function organization follows namespace-based separation with Helper.FormatMessage in HelloWorldApp.Utilities and all other functions in default namespace",
+      "source_file": "HelloWorldApp/Utilities/Helper.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/Utilities/Helper.cs",
+      "entity_name": "FormatMessage",
+      "entity_type": "method",
+      "evidence": {
+        "summary": "Namespace organization query shows Helper type with function_count 1 in namespace_name 'HelloWorldApp.Utilities' containing FormatMessage function, while all other types (Manager, Program, TestAliases, WorkerA, WorkerB, WorkerC, WorkerFactory) are in namespace_name 'Default'"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (f:Function) OPTIONAL MATCH (ns:Namespace)-[:CONTAINS]->(t:Type)-[:CONTAINS]->(f) OPTIONAL MATCH (t2:Type)-[:CONTAINS]->(f) WHERE ns IS NULL WITH COALESCE(ns.name, 'Default') as namespace_name, COALESCE(t.name, t2.name) as type_name, collect({name: f.name, type: f.type_kind, modifier: f.modifier}) as functions RETURN namespace_name, type_name, size(functions) as function_count, functions ORDER BY namespace_name, type_name",
+      "verification_query": "MATCH (f:Function) OPTIONAL MATCH (ns:Namespace)-[:CONTAINS]->(t:Type)-[:CONTAINS]->(f) OPTIONAL MATCH (t2:Type)-[:CONTAINS]->(f) WHERE ns IS NULL WITH COALESCE(ns.name, 'Default') as namespace_name, COALESCE(t.name, t2.name) as type_name, collect({name: f.name, type: f.type_kind, modifier: f.modifier}) as functions RETURN namespace_name, type_name, size(functions) as function_count, functions ORDER BY namespace_name, type_name",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "Static factory pattern is implemented with WorkerFactory.CreateWorkers returning IEnumerable<IWorker>",
+      "source_file": "HelloWorldApp/WorkerFactory.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/WorkerFactory.cs",
+      "entity_name": "CreateWorkers",
+      "entity_type": "method",
+      "evidence": {
+        "summary": "Function query shows CreateWorkers with function_type 'method', modifier ['public', 'static'], return_type 'IEnumerable<IWorker>', parameters '(INotifier notifier)', demonstrating static factory pattern for creating worker instances"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (f:Function) RETURN f.name as function_name, f.type_kind as function_type, f.modifier as modifier, f.return_type as return_type, f.parameters as parameters, f.file_path as file_path ORDER BY f.type_kind, f.name",
+      "verification_query": "MATCH (f:Function) RETURN f.name as function_name, f.type_kind as function_type, f.modifier as modifier, f.return_type as return_type, f.parameters as parameters, f.file_path as file_path ORDER BY f.type_kind, f.name",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "All Process methods across worker classes follow identical signatures with void return type and no parameters",
+      "source_file": "HelloWorldApp/WorkerA.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/WorkerA.cs",
+      "entity_name": "Process",
+      "entity_type": "method",
+      "evidence": {
+        "summary": "Function query shows all three Process methods have identical properties: function_type 'method', modifier 'public', return_type 'void', parameters '()', across WorkerA.cs, WorkerB.cs, and WorkerC.cs files"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (f:Function) RETURN f.name as function_name, f.type_kind as function_type, f.modifier as modifier, f.return_type as return_type, f.parameters as parameters, f.file_path as file_path ORDER BY f.type_kind, f.name",
+      "verification_query": "MATCH (f:Function) RETURN f.name as function_name, f.type_kind as function_type, f.modifier as modifier, f.return_type as return_type, f.parameters as parameters, f.file_path as file_path ORDER BY f.type_kind, f.name",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "The project implements a dual interface hierarchy with IWorker having multiple implementations and INotifier having a single implementation",
+      "source_file": "HelloWorldApp/IWorker.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/IWorker.cs",
+      "entity_name": "IWorker",
+      "entity_type": "interface",
+      "evidence": {
+        "summary": "Interface hierarchy analysis shows IWorker with implementing_classes ['WorkerA', 'WorkerB', 'WorkerC'] and implementation_count 3, while INotifier has implementing_classes ['Manager'] and implementation_count 1, both with interface_access 'public'"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (class:Type {type_kind: 'class'})-[:IMPLEMENTS]->(interface:Type {type_kind: 'interface'}) RETURN interface.name as interface_name, interface.modifier as interface_access, collect(class.name) as implementing_classes, count(class) as implementation_count ORDER BY interface_name",
+      "verification_query": "MATCH (class:Type {type_kind: 'class'})-[:IMPLEMENTS]->(interface:Type {type_kind: 'interface'}) RETURN interface.name as interface_name, interface.modifier as interface_access, collect(class.name) as implementing_classes, count(class) as implementation_count ORDER BY interface_name",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "Worker classes exhibit non-traditional circular class implementation relationships, where each worker implements the other workers as if they were interfaces",
+      "source_file": "HelloWorldApp/WorkerA.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/WorkerA.cs",
+      "entity_name": "WorkerA",
+      "entity_type": "class",
+      "evidence": {
+        "summary": "Class-to-class implementation query shows 6 circular relationships: WorkerA implements WorkerB and WorkerC, WorkerB implements WorkerA and WorkerC, WorkerC implements WorkerA and WorkerB, all with public modifiers creating a complete circular implementation pattern"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (derived:Type)-[:IMPLEMENTS]->(base:Type) WHERE derived.type_kind = 'class' AND base.type_kind = 'class' AND derived <> base RETURN derived.name as derived_class, base.name as base_class, derived.modifier as derived_modifier, base.modifier as base_modifier, derived.file_path as derived_file ORDER BY derived_class, base_class",
+      "verification_query": "MATCH (derived:Type)-[:IMPLEMENTS]->(base:Type) WHERE derived.type_kind = 'class' AND base.type_kind = 'class' AND derived <> base RETURN derived.name as derived_class, base.name as base_class, derived.modifier as derived_modifier, base.modifier as base_modifier, derived.file_path as derived_file ORDER BY derived_class, base_class",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "All worker classes are hybrid implementers that implement both interfaces and other classes, making them the most complex architectural components",
+      "source_file": "HelloWorldApp/WorkerA.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/WorkerA.cs",
+      "entity_name": "WorkerA",
+      "entity_type": "class",
+      "evidence": {
+        "summary": "Implementation complexity analysis shows each worker class with total_implementations 3: WorkerA implements ['WorkerC', 'WorkerB', 'IWorker'], WorkerB implements ['WorkerC', 'WorkerA', 'IWorker'], WorkerC implements ['WorkerB', 'WorkerA', 'IWorker'], demonstrating hybrid implementation patterns"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (implementer:Type)-[:IMPLEMENTS]->(target:Type) WHERE implementer <> target WITH implementer.name as class_name, implementer.type_kind as class_type, count(DISTINCT target) as total_implementations, collect(DISTINCT target.name) as implemented_types RETURN class_name, class_type, total_implementations, implemented_types ORDER BY total_implementations DESC, class_name",
+      "verification_query": "MATCH (implementer:Type)-[:IMPLEMENTS]->(target:Type) WHERE implementer <> target WITH implementer.name as class_name, implementer.type_kind as class_type, count(DISTINCT target) as total_implementations, collect(DISTINCT target.name) as implemented_types RETURN class_name, class_type, total_implementations, implemented_types ORDER BY total_implementations DESC, class_name",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "The project demonstrates four distinct architectural roles: hybrid implementers (workers), interface implementer (Manager), interface contracts (IWorker, INotifier), and standalone classes",
+      "source_file": "HelloWorldApp/WorkerA.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/WorkerA.cs",
+      "entity_name": "WorkerA",
+      "entity_type": "class",
+      "evidence": {
+        "summary": "Architectural role analysis shows distinct patterns: 3 types with architectural_role 'hybrid_implementer' (workers), 1 with 'interface_implementer' (Manager), 2 with 'interface_contract' (interfaces), and 4 with 'standalone' role (Helper, Program, TestAliases, WorkerFactory)"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (t:Type) OPTIONAL MATCH (t)-[:IMPLEMENTS]->(interface:Type {type_kind: 'interface'}) OPTIONAL MATCH (t)-[:IMPLEMENTS]->(otherClass:Type {type_kind: 'class'}) WHERE t <> otherClass OPTIONAL MATCH (implementer:Type)-[:IMPLEMENTS]->(t) WHERE implementer <> t WITH t.name as type_name, t.type_kind as type_kind, t.modifier as modifier, count(DISTINCT interface) as interfaces_implemented, count(DISTINCT otherClass) as classes_implemented, count(DISTINCT implementer) as times_implemented RETURN type_name, type_kind, modifier, interfaces_implemented, classes_implemented, times_implemented, CASE WHEN type_kind = 'interface' THEN 'interface_contract' WHEN interfaces_implemented > 0 AND classes_implemented > 0 THEN 'hybrid_implementer' WHEN interfaces_implemented > 0 THEN 'interface_implementer' WHEN classes_implemented > 0 THEN 'class_implementer' ELSE 'standalone' END as architectural_role ORDER BY architectural_role, type_name",
+      "verification_query": "MATCH (t:Type) OPTIONAL MATCH (t)-[:IMPLEMENTS]->(interface:Type {type_kind: 'interface'}) OPTIONAL MATCH (t)-[:IMPLEMENTS]->(otherClass:Type {type_kind: 'class'}) WHERE t <> otherClass OPTIONAL MATCH (implementer:Type)-[:IMPLEMENTS]->(t) WHERE implementer <> t WITH t.name as type_name, t.type_kind as type_kind, t.modifier as modifier, count(DISTINCT interface) as interfaces_implemented, count(DISTINCT otherClass) as classes_implemented, count(DISTINCT implementer) as times_implemented RETURN type_name, type_kind, modifier, interfaces_implemented, classes_implemented, times_implemented, CASE WHEN type_kind = 'interface' THEN 'interface_contract' WHEN interfaces_implemented > 0 AND classes_implemented > 0 THEN 'hybrid_implementer' WHEN interfaces_implemented > 0 THEN 'interface_implementer' WHEN classes_implemented > 0 THEN 'class_implementer' ELSE 'standalone' END as architectural_role ORDER BY architectural_role, type_name",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "Worker classes are both implementers and targets of implementation, with each worker being implemented by exactly 2 other workers",
+      "source_file": "HelloWorldApp/WorkerA.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/WorkerA.cs",
+      "entity_name": "WorkerA",
+      "entity_type": "class",
+      "evidence": {
+        "summary": "Bidirectional implementation pattern shows symmetric relationships: WorkerA, WorkerB, and WorkerC each have interfaces_implemented: 1, classes_implemented: 2, and times_implemented: 2, creating perfect symmetry in the implementation graph"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (t:Type) OPTIONAL MATCH (t)-[:IMPLEMENTS]->(interface:Type {type_kind: 'interface'}) OPTIONAL MATCH (t)-[:IMPLEMENTS]->(otherClass:Type {type_kind: 'class'}) WHERE t <> otherClass OPTIONAL MATCH (implementer:Type)-[:IMPLEMENTS]->(t) WHERE implementer <> t WITH t.name as type_name, t.type_kind as type_kind, t.modifier as modifier, count(DISTINCT interface) as interfaces_implemented, count(DISTINCT otherClass) as classes_implemented, count(DISTINCT implementer) as times_implemented RETURN type_name, type_kind, modifier, interfaces_implemented, classes_implemented, times_implemented, CASE WHEN type_kind = 'interface' THEN 'interface_contract' WHEN interfaces_implemented > 0 AND classes_implemented > 0 THEN 'hybrid_implementer' WHEN interfaces_implemented > 0 THEN 'interface_implementer' WHEN classes_implemented > 0 THEN 'class_implementer' ELSE 'standalone' END as architectural_role ORDER BY architectural_role, type_name",
+      "verification_query": "MATCH (t:Type) OPTIONAL MATCH (t)-[:IMPLEMENTS]->(interface:Type {type_kind: 'interface'}) OPTIONAL MATCH (t)-[:IMPLEMENTS]->(otherClass:Type {type_kind: 'class'}) WHERE t <> otherClass OPTIONAL MATCH (implementer:Type)-[:IMPLEMENTS]->(t) WHERE implementer <> t WITH t.name as type_name, t.type_kind as type_kind, t.modifier as modifier, count(DISTINCT interface) as interfaces_implemented, count(DISTINCT otherClass) as classes_implemented, count(DISTINCT implementer) as times_implemented RETURN type_name, type_kind, modifier, interfaces_implemented, classes_implemented, times_implemented, CASE WHEN type_kind = 'interface' THEN 'interface_contract' WHEN interfaces_implemented > 0 AND classes_implemented > 0 THEN 'hybrid_implementer' WHEN interfaces_implemented > 0 THEN 'interface_implementer' WHEN classes_implemented > 0 THEN 'class_implementer' ELSE 'standalone' END as architectural_role ORDER BY architectural_role, type_name",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "Manager class follows traditional single interface implementation pattern, implementing only INotifier without cross-class relationships",
+      "source_file": "HelloWorldApp/Manager.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/Manager.cs",
+      "entity_name": "Manager",
+      "entity_type": "class",
+      "evidence": {
+        "summary": "Traditional implementation pattern analysis shows Manager with architectural_role 'interface_implementer', interfaces_implemented: 1, classes_implemented: 0, times_implemented: 0, demonstrating clean single interface implementation without circular class dependencies"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (t:Type) OPTIONAL MATCH (t)-[:IMPLEMENTS]->(interface:Type {type_kind: 'interface'}) OPTIONAL MATCH (t)-[:IMPLEMENTS]->(otherClass:Type {type_kind: 'class'}) WHERE t <> otherClass OPTIONAL MATCH (implementer:Type)-[:IMPLEMENTS]->(t) WHERE implementer <> t WITH t.name as type_name, t.type_kind as type_kind, t.modifier as modifier, count(DISTINCT interface) as interfaces_implemented, count(DISTINCT otherClass) as classes_implemented, count(DISTINCT implementer) as times_implemented RETURN type_name, type_kind, modifier, interfaces_implemented, classes_implemented, times_implemented, CASE WHEN type_kind = 'interface' THEN 'interface_contract' WHEN interfaces_implemented > 0 AND classes_implemented > 0 THEN 'hybrid_implementer' WHEN interfaces_implemented > 0 THEN 'interface_implementer' WHEN classes_implemented > 0 THEN 'class_implementer' ELSE 'standalone' END as architectural_role ORDER BY architectural_role, type_name",
+      "verification_query": "MATCH (t:Type) OPTIONAL MATCH (t)-[:IMPLEMENTS]->(interface:Type {type_kind: 'interface'}) OPTIONAL MATCH (t)-[:IMPLEMENTS]->(otherClass:Type {type_kind: 'class'}) WHERE t <> otherClass OPTIONAL MATCH (implementer:Type)-[:IMPLEMENTS]->(t) WHERE implementer <> t WITH t.name as type_name, t.type_kind as type_kind, t.modifier as modifier, count(DISTINCT interface) as interfaces_implemented, count(DISTINCT otherClass) as classes_implemented, count(DISTINCT implementer) as times_implemented RETURN type_name, type_kind, modifier, interfaces_implemented, classes_implemented, times_implemented, CASE WHEN type_kind = 'interface' THEN 'interface_contract' WHEN interfaces_implemented > 0 AND classes_implemented > 0 THEN 'hybrid_implementer' WHEN interfaces_implemented > 0 THEN 'interface_implementer' WHEN classes_implemented > 0 THEN 'class_implementer' ELSE 'standalone' END as architectural_role ORDER BY architectural_role, type_name",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "The project follows a dual-namespace organization with HelloWorldApp.Utilities containing utility functions and Default namespace containing the core application logic",
+      "source_file": "HelloWorldApp/Utilities/Helper.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/Utilities/Helper.cs",
+      "entity_name": "HelloWorldApp.Utilities",
+      "entity_type": "namespace",
+      "evidence": {
+        "summary": "Namespace organization query shows HelloWorldApp.Utilities with total_types 1 and total_functions 1 containing Helper class with FormatMessage function, while Default namespace contains total_types 9 and total_functions 11 including interfaces INotifier and IWorker plus classes Manager, Program, TestAliases, WorkerA, WorkerB, WorkerC, WorkerFactory"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (t:Type) OPTIONAL MATCH (ns:Namespace)-[:CONTAINS]->(t) OPTIONAL MATCH (t)-[:CONTAINS]->(f:Function) WITH COALESCE(ns.name, 'Default') as namespace_name, t.name as type_name, t.type_kind as type_kind, t.modifier as type_modifier, count(f) as function_count, collect(f.name) as functions RETURN namespace_name, collect({type_name: type_name, type_kind: type_kind, modifier: type_modifier, function_count: function_count, functions: functions}) as types, count(*) as total_types, sum(function_count) as total_functions ORDER BY namespace_name",
+      "verification_query": "MATCH (t:Type) OPTIONAL MATCH (ns:Namespace)-[:CONTAINS]->(t) OPTIONAL MATCH (t)-[:CONTAINS]->(f:Function) WITH COALESCE(ns.name, 'Default') as namespace_name, t.name as type_name, t.type_kind as type_kind, t.modifier as type_modifier, count(f) as function_count, collect(f.name) as functions RETURN namespace_name, collect({type_name: type_name, type_kind: type_kind, modifier: type_modifier, function_count: function_count, functions: functions}) as types, count(*) as total_types, sum(function_count) as total_functions ORDER BY namespace_name",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "Interfaces exhibit stronger reference relationships than implementation relationships, with INotifier and IWorker both having relationship_strength of 2 for REFERENCES compared to strength 1 for IMPLEMENTS",
+      "source_file": "HelloWorldApp/INotifier.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/INotifier.cs",
+      "entity_name": "INotifier",
+      "entity_type": "interface",
+      "evidence": {
+        "summary": "Type relationship analysis shows highest relationship_strength values: INotifier-to-Manager with strength 2, IWorker-to-WorkerA/B/C each with strength 2, all using REFERENCES relationship_type, indicating interfaces have stronger reference bonds than simple implementation relationships"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (source:Type)-[r]->(target:Type) WHERE type(r) IN ['IMPLEMENTS', 'REFERENCES'] AND source <> target WITH source.name as source_type, source.type_kind as source_kind, type(r) as relationship_type, target.name as target_type, target.type_kind as target_kind, count(*) as relationship_strength RETURN source_type, source_kind, relationship_type, target_type, target_kind, relationship_strength ORDER BY relationship_strength DESC, source_type",
+      "verification_query": "MATCH (source:Type)-[r]->(target:Type) WHERE type(r) IN ['IMPLEMENTS', 'REFERENCES'] AND source <> target WITH source.name as source_type, source.type_kind as source_kind, type(r) as relationship_type, target.name as target_type, target.type_kind as target_kind, count(*) as relationship_strength RETURN source_type, source_kind, relationship_type, target_type, target_kind, relationship_strength ORDER BY relationship_strength DESC, source_type",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "All worker classes are classified as 'highly_coupled' with identical complexity scores of 6, indicating problematic architectural coupling",
+      "source_file": "HelloWorldApp/WorkerA.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/WorkerA.cs",
+      "entity_name": "WorkerA",
+      "entity_type": "class",
+      "evidence": {
+        "summary": "Architectural assessment query shows WorkerA, WorkerB, and WorkerC each with complexity_score 6, architectural_assessment 'highly_coupled', interfaces_implemented 1, classes_implemented 2, and external_dependencies 3, demonstrating identical problematic coupling patterns"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (t:Type) OPTIONAL MATCH (t)-[:IMPLEMENTS]->(interface:Type {type_kind: 'interface'}) OPTIONAL MATCH (t)-[:IMPLEMENTS]->(otherClass:Type {type_kind: 'class'}) WHERE t <> otherClass OPTIONAL MATCH (t)-[:CONTAINS]->(f:Function) OPTIONAL MATCH (f)-[:CALLS]->(callee:Function) MATCH (calleeType:Type)-[:CONTAINS]->(callee) WHERE t <> calleeType WITH t.name as type_name, t.type_kind as type_kind, count(DISTINCT interface) as interfaces_implemented, count(DISTINCT otherClass) as classes_implemented, count(DISTINCT f) as function_count, count(DISTINCT calleeType) as external_dependencies RETURN type_name, type_kind, interfaces_implemented, classes_implemented, function_count, external_dependencies, (interfaces_implemented + classes_implemented + external_dependencies) as complexity_score, CASE WHEN type_kind = 'interface' THEN 'contract' WHEN external_dependencies = 0 THEN 'isolated' WHEN classes_implemented > 0 AND external_dependencies > 2 THEN 'highly_coupled' WHEN interfaces_implemented > 0 AND external_dependencies <= 2 THEN 'well_designed' ELSE 'moderate' END as architectural_assessment ORDER BY complexity_score DESC, type_name",
+      "verification_query": "MATCH (t:Type) OPTIONAL MATCH (t)-[:IMPLEMENTS]->(interface:Type {type_kind: 'interface'}) OPTIONAL MATCH (t)-[:IMPLEMENTS]->(otherClass:Type {type_kind: 'class'}) WHERE t <> otherClass OPTIONAL MATCH (t)-[:CONTAINS]->(f:Function) OPTIONAL MATCH (f)-[:CALLS]->(callee:Function) MATCH (calleeType:Type)-[:CONTAINS]->(callee) WHERE t <> calleeType WITH t.name as type_name, t.type_kind as type_kind, count(DISTINCT interface) as interfaces_implemented, count(DISTINCT otherClass) as classes_implemented, count(DISTINCT f) as function_count, count(DISTINCT calleeType) as external_dependencies RETURN type_name, type_kind, interfaces_implemented, classes_implemented, function_count, external_dependencies, (interfaces_implemented + classes_implemented + external_dependencies) as complexity_score, CASE WHEN type_kind = 'interface' THEN 'contract' WHEN external_dependencies = 0 THEN 'isolated' WHEN classes_implemented > 0 AND external_dependencies > 2 THEN 'highly_coupled' WHEN interfaces_implemented > 0 AND external_dependencies <= 2 THEN 'well_designed' ELSE 'moderate' END as architectural_assessment ORDER BY complexity_score DESC, type_name",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "Manager and WorkerFactory classes are classified as 'moderate' architectural assessment, showing better design than worker classes",
+      "source_file": "HelloWorldApp/Manager.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/Manager.cs",
+      "entity_name": "Manager",
+      "entity_type": "class",
+      "evidence": {
+        "summary": "Complexity analysis shows Manager with complexity_score 4 and WorkerFactory with complexity_score 3, both having architectural_assessment 'moderate', compared to workers' 'highly_coupled' assessment, indicating better architectural design with lower coupling"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (t:Type) OPTIONAL MATCH (t)-[:IMPLEMENTS]->(interface:Type {type_kind: 'interface'}) OPTIONAL MATCH (t)-[:IMPLEMENTS]->(otherClass:Type {type_kind: 'class'}) WHERE t <> otherClass OPTIONAL MATCH (t)-[:CONTAINS]->(f:Function) OPTIONAL MATCH (f)-[:CALLS]->(callee:Function) MATCH (calleeType:Type)-[:CONTAINS]->(callee) WHERE t <> calleeType WITH t.name as type_name, t.type_kind as type_kind, count(DISTINCT interface) as interfaces_implemented, count(DISTINCT otherClass) as classes_implemented, count(DISTINCT f) as function_count, count(DISTINCT calleeType) as external_dependencies RETURN type_name, type_kind, interfaces_implemented, classes_implemented, function_count, external_dependencies, (interfaces_implemented + classes_implemented + external_dependencies) as complexity_score, CASE WHEN type_kind = 'interface' THEN 'contract' WHEN external_dependencies = 0 THEN 'isolated' WHEN classes_implemented > 0 AND external_dependencies > 2 THEN 'highly_coupled' WHEN interfaces_implemented > 0 AND external_dependencies <= 2 THEN 'well_designed' ELSE 'moderate' END as architectural_assessment ORDER BY complexity_score DESC, type_name",
+      "verification_query": "MATCH (t:Type) OPTIONAL MATCH (t)-[:IMPLEMENTS]->(interface:Type {type_kind: 'interface'}) OPTIONAL MATCH (t)-[:IMPLEMENTS]->(otherClass:Type {type_kind: 'class'}) WHERE t <> otherClass OPTIONAL MATCH (t)-[:CONTAINS]->(f:Function) OPTIONAL MATCH (f)-[:CALLS]->(callee:Function) MATCH (calleeType:Type)-[:CONTAINS]->(callee) WHERE t <> calleeType WITH t.name as type_name, t.type_kind as type_kind, count(DISTINCT interface) as interfaces_implemented, count(DISTINCT otherClass) as classes_implemented, count(DISTINCT f) as function_count, count(DISTINCT calleeType) as external_dependencies RETURN type_name, type_kind, interfaces_implemented, classes_implemented, function_count, external_dependencies, (interfaces_implemented + classes_implemented + external_dependencies) as complexity_score, CASE WHEN type_kind = 'interface' THEN 'contract' WHEN external_dependencies = 0 THEN 'isolated' WHEN classes_implemented > 0 AND external_dependencies > 2 THEN 'highly_coupled' WHEN interfaces_implemented > 0 AND external_dependencies <= 2 THEN 'well_designed' ELSE 'moderate' END as architectural_assessment ORDER BY complexity_score DESC, type_name",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "Cross-type function calls exhibit uniform distribution pattern with Manager, WorkerA, WorkerB, WorkerC, and WorkerFactory all making exactly 3 outbound calls, while Program makes only 1",
+      "source_file": "HelloWorldApp/Manager.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/Manager.cs",
+      "entity_name": "Manager",
+      "entity_type": "class",
+      "evidence": {
+        "summary": "Cross-type call analysis shows Manager, WorkerA, WorkerB, WorkerC, and WorkerFactory each with total_outbound_calls 3, while Program has total_outbound_calls 1, demonstrating uniform call distribution across most components except the entry point"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (caller:Function)-[:CALLS]->(callee:Function) MATCH (callerType:Type)-[:CONTAINS]->(caller) MATCH (calleeType:Type)-[:CONTAINS]->(callee) WHERE callerType <> calleeType WITH callerType.name as caller_type, caller.name as caller_function, calleeType.name as callee_type, callee.name as callee_function, count(*) as call_frequency RETURN caller_type, collect({function: caller_function, calls_to: callee_type + '.' + callee_function, frequency: call_frequency}) as outbound_calls, count(*) as total_outbound_calls ORDER BY total_outbound_calls DESC, caller_type",
+      "verification_query": "MATCH (caller:Function)-[:CALLS]->(callee:Function) MATCH (callerType:Type)-[:CONTAINS]->(caller) MATCH (calleeType:Type)-[:CONTAINS]->(callee) WHERE callerType <> calleeType WITH callerType.name as caller_type, caller.name as caller_function, calleeType.name as callee_type, callee.name as callee_function, count(*) as call_frequency RETURN caller_type, collect({function: caller_function, calls_to: callee_type + '.' + callee_function, frequency: call_frequency}) as outbound_calls, count(*) as total_outbound_calls ORDER BY total_outbound_calls DESC, caller_type",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "The architecture demonstrates a cross-cutting concern pattern where both IMPLEMENTS and REFERENCES relationships exist between the same type pairs, indicating tight coupling",
+      "source_file": "HelloWorldApp/WorkerA.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/WorkerA.cs",
+      "entity_name": "WorkerA",
+      "entity_type": "class",
+      "evidence": {
+        "summary": "Relationship analysis reveals dual relationship patterns where worker classes have both IMPLEMENTS and REFERENCES relationships to the same targets (WorkerA-to-WorkerB/C, WorkerB-to-WorkerA/C, WorkerC-to-WorkerA/B, and all to IWorker), indicating tight coupling through multiple relationship types"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (source:Type)-[r]->(target:Type) WHERE type(r) IN ['IMPLEMENTS', 'REFERENCES'] AND source <> target WITH source.name as source_type, source.type_kind as source_kind, type(r) as relationship_type, target.name as target_type, target.type_kind as target_kind, count(*) as relationship_strength RETURN source_type, source_kind, relationship_type, target_type, target_kind, relationship_strength ORDER BY relationship_strength DESC, source_type",
+      "verification_query": "MATCH (source:Type)-[r]->(target:Type) WHERE type(r) IN ['IMPLEMENTS', 'REFERENCES'] AND source <> target WITH source.name as source_type, source.type_kind as source_kind, type(r) as relationship_type, target.name as target_type, target.type_kind as target_kind, count(*) as relationship_strength RETURN source_type, source_kind, relationship_type, target_type, target_kind, relationship_strength ORDER BY relationship_strength DESC, source_type",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    }
+  ],
+  "raw_results": [
+    {
+      "claim": "The project contains 10 total types: 8 classes and 2 interfaces",
+      "source_file": "HelloWorldApp/Utilities/Helper.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/Utilities/Helper.cs",
+      "entity_name": "Helper",
+      "entity_type": "class",
+      "evidence": {
+        "summary": "Query returned 10 distinct type nodes: 8 with type_kind 'class' (Helper, Manager, Program, TestAliases, WorkerA, WorkerB, WorkerC, WorkerFactory) and 2 with type_kind 'interface' (INotifier, IWorker), each with specific file paths"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (t:Type) RETURN t.name as type_name, t.type_kind as type_kind, t.file_path as file_path, t.modifier as access_modifier ORDER BY t.type_kind, t.name",
+      "verification_query": "MATCH (t:Type) RETURN t.name as type_name, t.type_kind as type_kind, t.file_path as file_path, t.modifier as access_modifier ORDER BY t.type_kind, t.name",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "IWorker interface is implemented by three worker classes: WorkerA, WorkerB, and WorkerC",
+      "source_file": "HelloWorldApp/IWorker.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/IWorker.cs",
+      "entity_name": "IWorker",
+      "entity_type": "interface",
+      "evidence": {
+        "summary": "IMPLEMENTS relationships show WorkerA, WorkerB, and WorkerC classes all implement IWorker interface, with consistent interface file path 'HelloWorldApp/IWorker.cs' and respective class file paths"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (class:Type {type_kind: 'class'})-[:IMPLEMENTS]->(interface:Type {type_kind: 'interface'}) RETURN class.name as implementing_class, interface.name as implemented_interface, class.file_path as class_file, interface.file_path as interface_file ORDER BY interface.name, class.name",
+      "verification_query": "MATCH (class:Type {type_kind: 'class'})-[:IMPLEMENTS]->(interface:Type {type_kind: 'interface'}) RETURN class.name as implementing_class, interface.name as implemented_interface, class.file_path as class_file, interface.file_path as interface_file ORDER BY interface.name, class.name",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "Manager class implements the INotifier interface",
+      "source_file": "HelloWorldApp/Manager.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/Manager.cs",
+      "entity_name": "Manager",
+      "entity_type": "class",
+      "evidence": {
+        "summary": "IMPLEMENTS relationship query shows Manager class implementing INotifier interface, with implementing_class 'Manager' and implemented_interface 'INotifier'"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (class:Type {type_kind: 'class'})-[:IMPLEMENTS]->(interface:Type {type_kind: 'interface'}) RETURN class.name as implementing_class, interface.name as implemented_interface, class.file_path as class_file, interface.file_path as interface_file ORDER BY interface.name, class.name",
+      "verification_query": "MATCH (class:Type {type_kind: 'class'})-[:IMPLEMENTS]->(interface:Type {type_kind: 'interface'}) RETURN class.name as implementing_class, interface.name as implemented_interface, class.file_path as class_file, interface.file_path as interface_file ORDER BY interface.name, class.name",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "Worker classes (WorkerA, WorkerB, WorkerC) have circular cross-references to each other",
+      "source_file": "HelloWorldApp/WorkerA.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/WorkerA.cs",
+      "entity_name": "WorkerA",
+      "entity_type": "class",
+      "evidence": {
+        "summary": "REFERENCES relationships show WorkerA references WorkerB and WorkerC, WorkerB references WorkerA and WorkerC, and WorkerC references WorkerA and WorkerB, creating a complete circular reference pattern among all three worker classes"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (t1:Type)-[:REFERENCES]->(t2:Type) WHERE t1 <> t2 RETURN t1.name as referencing_type, t1.type_kind as referencing_kind, t2.name as referenced_type, t2.type_kind as referenced_kind ORDER BY t1.name, t2.name",
+      "verification_query": "MATCH (t1:Type)-[:REFERENCES]->(t2:Type) WHERE t1 <> t2 RETURN t1.name as referencing_type, t1.type_kind as referencing_kind, t2.name as referenced_type, t2.type_kind as referenced_kind ORDER BY t1.name, t2.name",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "Helper and WorkerFactory classes are both public static classes",
+      "source_file": "HelloWorldApp/Utilities/Helper.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/Utilities/Helper.cs",
+      "entity_name": "Helper",
+      "entity_type": "class",
+      "evidence": {
+        "summary": "Type query shows Helper class has access_modifier ['public', 'static'] and WorkerFactory class has access_modifier ['public', 'static'], indicating both are static utility classes"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (t:Type) RETURN t.name as type_name, t.type_kind as type_kind, t.file_path as file_path, t.modifier as access_modifier ORDER BY t.type_kind, t.name",
+      "verification_query": "MATCH (t:Type) RETURN t.name as type_name, t.type_kind as type_kind, t.file_path as file_path, t.modifier as access_modifier ORDER BY t.type_kind, t.name",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "WorkerA, WorkerB, and WorkerC classes each have a public constructor and a public Process method",
+      "source_file": "HelloWorldApp/WorkerA.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/WorkerA.cs",
+      "entity_name": "WorkerA",
+      "entity_type": "class",
+      "evidence": {
+        "summary": "Function query shows each worker class contains two functions: a constructor (function_name matches type_name, function_type 'constructor') and a Process method (function_name 'Process', function_type 'method'), all with 'public' modifier"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (t:Type)-[:CONTAINS]->(f:Function) RETURN t.name as type_name, t.type_kind as type_kind, f.name as function_name, f.modifier as function_modifier, CASE WHEN f.name = t.name THEN 'constructor' ELSE 'method' END as function_type ORDER BY t.name, function_type, f.name",
+      "verification_query": "MATCH (t:Type)-[:CONTAINS]->(f:Function) RETURN t.name as type_name, t.type_kind as type_kind, f.name as function_name, f.modifier as function_modifier, CASE WHEN f.name = t.name THEN 'constructor' ELSE 'method' END as function_type ORDER BY t.name, function_type, f.name",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "Program class contains the main entry point with a static Main method",
+      "source_file": "HelloWorldApp/Program.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/Program.cs",
+      "entity_name": "Program",
+      "entity_type": "class",
+      "evidence": {
+        "summary": "Function query shows Program class contains function 'Main' with modifier 'static' and function_type 'method', indicating the standard application entry point"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (t:Type)-[:CONTAINS]->(f:Function) RETURN t.name as type_name, t.type_kind as type_kind, f.name as function_name, f.modifier as function_modifier, CASE WHEN f.name = t.name THEN 'constructor' ELSE 'method' END as function_type ORDER BY t.name, function_type, f.name",
+      "verification_query": "MATCH (t:Type)-[:CONTAINS]->(f:Function) RETURN t.name as type_name, t.type_kind as type_kind, f.name as function_name, f.modifier as function_modifier, CASE WHEN f.name = t.name THEN 'constructor' ELSE 'method' END as function_type ORDER BY t.name, function_type, f.name",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "Manager class contains both Notify and Run public methods",
+      "source_file": "HelloWorldApp/Manager.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/Manager.cs",
+      "entity_name": "Manager",
+      "entity_type": "class",
+      "evidence": {
+        "summary": "Function query shows Manager class contains two methods: 'Notify' with modifier 'public' and 'Run' with modifier 'public', both of function_type 'method'"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (t:Type)-[:CONTAINS]->(f:Function) RETURN t.name as type_name, t.type_kind as type_kind, f.name as function_name, f.modifier as function_modifier, CASE WHEN f.name = t.name THEN 'constructor' ELSE 'method' END as function_type ORDER BY t.name, function_type, f.name",
+      "verification_query": "MATCH (t:Type)-[:CONTAINS]->(f:Function) RETURN t.name as type_name, t.type_kind as type_kind, f.name as function_name, f.modifier as function_modifier, CASE WHEN f.name = t.name THEN 'constructor' ELSE 'method' END as function_type ORDER BY t.name, function_type, f.name",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "Helper class contains a public static FormatMessage method",
+      "source_file": "HelloWorldApp/Utilities/Helper.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/Utilities/Helper.cs",
+      "entity_name": "Helper",
+      "entity_type": "class",
+      "evidence": {
+        "summary": "Function query shows Helper class contains function 'FormatMessage' with modifier ['public', 'static'] and function_type 'method'"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (t:Type)-[:CONTAINS]->(f:Function) RETURN t.name as type_name, t.type_kind as type_kind, f.name as function_name, f.modifier as function_modifier, CASE WHEN f.name = t.name THEN 'constructor' ELSE 'method' END as function_type ORDER BY t.name, function_type, f.name",
+      "verification_query": "MATCH (t:Type)-[:CONTAINS]->(f:Function) RETURN t.name as type_name, t.type_kind as type_kind, f.name as function_name, f.modifier as function_modifier, CASE WHEN f.name = t.name THEN 'constructor' ELSE 'method' END as function_type ORDER BY t.name, function_type, f.name",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "WorkerFactory class contains a public static CreateWorkers method",
+      "source_file": "HelloWorldApp/WorkerFactory.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/WorkerFactory.cs",
+      "entity_name": "WorkerFactory",
+      "entity_type": "class",
+      "evidence": {
+        "summary": "Function query shows WorkerFactory class contains function 'CreateWorkers' with modifier ['public', 'static'] and function_type 'method'"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (t:Type)-[:CONTAINS]->(f:Function) RETURN t.name as type_name, t.type_kind as type_kind, f.name as function_name, f.modifier as function_modifier, CASE WHEN f.name = t.name THEN 'constructor' ELSE 'method' END as function_type ORDER BY t.name, function_type, f.name",
+      "verification_query": "MATCH (t:Type)-[:CONTAINS]->(f:Function) RETURN t.name as type_name, t.type_kind as type_kind, f.name as function_name, f.modifier as function_modifier, CASE WHEN f.name = t.name THEN 'constructor' ELSE 'method' END as function_type ORDER BY t.name, function_type, f.name",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "HelloWorldApp.Utilities is the only namespace defined in the project",
+      "source_file": "HelloWorldApp/Utilities/Helper.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/Utilities/Helper.cs",
+      "entity_name": "HelloWorldApp.Utilities",
+      "entity_type": "namespace",
+      "evidence": {
+        "summary": "Query returned exactly one namespace record with name 'HelloWorldApp.Utilities' located in file 'HelloWorldApp/Utilities/Helper.cs' spanning from position [0,0] to [9,1]"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (n:Namespace) RETURN n.name as namespace_name, n.file_path as file_path, n.type_kind as type_kind, n.start_point as start_location, n.end_point as end_location ORDER BY n.name",
+      "verification_query": "MATCH (n:Namespace) RETURN n.name as namespace_name, n.file_path as file_path, n.type_kind as type_kind, n.start_point as start_location, n.end_point as end_location ORDER BY n.name",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "HelloWorldApp.Utilities namespace contains exactly one type: the Helper class",
+      "source_file": "HelloWorldApp/Utilities/Helper.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/Utilities/Helper.cs",
+      "entity_name": "HelloWorldApp.Utilities",
+      "entity_type": "namespace",
+      "evidence": {
+        "summary": "CONTAINS relationship query returned one record showing HelloWorldApp.Utilities namespace contains Helper class of type_kind 'class' in the same file path"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (n:Namespace)-[:CONTAINS]->(t:Type) RETURN n.name as namespace_name, t.name as type_name, t.type_kind as type_kind, t.file_path as type_file_path ORDER BY n.name, t.name",
+      "verification_query": "MATCH (n:Namespace)-[:CONTAINS]->(t:Type) RETURN n.name as namespace_name, t.name as type_name, t.type_kind as type_kind, t.file_path as type_file_path ORDER BY n.name, t.name",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "HelloWorldApp.Utilities namespace has self-referential relationships",
+      "source_file": "HelloWorldApp/Utilities/Helper.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/Utilities/Helper.cs",
+      "entity_name": "HelloWorldApp.Utilities",
+      "entity_type": "namespace",
+      "evidence": {
+        "summary": "REFERENCES relationship query returned records showing HelloWorldApp.Utilities namespace references itself (referenced_entity_name: 'HelloWorldApp.Utilities', referenced_entity_type: 'Namespace')"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (n:Namespace)-[:REFERENCES]->(other) RETURN n.name as namespace_name, labels(other)[0] as referenced_entity_type, other.name as referenced_entity_name, other.file_path as referenced_file_path ORDER BY n.name, referenced_entity_type",
+      "verification_query": "MATCH (n:Namespace)-[:REFERENCES]->(other) RETURN n.name as namespace_name, labels(other)[0] as referenced_entity_type, other.name as referenced_entity_name, other.file_path as referenced_file_path ORDER BY n.name, referenced_entity_type",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "medium"
+    },
+    {
+      "claim": "The project has a simple namespace structure with no cross-namespace dependencies",
+      "source_file": "HelloWorldApp/Utilities/Helper.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/Utilities/Helper.cs",
+      "entity_name": "HelloWorldApp.Utilities",
+      "entity_type": "namespace",
+      "evidence": {
+        "summary": "All three queries show only one namespace exists in the project, and the REFERENCES query shows only self-references to the same namespace, indicating no external namespace dependencies"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "Combined analysis from all three queries showing only one namespace with self-references",
+      "verification_query": "Combined analysis from all three queries showing only one namespace with self-references",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "The HelloWorldApp.Utilities namespace spans the entire Helper.cs file",
+      "source_file": "HelloWorldApp/Utilities/Helper.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/Utilities/Helper.cs",
+      "entity_name": "HelloWorldApp.Utilities",
+      "entity_type": "namespace",
+      "evidence": {
+        "summary": "Namespace query shows start_location at [0,0] and end_location at [9,1], indicating the namespace declaration covers the entire file from beginning to end"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (n:Namespace) RETURN n.name as namespace_name, n.file_path as file_path, n.type_kind as type_kind, n.start_point as start_location, n.end_point as end_location ORDER BY n.name",
+      "verification_query": "MATCH (n:Namespace) RETURN n.name as namespace_name, n.file_path as file_path, n.type_kind as type_kind, n.start_point as start_location, n.end_point as end_location ORDER BY n.name",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "The project follows a dual interface pattern with IWorker having multiple implementations and INotifier having a single implementation",
+      "source_file": "HelloWorldApp/IWorker.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/IWorker.cs",
+      "entity_name": "IWorker",
+      "entity_type": "interface",
+      "evidence": {
+        "summary": "Implementation count query shows IWorker has 3 implementations (WorkerA, WorkerB, WorkerC) while INotifier has 1 implementation (Manager), demonstrating different interface usage patterns"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (class:Type {type_kind: 'class'})-[:IMPLEMENTS]->(interface:Type {type_kind: 'interface'}) WITH interface.name as interface_name, collect(class.name) as implementing_classes, count(class) as implementation_count RETURN interface_name, implementing_classes, implementation_count ORDER BY implementation_count DESC, interface_name",
+      "verification_query": "MATCH (class:Type {type_kind: 'class'})-[:IMPLEMENTS]->(interface:Type {type_kind: 'interface'}) WITH interface.name as interface_name, collect(class.name) as implementing_classes, count(class) as implementation_count RETURN interface_name, implementing_classes, implementation_count ORDER BY implementation_count DESC, interface_name",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "All implementing classes and interfaces use public access modifiers, following a consistent visibility pattern",
+      "source_file": "HelloWorldApp/IWorker.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/IWorker.cs",
+      "entity_name": "IWorker",
+      "entity_type": "interface",
+      "evidence": {
+        "summary": "Interface implementation query shows all interfaces have interface_modifier 'public' and all implementing classes have class_modifier 'public', indicating consistent public visibility across the abstraction layer"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (class:Type {type_kind: 'class'})-[:IMPLEMENTS]->(interface:Type {type_kind: 'interface'}) RETURN interface.name as interface_name, interface.modifier as interface_modifier, interface.file_path as interface_file, class.name as implementing_class, class.modifier as class_modifier, class.file_path as class_file ORDER BY interface.name, class.name",
+      "verification_query": "MATCH (class:Type {type_kind: 'class'})-[:IMPLEMENTS]->(interface:Type {type_kind: 'interface'}) RETURN interface.name as interface_name, interface.modifier as interface_modifier, interface.file_path as interface_file, class.name as implementing_class, class.modifier as class_modifier, class.file_path as class_file ORDER BY interface.name, class.name",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "All IWorker implementing classes follow a consistent pattern with a public constructor and a public Process method",
+      "source_file": "HelloWorldApp/WorkerA.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/WorkerA.cs",
+      "entity_name": "WorkerA",
+      "entity_type": "class",
+      "evidence": {
+        "summary": "Function analysis shows each worker class (WorkerA, WorkerB, WorkerC) contains exactly two functions: a constructor (function_name matching class name, function_type 'constructor') and a Process method (function_name 'Process', function_type 'method'), all with 'public' modifiers"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (class:Type)-[:IMPLEMENTS]->(interface:Type {type_kind: 'interface'}) MATCH (class)-[:CONTAINS]->(f:Function) RETURN interface.name as interface_name, class.name as implementing_class, f.name as function_name, f.modifier as function_modifier, CASE WHEN f.name = class.name THEN 'constructor' ELSE 'method' END as function_type ORDER BY interface.name, class.name, function_type, f.name",
+      "verification_query": "MATCH (class:Type)-[:IMPLEMENTS]->(interface:Type {type_kind: 'interface'}) MATCH (class)-[:CONTAINS]->(f:Function) RETURN interface.name as interface_name, class.name as implementing_class, f.name as function_name, f.modifier as function_modifier, CASE WHEN f.name = class.name THEN 'constructor' ELSE 'method' END as function_type ORDER BY interface.name, class.name, function_type, f.name",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "Manager class implementing INotifier contains both Notify and Run public methods",
+      "source_file": "HelloWorldApp/Manager.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/Manager.cs",
+      "entity_name": "Manager",
+      "entity_type": "class",
+      "evidence": {
+        "summary": "Function query shows Manager class implementing INotifier interface contains two methods: 'Notify' and 'Run', both with function_modifier 'public' and function_type 'method'"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (class:Type)-[:IMPLEMENTS]->(interface:Type {type_kind: 'interface'}) MATCH (class)-[:CONTAINS]->(f:Function) RETURN interface.name as interface_name, class.name as implementing_class, f.name as function_name, f.modifier as function_modifier, CASE WHEN f.name = class.name THEN 'constructor' ELSE 'method' END as function_type ORDER BY interface.name, class.name, function_type, f.name",
+      "verification_query": "MATCH (class:Type)-[:IMPLEMENTS]->(interface:Type {type_kind: 'interface'}) MATCH (class)-[:CONTAINS]->(f:Function) RETURN interface.name as interface_name, class.name as implementing_class, f.name as function_name, f.modifier as function_modifier, CASE WHEN f.name = class.name THEN 'constructor' ELSE 'method' END as function_type ORDER BY interface.name, class.name, function_type, f.name",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "Worker classes exhibit circular implementation relationships, where each worker class implements the other worker classes",
+      "source_file": "HelloWorldApp/WorkerA.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/WorkerA.cs",
+      "entity_name": "WorkerA",
+      "entity_type": "class",
+      "evidence": {
+        "summary": "Class-to-class implementation query shows 6 bidirectional relationships: WorkerA implements WorkerB and WorkerC, WorkerB implements WorkerA and WorkerC, WorkerC implements WorkerA and WorkerB, creating a complete circular implementation pattern"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (implementer:Type {type_kind: 'class'})-[:IMPLEMENTS]->(baseClass:Type {type_kind: 'class'}) WHERE implementer <> baseClass RETURN baseClass.name as base_class, implementer.name as derived_class, baseClass.file_path as base_file, implementer.file_path as derived_file ORDER BY base_class, derived_class",
+      "verification_query": "MATCH (implementer:Type {type_kind: 'class'})-[:IMPLEMENTS]->(baseClass:Type {type_kind: 'class'}) WHERE implementer <> baseClass RETURN baseClass.name as base_class, implementer.name as derived_class, baseClass.file_path as base_file, implementer.file_path as derived_file ORDER BY base_class, derived_class",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "The project demonstrates a polymorphic design pattern with IWorker interface enabling interchangeable worker implementations",
+      "source_file": "HelloWorldApp/IWorker.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/IWorker.cs",
+      "entity_name": "IWorker",
+      "entity_type": "interface",
+      "evidence": {
+        "summary": "Combined evidence from interface implementation queries shows IWorker interface with 3 implementations, all having consistent Process method signatures with public modifiers, demonstrating polymorphic abstraction layer for worker functionality"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "Combined analysis from interface implementation and function queries showing consistent polymorphic pattern",
+      "verification_query": "Combined analysis from interface implementation and function queries showing consistent polymorphic pattern",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "WorkerFactory implements a classic static factory pattern with a public static class structure",
+      "source_file": "HelloWorldApp/WorkerFactory.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/WorkerFactory.cs",
+      "entity_name": "WorkerFactory",
+      "entity_type": "class",
+      "evidence": {
+        "summary": "Factory class query shows WorkerFactory with type_kind 'class', class_modifier ['public', 'static'], demonstrating static factory pattern implementation"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (factory:Type {name: 'WorkerFactory'}) RETURN factory.name as factory_name, factory.type_kind as type_kind, factory.modifier as class_modifier, factory.file_path as file_path, factory.body as class_body",
+      "verification_query": "MATCH (factory:Type {name: 'WorkerFactory'}) RETURN factory.name as factory_name, factory.type_kind as type_kind, factory.modifier as class_modifier, factory.file_path as file_path, factory.body as class_body",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "WorkerFactory contains a single CreateWorkers method that serves as the factory method with proper signature and return type",
+      "source_file": "HelloWorldApp/WorkerFactory.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/WorkerFactory.cs",
+      "entity_name": "CreateWorkers",
+      "entity_type": "method",
+      "evidence": {
+        "summary": "Factory method query shows WorkerFactory contains method_name 'CreateWorkers' with method_modifier ['public', 'static'], return_type 'IEnumerable<IWorker>', and parameters '(INotifier notifier)', establishing the factory method pattern"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (factory:Type {name: 'WorkerFactory'})-[:CONTAINS]->(method:Function) RETURN factory.name as factory_class, method.name as method_name, method.type_kind as method_type, method.modifier as method_modifier, method.return_type as return_type, method.parameters as parameters ORDER BY method.name",
+      "verification_query": "MATCH (factory:Type {name: 'WorkerFactory'})-[:CONTAINS]->(method:Function) RETURN factory.name as factory_class, method.name as method_name, method.type_kind as method_type, method.modifier as method_modifier, method.return_type as return_type, method.parameters as parameters ORDER BY method.name",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "CreateWorkers method instantiates all three worker types (WorkerA, WorkerB, WorkerC) by calling their constructors with consistent parameters",
+      "source_file": "HelloWorldApp/WorkerFactory.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/WorkerFactory.cs",
+      "entity_name": "CreateWorkers",
+      "entity_type": "method",
+      "evidence": {
+        "summary": "Constructor call analysis shows CreateWorkers factory_method calling constructors for WorkerA, WorkerB, and WorkerC worker_types, all with identical constructor_params '(INotifier notifier)' and worker_access 'public'"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (factory:Type {name: 'WorkerFactory'})-[:CONTAINS]->(method:Function {name: 'CreateWorkers'}) MATCH (method)-[:CALLS]->(constructor:Function) MATCH (workerType:Type)-[:CONTAINS]->(constructor) WHERE constructor.type_kind = 'constructor' RETURN method.name as factory_method, method.return_type as factory_return_type, constructor.name as constructor_name, workerType.name as worker_type, constructor.parameters as constructor_params, workerType.modifier as worker_access ORDER BY worker_type",
+      "verification_query": "MATCH (factory:Type {name: 'WorkerFactory'})-[:CONTAINS]->(method:Function {name: 'CreateWorkers'}) MATCH (method)-[:CALLS]->(constructor:Function) MATCH (workerType:Type)-[:CONTAINS]->(constructor) WHERE constructor.type_kind = 'constructor' RETURN method.name as factory_method, method.return_type as factory_return_type, constructor.name as constructor_name, workerType.name as worker_type, constructor.parameters as constructor_params, workerType.modifier as worker_access ORDER BY worker_type",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "The factory pattern properly abstracts object creation by returning IWorker interface instances for all three worker implementations",
+      "source_file": "HelloWorldApp/WorkerFactory.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/WorkerFactory.cs",
+      "entity_name": "CreateWorkers",
+      "entity_type": "method",
+      "evidence": {
+        "summary": "Interface abstraction query shows factory_return_type 'IEnumerable<IWorker>' with common_interface 'IWorker', created_worker_types ['WorkerC', 'WorkerB', 'WorkerA'], and worker_count 3, demonstrating proper abstraction through interface return types"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (factory:Type {name: 'WorkerFactory'})-[:CONTAINS]->(method:Function {name: 'CreateWorkers'}) MATCH (method)-[:CALLS]->(constructor:Function) MATCH (workerType:Type)-[:CONTAINS]->(constructor) MATCH (workerType)-[:IMPLEMENTS]->(interface:Type {type_kind: 'interface'}) WHERE constructor.type_kind = 'constructor' RETURN method.return_type as factory_return_type, interface.name as common_interface, collect(workerType.name) as created_worker_types, count(workerType) as worker_count ORDER BY interface.name",
+      "verification_query": "MATCH (factory:Type {name: 'WorkerFactory'})-[:CONTAINS]->(method:Function {name: 'CreateWorkers'}) MATCH (method)-[:CALLS]->(constructor:Function) MATCH (workerType:Type)-[:CONTAINS]->(constructor) MATCH (workerType)-[:IMPLEMENTS]->(interface:Type {type_kind: 'interface'}) WHERE constructor.type_kind = 'constructor' RETURN method.return_type as factory_return_type, interface.name as common_interface, collect(workerType.name) as created_worker_types, count(workerType) as worker_count ORDER BY interface.name",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "WorkerFactory class body implements a concrete List<IWorker> instantiation pattern with dependency injection",
+      "source_file": "HelloWorldApp/WorkerFactory.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/WorkerFactory.cs",
+      "entity_name": "WorkerFactory",
+      "entity_type": "class",
+      "evidence": {
+        "summary": "Class body analysis reveals CreateWorkers method returning 'new List<IWorker>' with concrete worker instantiations (new WorkerA(notifier), new WorkerB(notifier), new WorkerC(notifier)), demonstrating dependency injection pattern with INotifier parameter"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (factory:Type {name: 'WorkerFactory'}) RETURN factory.name as factory_name, factory.type_kind as type_kind, factory.modifier as class_modifier, factory.file_path as file_path, factory.body as class_body",
+      "verification_query": "MATCH (factory:Type {name: 'WorkerFactory'}) RETURN factory.name as factory_name, factory.type_kind as type_kind, factory.modifier as class_modifier, factory.file_path as file_path, factory.body as class_body",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "The application follows a hierarchical call pattern with Program.Main as the entry point calling Manager.Run, which orchestrates worker execution",
+      "source_file": "HelloWorldApp/Program.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/Program.cs",
+      "entity_name": "Main",
+      "entity_type": "method",
+      "evidence": {
+        "summary": "Cross-type call query shows Program.Main (static modifier) calling Manager.Run (public modifier), establishing the primary execution flow from application entry point to worker coordination"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (caller:Function)-[:CALLS]->(callee:Function) MATCH (callerType:Type)-[:CONTAINS]->(caller) MATCH (calleeType:Type)-[:CONTAINS]->(callee) WHERE callerType <> calleeType RETURN callerType.name as caller_type, caller.name as caller_function, caller.modifier as caller_modifier, calleeType.name as callee_type, callee.name as callee_function, callee.modifier as callee_modifier ORDER BY caller_type, caller_function",
+      "verification_query": "MATCH (caller:Function)-[:CALLS]->(callee:Function) MATCH (callerType:Type)-[:CONTAINS]->(caller) MATCH (calleeType:Type)-[:CONTAINS]->(callee) WHERE callerType <> calleeType RETURN callerType.name as caller_type, caller.name as caller_function, caller.modifier as caller_modifier, calleeType.name as callee_type, callee.name as callee_function, callee.modifier as callee_modifier ORDER BY caller_type, caller_function",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "Manager.Run coordinates all worker Process methods, calling WorkerA.Process, WorkerB.Process, and WorkerC.Process",
+      "source_file": "HelloWorldApp/Manager.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/Manager.cs",
+      "entity_name": "Run",
+      "entity_type": "method",
+      "evidence": {
+        "summary": "Function call relationships show Manager.Run as caller_function with three distinct calls to callee_function 'Process' in callee_types WorkerA, WorkerB, and WorkerC, all with public modifiers"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (caller:Function)-[:CALLS]->(callee:Function) MATCH (callerType:Type)-[:CONTAINS]->(caller) MATCH (calleeType:Type)-[:CONTAINS]->(callee) WHERE callerType <> calleeType RETURN callerType.name as caller_type, caller.name as caller_function, caller.modifier as caller_modifier, calleeType.name as callee_type, callee.name as callee_function, callee.modifier as callee_modifier ORDER BY caller_type, caller_function",
+      "verification_query": "MATCH (caller:Function)-[:CALLS]->(callee:Function) MATCH (callerType:Type)-[:CONTAINS]->(caller) MATCH (calleeType:Type)-[:CONTAINS]->(callee) WHERE callerType <> calleeType RETURN callerType.name as caller_type, caller.name as caller_function, caller.modifier as caller_modifier, calleeType.name as callee_type, callee.name as callee_function, callee.modifier as callee_modifier ORDER BY caller_type, caller_function",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "Worker Process methods exhibit circular calling patterns, where each worker calls the other workers' Process methods",
+      "source_file": "HelloWorldApp/WorkerA.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/WorkerA.cs",
+      "entity_name": "Process",
+      "entity_type": "method",
+      "evidence": {
+        "summary": "Circular call detection shows 6 bidirectional relationships: WorkerA.Process calls WorkerB.Process and WorkerC.Process, WorkerB.Process calls WorkerA.Process and WorkerC.Process, WorkerC.Process calls WorkerA.Process and WorkerB.Process"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (f1:Function)-[:CALLS]->(f2:Function)-[:CALLS]->(f1:Function) MATCH (t1:Type)-[:CONTAINS]->(f1) MATCH (t2:Type)-[:CONTAINS]->(f2) WHERE t1 <> t2 RETURN t1.name as type1, f1.name as function1, t2.name as type2, f2.name as function2 ORDER BY type1, function1",
+      "verification_query": "MATCH (f1:Function)-[:CALLS]->(f2:Function)-[:CALLS]->(f1:Function) MATCH (t1:Type)-[:CONTAINS]->(f1) MATCH (t2:Type)-[:CONTAINS]->(f2) WHERE t1 <> t2 RETURN t1.name as type1, f1.name as function1, t2.name as type2, f2.name as function2 ORDER BY type1, function1",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "WorkerFactory.CreateWorkers implements factory pattern by calling constructors of all worker classes",
+      "source_file": "HelloWorldApp/WorkerFactory.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/WorkerFactory.cs",
+      "entity_name": "CreateWorkers",
+      "entity_type": "method",
+      "evidence": {
+        "summary": "Factory pattern query shows CreateWorkers as factory_method calling constructor_names WorkerA, WorkerB, and WorkerC in their respective worker_types, all with public worker_modifier"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (factory:Function)-[:CALLS]->(constructor:Function) MATCH (factoryType:Type {name: 'WorkerFactory'})-[:CONTAINS]->(factory) MATCH (workerType:Type)-[:CONTAINS]->(constructor) WHERE constructor.name = workerType.name RETURN factory.name as factory_method, factoryType.name as factory_type, constructor.name as constructor_name, workerType.name as worker_type, workerType.modifier as worker_modifier ORDER BY worker_type",
+      "verification_query": "MATCH (factory:Function)-[:CALLS]->(constructor:Function) MATCH (factoryType:Type {name: 'WorkerFactory'})-[:CONTAINS]->(factory) MATCH (workerType:Type)-[:CONTAINS]->(constructor) WHERE constructor.name = workerType.name RETURN factory.name as factory_method, factoryType.name as factory_type, constructor.name as constructor_name, workerType.name as worker_type, workerType.modifier as worker_modifier ORDER BY worker_type",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "All worker Process methods call Manager.Notify, establishing a callback communication pattern",
+      "source_file": "HelloWorldApp/WorkerA.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/WorkerA.cs",
+      "entity_name": "Process",
+      "entity_type": "method",
+      "evidence": {
+        "summary": "Cross-type function calls show WorkerA.Process, WorkerB.Process, and WorkerC.Process all making calls to Manager.Notify (public modifier), creating a consistent callback pattern from workers to manager"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (caller:Function)-[:CALLS]->(callee:Function) MATCH (callerType:Type)-[:CONTAINS]->(caller) MATCH (calleeType:Type)-[:CONTAINS]->(callee) WHERE callerType <> calleeType RETURN callerType.name as caller_type, caller.name as caller_function, caller.modifier as caller_modifier, calleeType.name as callee_type, callee.name as callee_function, callee.modifier as callee_modifier ORDER BY caller_type, caller_function",
+      "verification_query": "MATCH (caller:Function)-[:CALLS]->(callee:Function) MATCH (callerType:Type)-[:CONTAINS]->(caller) MATCH (calleeType:Type)-[:CONTAINS]->(callee) WHERE callerType <> calleeType RETURN callerType.name as caller_type, caller.name as caller_function, caller.modifier as caller_modifier, calleeType.name as callee_type, callee.name as callee_function, callee.modifier as callee_modifier ORDER BY caller_type, caller_function",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "WorkerFactory.CreateWorkers is the most active function with 10 outgoing calls, making it a central coordination point",
+      "source_file": "HelloWorldApp/WorkerFactory.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/WorkerFactory.cs",
+      "entity_name": "CreateWorkers",
+      "entity_type": "method",
+      "evidence": {
+        "summary": "Function activity analysis shows WorkerFactory.CreateWorkers with calls_made: 10 (highest among all functions), times_called: 43, modifier ['public', 'static'], and role 'worker', indicating high outbound activity"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (caller:Function)-[:CALLS]->(callee:Function) MATCH (callerType:Type)-[:CONTAINS]->(caller) WITH callerType.name as type_name, caller.name as function_name, caller.modifier as modifier, count(callee) as calls_made OPTIONAL MATCH (caller)<-[:CALLS]-(other:Function) WITH type_name, function_name, modifier, calls_made, count(other) as times_called WHERE calls_made > 0 RETURN type_name, function_name, modifier, calls_made, times_called, CASE WHEN times_called = 0 THEN 'entry_point' WHEN calls_made > times_called THEN 'coordinator' ELSE 'worker' END as role ORDER BY calls_made DESC, times_called ASC",
+      "verification_query": "MATCH (caller:Function)-[:CALLS]->(callee:Function) MATCH (callerType:Type)-[:CONTAINS]->(caller) WITH callerType.name as type_name, caller.name as function_name, caller.modifier as modifier, count(callee) as calls_made OPTIONAL MATCH (caller)<-[:CALLS]-(other:Function) WITH type_name, function_name, modifier, calls_made, count(other) as times_called WHERE calls_made > 0 RETURN type_name, function_name, modifier, calls_made, times_called, CASE WHEN times_called = 0 THEN 'entry_point' WHEN calls_made > times_called THEN 'coordinator' ELSE 'worker' END as role ORDER BY calls_made DESC, times_called ASC",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "All functions are classified as 'worker' role despite having different call patterns, indicating high interconnectedness in the call graph",
+      "source_file": "HelloWorldApp/WorkerFactory.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/WorkerFactory.cs",
+      "entity_name": "CreateWorkers",
+      "entity_type": "method",
+      "evidence": {
+        "summary": "Role analysis shows all functions with role 'worker' and consistently high times_called values (43), indicating no functions qualify as 'entry_point' or 'coordinator' roles due to high interconnectedness"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (caller:Function)-[:CALLS]->(callee:Function) MATCH (callerType:Type)-[:CONTAINS]->(caller) WITH callerType.name as type_name, caller.name as function_name, caller.modifier as modifier, count(callee) as calls_made OPTIONAL MATCH (caller)<-[:CALLS]-(other:Function) WITH type_name, function_name, modifier, calls_made, count(other) as times_called WHERE calls_made > 0 RETURN type_name, function_name, modifier, calls_made, times_called, CASE WHEN times_called = 0 THEN 'entry_point' WHEN calls_made > times_called THEN 'coordinator' ELSE 'worker' END as role ORDER BY calls_made DESC, times_called ASC",
+      "verification_query": "MATCH (caller:Function)-[:CALLS]->(callee:Function) MATCH (callerType:Type)-[:CONTAINS]->(caller) WITH callerType.name as type_name, caller.name as function_name, caller.modifier as modifier, count(callee) as calls_made OPTIONAL MATCH (caller)<-[:CALLS]-(other:Function) WITH type_name, function_name, modifier, calls_made, count(other) as times_called WHERE calls_made > 0 RETURN type_name, function_name, modifier, calls_made, times_called, CASE WHEN times_called = 0 THEN 'entry_point' WHEN calls_made > times_called THEN 'coordinator' ELSE 'worker' END as role ORDER BY calls_made DESC, times_called ASC",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "medium"
+    },
+    {
+      "claim": "The project contains 12 total functions distributed across 8 classes with diverse signatures and purposes",
+      "source_file": "HelloWorldApp/WorkerA.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/WorkerA.cs",
+      "entity_name": "WorkerA",
+      "entity_type": "constructor",
+      "evidence": {
+        "summary": "Function query returned 12 distinct functions: 3 constructors (WorkerA, WorkerB, WorkerC) and 9 methods (CreateWorkers, FormatMessage, Main, Notify, Process x3, Run, TestMethod) with diverse parameters and return types across multiple files"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (f:Function) RETURN f.name as function_name, f.type_kind as function_type, f.modifier as modifier, f.return_type as return_type, f.parameters as parameters, f.file_path as file_path ORDER BY f.type_kind, f.name",
+      "verification_query": "MATCH (f:Function) RETURN f.name as function_name, f.type_kind as function_type, f.modifier as modifier, f.return_type as return_type, f.parameters as parameters, f.file_path as file_path ORDER BY f.type_kind, f.name",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "All worker constructors follow a consistent pattern accepting INotifier notifier parameter",
+      "source_file": "HelloWorldApp/WorkerA.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/WorkerA.cs",
+      "entity_name": "WorkerA",
+      "entity_type": "constructor",
+      "evidence": {
+        "summary": "Function query shows all three worker constructors (WorkerA, WorkerB, WorkerC) have identical signatures with function_type 'constructor', modifier 'public', return_type null, and parameters '(INotifier notifier)'"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (f:Function) RETURN f.name as function_name, f.type_kind as function_type, f.modifier as modifier, f.return_type as return_type, f.parameters as parameters, f.file_path as file_path ORDER BY f.type_kind, f.name",
+      "verification_query": "MATCH (f:Function) RETURN f.name as function_name, f.type_kind as function_type, f.modifier as modifier, f.return_type as return_type, f.parameters as parameters, f.file_path as file_path ORDER BY f.type_kind, f.name",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "The project exhibits three distinct method categories: constructors, static methods, and instance methods",
+      "source_file": "HelloWorldApp/Utilities/Helper.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/Utilities/Helper.cs",
+      "entity_name": "FormatMessage",
+      "entity_type": "method",
+      "evidence": {
+        "summary": "Method categorization query shows clear separation: 3 functions with method_category 'constructor', 3 functions with method_category 'static_method' (FormatMessage, CreateWorkers, Main), and 6 functions with method_category 'instance_method'"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (t:Type)-[:CONTAINS]->(f:Function) RETURN t.name as type_name, t.type_kind as type_kind, t.modifier as type_modifier, f.name as function_name, f.type_kind as function_type, f.modifier as function_modifier, f.return_type as return_type, CASE WHEN f.name = t.name THEN 'constructor' WHEN f.modifier CONTAINS 'static' THEN 'static_method' ELSE 'instance_method' END as method_category ORDER BY t.name, method_category, f.name",
+      "verification_query": "MATCH (t:Type)-[:CONTAINS]->(f:Function) RETURN t.name as type_name, t.type_kind as type_kind, t.modifier as type_modifier, f.name as function_name, f.type_kind as function_type, f.modifier as function_modifier, f.return_type as return_type, CASE WHEN f.name = t.name THEN 'constructor' WHEN f.modifier CONTAINS 'static' THEN 'static_method' ELSE 'instance_method' END as method_category ORDER BY t.name, method_category, f.name",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "Functions demonstrate polymorphic implementations with Manager.Notify implementing INotifier and WorkerA.Process implementing IWorker",
+      "source_file": "HelloWorldApp/Manager.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/Manager.cs",
+      "entity_name": "Notify",
+      "entity_type": "method",
+      "evidence": {
+        "summary": "Relationship query shows Manager.Notify has IMPLEMENTS relationship with target_entity_type 'Type' and target_name 'INotifier', and WorkerA.Process has IMPLEMENTS relationship with target_entity_type 'Type' and target_name 'IWorker'"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (f:Function)-[r]->(other) WHERE type(r) IN ['REFERENCES', 'IMPLEMENTS'] MATCH (t:Type)-[:CONTAINS]->(f) RETURN t.name as containing_type, f.name as function_name, type(r) as relationship_type, labels(other)[0] as target_entity_type, other.name as target_name ORDER BY containing_type, function_name, relationship_type",
+      "verification_query": "MATCH (f:Function)-[r]->(other) WHERE type(r) IN ['REFERENCES', 'IMPLEMENTS'] MATCH (t:Type)-[:CONTAINS]->(f) RETURN t.name as containing_type, f.name as function_name, type(r) as relationship_type, labels(other)[0] as target_entity_type, other.name as target_name ORDER BY containing_type, function_name, relationship_type",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "Function organization follows namespace-based separation with Helper.FormatMessage in HelloWorldApp.Utilities and all other functions in default namespace",
+      "source_file": "HelloWorldApp/Utilities/Helper.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/Utilities/Helper.cs",
+      "entity_name": "FormatMessage",
+      "entity_type": "method",
+      "evidence": {
+        "summary": "Namespace organization query shows Helper type with function_count 1 in namespace_name 'HelloWorldApp.Utilities' containing FormatMessage function, while all other types (Manager, Program, TestAliases, WorkerA, WorkerB, WorkerC, WorkerFactory) are in namespace_name 'Default'"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (f:Function) OPTIONAL MATCH (ns:Namespace)-[:CONTAINS]->(t:Type)-[:CONTAINS]->(f) OPTIONAL MATCH (t2:Type)-[:CONTAINS]->(f) WHERE ns IS NULL WITH COALESCE(ns.name, 'Default') as namespace_name, COALESCE(t.name, t2.name) as type_name, collect({name: f.name, type: f.type_kind, modifier: f.modifier}) as functions RETURN namespace_name, type_name, size(functions) as function_count, functions ORDER BY namespace_name, type_name",
+      "verification_query": "MATCH (f:Function) OPTIONAL MATCH (ns:Namespace)-[:CONTAINS]->(t:Type)-[:CONTAINS]->(f) OPTIONAL MATCH (t2:Type)-[:CONTAINS]->(f) WHERE ns IS NULL WITH COALESCE(ns.name, 'Default') as namespace_name, COALESCE(t.name, t2.name) as type_name, collect({name: f.name, type: f.type_kind, modifier: f.modifier}) as functions RETURN namespace_name, type_name, size(functions) as function_count, functions ORDER BY namespace_name, type_name",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "Static factory pattern is implemented with WorkerFactory.CreateWorkers returning IEnumerable<IWorker>",
+      "source_file": "HelloWorldApp/WorkerFactory.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/WorkerFactory.cs",
+      "entity_name": "CreateWorkers",
+      "entity_type": "method",
+      "evidence": {
+        "summary": "Function query shows CreateWorkers with function_type 'method', modifier ['public', 'static'], return_type 'IEnumerable<IWorker>', parameters '(INotifier notifier)', demonstrating static factory pattern for creating worker instances"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (f:Function) RETURN f.name as function_name, f.type_kind as function_type, f.modifier as modifier, f.return_type as return_type, f.parameters as parameters, f.file_path as file_path ORDER BY f.type_kind, f.name",
+      "verification_query": "MATCH (f:Function) RETURN f.name as function_name, f.type_kind as function_type, f.modifier as modifier, f.return_type as return_type, f.parameters as parameters, f.file_path as file_path ORDER BY f.type_kind, f.name",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "All Process methods across worker classes follow identical signatures with void return type and no parameters",
+      "source_file": "HelloWorldApp/WorkerA.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/WorkerA.cs",
+      "entity_name": "Process",
+      "entity_type": "method",
+      "evidence": {
+        "summary": "Function query shows all three Process methods have identical properties: function_type 'method', modifier 'public', return_type 'void', parameters '()', across WorkerA.cs, WorkerB.cs, and WorkerC.cs files"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (f:Function) RETURN f.name as function_name, f.type_kind as function_type, f.modifier as modifier, f.return_type as return_type, f.parameters as parameters, f.file_path as file_path ORDER BY f.type_kind, f.name",
+      "verification_query": "MATCH (f:Function) RETURN f.name as function_name, f.type_kind as function_type, f.modifier as modifier, f.return_type as return_type, f.parameters as parameters, f.file_path as file_path ORDER BY f.type_kind, f.name",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "The project implements a dual interface hierarchy with IWorker having multiple implementations and INotifier having a single implementation",
+      "source_file": "HelloWorldApp/IWorker.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/IWorker.cs",
+      "entity_name": "IWorker",
+      "entity_type": "interface",
+      "evidence": {
+        "summary": "Interface hierarchy analysis shows IWorker with implementing_classes ['WorkerA', 'WorkerB', 'WorkerC'] and implementation_count 3, while INotifier has implementing_classes ['Manager'] and implementation_count 1, both with interface_access 'public'"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (class:Type {type_kind: 'class'})-[:IMPLEMENTS]->(interface:Type {type_kind: 'interface'}) RETURN interface.name as interface_name, interface.modifier as interface_access, collect(class.name) as implementing_classes, count(class) as implementation_count ORDER BY interface_name",
+      "verification_query": "MATCH (class:Type {type_kind: 'class'})-[:IMPLEMENTS]->(interface:Type {type_kind: 'interface'}) RETURN interface.name as interface_name, interface.modifier as interface_access, collect(class.name) as implementing_classes, count(class) as implementation_count ORDER BY interface_name",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "Worker classes exhibit non-traditional circular class implementation relationships, where each worker implements the other workers as if they were interfaces",
+      "source_file": "HelloWorldApp/WorkerA.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/WorkerA.cs",
+      "entity_name": "WorkerA",
+      "entity_type": "class",
+      "evidence": {
+        "summary": "Class-to-class implementation query shows 6 circular relationships: WorkerA implements WorkerB and WorkerC, WorkerB implements WorkerA and WorkerC, WorkerC implements WorkerA and WorkerB, all with public modifiers creating a complete circular implementation pattern"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (derived:Type)-[:IMPLEMENTS]->(base:Type) WHERE derived.type_kind = 'class' AND base.type_kind = 'class' AND derived <> base RETURN derived.name as derived_class, base.name as base_class, derived.modifier as derived_modifier, base.modifier as base_modifier, derived.file_path as derived_file ORDER BY derived_class, base_class",
+      "verification_query": "MATCH (derived:Type)-[:IMPLEMENTS]->(base:Type) WHERE derived.type_kind = 'class' AND base.type_kind = 'class' AND derived <> base RETURN derived.name as derived_class, base.name as base_class, derived.modifier as derived_modifier, base.modifier as base_modifier, derived.file_path as derived_file ORDER BY derived_class, base_class",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "All worker classes are hybrid implementers that implement both interfaces and other classes, making them the most complex architectural components",
+      "source_file": "HelloWorldApp/WorkerA.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/WorkerA.cs",
+      "entity_name": "WorkerA",
+      "entity_type": "class",
+      "evidence": {
+        "summary": "Implementation complexity analysis shows each worker class with total_implementations 3: WorkerA implements ['WorkerC', 'WorkerB', 'IWorker'], WorkerB implements ['WorkerC', 'WorkerA', 'IWorker'], WorkerC implements ['WorkerB', 'WorkerA', 'IWorker'], demonstrating hybrid implementation patterns"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (implementer:Type)-[:IMPLEMENTS]->(target:Type) WHERE implementer <> target WITH implementer.name as class_name, implementer.type_kind as class_type, count(DISTINCT target) as total_implementations, collect(DISTINCT target.name) as implemented_types RETURN class_name, class_type, total_implementations, implemented_types ORDER BY total_implementations DESC, class_name",
+      "verification_query": "MATCH (implementer:Type)-[:IMPLEMENTS]->(target:Type) WHERE implementer <> target WITH implementer.name as class_name, implementer.type_kind as class_type, count(DISTINCT target) as total_implementations, collect(DISTINCT target.name) as implemented_types RETURN class_name, class_type, total_implementations, implemented_types ORDER BY total_implementations DESC, class_name",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "The project demonstrates four distinct architectural roles: hybrid implementers (workers), interface implementer (Manager), interface contracts (IWorker, INotifier), and standalone classes",
+      "source_file": "HelloWorldApp/WorkerA.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/WorkerA.cs",
+      "entity_name": "WorkerA",
+      "entity_type": "class",
+      "evidence": {
+        "summary": "Architectural role analysis shows distinct patterns: 3 types with architectural_role 'hybrid_implementer' (workers), 1 with 'interface_implementer' (Manager), 2 with 'interface_contract' (interfaces), and 4 with 'standalone' role (Helper, Program, TestAliases, WorkerFactory)"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (t:Type) OPTIONAL MATCH (t)-[:IMPLEMENTS]->(interface:Type {type_kind: 'interface'}) OPTIONAL MATCH (t)-[:IMPLEMENTS]->(otherClass:Type {type_kind: 'class'}) WHERE t <> otherClass OPTIONAL MATCH (implementer:Type)-[:IMPLEMENTS]->(t) WHERE implementer <> t WITH t.name as type_name, t.type_kind as type_kind, t.modifier as modifier, count(DISTINCT interface) as interfaces_implemented, count(DISTINCT otherClass) as classes_implemented, count(DISTINCT implementer) as times_implemented RETURN type_name, type_kind, modifier, interfaces_implemented, classes_implemented, times_implemented, CASE WHEN type_kind = 'interface' THEN 'interface_contract' WHEN interfaces_implemented > 0 AND classes_implemented > 0 THEN 'hybrid_implementer' WHEN interfaces_implemented > 0 THEN 'interface_implementer' WHEN classes_implemented > 0 THEN 'class_implementer' ELSE 'standalone' END as architectural_role ORDER BY architectural_role, type_name",
+      "verification_query": "MATCH (t:Type) OPTIONAL MATCH (t)-[:IMPLEMENTS]->(interface:Type {type_kind: 'interface'}) OPTIONAL MATCH (t)-[:IMPLEMENTS]->(otherClass:Type {type_kind: 'class'}) WHERE t <> otherClass OPTIONAL MATCH (implementer:Type)-[:IMPLEMENTS]->(t) WHERE implementer <> t WITH t.name as type_name, t.type_kind as type_kind, t.modifier as modifier, count(DISTINCT interface) as interfaces_implemented, count(DISTINCT otherClass) as classes_implemented, count(DISTINCT implementer) as times_implemented RETURN type_name, type_kind, modifier, interfaces_implemented, classes_implemented, times_implemented, CASE WHEN type_kind = 'interface' THEN 'interface_contract' WHEN interfaces_implemented > 0 AND classes_implemented > 0 THEN 'hybrid_implementer' WHEN interfaces_implemented > 0 THEN 'interface_implementer' WHEN classes_implemented > 0 THEN 'class_implementer' ELSE 'standalone' END as architectural_role ORDER BY architectural_role, type_name",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "Worker classes are both implementers and targets of implementation, with each worker being implemented by exactly 2 other workers",
+      "source_file": "HelloWorldApp/WorkerA.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/WorkerA.cs",
+      "entity_name": "WorkerA",
+      "entity_type": "class",
+      "evidence": {
+        "summary": "Bidirectional implementation pattern shows symmetric relationships: WorkerA, WorkerB, and WorkerC each have interfaces_implemented: 1, classes_implemented: 2, and times_implemented: 2, creating perfect symmetry in the implementation graph"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (t:Type) OPTIONAL MATCH (t)-[:IMPLEMENTS]->(interface:Type {type_kind: 'interface'}) OPTIONAL MATCH (t)-[:IMPLEMENTS]->(otherClass:Type {type_kind: 'class'}) WHERE t <> otherClass OPTIONAL MATCH (implementer:Type)-[:IMPLEMENTS]->(t) WHERE implementer <> t WITH t.name as type_name, t.type_kind as type_kind, t.modifier as modifier, count(DISTINCT interface) as interfaces_implemented, count(DISTINCT otherClass) as classes_implemented, count(DISTINCT implementer) as times_implemented RETURN type_name, type_kind, modifier, interfaces_implemented, classes_implemented, times_implemented, CASE WHEN type_kind = 'interface' THEN 'interface_contract' WHEN interfaces_implemented > 0 AND classes_implemented > 0 THEN 'hybrid_implementer' WHEN interfaces_implemented > 0 THEN 'interface_implementer' WHEN classes_implemented > 0 THEN 'class_implementer' ELSE 'standalone' END as architectural_role ORDER BY architectural_role, type_name",
+      "verification_query": "MATCH (t:Type) OPTIONAL MATCH (t)-[:IMPLEMENTS]->(interface:Type {type_kind: 'interface'}) OPTIONAL MATCH (t)-[:IMPLEMENTS]->(otherClass:Type {type_kind: 'class'}) WHERE t <> otherClass OPTIONAL MATCH (implementer:Type)-[:IMPLEMENTS]->(t) WHERE implementer <> t WITH t.name as type_name, t.type_kind as type_kind, t.modifier as modifier, count(DISTINCT interface) as interfaces_implemented, count(DISTINCT otherClass) as classes_implemented, count(DISTINCT implementer) as times_implemented RETURN type_name, type_kind, modifier, interfaces_implemented, classes_implemented, times_implemented, CASE WHEN type_kind = 'interface' THEN 'interface_contract' WHEN interfaces_implemented > 0 AND classes_implemented > 0 THEN 'hybrid_implementer' WHEN interfaces_implemented > 0 THEN 'interface_implementer' WHEN classes_implemented > 0 THEN 'class_implementer' ELSE 'standalone' END as architectural_role ORDER BY architectural_role, type_name",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "Manager class follows traditional single interface implementation pattern, implementing only INotifier without cross-class relationships",
+      "source_file": "HelloWorldApp/Manager.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/Manager.cs",
+      "entity_name": "Manager",
+      "entity_type": "class",
+      "evidence": {
+        "summary": "Traditional implementation pattern analysis shows Manager with architectural_role 'interface_implementer', interfaces_implemented: 1, classes_implemented: 0, times_implemented: 0, demonstrating clean single interface implementation without circular class dependencies"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (t:Type) OPTIONAL MATCH (t)-[:IMPLEMENTS]->(interface:Type {type_kind: 'interface'}) OPTIONAL MATCH (t)-[:IMPLEMENTS]->(otherClass:Type {type_kind: 'class'}) WHERE t <> otherClass OPTIONAL MATCH (implementer:Type)-[:IMPLEMENTS]->(t) WHERE implementer <> t WITH t.name as type_name, t.type_kind as type_kind, t.modifier as modifier, count(DISTINCT interface) as interfaces_implemented, count(DISTINCT otherClass) as classes_implemented, count(DISTINCT implementer) as times_implemented RETURN type_name, type_kind, modifier, interfaces_implemented, classes_implemented, times_implemented, CASE WHEN type_kind = 'interface' THEN 'interface_contract' WHEN interfaces_implemented > 0 AND classes_implemented > 0 THEN 'hybrid_implementer' WHEN interfaces_implemented > 0 THEN 'interface_implementer' WHEN classes_implemented > 0 THEN 'class_implementer' ELSE 'standalone' END as architectural_role ORDER BY architectural_role, type_name",
+      "verification_query": "MATCH (t:Type) OPTIONAL MATCH (t)-[:IMPLEMENTS]->(interface:Type {type_kind: 'interface'}) OPTIONAL MATCH (t)-[:IMPLEMENTS]->(otherClass:Type {type_kind: 'class'}) WHERE t <> otherClass OPTIONAL MATCH (implementer:Type)-[:IMPLEMENTS]->(t) WHERE implementer <> t WITH t.name as type_name, t.type_kind as type_kind, t.modifier as modifier, count(DISTINCT interface) as interfaces_implemented, count(DISTINCT otherClass) as classes_implemented, count(DISTINCT implementer) as times_implemented RETURN type_name, type_kind, modifier, interfaces_implemented, classes_implemented, times_implemented, CASE WHEN type_kind = 'interface' THEN 'interface_contract' WHEN interfaces_implemented > 0 AND classes_implemented > 0 THEN 'hybrid_implementer' WHEN interfaces_implemented > 0 THEN 'interface_implementer' WHEN classes_implemented > 0 THEN 'class_implementer' ELSE 'standalone' END as architectural_role ORDER BY architectural_role, type_name",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "The project follows a dual-namespace organization with HelloWorldApp.Utilities containing utility functions and Default namespace containing the core application logic",
+      "source_file": "HelloWorldApp/Utilities/Helper.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/Utilities/Helper.cs",
+      "entity_name": "HelloWorldApp.Utilities",
+      "entity_type": "namespace",
+      "evidence": {
+        "summary": "Namespace organization query shows HelloWorldApp.Utilities with total_types 1 and total_functions 1 containing Helper class with FormatMessage function, while Default namespace contains total_types 9 and total_functions 11 including interfaces INotifier and IWorker plus classes Manager, Program, TestAliases, WorkerA, WorkerB, WorkerC, WorkerFactory"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (t:Type) OPTIONAL MATCH (ns:Namespace)-[:CONTAINS]->(t) OPTIONAL MATCH (t)-[:CONTAINS]->(f:Function) WITH COALESCE(ns.name, 'Default') as namespace_name, t.name as type_name, t.type_kind as type_kind, t.modifier as type_modifier, count(f) as function_count, collect(f.name) as functions RETURN namespace_name, collect({type_name: type_name, type_kind: type_kind, modifier: type_modifier, function_count: function_count, functions: functions}) as types, count(*) as total_types, sum(function_count) as total_functions ORDER BY namespace_name",
+      "verification_query": "MATCH (t:Type) OPTIONAL MATCH (ns:Namespace)-[:CONTAINS]->(t) OPTIONAL MATCH (t)-[:CONTAINS]->(f:Function) WITH COALESCE(ns.name, 'Default') as namespace_name, t.name as type_name, t.type_kind as type_kind, t.modifier as type_modifier, count(f) as function_count, collect(f.name) as functions RETURN namespace_name, collect({type_name: type_name, type_kind: type_kind, modifier: type_modifier, function_count: function_count, functions: functions}) as types, count(*) as total_types, sum(function_count) as total_functions ORDER BY namespace_name",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "Interfaces exhibit stronger reference relationships than implementation relationships, with INotifier and IWorker both having relationship_strength of 2 for REFERENCES compared to strength 1 for IMPLEMENTS",
+      "source_file": "HelloWorldApp/INotifier.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/INotifier.cs",
+      "entity_name": "INotifier",
+      "entity_type": "interface",
+      "evidence": {
+        "summary": "Type relationship analysis shows highest relationship_strength values: INotifier-to-Manager with strength 2, IWorker-to-WorkerA/B/C each with strength 2, all using REFERENCES relationship_type, indicating interfaces have stronger reference bonds than simple implementation relationships"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (source:Type)-[r]->(target:Type) WHERE type(r) IN ['IMPLEMENTS', 'REFERENCES'] AND source <> target WITH source.name as source_type, source.type_kind as source_kind, type(r) as relationship_type, target.name as target_type, target.type_kind as target_kind, count(*) as relationship_strength RETURN source_type, source_kind, relationship_type, target_type, target_kind, relationship_strength ORDER BY relationship_strength DESC, source_type",
+      "verification_query": "MATCH (source:Type)-[r]->(target:Type) WHERE type(r) IN ['IMPLEMENTS', 'REFERENCES'] AND source <> target WITH source.name as source_type, source.type_kind as source_kind, type(r) as relationship_type, target.name as target_type, target.type_kind as target_kind, count(*) as relationship_strength RETURN source_type, source_kind, relationship_type, target_type, target_kind, relationship_strength ORDER BY relationship_strength DESC, source_type",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "All worker classes are classified as 'highly_coupled' with identical complexity scores of 6, indicating problematic architectural coupling",
+      "source_file": "HelloWorldApp/WorkerA.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/WorkerA.cs",
+      "entity_name": "WorkerA",
+      "entity_type": "class",
+      "evidence": {
+        "summary": "Architectural assessment query shows WorkerA, WorkerB, and WorkerC each with complexity_score 6, architectural_assessment 'highly_coupled', interfaces_implemented 1, classes_implemented 2, and external_dependencies 3, demonstrating identical problematic coupling patterns"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (t:Type) OPTIONAL MATCH (t)-[:IMPLEMENTS]->(interface:Type {type_kind: 'interface'}) OPTIONAL MATCH (t)-[:IMPLEMENTS]->(otherClass:Type {type_kind: 'class'}) WHERE t <> otherClass OPTIONAL MATCH (t)-[:CONTAINS]->(f:Function) OPTIONAL MATCH (f)-[:CALLS]->(callee:Function) MATCH (calleeType:Type)-[:CONTAINS]->(callee) WHERE t <> calleeType WITH t.name as type_name, t.type_kind as type_kind, count(DISTINCT interface) as interfaces_implemented, count(DISTINCT otherClass) as classes_implemented, count(DISTINCT f) as function_count, count(DISTINCT calleeType) as external_dependencies RETURN type_name, type_kind, interfaces_implemented, classes_implemented, function_count, external_dependencies, (interfaces_implemented + classes_implemented + external_dependencies) as complexity_score, CASE WHEN type_kind = 'interface' THEN 'contract' WHEN external_dependencies = 0 THEN 'isolated' WHEN classes_implemented > 0 AND external_dependencies > 2 THEN 'highly_coupled' WHEN interfaces_implemented > 0 AND external_dependencies <= 2 THEN 'well_designed' ELSE 'moderate' END as architectural_assessment ORDER BY complexity_score DESC, type_name",
+      "verification_query": "MATCH (t:Type) OPTIONAL MATCH (t)-[:IMPLEMENTS]->(interface:Type {type_kind: 'interface'}) OPTIONAL MATCH (t)-[:IMPLEMENTS]->(otherClass:Type {type_kind: 'class'}) WHERE t <> otherClass OPTIONAL MATCH (t)-[:CONTAINS]->(f:Function) OPTIONAL MATCH (f)-[:CALLS]->(callee:Function) MATCH (calleeType:Type)-[:CONTAINS]->(callee) WHERE t <> calleeType WITH t.name as type_name, t.type_kind as type_kind, count(DISTINCT interface) as interfaces_implemented, count(DISTINCT otherClass) as classes_implemented, count(DISTINCT f) as function_count, count(DISTINCT calleeType) as external_dependencies RETURN type_name, type_kind, interfaces_implemented, classes_implemented, function_count, external_dependencies, (interfaces_implemented + classes_implemented + external_dependencies) as complexity_score, CASE WHEN type_kind = 'interface' THEN 'contract' WHEN external_dependencies = 0 THEN 'isolated' WHEN classes_implemented > 0 AND external_dependencies > 2 THEN 'highly_coupled' WHEN interfaces_implemented > 0 AND external_dependencies <= 2 THEN 'well_designed' ELSE 'moderate' END as architectural_assessment ORDER BY complexity_score DESC, type_name",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "Manager and WorkerFactory classes are classified as 'moderate' architectural assessment, showing better design than worker classes",
+      "source_file": "HelloWorldApp/Manager.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/Manager.cs",
+      "entity_name": "Manager",
+      "entity_type": "class",
+      "evidence": {
+        "summary": "Complexity analysis shows Manager with complexity_score 4 and WorkerFactory with complexity_score 3, both having architectural_assessment 'moderate', compared to workers' 'highly_coupled' assessment, indicating better architectural design with lower coupling"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (t:Type) OPTIONAL MATCH (t)-[:IMPLEMENTS]->(interface:Type {type_kind: 'interface'}) OPTIONAL MATCH (t)-[:IMPLEMENTS]->(otherClass:Type {type_kind: 'class'}) WHERE t <> otherClass OPTIONAL MATCH (t)-[:CONTAINS]->(f:Function) OPTIONAL MATCH (f)-[:CALLS]->(callee:Function) MATCH (calleeType:Type)-[:CONTAINS]->(callee) WHERE t <> calleeType WITH t.name as type_name, t.type_kind as type_kind, count(DISTINCT interface) as interfaces_implemented, count(DISTINCT otherClass) as classes_implemented, count(DISTINCT f) as function_count, count(DISTINCT calleeType) as external_dependencies RETURN type_name, type_kind, interfaces_implemented, classes_implemented, function_count, external_dependencies, (interfaces_implemented + classes_implemented + external_dependencies) as complexity_score, CASE WHEN type_kind = 'interface' THEN 'contract' WHEN external_dependencies = 0 THEN 'isolated' WHEN classes_implemented > 0 AND external_dependencies > 2 THEN 'highly_coupled' WHEN interfaces_implemented > 0 AND external_dependencies <= 2 THEN 'well_designed' ELSE 'moderate' END as architectural_assessment ORDER BY complexity_score DESC, type_name",
+      "verification_query": "MATCH (t:Type) OPTIONAL MATCH (t)-[:IMPLEMENTS]->(interface:Type {type_kind: 'interface'}) OPTIONAL MATCH (t)-[:IMPLEMENTS]->(otherClass:Type {type_kind: 'class'}) WHERE t <> otherClass OPTIONAL MATCH (t)-[:CONTAINS]->(f:Function) OPTIONAL MATCH (f)-[:CALLS]->(callee:Function) MATCH (calleeType:Type)-[:CONTAINS]->(callee) WHERE t <> calleeType WITH t.name as type_name, t.type_kind as type_kind, count(DISTINCT interface) as interfaces_implemented, count(DISTINCT otherClass) as classes_implemented, count(DISTINCT f) as function_count, count(DISTINCT calleeType) as external_dependencies RETURN type_name, type_kind, interfaces_implemented, classes_implemented, function_count, external_dependencies, (interfaces_implemented + classes_implemented + external_dependencies) as complexity_score, CASE WHEN type_kind = 'interface' THEN 'contract' WHEN external_dependencies = 0 THEN 'isolated' WHEN classes_implemented > 0 AND external_dependencies > 2 THEN 'highly_coupled' WHEN interfaces_implemented > 0 AND external_dependencies <= 2 THEN 'well_designed' ELSE 'moderate' END as architectural_assessment ORDER BY complexity_score DESC, type_name",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "Cross-type function calls exhibit uniform distribution pattern with Manager, WorkerA, WorkerB, WorkerC, and WorkerFactory all making exactly 3 outbound calls, while Program makes only 1",
+      "source_file": "HelloWorldApp/Manager.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/Manager.cs",
+      "entity_name": "Manager",
+      "entity_type": "class",
+      "evidence": {
+        "summary": "Cross-type call analysis shows Manager, WorkerA, WorkerB, WorkerC, and WorkerFactory each with total_outbound_calls 3, while Program has total_outbound_calls 1, demonstrating uniform call distribution across most components except the entry point"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (caller:Function)-[:CALLS]->(callee:Function) MATCH (callerType:Type)-[:CONTAINS]->(caller) MATCH (calleeType:Type)-[:CONTAINS]->(callee) WHERE callerType <> calleeType WITH callerType.name as caller_type, caller.name as caller_function, calleeType.name as callee_type, callee.name as callee_function, count(*) as call_frequency RETURN caller_type, collect({function: caller_function, calls_to: callee_type + '.' + callee_function, frequency: call_frequency}) as outbound_calls, count(*) as total_outbound_calls ORDER BY total_outbound_calls DESC, caller_type",
+      "verification_query": "MATCH (caller:Function)-[:CALLS]->(callee:Function) MATCH (callerType:Type)-[:CONTAINS]->(caller) MATCH (calleeType:Type)-[:CONTAINS]->(callee) WHERE callerType <> calleeType WITH callerType.name as caller_type, caller.name as caller_function, calleeType.name as callee_type, callee.name as callee_function, count(*) as call_frequency RETURN caller_type, collect({function: caller_function, calls_to: callee_type + '.' + callee_function, frequency: call_frequency}) as outbound_calls, count(*) as total_outbound_calls ORDER BY total_outbound_calls DESC, caller_type",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    },
+    {
+      "claim": "The architecture demonstrates a cross-cutting concern pattern where both IMPLEMENTS and REFERENCES relationships exist between the same type pairs, indicating tight coupling",
+      "source_file": "HelloWorldApp/WorkerA.cs",
+      "source_line": null,
+      "source_location": "HelloWorldApp/WorkerA.cs",
+      "entity_name": "WorkerA",
+      "entity_type": "class",
+      "evidence": {
+        "summary": "Relationship analysis reveals dual relationship patterns where worker classes have both IMPLEMENTS and REFERENCES relationships to the same targets (WorkerA-to-WorkerB/C, WorkerB-to-WorkerA/C, WorkerC-to-WorkerA/B, and all to IWorker), indicating tight coupling through multiple relationship types"
+      },
+      "verification_status": "verified",
+      "verification_explanation": "Validated by 4-agent workflow (ThinkingValidator + CypherValidator)",
+      "discovery_query": "MATCH (source:Type)-[r]->(target:Type) WHERE type(r) IN ['IMPLEMENTS', 'REFERENCES'] AND source <> target WITH source.name as source_type, source.type_kind as source_kind, type(r) as relationship_type, target.name as target_type, target.type_kind as target_kind, count(*) as relationship_strength RETURN source_type, source_kind, relationship_type, target_type, target_kind, relationship_strength ORDER BY relationship_strength DESC, source_type",
+      "verification_query": "MATCH (source:Type)-[r]->(target:Type) WHERE type(r) IN ['IMPLEMENTS', 'REFERENCES'] AND source <> target WITH source.name as source_type, source.type_kind as source_kind, type(r) as relationship_type, target.name as target_type, target.type_kind as target_kind, count(*) as relationship_strength RETURN source_type, source_kind, relationship_type, target_type, target_kind, relationship_strength ORDER BY relationship_strength DESC, source_type",
+      "cot_agent_id": "ExecutorVerifier",
+      "confidence": "high"
+    }
+  ],
+  "verified_count": 52,
+  "unverified_count": 0,
+  "total_citations": 52,
+  "sub_queries_count": 8,
+  "llm_calls_count": 68,
+  "execution_time_ms": 2016982,
+  "token_usage": {
+    "total_tokens": 98655,
+    "total_prompt_tokens": 706,
+    "total_completion_tokens": 97949,
+    "call_count": 68,
+    "by_agent_role": {
+      "cot_agent": 1515,
+      "tot_orchestrator": 1999,
+      "thinker": 26818,
+      "thinking_validator": 6337,
+      "cypher_validator": 16198,
+      "executor_verifier": 45788
+    }
+  },
+  "total_tokens_used": 98655,
+  "total_input_tokens": 706,
+  "total_output_tokens": 97949,
+  "agent_workflow": "4_agent_team",
+  "agent_metadata": {
+    "llm_model": "gpt-4o",
+    "max_cot_iterations": 15,
+    "parallel_agents": true,
+    "verification_enabled": true,
+    "entity_resolution_enabled": true,
+    "observer_enabled": false,
+    "use_4_agent_team": true,
+    "four_agent_max_iterations": 3
+  },
+  "cli_parameters_used": {
+    "config_path": "/opt/genpod/neo4j_config.json",
+    "schema_path": "/opt/genpod/src/schemas/project_knowledgebase_graph_schema.yaml",
+    "llm_model": "gpt-4o"
+  },
+  "message": "4-Agent Team CPG RAG completed successfully (2016982ms)"
+}

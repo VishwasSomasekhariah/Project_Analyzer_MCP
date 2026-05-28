@@ -1,0 +1,8 @@
+digraph "ReadKey" {  
+node [shape="rect"];  
+"111669149715" [label = <METHOD<BR/>ReadKey> ]
+"128849018899" [label = <METHOD_RETURN<BR/>ANY> ]
+"115964117024" [label = <PARAM<BR/>p0> ]
+  "115964117024" -> "128849018899"  [ label = "p0"] 
+  "111669149715" -> "115964117024" 
+}

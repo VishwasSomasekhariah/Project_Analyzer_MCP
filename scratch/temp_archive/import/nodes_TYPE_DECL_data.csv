@@ -1,0 +1,84 @@
+171798691840,TYPE_DECL,,,,"public interface INotifier
+    {
+        void Notify(string message);
+    }",4,HelloWorldApp/INotifier.cs,HelloWorldApp.INotifier,<empty>,,false,2,INotifier,,,1
+171798691841,TYPE_DECL,,,,"public interface IWorker
+    {
+        void Process();
+    }",4,HelloWorldApp/IWorker.cs,HelloWorldApp.IWorker,<empty>,,false,2,IWorker,,,1
+171798691842,TYPE_DECL,,,,"public class Manager : INotifier
+    {
+        public void Run()
+        {
+            Console.WriteLine(""Manager starting work..."");
+            IEnumerable<IWorker> workers = WorkerFactory.CreateWorkers(this);
+
+            // one-to-many: Manager invokes all workers
+            foreach (var worker in workers)
+            {
+                worker.Process();
+            }
+        }
+
+        // many-to-one: workers call back here
+        public void Notify(string message)
+        {
+            Console.WriteLine($""Manager received notification: {message}"");
+        }
+    }",4,HelloWorldApp/Manager.cs,HelloWorldApp.Manager,<empty>,HelloWorldApp.INotifier,false,5,Manager,,,1
+171798691843,TYPE_DECL,,,,"class Program
+    {
+        static void Main(string[] args)
+        {
+            Manager manager = new Manager();
+            manager.Run();
+            Console.WriteLine(""All work completed. Press any key to exit."");
+            Console.ReadKey();
+        }
+    }",4,HelloWorldApp/Program.cs,HelloWorldApp.Program,<empty>,,false,4,Program,,,1
+171798691844,TYPE_DECL,,,,"public static class Helper
+    {
+        public static string FormatMessage(string workerName, string text)
+        {
+            return $""[{workerName}] {text}"";
+        }
+    }",4,HelloWorldApp/Utilities/Helper.cs,HelloWorldApp.Utilities.Helper,<empty>,,false,2,Helper,,,1
+171798691845,TYPE_DECL,,,,"public class WorkerC : IWorker
+    {
+        private readonly INotifier _notifier;
+
+        public WorkerC(INotifier notifier)
+        {
+            _notifier = notifier;
+        }
+
+        public void Process()
+        {
+            string msg = Utilities.Helper.FormatMessage(""WorkerC"", ""Hi there, C here"");
+            System.Console.WriteLine(msg);
+            _notifier.Notify(""WorkerC has finished processing."");
+        }
+    }",4,HelloWorldApp/WorkerC.cs,HelloWorldApp.WorkerC,<empty>,HelloWorldApp.IWorker,false,2,WorkerC,,,1
+171798691846,TYPE_DECL,,,,"public static class WorkerFactory
+    {
+        public static IEnumerable<IWorker> CreateWorkers(INotifier notifier)
+        {
+            // create multiple workers, each knows how to call back
+            return new List<IWorker>
+            {
+                new WorkerA(notifier),
+                new WorkerB(notifier),
+                new WorkerC(notifier)
+            };
+        }
+    }",4,HelloWorldApp/WorkerFactory.cs,HelloWorldApp.WorkerFactory,<empty>,,false,4,WorkerFactory,,,1
+171798691847,TYPE_DECL,,<global>,NAMESPACE_BLOCK,<empty>,,<unknown>,ANY,<empty>,,true,,ANY,,,-1
+171798691848,TYPE_DECL,,<global>,NAMESPACE_BLOCK,<empty>,,<unknown>,IEnumerable,<empty>,,true,,IEnumerable,,,-1
+171798691849,TYPE_DECL,,<global>,NAMESPACE_BLOCK,<empty>,,<unknown>,List,<empty>,,true,,List,,,-1
+171798691850,TYPE_DECL,,<global>,NAMESPACE_BLOCK,<empty>,,<unknown>,System.Console,<empty>,,true,,Console,,,-1
+171798691851,TYPE_DECL,,<global>,NAMESPACE_BLOCK,<empty>,,<unknown>,System.ConsoleKeyInfo,<empty>,,true,,ConsoleKeyInfo,,,-1
+171798691852,TYPE_DECL,,<global>,NAMESPACE_BLOCK,<empty>,,<unknown>,System.Int32,<empty>,,true,,Int32,,,-1
+171798691853,TYPE_DECL,,<global>,NAMESPACE_BLOCK,<empty>,,<unknown>,System.String,<empty>,,true,,String,,,-1
+171798691854,TYPE_DECL,,<global>,NAMESPACE_BLOCK,<empty>,,<unknown>,System.String[],<empty>,,true,,String[],,,-1
+171798691855,TYPE_DECL,,<global>,NAMESPACE_BLOCK,<empty>,,<unknown>,System.Void,<empty>,,true,,Void,,,-1
+171798691856,TYPE_DECL,,<global>,NAMESPACE_BLOCK,<empty>,,<unknown>,var,<empty>,,true,,var,,,-1

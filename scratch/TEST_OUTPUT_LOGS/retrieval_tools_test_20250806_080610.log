@@ -1,0 +1,101 @@
+2025-08-06 08:06:12,364 - __main__ - INFO - Test results will be saved to: retrieval_tools_test_results_20250806_080612.json
+2025-08-06 08:06:12,365 - __main__ - INFO - Logs will be saved to: retrieval_tools_test_20250806_080612.log
+2025-08-06 08:06:12,372 - mcp.client.sse - INFO - Connecting to SSE endpoint: http://localhost:9000/sse
+2025-08-06 08:06:12,565 - httpx - INFO - HTTP Request: GET http://localhost:9000/sse "HTTP/1.1 200 OK"
+2025-08-06 08:06:12,567 - mcp.client.sse - INFO - Received endpoint URL: http://localhost:9000/messages/?session_id=d202749c371a41649d33e6ac921fbbe1
+2025-08-06 08:06:12,568 - mcp.client.sse - INFO - Starting post writer with endpoint URL: http://localhost:9000/messages/?session_id=d202749c371a41649d33e6ac921fbbe1
+2025-08-06 08:06:12,579 - httpx - INFO - HTTP Request: POST http://localhost:9000/messages/?session_id=d202749c371a41649d33e6ac921fbbe1 "HTTP/1.1 202 Accepted"
+2025-08-06 08:06:12,592 - httpx - INFO - HTTP Request: POST http://localhost:9000/messages/?session_id=d202749c371a41649d33e6ac921fbbe1 "HTTP/1.1 202 Accepted"
+2025-08-06 08:06:12,595 - httpx - INFO - HTTP Request: POST http://localhost:9000/messages/?session_id=d202749c371a41649d33e6ac921fbbe1 "HTTP/1.1 202 Accepted"
+2025-08-06 08:06:12,602 - __main__ - INFO - Starting vector_only test
+2025-08-06 08:06:12,603 - __main__ - INFO - Test query: Find WorkerA.cs file
+2025-08-06 08:06:12,606 - httpx - INFO - HTTP Request: POST http://localhost:9000/messages/?session_id=d202749c371a41649d33e6ac921fbbe1 "HTTP/1.1 202 Accepted"
+2025-08-06 08:06:32,329 - __main__ - INFO - Starting cpg_only Enhanced RAG test
+2025-08-06 08:06:32,331 - __main__ - INFO - Test query: How many comment lines are in WorkerA.cs?
+2025-08-06 08:06:32,339 - httpx - INFO - HTTP Request: POST http://localhost:9000/messages/?session_id=d202749c371a41649d33e6ac921fbbe1 "HTTP/1.1 202 Accepted"
+2025-08-06 08:06:54,488 - __main__ - INFO - Starting comprehensive_code_analysis hybrid test
+2025-08-06 08:06:54,489 - __main__ - INFO - Test query: Analyze the structure of WorkerA.cs
+2025-08-06 08:06:54,495 - httpx - INFO - HTTP Request: POST http://localhost:9000/messages/?session_id=d202749c371a41649d33e6ac921fbbe1 "HTTP/1.1 202 Accepted"
+2025-08-06 08:07:31,222 - __main__ - INFO - Test results saved to retrieval_tools_test_results_20250806_080612.json
+🧪 Comprehensive Retrieval Tools Test Suite
+============================================================
+Testing: Vector-Only, CPG-Only (Enhanced RAG), Hybrid Retrieval
+============================================================
+🚀 Starting comprehensive retrieval tool tests...
+
+🔍 Testing query_vector_only...
+  Status: success
+  AI Response length: 87
+  Raw results count: 10
+  First result type: <class 'dict'>
+  Vector tool checks: 4/4
+    ✅ Status success
+    ✅ Has AI response
+    ✅ Has raw results
+    ✅ Has metadata
+
+🔍 Testing query_cpg_only (Enhanced RAG)...
+  Status: success
+  Workflow: advanced_rag
+  Analysis type: advanced_rag
+  Raw results count: 2
+  Entities extracted: 8 types
+  Retrieval plan: True
+  Synthesis length: 77
+  CPG tool checks: 6/6
+    ✅ Status success
+    ✅ Has raw results
+    ✅ Advanced RAG workflow
+    ✅ Entities extracted
+    ✅ Has synthesis
+    ✅ Has retrieval plan
+
+🔍 Testing comprehensive_code_analysis (Hybrid)...
+  Status: success
+  Analysis type: hybrid_comprehensive_analysis
+  Workflow: hybrid_vector_graph_rag
+  Vector raw results: 10
+  CPG raw results: 2
+  Synthesis length: 82
+  Entities extracted: True
+  Comprehensive tool checks: 7/7
+    ✅ Status success
+    ✅ Hybrid analysis type
+    ✅ Vector raw results
+    ✅ CPG raw results
+    ✅ Has synthesis
+    ✅ Has entities
+    ✅ Hybrid workflow
+
+📊 Test Results Summary:
+  Vector Only: ✅ PASS
+  CPG Only (Enhanced RAG): ✅ PASS
+  Comprehensive (Hybrid): ✅ PASS
+
+🎯 Overall Score: 3/3 tools passing
+✅ Test results saved to: retrieval_tools_test_results_20250806_080612.json
+
+============================================================
+🎉 TEST SUITE PASSED!
+✅ All retrieval tools functioning correctly
+✅ Enhanced RAG implementation verified
+✅ Hybrid retrieval working with raw results
+✅ Benchmarking compatibility confirmed
+Traceback (most recent call last):
+  File "/opt/genpod/test_all_retrieval_tools.py", line 350, in <module>
+    asyncio.run(main())
+  File "/usr/local/lib/python3.12/asyncio/runners.py", line 194, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/asyncio/base_events.py", line 686, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/opt/genpod/test_all_retrieval_tools.py", line 347, in main
+    await tester.run_all_tests()
+  File "/opt/genpod/test_all_retrieval_tools.py", line 342, in run_all_tests
+    await client.close()
+          ^^^^^^^^^^^^
+AttributeError: 'MCPClient' object has no attribute 'close'

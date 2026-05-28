@@ -1,0 +1,2720 @@
+{
+  "test_run_timestamp": "2025-12-16T19:40:04.790794",
+  "configuration": {
+    "use_4_agent_team": true,
+    "four_agent_max_iterations": 3,
+    "max_cot_iterations": 15,
+    "llm_model": "gpt-4o"
+  },
+  "queries": [
+    {
+      "query_number": 1,
+      "query": "What are the key methods in the HelloWorldApp and their cyclomatic complexity?",
+      "status": "success",
+      "answer": "The 'HelloWorldApp' project contains several classes with key methods, but the specific methods within a class named 'HelloWorldApp' itself have not been identified. However, the project includes classes such as 'Helper', 'WorkerFactory', 'WorkerC', 'WorkerB', 'WorkerA', 'TestAliases', 'Program', and 'Manager', each with their own methods. The 'Program' class contains a 'Main' method, which is typically the entry point of an application. The 'Manager' class includes 'Run' and 'Notify' methods, with the 'Run' method having a cyclomatic complexity of at least 1 due to a foreach statement. The cyclomatic complexity of other methods in the project has not been specified.",
+      "confidence": "medium",
+      "citations": [
+        {
+          "claim": "The 'HelloWorldApp' project contains a class named 'Helper'.",
+          "verified": true,
+          "verification_status": "verified",
+          "entity_name": "Helper",
+          "entity_type": "class",
+          "source_file": "Unknown (File path not provided in results)",
+          "source_location": "Unknown (File path not provided in results)",
+          "discovery_query": "MATCH (p:Project {name: 'HelloWorldApp'})-[:CONTAINS]->(f:File)-[:CONTAINS]->(ns:Namespace)-[:CONTAINS]->(t:Type) WHERE t.type_kind = 'class' RETURN t.name",
+          "verification_query": "MATCH (p:Project {name: 'HelloWorldApp'})-[:CONTAINS]->(f:File)-[:CONTAINS]->(ns:Namespace)-[:CONTAINS]->(t:Type) WHERE t.type_kind = 'class' RETURN t.name",
+          "confidence": "high"
+        },
+        {
+          "claim": "WorkerFactory class contains CreateWorkers method",
+          "verified": true,
+          "verification_status": "verified",
+          "entity_name": "WorkerFactory",
+          "entity_type": "class",
+          "source_file": "HelloWorldApp/WorkerFactory.cs",
+          "source_location": "HelloWorldApp/WorkerFactory.cs",
+          "discovery_query": "MATCH (p:Project {name: 'HelloWorldApp'})-[:CONTAINS]->(f:File)-[:CONTAINS]->(t:Type)-[:CONTAINS]->(fn:Function) RETURN t.name AS className, fn.name AS methodName",
+          "verification_query": "MATCH (p:Project {name: 'HelloWorldApp'})-[:CONTAINS]->(f:File)-[:CONTAINS]->(t:Type)-[:CONTAINS]->(fn:Function) RETURN t.name AS className, fn.name AS methodName",
+          "confidence": "high"
+        },
+        {
+          "claim": "WorkerC class contains WorkerC and Process methods",
+          "verified": true,
+          "verification_status": "verified",
+          "entity_name": "WorkerC",
+          "entity_type": "class",
+          "source_file": "HelloWorldApp/WorkerC.cs",
+          "source_location": "HelloWorldApp/WorkerC.cs",
+          "discovery_query": "MATCH (p:Project {name: 'HelloWorldApp'})-[:CONTAINS]->(f:File)-[:CONTAINS]->(t:Type)-[:CONTAINS]->(fn:Function) RETURN t.name AS className, fn.name AS methodName",
+          "verification_query": "MATCH (p:Project {name: 'HelloWorldApp'})-[:CONTAINS]->(f:File)-[:CONTAINS]->(t:Type)-[:CONTAINS]->(fn:Function) RETURN t.name AS className, fn.name AS methodName",
+          "confidence": "high"
+        },
+        {
+          "claim": "WorkerB class contains WorkerB and Process methods",
+          "verified": true,
+          "verification_status": "verified",
+          "entity_name": "WorkerB",
+          "entity_type": "class",
+          "source_file": "HelloWorldApp/WorkerB.cs",
+          "source_location": "HelloWorldApp/WorkerB.cs",
+          "discovery_query": "MATCH (p:Project {name: 'HelloWorldApp'})-[:CONTAINS]->(f:File)-[:CONTAINS]->(t:Type)-[:CONTAINS]->(fn:Function) RETURN t.name AS className, fn.name AS methodName",
+          "verification_query": "MATCH (p:Project {name: 'HelloWorldApp'})-[:CONTAINS]->(f:File)-[:CONTAINS]->(t:Type)-[:CONTAINS]->(fn:Function) RETURN t.name AS className, fn.name AS methodName",
+          "confidence": "high"
+        },
+        {
+          "claim": "WorkerA class contains WorkerA and Process methods",
+          "verified": true,
+          "verification_status": "verified",
+          "entity_name": "WorkerA",
+          "entity_type": "class",
+          "source_file": "HelloWorldApp/WorkerA.cs",
+          "source_location": "HelloWorldApp/WorkerA.cs",
+          "discovery_query": "MATCH (p:Project {name: 'HelloWorldApp'})-[:CONTAINS]->(f:File)-[:CONTAINS]->(t:Type)-[:CONTAINS]->(fn:Function) RETURN t.name AS className, fn.name AS methodName",
+          "verification_query": "MATCH (p:Project {name: 'HelloWorldApp'})-[:CONTAINS]->(f:File)-[:CONTAINS]->(t:Type)-[:CONTAINS]->(fn:Function) RETURN t.name AS className, fn.name AS methodName",
+          "confidence": "high"
+        },
+        {
+          "claim": "TestAliases class contains TestMethod method",
+          "verified": true,
+          "verification_status": "verified",
+          "entity_name": "TestAliases",
+          "entity_type": "class",
+          "source_file": "HelloWorldApp/TestAliases.cs",
+          "source_location": "HelloWorldApp/TestAliases.cs",
+          "discovery_query": "MATCH (p:Project {name: 'HelloWorldApp'})-[:CONTAINS]->(f:File)-[:CONTAINS]->(t:Type)-[:CONTAINS]->(fn:Function) RETURN t.name AS className, fn.name AS methodName",
+          "verification_query": "MATCH (p:Project {name: 'HelloWorldApp'})-[:CONTAINS]->(f:File)-[:CONTAINS]->(t:Type)-[:CONTAINS]->(fn:Function) RETURN t.name AS className, fn.name AS methodName",
+          "confidence": "high"
+        },
+        {
+          "claim": "Program class contains Main method",
+          "verified": true,
+          "verification_status": "verified",
+          "entity_name": "Program",
+          "entity_type": "class",
+          "source_file": "HelloWorldApp/Program.cs",
+          "source_location": "HelloWorldApp/Program.cs",
+          "discovery_query": "MATCH (p:Project {name: 'HelloWorldApp'})-[:CONTAINS]->(f:File)-[:CONTAINS]->(t:Type)-[:CONTAINS]->(fn:Function) RETURN t.name AS className, fn.name AS methodName",
+          "verification_query": "MATCH (p:Project {name: 'HelloWorldApp'})-[:CONTAINS]->(f:File)-[:CONTAINS]->(t:Type)-[:CONTAINS]->(fn:Function) RETURN t.name AS className, fn.name AS methodName",
+          "confidence": "high"
+        },
+        {
+          "claim": "Manager class contains Run and Notify methods",
+          "verified": true,
+          "verification_status": "verified",
+          "entity_name": "Manager",
+          "entity_type": "class",
+          "source_file": "HelloWorldApp/Manager.cs",
+          "source_location": "HelloWorldApp/Manager.cs",
+          "discovery_query": "MATCH (p:Project {name: 'HelloWorldApp'})-[:CONTAINS]->(f:File)-[:CONTAINS]->(t:Type)-[:CONTAINS]->(fn:Function) RETURN t.name AS className, fn.name AS methodName",
+          "verification_query": "MATCH (p:Project {name: 'HelloWorldApp'})-[:CONTAINS]->(f:File)-[:CONTAINS]->(t:Type)-[:CONTAINS]->(fn:Function) RETURN t.name AS className, fn.name AS methodName",
+          "confidence": "high"
+        },
+        {
+          "claim": "The 'Run' function contains a foreach statement, indicating a decision point contributing to cyclomatic complexity.",
+          "verified": true,
+          "verification_status": "verified",
+          "entity_name": "Run",
+          "entity_type": "function",
+          "source_file": "Unknown",
+          "source_location": "Unknown",
+          "discovery_query": "MATCH (p:Project {name: 'HelloWorldApp'})-[:CONTAINS]->(f:File)-[:CONTAINS]->(t:Type)-[:CONTAINS]->(func:Function)-[:CONTAINS]->(b:Block)-[:CONTAINS]->(s:Statement) WHERE s.statement_type IN ['foreach'] RETURN func.name AS functionName, COUNT(s) AS decisionPoints",
+          "verification_query": "MATCH (p:Project {name: 'HelloWorldApp'})-[:CONTAINS]->(f:File)-[:CONTAINS]->(t:Type)-[:CONTAINS]->(func:Function)-[:CONTAINS]->(b:Block)-[:CONTAINS]->(s:Statement) WHERE s.statement_type IN ['foreach'] RETURN func.name AS functionName, COUNT(s) AS decisionPoints",
+          "confidence": "high"
+        }
+      ],
+      "execution_time_ms": 173777,
+      "sub_queries_count": 3,
+      "llm_calls_count": 58,
+      "token_usage": {
+        "total_tokens": 147761,
+        "prompt_tokens": 138155,
+        "completion_tokens": 9606,
+        "call_count": 58
+      },
+      "error": null,
+      "execution_traces": [
+        {
+          "subquery_id": 1,
+          "iterations_used": 1,
+          "findings_count": 1,
+          "verified_count": 1,
+          "execution_time_ms": 30343,
+          "validation_history": [
+            {
+              "iteration": 1,
+              "thinker_output": {
+                "summary": "We will traverse from the 'HelloWorldApp' project to 'Type' nodes through 'File' and 'Namespace' nodes using the 'CONTAINS' relationship. We will filter 'Type' nodes by 'type_kind' to find classes.",
+                "query_count": 1,
+                "proposed_queries": [
+                  {
+                    "query_id": 1,
+                    "purpose": "Retrieve all classes within the HelloWorldApp project",
+                    "cypher": "MATCH (p:Project {name: 'HelloWorldApp'})-[:CONTAINS]->(f:File)-[:CONTAINS]->(ns:Namespace)-[:CONTAINS]->(t:Type) WHERE t.type_kind = 'class' RETURN t.name"
+                  }
+                ],
+                "overall_reasoning": [
+                  "The task is to find all classes within the 'HelloWorldApp' project.",
+                  "From the schema, 'Type' nodes represent classes and other types.",
+                  "The 'Project' node can contain 'File' nodes, which can contain 'Namespace' nodes, which in turn can contain 'Type' nodes.",
+                  "The 'CONTAINS' relationship allows traversal from 'Project' to 'File', 'File' to 'Namespace', and 'Namespace' to 'Type'.",
+                  "We need to filter 'Type' nodes by 'type_kind' to identify classes specifically."
+                ]
+              },
+              "thinking_validation": {
+                "approved": true,
+                "feedback": null,
+                "reasoning_gaps": [],
+                "missing_aspects": [],
+                "queries_coverage_issues": [],
+                "specific_issues": [],
+                "suggested_corrections": null
+              },
+              "cypher_validation": {
+                "approved": true,
+                "feedback": "The query is valid. All node labels, properties, and relationships are correctly used and exist in the schema.",
+                "invalid_nodes": [],
+                "invalid_properties": [],
+                "invalid_relationships": [],
+                "query_issues": [
+                  {
+                    "query_id": 1,
+                    "approved": true,
+                    "issues": []
+                  }
+                ],
+                "observed_categorical_values": {
+                  "Type.type_kind": [
+                    "interface",
+                    "class"
+                  ]
+                }
+              },
+              "final_execution": true,
+              "executed_queries": [
+                {
+                  "query_id": 1,
+                  "cypher_query": "MATCH (p:Project {name: 'HelloWorldApp'})-[:CONTAINS]->(f:File)-[:CONTAINS]->(ns:Namespace)-[:CONTAINS]->(t:Type) WHERE t.type_kind = 'class' RETURN t.name",
+                  "result_count": 1,
+                  "execution_time_ms": 427,
+                  "error": null,
+                  "results_preview": [
+                    {
+                      "success": true,
+                      "results": [
+                        {
+                          "t.name": "Helper"
+                        }
+                      ],
+                      "count": 1,
+                      "query": "MATCH (p:Project {name: 'HelloWorldApp'})-[:CONTAINS]->(f:File)-[:CONTAINS]->(ns:Namespace)-[:CONTAINS]->(t:Type) WHERE t.type_kind = 'class' RETURN t.name"
+                    }
+                  ]
+                }
+              ],
+              "findings_count": 1
+            }
+          ],
+          "executed_queries": [
+            {
+              "query_id": 1,
+              "cypher_query": "MATCH (p:Project {name: 'HelloWorldApp'})-[:CONTAINS]->(f:File)-[:CONTAINS]->(ns:Namespace)-[:CONTAINS]->(t:Type) WHERE t.type_kind = 'class' RETURN t.name",
+              "result_count": 1,
+              "execution_time_ms": 427,
+              "error": null
+            }
+          ],
+          "errors": []
+        },
+        {
+          "subquery_id": 2,
+          "iterations_used": 1,
+          "findings_count": 7,
+          "verified_count": 7,
+          "execution_time_ms": 46808,
+          "validation_history": [
+            {
+              "iteration": 1,
+              "thinker_output": {
+                "summary": "Retrieve all methods within classes of the 'HelloWorldApp' project by traversing from the project node to files, then to types, and finally to functions.",
+                "query_count": 1,
+                "proposed_queries": [
+                  {
+                    "query_id": 1,
+                    "purpose": "Retrieve all methods within classes of the 'HelloWorldApp' project.",
+                    "cypher": "MATCH (p:Project {name: 'HelloWorldApp'})-[:CONTAINS]->(f:File)-[:CONTAINS]->(t:Type)-[:CONTAINS]->(fn:Function) RETURN t.name AS className, fn.name AS methodName"
+                  }
+                ],
+                "overall_reasoning": [
+                  "Identify the project node for 'HelloWorldApp'.",
+                  "Use the CONTAINS relationship to traverse from the project to its files.",
+                  "Further traverse from files to types (classes) using CONTAINS.",
+                  "Finally, find all functions (methods) within these types using CONTAINS."
+                ]
+              },
+              "thinking_validation": {
+                "approved": true,
+                "feedback": null,
+                "reasoning_gaps": [],
+                "missing_aspects": [],
+                "queries_coverage_issues": [],
+                "specific_issues": [],
+                "suggested_corrections": null
+              },
+              "cypher_validation": {
+                "approved": true,
+                "feedback": "All node labels, properties, and relationships are valid according to the schema.",
+                "invalid_nodes": [],
+                "invalid_properties": [],
+                "invalid_relationships": [],
+                "query_issues": [
+                  {
+                    "query_id": 1,
+                    "approved": true,
+                    "issues": []
+                  }
+                ],
+                "observed_categorical_values": {}
+              },
+              "final_execution": true,
+              "executed_queries": [
+                {
+                  "query_id": 1,
+                  "cypher_query": "MATCH (p:Project {name: 'HelloWorldApp'})-[:CONTAINS]->(f:File)-[:CONTAINS]->(t:Type)-[:CONTAINS]->(fn:Function) RETURN t.name AS className, fn.name AS methodName",
+                  "result_count": 1,
+                  "execution_time_ms": 186,
+                  "error": null,
+                  "results_preview": [
+                    {
+                      "success": true,
+                      "results": [
+                        {
+                          "className": "WorkerFactory",
+                          "methodName": "CreateWorkers"
+                        },
+                        {
+                          "className": "WorkerC",
+                          "methodName": "WorkerC"
+                        },
+                        {
+                          "className": "WorkerC",
+                          "methodName": "Process"
+                        },
+                        {
+                          "className": "WorkerB",
+                          "methodName": "Process"
+                        },
+                        {
+                          "className": "WorkerB",
+                          "methodName": "WorkerB"
+                        },
+                        {
+                          "className": "WorkerA",
+                          "methodName": "Process"
+                        },
+                        {
+                          "className": "WorkerA",
+                          "methodName": "WorkerA"
+                        },
+                        {
+                          "className": "TestAliases",
+                          "methodName": "TestMethod"
+                        },
+                        {
+                          "className": "Program",
+                          "methodName": "Main"
+                        },
+                        {
+                          "className": "Manager",
+                          "methodName": "Run"
+                        },
+                        {
+                          "className": "Manager",
+                          "methodName": "Notify"
+                        }
+                      ],
+                      "count": 11,
+                      "query": "MATCH (p:Project {name: 'HelloWorldApp'})-[:CONTAINS]->(f:File)-[:CONTAINS]->(t:Type)-[:CONTAINS]->(fn:Function) RETURN t.name AS className, fn.name AS methodName"
+                    }
+                  ]
+                }
+              ],
+              "findings_count": 7
+            }
+          ],
+          "executed_queries": [
+            {
+              "query_id": 1,
+              "cypher_query": "MATCH (p:Project {name: 'HelloWorldApp'})-[:CONTAINS]->(f:File)-[:CONTAINS]->(t:Type)-[:CONTAINS]->(fn:Function) RETURN t.name AS className, fn.name AS methodName",
+              "result_count": 1,
+              "execution_time_ms": 186,
+              "error": null
+            }
+          ],
+          "errors": []
+        },
+        {
+          "subquery_id": 3,
+          "iterations_used": 2,
+          "findings_count": 1,
+          "verified_count": 1,
+          "execution_time_ms": 72565,
+          "validation_history": [
+            {
+              "iteration": 1,
+              "thinker_output": {
+                "summary": "Cyclomatic complexity is derived by counting decision-making statements in each function.",
+                "query_count": 1,
+                "proposed_queries": [
+                  {
+                    "query_id": 1,
+                    "purpose": "Calculate cyclomatic complexity for each method in HelloWorldApp.",
+                    "cypher": "MATCH (p:Project {name: 'HelloWorldApp'})-[:CONTAINS]->(f:File)-[:CONTAINS]->(t:Type)-[:CONTAINS]->(func:Function) \nOPTIONAL MATCH (func)-[:CONTAINS]->(b:Block)-[:CONTAINS]->(s:Statement) \nWHERE s.statement_type IN ['if', 'for', 'while', 'case', 'foreach'] \nRETURN func.name AS function_name, count(s) + 1 AS cyclomatic_complexity"
+                  }
+                ],
+                "overall_reasoning": [
+                  "Understand the request to calculate cyclomatic complexity for methods in HelloWorldApp.",
+                  "Use schema tools to identify nodes, properties, and relationships relevant to Function and Statement.",
+                  "Derive cyclomatic complexity by counting decision points within each Function.",
+                  "Plan queries to navigate from Function to Statement and filter by decision-making statement types."
+                ]
+              },
+              "thinking_validation": {
+                "approved": true,
+                "feedback": null,
+                "reasoning_gaps": [],
+                "missing_aspects": [],
+                "queries_coverage_issues": [],
+                "specific_issues": [],
+                "suggested_corrections": null
+              },
+              "cypher_validation": {
+                "approved": false,
+                "feedback": "Invalid categorical values in WHERE clause for Statement.statement_type",
+                "invalid_nodes": [],
+                "invalid_properties": [],
+                "invalid_relationships": [],
+                "query_issues": [
+                  {
+                    "query_id": 1,
+                    "approved": false,
+                    "issues": [
+                      "Invalid categorical values in WHERE clause for Statement.statement_type"
+                    ]
+                  }
+                ],
+                "observed_categorical_values": {
+                  "Statement.statement_type": [
+                    "expression",
+                    "declaration",
+                    "foreach",
+                    "return"
+                  ]
+                }
+              }
+            },
+            {
+              "iteration": 2,
+              "thinker_output": {
+                "summary": "Calculate cyclomatic complexity by counting decision points in each method of the HelloWorldApp project.",
+                "query_count": 1,
+                "proposed_queries": [
+                  {
+                    "query_id": 1,
+                    "purpose": "Retrieve all methods in the HelloWorldApp project and count decision points.",
+                    "cypher": "MATCH (p:Project {name: 'HelloWorldApp'})-[:CONTAINS]->(f:File)-[:CONTAINS]->(t:Type)-[:CONTAINS]->(func:Function)-[:CONTAINS]->(b:Block)-[:CONTAINS]->(s:Statement) WHERE s.statement_type IN ['foreach'] RETURN func.name AS functionName, COUNT(s) AS decisionPoints"
+                  }
+                ],
+                "overall_reasoning": [
+                  "Determine the cyclomatic complexity of each method in the HelloWorldApp project.",
+                  "Identify all functions within the HelloWorldApp project.",
+                  "Count decision points within each function to estimate cyclomatic complexity."
+                ]
+              },
+              "thinking_validation": {
+                "approved": true,
+                "feedback": null,
+                "reasoning_gaps": [],
+                "missing_aspects": [],
+                "queries_coverage_issues": [],
+                "specific_issues": [],
+                "suggested_corrections": null
+              },
+              "cypher_validation": {
+                "approved": true,
+                "feedback": "The query is semantically aligned with the Neo4j graph schema. All node labels, properties, and relationships are valid.",
+                "invalid_nodes": [],
+                "invalid_properties": [],
+                "invalid_relationships": [],
+                "query_issues": [
+                  {
+                    "query_id": 1,
+                    "approved": true,
+                    "issues": []
+                  }
+                ],
+                "observed_categorical_values": {
+                  "Statement.statement_type": [
+                    "expression",
+                    "declaration",
+                    "foreach",
+                    "return"
+                  ]
+                }
+              },
+              "final_execution": true,
+              "executed_queries": [
+                {
+                  "query_id": 1,
+                  "cypher_query": "MATCH (p:Project {name: 'HelloWorldApp'})-[:CONTAINS]->(f:File)-[:CONTAINS]->(t:Type)-[:CONTAINS]->(func:Function)-[:CONTAINS]->(b:Block)-[:CONTAINS]->(s:Statement) WHERE s.statement_type IN ['foreach'] RETURN func.name AS functionName, COUNT(s) AS decisionPoints",
+                  "result_count": 1,
+                  "execution_time_ms": 434,
+                  "error": null,
+                  "results_preview": [
+                    {
+                      "success": true,
+                      "results": [
+                        {
+                          "functionName": "Run",
+                          "decisionPoints": 1
+                        }
+                      ],
+                      "count": 1,
+                      "query": "MATCH (p:Project {name: 'HelloWorldApp'})-[:CONTAINS]->(f:File)-[:CONTAINS]->(t:Type)-[:CONTAINS]->(func:Function)-[:CONTAINS]->(b:Block)-[:CONTAINS]->(s:Statement) WHERE s.statement_type IN ['foreach'] RETURN func.name AS functionName, COUNT(s) AS decisionPoints"
+                    }
+                  ]
+                }
+              ],
+              "findings_count": 1
+            }
+          ],
+          "executed_queries": [
+            {
+              "query_id": 1,
+              "cypher_query": "MATCH (p:Project {name: 'HelloWorldApp'})-[:CONTAINS]->(f:File)-[:CONTAINS]->(t:Type)-[:CONTAINS]->(func:Function)-[:CONTAINS]->(b:Block)-[:CONTAINS]->(s:Statement) WHERE s.statement_type IN ['foreach'] RETURN func.name AS functionName, COUNT(s) AS decisionPoints",
+              "result_count": 1,
+              "execution_time_ms": 434,
+              "error": null
+            }
+          ],
+          "errors": []
+        }
+      ],
+      "verified_count": 9,
+      "unverified_count": 0
+    },
+    {
+      "query_number": 2,
+      "query": "Analyze the overall architecture of the HelloWorldApp.",
+      "status": "success",
+      "answer": "The HelloWorldApp project includes a namespace called 'HelloWorldApp.Utilities', which contains a class named 'Helper'. Within this class, there is a function called 'FormatMessage'. This function is notable for calling itself, indicating that it may be recursive. Additionally, the project does not contain a function named 'main', which is typically expected in many applications as an entry point.",
+      "confidence": "high",
+      "citations": [
+        {
+          "claim": "The HelloWorldApp project contains a namespace named HelloWorldApp.Utilities.",
+          "verified": true,
+          "verification_status": "verified",
+          "entity_name": "HelloWorldApp.Utilities",
+          "entity_type": "namespace",
+          "source_file": "Unknown",
+          "source_location": "Unknown",
+          "discovery_query": "MATCH (p:Project {name: 'HelloWorldApp'})-[:CONTAINS]->(f:File)-[:CONTAINS]->(n:Namespace) RETURN n.name AS module_name",
+          "verification_query": "MATCH (p:Project {name: 'HelloWorldApp'})-[:CONTAINS]->(f:File)-[:CONTAINS]->(n:Namespace) RETURN n.name AS module_name",
+          "confidence": "high"
+        },
+        {
+          "claim": "The 'Helper' class is part of the 'HelloWorldApp.Utilities' module.",
+          "verified": true,
+          "verification_status": "verified",
+          "entity_name": "Helper",
+          "entity_type": "class",
+          "source_file": null,
+          "source_location": null,
+          "discovery_query": "MATCH (p:Project {name: 'HelloWorldApp'})-[:CONTAINS]->(f:File)-[:CONTAINS]->(n:Namespace)-[:CONTAINS]->(t:Type) WHERE t.type_kind = 'class' RETURN n.name AS module, t.name AS class_name",
+          "verification_query": "MATCH (p:Project {name: 'HelloWorldApp'})-[:CONTAINS]->(f:File)-[:CONTAINS]->(n:Namespace)-[:CONTAINS]->(t:Type) WHERE t.type_kind = 'class' RETURN n.name AS module, t.name AS class_name",
+          "confidence": "high"
+        },
+        {
+          "claim": "The class 'Helper' contains the function 'FormatMessage'.",
+          "verified": true,
+          "verification_status": "verified",
+          "entity_name": "Helper",
+          "entity_type": "class",
+          "source_file": null,
+          "source_location": null,
+          "discovery_query": "MATCH (p:Project {name: 'HelloWorldApp'})-[:CONTAINS]->(f:File)-[:CONTAINS]->(ns:Namespace)-[:CONTAINS]->(t:Type)-[:CONTAINS]->(func:Function) RETURN t.name AS className, func.name AS functionName",
+          "verification_query": "MATCH (p:Project {name: 'HelloWorldApp'})-[:CONTAINS]->(f:File)-[:CONTAINS]->(ns:Namespace)-[:CONTAINS]->(t:Type)-[:CONTAINS]->(func:Function) RETURN t.name AS className, func.name AS functionName",
+          "confidence": "high"
+        },
+        {
+          "claim": "The 'Helper' class in the 'HelloWorldApp.Utilities' namespace contains the 'FormatMessage' function.",
+          "verified": true,
+          "verification_status": "verified",
+          "entity_name": "Helper",
+          "entity_type": "class",
+          "source_file": "HelloWorldApp/Utilities/Helper.cs",
+          "source_location": "HelloWorldApp/Utilities/Helper.cs",
+          "discovery_query": "MATCH (p:Project {name: 'HelloWorldApp'})-[:CONTAINS]->(f:File)-[:CONTAINS]->(n:Namespace)-[:CONTAINS]->(t:Type)-[:CONTAINS]->(fn:Function) RETURN p.name AS Project, f.file_path AS File, n.name AS Namespace, t.name AS Type, fn.name AS Function",
+          "verification_query": "MATCH (p:Project {name: 'HelloWorldApp'})-[:CONTAINS]->(f:File)-[:CONTAINS]->(n:Namespace)-[:CONTAINS]->(t:Type)-[:CONTAINS]->(fn:Function) RETURN p.name AS Project, f.file_path AS File, n.name AS Namespace, t.name AS Type, fn.name AS Function",
+          "confidence": "high"
+        },
+        {
+          "claim": "The 'FormatMessage' function in the 'Helper' class calls itself.",
+          "verified": true,
+          "verification_status": "verified",
+          "entity_name": "FormatMessage",
+          "entity_type": "function",
+          "source_file": "HelloWorldApp/Utilities/Helper.cs",
+          "source_location": "HelloWorldApp/Utilities/Helper.cs",
+          "discovery_query": "MATCH (p:Project {name: 'HelloWorldApp'})-[:CONTAINS]->(:File)-[:CONTAINS]->(:Namespace)-[:CONTAINS]->(:Type)-[:CONTAINS]->(fn:Function)-[:CALLS]->(calledFn:Function) RETURN fn.name AS CallerFunction, calledFn.name AS CalledFunction",
+          "verification_query": "MATCH (p:Project {name: 'HelloWorldApp'})-[:CONTAINS]->(:File)-[:CONTAINS]->(:Namespace)-[:CONTAINS]->(:Type)-[:CONTAINS]->(fn:Function)-[:CALLS]->(calledFn:Function) RETURN fn.name AS CallerFunction, calledFn.name AS CalledFunction",
+          "confidence": "high"
+        },
+        {
+          "claim": "The HelloWorldApp project does not contain a function named 'main'.",
+          "verified": true,
+          "verification_status": "verified",
+          "entity_name": null,
+          "entity_type": null,
+          "source_file": null,
+          "source_location": null,
+          "discovery_query": "MATCH (p:Project {name: 'HelloWorldApp'})-[:CONTAINS]->(f:File)-[:CONTAINS]->(ns:Namespace)-[:CONTAINS]->(t:Type)-[:CONTAINS]->(fn:Function {name: 'main'}) RETURN fn",
+          "verification_query": "MATCH (p:Project {name: 'HelloWorldApp'})-[:CONTAINS]->(f:File)-[:CONTAINS]->(ns:Namespace)-[:CONTAINS]->(t:Type)-[:CONTAINS]->(fn:Function {name: 'main'}) RETURN fn",
+          "confidence": "high"
+        }
+      ],
+      "execution_time_ms": 230928,
+      "sub_queries_count": 5,
+      "llm_calls_count": 85,
+      "token_usage": {
+        "total_tokens": 213018,
+        "prompt_tokens": 200643,
+        "completion_tokens": 12375,
+        "call_count": 85
+      },
+      "error": null,
+      "execution_traces": [
+        {
+          "subquery_id": 1,
+          "iterations_used": 1,
+          "findings_count": 1,
+          "verified_count": 1,
+          "execution_time_ms": 22161,
+          "validation_history": [
+            {
+              "iteration": 1,
+              "thinker_output": {
+                "summary": "Retrieve Namespace nodes within the HelloWorldApp project to identify modules or packages.",
+                "query_count": 1,
+                "proposed_queries": [
+                  {
+                    "query_id": 1,
+                    "purpose": "Retrieve all modules or packages within the HelloWorldApp project.",
+                    "cypher": "MATCH (p:Project {name: 'HelloWorldApp'})-[:CONTAINS]->(f:File)-[:CONTAINS]->(n:Namespace) RETURN n.name AS module_name"
+                  }
+                ],
+                "overall_reasoning": [
+                  "Identify the Project node for HelloWorldApp.",
+                  "Traverse from the Project to its contained File nodes.",
+                  "From each File node, traverse to contained Namespace nodes, representing modules or packages."
+                ]
+              },
+              "thinking_validation": {
+                "approved": true,
+                "feedback": null,
+                "reasoning_gaps": [],
+                "missing_aspects": [],
+                "queries_coverage_issues": [],
+                "specific_issues": [],
+                "suggested_corrections": null
+              },
+              "cypher_validation": {
+                "approved": true,
+                "feedback": "All elements in the query are valid according to the schema.",
+                "invalid_nodes": [],
+                "invalid_properties": [],
+                "invalid_relationships": [],
+                "query_issues": [
+                  {
+                    "query_id": 1,
+                    "approved": true,
+                    "issues": []
+                  }
+                ],
+                "observed_categorical_values": {}
+              },
+              "final_execution": true,
+              "executed_queries": [
+                {
+                  "query_id": 1,
+                  "cypher_query": "MATCH (p:Project {name: 'HelloWorldApp'})-[:CONTAINS]->(f:File)-[:CONTAINS]->(n:Namespace) RETURN n.name AS module_name",
+                  "result_count": 1,
+                  "execution_time_ms": 127,
+                  "error": null,
+                  "results_preview": [
+                    {
+                      "success": true,
+                      "results": [
+                        {
+                          "module_name": "HelloWorldApp.Utilities"
+                        }
+                      ],
+                      "count": 1,
+                      "query": "MATCH (p:Project {name: 'HelloWorldApp'})-[:CONTAINS]->(f:File)-[:CONTAINS]->(n:Namespace) RETURN n.name AS module_name"
+                    }
+                  ]
+                }
+              ],
+              "findings_count": 1
+            }
+          ],
+          "executed_queries": [
+            {
+              "query_id": 1,
+              "cypher_query": "MATCH (p:Project {name: 'HelloWorldApp'})-[:CONTAINS]->(f:File)-[:CONTAINS]->(n:Namespace) RETURN n.name AS module_name",
+              "result_count": 1,
+              "execution_time_ms": 127,
+              "error": null
+            }
+          ],
+          "errors": []
+        },
+        {
+          "subquery_id": 2,
+          "iterations_used": 1,
+          "findings_count": 1,
+          "verified_count": 1,
+          "execution_time_ms": 32595,
+          "validation_history": [
+            {
+              "iteration": 1,
+              "thinker_output": {
+                "summary": "The query retrieves classes within each module of the 'HelloWorldApp' project by traversing from the project to files, then to namespaces, and finally to types, filtering for classes.",
+                "query_count": 1,
+                "proposed_queries": [
+                  {
+                    "query_id": 1,
+                    "purpose": "Retrieve classes within each module of the 'HelloWorldApp' project.",
+                    "cypher": "MATCH (p:Project {name: 'HelloWorldApp'})-[:CONTAINS]->(f:File)-[:CONTAINS]->(n:Namespace)-[:CONTAINS]->(t:Type) WHERE t.type_kind = 'class' RETURN n.name AS module, t.name AS class_name"
+                  }
+                ],
+                "overall_reasoning": [
+                  "Identify the 'HelloWorldApp' project node using the Project label and name property.",
+                  "Traverse from the Project node to its contained File nodes.",
+                  "From each File node, traverse to contained Namespace nodes.",
+                  "Within each Namespace, find contained Type nodes.",
+                  "Filter Type nodes to identify classes using the type_kind property."
+                ]
+              },
+              "thinking_validation": {
+                "approved": true,
+                "feedback": null,
+                "reasoning_gaps": [],
+                "missing_aspects": [],
+                "queries_coverage_issues": [],
+                "specific_issues": [],
+                "suggested_corrections": null
+              },
+              "cypher_validation": {
+                "approved": true,
+                "feedback": "The query is semantically aligned with the Neo4j graph schema and observed data values.",
+                "invalid_nodes": [],
+                "invalid_properties": [],
+                "invalid_relationships": [],
+                "query_issues": [
+                  {
+                    "query_id": 1,
+                    "approved": true,
+                    "issues": []
+                  }
+                ],
+                "observed_categorical_values": {
+                  "Type.type_kind": [
+                    "interface",
+                    "class"
+                  ]
+                }
+              },
+              "final_execution": true,
+              "executed_queries": [
+                {
+                  "query_id": 1,
+                  "cypher_query": "MATCH (p:Project {name: 'HelloWorldApp'})-[:CONTAINS]->(f:File)-[:CONTAINS]->(n:Namespace)-[:CONTAINS]->(t:Type) WHERE t.type_kind = 'class' RETURN n.name AS module, t.name AS class_name",
+                  "result_count": 1,
+                  "execution_time_ms": 209,
+                  "error": null,
+                  "results_preview": [
+                    {
+                      "success": true,
+                      "results": [
+                        {
+                          "module": "HelloWorldApp.Utilities",
+                          "class_name": "Helper"
+                        }
+                      ],
+                      "count": 1,
+                      "query": "MATCH (p:Project {name: 'HelloWorldApp'})-[:CONTAINS]->(f:File)-[:CONTAINS]->(n:Namespace)-[:CONTAINS]->(t:Type) WHERE t.type_kind = 'class' RETURN n.name AS module, t.name AS class_name"
+                    }
+                  ]
+                }
+              ],
+              "findings_count": 1
+            }
+          ],
+          "executed_queries": [
+            {
+              "query_id": 1,
+              "cypher_query": "MATCH (p:Project {name: 'HelloWorldApp'})-[:CONTAINS]->(f:File)-[:CONTAINS]->(n:Namespace)-[:CONTAINS]->(t:Type) WHERE t.type_kind = 'class' RETURN n.name AS module, t.name AS class_name",
+              "result_count": 1,
+              "execution_time_ms": 209,
+              "error": null
+            }
+          ],
+          "errors": []
+        },
+        {
+          "subquery_id": 3,
+          "iterations_used": 1,
+          "findings_count": 1,
+          "verified_count": 1,
+          "execution_time_ms": 35139,
+          "validation_history": [
+            {
+              "iteration": 1,
+              "thinker_output": {
+                "summary": "We will query the graph to find all functions contained within each class (Type) in the HelloWorldApp project by leveraging the CONTAINS relationship chain: Project -> File -> Namespace -> Type -> Function.",
+                "query_count": 1,
+                "proposed_queries": [
+                  {
+                    "query_id": 1,
+                    "purpose": "Retrieve all functions within each class in the HelloWorldApp project.",
+                    "cypher": "MATCH (p:Project {name: 'HelloWorldApp'})-[:CONTAINS]->(f:File)-[:CONTAINS]->(ns:Namespace)-[:CONTAINS]->(t:Type)-[:CONTAINS]->(func:Function) RETURN t.name AS className, func.name AS functionName"
+                  }
+                ],
+                "overall_reasoning": [
+                  "The goal is to find all functions within each class in the HelloWorldApp project.",
+                  "From the schema, we know that a Project contains Files, Files contain Namespaces, Namespaces contain Types (which represent classes), and Types contain Functions.",
+                  "We need to traverse from the Project node to the Type node and then to the Function node using the CONTAINS relationship.",
+                  "The HelloWorldApp project is identified by its name property, and we can filter the Type nodes by their name to identify specific classes."
+                ]
+              },
+              "thinking_validation": {
+                "approved": true,
+                "feedback": null,
+                "reasoning_gaps": [],
+                "missing_aspects": [],
+                "queries_coverage_issues": [],
+                "specific_issues": [],
+                "suggested_corrections": null
+              },
+              "cypher_validation": {
+                "approved": true,
+                "feedback": "All node labels, relationships, and properties are valid according to the schema.",
+                "invalid_nodes": [],
+                "invalid_properties": [],
+                "invalid_relationships": [],
+                "query_issues": [
+                  {
+                    "query_id": 1,
+                    "approved": true,
+                    "issues": []
+                  }
+                ],
+                "observed_categorical_values": {}
+              },
+              "final_execution": true,
+              "executed_queries": [
+                {
+                  "query_id": 1,
+                  "cypher_query": "MATCH (p:Project {name: 'HelloWorldApp'})-[:CONTAINS]->(f:File)-[:CONTAINS]->(ns:Namespace)-[:CONTAINS]->(t:Type)-[:CONTAINS]->(func:Function) RETURN t.name AS className, func.name AS functionName",
+                  "result_count": 1,
+                  "execution_time_ms": 310,
+                  "error": null,
+                  "results_preview": [
+                    {
+                      "success": true,
+                      "results": [
+                        {
+                          "className": "Helper",
+                          "functionName": "FormatMessage"
+                        }
+                      ],
+                      "count": 1,
+                      "query": "MATCH (p:Project {name: 'HelloWorldApp'})-[:CONTAINS]->(f:File)-[:CONTAINS]->(ns:Namespace)-[:CONTAINS]->(t:Type)-[:CONTAINS]->(func:Function) RETURN t.name AS className, func.name AS functionName"
+                    }
+                  ]
+                }
+              ],
+              "findings_count": 1
+            }
+          ],
+          "executed_queries": [
+            {
+              "query_id": 1,
+              "cypher_query": "MATCH (p:Project {name: 'HelloWorldApp'})-[:CONTAINS]->(f:File)-[:CONTAINS]->(ns:Namespace)-[:CONTAINS]->(t:Type)-[:CONTAINS]->(func:Function) RETURN t.name AS className, func.name AS functionName",
+              "result_count": 1,
+              "execution_time_ms": 310,
+              "error": null
+            }
+          ],
+          "errors": []
+        },
+        {
+          "subquery_id": 4,
+          "iterations_used": 1,
+          "findings_count": 2,
+          "verified_count": 2,
+          "execution_time_ms": 102020,
+          "validation_history": [
+            {
+              "iteration": 1,
+              "thinker_output": {
+                "summary": "Retrieve the hierarchical structure and interactions between modules, classes, and functions in the HelloWorldApp project using verified relationships and node properties.",
+                "query_count": 2,
+                "proposed_queries": [
+                  {
+                    "query_id": 1,
+                    "purpose": "Retrieve the hierarchical structure from Project to Function.",
+                    "cypher": "MATCH (p:Project {name: 'HelloWorldApp'})-[:CONTAINS]->(f:File)-[:CONTAINS]->(n:Namespace)-[:CONTAINS]->(t:Type)-[:CONTAINS]->(fn:Function) RETURN p.name AS Project, f.file_path AS File, n.name AS Namespace, t.name AS Type, fn.name AS Function"
+                  },
+                  {
+                    "query_id": 2,
+                    "purpose": "Identify function calls within the HelloWorldApp project.",
+                    "cypher": "MATCH (p:Project {name: 'HelloWorldApp'})-[:CONTAINS]->(:File)-[:CONTAINS]->(:Namespace)-[:CONTAINS]->(:Type)-[:CONTAINS]->(fn:Function)-[:CALLS]->(calledFn:Function) RETURN fn.name AS CallerFunction, calledFn.name AS CalledFunction"
+                  }
+                ],
+                "overall_reasoning": [
+                  "Identify the hierarchical structure of the HelloWorldApp project by exploring the containment relationships from Project to File, File to Namespace, Namespace to Type, and Type to Function.",
+                  "Understand interactions between functions by exploring the CALLS relationship between Function nodes.",
+                  "Ensure all relationships are valid according to the schema."
+                ]
+              },
+              "thinking_validation": {
+                "approved": true,
+                "feedback": null,
+                "reasoning_gaps": [],
+                "missing_aspects": [],
+                "queries_coverage_issues": [],
+                "specific_issues": [],
+                "suggested_corrections": null
+              },
+              "cypher_validation": {
+                "approved": true,
+                "feedback": "Both queries are semantically valid according to the schema.",
+                "invalid_nodes": [],
+                "invalid_properties": [],
+                "invalid_relationships": [],
+                "query_issues": [
+                  {
+                    "query_id": 1,
+                    "approved": true,
+                    "issues": []
+                  },
+                  {
+                    "query_id": 2,
+                    "approved": true,
+                    "issues": []
+                  }
+                ],
+                "observed_categorical_values": {}
+              },
+              "final_execution": true,
+              "executed_queries": [
+                {
+                  "query_id": 1,
+                  "cypher_query": "MATCH (p:Project {name: 'HelloWorldApp'})-[:CONTAINS]->(f:File)-[:CONTAINS]->(n:Namespace)-[:CONTAINS]->(t:Type)-[:CONTAINS]->(fn:Function) RETURN p.name AS Project, f.file_path AS File, n.name AS Namespace, t.name AS Type, fn.name AS Function",
+                  "result_count": 1,
+                  "execution_time_ms": 276,
+                  "error": null,
+                  "results_preview": [
+                    {
+                      "success": true,
+                      "results": [
+                        {
+                          "Project": "HelloWorldApp",
+                          "File": "HelloWorldApp/Utilities/Helper.cs",
+                          "Namespace": "HelloWorldApp.Utilities",
+                          "Type": "Helper",
+                          "Function": "FormatMessage"
+                        }
+                      ],
+                      "count": 1,
+                      "query": "MATCH (p:Project {name: 'HelloWorldApp'})-[:CONTAINS]->(f:File)-[:CONTAINS]->(n:Namespace)-[:CONTAINS]->(t:Type)-[:CONTAINS]->(fn:Function) RETURN p.name AS Project, f.file_path AS File, n.name AS Namespace, t.name AS Type, fn.name AS Function"
+                    }
+                  ]
+                },
+                {
+                  "query_id": 2,
+                  "cypher_query": "MATCH (p:Project {name: 'HelloWorldApp'})-[:CONTAINS]->(:File)-[:CONTAINS]->(:Namespace)-[:CONTAINS]->(:Type)-[:CONTAINS]->(fn:Function)-[:CALLS]->(calledFn:Function) RETURN fn.name AS CallerFunction, calledFn.name AS CalledFunction",
+                  "result_count": 1,
+                  "execution_time_ms": 3526,
+                  "error": null,
+                  "results_preview": [
+                    {
+                      "success": true,
+                      "results": [
+                        {
+                          "CallerFunction": "FormatMessage",
+                          "CalledFunction": "FormatMessage"
+                        },
+                        {
+                          "CallerFunction": "FormatMessage",
+                          "CalledFunction": "FormatMessage"
+                        },
+                        {
+                          "CallerFunction": "FormatMessage",
+                          "CalledFunction": "FormatMessage"
+                        }
+                      ],
+                      "count": 3,
+                      "query": "MATCH (p:Project {name: 'HelloWorldApp'})-[:CONTAINS]->(:File)-[:CONTAINS]->(:Namespace)-[:CONTAINS]->(:Type)-[:CONTAINS]->(fn:Function)-[:CALLS]->(calledFn:Function) RETURN fn.name AS CallerFunction, calledFn.name AS CalledFunction"
+                    }
+                  ]
+                }
+              ],
+              "findings_count": 2
+            }
+          ],
+          "executed_queries": [
+            {
+              "query_id": 1,
+              "cypher_query": "MATCH (p:Project {name: 'HelloWorldApp'})-[:CONTAINS]->(f:File)-[:CONTAINS]->(n:Namespace)-[:CONTAINS]->(t:Type)-[:CONTAINS]->(fn:Function) RETURN p.name AS Project, f.file_path AS File, n.name AS Namespace, t.name AS Type, fn.name AS Function",
+              "result_count": 1,
+              "execution_time_ms": 276,
+              "error": null
+            },
+            {
+              "query_id": 2,
+              "cypher_query": "MATCH (p:Project {name: 'HelloWorldApp'})-[:CONTAINS]->(:File)-[:CONTAINS]->(:Namespace)-[:CONTAINS]->(:Type)-[:CONTAINS]->(fn:Function)-[:CALLS]->(calledFn:Function) RETURN fn.name AS CallerFunction, calledFn.name AS CalledFunction",
+              "result_count": 1,
+              "execution_time_ms": 3526,
+              "error": null
+            }
+          ],
+          "errors": []
+        },
+        {
+          "subquery_id": 5,
+          "iterations_used": 2,
+          "findings_count": 1,
+          "verified_count": 1,
+          "execution_time_ms": 109057,
+          "validation_history": [
+            {
+              "iteration": 1,
+              "thinker_output": {
+                "summary": "Identify the entry point function of the HelloWorldApp project by examining functions or methods that are likely to be the start of execution.",
+                "query_count": 1,
+                "proposed_queries": [
+                  {
+                    "query_id": 1,
+                    "purpose": "Retrieve functions within the HelloWorldApp project that could serve as entry points.",
+                    "cypher": "MATCH (p:Project {name: 'HelloWorldApp'})-[:CONTAINS]->(m:Module)-[:CONTAINS]->(c:Class)-[:CONTAINS]->(f:Function) WHERE f.name IN ['main', 'Main', 'start', 'Start'] RETURN f"
+                  }
+                ],
+                "overall_reasoning": [
+                  "The task is to identify the entry point of the HelloWorldApp project, which typically involves finding the main function or method where execution begins.",
+                  "The context indicates that HelloWorldApp is a project, and we have information about a module and class within it, but no specific entry point is mentioned.",
+                  "To determine the entry point, we need to find a function or method that serves as the starting point of execution, often named 'main' or similar.",
+                  "I will first explore the schema to understand the available nodes and relationships, focusing on nodes related to functions or methods."
+                ]
+              },
+              "thinking_validation": {
+                "approved": true,
+                "feedback": null,
+                "reasoning_gaps": [],
+                "missing_aspects": [],
+                "queries_coverage_issues": [],
+                "specific_issues": [],
+                "suggested_corrections": null
+              },
+              "cypher_validation": {
+                "approved": false,
+                "feedback": "The query uses invalid node labels 'Module' and 'Class'. These labels do not exist in the schema.",
+                "invalid_nodes": [
+                  "Module",
+                  "Class"
+                ],
+                "invalid_properties": [],
+                "invalid_relationships": [],
+                "query_issues": [
+                  {
+                    "query_id": 1,
+                    "approved": false,
+                    "issues": [
+                      "Node label 'Module' does not exist",
+                      "Node label 'Class' does not exist"
+                    ]
+                  }
+                ],
+                "observed_categorical_values": {}
+              }
+            },
+            {
+              "iteration": 2,
+              "thinker_output": {
+                "summary": "The query identifies the entry point of the HelloWorldApp project by finding the function named 'main'.",
+                "query_count": 1,
+                "proposed_queries": [
+                  {
+                    "query_id": 1,
+                    "purpose": "Retrieve the entry point function of the HelloWorldApp project.",
+                    "cypher": "MATCH (p:Project {name: 'HelloWorldApp'})-[:CONTAINS]->(f:File)-[:CONTAINS]->(ns:Namespace)-[:CONTAINS]->(t:Type)-[:CONTAINS]->(fn:Function {name: 'main'}) RETURN fn"
+                  }
+                ],
+                "overall_reasoning": [
+                  "Identify the Project node with the name 'HelloWorldApp'.",
+                  "Traverse from Project to File nodes using the CONTAINS relationship.",
+                  "From File nodes, traverse to Namespace and then to Type nodes using the CONTAINS relationship.",
+                  "From Type nodes, traverse to Function nodes using the CONTAINS relationship.",
+                  "Filter Function nodes to find the one with the name 'main', which is typically the entry point."
+                ]
+              },
+              "thinking_validation": {
+                "approved": true,
+                "feedback": null,
+                "reasoning_gaps": [],
+                "missing_aspects": [],
+                "queries_coverage_issues": [],
+                "specific_issues": [],
+                "suggested_corrections": null
+              },
+              "cypher_validation": {
+                "approved": true,
+                "feedback": "All node labels, relationships, and properties are valid.",
+                "invalid_nodes": [],
+                "invalid_properties": [],
+                "invalid_relationships": [],
+                "query_issues": [
+                  {
+                    "query_id": 1,
+                    "approved": true,
+                    "issues": []
+                  }
+                ],
+                "observed_categorical_values": {}
+              },
+              "final_execution": true,
+              "executed_queries": [
+                {
+                  "query_id": 1,
+                  "cypher_query": "MATCH (p:Project {name: 'HelloWorldApp'})-[:CONTAINS]->(f:File)-[:CONTAINS]->(ns:Namespace)-[:CONTAINS]->(t:Type)-[:CONTAINS]->(fn:Function {name: 'main'}) RETURN fn",
+                  "result_count": 1,
+                  "execution_time_ms": 291,
+                  "error": null,
+                  "results_preview": [
+                    {
+                      "success": true,
+                      "results": [],
+                      "count": 0,
+                      "query": "MATCH (p:Project {name: 'HelloWorldApp'})-[:CONTAINS]->(f:File)-[:CONTAINS]->(ns:Namespace)-[:CONTAINS]->(t:Type)-[:CONTAINS]->(fn:Function {name: 'main'}) RETURN fn"
+                    }
+                  ]
+                }
+              ],
+              "findings_count": 1
+            }
+          ],
+          "executed_queries": [
+            {
+              "query_id": 1,
+              "cypher_query": "MATCH (p:Project {name: 'HelloWorldApp'})-[:CONTAINS]->(f:File)-[:CONTAINS]->(ns:Namespace)-[:CONTAINS]->(t:Type)-[:CONTAINS]->(fn:Function {name: 'main'}) RETURN fn",
+              "result_count": 1,
+              "execution_time_ms": 291,
+              "error": null
+            }
+          ],
+          "errors": []
+        }
+      ],
+      "verified_count": 6,
+      "unverified_count": 0
+    },
+    {
+      "query_number": 3,
+      "query": "What is the exact method signature of the CreateWorkers method in the WorkerFactory class?",
+      "status": "success",
+      "answer": "The 'CreateWorkers' method in the 'WorkerFactory' class is a public static method that takes a single parameter of type 'INotifier' and returns an 'IEnumerable<IWorker>'. It is defined in the 'HelloWorldApp/WorkerFactory.cs' file.",
+      "confidence": "high",
+      "citations": [
+        {
+          "claim": "The 'WorkerFactory' class contains the 'CreateWorkers' method.",
+          "verified": true,
+          "verification_status": "verified",
+          "entity_name": "WorkerFactory",
+          "entity_type": "class",
+          "source_file": "HelloWorldApp/WorkerFactory.cs",
+          "source_location": "HelloWorldApp/WorkerFactory.cs",
+          "discovery_query": "MATCH (t:Type {name: 'WorkerFactory'})-[:CONTAINS]->(member) RETURN t, member",
+          "verification_query": "MATCH (t:Type {name: 'WorkerFactory'})-[:CONTAINS]->(member) RETURN t, member",
+          "confidence": "high"
+        },
+        {
+          "claim": "The 'CreateWorkers' function is part of the 'WorkerFactory' type.",
+          "verified": true,
+          "verification_status": "verified",
+          "entity_name": "WorkerFactory",
+          "entity_type": "type",
+          "source_file": "HelloWorldApp/WorkerFactory.cs",
+          "source_location": "HelloWorldApp/WorkerFactory.cs",
+          "discovery_query": "MATCH (t:Type {name: 'WorkerFactory'})-[:CONTAINS]->(f:Function {name: 'CreateWorkers'}) RETURN f",
+          "verification_query": "MATCH (t:Type {name: 'WorkerFactory'})-[:CONTAINS]->(f:Function {name: 'CreateWorkers'}) RETURN f",
+          "confidence": "high"
+        },
+        {
+          "claim": "The CreateWorkers method has a parameter of type INotifier, returns IEnumerable<IWorker>, and is public and static.",
+          "verified": true,
+          "verification_status": "verified",
+          "entity_name": "CreateWorkers",
+          "entity_type": "method",
+          "source_file": "Unknown",
+          "source_location": "Unknown",
+          "discovery_query": "MATCH (f:Function {name: 'CreateWorkers'}) RETURN f.parameters, f.return_type, f.modifier",
+          "verification_query": "MATCH (f:Function {name: 'CreateWorkers'}) RETURN f.parameters, f.return_type, f.modifier",
+          "confidence": "high"
+        }
+      ],
+      "execution_time_ms": 113174,
+      "sub_queries_count": 3,
+      "llm_calls_count": 42,
+      "token_usage": {
+        "total_tokens": 88009,
+        "prompt_tokens": 82653,
+        "completion_tokens": 5356,
+        "call_count": 42
+      },
+      "error": null,
+      "execution_traces": [
+        {
+          "subquery_id": 1,
+          "iterations_used": 1,
+          "findings_count": 1,
+          "verified_count": 1,
+          "execution_time_ms": 33711,
+          "validation_history": [
+            {
+              "iteration": 1,
+              "thinker_output": {
+                "summary": "Retrieve the 'WorkerFactory' class definition and its context by exploring its contained elements.",
+                "query_count": 1,
+                "proposed_queries": [
+                  {
+                    "query_id": 1,
+                    "purpose": "Retrieve the WorkerFactory class definition and its contained elements.",
+                    "cypher": "MATCH (t:Type {name: 'WorkerFactory'})-[:CONTAINS]->(member) RETURN t, member"
+                  }
+                ],
+                "overall_reasoning": [
+                  "Identify the Type node with the name 'WorkerFactory'.",
+                  "Explore the elements contained within the 'WorkerFactory' class using the 'CONTAINS' relationship."
+                ]
+              },
+              "thinking_validation": {
+                "approved": true,
+                "feedback": null,
+                "reasoning_gaps": [],
+                "missing_aspects": [],
+                "queries_coverage_issues": [],
+                "specific_issues": [],
+                "suggested_corrections": null
+              },
+              "cypher_validation": {
+                "approved": true,
+                "feedback": "All elements in the query are valid according to the schema.",
+                "invalid_nodes": [],
+                "invalid_properties": [],
+                "invalid_relationships": [],
+                "query_issues": [
+                  {
+                    "query_id": 1,
+                    "approved": true,
+                    "issues": []
+                  }
+                ],
+                "observed_categorical_values": {}
+              },
+              "final_execution": true,
+              "executed_queries": [
+                {
+                  "query_id": 1,
+                  "cypher_query": "MATCH (t:Type {name: 'WorkerFactory'})-[:CONTAINS]->(member) RETURN t, member",
+                  "result_count": 1,
+                  "execution_time_ms": 86,
+                  "error": null,
+                  "results_preview": [
+                    {
+                      "success": true,
+                      "results": [
+                        {
+                          "t": {
+                            "file_path": "HelloWorldApp/WorkerFactory.cs",
+                            "end_point": "[16, 5]",
+                            "start_byte": 65,
+                            "start_point": "[4, 4]",
+                            "modifier": "[\"public\", \"static\"]",
+                            "name": "WorkerFactory",
+                            "type_kind": "class",
+                            "body": "{\n        public static IEnumerable<IWorker> CreateWorkers(INotifier notifier)\n        {\n            // create multiple workers, each knows how to call back\n            return new List<IWorker>\n            {\n                new WorkerA(notifier),\n                new WorkerB(notifier),\n                new WorkerC(notifier)\n            };\n        }\n    }",
+                            "type": "Type",
+                            "end_byte": 457,
+                            "symbols_location": "{\"symbols\": [{\"text\": \"WorkerFactory\", \"start_byte\": 85, \"end_byte\": 98, \"start_point\": [4, 24], \"end_point\": [4, 37]}, {\"text\": \"CreateWorkers\", \"start_byte\": 148, \"end_byte\": 161, \"start_point\": [6, 43], \"end_point\": [6, 56]}]}"
+                          },
+                          "member": {
+                            "return_type": "IEnumerable<IWorker>",
+                            "file_path": "HelloWorldApp/WorkerFactory.cs",
+                            "end_point": "[15, 9]",
+                            "start_byte": 113,
+                            "start_point": "[6, 8]",
+                            "modifier": "[\"public\", \"static\"]",
+                            "name": "CreateWorkers",
+                            "type_kind": "method",
+                            "type": "Function",
+                            "parameters": "(INotifier notifier)",
+                            "end_byte": 451,
+                            "symbols_location": "{\"symbols\": [{\"text\": \"IEnumerable\", \"start_byte\": 127, \"end_byte\": 138, \"start_point\": [6, 22], \"end_point\": [6, 33]}, {\"text\": \"IWorker\", \"start_byte\": 139, \"end_byte\": 146, \"start_point\": [6, 34], \"end_point\": [6, 41]}, {\"text\": \"CreateWorkers\", \"start_byte\": 148, \"end_byte\": 161, \"start_point\": [6, 43], \"end_point\": [6, 56]}, {\"text\": \"INotifier\", \"start_byte\": 162, \"end_byte\": 171, \"start_point\": [6, 57], \"end_point\": [6, 66]}, {\"text\": \"notifier\", \"start_byte\": 172, \"end_byte\": 180, \"start_point\": [6, 67], \"end_point\": [6, 75]}]}"
+                          }
+                        }
+                      ],
+                      "count": 1,
+                      "query": "MATCH (t:Type {name: 'WorkerFactory'})-[:CONTAINS]->(member) RETURN t, member"
+                    }
+                  ]
+                }
+              ],
+              "findings_count": 1
+            }
+          ],
+          "executed_queries": [
+            {
+              "query_id": 1,
+              "cypher_query": "MATCH (t:Type {name: 'WorkerFactory'})-[:CONTAINS]->(member) RETURN t, member",
+              "result_count": 1,
+              "execution_time_ms": 86,
+              "error": null
+            }
+          ],
+          "errors": []
+        },
+        {
+          "subquery_id": 2,
+          "iterations_used": 1,
+          "findings_count": 1,
+          "verified_count": 1,
+          "execution_time_ms": 30428,
+          "validation_history": [
+            {
+              "iteration": 1,
+              "thinker_output": {
+                "summary": "Locate the 'CreateWorkers' function within the 'WorkerFactory' type using the CONTAINS relationship.",
+                "query_count": 1,
+                "proposed_queries": [
+                  {
+                    "query_id": 1,
+                    "purpose": "Find the CreateWorkers method within the WorkerFactory class.",
+                    "cypher": "MATCH (t:Type {name: 'WorkerFactory'})-[:CONTAINS]->(f:Function {name: 'CreateWorkers'}) RETURN f"
+                  }
+                ],
+                "overall_reasoning": [
+                  "Identify the 'WorkerFactory' class as a Type node.",
+                  "Identify the 'CreateWorkers' method as a Function node.",
+                  "Verify the containment relationship between 'WorkerFactory' and 'CreateWorkers'."
+                ]
+              },
+              "thinking_validation": {
+                "approved": true,
+                "feedback": null,
+                "reasoning_gaps": [],
+                "missing_aspects": [],
+                "queries_coverage_issues": [],
+                "specific_issues": [],
+                "suggested_corrections": null
+              },
+              "cypher_validation": {
+                "approved": true,
+                "feedback": "The query is semantically aligned with the Neo4j graph schema.",
+                "invalid_nodes": [],
+                "invalid_properties": [],
+                "invalid_relationships": [],
+                "query_issues": [
+                  {
+                    "query_id": 1,
+                    "approved": true,
+                    "issues": []
+                  }
+                ],
+                "observed_categorical_values": {}
+              },
+              "final_execution": true,
+              "executed_queries": [
+                {
+                  "query_id": 1,
+                  "cypher_query": "MATCH (t:Type {name: 'WorkerFactory'})-[:CONTAINS]->(f:Function {name: 'CreateWorkers'}) RETURN f",
+                  "result_count": 1,
+                  "execution_time_ms": 15,
+                  "error": null,
+                  "results_preview": [
+                    {
+                      "success": true,
+                      "results": [
+                        {
+                          "f": {
+                            "return_type": "IEnumerable<IWorker>",
+                            "file_path": "HelloWorldApp/WorkerFactory.cs",
+                            "end_point": "[15, 9]",
+                            "start_byte": 113,
+                            "start_point": "[6, 8]",
+                            "modifier": "[\"public\", \"static\"]",
+                            "name": "CreateWorkers",
+                            "type_kind": "method",
+                            "type": "Function",
+                            "parameters": "(INotifier notifier)",
+                            "end_byte": 451,
+                            "symbols_location": "{\"symbols\": [{\"text\": \"IEnumerable\", \"start_byte\": 127, \"end_byte\": 138, \"start_point\": [6, 22], \"end_point\": [6, 33]}, {\"text\": \"IWorker\", \"start_byte\": 139, \"end_byte\": 146, \"start_point\": [6, 34], \"end_point\": [6, 41]}, {\"text\": \"CreateWorkers\", \"start_byte\": 148, \"end_byte\": 161, \"start_point\": [6, 43], \"end_point\": [6, 56]}, {\"text\": \"INotifier\", \"start_byte\": 162, \"end_byte\": 171, \"start_point\": [6, 57], \"end_point\": [6, 66]}, {\"text\": \"notifier\", \"start_byte\": 172, \"end_byte\": 180, \"start_point\": [6, 67], \"end_point\": [6, 75]}]}"
+                          }
+                        }
+                      ],
+                      "count": 1,
+                      "query": "MATCH (t:Type {name: 'WorkerFactory'})-[:CONTAINS]->(f:Function {name: 'CreateWorkers'}) RETURN f"
+                    }
+                  ]
+                }
+              ],
+              "findings_count": 1
+            }
+          ],
+          "executed_queries": [
+            {
+              "query_id": 1,
+              "cypher_query": "MATCH (t:Type {name: 'WorkerFactory'})-[:CONTAINS]->(f:Function {name: 'CreateWorkers'}) RETURN f",
+              "result_count": 1,
+              "execution_time_ms": 15,
+              "error": null
+            }
+          ],
+          "errors": []
+        },
+        {
+          "subquery_id": 3,
+          "iterations_used": 1,
+          "findings_count": 1,
+          "verified_count": 1,
+          "execution_time_ms": 26042,
+          "validation_history": [
+            {
+              "iteration": 1,
+              "thinker_output": {
+                "summary": "Retrieve the parameters, return type, and modifiers of the CreateWorkers method using the Function node properties and relationships.",
+                "query_count": 1,
+                "proposed_queries": [
+                  {
+                    "query_id": 1,
+                    "purpose": "Retrieve the method signature of the CreateWorkers method.",
+                    "cypher": "MATCH (f:Function {name: 'CreateWorkers'}) RETURN f.parameters, f.return_type, f.modifier"
+                  }
+                ],
+                "overall_reasoning": [
+                  "Understand the request to determine the method signature of the CreateWorkers method.",
+                  "Schema discovery revealed relevant properties and relationships for Function and Type nodes.",
+                  "Validate that Function nodes can reference Type nodes for return types and parameter types."
+                ]
+              },
+              "thinking_validation": {
+                "approved": true,
+                "feedback": null,
+                "reasoning_gaps": [],
+                "missing_aspects": [],
+                "queries_coverage_issues": [],
+                "specific_issues": [],
+                "suggested_corrections": null
+              },
+              "cypher_validation": {
+                "approved": true,
+                "feedback": "All node labels and properties are valid.",
+                "invalid_nodes": [],
+                "invalid_properties": [],
+                "invalid_relationships": [],
+                "query_issues": [
+                  {
+                    "query_id": 1,
+                    "approved": true,
+                    "issues": []
+                  }
+                ],
+                "observed_categorical_values": {}
+              },
+              "final_execution": true,
+              "executed_queries": [
+                {
+                  "query_id": 1,
+                  "cypher_query": "MATCH (f:Function {name: 'CreateWorkers'}) RETURN f.parameters, f.return_type, f.modifier",
+                  "result_count": 1,
+                  "execution_time_ms": 16,
+                  "error": null,
+                  "results_preview": [
+                    {
+                      "success": true,
+                      "results": [
+                        {
+                          "f.parameters": "(INotifier notifier)",
+                          "f.return_type": "IEnumerable<IWorker>",
+                          "f.modifier": [
+                            "public",
+                            "static"
+                          ]
+                        }
+                      ],
+                      "count": 1,
+                      "query": "MATCH (f:Function {name: 'CreateWorkers'}) RETURN f.parameters, f.return_type, f.modifier"
+                    }
+                  ]
+                }
+              ],
+              "findings_count": 1
+            }
+          ],
+          "executed_queries": [
+            {
+              "query_id": 1,
+              "cypher_query": "MATCH (f:Function {name: 'CreateWorkers'}) RETURN f.parameters, f.return_type, f.modifier",
+              "result_count": 1,
+              "execution_time_ms": 16,
+              "error": null
+            }
+          ],
+          "errors": []
+        }
+      ],
+      "verified_count": 3,
+      "unverified_count": 0
+    },
+    {
+      "query_number": 4,
+      "query": "What are the two parameters passed to Helper.FormatMessage?",
+      "status": "success",
+      "answer": "The 'FormatMessage' function in the 'Helper' class takes two parameters: 'string workerName' and 'string text'. This function is designed to format a message using these two string parameters and returns a string.",
+      "confidence": "high",
+      "citations": [
+        {
+          "claim": "The 'Helper' class is not defined within the 'Utilities' namespace.",
+          "verified": true,
+          "verification_status": "verified",
+          "entity_name": "Utilities",
+          "entity_type": "namespace",
+          "source_file": null,
+          "source_location": null,
+          "discovery_query": "MATCH (n:Namespace {name: 'Utilities'})-[:CONTAINS]->(t:Type {name: 'Helper'}) RETURN t",
+          "verification_query": "MATCH (n:Namespace {name: 'Utilities'})-[:CONTAINS]->(t:Type {name: 'Helper'}) RETURN t",
+          "confidence": "high"
+        },
+        {
+          "claim": "The 'Helper' class contains a function named 'FormatMessage' with parameters '(string workerName, string text)' and a return type of 'string'.",
+          "verified": true,
+          "verification_status": "verified",
+          "entity_name": "Helper",
+          "entity_type": "class",
+          "source_file": "Unknown",
+          "source_location": "Unknown",
+          "discovery_query": "MATCH (t:Type {name: 'Helper'})-[:CONTAINS]->(f:Function {name: 'FormatMessage'}) RETURN f.name, f.parameters, f.return_type",
+          "verification_query": "MATCH (t:Type {name: 'Helper'})-[:CONTAINS]->(f:Function {name: 'FormatMessage'}) RETURN f.name, f.parameters, f.return_type",
+          "confidence": "high"
+        },
+        {
+          "claim": "The 'FormatMessage' function has parameters 'string workerName' and 'string text'.",
+          "verified": true,
+          "verification_status": "verified",
+          "entity_name": "FormatMessage",
+          "entity_type": "function",
+          "source_file": "Unknown",
+          "source_location": "Unknown",
+          "discovery_query": "MATCH (f:Function {name: 'FormatMessage'}) RETURN f.parameters",
+          "verification_query": "MATCH (f:Function {name: 'FormatMessage'}) RETURN f.parameters",
+          "confidence": "high"
+        }
+      ],
+      "execution_time_ms": 105327,
+      "sub_queries_count": 3,
+      "llm_calls_count": 44,
+      "token_usage": {
+        "total_tokens": 95688,
+        "prompt_tokens": 90354,
+        "completion_tokens": 5334,
+        "call_count": 44
+      },
+      "error": null,
+      "execution_traces": [
+        {
+          "subquery_id": 1,
+          "iterations_used": 1,
+          "findings_count": 1,
+          "verified_count": 1,
+          "execution_time_ms": 31632,
+          "validation_history": [
+            {
+              "iteration": 1,
+              "thinker_output": {
+                "summary": "Locate the 'Helper' class definition within the 'Utilities' namespace using Type and Namespace nodes connected by the CONTAINS relationship.",
+                "query_count": 1,
+                "proposed_queries": [
+                  {
+                    "query_id": 1,
+                    "purpose": "Find the definition of the 'Helper' class within the 'Utilities' namespace.",
+                    "cypher": "MATCH (n:Namespace {name: 'Utilities'})-[:CONTAINS]->(t:Type {name: 'Helper'}) RETURN t"
+                  }
+                ],
+                "overall_reasoning": [
+                  "Identify the Type node representing the 'Helper' class.",
+                  "Ensure the 'Helper' class is within the 'Utilities' namespace.",
+                  "Use the CONTAINS relationship to link the Namespace and Type nodes."
+                ]
+              },
+              "thinking_validation": {
+                "approved": true,
+                "feedback": null,
+                "reasoning_gaps": [],
+                "missing_aspects": [],
+                "queries_coverage_issues": [],
+                "specific_issues": [],
+                "suggested_corrections": null
+              },
+              "cypher_validation": {
+                "approved": true,
+                "feedback": "The query is semantically valid and aligns with the graph schema.",
+                "invalid_nodes": [],
+                "invalid_properties": [],
+                "invalid_relationships": [],
+                "query_issues": [
+                  {
+                    "query_id": 1,
+                    "approved": true,
+                    "issues": []
+                  }
+                ],
+                "observed_categorical_values": {}
+              },
+              "final_execution": true,
+              "executed_queries": [
+                {
+                  "query_id": 1,
+                  "cypher_query": "MATCH (n:Namespace {name: 'Utilities'})-[:CONTAINS]->(t:Type {name: 'Helper'}) RETURN t",
+                  "result_count": 1,
+                  "execution_time_ms": 220,
+                  "error": null,
+                  "results_preview": [
+                    {
+                      "success": true,
+                      "results": [],
+                      "count": 0,
+                      "query": "MATCH (n:Namespace {name: 'Utilities'})-[:CONTAINS]->(t:Type {name: 'Helper'}) RETURN t"
+                    }
+                  ]
+                }
+              ],
+              "findings_count": 1
+            }
+          ],
+          "executed_queries": [
+            {
+              "query_id": 1,
+              "cypher_query": "MATCH (n:Namespace {name: 'Utilities'})-[:CONTAINS]->(t:Type {name: 'Helper'}) RETURN t",
+              "result_count": 1,
+              "execution_time_ms": 220,
+              "error": null
+            }
+          ],
+          "errors": []
+        },
+        {
+          "subquery_id": 2,
+          "iterations_used": 1,
+          "findings_count": 1,
+          "verified_count": 1,
+          "execution_time_ms": 26124,
+          "validation_history": [
+            {
+              "iteration": 1,
+              "thinker_output": {
+                "summary": "Retrieve the definition and parameters of the 'FormatMessage' function within the 'Helper' class. The 'Helper' class is not in the 'Utilities' namespace, so we search globally.",
+                "query_count": 1,
+                "proposed_queries": [
+                  {
+                    "query_id": 1,
+                    "purpose": "Find the 'FormatMessage' function within the 'Helper' class and retrieve its signature.",
+                    "cypher": "MATCH (t:Type {name: 'Helper'})-[:CONTAINS]->(f:Function {name: 'FormatMessage'}) RETURN f.name, f.parameters, f.return_type"
+                  }
+                ],
+                "overall_reasoning": [
+                  "Identify the 'Helper' class as a Type node.",
+                  "Find the 'FormatMessage' function within the 'Helper' class.",
+                  "Retrieve the function's signature, including parameters."
+                ]
+              },
+              "thinking_validation": {
+                "approved": true,
+                "feedback": null,
+                "reasoning_gaps": [],
+                "missing_aspects": [],
+                "queries_coverage_issues": [],
+                "specific_issues": [],
+                "suggested_corrections": null
+              },
+              "cypher_validation": {
+                "approved": true,
+                "feedback": "The query is semantically aligned with the schema.",
+                "invalid_nodes": [],
+                "invalid_properties": [],
+                "invalid_relationships": [],
+                "query_issues": [
+                  {
+                    "query_id": 1,
+                    "approved": true,
+                    "issues": []
+                  }
+                ],
+                "observed_categorical_values": {}
+              },
+              "final_execution": true,
+              "executed_queries": [
+                {
+                  "query_id": 1,
+                  "cypher_query": "MATCH (t:Type {name: 'Helper'})-[:CONTAINS]->(f:Function {name: 'FormatMessage'}) RETURN f.name, f.parameters, f.return_type",
+                  "result_count": 1,
+                  "execution_time_ms": 124,
+                  "error": null,
+                  "results_preview": [
+                    {
+                      "success": true,
+                      "results": [
+                        {
+                          "f.name": "FormatMessage",
+                          "f.parameters": "(string workerName, string text)",
+                          "f.return_type": "string"
+                        }
+                      ],
+                      "count": 1,
+                      "query": "MATCH (t:Type {name: 'Helper'})-[:CONTAINS]->(f:Function {name: 'FormatMessage'}) RETURN f.name, f.parameters, f.return_type"
+                    }
+                  ]
+                }
+              ],
+              "findings_count": 1
+            }
+          ],
+          "executed_queries": [
+            {
+              "query_id": 1,
+              "cypher_query": "MATCH (t:Type {name: 'Helper'})-[:CONTAINS]->(f:Function {name: 'FormatMessage'}) RETURN f.name, f.parameters, f.return_type",
+              "result_count": 1,
+              "execution_time_ms": 124,
+              "error": null
+            }
+          ],
+          "errors": []
+        },
+        {
+          "subquery_id": 3,
+          "iterations_used": 1,
+          "findings_count": 1,
+          "verified_count": 1,
+          "execution_time_ms": 29370,
+          "validation_history": [
+            {
+              "iteration": 1,
+              "thinker_output": {
+                "summary": "Retrieve the parameters of the 'FormatMessage' function by accessing the 'parameters' property of the corresponding 'Function' node.",
+                "query_count": 1,
+                "proposed_queries": [
+                  {
+                    "query_id": 1,
+                    "purpose": "Retrieve the parameters of the 'FormatMessage' function.",
+                    "cypher": "MATCH (f:Function {name: 'FormatMessage'}) RETURN f.parameters"
+                  }
+                ],
+                "overall_reasoning": [
+                  "The goal is to identify the parameters of the 'FormatMessage' function.",
+                  "The 'Function' node has a 'parameters' property that stores this information.",
+                  "We need to match the 'Function' node by its name and retrieve the 'parameters' property."
+                ]
+              },
+              "thinking_validation": {
+                "approved": true,
+                "feedback": null,
+                "reasoning_gaps": [],
+                "missing_aspects": [],
+                "queries_coverage_issues": [],
+                "specific_issues": [],
+                "suggested_corrections": null
+              },
+              "cypher_validation": {
+                "approved": true,
+                "feedback": "The query is semantically valid with respect to the schema.",
+                "invalid_nodes": [],
+                "invalid_properties": [],
+                "invalid_relationships": [],
+                "query_issues": [
+                  {
+                    "query_id": 1,
+                    "approved": true,
+                    "issues": []
+                  }
+                ],
+                "observed_categorical_values": {}
+              },
+              "final_execution": true,
+              "executed_queries": [
+                {
+                  "query_id": 1,
+                  "cypher_query": "MATCH (f:Function {name: 'FormatMessage'}) RETURN f.parameters",
+                  "result_count": 1,
+                  "execution_time_ms": 12,
+                  "error": null,
+                  "results_preview": [
+                    {
+                      "success": true,
+                      "results": [
+                        {
+                          "f.parameters": "(string workerName, string text)"
+                        }
+                      ],
+                      "count": 1,
+                      "query": "MATCH (f:Function {name: 'FormatMessage'}) RETURN f.parameters"
+                    }
+                  ]
+                }
+              ],
+              "findings_count": 1
+            }
+          ],
+          "executed_queries": [
+            {
+              "query_id": 1,
+              "cypher_query": "MATCH (f:Function {name: 'FormatMessage'}) RETURN f.parameters",
+              "result_count": 1,
+              "execution_time_ms": 12,
+              "error": null
+            }
+          ],
+          "errors": []
+        }
+      ],
+      "verified_count": 3,
+      "unverified_count": 0
+    },
+    {
+      "query_number": 5,
+      "query": "What is the role of WorkerZ in the project?",
+      "status": "success",
+      "answer": "The role of 'WorkerZ' in the project is non-existent. There is no definition of a type, function, or class named 'WorkerZ' in the codebase. Additionally, there are no methods, properties, or references associated with 'WorkerZ'. Therefore, 'WorkerZ' does not play any role in the project.",
+      "confidence": "high",
+      "citations": [
+        {
+          "claim": "The type 'WorkerZ' is not defined in the project.",
+          "verified": true,
+          "verification_status": "verified",
+          "entity_name": null,
+          "entity_type": null,
+          "source_file": null,
+          "source_location": null,
+          "discovery_query": "MATCH (t:Type) WHERE t.name = 'WorkerZ' RETURN t",
+          "verification_query": "MATCH (t:Type) WHERE t.name = 'WorkerZ' RETURN t",
+          "confidence": "high"
+        },
+        {
+          "claim": "The function 'WorkerZ' is not defined in the project.",
+          "verified": true,
+          "verification_status": "verified",
+          "entity_name": null,
+          "entity_type": null,
+          "source_file": null,
+          "source_location": null,
+          "discovery_query": "MATCH (f:Function) WHERE f.name = 'WorkerZ' RETURN f",
+          "verification_query": "MATCH (f:Function) WHERE f.name = 'WorkerZ' RETURN f",
+          "confidence": "high"
+        },
+        {
+          "claim": "The WorkerZ class does not contain any methods.",
+          "verified": true,
+          "verification_status": "verified",
+          "entity_name": "WorkerZ",
+          "entity_type": "class",
+          "source_file": null,
+          "source_location": null,
+          "discovery_query": "MATCH (wz:Type {name: 'WorkerZ'})-[:CONTAINS]->(f:Function) RETURN f.name AS method_name",
+          "verification_query": "MATCH (wz:Type {name: 'WorkerZ'})-[:CONTAINS]->(f:Function) RETURN f.name AS method_name",
+          "confidence": "high"
+        },
+        {
+          "claim": "The WorkerZ class does not contain any properties.",
+          "verified": true,
+          "verification_status": "verified",
+          "entity_name": "WorkerZ",
+          "entity_type": "class",
+          "source_file": null,
+          "source_location": null,
+          "discovery_query": "MATCH (wz:Type {name: 'WorkerZ'})-[:CONTAINS]->(v:Variable) RETURN v.name AS property_name",
+          "verification_query": "MATCH (wz:Type {name: 'WorkerZ'})-[:CONTAINS]->(v:Variable) RETURN v.name AS property_name",
+          "confidence": "high"
+        },
+        {
+          "claim": "There are no Variable nodes that reference the WorkerZ type.",
+          "verified": true,
+          "verification_status": "verified",
+          "entity_name": "WorkerZ",
+          "entity_type": "type",
+          "source_file": null,
+          "source_location": null,
+          "discovery_query": "MATCH (wz:Type {name: 'WorkerZ'})<-[:REFERENCES]-(v:Variable) RETURN v",
+          "verification_query": "MATCH (wz:Type {name: 'WorkerZ'})<-[:REFERENCES]-(v:Variable) RETURN v",
+          "confidence": "high"
+        },
+        {
+          "claim": "There are no Statement nodes that reference the WorkerZ type.",
+          "verified": true,
+          "verification_status": "verified",
+          "entity_name": "WorkerZ",
+          "entity_type": "type",
+          "source_file": null,
+          "source_location": null,
+          "discovery_query": "MATCH (wz:Type {name: 'WorkerZ'})<-[:REFERENCES]-(s:Statement) RETURN s",
+          "verification_query": "MATCH (wz:Type {name: 'WorkerZ'})<-[:REFERENCES]-(s:Statement) RETURN s",
+          "confidence": "high"
+        },
+        {
+          "claim": "The WorkerFactory type references itself.",
+          "verified": true,
+          "verification_status": "verified",
+          "entity_name": "WorkerFactory",
+          "entity_type": "Type",
+          "source_file": "Unknown",
+          "source_location": "Unknown",
+          "discovery_query": "MATCH (t:Type)-[:REFERENCES]->(wf:Type {name: 'WorkerFactory'}) RETURN t.name",
+          "verification_query": "MATCH (t:Type)-[:REFERENCES]->(wf:Type {name: 'WorkerFactory'}) RETURN t.name",
+          "confidence": "high"
+        },
+        {
+          "claim": "There is no REFERENCES or IMPLEMENTS relationship between WorkerA and WorkerZ.",
+          "verified": true,
+          "verification_status": "verified",
+          "entity_name": "WorkerA",
+          "entity_type": "class",
+          "source_file": null,
+          "source_location": null,
+          "discovery_query": "MATCH (a:Type {name: 'WorkerA'})-[:REFERENCES|IMPLEMENTS]->(z:Type {name: 'WorkerZ'}) RETURN a, z",
+          "verification_query": "MATCH (a:Type {name: 'WorkerA'})-[:REFERENCES|IMPLEMENTS]->(z:Type {name: 'WorkerZ'}) RETURN a, z",
+          "confidence": "high"
+        },
+        {
+          "claim": "WorkerB class references WorkerC class.",
+          "verified": true,
+          "verification_status": "verified",
+          "entity_name": "WorkerB",
+          "entity_type": "class",
+          "source_file": null,
+          "source_location": null,
+          "discovery_query": "MATCH (b:Type {name: 'WorkerB'})-[:REFERENCES]->(t:Type) RETURN t.name",
+          "verification_query": "MATCH (b:Type {name: 'WorkerB'})-[:REFERENCES]->(t:Type) RETURN t.name",
+          "confidence": "high"
+        },
+        {
+          "claim": "WorkerB class references itself.",
+          "verified": true,
+          "verification_status": "verified",
+          "entity_name": "WorkerB",
+          "entity_type": "class",
+          "source_file": null,
+          "source_location": null,
+          "discovery_query": "MATCH (b:Type {name: 'WorkerB'})-[:REFERENCES]->(t:Type) RETURN t.name",
+          "verification_query": "MATCH (b:Type {name: 'WorkerB'})-[:REFERENCES]->(t:Type) RETURN t.name",
+          "confidence": "high"
+        },
+        {
+          "claim": "WorkerB class references WorkerA class.",
+          "verified": true,
+          "verification_status": "verified",
+          "entity_name": "WorkerB",
+          "entity_type": "class",
+          "source_file": null,
+          "source_location": null,
+          "discovery_query": "MATCH (b:Type {name: 'WorkerB'})-[:REFERENCES]->(t:Type) RETURN t.name",
+          "verification_query": "MATCH (b:Type {name: 'WorkerB'})-[:REFERENCES]->(t:Type) RETURN t.name",
+          "confidence": "high"
+        },
+        {
+          "claim": "WorkerB class references IWorker interface.",
+          "verified": true,
+          "verification_status": "verified",
+          "entity_name": "WorkerB",
+          "entity_type": "class",
+          "source_file": null,
+          "source_location": null,
+          "discovery_query": "MATCH (b:Type {name: 'WorkerB'})-[:REFERENCES]->(t:Type) RETURN t.name",
+          "verification_query": "MATCH (b:Type {name: 'WorkerB'})-[:REFERENCES]->(t:Type) RETURN t.name",
+          "confidence": "high"
+        },
+        {
+          "claim": "There is no REFERENCES relationship between WorkerZ and WorkerC.",
+          "verified": true,
+          "verification_status": "verified",
+          "entity_name": "WorkerZ",
+          "entity_type": "Type",
+          "source_file": null,
+          "source_location": null,
+          "discovery_query": "MATCH (z:Type {name: 'WorkerZ'})-[:REFERENCES]->(c:Type {name: 'WorkerC'}) RETURN z, c",
+          "verification_query": "MATCH (z:Type {name: 'WorkerZ'})-[:REFERENCES]->(c:Type {name: 'WorkerC'}) RETURN z, c",
+          "confidence": "high"
+        },
+        {
+          "claim": "There is no IMPLEMENTS relationship between WorkerZ and WorkerC.",
+          "verified": true,
+          "verification_status": "verified",
+          "entity_name": "WorkerZ",
+          "entity_type": "Type",
+          "source_file": null,
+          "source_location": null,
+          "discovery_query": "MATCH (z:Type {name: 'WorkerZ'})-[:IMPLEMENTS]->(c:Type {name: 'WorkerC'}) RETURN z, c",
+          "verification_query": "MATCH (z:Type {name: 'WorkerZ'})-[:IMPLEMENTS]->(c:Type {name: 'WorkerC'}) RETURN z, c",
+          "confidence": "high"
+        }
+      ],
+      "execution_time_ms": 267767,
+      "sub_queries_count": 7,
+      "llm_calls_count": 97,
+      "token_usage": {
+        "total_tokens": 232018,
+        "prompt_tokens": 217969,
+        "completion_tokens": 14049,
+        "call_count": 97
+      },
+      "error": null,
+      "execution_traces": [
+        {
+          "subquery_id": 1,
+          "iterations_used": 1,
+          "findings_count": 2,
+          "verified_count": 2,
+          "execution_time_ms": 23283,
+          "validation_history": [
+            {
+              "iteration": 1,
+              "thinker_output": {
+                "summary": "Query both Type and Function nodes to determine the definition of WorkerZ. If not found, it may not be defined in the project.",
+                "query_count": 2,
+                "proposed_queries": [
+                  {
+                    "query_id": 1,
+                    "purpose": "Check if WorkerZ is defined as a Type.",
+                    "cypher": "MATCH (t:Type) WHERE t.name = 'WorkerZ' RETURN t"
+                  },
+                  {
+                    "query_id": 2,
+                    "purpose": "Check if WorkerZ is defined as a Function.",
+                    "cypher": "MATCH (f:Function) WHERE f.name = 'WorkerZ' RETURN f"
+                  }
+                ],
+                "overall_reasoning": [
+                  "Identify the nature of WorkerZ by checking if it is a Type or a Function.",
+                  "Use the name property of Type and Function nodes to search for WorkerZ.",
+                  "If WorkerZ is not found as a Type, check if it is a Function."
+                ]
+              },
+              "thinking_validation": {
+                "approved": true,
+                "feedback": null,
+                "reasoning_gaps": [],
+                "missing_aspects": [],
+                "queries_coverage_issues": [],
+                "specific_issues": [],
+                "suggested_corrections": null
+              },
+              "cypher_validation": {
+                "approved": true,
+                "feedback": "Both queries are valid as they use existing node labels and properties.",
+                "invalid_nodes": [],
+                "invalid_properties": [],
+                "invalid_relationships": [],
+                "query_issues": [
+                  {
+                    "query_id": 1,
+                    "approved": true,
+                    "issues": []
+                  },
+                  {
+                    "query_id": 2,
+                    "approved": true,
+                    "issues": []
+                  }
+                ],
+                "observed_categorical_values": {}
+              },
+              "final_execution": true,
+              "executed_queries": [
+                {
+                  "query_id": 1,
+                  "cypher_query": "MATCH (t:Type) WHERE t.name = 'WorkerZ' RETURN t",
+                  "result_count": 1,
+                  "execution_time_ms": 12,
+                  "error": null,
+                  "results_preview": [
+                    {
+                      "success": true,
+                      "results": [],
+                      "count": 0,
+                      "query": "MATCH (t:Type) WHERE t.name = 'WorkerZ' RETURN t"
+                    }
+                  ]
+                },
+                {
+                  "query_id": 2,
+                  "cypher_query": "MATCH (f:Function) WHERE f.name = 'WorkerZ' RETURN f",
+                  "result_count": 1,
+                  "execution_time_ms": 11,
+                  "error": null,
+                  "results_preview": [
+                    {
+                      "success": true,
+                      "results": [],
+                      "count": 0,
+                      "query": "MATCH (f:Function) WHERE f.name = 'WorkerZ' RETURN f"
+                    }
+                  ]
+                }
+              ],
+              "findings_count": 2
+            }
+          ],
+          "executed_queries": [
+            {
+              "query_id": 1,
+              "cypher_query": "MATCH (t:Type) WHERE t.name = 'WorkerZ' RETURN t",
+              "result_count": 1,
+              "execution_time_ms": 12,
+              "error": null
+            },
+            {
+              "query_id": 2,
+              "cypher_query": "MATCH (f:Function) WHERE f.name = 'WorkerZ' RETURN f",
+              "result_count": 1,
+              "execution_time_ms": 11,
+              "error": null
+            }
+          ],
+          "errors": []
+        },
+        {
+          "subquery_id": 2,
+          "iterations_used": 1,
+          "findings_count": 2,
+          "verified_count": 2,
+          "execution_time_ms": 209452,
+          "validation_history": [
+            {
+              "iteration": 1,
+              "thinker_output": {
+                "summary": "Retrieve methods and properties of WorkerZ by exploring its Type node and using the CONTAINS relationship.",
+                "query_count": 2,
+                "proposed_queries": [
+                  {
+                    "query_id": 1,
+                    "purpose": "Retrieve methods of WorkerZ",
+                    "cypher": "MATCH (wz:Type {name: 'WorkerZ'})-[:CONTAINS]->(f:Function) RETURN f.name AS method_name"
+                  },
+                  {
+                    "query_id": 2,
+                    "purpose": "Retrieve properties of WorkerZ",
+                    "cypher": "MATCH (wz:Type {name: 'WorkerZ'})-[:CONTAINS]->(v:Variable) RETURN v.name AS property_name"
+                  }
+                ],
+                "overall_reasoning": [
+                  "Identify 'WorkerZ' as a Type node.",
+                  "Use the 'CONTAINS' relationship to find methods (Function nodes) and properties (Variable nodes) of 'WorkerZ'."
+                ]
+              },
+              "thinking_validation": {
+                "approved": true,
+                "feedback": null,
+                "reasoning_gaps": [],
+                "missing_aspects": [],
+                "queries_coverage_issues": [],
+                "specific_issues": [],
+                "suggested_corrections": null
+              },
+              "cypher_validation": {
+                "approved": true,
+                "feedback": "Both queries are valid and approved.",
+                "invalid_nodes": [],
+                "invalid_properties": [],
+                "invalid_relationships": [],
+                "query_issues": [
+                  {
+                    "query_id": 1,
+                    "approved": true,
+                    "issues": []
+                  },
+                  {
+                    "query_id": 2,
+                    "approved": true,
+                    "issues": []
+                  }
+                ],
+                "observed_categorical_values": {}
+              },
+              "final_execution": true,
+              "executed_queries": [
+                {
+                  "query_id": 1,
+                  "cypher_query": "MATCH (wz:Type {name: 'WorkerZ'})-[:CONTAINS]->(f:Function) RETURN f.name AS method_name",
+                  "result_count": 1,
+                  "execution_time_ms": 9902,
+                  "error": null,
+                  "results_preview": [
+                    {
+                      "success": true,
+                      "results": [],
+                      "count": 0,
+                      "query": "MATCH (wz:Type {name: 'WorkerZ'})-[:CONTAINS]->(f:Function) RETURN f.name AS method_name"
+                    }
+                  ]
+                },
+                {
+                  "query_id": 2,
+                  "cypher_query": "MATCH (wz:Type {name: 'WorkerZ'})-[:CONTAINS]->(v:Variable) RETURN v.name AS property_name",
+                  "result_count": 1,
+                  "execution_time_ms": 8631,
+                  "error": null,
+                  "results_preview": [
+                    {
+                      "success": true,
+                      "results": [],
+                      "count": 0,
+                      "query": "MATCH (wz:Type {name: 'WorkerZ'})-[:CONTAINS]->(v:Variable) RETURN v.name AS property_name"
+                    }
+                  ]
+                }
+              ],
+              "findings_count": 2
+            }
+          ],
+          "executed_queries": [
+            {
+              "query_id": 1,
+              "cypher_query": "MATCH (wz:Type {name: 'WorkerZ'})-[:CONTAINS]->(f:Function) RETURN f.name AS method_name",
+              "result_count": 1,
+              "execution_time_ms": 9902,
+              "error": null
+            },
+            {
+              "query_id": 2,
+              "cypher_query": "MATCH (wz:Type {name: 'WorkerZ'})-[:CONTAINS]->(v:Variable) RETURN v.name AS property_name",
+              "result_count": 1,
+              "execution_time_ms": 8631,
+              "error": null
+            }
+          ],
+          "errors": []
+        },
+        {
+          "subquery_id": 3,
+          "iterations_used": 1,
+          "findings_count": 2,
+          "verified_count": 2,
+          "execution_time_ms": 210137,
+          "validation_history": [
+            {
+              "iteration": 1,
+              "thinker_output": {
+                "summary": "Find references to WorkerZ in Variable and Statement nodes using the REFERENCES relationship.",
+                "query_count": 2,
+                "proposed_queries": [
+                  {
+                    "query_id": 1,
+                    "purpose": "Find where WorkerZ is referenced or instantiated in the project.",
+                    "cypher": "MATCH (wz:Type {name: 'WorkerZ'})<-[:REFERENCES]-(v:Variable) RETURN v"
+                  },
+                  {
+                    "query_id": 2,
+                    "purpose": "Find where WorkerZ is referenced in statements.",
+                    "cypher": "MATCH (wz:Type {name: 'WorkerZ'})<-[:REFERENCES]-(s:Statement) RETURN s"
+                  }
+                ],
+                "overall_reasoning": [
+                  "Identify node labels and properties relevant to WorkerZ.",
+                  "Use REFERENCES relationship to find where WorkerZ is used.",
+                  "Query Variable and Statement nodes that reference WorkerZ as a Type."
+                ]
+              },
+              "thinking_validation": {
+                "approved": true,
+                "feedback": null,
+                "reasoning_gaps": [],
+                "missing_aspects": [],
+                "queries_coverage_issues": [],
+                "specific_issues": [],
+                "suggested_corrections": null
+              },
+              "cypher_validation": {
+                "approved": true,
+                "feedback": "Both queries are valid according to the schema.",
+                "invalid_nodes": [],
+                "invalid_properties": [],
+                "invalid_relationships": [],
+                "query_issues": [
+                  {
+                    "query_id": 1,
+                    "approved": true,
+                    "issues": []
+                  },
+                  {
+                    "query_id": 2,
+                    "approved": true,
+                    "issues": []
+                  }
+                ],
+                "observed_categorical_values": {}
+              },
+              "final_execution": true,
+              "executed_queries": [
+                {
+                  "query_id": 1,
+                  "cypher_query": "MATCH (wz:Type {name: 'WorkerZ'})<-[:REFERENCES]-(v:Variable) RETURN v",
+                  "result_count": 1,
+                  "execution_time_ms": 9908,
+                  "error": null,
+                  "results_preview": [
+                    {
+                      "success": true,
+                      "results": [],
+                      "count": 0,
+                      "query": "MATCH (wz:Type {name: 'WorkerZ'})<-[:REFERENCES]-(v:Variable) RETURN v"
+                    }
+                  ]
+                },
+                {
+                  "query_id": 2,
+                  "cypher_query": "MATCH (wz:Type {name: 'WorkerZ'})<-[:REFERENCES]-(s:Statement) RETURN s",
+                  "result_count": 1,
+                  "execution_time_ms": 5187,
+                  "error": null,
+                  "results_preview": [
+                    {
+                      "success": true,
+                      "results": [],
+                      "count": 0,
+                      "query": "MATCH (wz:Type {name: 'WorkerZ'})<-[:REFERENCES]-(s:Statement) RETURN s"
+                    }
+                  ]
+                }
+              ],
+              "findings_count": 2
+            }
+          ],
+          "executed_queries": [
+            {
+              "query_id": 1,
+              "cypher_query": "MATCH (wz:Type {name: 'WorkerZ'})<-[:REFERENCES]-(v:Variable) RETURN v",
+              "result_count": 1,
+              "execution_time_ms": 9908,
+              "error": null
+            },
+            {
+              "query_id": 2,
+              "cypher_query": "MATCH (wz:Type {name: 'WorkerZ'})<-[:REFERENCES]-(s:Statement) RETURN s",
+              "result_count": 1,
+              "execution_time_ms": 5187,
+              "error": null
+            }
+          ],
+          "errors": []
+        },
+        {
+          "subquery_id": 4,
+          "iterations_used": 1,
+          "findings_count": 1,
+          "verified_count": 1,
+          "execution_time_ms": 199009,
+          "validation_history": [
+            {
+              "iteration": 1,
+              "thinker_output": {
+                "summary": "We will query the database to find any Type nodes that have a REFERENCES relationship with WorkerFactory, as WorkerZ is not explicitly defined but could be a Type node referencing WorkerFactory.",
+                "query_count": 1,
+                "proposed_queries": [
+                  {
+                    "query_id": 1,
+                    "purpose": "Identify Type nodes that reference WorkerFactory.",
+                    "cypher": "MATCH (t:Type)-[:REFERENCES]->(wf:Type {name: 'WorkerFactory'}) RETURN t.name"
+                  }
+                ],
+                "overall_reasoning": [
+                  "The task is to identify any relationships between WorkerZ and WorkerFactory.",
+                  "WorkerFactory is confirmed as a Type node. WorkerZ is not explicitly defined, but we need to explore its potential relationships with WorkerFactory.",
+                  "The schema shows that Type nodes can have REFERENCES relationships with other Type nodes.",
+                  "Since WorkerFactory is a Type, we will check if there are any Type nodes that reference WorkerFactory."
+                ]
+              },
+              "thinking_validation": {
+                "approved": true,
+                "feedback": null,
+                "reasoning_gaps": [],
+                "missing_aspects": [],
+                "queries_coverage_issues": [],
+                "specific_issues": [],
+                "suggested_corrections": null
+              },
+              "cypher_validation": {
+                "approved": true,
+                "feedback": "The query is valid. All node labels, properties, and relationships are correctly used.",
+                "invalid_nodes": [],
+                "invalid_properties": [],
+                "invalid_relationships": [],
+                "query_issues": [
+                  {
+                    "query_id": 1,
+                    "approved": true,
+                    "issues": []
+                  }
+                ],
+                "observed_categorical_values": {}
+              },
+              "final_execution": true,
+              "executed_queries": [
+                {
+                  "query_id": 1,
+                  "cypher_query": "MATCH (t:Type)-[:REFERENCES]->(wf:Type {name: 'WorkerFactory'}) RETURN t.name",
+                  "result_count": 1,
+                  "execution_time_ms": 15053,
+                  "error": null,
+                  "results_preview": [
+                    {
+                      "success": true,
+                      "results": [
+                        {
+                          "t.name": "WorkerFactory"
+                        }
+                      ],
+                      "count": 1,
+                      "query": "MATCH (t:Type)-[:REFERENCES]->(wf:Type {name: 'WorkerFactory'}) RETURN t.name"
+                    }
+                  ]
+                }
+              ],
+              "findings_count": 1
+            }
+          ],
+          "executed_queries": [
+            {
+              "query_id": 1,
+              "cypher_query": "MATCH (t:Type)-[:REFERENCES]->(wf:Type {name: 'WorkerFactory'}) RETURN t.name",
+              "result_count": 1,
+              "execution_time_ms": 15053,
+              "error": null
+            }
+          ],
+          "errors": []
+        },
+        {
+          "subquery_id": 5,
+          "iterations_used": 1,
+          "findings_count": 1,
+          "verified_count": 1,
+          "execution_time_ms": 197905,
+          "validation_history": [
+            {
+              "iteration": 1,
+              "thinker_output": {
+                "summary": "Query to find REFERENCES or IMPLEMENTS relationships between WorkerA and WorkerZ.",
+                "query_count": 1,
+                "proposed_queries": [
+                  {
+                    "query_id": 1,
+                    "purpose": "Find REFERENCES or IMPLEMENTS relationships between WorkerA and WorkerZ.",
+                    "cypher": "MATCH (a:Type {name: 'WorkerA'})-[:REFERENCES|IMPLEMENTS]->(z:Type {name: 'WorkerZ'}) RETURN a, z"
+                  }
+                ],
+                "overall_reasoning": [
+                  "Identify any REFERENCES or IMPLEMENTS relationships between WorkerA and WorkerZ.",
+                  "Validate that REFERENCES and IMPLEMENTS relationships can exist between Type nodes.",
+                  "Formulate a query to find these relationships."
+                ]
+              },
+              "thinking_validation": {
+                "approved": true,
+                "feedback": null,
+                "reasoning_gaps": [],
+                "missing_aspects": [],
+                "queries_coverage_issues": [],
+                "specific_issues": [],
+                "suggested_corrections": null
+              },
+              "cypher_validation": {
+                "approved": true,
+                "feedback": "All elements of the query are valid according to the schema.",
+                "invalid_nodes": [],
+                "invalid_properties": [],
+                "invalid_relationships": [],
+                "query_issues": [
+                  {
+                    "query_id": 1,
+                    "approved": true,
+                    "issues": []
+                  }
+                ],
+                "observed_categorical_values": {}
+              },
+              "final_execution": true,
+              "executed_queries": [
+                {
+                  "query_id": 1,
+                  "cypher_query": "MATCH (a:Type {name: 'WorkerA'})-[:REFERENCES|IMPLEMENTS]->(z:Type {name: 'WorkerZ'}) RETURN a, z",
+                  "result_count": 1,
+                  "execution_time_ms": 16480,
+                  "error": null,
+                  "results_preview": [
+                    {
+                      "success": true,
+                      "results": [],
+                      "count": 0,
+                      "query": "MATCH (a:Type {name: 'WorkerA'})-[:REFERENCES|IMPLEMENTS]->(z:Type {name: 'WorkerZ'}) RETURN a, z"
+                    }
+                  ]
+                }
+              ],
+              "findings_count": 1
+            }
+          ],
+          "executed_queries": [
+            {
+              "query_id": 1,
+              "cypher_query": "MATCH (a:Type {name: 'WorkerA'})-[:REFERENCES|IMPLEMENTS]->(z:Type {name: 'WorkerZ'}) RETURN a, z",
+              "result_count": 1,
+              "execution_time_ms": 16480,
+              "error": null
+            }
+          ],
+          "errors": []
+        },
+        {
+          "subquery_id": 6,
+          "iterations_used": 1,
+          "findings_count": 4,
+          "verified_count": 4,
+          "execution_time_ms": 197950,
+          "validation_history": [
+            {
+              "iteration": 1,
+              "thinker_output": {
+                "summary": "We will query for REFERENCES relationships involving WorkerB to explore potential interactions or dependencies. WorkerZ is not explicitly defined, so we will focus on WorkerB's connections.",
+                "query_count": 1,
+                "proposed_queries": [
+                  {
+                    "query_id": 1,
+                    "purpose": "Identify any REFERENCES relationships involving WorkerB.",
+                    "cypher": "MATCH (b:Type {name: 'WorkerB'})-[:REFERENCES]->(t:Type) RETURN t.name"
+                  }
+                ],
+                "overall_reasoning": [
+                  "WorkerB is a defined Type node, but WorkerZ is not explicitly defined.",
+                  "The REFERENCES relationship can connect Type nodes to other Type nodes.",
+                  "We will query for any REFERENCES relationships involving WorkerB to explore potential interactions."
+                ]
+              },
+              "thinking_validation": {
+                "approved": true,
+                "feedback": null,
+                "reasoning_gaps": [],
+                "missing_aspects": [],
+                "queries_coverage_issues": [],
+                "specific_issues": [],
+                "suggested_corrections": null
+              },
+              "cypher_validation": {
+                "approved": true,
+                "feedback": "All elements in the query are valid according to the schema.",
+                "invalid_nodes": [],
+                "invalid_properties": [],
+                "invalid_relationships": [],
+                "query_issues": [
+                  {
+                    "query_id": 1,
+                    "approved": true,
+                    "issues": []
+                  }
+                ],
+                "observed_categorical_values": {}
+              },
+              "final_execution": true,
+              "executed_queries": [
+                {
+                  "query_id": 1,
+                  "cypher_query": "MATCH (b:Type {name: 'WorkerB'})-[:REFERENCES]->(t:Type) RETURN t.name",
+                  "result_count": 1,
+                  "execution_time_ms": 9545,
+                  "error": null,
+                  "results_preview": [
+                    {
+                      "success": true,
+                      "results": [
+                        {
+                          "t.name": "WorkerC"
+                        },
+                        {
+                          "t.name": "WorkerB"
+                        },
+                        {
+                          "t.name": "WorkerB"
+                        },
+                        {
+                          "t.name": "WorkerA"
+                        },
+                        {
+                          "t.name": "IWorker"
+                        }
+                      ],
+                      "count": 5,
+                      "query": "MATCH (b:Type {name: 'WorkerB'})-[:REFERENCES]->(t:Type) RETURN t.name"
+                    }
+                  ]
+                }
+              ],
+              "findings_count": 4
+            }
+          ],
+          "executed_queries": [
+            {
+              "query_id": 1,
+              "cypher_query": "MATCH (b:Type {name: 'WorkerB'})-[:REFERENCES]->(t:Type) RETURN t.name",
+              "result_count": 1,
+              "execution_time_ms": 9545,
+              "error": null
+            }
+          ],
+          "errors": []
+        },
+        {
+          "subquery_id": 7,
+          "iterations_used": 1,
+          "findings_count": 2,
+          "verified_count": 2,
+          "execution_time_ms": 209495,
+          "validation_history": [
+            {
+              "iteration": 1,
+              "thinker_output": {
+                "summary": "Explore REFERENCES and IMPLEMENTS relationships between WorkerZ and WorkerC as both are assumed to be Types.",
+                "query_count": 2,
+                "proposed_queries": [
+                  {
+                    "query_id": 1,
+                    "purpose": "Find references between WorkerZ and WorkerC.",
+                    "cypher": "MATCH (z:Type {name: 'WorkerZ'})-[:REFERENCES]->(c:Type {name: 'WorkerC'}) RETURN z, c"
+                  },
+                  {
+                    "query_id": 2,
+                    "purpose": "Check if WorkerZ implements WorkerC or vice versa.",
+                    "cypher": "MATCH (z:Type {name: 'WorkerZ'})-[:IMPLEMENTS]->(c:Type {name: 'WorkerC'}) RETURN z, c"
+                  }
+                ],
+                "overall_reasoning": [
+                  "Identify relationships between WorkerZ and WorkerC using the REFERENCES and IMPLEMENTS relationships.",
+                  "WorkerZ is not defined, but we assume it's a Type similar to WorkerC.",
+                  "Use the REFERENCES relationship to find where WorkerC is referenced by WorkerZ.",
+                  "Use the IMPLEMENTS relationship to check if WorkerZ implements WorkerC or vice versa."
+                ]
+              },
+              "thinking_validation": {
+                "approved": true,
+                "feedback": null,
+                "reasoning_gaps": [],
+                "missing_aspects": [],
+                "queries_coverage_issues": [],
+                "specific_issues": [],
+                "suggested_corrections": null
+              },
+              "cypher_validation": {
+                "approved": true,
+                "feedback": "Both queries are valid and approved.",
+                "invalid_nodes": [],
+                "invalid_properties": [],
+                "invalid_relationships": [],
+                "query_issues": [
+                  {
+                    "query_id": 1,
+                    "approved": true,
+                    "issues": []
+                  },
+                  {
+                    "query_id": 2,
+                    "approved": true,
+                    "issues": []
+                  }
+                ],
+                "observed_categorical_values": {}
+              },
+              "final_execution": true,
+              "executed_queries": [
+                {
+                  "query_id": 1,
+                  "cypher_query": "MATCH (z:Type {name: 'WorkerZ'})-[:REFERENCES]->(c:Type {name: 'WorkerC'}) RETURN z, c",
+                  "result_count": 1,
+                  "execution_time_ms": 9915,
+                  "error": null,
+                  "results_preview": [
+                    {
+                      "success": true,
+                      "results": [],
+                      "count": 0,
+                      "query": "MATCH (z:Type {name: 'WorkerZ'})-[:REFERENCES]->(c:Type {name: 'WorkerC'}) RETURN z, c"
+                    }
+                  ]
+                },
+                {
+                  "query_id": 2,
+                  "cypher_query": "MATCH (z:Type {name: 'WorkerZ'})-[:IMPLEMENTS]->(c:Type {name: 'WorkerC'}) RETURN z, c",
+                  "result_count": 1,
+                  "execution_time_ms": 11645,
+                  "error": null,
+                  "results_preview": [
+                    {
+                      "success": true,
+                      "results": [],
+                      "count": 0,
+                      "query": "MATCH (z:Type {name: 'WorkerZ'})-[:IMPLEMENTS]->(c:Type {name: 'WorkerC'}) RETURN z, c"
+                    }
+                  ]
+                }
+              ],
+              "findings_count": 2
+            }
+          ],
+          "executed_queries": [
+            {
+              "query_id": 1,
+              "cypher_query": "MATCH (z:Type {name: 'WorkerZ'})-[:REFERENCES]->(c:Type {name: 'WorkerC'}) RETURN z, c",
+              "result_count": 1,
+              "execution_time_ms": 9915,
+              "error": null
+            },
+            {
+              "query_id": 2,
+              "cypher_query": "MATCH (z:Type {name: 'WorkerZ'})-[:IMPLEMENTS]->(c:Type {name: 'WorkerC'}) RETURN z, c",
+              "result_count": 1,
+              "execution_time_ms": 11645,
+              "error": null
+            }
+          ],
+          "errors": []
+        }
+      ],
+      "verified_count": 14,
+      "unverified_count": 0
+    }
+  ],
+  "summary": {
+    "total_queries": 5,
+    "successful_queries": 5,
+    "failed_queries": 0,
+    "total_citations": 35,
+    "total_verified_citations": 35,
+    "total_execution_time_ms": 890973,
+    "total_tokens": 776494,
+    "total_llm_calls": 326
+  }
+}

@@ -1,0 +1,22 @@
+digraph "Process" {  
+node [shape="rect"];  
+"30064771092" [label = <&lt;operator&gt;.assignment, 13<BR/>msg = Utilities.Helper.FormatMessage(&quot;WorkerC&quot;,...> ]
+"30064771095" [label = <WriteLine, 14<BR/>System.Console.WriteLine(msg)> ]
+"30064771097" [label = <Notify, 15<BR/>_notifier.Notify(&quot;WorkerC has finished processi...> ]
+"30064771093" [label = <FormatMessage, 13<BR/>Utilities.Helper.FormatMessage(&quot;WorkerC&quot;, &quot;Hi t...> ]
+"30064771096" [label = <&lt;operator&gt;.fieldAccess, 14<BR/>System.Console> ]
+"30064771094" [label = <&lt;operator&gt;.fieldAccess, 13<BR/>Utilities.Helper> ]
+"55834574851" [label = <FIELD_IDENTIFIER, 14<BR/>Console> ]
+"55834574850" [label = <FIELD_IDENTIFIER, 13<BR/>Helper> ]
+"111669149703" [label = <METHOD, 11<BR/>Process> ]
+"128849018887" [label = <METHOD_RETURN, 11<BR/>System.Void> ]
+  "30064771092" -> "55834574851" 
+  "30064771095" -> "30064771097" 
+  "30064771097" -> "128849018887" 
+  "30064771093" -> "30064771092" 
+  "30064771096" -> "30064771095" 
+  "30064771094" -> "30064771093" 
+  "55834574851" -> "30064771096" 
+  "55834574850" -> "30064771094" 
+  "111669149703" -> "55834574850" 
+}

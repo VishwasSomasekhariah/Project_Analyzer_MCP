@@ -1,0 +1,29 @@
+{
+  "Function": {
+    "node_type": "Function",
+    "exists": true,
+    "sample_count": 1,
+    "properties": [],
+    "paths_from_project": [],
+    "outgoing_relationships": [],
+    "notes": []
+  },
+  "Statement": {
+    "node_type": "Statement",
+    "exists": true,
+    "sample_count": 1,
+    "properties": [],
+    "paths_from_project": [],
+    "outgoing_relationships": [],
+    "notes": []
+  },
+  "Expression": {
+    "node_type": "Expression",
+    "exists": true,
+    "sample_count": 1,
+    "properties": [],
+    "paths_from_project": [],
+    "outgoing_relationships": [],
+    "notes": []
+  }
+}

@@ -1,0 +1,19 @@
+2025-08-05 16:59:36,144 - __main__ - INFO - Test results will be saved to: retrieval_tools_test_results_20250805_165936.json
+2025-08-05 16:59:36,145 - __main__ - INFO - Logs will be saved to: retrieval_tools_test_20250805_165936.log
+2025-08-05 16:59:36,156 - mcp.client.sse - INFO - Connecting to SSE endpoint: http://localhost:9000/sse
+2025-08-05 16:59:36,340 - httpx - INFO - HTTP Request: GET http://localhost:9000/sse "HTTP/1.1 200 OK"
+2025-08-05 16:59:36,341 - mcp.client.sse - INFO - Received endpoint URL: http://localhost:9000/messages/?session_id=141e20a7a102424ab853ff3b5727f14b
+2025-08-05 16:59:36,342 - mcp.client.sse - INFO - Starting post writer with endpoint URL: http://localhost:9000/messages/?session_id=141e20a7a102424ab853ff3b5727f14b
+2025-08-05 16:59:36,360 - httpx - INFO - HTTP Request: POST http://localhost:9000/messages/?session_id=141e20a7a102424ab853ff3b5727f14b "HTTP/1.1 202 Accepted"
+2025-08-05 16:59:36,377 - httpx - INFO - HTTP Request: POST http://localhost:9000/messages/?session_id=141e20a7a102424ab853ff3b5727f14b "HTTP/1.1 202 Accepted"
+2025-08-05 16:59:36,381 - httpx - INFO - HTTP Request: POST http://localhost:9000/messages/?session_id=141e20a7a102424ab853ff3b5727f14b "HTTP/1.1 202 Accepted"
+2025-08-05 16:59:36,395 - __main__ - INFO - Starting vector_only test
+2025-08-05 16:59:36,396 - __main__ - INFO - Test query: Find WorkerA.cs file
+2025-08-05 16:59:36,423 - httpx - INFO - HTTP Request: POST http://localhost:9000/messages/?session_id=141e20a7a102424ab853ff3b5727f14b "HTTP/1.1 202 Accepted"
+2025-08-05 16:59:59,619 - __main__ - INFO - Starting cpg_only Enhanced RAG test
+2025-08-05 16:59:59,620 - __main__ - INFO - Test query: How many comment lines are in WorkerA.cs?
+2025-08-05 16:59:59,628 - httpx - INFO - HTTP Request: POST http://localhost:9000/messages/?session_id=141e20a7a102424ab853ff3b5727f14b "HTTP/1.1 202 Accepted"
+2025-08-05 17:00:09,943 - __main__ - INFO - Starting comprehensive_code_analysis hybrid test
+2025-08-05 17:00:09,945 - __main__ - INFO - Test query: Analyze the structure of WorkerA.cs
+2025-08-05 17:00:09,952 - httpx - INFO - HTTP Request: POST http://localhost:9000/messages/?session_id=141e20a7a102424ab853ff3b5727f14b "HTTP/1.1 202 Accepted"
+2025-08-05 17:00:23,641 - __main__ - INFO - Test results saved to retrieval_tools_test_results_20250805_165936.json

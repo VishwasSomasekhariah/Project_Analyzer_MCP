@@ -1,0 +1,52 @@
+# Python cache and build artifacts
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.egg-info/
+*.egg
+*.log
+
+# Virtual environments
+.env
+.venv
+venv/
+ENV/
+env/
+.Python
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Git and version control
+.git
+.gitignore
+
+# IDE/editor configs
+.vscode/
+.idea/
+*.swp
+
+# Test and temp files
+tests/
+*.tmp
+*.bak
+
+# Node/npm artifacts (if any)
+node_modules/
+npm-debug.log
+
+# Docker files not needed in image
+docker-compose.yml
+Dockerfile
+.dockerignore
+
+# Large files or datasets not needed in image
+*.db
+*.sqlite
+*.tar
+*.zip
+*.gz
+*.rar
+*.7z

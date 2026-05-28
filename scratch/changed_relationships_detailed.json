@@ -1,0 +1,1906 @@
+{
+  "calls_to_uses_type": [
+    {
+      "timestamp": "2025-09-23T17:57:57.991189Z",
+      "file_path": "HelloWorldApp/INotifier.cs",
+      "parent_node": {
+        "name": "WorkerA",
+        "type": "Function",
+        "type_kind": "constructor",
+        "parameters": "(INotifier notifier)"
+      },
+      "symbol_node": {
+        "name": "INotifier",
+        "type": "Type",
+        "type_kind": "interface"
+      },
+      "current_relationship": "CALLS",
+      "proposed_relationship": "USES_TYPE",
+      "relationship_changed": true,
+      "lsp_reference_uri": "file:///opt/HelloWorldApp/HelloWorldApp/WorkerA.cs",
+      "analysis_reason": "Interface used as parameter type, not called"
+    },
+    {
+      "timestamp": "2025-09-23T17:57:57.991364Z",
+      "file_path": "HelloWorldApp/INotifier.cs",
+      "parent_node": {
+        "name": "WorkerB",
+        "type": "Function",
+        "type_kind": "constructor",
+        "parameters": "(INotifier notifier)"
+      },
+      "symbol_node": {
+        "name": "INotifier",
+        "type": "Type",
+        "type_kind": "interface"
+      },
+      "current_relationship": "CALLS",
+      "proposed_relationship": "USES_TYPE",
+      "relationship_changed": true,
+      "lsp_reference_uri": "file:///opt/HelloWorldApp/HelloWorldApp/WorkerB.cs",
+      "analysis_reason": "Interface used as parameter type, not called"
+    },
+    {
+      "timestamp": "2025-09-23T17:57:57.991557Z",
+      "file_path": "HelloWorldApp/INotifier.cs",
+      "parent_node": {
+        "name": "WorkerC",
+        "type": "Function",
+        "type_kind": "constructor",
+        "parameters": "(INotifier notifier)"
+      },
+      "symbol_node": {
+        "name": "INotifier",
+        "type": "Type",
+        "type_kind": "interface"
+      },
+      "current_relationship": "CALLS",
+      "proposed_relationship": "USES_TYPE",
+      "relationship_changed": true,
+      "lsp_reference_uri": "file:///opt/HelloWorldApp/HelloWorldApp/WorkerC.cs",
+      "analysis_reason": "Interface used as parameter type, not called"
+    },
+    {
+      "timestamp": "2025-09-23T17:57:57.991647Z",
+      "file_path": "HelloWorldApp/INotifier.cs",
+      "parent_node": {
+        "name": "CreateWorkers",
+        "type": "Function",
+        "type_kind": "method",
+        "parameters": "(INotifier notifier)"
+      },
+      "symbol_node": {
+        "name": "INotifier",
+        "type": "Type",
+        "type_kind": "interface"
+      },
+      "current_relationship": "CALLS",
+      "proposed_relationship": "USES_TYPE",
+      "relationship_changed": true,
+      "lsp_reference_uri": "file:///opt/HelloWorldApp/HelloWorldApp/WorkerFactory.cs",
+      "analysis_reason": "Interface used as parameter type, not called"
+    },
+    {
+      "timestamp": "2025-09-23T17:57:58.179815Z",
+      "file_path": "HelloWorldApp/INotifier.cs",
+      "parent_node": {
+        "name": "Notify",
+        "type": "Function",
+        "type_kind": "method",
+        "parameters": "(string message)"
+      },
+      "symbol_node": {
+        "name": "INotifier",
+        "type": "Type",
+        "type_kind": "interface"
+      },
+      "current_relationship": "CALLS",
+      "proposed_relationship": "USES_TYPE",
+      "relationship_changed": true,
+      "lsp_reference_uri": "file:///opt/HelloWorldApp/HelloWorldApp/Manager.cs",
+      "analysis_reason": "Interface used as parameter type, not called"
+    },
+    {
+      "timestamp": "2025-09-23T17:57:58.179958Z",
+      "file_path": "HelloWorldApp/INotifier.cs",
+      "parent_node": {
+        "name": "Process",
+        "type": "Function",
+        "type_kind": "method",
+        "parameters": "()"
+      },
+      "symbol_node": {
+        "name": "INotifier",
+        "type": "Type",
+        "type_kind": "interface"
+      },
+      "current_relationship": "CALLS",
+      "proposed_relationship": "USES_TYPE",
+      "relationship_changed": true,
+      "lsp_reference_uri": "file:///opt/HelloWorldApp/HelloWorldApp/WorkerA.cs",
+      "analysis_reason": "Interface used as parameter type, not called"
+    },
+    {
+      "timestamp": "2025-09-23T17:57:58.180069Z",
+      "file_path": "HelloWorldApp/INotifier.cs",
+      "parent_node": {
+        "name": "Process",
+        "type": "Function",
+        "type_kind": "method",
+        "parameters": "()"
+      },
+      "symbol_node": {
+        "name": "INotifier",
+        "type": "Type",
+        "type_kind": "interface"
+      },
+      "current_relationship": "CALLS",
+      "proposed_relationship": "USES_TYPE",
+      "relationship_changed": true,
+      "lsp_reference_uri": "file:///opt/HelloWorldApp/HelloWorldApp/WorkerB.cs",
+      "analysis_reason": "Interface used as parameter type, not called"
+    },
+    {
+      "timestamp": "2025-09-23T17:57:58.180157Z",
+      "file_path": "HelloWorldApp/INotifier.cs",
+      "parent_node": {
+        "name": "Process",
+        "type": "Function",
+        "type_kind": "method",
+        "parameters": "()"
+      },
+      "symbol_node": {
+        "name": "INotifier",
+        "type": "Type",
+        "type_kind": "interface"
+      },
+      "current_relationship": "CALLS",
+      "proposed_relationship": "USES_TYPE",
+      "relationship_changed": true,
+      "lsp_reference_uri": "file:///opt/HelloWorldApp/HelloWorldApp/WorkerC.cs",
+      "analysis_reason": "Interface used as parameter type, not called"
+    },
+    {
+      "timestamp": "2025-09-23T17:58:01.463992Z",
+      "file_path": "HelloWorldApp/IWorker.cs",
+      "parent_node": {
+        "name": "Run",
+        "type": "Function",
+        "type_kind": "method",
+        "parameters": "()"
+      },
+      "symbol_node": {
+        "name": "IWorker",
+        "type": "Type",
+        "type_kind": "interface"
+      },
+      "current_relationship": "CALLS",
+      "proposed_relationship": "USES_TYPE",
+      "relationship_changed": true,
+      "lsp_reference_uri": "file:///opt/HelloWorldApp/HelloWorldApp/Manager.cs",
+      "analysis_reason": "Interface used as parameter type, not called"
+    },
+    {
+      "timestamp": "2025-09-23T17:58:01.464557Z",
+      "file_path": "HelloWorldApp/IWorker.cs",
+      "parent_node": {
+        "name": "CreateWorkers",
+        "type": "Function",
+        "type_kind": "method",
+        "parameters": "(INotifier notifier)"
+      },
+      "symbol_node": {
+        "name": "IWorker",
+        "type": "Type",
+        "type_kind": "interface"
+      },
+      "current_relationship": "CALLS",
+      "proposed_relationship": "USES_TYPE",
+      "relationship_changed": true,
+      "lsp_reference_uri": "file:///opt/HelloWorldApp/HelloWorldApp/WorkerFactory.cs",
+      "analysis_reason": "Interface used as parameter type, not called"
+    },
+    {
+      "timestamp": "2025-09-23T17:58:01.515676Z",
+      "file_path": "HelloWorldApp/IWorker.cs",
+      "parent_node": {
+        "name": "CreateWorkers",
+        "type": "Function",
+        "type_kind": "method",
+        "parameters": "(INotifier notifier)"
+      },
+      "symbol_node": {
+        "name": "IWorker",
+        "type": "Type",
+        "type_kind": "interface"
+      },
+      "current_relationship": "CALLS",
+      "proposed_relationship": "USES_TYPE",
+      "relationship_changed": true,
+      "lsp_reference_uri": "file:///opt/HelloWorldApp/HelloWorldApp/WorkerFactory.cs",
+      "analysis_reason": "Interface used as parameter type, not called"
+    },
+    {
+      "timestamp": "2025-09-23T17:58:01.606236Z",
+      "file_path": "HelloWorldApp/IWorker.cs",
+      "parent_node": {
+        "name": "Run",
+        "type": "Function",
+        "type_kind": "method",
+        "parameters": "()"
+      },
+      "symbol_node": {
+        "name": "IWorker",
+        "type": "Type",
+        "type_kind": "interface"
+      },
+      "current_relationship": "CALLS",
+      "proposed_relationship": "USES_TYPE",
+      "relationship_changed": true,
+      "lsp_reference_uri": "file:///opt/HelloWorldApp/HelloWorldApp/Manager.cs",
+      "analysis_reason": "Interface used as parameter type, not called"
+    },
+    {
+      "timestamp": "2025-09-23T17:58:01.606394Z",
+      "file_path": "HelloWorldApp/IWorker.cs",
+      "parent_node": {
+        "name": "Process",
+        "type": "Function",
+        "type_kind": "method",
+        "parameters": "()"
+      },
+      "symbol_node": {
+        "name": "IWorker",
+        "type": "Type",
+        "type_kind": "interface"
+      },
+      "current_relationship": "CALLS",
+      "proposed_relationship": "USES_TYPE",
+      "relationship_changed": true,
+      "lsp_reference_uri": "file:///opt/HelloWorldApp/HelloWorldApp/WorkerA.cs",
+      "analysis_reason": "Interface used as parameter type, not called"
+    },
+    {
+      "timestamp": "2025-09-23T17:58:01.606547Z",
+      "file_path": "HelloWorldApp/IWorker.cs",
+      "parent_node": {
+        "name": "Process",
+        "type": "Function",
+        "type_kind": "method",
+        "parameters": "()"
+      },
+      "symbol_node": {
+        "name": "IWorker",
+        "type": "Type",
+        "type_kind": "interface"
+      },
+      "current_relationship": "CALLS",
+      "proposed_relationship": "USES_TYPE",
+      "relationship_changed": true,
+      "lsp_reference_uri": "file:///opt/HelloWorldApp/HelloWorldApp/WorkerB.cs",
+      "analysis_reason": "Interface used as parameter type, not called"
+    },
+    {
+      "timestamp": "2025-09-23T17:58:01.606691Z",
+      "file_path": "HelloWorldApp/IWorker.cs",
+      "parent_node": {
+        "name": "Process",
+        "type": "Function",
+        "type_kind": "method",
+        "parameters": "()"
+      },
+      "symbol_node": {
+        "name": "IWorker",
+        "type": "Type",
+        "type_kind": "interface"
+      },
+      "current_relationship": "CALLS",
+      "proposed_relationship": "USES_TYPE",
+      "relationship_changed": true,
+      "lsp_reference_uri": "file:///opt/HelloWorldApp/HelloWorldApp/WorkerC.cs",
+      "analysis_reason": "Interface used as parameter type, not called"
+    },
+    {
+      "timestamp": "2025-09-23T17:58:04.854849Z",
+      "file_path": "HelloWorldApp/Manager.cs",
+      "parent_node": {
+        "name": "Main",
+        "type": "Function",
+        "type_kind": "method",
+        "parameters": "(string[] args)"
+      },
+      "symbol_node": {
+        "name": "Manager",
+        "type": "Type",
+        "type_kind": "class"
+      },
+      "current_relationship": "CALLS",
+      "proposed_relationship": "USES_TYPE",
+      "relationship_changed": true,
+      "lsp_reference_uri": "file:///opt/HelloWorldApp/HelloWorldApp/Program.cs",
+      "analysis_reason": "Function-to-Type relationship should be type usage"
+    },
+    {
+      "timestamp": "2025-09-23T17:58:04.854961Z",
+      "file_path": "HelloWorldApp/Manager.cs",
+      "parent_node": {
+        "name": "Main",
+        "type": "Function",
+        "type_kind": "method",
+        "parameters": "(string[] args)"
+      },
+      "symbol_node": {
+        "name": "Manager",
+        "type": "Type",
+        "type_kind": "class"
+      },
+      "current_relationship": "CALLS",
+      "proposed_relationship": "USES_TYPE",
+      "relationship_changed": true,
+      "lsp_reference_uri": "file:///opt/HelloWorldApp/HelloWorldApp/Program.cs",
+      "analysis_reason": "Function-to-Type relationship should be type usage"
+    },
+    {
+      "timestamp": "2025-09-23T17:58:04.909046Z",
+      "file_path": "HelloWorldApp/Manager.cs",
+      "parent_node": {
+        "name": "WorkerA",
+        "type": "Function",
+        "type_kind": "constructor",
+        "parameters": "(INotifier notifier)"
+      },
+      "symbol_node": {
+        "name": "Manager",
+        "type": "Type",
+        "type_kind": "class"
+      },
+      "current_relationship": "CALLS",
+      "proposed_relationship": "USES_TYPE",
+      "relationship_changed": true,
+      "lsp_reference_uri": "file:///opt/HelloWorldApp/HelloWorldApp/WorkerA.cs",
+      "analysis_reason": "Constructor parameter type usage"
+    },
+    {
+      "timestamp": "2025-09-23T17:58:04.909193Z",
+      "file_path": "HelloWorldApp/Manager.cs",
+      "parent_node": {
+        "name": "WorkerB",
+        "type": "Function",
+        "type_kind": "constructor",
+        "parameters": "(INotifier notifier)"
+      },
+      "symbol_node": {
+        "name": "Manager",
+        "type": "Type",
+        "type_kind": "class"
+      },
+      "current_relationship": "CALLS",
+      "proposed_relationship": "USES_TYPE",
+      "relationship_changed": true,
+      "lsp_reference_uri": "file:///opt/HelloWorldApp/HelloWorldApp/WorkerB.cs",
+      "analysis_reason": "Constructor parameter type usage"
+    },
+    {
+      "timestamp": "2025-09-23T17:58:04.909339Z",
+      "file_path": "HelloWorldApp/Manager.cs",
+      "parent_node": {
+        "name": "WorkerC",
+        "type": "Function",
+        "type_kind": "constructor",
+        "parameters": "(INotifier notifier)"
+      },
+      "symbol_node": {
+        "name": "Manager",
+        "type": "Type",
+        "type_kind": "class"
+      },
+      "current_relationship": "CALLS",
+      "proposed_relationship": "USES_TYPE",
+      "relationship_changed": true,
+      "lsp_reference_uri": "file:///opt/HelloWorldApp/HelloWorldApp/WorkerC.cs",
+      "analysis_reason": "Constructor parameter type usage"
+    },
+    {
+      "timestamp": "2025-09-23T17:58:04.909414Z",
+      "file_path": "HelloWorldApp/Manager.cs",
+      "parent_node": {
+        "name": "CreateWorkers",
+        "type": "Function",
+        "type_kind": "method",
+        "parameters": "(INotifier notifier)"
+      },
+      "symbol_node": {
+        "name": "Manager",
+        "type": "Type",
+        "type_kind": "class"
+      },
+      "current_relationship": "CALLS",
+      "proposed_relationship": "USES_TYPE",
+      "relationship_changed": true,
+      "lsp_reference_uri": "file:///opt/HelloWorldApp/HelloWorldApp/WorkerFactory.cs",
+      "analysis_reason": "Function-to-Type relationship should be type usage"
+    },
+    {
+      "timestamp": "2025-09-23T17:58:04.929288Z",
+      "file_path": "HelloWorldApp/Manager.cs",
+      "parent_node": {
+        "name": "Run",
+        "type": "Function",
+        "type_kind": "method",
+        "parameters": "()"
+      },
+      "symbol_node": {
+        "name": "Manager",
+        "type": "Type",
+        "type_kind": "class"
+      },
+      "current_relationship": "CALLS",
+      "proposed_relationship": "USES_TYPE",
+      "relationship_changed": true,
+      "lsp_reference_uri": "file:///opt/HelloWorldApp/HelloWorldApp/Manager.cs",
+      "analysis_reason": "Function-to-Type relationship should be type usage"
+    },
+    {
+      "timestamp": "2025-09-23T17:58:04.929371Z",
+      "file_path": "HelloWorldApp/Manager.cs",
+      "parent_node": {
+        "name": "Main",
+        "type": "Function",
+        "type_kind": "method",
+        "parameters": "(string[] args)"
+      },
+      "symbol_node": {
+        "name": "Manager",
+        "type": "Type",
+        "type_kind": "class"
+      },
+      "current_relationship": "CALLS",
+      "proposed_relationship": "USES_TYPE",
+      "relationship_changed": true,
+      "lsp_reference_uri": "file:///opt/HelloWorldApp/HelloWorldApp/Program.cs",
+      "analysis_reason": "Function-to-Type relationship should be type usage"
+    },
+    {
+      "timestamp": "2025-09-23T17:58:04.985104Z",
+      "file_path": "HelloWorldApp/Manager.cs",
+      "parent_node": {
+        "name": "Notify",
+        "type": "Function",
+        "type_kind": "method",
+        "parameters": "(string message)"
+      },
+      "symbol_node": {
+        "name": "Manager",
+        "type": "Type",
+        "type_kind": "class"
+      },
+      "current_relationship": "CALLS",
+      "proposed_relationship": "USES_TYPE",
+      "relationship_changed": true,
+      "lsp_reference_uri": "file:///opt/HelloWorldApp/HelloWorldApp/Manager.cs",
+      "analysis_reason": "Function-to-Type relationship should be type usage"
+    },
+    {
+      "timestamp": "2025-09-23T17:58:04.985240Z",
+      "file_path": "HelloWorldApp/Manager.cs",
+      "parent_node": {
+        "name": "Process",
+        "type": "Function",
+        "type_kind": "method",
+        "parameters": "()"
+      },
+      "symbol_node": {
+        "name": "Manager",
+        "type": "Type",
+        "type_kind": "class"
+      },
+      "current_relationship": "CALLS",
+      "proposed_relationship": "USES_TYPE",
+      "relationship_changed": true,
+      "lsp_reference_uri": "file:///opt/HelloWorldApp/HelloWorldApp/WorkerA.cs",
+      "analysis_reason": "Function-to-Type relationship should be type usage"
+    },
+    {
+      "timestamp": "2025-09-23T17:58:04.985378Z",
+      "file_path": "HelloWorldApp/Manager.cs",
+      "parent_node": {
+        "name": "Process",
+        "type": "Function",
+        "type_kind": "method",
+        "parameters": "()"
+      },
+      "symbol_node": {
+        "name": "Manager",
+        "type": "Type",
+        "type_kind": "class"
+      },
+      "current_relationship": "CALLS",
+      "proposed_relationship": "USES_TYPE",
+      "relationship_changed": true,
+      "lsp_reference_uri": "file:///opt/HelloWorldApp/HelloWorldApp/WorkerB.cs",
+      "analysis_reason": "Function-to-Type relationship should be type usage"
+    },
+    {
+      "timestamp": "2025-09-23T17:58:04.985540Z",
+      "file_path": "HelloWorldApp/Manager.cs",
+      "parent_node": {
+        "name": "Process",
+        "type": "Function",
+        "type_kind": "method",
+        "parameters": "()"
+      },
+      "symbol_node": {
+        "name": "Manager",
+        "type": "Type",
+        "type_kind": "class"
+      },
+      "current_relationship": "CALLS",
+      "proposed_relationship": "USES_TYPE",
+      "relationship_changed": true,
+      "lsp_reference_uri": "file:///opt/HelloWorldApp/HelloWorldApp/WorkerC.cs",
+      "analysis_reason": "Function-to-Type relationship should be type usage"
+    },
+    {
+      "timestamp": "2025-09-23T17:58:12.100002Z",
+      "file_path": "HelloWorldApp/Program.cs",
+      "parent_node": {
+        "name": "Main",
+        "type": "Function",
+        "type_kind": "method",
+        "parameters": "(string[] args)"
+      },
+      "symbol_node": {
+        "name": "Program",
+        "type": "Type",
+        "type_kind": "class"
+      },
+      "current_relationship": "CALLS",
+      "proposed_relationship": "USES_TYPE",
+      "relationship_changed": true,
+      "lsp_reference_uri": "file:///opt/HelloWorldApp/HelloWorldApp/Program.cs",
+      "analysis_reason": "Function-to-Type relationship should be type usage"
+    },
+    {
+      "timestamp": "2025-09-23T17:58:14.919548Z",
+      "file_path": "HelloWorldApp/TestAliases.cs",
+      "parent_node": {
+        "name": "TestMethod",
+        "type": "Function",
+        "type_kind": "method",
+        "parameters": "()"
+      },
+      "symbol_node": {
+        "name": "TestAliases",
+        "type": "Type",
+        "type_kind": "class"
+      },
+      "current_relationship": "CALLS",
+      "proposed_relationship": "USES_TYPE",
+      "relationship_changed": true,
+      "lsp_reference_uri": "file:///opt/HelloWorldApp/HelloWorldApp/TestAliases.cs",
+      "analysis_reason": "Function-to-Type relationship should be type usage"
+    },
+    {
+      "timestamp": "2025-09-23T17:58:17.609113Z",
+      "file_path": "HelloWorldApp/WorkerA.cs",
+      "parent_node": {
+        "name": "WorkerA",
+        "type": "Function",
+        "type_kind": "constructor",
+        "parameters": "(INotifier notifier)"
+      },
+      "symbol_node": {
+        "name": "WorkerA",
+        "type": "Type",
+        "type_kind": "class"
+      },
+      "current_relationship": "CALLS",
+      "proposed_relationship": "USES_TYPE",
+      "relationship_changed": true,
+      "lsp_reference_uri": "file:///opt/HelloWorldApp/HelloWorldApp/WorkerA.cs",
+      "analysis_reason": "Constructor parameter type usage"
+    },
+    {
+      "timestamp": "2025-09-23T17:58:17.609205Z",
+      "file_path": "HelloWorldApp/WorkerA.cs",
+      "parent_node": {
+        "name": "CreateWorkers",
+        "type": "Function",
+        "type_kind": "method",
+        "parameters": "(INotifier notifier)"
+      },
+      "symbol_node": {
+        "name": "WorkerA",
+        "type": "Type",
+        "type_kind": "class"
+      },
+      "current_relationship": "CALLS",
+      "proposed_relationship": "USES_TYPE",
+      "relationship_changed": true,
+      "lsp_reference_uri": "file:///opt/HelloWorldApp/HelloWorldApp/WorkerFactory.cs",
+      "analysis_reason": "Function-to-Type relationship should be type usage"
+    },
+    {
+      "timestamp": "2025-09-23T17:58:17.631631Z",
+      "file_path": "HelloWorldApp/WorkerA.cs",
+      "parent_node": {
+        "name": "Run",
+        "type": "Function",
+        "type_kind": "method",
+        "parameters": "()"
+      },
+      "symbol_node": {
+        "name": "WorkerA",
+        "type": "Type",
+        "type_kind": "class"
+      },
+      "current_relationship": "CALLS",
+      "proposed_relationship": "USES_TYPE",
+      "relationship_changed": true,
+      "lsp_reference_uri": "file:///opt/HelloWorldApp/HelloWorldApp/Manager.cs",
+      "analysis_reason": "Function-to-Type relationship should be type usage"
+    },
+    {
+      "timestamp": "2025-09-23T17:58:17.662286Z",
+      "file_path": "HelloWorldApp/WorkerA.cs",
+      "parent_node": {
+        "name": "CreateWorkers",
+        "type": "Function",
+        "type_kind": "method",
+        "parameters": "(INotifier notifier)"
+      },
+      "symbol_node": {
+        "name": "WorkerA",
+        "type": "Type",
+        "type_kind": "class"
+      },
+      "current_relationship": "CALLS",
+      "proposed_relationship": "USES_TYPE",
+      "relationship_changed": true,
+      "lsp_reference_uri": "file:///opt/HelloWorldApp/HelloWorldApp/WorkerFactory.cs",
+      "analysis_reason": "Function-to-Type relationship should be type usage"
+    },
+    {
+      "timestamp": "2025-09-23T17:58:17.662391Z",
+      "file_path": "HelloWorldApp/WorkerA.cs",
+      "parent_node": {
+        "name": "CreateWorkers",
+        "type": "Function",
+        "type_kind": "method",
+        "parameters": "(INotifier notifier)"
+      },
+      "symbol_node": {
+        "name": "WorkerA",
+        "type": "Type",
+        "type_kind": "class"
+      },
+      "current_relationship": "CALLS",
+      "proposed_relationship": "USES_TYPE",
+      "relationship_changed": true,
+      "lsp_reference_uri": "file:///opt/HelloWorldApp/HelloWorldApp/WorkerFactory.cs",
+      "analysis_reason": "Function-to-Type relationship should be type usage"
+    },
+    {
+      "timestamp": "2025-09-23T17:58:17.677681Z",
+      "file_path": "HelloWorldApp/WorkerA.cs",
+      "parent_node": {
+        "name": "WorkerA",
+        "type": "Function",
+        "type_kind": "constructor",
+        "parameters": "(INotifier notifier)"
+      },
+      "symbol_node": {
+        "name": "WorkerA",
+        "type": "Type",
+        "type_kind": "class"
+      },
+      "current_relationship": "CALLS",
+      "proposed_relationship": "USES_TYPE",
+      "relationship_changed": true,
+      "lsp_reference_uri": "file:///opt/HelloWorldApp/HelloWorldApp/WorkerA.cs",
+      "analysis_reason": "Constructor parameter type usage"
+    },
+    {
+      "timestamp": "2025-09-23T17:58:17.677769Z",
+      "file_path": "HelloWorldApp/WorkerA.cs",
+      "parent_node": {
+        "name": "CreateWorkers",
+        "type": "Function",
+        "type_kind": "method",
+        "parameters": "(INotifier notifier)"
+      },
+      "symbol_node": {
+        "name": "WorkerA",
+        "type": "Type",
+        "type_kind": "class"
+      },
+      "current_relationship": "CALLS",
+      "proposed_relationship": "USES_TYPE",
+      "relationship_changed": true,
+      "lsp_reference_uri": "file:///opt/HelloWorldApp/HelloWorldApp/WorkerFactory.cs",
+      "analysis_reason": "Function-to-Type relationship should be type usage"
+    },
+    {
+      "timestamp": "2025-09-23T17:58:17.691974Z",
+      "file_path": "HelloWorldApp/WorkerA.cs",
+      "parent_node": {
+        "name": "Run",
+        "type": "Function",
+        "type_kind": "method",
+        "parameters": "()"
+      },
+      "symbol_node": {
+        "name": "WorkerA",
+        "type": "Type",
+        "type_kind": "class"
+      },
+      "current_relationship": "CALLS",
+      "proposed_relationship": "USES_TYPE",
+      "relationship_changed": true,
+      "lsp_reference_uri": "file:///opt/HelloWorldApp/HelloWorldApp/Manager.cs",
+      "analysis_reason": "Function-to-Type relationship should be type usage"
+    },
+    {
+      "timestamp": "2025-09-23T17:58:17.692044Z",
+      "file_path": "HelloWorldApp/WorkerA.cs",
+      "parent_node": {
+        "name": "Process",
+        "type": "Function",
+        "type_kind": "method",
+        "parameters": "()"
+      },
+      "symbol_node": {
+        "name": "WorkerA",
+        "type": "Type",
+        "type_kind": "class"
+      },
+      "current_relationship": "CALLS",
+      "proposed_relationship": "USES_TYPE",
+      "relationship_changed": true,
+      "lsp_reference_uri": "file:///opt/HelloWorldApp/HelloWorldApp/WorkerA.cs",
+      "analysis_reason": "Function-to-Type relationship should be type usage"
+    },
+    {
+      "timestamp": "2025-09-23T17:58:17.721247Z",
+      "file_path": "HelloWorldApp/WorkerA.cs",
+      "parent_node": {
+        "name": "Process",
+        "type": "Function",
+        "type_kind": "method",
+        "parameters": "()"
+      },
+      "symbol_node": {
+        "name": "WorkerA",
+        "type": "Type",
+        "type_kind": "class"
+      },
+      "current_relationship": "CALLS",
+      "proposed_relationship": "USES_TYPE",
+      "relationship_changed": true,
+      "lsp_reference_uri": "file:///opt/HelloWorldApp/HelloWorldApp/WorkerB.cs",
+      "analysis_reason": "Function-to-Type relationship should be type usage"
+    },
+    {
+      "timestamp": "2025-09-23T17:58:17.721444Z",
+      "file_path": "HelloWorldApp/WorkerA.cs",
+      "parent_node": {
+        "name": "Process",
+        "type": "Function",
+        "type_kind": "method",
+        "parameters": "()"
+      },
+      "symbol_node": {
+        "name": "WorkerA",
+        "type": "Type",
+        "type_kind": "class"
+      },
+      "current_relationship": "CALLS",
+      "proposed_relationship": "USES_TYPE",
+      "relationship_changed": true,
+      "lsp_reference_uri": "file:///opt/HelloWorldApp/HelloWorldApp/WorkerC.cs",
+      "analysis_reason": "Function-to-Type relationship should be type usage"
+    },
+    {
+      "timestamp": "2025-09-23T17:58:21.258433Z",
+      "file_path": "HelloWorldApp/WorkerB.cs",
+      "parent_node": {
+        "name": "WorkerB",
+        "type": "Function",
+        "type_kind": "constructor",
+        "parameters": "(INotifier notifier)"
+      },
+      "symbol_node": {
+        "name": "WorkerB",
+        "type": "Type",
+        "type_kind": "class"
+      },
+      "current_relationship": "CALLS",
+      "proposed_relationship": "USES_TYPE",
+      "relationship_changed": true,
+      "lsp_reference_uri": "file:///opt/HelloWorldApp/HelloWorldApp/WorkerB.cs",
+      "analysis_reason": "Constructor parameter type usage"
+    },
+    {
+      "timestamp": "2025-09-23T17:58:21.258502Z",
+      "file_path": "HelloWorldApp/WorkerB.cs",
+      "parent_node": {
+        "name": "CreateWorkers",
+        "type": "Function",
+        "type_kind": "method",
+        "parameters": "(INotifier notifier)"
+      },
+      "symbol_node": {
+        "name": "WorkerB",
+        "type": "Type",
+        "type_kind": "class"
+      },
+      "current_relationship": "CALLS",
+      "proposed_relationship": "USES_TYPE",
+      "relationship_changed": true,
+      "lsp_reference_uri": "file:///opt/HelloWorldApp/HelloWorldApp/WorkerFactory.cs",
+      "analysis_reason": "Function-to-Type relationship should be type usage"
+    },
+    {
+      "timestamp": "2025-09-23T17:58:21.273530Z",
+      "file_path": "HelloWorldApp/WorkerB.cs",
+      "parent_node": {
+        "name": "Run",
+        "type": "Function",
+        "type_kind": "method",
+        "parameters": "()"
+      },
+      "symbol_node": {
+        "name": "WorkerB",
+        "type": "Type",
+        "type_kind": "class"
+      },
+      "current_relationship": "CALLS",
+      "proposed_relationship": "USES_TYPE",
+      "relationship_changed": true,
+      "lsp_reference_uri": "file:///opt/HelloWorldApp/HelloWorldApp/Manager.cs",
+      "analysis_reason": "Function-to-Type relationship should be type usage"
+    },
+    {
+      "timestamp": "2025-09-23T17:58:21.307402Z",
+      "file_path": "HelloWorldApp/WorkerB.cs",
+      "parent_node": {
+        "name": "CreateWorkers",
+        "type": "Function",
+        "type_kind": "method",
+        "parameters": "(INotifier notifier)"
+      },
+      "symbol_node": {
+        "name": "WorkerB",
+        "type": "Type",
+        "type_kind": "class"
+      },
+      "current_relationship": "CALLS",
+      "proposed_relationship": "USES_TYPE",
+      "relationship_changed": true,
+      "lsp_reference_uri": "file:///opt/HelloWorldApp/HelloWorldApp/WorkerFactory.cs",
+      "analysis_reason": "Function-to-Type relationship should be type usage"
+    },
+    {
+      "timestamp": "2025-09-23T17:58:21.307479Z",
+      "file_path": "HelloWorldApp/WorkerB.cs",
+      "parent_node": {
+        "name": "CreateWorkers",
+        "type": "Function",
+        "type_kind": "method",
+        "parameters": "(INotifier notifier)"
+      },
+      "symbol_node": {
+        "name": "WorkerB",
+        "type": "Type",
+        "type_kind": "class"
+      },
+      "current_relationship": "CALLS",
+      "proposed_relationship": "USES_TYPE",
+      "relationship_changed": true,
+      "lsp_reference_uri": "file:///opt/HelloWorldApp/HelloWorldApp/WorkerFactory.cs",
+      "analysis_reason": "Function-to-Type relationship should be type usage"
+    },
+    {
+      "timestamp": "2025-09-23T17:58:21.321045Z",
+      "file_path": "HelloWorldApp/WorkerB.cs",
+      "parent_node": {
+        "name": "WorkerB",
+        "type": "Function",
+        "type_kind": "constructor",
+        "parameters": "(INotifier notifier)"
+      },
+      "symbol_node": {
+        "name": "WorkerB",
+        "type": "Type",
+        "type_kind": "class"
+      },
+      "current_relationship": "CALLS",
+      "proposed_relationship": "USES_TYPE",
+      "relationship_changed": true,
+      "lsp_reference_uri": "file:///opt/HelloWorldApp/HelloWorldApp/WorkerB.cs",
+      "analysis_reason": "Constructor parameter type usage"
+    },
+    {
+      "timestamp": "2025-09-23T17:58:21.321164Z",
+      "file_path": "HelloWorldApp/WorkerB.cs",
+      "parent_node": {
+        "name": "CreateWorkers",
+        "type": "Function",
+        "type_kind": "method",
+        "parameters": "(INotifier notifier)"
+      },
+      "symbol_node": {
+        "name": "WorkerB",
+        "type": "Type",
+        "type_kind": "class"
+      },
+      "current_relationship": "CALLS",
+      "proposed_relationship": "USES_TYPE",
+      "relationship_changed": true,
+      "lsp_reference_uri": "file:///opt/HelloWorldApp/HelloWorldApp/WorkerFactory.cs",
+      "analysis_reason": "Function-to-Type relationship should be type usage"
+    },
+    {
+      "timestamp": "2025-09-23T17:58:21.334333Z",
+      "file_path": "HelloWorldApp/WorkerB.cs",
+      "parent_node": {
+        "name": "Run",
+        "type": "Function",
+        "type_kind": "method",
+        "parameters": "()"
+      },
+      "symbol_node": {
+        "name": "WorkerB",
+        "type": "Type",
+        "type_kind": "class"
+      },
+      "current_relationship": "CALLS",
+      "proposed_relationship": "USES_TYPE",
+      "relationship_changed": true,
+      "lsp_reference_uri": "file:///opt/HelloWorldApp/HelloWorldApp/Manager.cs",
+      "analysis_reason": "Function-to-Type relationship should be type usage"
+    },
+    {
+      "timestamp": "2025-09-23T17:58:21.334439Z",
+      "file_path": "HelloWorldApp/WorkerB.cs",
+      "parent_node": {
+        "name": "Process",
+        "type": "Function",
+        "type_kind": "method",
+        "parameters": "()"
+      },
+      "symbol_node": {
+        "name": "WorkerB",
+        "type": "Type",
+        "type_kind": "class"
+      },
+      "current_relationship": "CALLS",
+      "proposed_relationship": "USES_TYPE",
+      "relationship_changed": true,
+      "lsp_reference_uri": "file:///opt/HelloWorldApp/HelloWorldApp/WorkerA.cs",
+      "analysis_reason": "Function-to-Type relationship should be type usage"
+    },
+    {
+      "timestamp": "2025-09-23T17:58:21.334516Z",
+      "file_path": "HelloWorldApp/WorkerB.cs",
+      "parent_node": {
+        "name": "Process",
+        "type": "Function",
+        "type_kind": "method",
+        "parameters": "()"
+      },
+      "symbol_node": {
+        "name": "WorkerB",
+        "type": "Type",
+        "type_kind": "class"
+      },
+      "current_relationship": "CALLS",
+      "proposed_relationship": "USES_TYPE",
+      "relationship_changed": true,
+      "lsp_reference_uri": "file:///opt/HelloWorldApp/HelloWorldApp/WorkerB.cs",
+      "analysis_reason": "Function-to-Type relationship should be type usage"
+    },
+    {
+      "timestamp": "2025-09-23T17:58:21.334586Z",
+      "file_path": "HelloWorldApp/WorkerB.cs",
+      "parent_node": {
+        "name": "Process",
+        "type": "Function",
+        "type_kind": "method",
+        "parameters": "()"
+      },
+      "symbol_node": {
+        "name": "WorkerB",
+        "type": "Type",
+        "type_kind": "class"
+      },
+      "current_relationship": "CALLS",
+      "proposed_relationship": "USES_TYPE",
+      "relationship_changed": true,
+      "lsp_reference_uri": "file:///opt/HelloWorldApp/HelloWorldApp/WorkerC.cs",
+      "analysis_reason": "Function-to-Type relationship should be type usage"
+    },
+    {
+      "timestamp": "2025-09-23T17:58:25.532904Z",
+      "file_path": "HelloWorldApp/WorkerC.cs",
+      "parent_node": {
+        "name": "WorkerC",
+        "type": "Function",
+        "type_kind": "constructor",
+        "parameters": "(INotifier notifier)"
+      },
+      "symbol_node": {
+        "name": "WorkerC",
+        "type": "Type",
+        "type_kind": "class"
+      },
+      "current_relationship": "CALLS",
+      "proposed_relationship": "USES_TYPE",
+      "relationship_changed": true,
+      "lsp_reference_uri": "file:///opt/HelloWorldApp/HelloWorldApp/WorkerC.cs",
+      "analysis_reason": "Constructor parameter type usage"
+    },
+    {
+      "timestamp": "2025-09-23T17:58:25.532985Z",
+      "file_path": "HelloWorldApp/WorkerC.cs",
+      "parent_node": {
+        "name": "CreateWorkers",
+        "type": "Function",
+        "type_kind": "method",
+        "parameters": "(INotifier notifier)"
+      },
+      "symbol_node": {
+        "name": "WorkerC",
+        "type": "Type",
+        "type_kind": "class"
+      },
+      "current_relationship": "CALLS",
+      "proposed_relationship": "USES_TYPE",
+      "relationship_changed": true,
+      "lsp_reference_uri": "file:///opt/HelloWorldApp/HelloWorldApp/WorkerFactory.cs",
+      "analysis_reason": "Function-to-Type relationship should be type usage"
+    },
+    {
+      "timestamp": "2025-09-23T17:58:25.546824Z",
+      "file_path": "HelloWorldApp/WorkerC.cs",
+      "parent_node": {
+        "name": "Run",
+        "type": "Function",
+        "type_kind": "method",
+        "parameters": "()"
+      },
+      "symbol_node": {
+        "name": "WorkerC",
+        "type": "Type",
+        "type_kind": "class"
+      },
+      "current_relationship": "CALLS",
+      "proposed_relationship": "USES_TYPE",
+      "relationship_changed": true,
+      "lsp_reference_uri": "file:///opt/HelloWorldApp/HelloWorldApp/Manager.cs",
+      "analysis_reason": "Function-to-Type relationship should be type usage"
+    },
+    {
+      "timestamp": "2025-09-23T17:58:25.547335Z",
+      "file_path": "HelloWorldApp/WorkerC.cs",
+      "parent_node": {
+        "name": "CreateWorkers",
+        "type": "Function",
+        "type_kind": "method",
+        "parameters": "(INotifier notifier)"
+      },
+      "symbol_node": {
+        "name": "WorkerC",
+        "type": "Type",
+        "type_kind": "class"
+      },
+      "current_relationship": "CALLS",
+      "proposed_relationship": "USES_TYPE",
+      "relationship_changed": true,
+      "lsp_reference_uri": "file:///opt/HelloWorldApp/HelloWorldApp/WorkerFactory.cs",
+      "analysis_reason": "Function-to-Type relationship should be type usage"
+    },
+    {
+      "timestamp": "2025-09-23T17:58:25.547457Z",
+      "file_path": "HelloWorldApp/WorkerC.cs",
+      "parent_node": {
+        "name": "CreateWorkers",
+        "type": "Function",
+        "type_kind": "method",
+        "parameters": "(INotifier notifier)"
+      },
+      "symbol_node": {
+        "name": "WorkerC",
+        "type": "Type",
+        "type_kind": "class"
+      },
+      "current_relationship": "CALLS",
+      "proposed_relationship": "USES_TYPE",
+      "relationship_changed": true,
+      "lsp_reference_uri": "file:///opt/HelloWorldApp/HelloWorldApp/WorkerFactory.cs",
+      "analysis_reason": "Function-to-Type relationship should be type usage"
+    },
+    {
+      "timestamp": "2025-09-23T17:58:25.568296Z",
+      "file_path": "HelloWorldApp/WorkerC.cs",
+      "parent_node": {
+        "name": "WorkerC",
+        "type": "Function",
+        "type_kind": "constructor",
+        "parameters": "(INotifier notifier)"
+      },
+      "symbol_node": {
+        "name": "WorkerC",
+        "type": "Type",
+        "type_kind": "class"
+      },
+      "current_relationship": "CALLS",
+      "proposed_relationship": "USES_TYPE",
+      "relationship_changed": true,
+      "lsp_reference_uri": "file:///opt/HelloWorldApp/HelloWorldApp/WorkerC.cs",
+      "analysis_reason": "Constructor parameter type usage"
+    },
+    {
+      "timestamp": "2025-09-23T17:58:25.615669Z",
+      "file_path": "HelloWorldApp/WorkerC.cs",
+      "parent_node": {
+        "name": "CreateWorkers",
+        "type": "Function",
+        "type_kind": "method",
+        "parameters": "(INotifier notifier)"
+      },
+      "symbol_node": {
+        "name": "WorkerC",
+        "type": "Type",
+        "type_kind": "class"
+      },
+      "current_relationship": "CALLS",
+      "proposed_relationship": "USES_TYPE",
+      "relationship_changed": true,
+      "lsp_reference_uri": "file:///opt/HelloWorldApp/HelloWorldApp/WorkerFactory.cs",
+      "analysis_reason": "Function-to-Type relationship should be type usage"
+    },
+    {
+      "timestamp": "2025-09-23T17:58:25.627882Z",
+      "file_path": "HelloWorldApp/WorkerC.cs",
+      "parent_node": {
+        "name": "Run",
+        "type": "Function",
+        "type_kind": "method",
+        "parameters": "()"
+      },
+      "symbol_node": {
+        "name": "WorkerC",
+        "type": "Type",
+        "type_kind": "class"
+      },
+      "current_relationship": "CALLS",
+      "proposed_relationship": "USES_TYPE",
+      "relationship_changed": true,
+      "lsp_reference_uri": "file:///opt/HelloWorldApp/HelloWorldApp/Manager.cs",
+      "analysis_reason": "Function-to-Type relationship should be type usage"
+    },
+    {
+      "timestamp": "2025-09-23T17:58:25.627965Z",
+      "file_path": "HelloWorldApp/WorkerC.cs",
+      "parent_node": {
+        "name": "Process",
+        "type": "Function",
+        "type_kind": "method",
+        "parameters": "()"
+      },
+      "symbol_node": {
+        "name": "WorkerC",
+        "type": "Type",
+        "type_kind": "class"
+      },
+      "current_relationship": "CALLS",
+      "proposed_relationship": "USES_TYPE",
+      "relationship_changed": true,
+      "lsp_reference_uri": "file:///opt/HelloWorldApp/HelloWorldApp/WorkerA.cs",
+      "analysis_reason": "Function-to-Type relationship should be type usage"
+    },
+    {
+      "timestamp": "2025-09-23T17:58:25.628042Z",
+      "file_path": "HelloWorldApp/WorkerC.cs",
+      "parent_node": {
+        "name": "Process",
+        "type": "Function",
+        "type_kind": "method",
+        "parameters": "()"
+      },
+      "symbol_node": {
+        "name": "WorkerC",
+        "type": "Type",
+        "type_kind": "class"
+      },
+      "current_relationship": "CALLS",
+      "proposed_relationship": "USES_TYPE",
+      "relationship_changed": true,
+      "lsp_reference_uri": "file:///opt/HelloWorldApp/HelloWorldApp/WorkerB.cs",
+      "analysis_reason": "Function-to-Type relationship should be type usage"
+    },
+    {
+      "timestamp": "2025-09-23T17:58:25.628152Z",
+      "file_path": "HelloWorldApp/WorkerC.cs",
+      "parent_node": {
+        "name": "Process",
+        "type": "Function",
+        "type_kind": "method",
+        "parameters": "()"
+      },
+      "symbol_node": {
+        "name": "WorkerC",
+        "type": "Type",
+        "type_kind": "class"
+      },
+      "current_relationship": "CALLS",
+      "proposed_relationship": "USES_TYPE",
+      "relationship_changed": true,
+      "lsp_reference_uri": "file:///opt/HelloWorldApp/HelloWorldApp/WorkerC.cs",
+      "analysis_reason": "Function-to-Type relationship should be type usage"
+    },
+    {
+      "timestamp": "2025-09-23T17:58:29.090625Z",
+      "file_path": "HelloWorldApp/WorkerFactory.cs",
+      "parent_node": {
+        "name": "Run",
+        "type": "Function",
+        "type_kind": "method",
+        "parameters": "()"
+      },
+      "symbol_node": {
+        "name": "WorkerFactory",
+        "type": "Type",
+        "type_kind": "class"
+      },
+      "current_relationship": "CALLS",
+      "proposed_relationship": "USES_TYPE",
+      "relationship_changed": true,
+      "lsp_reference_uri": "file:///opt/HelloWorldApp/HelloWorldApp/Manager.cs",
+      "analysis_reason": "Function-to-Type relationship should be type usage"
+    },
+    {
+      "timestamp": "2025-09-23T17:58:29.108627Z",
+      "file_path": "HelloWorldApp/WorkerFactory.cs",
+      "parent_node": {
+        "name": "Run",
+        "type": "Function",
+        "type_kind": "method",
+        "parameters": "()"
+      },
+      "symbol_node": {
+        "name": "WorkerFactory",
+        "type": "Type",
+        "type_kind": "class"
+      },
+      "current_relationship": "CALLS",
+      "proposed_relationship": "USES_TYPE",
+      "relationship_changed": true,
+      "lsp_reference_uri": "file:///opt/HelloWorldApp/HelloWorldApp/Manager.cs",
+      "analysis_reason": "Function-to-Type relationship should be type usage"
+    },
+    {
+      "timestamp": "2025-09-23T17:58:29.108700Z",
+      "file_path": "HelloWorldApp/WorkerFactory.cs",
+      "parent_node": {
+        "name": "CreateWorkers",
+        "type": "Function",
+        "type_kind": "method",
+        "parameters": "(INotifier notifier)"
+      },
+      "symbol_node": {
+        "name": "WorkerFactory",
+        "type": "Type",
+        "type_kind": "class"
+      },
+      "current_relationship": "CALLS",
+      "proposed_relationship": "USES_TYPE",
+      "relationship_changed": true,
+      "lsp_reference_uri": "file:///opt/HelloWorldApp/HelloWorldApp/WorkerFactory.cs",
+      "analysis_reason": "Function-to-Type relationship should be type usage"
+    },
+    {
+      "timestamp": "2025-09-23T17:58:35.541501Z",
+      "file_path": "HelloWorldApp/Utilities/Helper.cs",
+      "parent_node": {
+        "name": "Process",
+        "type": "Function",
+        "type_kind": "method",
+        "parameters": "()"
+      },
+      "symbol_node": {
+        "name": "Helper",
+        "type": "Type",
+        "type_kind": "class"
+      },
+      "current_relationship": "CALLS",
+      "proposed_relationship": "USES_TYPE",
+      "relationship_changed": true,
+      "lsp_reference_uri": "file:///opt/HelloWorldApp/HelloWorldApp/WorkerA.cs",
+      "analysis_reason": "Function-to-Type relationship should be type usage"
+    },
+    {
+      "timestamp": "2025-09-23T17:58:35.541570Z",
+      "file_path": "HelloWorldApp/Utilities/Helper.cs",
+      "parent_node": {
+        "name": "Process",
+        "type": "Function",
+        "type_kind": "method",
+        "parameters": "()"
+      },
+      "symbol_node": {
+        "name": "Helper",
+        "type": "Type",
+        "type_kind": "class"
+      },
+      "current_relationship": "CALLS",
+      "proposed_relationship": "USES_TYPE",
+      "relationship_changed": true,
+      "lsp_reference_uri": "file:///opt/HelloWorldApp/HelloWorldApp/WorkerB.cs",
+      "analysis_reason": "Function-to-Type relationship should be type usage"
+    },
+    {
+      "timestamp": "2025-09-23T17:58:35.541635Z",
+      "file_path": "HelloWorldApp/Utilities/Helper.cs",
+      "parent_node": {
+        "name": "Process",
+        "type": "Function",
+        "type_kind": "method",
+        "parameters": "()"
+      },
+      "symbol_node": {
+        "name": "Helper",
+        "type": "Type",
+        "type_kind": "class"
+      },
+      "current_relationship": "CALLS",
+      "proposed_relationship": "USES_TYPE",
+      "relationship_changed": true,
+      "lsp_reference_uri": "file:///opt/HelloWorldApp/HelloWorldApp/WorkerC.cs",
+      "analysis_reason": "Function-to-Type relationship should be type usage"
+    },
+    {
+      "timestamp": "2025-09-23T17:58:35.550405Z",
+      "file_path": "HelloWorldApp/Utilities/Helper.cs",
+      "parent_node": {
+        "name": "FormatMessage",
+        "type": "Function",
+        "type_kind": "method",
+        "parameters": "(string workerName, string text)"
+      },
+      "symbol_node": {
+        "name": "Helper",
+        "type": "Type",
+        "type_kind": "class"
+      },
+      "current_relationship": "CALLS",
+      "proposed_relationship": "USES_TYPE",
+      "relationship_changed": true,
+      "lsp_reference_uri": "file:///opt/HelloWorldApp/HelloWorldApp/Utilities/Helper.cs",
+      "analysis_reason": "Function-to-Type relationship should be type usage"
+    },
+    {
+      "timestamp": "2025-09-23T17:58:35.550565Z",
+      "file_path": "HelloWorldApp/Utilities/Helper.cs",
+      "parent_node": {
+        "name": "Process",
+        "type": "Function",
+        "type_kind": "method",
+        "parameters": "()"
+      },
+      "symbol_node": {
+        "name": "Helper",
+        "type": "Type",
+        "type_kind": "class"
+      },
+      "current_relationship": "CALLS",
+      "proposed_relationship": "USES_TYPE",
+      "relationship_changed": true,
+      "lsp_reference_uri": "file:///opt/HelloWorldApp/HelloWorldApp/WorkerA.cs",
+      "analysis_reason": "Function-to-Type relationship should be type usage"
+    },
+    {
+      "timestamp": "2025-09-23T17:58:35.550631Z",
+      "file_path": "HelloWorldApp/Utilities/Helper.cs",
+      "parent_node": {
+        "name": "Process",
+        "type": "Function",
+        "type_kind": "method",
+        "parameters": "()"
+      },
+      "symbol_node": {
+        "name": "Helper",
+        "type": "Type",
+        "type_kind": "class"
+      },
+      "current_relationship": "CALLS",
+      "proposed_relationship": "USES_TYPE",
+      "relationship_changed": true,
+      "lsp_reference_uri": "file:///opt/HelloWorldApp/HelloWorldApp/WorkerB.cs",
+      "analysis_reason": "Function-to-Type relationship should be type usage"
+    }
+  ],
+  "calls_to_references": [
+    {
+      "timestamp": "2025-09-23T17:58:17.733708Z",
+      "file_path": "HelloWorldApp/WorkerA.cs",
+      "parent_node": {
+        "name": "WorkerA",
+        "type": "Function",
+        "type_kind": "constructor",
+        "parameters": "(INotifier notifier)"
+      },
+      "symbol_node": {
+        "name": "_notifier",
+        "type": "Variable",
+        "type_kind": "field"
+      },
+      "current_relationship": "CALLS",
+      "proposed_relationship": "REFERENCES",
+      "relationship_changed": true,
+      "lsp_reference_uri": "file:///opt/HelloWorldApp/HelloWorldApp/WorkerA.cs",
+      "analysis_reason": "Changed from CALLS to REFERENCES"
+    },
+    {
+      "timestamp": "2025-09-23T17:58:17.733844Z",
+      "file_path": "HelloWorldApp/WorkerA.cs",
+      "parent_node": {
+        "name": "WorkerB",
+        "type": "Function",
+        "type_kind": "constructor",
+        "parameters": "(INotifier notifier)"
+      },
+      "symbol_node": {
+        "name": "_notifier",
+        "type": "Variable",
+        "type_kind": "field"
+      },
+      "current_relationship": "CALLS",
+      "proposed_relationship": "REFERENCES",
+      "relationship_changed": true,
+      "lsp_reference_uri": "file:///opt/HelloWorldApp/HelloWorldApp/WorkerB.cs",
+      "analysis_reason": "Changed from CALLS to REFERENCES"
+    },
+    {
+      "timestamp": "2025-09-23T17:58:17.733973Z",
+      "file_path": "HelloWorldApp/WorkerA.cs",
+      "parent_node": {
+        "name": "WorkerC",
+        "type": "Function",
+        "type_kind": "constructor",
+        "parameters": "(INotifier notifier)"
+      },
+      "symbol_node": {
+        "name": "_notifier",
+        "type": "Variable",
+        "type_kind": "field"
+      },
+      "current_relationship": "CALLS",
+      "proposed_relationship": "REFERENCES",
+      "relationship_changed": true,
+      "lsp_reference_uri": "file:///opt/HelloWorldApp/HelloWorldApp/WorkerC.cs",
+      "analysis_reason": "Changed from CALLS to REFERENCES"
+    },
+    {
+      "timestamp": "2025-09-23T17:58:17.761421Z",
+      "file_path": "HelloWorldApp/WorkerA.cs",
+      "parent_node": {
+        "name": "CreateWorkers",
+        "type": "Function",
+        "type_kind": "method",
+        "parameters": "(INotifier notifier)"
+      },
+      "symbol_node": {
+        "name": "_notifier",
+        "type": "Variable",
+        "type_kind": "field"
+      },
+      "current_relationship": "CALLS",
+      "proposed_relationship": "REFERENCES",
+      "relationship_changed": true,
+      "lsp_reference_uri": "file:///opt/HelloWorldApp/HelloWorldApp/WorkerFactory.cs",
+      "analysis_reason": "Changed from CALLS to REFERENCES"
+    },
+    {
+      "timestamp": "2025-09-23T17:58:17.777308Z",
+      "file_path": "HelloWorldApp/WorkerA.cs",
+      "parent_node": {
+        "name": "WorkerA",
+        "type": "Function",
+        "type_kind": "constructor",
+        "parameters": "(INotifier notifier)"
+      },
+      "symbol_node": {
+        "name": "_notifier",
+        "type": "Variable",
+        "type_kind": "field"
+      },
+      "current_relationship": "CALLS",
+      "proposed_relationship": "REFERENCES",
+      "relationship_changed": true,
+      "lsp_reference_uri": "file:///opt/HelloWorldApp/HelloWorldApp/WorkerA.cs",
+      "analysis_reason": "Changed from CALLS to REFERENCES"
+    },
+    {
+      "timestamp": "2025-09-23T17:58:17.777379Z",
+      "file_path": "HelloWorldApp/WorkerA.cs",
+      "parent_node": {
+        "name": "Process",
+        "type": "Function",
+        "type_kind": "method",
+        "parameters": "()"
+      },
+      "symbol_node": {
+        "name": "_notifier",
+        "type": "Variable",
+        "type_kind": "field"
+      },
+      "current_relationship": "CALLS",
+      "proposed_relationship": "REFERENCES",
+      "relationship_changed": true,
+      "lsp_reference_uri": "file:///opt/HelloWorldApp/HelloWorldApp/WorkerA.cs",
+      "analysis_reason": "Changed from CALLS to REFERENCES"
+    },
+    {
+      "timestamp": "2025-09-23T17:58:21.390258Z",
+      "file_path": "HelloWorldApp/WorkerB.cs",
+      "parent_node": {
+        "name": "WorkerA",
+        "type": "Function",
+        "type_kind": "constructor",
+        "parameters": "(INotifier notifier)"
+      },
+      "symbol_node": {
+        "name": "_notifier",
+        "type": "Variable",
+        "type_kind": "field"
+      },
+      "current_relationship": "CALLS",
+      "proposed_relationship": "REFERENCES",
+      "relationship_changed": true,
+      "lsp_reference_uri": "file:///opt/HelloWorldApp/HelloWorldApp/WorkerA.cs",
+      "analysis_reason": "Changed from CALLS to REFERENCES"
+    },
+    {
+      "timestamp": "2025-09-23T17:58:21.390393Z",
+      "file_path": "HelloWorldApp/WorkerB.cs",
+      "parent_node": {
+        "name": "WorkerB",
+        "type": "Function",
+        "type_kind": "constructor",
+        "parameters": "(INotifier notifier)"
+      },
+      "symbol_node": {
+        "name": "_notifier",
+        "type": "Variable",
+        "type_kind": "field"
+      },
+      "current_relationship": "CALLS",
+      "proposed_relationship": "REFERENCES",
+      "relationship_changed": true,
+      "lsp_reference_uri": "file:///opt/HelloWorldApp/HelloWorldApp/WorkerB.cs",
+      "analysis_reason": "Changed from CALLS to REFERENCES"
+    },
+    {
+      "timestamp": "2025-09-23T17:58:21.390523Z",
+      "file_path": "HelloWorldApp/WorkerB.cs",
+      "parent_node": {
+        "name": "WorkerC",
+        "type": "Function",
+        "type_kind": "constructor",
+        "parameters": "(INotifier notifier)"
+      },
+      "symbol_node": {
+        "name": "_notifier",
+        "type": "Variable",
+        "type_kind": "field"
+      },
+      "current_relationship": "CALLS",
+      "proposed_relationship": "REFERENCES",
+      "relationship_changed": true,
+      "lsp_reference_uri": "file:///opt/HelloWorldApp/HelloWorldApp/WorkerC.cs",
+      "analysis_reason": "Changed from CALLS to REFERENCES"
+    },
+    {
+      "timestamp": "2025-09-23T17:58:21.390585Z",
+      "file_path": "HelloWorldApp/WorkerB.cs",
+      "parent_node": {
+        "name": "CreateWorkers",
+        "type": "Function",
+        "type_kind": "method",
+        "parameters": "(INotifier notifier)"
+      },
+      "symbol_node": {
+        "name": "_notifier",
+        "type": "Variable",
+        "type_kind": "field"
+      },
+      "current_relationship": "CALLS",
+      "proposed_relationship": "REFERENCES",
+      "relationship_changed": true,
+      "lsp_reference_uri": "file:///opt/HelloWorldApp/HelloWorldApp/WorkerFactory.cs",
+      "analysis_reason": "Changed from CALLS to REFERENCES"
+    },
+    {
+      "timestamp": "2025-09-23T17:58:21.402633Z",
+      "file_path": "HelloWorldApp/WorkerB.cs",
+      "parent_node": {
+        "name": "WorkerB",
+        "type": "Function",
+        "type_kind": "constructor",
+        "parameters": "(INotifier notifier)"
+      },
+      "symbol_node": {
+        "name": "_notifier",
+        "type": "Variable",
+        "type_kind": "field"
+      },
+      "current_relationship": "CALLS",
+      "proposed_relationship": "REFERENCES",
+      "relationship_changed": true,
+      "lsp_reference_uri": "file:///opt/HelloWorldApp/HelloWorldApp/WorkerB.cs",
+      "analysis_reason": "Changed from CALLS to REFERENCES"
+    },
+    {
+      "timestamp": "2025-09-23T17:58:21.449971Z",
+      "file_path": "HelloWorldApp/WorkerB.cs",
+      "parent_node": {
+        "name": "Process",
+        "type": "Function",
+        "type_kind": "method",
+        "parameters": "()"
+      },
+      "symbol_node": {
+        "name": "_notifier",
+        "type": "Variable",
+        "type_kind": "field"
+      },
+      "current_relationship": "CALLS",
+      "proposed_relationship": "REFERENCES",
+      "relationship_changed": true,
+      "lsp_reference_uri": "file:///opt/HelloWorldApp/HelloWorldApp/WorkerB.cs",
+      "analysis_reason": "Changed from CALLS to REFERENCES"
+    },
+    {
+      "timestamp": "2025-09-23T17:58:25.638544Z",
+      "file_path": "HelloWorldApp/WorkerC.cs",
+      "parent_node": {
+        "name": "WorkerA",
+        "type": "Function",
+        "type_kind": "constructor",
+        "parameters": "(INotifier notifier)"
+      },
+      "symbol_node": {
+        "name": "_notifier",
+        "type": "Variable",
+        "type_kind": "field"
+      },
+      "current_relationship": "CALLS",
+      "proposed_relationship": "REFERENCES",
+      "relationship_changed": true,
+      "lsp_reference_uri": "file:///opt/HelloWorldApp/HelloWorldApp/WorkerA.cs",
+      "analysis_reason": "Changed from CALLS to REFERENCES"
+    },
+    {
+      "timestamp": "2025-09-23T17:58:25.700625Z",
+      "file_path": "HelloWorldApp/WorkerC.cs",
+      "parent_node": {
+        "name": "WorkerB",
+        "type": "Function",
+        "type_kind": "constructor",
+        "parameters": "(INotifier notifier)"
+      },
+      "symbol_node": {
+        "name": "_notifier",
+        "type": "Variable",
+        "type_kind": "field"
+      },
+      "current_relationship": "CALLS",
+      "proposed_relationship": "REFERENCES",
+      "relationship_changed": true,
+      "lsp_reference_uri": "file:///opt/HelloWorldApp/HelloWorldApp/WorkerB.cs",
+      "analysis_reason": "Changed from CALLS to REFERENCES"
+    },
+    {
+      "timestamp": "2025-09-23T17:58:25.700831Z",
+      "file_path": "HelloWorldApp/WorkerC.cs",
+      "parent_node": {
+        "name": "WorkerC",
+        "type": "Function",
+        "type_kind": "constructor",
+        "parameters": "(INotifier notifier)"
+      },
+      "symbol_node": {
+        "name": "_notifier",
+        "type": "Variable",
+        "type_kind": "field"
+      },
+      "current_relationship": "CALLS",
+      "proposed_relationship": "REFERENCES",
+      "relationship_changed": true,
+      "lsp_reference_uri": "file:///opt/HelloWorldApp/HelloWorldApp/WorkerC.cs",
+      "analysis_reason": "Changed from CALLS to REFERENCES"
+    },
+    {
+      "timestamp": "2025-09-23T17:58:25.700928Z",
+      "file_path": "HelloWorldApp/WorkerC.cs",
+      "parent_node": {
+        "name": "CreateWorkers",
+        "type": "Function",
+        "type_kind": "method",
+        "parameters": "(INotifier notifier)"
+      },
+      "symbol_node": {
+        "name": "_notifier",
+        "type": "Variable",
+        "type_kind": "field"
+      },
+      "current_relationship": "CALLS",
+      "proposed_relationship": "REFERENCES",
+      "relationship_changed": true,
+      "lsp_reference_uri": "file:///opt/HelloWorldApp/HelloWorldApp/WorkerFactory.cs",
+      "analysis_reason": "Changed from CALLS to REFERENCES"
+    },
+    {
+      "timestamp": "2025-09-23T17:58:25.715078Z",
+      "file_path": "HelloWorldApp/WorkerC.cs",
+      "parent_node": {
+        "name": "WorkerC",
+        "type": "Function",
+        "type_kind": "constructor",
+        "parameters": "(INotifier notifier)"
+      },
+      "symbol_node": {
+        "name": "_notifier",
+        "type": "Variable",
+        "type_kind": "field"
+      },
+      "current_relationship": "CALLS",
+      "proposed_relationship": "REFERENCES",
+      "relationship_changed": true,
+      "lsp_reference_uri": "file:///opt/HelloWorldApp/HelloWorldApp/WorkerC.cs",
+      "analysis_reason": "Changed from CALLS to REFERENCES"
+    },
+    {
+      "timestamp": "2025-09-23T17:58:25.715198Z",
+      "file_path": "HelloWorldApp/WorkerC.cs",
+      "parent_node": {
+        "name": "Process",
+        "type": "Function",
+        "type_kind": "method",
+        "parameters": "()"
+      },
+      "symbol_node": {
+        "name": "_notifier",
+        "type": "Variable",
+        "type_kind": "field"
+      },
+      "current_relationship": "CALLS",
+      "proposed_relationship": "REFERENCES",
+      "relationship_changed": true,
+      "lsp_reference_uri": "file:///opt/HelloWorldApp/HelloWorldApp/WorkerC.cs",
+      "analysis_reason": "Changed from CALLS to REFERENCES"
+    },
+    {
+      "timestamp": "2025-09-23T17:58:35.474335Z",
+      "file_path": "HelloWorldApp/Utilities/Helper.cs",
+      "parent_node": {
+        "name": "Process",
+        "type": "Function",
+        "type_kind": "method",
+        "parameters": "()"
+      },
+      "symbol_node": {
+        "name": "HelloWorldApp.Utilities",
+        "type": "Namespace",
+        "type_kind": "namespace"
+      },
+      "current_relationship": "CALLS",
+      "proposed_relationship": "REFERENCES",
+      "relationship_changed": true,
+      "lsp_reference_uri": "file:///opt/HelloWorldApp/HelloWorldApp/WorkerA.cs",
+      "analysis_reason": "Changed from CALLS to REFERENCES"
+    },
+    {
+      "timestamp": "2025-09-23T17:58:35.474407Z",
+      "file_path": "HelloWorldApp/Utilities/Helper.cs",
+      "parent_node": {
+        "name": "Process",
+        "type": "Function",
+        "type_kind": "method",
+        "parameters": "()"
+      },
+      "symbol_node": {
+        "name": "HelloWorldApp.Utilities",
+        "type": "Namespace",
+        "type_kind": "namespace"
+      },
+      "current_relationship": "CALLS",
+      "proposed_relationship": "REFERENCES",
+      "relationship_changed": true,
+      "lsp_reference_uri": "file:///opt/HelloWorldApp/HelloWorldApp/WorkerB.cs",
+      "analysis_reason": "Changed from CALLS to REFERENCES"
+    },
+    {
+      "timestamp": "2025-09-23T17:58:35.474469Z",
+      "file_path": "HelloWorldApp/Utilities/Helper.cs",
+      "parent_node": {
+        "name": "Process",
+        "type": "Function",
+        "type_kind": "method",
+        "parameters": "()"
+      },
+      "symbol_node": {
+        "name": "HelloWorldApp.Utilities",
+        "type": "Namespace",
+        "type_kind": "namespace"
+      },
+      "current_relationship": "CALLS",
+      "proposed_relationship": "REFERENCES",
+      "relationship_changed": true,
+      "lsp_reference_uri": "file:///opt/HelloWorldApp/HelloWorldApp/WorkerC.cs",
+      "analysis_reason": "Changed from CALLS to REFERENCES"
+    },
+    {
+      "timestamp": "2025-09-23T17:58:35.533712Z",
+      "file_path": "HelloWorldApp/Utilities/Helper.cs",
+      "parent_node": {
+        "name": "Process",
+        "type": "Function",
+        "type_kind": "method",
+        "parameters": "()"
+      },
+      "symbol_node": {
+        "name": "HelloWorldApp.Utilities",
+        "type": "Namespace",
+        "type_kind": "namespace"
+      },
+      "current_relationship": "CALLS",
+      "proposed_relationship": "REFERENCES",
+      "relationship_changed": true,
+      "lsp_reference_uri": "file:///opt/HelloWorldApp/HelloWorldApp/WorkerA.cs",
+      "analysis_reason": "Changed from CALLS to REFERENCES"
+    },
+    {
+      "timestamp": "2025-09-23T17:58:35.533784Z",
+      "file_path": "HelloWorldApp/Utilities/Helper.cs",
+      "parent_node": {
+        "name": "Process",
+        "type": "Function",
+        "type_kind": "method",
+        "parameters": "()"
+      },
+      "symbol_node": {
+        "name": "HelloWorldApp.Utilities",
+        "type": "Namespace",
+        "type_kind": "namespace"
+      },
+      "current_relationship": "CALLS",
+      "proposed_relationship": "REFERENCES",
+      "relationship_changed": true,
+      "lsp_reference_uri": "file:///opt/HelloWorldApp/HelloWorldApp/WorkerB.cs",
+      "analysis_reason": "Changed from CALLS to REFERENCES"
+    },
+    {
+      "timestamp": "2025-09-23T17:58:35.533855Z",
+      "file_path": "HelloWorldApp/Utilities/Helper.cs",
+      "parent_node": {
+        "name": "Process",
+        "type": "Function",
+        "type_kind": "method",
+        "parameters": "()"
+      },
+      "symbol_node": {
+        "name": "HelloWorldApp.Utilities",
+        "type": "Namespace",
+        "type_kind": "namespace"
+      },
+      "current_relationship": "CALLS",
+      "proposed_relationship": "REFERENCES",
+      "relationship_changed": true,
+      "lsp_reference_uri": "file:///opt/HelloWorldApp/HelloWorldApp/WorkerC.cs",
+      "analysis_reason": "Changed from CALLS to REFERENCES"
+    }
+  ]
+}

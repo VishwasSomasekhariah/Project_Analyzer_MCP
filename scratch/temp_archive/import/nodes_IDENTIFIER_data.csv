@@ -1,0 +1,28 @@
+68719476736,IDENTIFIER,0,,Console,12,,9,Console,,,1,,System.Console
+68719476737,IDENTIFIER,1,,workers = WorkerFactory.CreateWorkers(this),33,,10,workers,,,1,,IEnumerable
+68719476738,IDENTIFIER,0,,WorkerFactory,43,,10,WorkerFactory,,,1,,HelloWorldApp.WorkerFactory
+68719476739,IDENTIFIER,1,,this,71,,10,this,,,2,,HelloWorldApp.Manager
+68719476740,IDENTIFIER,1,,_idx_,35,,13,_idx_,,,1,,System.Int32
+68719476741,IDENTIFIER,1,,_idx_,35,,13,_idx_,,,1,,System.Int32
+68719476742,IDENTIFIER,1,,workers,35,,13,workers,,,1,,IEnumerable
+68719476743,IDENTIFIER,1,,worker,21,,13,worker,,,1,,var
+68719476744,IDENTIFIER,1,,workers,35,,13,workers,,,1,,IEnumerable
+68719476745,IDENTIFIER,1,,_idx_,35,,13,_idx_,,,1,,System.Int32
+68719476746,IDENTIFIER,0,,worker,16,,15,worker,,,1,,var
+68719476747,IDENTIFIER,0,,Console,12,,22,Console,,,1,,System.Console
+68719476748,IDENTIFIER,2,,string message,64,,22,message,,,2,,System.String
+68719476749,IDENTIFIER,1,,manager = new Manager(),20,,8,manager,,,1,,HelloWorldApp.Manager
+68719476750,IDENTIFIER,0,,this,,,,this,,,1,,HelloWorldApp.Program
+68719476751,IDENTIFIER,0,,manager,12,,9,manager,,,1,,HelloWorldApp.Manager
+68719476752,IDENTIFIER,0,,Console,12,,10,Console,,,1,,System.Console
+68719476753,IDENTIFIER,0,,Console,12,,11,Console,,,1,,System.Console
+68719476754,IDENTIFIER,2,,string workerName,23,,6,workerName,,,2,,System.String
+68719476755,IDENTIFIER,4,,string text,37,,6,text,,,4,,System.String
+68719476756,IDENTIFIER,1,,this,12,,8,this,,,1,,HelloWorldApp.INotifier
+68719476757,IDENTIFIER,2,,INotifier notifier,24,,8,notifier,,,2,,HelloWorldApp.INotifier
+68719476758,IDENTIFIER,1,,"msg = Utilities.Helper.FormatMessage(""WorkerC"", ""Hi there, C here"")",19,,13,msg,,,1,,System.String
+68719476759,IDENTIFIER,1,,Utilities,25,,13,Utilities,,,1,,ANY
+68719476760,IDENTIFIER,1,,System,12,,14,System,,,1,,ANY
+68719476761,IDENTIFIER,1,,msg,37,,14,msg,,,2,,System.String
+68719476762,IDENTIFIER,0,,_notifier,12,,15,_notifier,,,1,,HelloWorldApp.INotifier
+68719476763,IDENTIFIER,0,,this,,,,this,,,1,,HelloWorldApp.WorkerFactory

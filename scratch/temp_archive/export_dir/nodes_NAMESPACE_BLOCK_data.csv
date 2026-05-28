@@ -1,0 +1,96 @@
+141733920768,NAMESPACE_BLOCK,<empty>,,<unknown>,<global>,,<global>,,,1
+141733920769,NAMESPACE_BLOCK,"namespace HelloWorldApp
+{
+    public interface INotifier
+    {
+        void Notify(string message);
+    }
+}",1,HelloWorldApp/INotifier.cs,HelloWorldApp,0,HelloWorldApp,,,1
+141733920770,NAMESPACE_BLOCK,"namespace HelloWorldApp
+{
+    public interface IWorker
+    {
+        void Process();
+    }
+}",1,HelloWorldApp/IWorker.cs,HelloWorldApp,0,HelloWorldApp,,,1
+141733920771,NAMESPACE_BLOCK,"namespace HelloWorldApp
+{
+    public class Manager : INotifier
+    {
+        public void Run()
+        {
+            Console.WriteLine(""Manager starting work..."");
+            IEnumerable<IWorker> workers = WorkerFactory.CreateWorkers(this);
+
+            // one-to-many: Manager invokes all workers
+            foreach (var worker in workers)
+            {
+                worker.Process();
+            }
+        }
+
+        // many-to-one: workers call back here
+        public void Notify(string message)
+        {
+            Console.WriteLine($""Manager received notification: {message}"");
+        }
+    }
+}",1,HelloWorldApp/Manager.cs,HelloWorldApp,3,HelloWorldApp,,,3
+141733920772,NAMESPACE_BLOCK,"namespace HelloWorldApp
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Manager manager = new Manager();
+            manager.Run();
+            Console.WriteLine(""All work completed. Press any key to exit."");
+            Console.ReadKey();
+        }
+    }
+}",1,HelloWorldApp/Program.cs,HelloWorldApp,2,HelloWorldApp,,,2
+141733920773,NAMESPACE_BLOCK,"namespace HelloWorldApp.Utilities
+{
+    public static class Helper
+    {
+        public static string FormatMessage(string workerName, string text)
+        {
+            return $""[{workerName}] {text}"";
+        }
+    }
+}",1,HelloWorldApp/Utilities/Helper.cs,HelloWorldApp.Utilities,0,Utilities,,,1
+141733920774,NAMESPACE_BLOCK,"namespace HelloWorldApp
+{
+    public class WorkerC : IWorker
+    {
+        private readonly INotifier _notifier;
+
+        public WorkerC(INotifier notifier)
+        {
+            _notifier = notifier;
+        }
+
+        public void Process()
+        {
+            string msg = Utilities.Helper.FormatMessage(""WorkerC"", ""Hi there, C here"");
+            System.Console.WriteLine(msg);
+            _notifier.Notify(""WorkerC has finished processing."");
+        }
+    }
+}",1,HelloWorldApp/WorkerC.cs,HelloWorldApp,0,HelloWorldApp,,,1
+141733920775,NAMESPACE_BLOCK,"namespace HelloWorldApp
+{
+    public static class WorkerFactory
+    {
+        public static IEnumerable<IWorker> CreateWorkers(INotifier notifier)
+        {
+            // create multiple workers, each knows how to call back
+            return new List<IWorker>
+            {
+                new WorkerA(notifier),
+                new WorkerB(notifier),
+                new WorkerC(notifier)
+            };
+        }
+    }
+}",1,HelloWorldApp/WorkerFactory.cs,HelloWorldApp,2,HelloWorldApp,,,2

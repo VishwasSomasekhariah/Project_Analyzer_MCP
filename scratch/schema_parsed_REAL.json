@@ -1,0 +1,1298 @@
+{
+  "nodes": {
+    "Variable": {
+      "count": 18,
+      "all_properties": [
+        "start_byte",
+        "modifier",
+        "end_byte",
+        "end_point",
+        "start_point",
+        "file_path",
+        "name",
+        "type",
+        "type_kind",
+        "symbols_location"
+      ],
+      "indexed_properties": [
+        "file_path",
+        "name"
+      ],
+      "unique_properties": [],
+      "outgoing_relationships": {
+        "REFERENCES": {
+          "direction": "out",
+          "target_labels": [
+            "Variable",
+            "Function",
+            "Type",
+            "Statement",
+            "Block",
+            "Literal",
+            "Namespace",
+            "Variable",
+            "Type",
+            "Function"
+          ],
+          "count": 108
+        },
+        "CONTAINS": {
+          "direction": "in",
+          "target_labels": [
+            "Type",
+            "Function",
+            "Block"
+          ],
+          "count": 17
+        }
+      }
+    },
+    "Literal": {
+      "count": 17,
+      "all_properties": [
+        "start_byte",
+        "end_byte",
+        "end_point",
+        "start_point",
+        "file_path",
+        "value",
+        "literal_type",
+        "type",
+        "type_kind",
+        "symbols_location"
+      ],
+      "indexed_properties": [
+        "file_path"
+      ],
+      "unique_properties": [],
+      "outgoing_relationships": {
+        "REFERENCES": {
+          "direction": "in",
+          "target_labels": [
+            "Variable",
+            "Function"
+          ],
+          "count": 186
+        },
+        "CONTAINS": {
+          "direction": "in",
+          "target_labels": [
+            "Type",
+            "Block"
+          ],
+          "count": 17
+        }
+      }
+    },
+    "Type": {
+      "count": 10,
+      "all_properties": [
+        "modifier",
+        "start_byte",
+        "body",
+        "end_byte",
+        "end_point",
+        "start_point",
+        "file_path",
+        "base_list",
+        "name",
+        "type",
+        "type_kind",
+        "symbols_location"
+      ],
+      "indexed_properties": [
+        "file_path",
+        "name"
+      ],
+      "unique_properties": [],
+      "outgoing_relationships": {
+        "IMPLEMENTS": {
+          "direction": "out",
+          "target_labels": [
+            "Type",
+            "Type",
+            "Function"
+          ],
+          "count": 30
+        },
+        "REFERENCES": {
+          "direction": "out",
+          "target_labels": [
+            "Variable",
+            "Function",
+            "Statement",
+            "Type",
+            "Block",
+            "Namespace",
+            "Variable",
+            "Type",
+            "Function"
+          ],
+          "count": 77
+        },
+        "CONTAINS": {
+          "direction": "out",
+          "target_labels": [
+            "Variable",
+            "Literal",
+            "Function",
+            "File",
+            "Namespace"
+          ],
+          "count": 9
+        }
+      }
+    },
+    "Statement": {
+      "count": 25,
+      "all_properties": [
+        "start_byte",
+        "text",
+        "end_byte",
+        "end_point",
+        "start_point",
+        "order",
+        "file_path",
+        "statement_type",
+        "type",
+        "type_kind",
+        "symbols_location"
+      ],
+      "indexed_properties": [],
+      "unique_properties": [],
+      "outgoing_relationships": {
+        "REFERENCES": {
+          "direction": "in",
+          "target_labels": [
+            "Variable",
+            "Type",
+            "Function"
+          ],
+          "count": 186
+        },
+        "CONTAINS": {
+          "direction": "in",
+          "target_labels": [
+            "Block"
+          ],
+          "count": 48
+        }
+      }
+    },
+    "Function": {
+      "count": 12,
+      "all_properties": [
+        "body",
+        "end_byte",
+        "end_point",
+        "start_point",
+        "file_path",
+        "return_type",
+        "type",
+        "type_kind",
+        "symbols_location",
+        "modifier",
+        "start_byte",
+        "name",
+        "parameters"
+      ],
+      "indexed_properties": [
+        "body",
+        "file_path",
+        "name"
+      ],
+      "unique_properties": [],
+      "outgoing_relationships": {
+        "IMPLEMENTS": {
+          "direction": "out",
+          "target_labels": [
+            "Type"
+          ],
+          "count": 0
+        },
+        "CALLS": {
+          "direction": "out",
+          "target_labels": [
+            "Function",
+            "Function"
+          ],
+          "count": 43
+        },
+        "REFERENCES": {
+          "direction": "out",
+          "target_labels": [
+            "Statement",
+            "Block",
+            "Variable",
+            "Type",
+            "Literal",
+            "Variable",
+            "Type"
+          ],
+          "count": 59
+        },
+        "CONTAINS": {
+          "direction": "out",
+          "target_labels": [
+            "Block",
+            "Variable",
+            "Type"
+          ],
+          "count": 12
+        }
+      }
+    },
+    "File": {
+      "count": 11,
+      "all_properties": [
+        "start_byte",
+        "end_byte",
+        "end_point",
+        "start_point",
+        "file_path",
+        "name",
+        "import_aliases",
+        "type",
+        "file_checksum",
+        "imports"
+      ],
+      "indexed_properties": [
+        "file_path",
+        "name"
+      ],
+      "unique_properties": [],
+      "outgoing_relationships": {
+        "CONTAINS": {
+          "direction": "out",
+          "target_labels": [
+            "Type",
+            "Namespace",
+            "Project"
+          ],
+          "count": 10
+        }
+      }
+    },
+    "Namespace": {
+      "count": 1,
+      "all_properties": [
+        "start_byte",
+        "body",
+        "end_byte",
+        "end_point",
+        "start_point",
+        "file_path",
+        "name",
+        "type",
+        "type_kind",
+        "symbols_location"
+      ],
+      "indexed_properties": [
+        "file_path",
+        "name"
+      ],
+      "unique_properties": [],
+      "outgoing_relationships": {
+        "REFERENCES": {
+          "direction": "out",
+          "target_labels": [
+            "Namespace",
+            "Variable",
+            "Namespace",
+            "Type"
+          ],
+          "count": 9
+        },
+        "CONTAINS": {
+          "direction": "out",
+          "target_labels": [
+            "Type",
+            "File"
+          ],
+          "count": 1
+        }
+      }
+    },
+    "Project": {
+      "count": 1,
+      "all_properties": [
+        "project_path",
+        "dependencies",
+        "project_checksum",
+        "build_properties",
+        "name",
+        "created_at",
+        "output_type",
+        "type",
+        "target_framework",
+        "modified_at",
+        "config_metadata",
+        "version"
+      ],
+      "indexed_properties": [
+        "name"
+      ],
+      "unique_properties": [],
+      "outgoing_relationships": {
+        "CONTAINS": {
+          "direction": "out",
+          "target_labels": [
+            "File"
+          ],
+          "count": 0
+        }
+      }
+    },
+    "Block": {
+      "count": 13,
+      "all_properties": [
+        "start_byte",
+        "end_byte",
+        "end_point",
+        "start_point",
+        "file_path",
+        "statements",
+        "type",
+        "type_kind",
+        "symbols_location"
+      ],
+      "indexed_properties": [
+        "file_path"
+      ],
+      "unique_properties": [],
+      "outgoing_relationships": {
+        "REFERENCES": {
+          "direction": "in",
+          "target_labels": [
+            "Variable",
+            "Type",
+            "Function"
+          ],
+          "count": 186
+        },
+        "CONTAINS": {
+          "direction": "out",
+          "target_labels": [
+            "Block",
+            "Variable",
+            "Literal",
+            "Statement",
+            "Function",
+            "Block"
+          ],
+          "count": 13
+        }
+      }
+    }
+  },
+  "relationships": {
+    "REFERENCES": {
+      "from_labels": [
+        "Function",
+        "Namespace",
+        "Type",
+        "Variable"
+      ],
+      "to_labels": [
+        "Block",
+        "Function",
+        "Literal",
+        "Namespace",
+        "Statement",
+        "Type",
+        "Variable"
+      ],
+      "properties": {
+        "start_byte": {
+          "type": "INTEGER",
+          "array": false
+        },
+        "text": {
+          "type": "STRING",
+          "array": false
+        },
+        "end_byte": {
+          "type": "INTEGER",
+          "array": false
+        },
+        "end_point": {
+          "type": "STRING",
+          "array": false
+        },
+        "start_point": {
+          "type": "STRING",
+          "array": false
+        },
+        "enriched_by": {
+          "type": "STRING",
+          "array": false
+        },
+        "created_at": {
+          "type": "STRING",
+          "array": false
+        },
+        "modified_at": {
+          "type": "STRING",
+          "array": false
+        }
+      },
+      "count": 811
+    },
+    "CONTAINS": {
+      "from_labels": [
+        "Block",
+        "File",
+        "Function",
+        "Namespace",
+        "Project",
+        "Type"
+      ],
+      "to_labels": [
+        "Block",
+        "File",
+        "Function",
+        "Literal",
+        "Namespace",
+        "Project",
+        "Statement",
+        "Type",
+        "Variable"
+      ],
+      "properties": {
+        "order": {
+          "type": "INTEGER",
+          "array": false
+        },
+        "enriched_by": {
+          "type": "STRING",
+          "array": false
+        },
+        "created_at": {
+          "type": "STRING",
+          "array": false
+        },
+        "modified_at": {
+          "type": "STRING",
+          "array": false
+        }
+      },
+      "count": 127
+    },
+    "IMPLEMENTS": {
+      "from_labels": [
+        "Function",
+        "Type"
+      ],
+      "to_labels": [
+        "Function",
+        "Type"
+      ],
+      "properties": {
+        "start_byte": {
+          "type": "INTEGER",
+          "array": false
+        },
+        "text": {
+          "type": "STRING",
+          "array": false
+        },
+        "end_byte": {
+          "type": "INTEGER",
+          "array": false
+        },
+        "end_point": {
+          "type": "STRING",
+          "array": false
+        },
+        "start_point": {
+          "type": "STRING",
+          "array": false
+        },
+        "enriched_by": {
+          "type": "STRING",
+          "array": false
+        },
+        "created_at": {
+          "type": "STRING",
+          "array": false
+        },
+        "modified_at": {
+          "type": "STRING",
+          "array": false
+        }
+      },
+      "count": 68
+    },
+    "CALLS": {
+      "from_labels": [
+        "Function"
+      ],
+      "to_labels": [
+        "Function"
+      ],
+      "properties": {
+        "start_byte": {
+          "type": "INTEGER",
+          "array": false
+        },
+        "text": {
+          "type": "STRING",
+          "array": false
+        },
+        "end_byte": {
+          "type": "INTEGER",
+          "array": false
+        },
+        "end_point": {
+          "type": "STRING",
+          "array": false
+        },
+        "start_point": {
+          "type": "STRING",
+          "array": false
+        },
+        "enriched_by": {
+          "type": "STRING",
+          "array": false
+        },
+        "created_at": {
+          "type": "STRING",
+          "array": false
+        },
+        "modified_at": {
+          "type": "STRING",
+          "array": false
+        }
+      },
+      "count": 43
+    }
+  },
+  "node_properties": {
+    "Variable": {
+      "start_byte": {
+        "type": "INTEGER",
+        "indexed": false,
+        "unique": false,
+        "array": false
+      },
+      "modifier": {
+        "type": "STRING",
+        "indexed": false,
+        "unique": false,
+        "array": false
+      },
+      "end_byte": {
+        "type": "INTEGER",
+        "indexed": false,
+        "unique": false,
+        "array": false
+      },
+      "end_point": {
+        "type": "STRING",
+        "indexed": false,
+        "unique": false,
+        "array": false
+      },
+      "start_point": {
+        "type": "STRING",
+        "indexed": false,
+        "unique": false,
+        "array": false
+      },
+      "file_path": {
+        "type": "STRING",
+        "indexed": true,
+        "unique": false,
+        "array": false
+      },
+      "name": {
+        "type": "STRING",
+        "indexed": true,
+        "unique": false,
+        "array": false
+      },
+      "type": {
+        "type": "STRING",
+        "indexed": false,
+        "unique": false,
+        "array": false
+      },
+      "type_kind": {
+        "type": "STRING",
+        "indexed": false,
+        "unique": false,
+        "array": false
+      },
+      "symbols_location": {
+        "type": "STRING",
+        "indexed": false,
+        "unique": false,
+        "array": false
+      }
+    },
+    "Literal": {
+      "start_byte": {
+        "type": "INTEGER",
+        "indexed": false,
+        "unique": false,
+        "array": false
+      },
+      "end_byte": {
+        "type": "INTEGER",
+        "indexed": false,
+        "unique": false,
+        "array": false
+      },
+      "end_point": {
+        "type": "STRING",
+        "indexed": false,
+        "unique": false,
+        "array": false
+      },
+      "start_point": {
+        "type": "STRING",
+        "indexed": false,
+        "unique": false,
+        "array": false
+      },
+      "file_path": {
+        "type": "STRING",
+        "indexed": true,
+        "unique": false,
+        "array": false
+      },
+      "value": {
+        "type": "STRING",
+        "indexed": false,
+        "unique": false,
+        "array": false
+      },
+      "literal_type": {
+        "type": "STRING",
+        "indexed": false,
+        "unique": false,
+        "array": false
+      },
+      "type": {
+        "type": "STRING",
+        "indexed": false,
+        "unique": false,
+        "array": false
+      },
+      "type_kind": {
+        "type": "STRING",
+        "indexed": false,
+        "unique": false,
+        "array": false
+      },
+      "symbols_location": {
+        "type": "STRING",
+        "indexed": false,
+        "unique": false,
+        "array": false
+      }
+    },
+    "Type": {
+      "modifier": {
+        "type": "STRING",
+        "indexed": false,
+        "unique": false,
+        "array": false
+      },
+      "start_byte": {
+        "type": "INTEGER",
+        "indexed": false,
+        "unique": false,
+        "array": false
+      },
+      "body": {
+        "type": "STRING",
+        "indexed": false,
+        "unique": false,
+        "array": false
+      },
+      "end_byte": {
+        "type": "INTEGER",
+        "indexed": false,
+        "unique": false,
+        "array": false
+      },
+      "end_point": {
+        "type": "STRING",
+        "indexed": false,
+        "unique": false,
+        "array": false
+      },
+      "start_point": {
+        "type": "STRING",
+        "indexed": false,
+        "unique": false,
+        "array": false
+      },
+      "file_path": {
+        "type": "STRING",
+        "indexed": true,
+        "unique": false,
+        "array": false
+      },
+      "base_list": {
+        "type": "STRING",
+        "indexed": false,
+        "unique": false,
+        "array": false
+      },
+      "name": {
+        "type": "STRING",
+        "indexed": true,
+        "unique": false,
+        "array": false
+      },
+      "type": {
+        "type": "STRING",
+        "indexed": false,
+        "unique": false,
+        "array": false
+      },
+      "type_kind": {
+        "type": "STRING",
+        "indexed": false,
+        "unique": false,
+        "array": false
+      },
+      "symbols_location": {
+        "type": "STRING",
+        "indexed": false,
+        "unique": false,
+        "array": false
+      }
+    },
+    "Statement": {
+      "start_byte": {
+        "type": "INTEGER",
+        "indexed": false,
+        "unique": false,
+        "array": false
+      },
+      "text": {
+        "type": "STRING",
+        "indexed": false,
+        "unique": false,
+        "array": false
+      },
+      "end_byte": {
+        "type": "INTEGER",
+        "indexed": false,
+        "unique": false,
+        "array": false
+      },
+      "end_point": {
+        "type": "STRING",
+        "indexed": false,
+        "unique": false,
+        "array": false
+      },
+      "start_point": {
+        "type": "STRING",
+        "indexed": false,
+        "unique": false,
+        "array": false
+      },
+      "order": {
+        "type": "INTEGER",
+        "indexed": false,
+        "unique": false,
+        "array": false
+      },
+      "file_path": {
+        "type": "STRING",
+        "indexed": false,
+        "unique": false,
+        "array": false
+      },
+      "statement_type": {
+        "type": "STRING",
+        "indexed": false,
+        "unique": false,
+        "array": false
+      },
+      "type": {
+        "type": "STRING",
+        "indexed": false,
+        "unique": false,
+        "array": false
+      },
+      "type_kind": {
+        "type": "STRING",
+        "indexed": false,
+        "unique": false,
+        "array": false
+      },
+      "symbols_location": {
+        "type": "STRING",
+        "indexed": false,
+        "unique": false,
+        "array": false
+      }
+    },
+    "Function": {
+      "body": {
+        "type": "STRING",
+        "indexed": true,
+        "unique": false,
+        "array": false
+      },
+      "end_byte": {
+        "type": "INTEGER",
+        "indexed": false,
+        "unique": false,
+        "array": false
+      },
+      "end_point": {
+        "type": "STRING",
+        "indexed": false,
+        "unique": false,
+        "array": false
+      },
+      "start_point": {
+        "type": "STRING",
+        "indexed": false,
+        "unique": false,
+        "array": false
+      },
+      "file_path": {
+        "type": "STRING",
+        "indexed": true,
+        "unique": false,
+        "array": false
+      },
+      "return_type": {
+        "type": "STRING",
+        "indexed": false,
+        "unique": false,
+        "array": false
+      },
+      "type": {
+        "type": "STRING",
+        "indexed": false,
+        "unique": false,
+        "array": false
+      },
+      "type_kind": {
+        "type": "STRING",
+        "indexed": false,
+        "unique": false,
+        "array": false
+      },
+      "symbols_location": {
+        "type": "STRING",
+        "indexed": false,
+        "unique": false,
+        "array": false
+      },
+      "modifier": {
+        "type": "STRING",
+        "indexed": false,
+        "unique": false,
+        "array": false
+      },
+      "start_byte": {
+        "type": "INTEGER",
+        "indexed": false,
+        "unique": false,
+        "array": false
+      },
+      "name": {
+        "type": "STRING",
+        "indexed": true,
+        "unique": false,
+        "array": false
+      },
+      "parameters": {
+        "type": "STRING",
+        "indexed": false,
+        "unique": false,
+        "array": false
+      }
+    },
+    "File": {
+      "start_byte": {
+        "type": "INTEGER",
+        "indexed": false,
+        "unique": false,
+        "array": false
+      },
+      "end_byte": {
+        "type": "INTEGER",
+        "indexed": false,
+        "unique": false,
+        "array": false
+      },
+      "end_point": {
+        "type": "STRING",
+        "indexed": false,
+        "unique": false,
+        "array": false
+      },
+      "start_point": {
+        "type": "STRING",
+        "indexed": false,
+        "unique": false,
+        "array": false
+      },
+      "file_path": {
+        "type": "STRING",
+        "indexed": true,
+        "unique": false,
+        "array": false
+      },
+      "name": {
+        "type": "STRING",
+        "indexed": true,
+        "unique": false,
+        "array": false
+      },
+      "import_aliases": {
+        "type": "STRING",
+        "indexed": false,
+        "unique": false,
+        "array": false
+      },
+      "type": {
+        "type": "STRING",
+        "indexed": false,
+        "unique": false,
+        "array": false
+      },
+      "file_checksum": {
+        "type": "STRING",
+        "indexed": false,
+        "unique": false,
+        "array": false
+      },
+      "imports": {
+        "type": "STRING",
+        "indexed": false,
+        "unique": false,
+        "array": false
+      }
+    },
+    "Namespace": {
+      "start_byte": {
+        "type": "INTEGER",
+        "indexed": false,
+        "unique": false,
+        "array": false
+      },
+      "body": {
+        "type": "STRING",
+        "indexed": false,
+        "unique": false,
+        "array": false
+      },
+      "end_byte": {
+        "type": "INTEGER",
+        "indexed": false,
+        "unique": false,
+        "array": false
+      },
+      "end_point": {
+        "type": "STRING",
+        "indexed": false,
+        "unique": false,
+        "array": false
+      },
+      "start_point": {
+        "type": "STRING",
+        "indexed": false,
+        "unique": false,
+        "array": false
+      },
+      "file_path": {
+        "type": "STRING",
+        "indexed": true,
+        "unique": false,
+        "array": false
+      },
+      "name": {
+        "type": "STRING",
+        "indexed": true,
+        "unique": false,
+        "array": false
+      },
+      "type": {
+        "type": "STRING",
+        "indexed": false,
+        "unique": false,
+        "array": false
+      },
+      "type_kind": {
+        "type": "STRING",
+        "indexed": false,
+        "unique": false,
+        "array": false
+      },
+      "symbols_location": {
+        "type": "STRING",
+        "indexed": false,
+        "unique": false,
+        "array": false
+      }
+    },
+    "Project": {
+      "project_path": {
+        "type": "STRING",
+        "indexed": false,
+        "unique": false,
+        "array": false
+      },
+      "dependencies": {
+        "type": "STRING",
+        "indexed": false,
+        "unique": false,
+        "array": false
+      },
+      "project_checksum": {
+        "type": "STRING",
+        "indexed": false,
+        "unique": false,
+        "array": false
+      },
+      "build_properties": {
+        "type": "STRING",
+        "indexed": false,
+        "unique": false,
+        "array": false
+      },
+      "name": {
+        "type": "STRING",
+        "indexed": true,
+        "unique": false,
+        "array": false
+      },
+      "created_at": {
+        "type": "STRING",
+        "indexed": false,
+        "unique": false,
+        "array": false
+      },
+      "output_type": {
+        "type": "STRING",
+        "indexed": false,
+        "unique": false,
+        "array": false
+      },
+      "type": {
+        "type": "STRING",
+        "indexed": false,
+        "unique": false,
+        "array": false
+      },
+      "target_framework": {
+        "type": "STRING",
+        "indexed": false,
+        "unique": false,
+        "array": false
+      },
+      "modified_at": {
+        "type": "STRING",
+        "indexed": false,
+        "unique": false,
+        "array": false
+      },
+      "config_metadata": {
+        "type": "STRING",
+        "indexed": false,
+        "unique": false,
+        "array": false
+      },
+      "version": {
+        "type": "STRING",
+        "indexed": false,
+        "unique": false,
+        "array": false
+      }
+    },
+    "Block": {
+      "start_byte": {
+        "type": "INTEGER",
+        "indexed": false,
+        "unique": false,
+        "array": false
+      },
+      "end_byte": {
+        "type": "INTEGER",
+        "indexed": false,
+        "unique": false,
+        "array": false
+      },
+      "end_point": {
+        "type": "STRING",
+        "indexed": false,
+        "unique": false,
+        "array": false
+      },
+      "start_point": {
+        "type": "STRING",
+        "indexed": false,
+        "unique": false,
+        "array": false
+      },
+      "file_path": {
+        "type": "STRING",
+        "indexed": true,
+        "unique": false,
+        "array": false
+      },
+      "statements": {
+        "type": "STRING",
+        "indexed": false,
+        "unique": false,
+        "array": false
+      },
+      "type": {
+        "type": "STRING",
+        "indexed": false,
+        "unique": false,
+        "array": false
+      },
+      "type_kind": {
+        "type": "STRING",
+        "indexed": false,
+        "unique": false,
+        "array": false
+      },
+      "symbols_location": {
+        "type": "STRING",
+        "indexed": false,
+        "unique": false,
+        "array": false
+      }
+    }
+  },
+  "rel_properties": {
+    "IMPLEMENTS": {
+      "start_byte": {
+        "type": "INTEGER",
+        "array": false
+      },
+      "text": {
+        "type": "STRING",
+        "array": false
+      },
+      "end_byte": {
+        "type": "INTEGER",
+        "array": false
+      },
+      "end_point": {
+        "type": "STRING",
+        "array": false
+      },
+      "start_point": {
+        "type": "STRING",
+        "array": false
+      },
+      "enriched_by": {
+        "type": "STRING",
+        "array": false
+      },
+      "created_at": {
+        "type": "STRING",
+        "array": false
+      },
+      "modified_at": {
+        "type": "STRING",
+        "array": false
+      }
+    },
+    "REFERENCES": {
+      "start_byte": {
+        "type": "INTEGER",
+        "array": false
+      },
+      "text": {
+        "type": "STRING",
+        "array": false
+      },
+      "end_byte": {
+        "type": "INTEGER",
+        "array": false
+      },
+      "end_point": {
+        "type": "STRING",
+        "array": false
+      },
+      "start_point": {
+        "type": "STRING",
+        "array": false
+      },
+      "enriched_by": {
+        "type": "STRING",
+        "array": false
+      },
+      "created_at": {
+        "type": "STRING",
+        "array": false
+      },
+      "modified_at": {
+        "type": "STRING",
+        "array": false
+      }
+    },
+    "CONTAINS": {
+      "order": {
+        "type": "INTEGER",
+        "array": false
+      },
+      "enriched_by": {
+        "type": "STRING",
+        "array": false
+      },
+      "created_at": {
+        "type": "STRING",
+        "array": false
+      },
+      "modified_at": {
+        "type": "STRING",
+        "array": false
+      }
+    },
+    "CALLS": {
+      "start_byte": {
+        "type": "INTEGER",
+        "array": false
+      },
+      "text": {
+        "type": "STRING",
+        "array": false
+      },
+      "end_byte": {
+        "type": "INTEGER",
+        "array": false
+      },
+      "end_point": {
+        "type": "STRING",
+        "array": false
+      },
+      "start_point": {
+        "type": "STRING",
+        "array": false
+      },
+      "enriched_by": {
+        "type": "STRING",
+        "array": false
+      },
+      "created_at": {
+        "type": "STRING",
+        "array": false
+      },
+      "modified_at": {
+        "type": "STRING",
+        "array": false
+      }
+    }
+  },
+  "_metadata": {
+    "loaded_at": "2025-10-30T20:16:57.107408",
+    "source": "apoc.meta.schema()"
+  }
+}

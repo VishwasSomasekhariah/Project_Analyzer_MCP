@@ -1,0 +1,101 @@
+2025-07-11 18:15:21,455 - __main__ - INFO - Starting comprehensive MCP test suite...
+2025-07-11 18:15:21,456 - __main__ - INFO - Setting up MCP session...
+2025-07-11 18:15:21,464 - mcp.client.sse - INFO - Connecting to SSE endpoint: http://host.docker.internal:9000/sse
+2025-07-11 18:15:21,872 - httpx - INFO - HTTP Request: GET http://host.docker.internal:9000/sse "HTTP/1.1 200 OK"
+2025-07-11 18:15:21,874 - mcp.client.sse - INFO - Received endpoint URL: http://host.docker.internal:9000/messages/?session_id=6d716264e51942d7be4a516587d2d9eb
+2025-07-11 18:15:21,876 - mcp.client.sse - INFO - Starting post writer with endpoint URL: http://host.docker.internal:9000/messages/?session_id=6d716264e51942d7be4a516587d2d9eb
+2025-07-11 18:15:22,449 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=6d716264e51942d7be4a516587d2d9eb "HTTP/1.1 202 Accepted"
+2025-07-11 18:15:22,463 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=6d716264e51942d7be4a516587d2d9eb "HTTP/1.1 202 Accepted"
+2025-07-11 18:15:22,484 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=6d716264e51942d7be4a516587d2d9eb "HTTP/1.1 202 Accepted"
+2025-07-11 18:15:22,492 - __main__ - INFO - ✓ Connected to MCP server
+2025-07-11 18:15:22,493 - __main__ - INFO - Available tools: ['analyze_project_only', 'get_file_monitor_config', 'set_project_path', 'process_file_changes', 'vectorize_codebase_only', 'query_vector_only', 'query_cpg_only', 'full_project_setup', 'comprehensive_code_analysis', 'configure_llm_service', 'llm_service_health_check']
+2025-07-11 18:15:22,498 - __main__ - INFO - Defined 37 test queries
+2025-07-11 18:15:22,498 - __main__ - INFO - Executing query T001: Technical/Architecture
+2025-07-11 18:15:22,509 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=6d716264e51942d7be4a516587d2d9eb "HTTP/1.1 202 Accepted"
+2025-07-11 18:16:30,478 - __main__ - INFO - Executing query T002: Technical/Design Patterns
+2025-07-11 18:16:30,773 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=6d716264e51942d7be4a516587d2d9eb "HTTP/1.1 202 Accepted"
+2025-07-11 18:17:07,264 - __main__ - INFO - Executing query T003: Technical/Dependencies
+2025-07-11 18:17:07,476 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=6d716264e51942d7be4a516587d2d9eb "HTTP/1.1 202 Accepted"
+2025-07-11 18:17:44,753 - __main__ - INFO - Executing query T004: Technical/Class Hierarchy
+2025-07-11 18:17:44,971 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=6d716264e51942d7be4a516587d2d9eb "HTTP/1.1 202 Accepted"
+2025-07-11 18:18:29,728 - __main__ - INFO - Executing query T005: Technical/Method Analysis
+2025-07-11 18:18:29,942 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=6d716264e51942d7be4a516587d2d9eb "HTTP/1.1 202 Accepted"
+2025-07-11 18:19:14,794 - __main__ - INFO - Executing query F001: Functional/Business Logic
+2025-07-11 18:19:15,047 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=6d716264e51942d7be4a516587d2d9eb "HTTP/1.1 202 Accepted"
+2025-07-11 18:19:58,649 - __main__ - INFO - Executing query F002: Functional/Data Flow
+2025-07-11 18:19:58,859 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=6d716264e51942d7be4a516587d2d9eb "HTTP/1.1 202 Accepted"
+2025-07-11 18:20:37,849 - __main__ - INFO - Executing query F003: Functional/Worker Coordination
+2025-07-11 18:20:38,145 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=6d716264e51942d7be4a516587d2d9eb "HTTP/1.1 202 Accepted"
+2025-07-11 18:21:26,426 - __main__ - INFO - Executing query F004: Functional/Factory Usage
+2025-07-11 18:21:26,637 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=6d716264e51942d7be4a516587d2d9eb "HTTP/1.1 202 Accepted"
+2025-07-11 18:22:14,230 - __main__ - INFO - Executing query F005: Functional/Notification System
+2025-07-11 18:22:14,451 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=6d716264e51942d7be4a516587d2d9eb "HTTP/1.1 202 Accepted"
+2025-07-11 18:23:09,136 - __main__ - INFO - Executing query NF001: Non-Functional/Error Handling
+2025-07-11 18:23:09,362 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=6d716264e51942d7be4a516587d2d9eb "HTTP/1.1 202 Accepted"
+2025-07-11 18:23:58,199 - __main__ - INFO - Executing query NF002: Non-Functional/Code Quality
+2025-07-11 18:23:58,432 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=6d716264e51942d7be4a516587d2d9eb "HTTP/1.1 202 Accepted"
+2025-07-11 18:24:43,803 - __main__ - INFO - Executing query NF003: Non-Functional/Performance
+2025-07-11 18:24:44,028 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=6d716264e51942d7be4a516587d2d9eb "HTTP/1.1 202 Accepted"
+2025-07-11 18:25:27,744 - __main__ - INFO - Executing query NF004: Non-Functional/Security
+2025-07-11 18:25:27,959 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=6d716264e51942d7be4a516587d2d9eb "HTTP/1.1 202 Accepted"
+2025-07-11 18:26:08,129 - __main__ - INFO - Executing query NF005: Non-Functional/Maintainability
+2025-07-11 18:26:08,348 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=6d716264e51942d7be4a516587d2d9eb "HTTP/1.1 202 Accepted"
+2025-07-11 18:27:03,586 - __main__ - INFO - Executing query NF006: Non-Functional/Testing
+2025-07-11 18:27:03,819 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=6d716264e51942d7be4a516587d2d9eb "HTTP/1.1 202 Accepted"
+2025-07-11 18:27:59,356 - __main__ - INFO - Executing query M001: Modification/Async Refactoring
+2025-07-11 18:27:59,583 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=6d716264e51942d7be4a516587d2d9eb "HTTP/1.1 202 Accepted"
+2025-07-11 18:28:43,523 - __main__ - INFO - Executing query M002: Modification/Error Handling
+2025-07-11 18:28:43,728 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=6d716264e51942d7be4a516587d2d9eb "HTTP/1.1 202 Accepted"
+2025-07-11 18:29:33,654 - __main__ - INFO - Executing query M003: Modification/Logging Integration
+2025-07-11 18:29:33,879 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=6d716264e51942d7be4a516587d2d9eb "HTTP/1.1 202 Accepted"
+2025-07-11 18:30:35,583 - __main__ - INFO - Executing query M004: Modification/Configuration
+2025-07-11 18:30:35,825 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=6d716264e51942d7be4a516587d2d9eb "HTTP/1.1 202 Accepted"
+2025-07-11 18:31:25,334 - __main__ - INFO - Executing query M005: Modification/Dependency Injection
+2025-07-11 18:31:25,553 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=6d716264e51942d7be4a516587d2d9eb "HTTP/1.1 202 Accepted"
+2025-07-11 18:32:09,941 - __main__ - INFO - Executing query FA001: Feature Addition/Worker Priority
+2025-07-11 18:32:10,184 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=6d716264e51942d7be4a516587d2d9eb "HTTP/1.1 202 Accepted"
+2025-07-11 18:32:50,375 - __main__ - INFO - Executing query FA002: Feature Addition/Worker Status
+2025-07-11 18:32:50,597 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=6d716264e51942d7be4a516587d2d9eb "HTTP/1.1 202 Accepted"
+2025-07-11 18:33:37,130 - __main__ - INFO - Executing query FA003: Feature Addition/Result Collection
+2025-07-11 18:33:37,366 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=6d716264e51942d7be4a516587d2d9eb "HTTP/1.1 202 Accepted"
+2025-07-11 18:34:26,733 - __main__ - INFO - Executing query FA004: Feature Addition/Parallel Processing
+2025-07-11 18:34:26,959 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=6d716264e51942d7be4a516587d2d9eb "HTTP/1.1 202 Accepted"
+2025-07-11 18:35:10,120 - __main__ - INFO - Executing query FA005: Feature Addition/Worker Lifecycle
+2025-07-11 18:35:10,329 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=6d716264e51942d7be4a516587d2d9eb "HTTP/1.1 202 Accepted"
+2025-07-11 18:36:05,956 - __main__ - INFO - Executing query MOD001: Modernization/NET 9 Features
+2025-07-11 18:36:06,172 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=6d716264e51942d7be4a516587d2d9eb "HTTP/1.1 202 Accepted"
+2025-07-11 18:36:50,995 - __main__ - INFO - Executing query MOD002: Modernization/Design Patterns
+2025-07-11 18:36:51,222 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=6d716264e51942d7be4a516587d2d9eb "HTTP/1.1 202 Accepted"
+2025-07-11 18:37:35,537 - __main__ - INFO - Executing query MOD003: Modernization/API Design
+2025-07-11 18:37:35,765 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=6d716264e51942d7be4a516587d2d9eb "HTTP/1.1 202 Accepted"
+2025-07-11 18:38:42,793 - __main__ - INFO - Executing query MOD004: Modernization/Cloud Native
+2025-07-11 18:38:43,054 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=6d716264e51942d7be4a516587d2d9eb "HTTP/1.1 202 Accepted"
+2025-07-11 18:39:22,409 - __main__ - INFO - Executing query MOD005: Modernization/Reactive Patterns
+2025-07-11 18:39:22,695 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=6d716264e51942d7be4a516587d2d9eb "HTTP/1.1 202 Accepted"
+2025-07-11 18:40:05,018 - __main__ - INFO - Executing query BUG001: Bug Analysis/Null Reference
+2025-07-11 18:40:05,231 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=6d716264e51942d7be4a516587d2d9eb "HTTP/1.1 202 Accepted"
+2025-07-11 18:40:48,301 - __main__ - INFO - Executing query BUG002: Bug Analysis/Resource Leaks
+2025-07-11 18:40:48,518 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=6d716264e51942d7be4a516587d2d9eb "HTTP/1.1 202 Accepted"
+2025-07-11 18:41:42,111 - __main__ - INFO - Executing query BUG003: Bug Analysis/Concurrency Issues
+2025-07-11 18:41:42,354 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=6d716264e51942d7be4a516587d2d9eb "HTTP/1.1 202 Accepted"
+2025-07-11 18:42:22,418 - __main__ - INFO - Executing query INT001: Integration/Database Integration
+2025-07-11 18:42:22,786 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=6d716264e51942d7be4a516587d2d9eb "HTTP/1.1 202 Accepted"
+2025-07-11 18:43:03,896 - __main__ - INFO - Executing query INT002: Integration/Message Queue
+2025-07-11 18:43:04,152 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=6d716264e51942d7be4a516587d2d9eb "HTTP/1.1 202 Accepted"
+2025-07-11 18:43:51,747 - __main__ - INFO - Executing query INT003: Integration/External API
+2025-07-11 18:43:52,003 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=6d716264e51942d7be4a516587d2d9eb "HTTP/1.1 202 Accepted"
+2025-07-11 18:44:30,873 - __main__ - INFO - ✓ Raw results saved to /opt/genpod/comprehensive_test_results_20250711_184430.json
+2025-07-11 18:44:30,880 - __main__ - INFO - ✓ Markdown report generated: /opt/genpod/MCP_Comprehensive_Benchmark_Report_20250711_184430.md
+2025-07-11 18:44:30,881 - __main__ - INFO - ✅ Comprehensive test suite completed
+2025-07-11 18:44:30,906 - __main__ - INFO - ✓ MCP session closed
+
+============================================================
+COMPREHENSIVE MCP TEST SUITE RESULTS
+============================================================
+Total Queries: 37
+Successful Queries: 37
+Success Rate: 100.0%
+Average Response Time: 46238ms
+Vector Search Accuracy: 61.0%
+Cypher Generation Success Rate: 0.0%
+============================================================

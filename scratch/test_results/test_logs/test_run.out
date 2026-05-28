@@ -1,0 +1,83 @@
+2025-07-03 19:46:53,739 - __main__ - INFO - ================================================================================
+2025-07-03 19:46:53,740 - __main__ - INFO - MODULAR MCP ARCHITECTURE TEST SESSION
+2025-07-03 19:46:53,741 - __main__ - INFO - ================================================================================
+2025-07-03 19:46:53,741 - __main__ - INFO - Test session started at: 2025-07-03T19:46:53.741885
+2025-07-03 19:46:53,742 - __main__ - INFO - Log file: /opt/genpod/test_modular_architecture_20250703_194653.log
+2025-07-03 19:46:53,743 - __main__ - INFO - MCP Server URL: http://localhost:9000/sse
+2025-07-03 19:46:53,743 - __main__ - INFO - ================================================================================
+2025-07-03 19:46:53,744 - __main__ - INFO - Starting modular MCP architecture tests...
+2025-07-03 19:46:53,745 - __main__ - INFO - ENVIRONMENT INFORMATION:
+2025-07-03 19:46:53,745 - __main__ - INFO -   Python version: 3.12.8 (main, Feb  4 2025, 07:31:04) [GCC 12.2.0]
+2025-07-03 19:46:53,746 - __main__ - INFO -   Working directory: /opt/genpod
+2025-07-03 19:46:53,746 - __main__ - INFO -   Target MCP server: http://localhost:9000/sse
+2025-07-03 19:46:53,747 - __main__ - INFO -   OpenAI API key present: True
+2025-07-03 19:46:53,747 - __main__ - INFO -   Anthropic API key present: False
+2025-07-03 19:46:53,754 - mcp.client.sse - INFO - Connecting to SSE endpoint: http://localhost:9000/sse
+2025-07-03 19:46:53,829 - httpx - INFO - HTTP Request: GET http://localhost:9000/sse "HTTP/1.1 200 OK"
+2025-07-03 19:46:53,831 - mcp.client.sse - INFO - Received endpoint URL: http://localhost:9000/messages/?session_id=390c093efc5a4bb78e8e0fafc407828b
+2025-07-03 19:46:53,832 - mcp.client.sse - INFO - Starting post writer with endpoint URL: http://localhost:9000/messages/?session_id=390c093efc5a4bb78e8e0fafc407828b
+2025-07-03 19:46:53,840 - httpx - INFO - HTTP Request: POST http://localhost:9000/messages/?session_id=390c093efc5a4bb78e8e0fafc407828b "HTTP/1.1 202 Accepted"
+2025-07-03 19:46:53,852 - httpx - INFO - HTTP Request: POST http://localhost:9000/messages/?session_id=390c093efc5a4bb78e8e0fafc407828b "HTTP/1.1 202 Accepted"
+2025-07-03 19:46:53,855 - httpx - INFO - HTTP Request: POST http://localhost:9000/messages/?session_id=390c093efc5a4bb78e8e0fafc407828b "HTTP/1.1 202 Accepted"
+2025-07-03 19:46:53,859 - __main__ - INFO - ✓ MCP client and session created successfully
+2025-07-03 19:46:53,859 - __main__ - INFO - ✓ No timeout constraints applied - allowing natural processing time
+2025-07-03 19:46:53,860 - __main__ - INFO - Available tools: ['analyze_project_only', 'get_file_monitor_config', 'set_project_path', 'process_file_changes', 'vectorize_codebase_only', 'query_vector_only', 'query_cpg_only', 'full_project_setup', 'comprehensive_code_analysis', 'configure_llm_service', 'llm_service_health_check']
+2025-07-03 19:46:53,861 - __main__ - INFO - ✓ All expected tools are available
+2025-07-03 19:46:53,861 - __main__ - INFO - 🚀 Starting sequential test execution...
+2025-07-03 19:46:53,862 - __main__ - INFO - Note: Processing times may vary significantly based on project complexity
+2025-07-03 19:46:53,862 - __main__ - INFO - LSP analysis and tree-sitter parsing can take several minutes for complex projects
+2025-07-03 19:46:53,863 - __main__ - INFO - --------------------------------------------------------------------------------
+2025-07-03 19:46:53,863 - __main__ - INFO - Phase 1/3: LLM Service Setup
+2025-07-03 19:46:53,864 - __main__ - INFO - === Testing LLM Service Setup ===
+2025-07-03 19:46:53,865 - __main__ - INFO - Testing LLM service health check...
+2025-07-03 19:46:53,869 - httpx - INFO - HTTP Request: POST http://localhost:9000/messages/?session_id=390c093efc5a4bb78e8e0fafc407828b "HTTP/1.1 202 Accepted"
+2025-07-03 19:46:54,254 - __main__ - INFO - ✓ LLM service status: available
+2025-07-03 19:46:54,255 - __main__ - INFO - Testing LLM service configuration...
+2025-07-03 19:46:54,258 - httpx - INFO - HTTP Request: POST http://localhost:9000/messages/?session_id=390c093efc5a4bb78e8e0fafc407828b "HTTP/1.1 202 Accepted"
+2025-07-03 19:46:54,259 - __main__ - INFO - ✓ LLM configuration: LLM service configured successfully
+2025-07-03 19:46:54,260 - __main__ - INFO - ✅ Phase 1 completed in 0.40 seconds
+2025-07-03 19:46:54,261 - __main__ - INFO - Phase 2/3: Full Project Setup (Vectorization + CPG Analysis)
+2025-07-03 19:46:54,261 - __main__ - INFO - ⏳ This phase may take several minutes depending on project complexity...
+2025-07-03 19:46:54,262 - __main__ - INFO - === Testing Full Project Setup Workflow ===
+2025-07-03 19:46:54,262 - __main__ - INFO - 🔧 Executing full project setup (vectorization + CPG analysis + monitoring)...
+2025-07-03 19:46:54,263 - __main__ - INFO - 📁 Project path: /opt/HelloWorldApp
+2025-07-03 19:46:54,263 - __main__ - INFO - 📊 Collection name: helloworldapp-comprehensive
+2025-07-03 19:46:54,264 - __main__ - INFO - 🔍 LSP analysis: enabled
+2025-07-03 19:46:54,264 - __main__ - INFO - 🤖 AI enhancements: enabled
+2025-07-03 19:46:54,265 - __main__ - INFO - ⏳ Processing initiated - this may take several minutes...
+2025-07-03 19:46:54,267 - httpx - INFO - HTTP Request: POST http://localhost:9000/messages/?session_id=390c093efc5a4bb78e8e0fafc407828b "HTTP/1.1 202 Accepted"
+2025-07-03 19:48:47,464 - __main__ - INFO - ⏱️  Full project setup completed in 113.20 seconds
+2025-07-03 19:48:47,465 - __main__ - INFO - ✓ Full project setup completed in 113.20 seconds
+2025-07-03 19:48:47,466 - __main__ - INFO - Monitoring mode: comprehensive
+2025-07-03 19:48:47,467 - __main__ - INFO - Capabilities: ['vector_search', 'cpg_analysis', 'llm_integration']
+2025-07-03 19:48:47,468 - __main__ - INFO -   1_vectorization: completed
+2025-07-03 19:48:47,469 - __main__ - INFO -   2_cpg_analysis: completed
+2025-07-03 19:48:47,470 - __main__ - INFO -   3_enable_monitoring: completed
+2025-07-03 19:48:47,471 - __main__ - INFO - ✅ Phase 2 completed in 113.21 seconds
+2025-07-03 19:48:47,472 - __main__ - INFO - Phase 3/3: Comprehensive LLM-Powered Analysis
+2025-07-03 19:48:47,473 - __main__ - INFO - ⏳ Running end-to-end analysis workflow...
+2025-07-03 19:48:47,473 - __main__ - INFO - === Testing Comprehensive LLM Analysis ===
+2025-07-03 19:48:47,474 - __main__ - INFO - Testing comprehensive analysis with query: 'How is the main function implemented and what functions does it call?'
+2025-07-03 19:48:47,478 - httpx - INFO - HTTP Request: POST http://localhost:9000/messages/?session_id=390c093efc5a4bb78e8e0fafc407828b "HTTP/1.1 202 Accepted"
+2025-07-03 19:48:47,492 - __main__ - INFO - Comprehensive analysis completed in 0.02 seconds
+2025-07-03 19:48:47,492 - __main__ - ERROR - ✗ Comprehensive analysis failed: name 'query_vectorized_codebase' is not defined
+2025-07-03 19:48:47,493 - __main__ - INFO - Partial results available - checking steps...
+2025-07-03 19:48:47,493 - __main__ - INFO -   1_vector_search: running
+2025-07-03 19:48:47,494 - __main__ - ERROR - ❌ Comprehensive analysis test failed
+2025-07-03 19:48:47,494 - __main__ - INFO - ================================================================================
+2025-07-03 19:48:47,494 - __main__ - INFO - 🏁 FINAL TEST RESULTS
+2025-07-03 19:48:47,495 - __main__ - INFO - ================================================================================
+2025-07-03 19:48:47,495 - __main__ - ERROR - ❌ SOME TESTS FAILED
+2025-07-03 19:48:47,495 - __main__ - ERROR - Please review the detailed logs above for failure analysis
+2025-07-03 19:48:47,495 - __main__ - ERROR - Check individual phase logs for specific error details
+2025-07-03 19:48:47,496 - __main__ - INFO - --------------------------------------------------------------------------------
+2025-07-03 19:48:47,496 - __main__ - INFO - ⏱️  PERFORMANCE STATISTICS
+2025-07-03 19:48:47,496 - __main__ - INFO - Total test execution time: 113.63 seconds
+2025-07-03 19:48:47,497 - __main__ - INFO - Overall session duration: 113.75 seconds
+2025-07-03 19:48:47,497 - __main__ - INFO - Test completed at: 2025-07-03T19:48:47.497595
+2025-07-03 19:48:47,497 - __main__ - INFO - Detailed log file: /opt/genpod/test_modular_architecture_20250703_194653.log
+2025-07-03 19:48:47,498 - __main__ - INFO - ================================================================================
+2025-07-03 19:48:47,498 - __main__ - INFO - Cleaning up test resources...
+2025-07-03 19:48:47,498 - __main__ - INFO - ✓ Temporary config file cleaned up
+2025-07-03 19:48:47,499 - __main__ - INFO - ✓ MCP session closed
+2025-07-03 19:48:47,500 - __main__ - INFO - Test cleanup completed.

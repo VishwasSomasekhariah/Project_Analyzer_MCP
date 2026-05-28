@@ -1,0 +1,314 @@
+[
+  {
+    "index": 0,
+    "approach_name": "Direct CALLS Enumeration",
+    "description": "Use the CALLS relationship to count every outgoing static call edge from Manager.Run().",
+    "target_nodes": [
+      "Function"
+    ],
+    "relationships": [
+      "CONTAINS",
+      "CALLS"
+    ],
+    "key_attributes": [
+      "name",
+      "file_path"
+    ],
+    "strategy": "MATCH (p:Project {name:'HelloWorldApp'})-[:CONTAINS]->(f:File)-[:CONTAINS]->(fn:Function {name:'Run', modifier:'public', file_path:toLower(f.file_path)})\nOPTIONAL MATCH (fn)-[c:CALLS]->(callee:Function)\nRETURN fn.name AS function, f.name AS file, count(c) AS totalMethodCalls;",
+    "validation_context": {
+      "validation_performed": true,
+      "validation_results": [
+        {
+          "purpose": "Validation query",
+          "success": true,
+          "finding": "\u2705 Data exists (1 results)"
+        },
+        {
+          "purpose": "Validation query",
+          "success": true,
+          "finding": "\u2705 Data exists (1 results)"
+        },
+        {
+          "purpose": "Validation query",
+          "success": true,
+          "finding": "\u274c No data found"
+        },
+        {
+          "purpose": "Validation query",
+          "success": true,
+          "finding": "\u2705 Data exists (1 results)"
+        }
+      ],
+      "warnings": [
+        "\u26a0\ufe0f Validation query: No data found"
+      ],
+      "ready_for_execution": false
+    },
+    "validation_summary": "=== APPROACH VALIDATION RESULTS ===\n\n\u2022 Validation query: \u2705 Data exists (1 results)\n\u2022 Validation query: \u2705 Data exists (1 results)\n\u2022 Validation query: \u274c No data found\n\u2022 Validation query: \u2705 Data exists (1 results)\n\n\u26a0\ufe0f WARNINGS:\n  \u26a0\ufe0f Validation query: No data found\n\n\u274c Has validation issues\n========================================"
+  },
+  {
+    "index": 1,
+    "approach_name": "Statement-Level Invocation Filter",
+    "description": "Count invocation-like statements within Manager.Run() by inspecting Statement nodes under the function.",
+    "target_nodes": [
+      "Function",
+      "Statement"
+    ],
+    "relationships": [
+      "CONTAINS"
+    ],
+    "key_attributes": [
+      "Statement.statement_type",
+      "Statement.text",
+      "Function.name",
+      "Function.type_kind",
+      "Function.return_type",
+      "Function.parameters",
+      "Function.start_point",
+      "Function.end_point",
+      "Function.file_path",
+      "Function.body",
+      "Function.modifier",
+      "Function.type_parameters",
+      "Function.constraints",
+      "Function.attribute",
+      "Function.start_byte",
+      "Function.end_byte",
+      "Function.symbols_location"
+    ],
+    "strategy": "MATCH (p:Project {name:'HelloWorldApp'})-[:CONTAINS]->(:File)-[:CONTAINS]->(fn:Function {name:'Run'})\nMATCH (fn)-[:CONTAINS]->(s:Statement)\nWHERE s.statement_type='expression_statement' AND s.text CONTAINS '('\nRETURN count(s) AS invocationStatements;",
+    "validation_context": {
+      "validation_performed": true,
+      "validation_results": [
+        {
+          "purpose": "Validation query",
+          "success": true,
+          "finding": "\u2705 Data exists (1 results)"
+        },
+        {
+          "purpose": "Validation query",
+          "success": true,
+          "finding": "\u2705 Data exists (1 results)"
+        },
+        {
+          "purpose": "Validation query",
+          "success": true,
+          "finding": "\u274c No data found"
+        },
+        {
+          "purpose": "Validation query",
+          "success": true,
+          "finding": "\u274c No data found"
+        }
+      ],
+      "warnings": [
+        "\u26a0\ufe0f Validation query: No data found",
+        "\u26a0\ufe0f Validation query: No data found"
+      ],
+      "ready_for_execution": false
+    },
+    "validation_summary": "=== APPROACH VALIDATION RESULTS ===\n\n\u2022 Validation query: \u2705 Data exists (1 results)\n\u2022 Validation query: \u2705 Data exists (1 results)\n\u2022 Validation query: \u274c No data found\n\u2022 Validation query: \u274c No data found\n\n\u26a0\ufe0f WARNINGS:\n  \u26a0\ufe0f Validation query: No data found\n  \u26a0\ufe0f Validation query: No data found\n\n\u274c Has validation issues\n========================================"
+  },
+  {
+    "index": 2,
+    "approach_name": "Block-Scoped Call Statement Count",
+    "description": "Drill into Block nodes inside Manager.Run() to count all contained call-style statements in nested scopes.",
+    "target_nodes": [
+      "Function",
+      "Block",
+      "Statement"
+    ],
+    "relationships": [
+      "CONTAINS",
+      "CONTAINS"
+    ],
+    "key_attributes": [
+      "Function.name",
+      "Function.type_kind",
+      "Function.return_type",
+      "Function.parameters",
+      "Function.start_point",
+      "Function.end_point",
+      "Function.file_path",
+      "Function.body",
+      "Function.modifier",
+      "Function.type_parameters",
+      "Function.constraints",
+      "Function.attribute",
+      "Function.start_byte",
+      "Function.end_byte",
+      "Function.symbols_location",
+      "Block.statements",
+      "Block.type_kind",
+      "Block.start_point",
+      "Block.end_point",
+      "Block.file_path",
+      "Block.start_byte",
+      "Block.end_byte",
+      "Block.symbols_location",
+      "Statement.text",
+      "Statement.statement_type",
+      "Statement.order",
+      "Statement.start_point",
+      "Statement.end_point",
+      "Statement.file_path",
+      "Statement.start_byte",
+      "Statement.end_byte",
+      "Statement.symbols_location"
+    ],
+    "strategy": "MATCH (p:Project {name:'HelloWorldApp'})-[:CONTAINS]->(:File)-[:CONTAINS]->(fn:Function {name:'Run'})\nMATCH (fn)-[:CONTAINS]->(b:Block)-[:CONTAINS]->(s:Statement)\nWHERE s.text =~ '.*\\w+\\s*\\(.*\\).*'\nRETURN count(s) AS callsInBlocks;",
+    "validation_context": {
+      "validation_performed": true,
+      "validation_results": [
+        {
+          "purpose": "Validation query",
+          "success": true,
+          "finding": "\u274c No data found"
+        },
+        {
+          "purpose": "Validation query",
+          "success": true,
+          "finding": "\u2705 Data exists (1 results)"
+        },
+        {
+          "purpose": "Validation query",
+          "success": true,
+          "finding": "\u274c No data found"
+        },
+        {
+          "purpose": "Validation query",
+          "success": true,
+          "finding": "\u2705 Data exists (1 results)"
+        },
+        {
+          "purpose": "Validation query",
+          "success": true,
+          "finding": "\u274c No data found"
+        },
+        {
+          "purpose": "Validation query",
+          "success": true,
+          "finding": "\u2705 Data exists (1 results)"
+        },
+        {
+          "purpose": "Validation query",
+          "success": true,
+          "finding": "\u2705 Data exists (1 results)"
+        },
+        {
+          "purpose": "Validation query",
+          "success": true,
+          "finding": "\u2705 Data exists (1 results)"
+        },
+        {
+          "purpose": "Validation query",
+          "success": true,
+          "finding": "\u2705 Data exists (1 results)"
+        }
+      ],
+      "warnings": [
+        "\u26a0\ufe0f Validation query: No data found",
+        "\u26a0\ufe0f Validation query: No data found",
+        "\u26a0\ufe0f Validation query: No data found"
+      ],
+      "ready_for_execution": false
+    },
+    "validation_summary": "=== APPROACH VALIDATION RESULTS ===\n\n\u2022 Validation query: \u274c No data found\n\u2022 Validation query: \u2705 Data exists (1 results)\n\u2022 Validation query: \u274c No data found\n\u2022 Validation query: \u2705 Data exists (1 results)\n\u2022 Validation query: \u274c No data found\n\u2022 Validation query: \u2705 Data exists (1 results)\n\u2022 Validation query: \u2705 Data exists (1 results)\n\u2022 Validation query: \u2705 Data exists (1 results)\n\u2022 Validation query: \u2705 Data exists (1 results)\n\n\u26a0\ufe0f WARNINGS:\n  \u26a0\ufe0f Validation query: No data found\n  \u26a0\ufe0f Validation query: No data found\n  \u26a0\ufe0f Validation query: No data found\n\n\u274c Has validation issues\n========================================"
+  },
+  {
+    "index": 3,
+    "approach_name": "Function Body Text Scan",
+    "description": "Retrieve the raw body of Manager.Run() and perform a regex or string-split to approximate the number of invocations.",
+    "target_nodes": [
+      "Function"
+    ],
+    "relationships": [],
+    "key_attributes": [
+      "body"
+    ],
+    "strategy": "MATCH (p:Project {name:'HelloWorldApp'})-[:CONTAINS]->(:File)-[:CONTAINS]->(fn:Function {name:'Run'})\nRETURN fn.body AS source, size([x IN split(fn.body, '(') WHERE x CONTAINS ')']) - 1 AS estimatedCallCount;",
+    "validation_context": {
+      "validation_performed": true,
+      "validation_results": [
+        {
+          "purpose": "Validation query",
+          "success": true,
+          "finding": "\u2705 Data exists (1 results)"
+        },
+        {
+          "purpose": "Validation query",
+          "success": true,
+          "finding": "\u2705 Data exists (1 results)"
+        },
+        {
+          "purpose": "Validation query",
+          "success": true,
+          "finding": "\u274c No data found"
+        },
+        {
+          "purpose": "Validation query",
+          "success": true,
+          "finding": "\u274c No data found"
+        }
+      ],
+      "warnings": [
+        "\u26a0\ufe0f Validation query: No data found",
+        "\u26a0\ufe0f Validation query: No data found"
+      ],
+      "ready_for_execution": false
+    },
+    "validation_summary": "=== APPROACH VALIDATION RESULTS ===\n\n\u2022 Validation query: \u2705 Data exists (1 results)\n\u2022 Validation query: \u2705 Data exists (1 results)\n\u2022 Validation query: \u274c No data found\n\u2022 Validation query: \u274c No data found\n\n\u26a0\ufe0f WARNINGS:\n  \u26a0\ufe0f Validation query: No data found\n  \u26a0\ufe0f Validation query: No data found\n\n\u274c Has validation issues\n========================================"
+  },
+  {
+    "index": 4,
+    "approach_name": "Nested Function Call Aggregation",
+    "description": "Include calls made by any local functions defined inside Manager.Run() to get a complete count of all method calls in its scope.",
+    "target_nodes": [
+      "Function"
+    ],
+    "relationships": [
+      "CONTAINS",
+      "CALLS"
+    ],
+    "key_attributes": [
+      "name"
+    ],
+    "strategy": "MATCH (p:Project {name:'HelloWorldApp'})-[:CONTAINS]->(:File)-[:CONTAINS]->(parent:Function {name:'Run'})\nOPTIONAL MATCH (parent)-[:CALLS]->(c1:Function)\nOPTIONAL MATCH (parent)-[:CONTAINS]->(local:Function)-[:CALLS]->(c2:Function)\nRETURN parent.name AS function, count(c1)+count(c2) AS totalCallsIncludingNested;",
+    "validation_context": {
+      "validation_performed": true,
+      "validation_results": [
+        {
+          "purpose": "Validation query",
+          "success": true,
+          "finding": "\u2705 Data exists (1 results)"
+        },
+        {
+          "purpose": "Validation query",
+          "success": true,
+          "finding": "\u274c No data found"
+        },
+        {
+          "purpose": "Validation query",
+          "success": true,
+          "finding": "\u2705 Data exists (1 results)"
+        },
+        {
+          "purpose": "Validation query",
+          "success": true,
+          "finding": "\u2705 Data exists (1 results)"
+        },
+        {
+          "purpose": "Validation query",
+          "success": true,
+          "finding": "\u274c No data found"
+        }
+      ],
+      "warnings": [
+        "\u26a0\ufe0f Validation query: No data found",
+        "\u26a0\ufe0f Validation query: No data found"
+      ],
+      "ready_for_execution": false
+    },
+    "validation_summary": "=== APPROACH VALIDATION RESULTS ===\n\n\u2022 Validation query: \u2705 Data exists (1 results)\n\u2022 Validation query: \u274c No data found\n\u2022 Validation query: \u2705 Data exists (1 results)\n\u2022 Validation query: \u2705 Data exists (1 results)\n\u2022 Validation query: \u274c No data found\n\n\u26a0\ufe0f WARNINGS:\n  \u26a0\ufe0f Validation query: No data found\n  \u26a0\ufe0f Validation query: No data found\n\n\u274c Has validation issues\n========================================"
+  }
+]

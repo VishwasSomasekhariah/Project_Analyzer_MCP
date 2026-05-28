@@ -1,0 +1,47 @@
+2025-07-11 20:44:38,642 - __main__ - INFO - Starting comprehensive MCP test suite...
+2025-07-11 20:44:38,645 - __main__ - INFO - Setting up MCP session...
+2025-07-11 20:44:38,657 - mcp.client.sse - INFO - Connecting to SSE endpoint: http://host.docker.internal:9000/sse
+2025-07-11 20:44:39,129 - httpx - INFO - HTTP Request: GET http://host.docker.internal:9000/sse "HTTP/1.1 200 OK"
+2025-07-11 20:44:39,132 - mcp.client.sse - INFO - Received endpoint URL: http://host.docker.internal:9000/messages/?session_id=a04a315b6ba240c6a3e45b6170d3f349
+2025-07-11 20:44:39,134 - mcp.client.sse - INFO - Starting post writer with endpoint URL: http://host.docker.internal:9000/messages/?session_id=a04a315b6ba240c6a3e45b6170d3f349
+2025-07-11 20:44:39,359 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=a04a315b6ba240c6a3e45b6170d3f349 "HTTP/1.1 202 Accepted"
+2025-07-11 20:44:39,365 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=a04a315b6ba240c6a3e45b6170d3f349 "HTTP/1.1 202 Accepted"
+2025-07-11 20:44:39,370 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=a04a315b6ba240c6a3e45b6170d3f349 "HTTP/1.1 202 Accepted"
+2025-07-11 20:44:39,374 - __main__ - INFO - ✓ Connected to MCP server
+2025-07-11 20:44:39,374 - __main__ - INFO - Available tools: ['analyze_project_only', 'get_file_monitor_config', 'set_project_path', 'process_file_changes', 'vectorize_codebase_only', 'query_vector_only', 'query_cpg_only', 'full_project_setup', 'comprehensive_code_analysis', 'configure_llm_service', 'llm_service_health_check']
+2025-07-11 20:44:39,376 - __main__ - INFO - Defined 37 test queries
+2025-07-11 20:44:39,377 - __main__ - INFO - Executing query T001: Technical/Architecture
+2025-07-11 20:44:39,382 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=a04a315b6ba240c6a3e45b6170d3f349 "HTTP/1.1 202 Accepted"
+2025-07-11 20:45:49,684 - __main__ - INFO - Executing query T002: Technical/Design Patterns
+2025-07-11 20:45:49,902 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=a04a315b6ba240c6a3e45b6170d3f349 "HTTP/1.1 202 Accepted"
+2025-07-11 20:46:30,500 - __main__ - INFO - Executing query T003: Technical/Dependencies
+2025-07-11 20:46:30,701 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=a04a315b6ba240c6a3e45b6170d3f349 "HTTP/1.1 202 Accepted"
+2025-07-11 20:47:08,777 - __main__ - INFO - Executing query T004: Technical/Class Hierarchy
+2025-07-11 20:47:08,982 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=a04a315b6ba240c6a3e45b6170d3f349 "HTTP/1.1 202 Accepted"
+2025-07-11 20:47:52,332 - __main__ - INFO - Executing query T005: Technical/Method Analysis
+2025-07-11 20:47:52,574 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=a04a315b6ba240c6a3e45b6170d3f349 "HTTP/1.1 202 Accepted"
+2025-07-11 20:48:33,067 - __main__ - INFO - Executing query F001: Functional/Business Logic
+2025-07-11 20:48:33,393 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=a04a315b6ba240c6a3e45b6170d3f349 "HTTP/1.1 202 Accepted"
+2025-07-11 20:49:17,063 - __main__ - INFO - Executing query F002: Functional/Data Flow
+2025-07-11 20:49:17,298 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=a04a315b6ba240c6a3e45b6170d3f349 "HTTP/1.1 202 Accepted"
+2025-07-11 20:50:26,432 - __main__ - INFO - Executing query F003: Functional/Worker Coordination
+2025-07-11 20:50:27,148 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=a04a315b6ba240c6a3e45b6170d3f349 "HTTP/1.1 202 Accepted"
+2025-07-11 20:51:17,707 - __main__ - INFO - Executing query F004: Functional/Factory Usage
+2025-07-11 20:51:17,937 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=a04a315b6ba240c6a3e45b6170d3f349 "HTTP/1.1 202 Accepted"
+2025-07-11 20:52:08,631 - __main__ - INFO - Executing query F005: Functional/Notification System
+2025-07-11 20:52:08,918 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=a04a315b6ba240c6a3e45b6170d3f349 "HTTP/1.1 202 Accepted"
+2025-07-11 20:53:39,685 - __main__ - INFO - Executing query NF001: Non-Functional/Error Handling
+2025-07-11 20:53:39,939 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=a04a315b6ba240c6a3e45b6170d3f349 "HTTP/1.1 202 Accepted"
+2025-07-11 20:54:29,289 - __main__ - INFO - Executing query NF002: Non-Functional/Code Quality
+2025-07-11 20:54:29,517 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=a04a315b6ba240c6a3e45b6170d3f349 "HTTP/1.1 202 Accepted"
+2025-07-11 20:55:26,092 - __main__ - INFO - Executing query NF003: Non-Functional/Performance
+2025-07-11 20:55:26,314 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=a04a315b6ba240c6a3e45b6170d3f349 "HTTP/1.1 202 Accepted"
+2025-07-11 20:56:08,689 - __main__ - INFO - Executing query NF004: Non-Functional/Security
+2025-07-11 20:56:08,943 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=a04a315b6ba240c6a3e45b6170d3f349 "HTTP/1.1 202 Accepted"
+2025-07-11 20:56:46,803 - __main__ - INFO - Executing query NF005: Non-Functional/Maintainability
+2025-07-11 20:56:46,998 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=a04a315b6ba240c6a3e45b6170d3f349 "HTTP/1.1 202 Accepted"
+2025-07-11 20:57:34,299 - __main__ - INFO - Executing query NF006: Non-Functional/Testing
+2025-07-11 20:57:34,587 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=a04a315b6ba240c6a3e45b6170d3f349 "HTTP/1.1 202 Accepted"
+2025-07-11 20:58:22,309 - __main__ - INFO - Executing query M001: Modification/Async Refactoring
+2025-07-11 20:58:22,580 - httpx - INFO - HTTP Request: POST http://host.docker.internal:9000/messages/?session_id=a04a315b6ba240c6a3e45b6170d3f349 "HTTP/1.1 202 Accepted"
+2025-07-11 20:58:33,579 - mcp.client.sse - ERROR - Error in sse_reader: peer closed connection without sending complete message body (incomplete chunked read)

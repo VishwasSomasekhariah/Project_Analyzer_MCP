@@ -1,0 +1,37 @@
+2025-07-16 19:39:54,541 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-16 19:39:54,557 - __main__ - INFO - ✅ LLM generated 2 queries for category: Technical
+2025-07-16 19:39:54,968 - project_analyzer.utils.neo4j_call_tool - INFO - Attempting to connect to Neo4j memory MCP server
+2025-07-16 19:39:54,981 - project_analyzer.utils.neo4j_call_tool - INFO - Creating session with neo4j_memory server
+2025-07-16 19:40:26,285 - project_analyzer.utils.neo4j_call_tool - ERROR - Error connecting to Neo4j memory MCP server: Request timed out after 30.0 seconds
+2025-07-16 19:40:26,285 - __main__ - ERROR - CPG query failed: 'NoneType' object has no attribute 'call_tool'
+2025-07-16 19:40:26,291 - asyncio - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7499a7bbc7d0>
+2025-07-16 19:40:57,607 - __main__ - ERROR - Comprehensive query failed: Request timed out after 30.0 seconds
+2025-07-16 19:40:57,809 - asyncio - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7499a74cf800>
+🎯 Running with scenario filter: 1
+🚀 Starting Properly Fixed Comparative Analysis Suite
+📊 Total scenarios to run: 1
+🕐 Timestamp: 20250716_193916
+🔧 Vector-RAG: Using JSON output format
+🔧 CPG: Using improved LLM generation with fallbacks
+================================================================================
+
+[1/1] Processing: T001 - Technical
+Query: Analyze the overall architecture of the HelloWorldApp. What are the main components and how do they ...
+  ✅ Vector: success (30515ms)
+  ✅ CPG: error (39092ms)
+  ✅ Comprehensive: error (31321ms)
+
+✅ Results saved to:
+  📄 CSV: /opt/genpod/test_results/properly_fixed_comparative_analysis_20250716_194057.csv
+  📊 Excel: /opt/genpod/test_results/properly_fixed_comparative_analysis_20250716_194057.xlsx
+📊 Total scenarios processed: 1
+
+📈 Success Rates:
+  Vector: 1/1 (100.0%)
+  CPG: 0/1 (0.0%)
+  Comprehensive: 0/1 (0.0%)
+
+🎉 Properly Fixed Comparative Analysis completed!
+📁 Results saved to CSV and Excel formats
