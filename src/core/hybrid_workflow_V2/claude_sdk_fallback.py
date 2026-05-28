@@ -4,7 +4,7 @@ Claude SDK Fallback Client for Hybrid Workflow.
 Provides direct integration with Claude Agent SDK for fallback when
 the primary LLM provider (OpenAI) is unavailable during query operations.
 
-Copied from codebase_rag implementation for isolated testing.
+Copied from genpod-semantic-rag implementation for isolated testing.
 This is ONLY used at query time for intent analysis, synthesis, and validation.
 """
 

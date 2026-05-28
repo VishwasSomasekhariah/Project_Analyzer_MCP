@@ -13,7 +13,7 @@ Design:
 
 This is intentionally database-agnostic at the BM25/RRF layer — any MCP tool that
 returns the same entry XML format can be used. Ported from the post-vector BM25
-approach used in codebase_rag HybridLlamaIndexQueryService.
+approach used in genpod-semantic-rag HybridLlamaIndexQueryService.
 """
 import json
 import logging
@@ -88,7 +88,7 @@ def _parse_qdrant_response(raw_list: List[str]) -> List[VectorEntry]:
 
 
 def _calculate_bm25_scores(query: str, documents: List[str]) -> List[float]:
-    """BM25 scoring — ported directly from codebase_rag HybridLlamaIndexQueryService."""
+    """BM25 scoring — ported directly from genpod-semantic-rag HybridLlamaIndexQueryService."""
     if not documents:
         return []
 

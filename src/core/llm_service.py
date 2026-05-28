@@ -530,7 +530,7 @@ class LLMService:
         Filter and prioritize vector search results using LLM.
         
         Args:
-            vector_results: Raw results from codebase-vector-rag
+            vector_results: Raw results from genpod-semantic-rag
             query: Original user query
             
         Returns:

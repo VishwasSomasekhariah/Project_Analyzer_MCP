@@ -1025,7 +1025,7 @@ The approaches_used array should contain the indices (0, 1, 2, ...) of approache
             used_indices: Indices of data points actually used in response
 
         Returns:
-            Structured citations format similar to codebase_rag for MCP/consumer compatibility.
+            Structured citations format similar to genpod-semantic-rag for MCP/consumer compatibility.
         """
         # Filter to only used data points
         cited_data = [discovered_data[i] for i in used_indices if i < len(discovered_data)]
