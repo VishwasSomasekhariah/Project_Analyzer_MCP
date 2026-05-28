@@ -242,8 +242,8 @@ def register_all_tools(mcp: FastMCP):
     @mcp.tool()
     async def analyze_project_only(
         project_path: str,
-        mappings_path: str = "/opt/genpod/project_analyzer_cli/project_analyzer/parsing_utils/mappings.yaml",
-        queries_path: str = "/opt/genpod/project_analyzer_cli/project_analyzer/final_queries",
+        mappings_path: str = "/opt/genpod/genpod-graph-indexer/project_analyzer/parsing_utils/mappings.yaml",
+        queries_path: str = "/opt/genpod/genpod-graph-indexer/project_analyzer/final_queries",
         config_path: str = "/opt/genpod/neo4j_config.json"
     ) -> dict:
         """
@@ -341,7 +341,7 @@ def register_all_tools(mcp: FastMCP):
         """
         Vectorize codebase ONLY - sets up vector-based file monitoring after completion.
 
-        This tool performs ONLY vectorization using codebase-vector-rag and then enables
+        This tool performs ONLY vectorization using genpod-semantic-rag and then enables
         file monitoring for vector-based change detection. Use this when you want
         vector-only analysis without CPG building.
 
@@ -363,7 +363,7 @@ def register_all_tools(mcp: FastMCP):
 
             # Build CLI command
             cli_command = [
-                "codebase-vector-rag", "preprocess",
+                "genpod-semantic-rag", "preprocess",
                 "--input-dir", input_dir,
                 "--collection-name", collection_name,
                 "--vector-db", vector_db
@@ -430,8 +430,8 @@ def register_all_tools(mcp: FastMCP):
     async def full_project_setup(
         project_path: str,
         collection_name: str,
-        mappings_path: str = "/opt/genpod/project_analyzer_cli/project_analyzer/parsing_utils/mappings.yaml",
-        queries_path: str = "/opt/genpod/project_analyzer_cli/project_analyzer/final_queries",
+        mappings_path: str = "/opt/genpod/genpod-graph-indexer/project_analyzer/parsing_utils/mappings.yaml",
+        queries_path: str = "/opt/genpod/genpod-graph-indexer/project_analyzer/final_queries",
         vector_config: str = None,
         neo4j_config: str = "/opt/genpod/neo4j_config.json",
         vector_db: str = "qdrant",
@@ -442,7 +442,7 @@ def register_all_tools(mcp: FastMCP):
         Complete project setup - vectorization + CPG analysis + comprehensive monitoring.
 
         This orchestrated workflow performs:
-        1. Vectorize codebase using codebase-vector-rag
+        1. Vectorize codebase using genpod-semantic-rag
         2. Analyze project for CPG using project-analyzer
         3. Enable comprehensive file monitoring (both vector + CPG)
 
@@ -471,7 +471,7 @@ def register_all_tools(mcp: FastMCP):
             workflow_results["steps"]["1_vectorization"] = {"status": "running"}
 
             vector_command = [
-                "codebase-vector-rag", "preprocess",
+                "genpod-semantic-rag", "preprocess",
                 "--input-dir", project_path,
                 "--collection-name", collection_name,
                 "--vector-db", vector_db
@@ -671,7 +671,7 @@ def register_all_tools(mcp: FastMCP):
         """
         Query vectorized codebase ONLY - pure vector search with no side effects.
 
-        This tool performs ONLY vector querying using codebase-vector-rag without
+        This tool performs ONLY vector querying using genpod-semantic-rag without
         affecting project configuration or file monitoring. Use this for pure
         vector searches without triggering any monitoring changes.
 
@@ -687,7 +687,7 @@ def register_all_tools(mcp: FastMCP):
         """
         try:
             # Build CLI command - config must come before subcommand
-            cli_command = ["codebase-vector-rag"]
+            cli_command = ["genpod-semantic-rag"]
 
             # Configuration file comes first (before subcommand)
             if config and os.path.exists(config):
@@ -795,7 +795,7 @@ def register_all_tools(mcp: FastMCP):
         """
         Query codebase using PageIndex retriever - MCTS-based file tree navigation.
 
-        Uses codebase-vector-rag with --retriever pageindex to navigate the project
+        Uses genpod-semantic-rag with --retriever pageindex to navigate the project
         file hierarchy with Monte Carlo Tree Search instead of vector similarity.
         Best for structural, direct-lookup, and quantitative queries.
 
@@ -803,11 +803,11 @@ def register_all_tools(mcp: FastMCP):
             query: Natural language query to search for (required)
             project_path: Absolute path to the project root (default: /opt/HelloWorldApp)
             mcts_iterations: Number of MCTS search iterations (default: 20)
-            config: Path to codebase-vector-rag config file (default: /opt/genpod/qdrant_config.json)
+            config: Path to genpod-semantic-rag config file (default: /opt/genpod/qdrant_config.json)
             output_format: Output format - "json" or "text" (default: "json")
         """
         try:
-            cli_command = ["codebase-vector-rag"]
+            cli_command = ["genpod-semantic-rag"]
 
             if config and os.path.exists(config):
                 cli_command.extend(["--config", config])
@@ -1876,7 +1876,7 @@ def register_all_tools(mcp: FastMCP):
     #         # ========== LEGACY CODE BELOW - TO BE REMOVED AFTER TESTING ==========
     #         # TODO: Remove this entire legacy implementation once hybrid retrieval is tested and verified
             
-    #         # Step 1: Vector search using codebase-vector-rag
+    #         # Step 1: Vector search using genpod-semantic-rag
     #         analysis_results["steps"]["1_vector_search"] = {"status": "running"}
             
     #         vector_result = await query_vector_only(
@@ -2229,8 +2229,8 @@ def register_all_tools(mcp: FastMCP):
     #     project_name: str = "HelloWorldApp", 
     #     config_path: str = "/opt/genpod/neo4j_config.json",
     #     project_path: str = "/opt/HelloWorldApp/",
-    #     mappings_path: str = "/opt/genpod/project_analyzer_cli/project_analyzer/parsing_utils/mappings.yaml",
-    #     queries_path: str = "/opt/genpod/project_analyzer_cli/project_analyzer/final_queries",
+    #     mappings_path: str = "/opt/genpod/genpod-graph-indexer/project_analyzer/parsing_utils/mappings.yaml",
+    #     queries_path: str = "/opt/genpod/genpod-graph-indexer/project_analyzer/final_queries",
     #     max_results: int = 100,
     #     enable_discovery: bool = True,
     #     enable_synthesis: bool = True,
@@ -3161,8 +3161,8 @@ def register_all_tools(mcp: FastMCP):
     #     project_name: str = "HelloWorldApp",
     #     config_path: str = "/opt/genpod/neo4j_config.json",
     #     project_path: str = "/opt/HelloWorldApp/",
-    #     mappings_path: str = "/opt/genpod/project_analyzer_cli/project_analyzer/parsing_utils/mappings.yaml",
-    #     queries_path: str = "/opt/genpod/project_analyzer_cli/project_analyzer/final_queries",
+    #     mappings_path: str = "/opt/genpod/genpod-graph-indexer/project_analyzer/parsing_utils/mappings.yaml",
+    #     queries_path: str = "/opt/genpod/genpod-graph-indexer/project_analyzer/final_queries",
     #     max_results: int = 100,
     #     max_agent_iterations: int = 10
     # ) -> dict:
@@ -3333,8 +3333,8 @@ def register_all_tools(mcp: FastMCP):
     #     collection_name: str = "helloworldapp-benchmarking",
     #     config_path: str = "/opt/genpod/neo4j_config.json",
     #     project_path: str = "/opt/HelloWorldApp/",
-    #     mappings_path: str = "/opt/genpod/project_analyzer_cli/project_analyzer/parsing_utils/mappings.yaml",
-    #     queries_path: str = "/opt/genpod/project_analyzer_cli/project_analyzer/final_queries",
+    #     mappings_path: str = "/opt/genpod/genpod-graph-indexer/project_analyzer/parsing_utils/mappings.yaml",
+    #     queries_path: str = "/opt/genpod/genpod-graph-indexer/project_analyzer/final_queries",
     #     max_results: int = 100,
     #     max_agent_iterations: int = 10
     # ) -> dict:
