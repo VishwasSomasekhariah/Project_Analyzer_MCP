@@ -122,7 +122,7 @@ class PageIndexAgent:
     async def run(self, query: str, config: Dict[str, Any], context: str = "") -> Dict[str, Any]:
         project_path = config.get("project_path", "/opt/HelloWorldApp")
         mcts_iterations = config.get("mcts_iterations", 20)
-        semantic_rag_config = config.get("codebase_rag_config")
+        semantic_rag_config = config.get("semantic_rag_config")
 
         cli = ["genpod-semantic-rag"]
         if semantic_rag_config:
