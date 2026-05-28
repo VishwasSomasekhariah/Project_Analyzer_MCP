@@ -228,8 +228,9 @@ from src.project_analyzer_tool.tools import register_all_tools, project_config_r
 from src.core.logging_config import setup_logging, cleanup_old_logs
 
 # Setup logging with rotation (10MB per file, keep last 5 files)
+# Log directory is configurable via GENPOD_LOG_DIR; defaults to /opt/genpod/logs for prod.
 logger = setup_logging(
-    log_dir=Path("/opt/genpod/logs"),
+    log_dir=Path(os.environ.get("GENPOD_LOG_DIR", "/opt/genpod/logs")),
     max_bytes=10 * 1024 * 1024,  # 10MB per file
     backup_count=5,  # Keep last 5 files
     console_level=logging.INFO,
