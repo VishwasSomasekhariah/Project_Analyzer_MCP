@@ -2,7 +2,7 @@
 Resilient LLM Service with Claude SDK fallback.
 
 Wraps the existing LLMService and adds automatic fallback to Claude SDK
-when OpenAI/Anthropic is unavailable. Adapted from codebase_rag's pattern.
+when OpenAI/Anthropic is unavailable. Adapted from genpod-semantic-rag's pattern.
 
 For easy rollback: just switch back to using LLMService directly.
 """
