@@ -17,7 +17,7 @@ charset-normalizer==3.4.2
 chromadb==1.0.13
 claude-agent-sdk==0.1.25
 click==8.2.1
--e git+https://github.com/VishwasSomasekhariah/codebase_rag.git@95376edc8498b57297b6b254070fb23fcf17efad#egg=codebase_vector_rag
+-e git+https://github.com/VishwasSomasekhariah/genpod-semantic-rag.git@main#egg=genpod_semantic_rag
 colorama==0.4.6
 coloredlogs==15.0.1
 contourpy==1.3.2
