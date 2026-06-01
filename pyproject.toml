@@ -23,7 +23,7 @@ classifiers = [
 dependencies = [
     # MCP framework
     "mcp>=1.9.0",
-    "fastmcp>=2.3.4",
+    "fastmcp>=2.3.4,<4.0.0",
     "mcp-use>=1.2.12",
 
     # LLM clients
@@ -48,8 +48,9 @@ dependencies = [
     "openpyxl>=3.1.5",
     "PyYAML>=6.0.2",
 
-    # File watching
+    # File watching + checksum dedup
     "watchdog>=6.0.0",
+    "redis>=5.0.0",
 ]
 
 [project.optional-dependencies]
