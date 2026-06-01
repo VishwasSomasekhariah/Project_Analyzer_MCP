@@ -1,0 +1,81 @@
+# genpod.conf — user configuration for install.sh
+#
+# Copy this file to genpod.conf and fill in your values before running install.sh:
+#   cp genpod.conf.example genpod.conf
+#   # edit genpod.conf
+#   ./install.sh
+#
+# install.sh reads genpod.conf automatically. Any value left blank or commented
+# out falls back to the documented default. genpod.conf is gitignored so your
+# secrets are never committed.
+#
+# Only set what you want to change — you don't need to uncomment everything.
+
+# ── API Keys ──────────────────────────────────────────────────────────────────
+# ANTHROPIC_API_KEY is only needed if you are NOT using Claude Code CLI.
+# If you are logged into Claude Code (`claude` is in your PATH), the session
+# auth is used automatically and this can be left blank.
+ANTHROPIC_API_KEY=
+
+# OPENAI_API_KEY is optional — only needed if mcp-server-qdrant's AI response
+# features are used (not required for standard vector search).
+OPENAI_API_KEY=
+
+# ── Neo4j Database ────────────────────────────────────────────────────────────
+# Username for the Neo4j database.
+# Default: neo4j
+NEO4J_USER=neo4j
+
+# Password for the Neo4j database.
+# Leave blank to auto-generate a secure random password (saved to GENPOD_HOME/.env).
+# If you set this, it must be at least 8 characters (Neo4j requirement).
+NEO4J_PASSWORD=
+
+# Host ports Neo4j listens on.
+# Change these if 7474 or 7687 are already in use on your machine.
+# Default: 7474 (HTTP browser), 7687 (Bolt protocol)
+NEO4J_HTTP_PORT=7474
+NEO4J_BOLT_PORT=7687
+
+# ── Qdrant Vector Database ────────────────────────────────────────────────────
+# Host port Qdrant REST API listens on (mapped from container port 6333).
+# Default: 7000
+QDRANT_PORT=7000
+
+# ── Redis ─────────────────────────────────────────────────────────────────────
+# Host port Redis listens on.
+# Used by the file watcher for checksum-based dedup (watch.sh).
+# Default: 6379
+REDIS_PORT=6379
+
+# ── MCP Server Ports ──────────────────────────────────────────────────────────
+# Port neo4j-mcp-server listens on (SSE endpoint).
+# Default: 8100
+NEO4J_MCP_PORT=8100
+
+# Port mcp-server-qdrant listens on (SSE endpoint).
+# Note: mcp-server-qdrant does not support changing this port — 8000 is fixed.
+QDRANT_MCP_PORT=8000
+
+# Port this MCP server (project-analyzer-mcp) listens on.
+# Default: 9000
+PROJECT_ANALYZER_PORT=9000
+
+# ── Embedding Model ───────────────────────────────────────────────────────────
+# Embedding model used by mcp-server-qdrant for vector indexing and search.
+# Must be a model name supported by the sentence-transformers library.
+# Default: BAAI/bge-large-en-v1.5
+EMBEDDING_MODEL=BAAI/bge-large-en-v1.5
+
+# ── Install Paths ─────────────────────────────────────────────────────────────
+# Where config files and .env are stored.
+# Default (user install):  ~/.config/genpod
+# Default (root install):  /etc/genpod
+# Uncomment and set to override:
+# GENPOD_HOME=~/.config/genpod
+
+# Where database volumes and runtime data are stored.
+# Default (user install):  ~/.local/share/genpod
+# Default (root install):  /var/lib/genpod
+# Uncomment and set to override:
+# GENPOD_DATA=~/.local/share/genpod

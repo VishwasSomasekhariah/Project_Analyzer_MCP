@@ -42,6 +42,7 @@ mcp_debug_dumps/
 # Environment / secrets
 .env
 *.env
+genpod.conf
 
 # IDE and tools
 .vscode/
