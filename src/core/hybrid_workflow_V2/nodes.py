@@ -21,6 +21,7 @@ from .models import (
     SynthesisRawResponse, CriticValidationRawResponse, SynthesisImprovementRawResponse,
     EvidenceClaim, RetrieverSummary, ClaimExtractionRawResponse, ReconciliationRawResponse,
 )
+from src.core.paths import NEO4J_CONFIG, SCHEMA_PATH
 
 logger = logging.getLogger(__name__)
 
@@ -969,8 +970,8 @@ Unsupported claims (claims made but not backed by evidence):
             cpg_config = config.get("cpg_config", {})
             max_cot_iterations = cpg_config.get("max_agent_iterations", 15)
             max_verifier_iterations = cpg_config.get("max_verifier_iterations", 10)
-            neo4j_config = cpg_config.get("config_path", "/opt/genpod/neo4j_config.json")
-            schema_path = cpg_config.get("schema_path", "/opt/genpod/src/schemas/project_knowledgebase_graph_schema.yaml")
+            neo4j_config = cpg_config.get("config_path", NEO4J_CONFIG)
+            schema_path = cpg_config.get("schema_path", SCHEMA_PATH)
             llm_model = cpg_config.get("llm_model", "gpt-4o")
             parallel_agents = cpg_config.get("parallel_agents", True)
             enable_verification = cpg_config.get("enable_verification", True)

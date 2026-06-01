@@ -30,6 +30,7 @@ from .context_manager import ContextManager
 from .prompts import get_intent_analysis_prompt
 from .adaptive_query_agent import AdaptiveQueryAgent
 from ..llm_service import LLMResponse
+from src.core.paths import NEO4J_CONFIG, SCHEMA_PATH, STATE_PKL
 
 logger = logging.getLogger(__name__)
 
@@ -93,7 +94,7 @@ class WorkflowNodes:
             cypher_server_service = None
             try:
                 # Get config file path (use provided config or default)
-                config_file = state.get("neo4j_config", "/opt/genpod/neo4j_config.json")
+                config_file = state.get("neo4j_config", NEO4J_CONFIG)
 
                 # Check if batch mode is enabled
                 enable_batch_mode = state.get('enable_batch_mode', True)
@@ -158,7 +159,7 @@ class WorkflowNodes:
 
             # Load CPG schema (YAML for backward compatibility)
             import yaml
-            schema_path = "/opt/genpod/src/schemas/project_knowledgebase_graph_schema.yaml"
+            schema_path = SCHEMA_PATH
 
             try:
                 with open(schema_path, 'r') as f:
@@ -1772,7 +1773,7 @@ Respond in JSON:
             state_copy['_debug_timestamp'] = datetime.now().isoformat()
 
             # Save to pickle file
-            pickle_path = '/opt/genpod/STATE.pkl'
+            pickle_path = STATE_PKL
             with open(pickle_path, 'wb') as f:
                 pickle.dump(state_copy, f)
 

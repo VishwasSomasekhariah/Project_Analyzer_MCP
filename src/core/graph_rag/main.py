@@ -15,6 +15,7 @@ import asyncio
 import json
 import sys
 
+from src.core.paths import SCHEMA_PATH
 from src.core.graph_rag import (
     MultiAgentCoT,
     SystemConfig,
@@ -36,7 +37,7 @@ async def main(query: str = None):
     # Default configuration - can be customized
     config = SystemConfig(
         mcp_config_path="neo4j_config.json",
-        yaml_schema_path="/opt/genpod/src/schemas/project_knowledgebase_graph_schema.yaml",
+        yaml_schema_path=SCHEMA_PATH,
         llm_model="gpt-4o",
         max_cot_iterations=10,
         max_verifier_iterations=5,

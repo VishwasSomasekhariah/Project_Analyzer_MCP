@@ -22,6 +22,7 @@ from src.core.graph_rag.tools.manager import ToolManager
 from src.core.hybrid_fast_workflow.models import Citation, make_citation_id
 from src.core.hybrid_fast_workflow.utils import parse_llm_json
 from src.core.retrieval.hybrid_vector_retriever import HybridVectorRetriever
+from src.core.paths import NEO4J_CONFIG, QDRANT_CONFIG, SCHEMA_PATH
 
 logger = logging.getLogger(__name__)
 
@@ -175,7 +176,7 @@ class VectorAgent:
     """
 
     async def run(self, query: str, config: Dict[str, Any], context: str = "") -> Dict[str, Any]:
-        qdrant_config_path = config.get("qdrant_config_path", "/opt/genpod/qdrant_config.json")
+        qdrant_config_path = config.get("qdrant_config_path", QDRANT_CONFIG)
         collection_name = config.get("collection_name", "HelloWorldApp_pageindex_v3")
         top_k = config.get("max_results", 5)
 
@@ -300,8 +301,8 @@ class GraphAgent:
         self._max_iterations = max_iterations
 
     async def run(self, query: str, config: Dict[str, Any], context: str = "") -> Dict[str, Any]:
-        neo4j_config_path = config.get("neo4j_config_path", "/opt/genpod/neo4j_config.json")
-        schema_path = config.get("schema_path", "/opt/genpod/src/schemas/project_knowledgebase_graph_schema.yaml")
+        neo4j_config_path = config.get("neo4j_config_path", NEO4J_CONFIG)
+        schema_path = config.get("schema_path", SCHEMA_PATH)
 
         with open(neo4j_config_path) as f:
             neo4j_cfg = json.load(f)

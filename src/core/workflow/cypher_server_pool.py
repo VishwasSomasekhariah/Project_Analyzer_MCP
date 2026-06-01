@@ -15,6 +15,8 @@ import json
 import logging
 from typing import List, Optional, Dict, Any
 
+from src.core.paths import NEO4J_CONFIG
+
 logger = logging.getLogger(__name__)
 
 
@@ -365,7 +367,7 @@ class CypherServerPoolContext:
 
 
 # Factory function for easy usage
-async def create_cypher_server_pool(pool_size: int = 4, neo4j_config: str = "/opt/genpod/neo4j_config.json") -> CypherServerPool:
+async def create_cypher_server_pool(pool_size: int = 4, neo4j_config: str = NEO4J_CONFIG) -> CypherServerPool:
     """
     Create and initialize a cypher server pool.
 
@@ -412,7 +414,7 @@ async def example_usage():
 async def example_with_context_manager():
     """Example using context manager for automatic cleanup."""
 
-    async with CypherServerPoolContext(pool_size=4, neo4j_config="/opt/genpod/neo4j_config.json") as pool:
+    async with CypherServerPoolContext(pool_size=4, neo4j_config=NEO4J_CONFIG) as pool:
         server = await pool.acquire()
         result = await server.execute_query("MATCH (n) RETURN count(n)")
         await pool.release(server)

@@ -24,6 +24,7 @@ from .parallel_models import AgentState, DiagnosticQueryGeneration, EmptyResultC
 from .parallel_research_engine import ResearchEngine
 from .parallel_context_manager import ContextManager
 from ..llm_service import LLMResponse
+from src.core.paths import NEO4J_CONFIG, SCHEMA_PATH, STATE_PKL
 
 logger = logging.getLogger(__name__)
 
@@ -64,8 +65,8 @@ class WorkflowNodes:
             
             # Load CPG schema
             import yaml
-            schema_path = "/opt/genpod/src/schemas/project_knowledgebase_graph_schema.yaml"
-            
+            schema_path = SCHEMA_PATH
+
             try:
                 with open(schema_path, 'r') as f:
                     schema = yaml.safe_load(f)
@@ -2277,7 +2278,7 @@ Provide the corrected JSON response:"""
             state_copy['_debug_timestamp'] = datetime.now().isoformat()
             
             # Save to pickle file
-            pickle_path = '/opt/genpod/STATE.pkl'
+            pickle_path = STATE_PKL
             with open(pickle_path, 'wb') as f:
                 pickle.dump(state_copy, f)
             
@@ -2665,7 +2666,7 @@ Return ONLY a valid JSON object with this exact structure:
                 # Use project-analyzer CLI (same pattern as other tools)
                 cli_command = [
                     "project-analyzer",
-                    "--config-file", state.get("neo4j_config", "/opt/genpod/neo4j_config.json"),
+                    "--config-file", state.get("neo4j_config", NEO4J_CONFIG),
                     "query",
                     "--cypher", fixed_query,
                     "--limit", "100",  # Default limit
@@ -3807,7 +3808,7 @@ Analyze the results now:"""
         
         try:
             # Get Neo4j config from state or use fallback
-            neo4j_config = "/opt/genpod/neo4j_config.json"  # Default fallback
+            neo4j_config = NEO4J_CONFIG  # Default fallback
             if state:
                 neo4j_config = state.get("neo4j_config", neo4j_config)
                 # Handle metadata nested config

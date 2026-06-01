@@ -13,12 +13,13 @@ from typing import Dict, Any, List, Tuple, Type, TypeVar, Optional
 from pydantic import ValidationError, BaseModel
 
 from .models import (
-    HybridState, IntentAnalysis, QueryIntent, RetrieverResult, 
-    RetrievalStatus, SynthesisResult, SynthesisStrategy, 
+    HybridState, IntentAnalysis, QueryIntent, RetrieverResult,
+    RetrievalStatus, SynthesisResult, SynthesisStrategy,
     CriticValidation, CrossValidationResult, BatchProcessingResult,
     ChainOfThoughtResult, ChainOfThoughtStep, IntentAnalysisRawResponse,
     SynthesisRawResponse, CriticValidationRawResponse, SynthesisImprovementRawResponse
 )
+from src.core.paths import NEO4J_CONFIG, QDRANT_CONFIG, SCHEMA_PATH
 
 logger = logging.getLogger(__name__)
 
@@ -410,7 +411,7 @@ Return ONLY a valid JSON object with this exact structure:
             config = state.execution_metadata.get("config", {})
             pageindex_config = config.get("pageindex_config", {})
 
-            config_path = pageindex_config.get("config_path", "/opt/genpod/qdrant_config.json")
+            config_path = pageindex_config.get("config_path", QDRANT_CONFIG)
             project_path = pageindex_config.get("project_path", "/opt/HelloWorldApp")
             mcts_iterations = pageindex_config.get("mcts_iterations", 20)
 
@@ -637,8 +638,8 @@ Return ONLY a valid JSON object with this exact structure:
             cpg_config = config.get("cpg_config", {})
             max_cot_iterations = cpg_config.get("max_agent_iterations", 15)
             max_verifier_iterations = cpg_config.get("max_verifier_iterations", 10)
-            neo4j_config = cpg_config.get("config_path", "/opt/genpod/neo4j_config.json")
-            schema_path = cpg_config.get("schema_path", "/opt/genpod/src/schemas/project_knowledgebase_graph_schema.yaml")
+            neo4j_config = cpg_config.get("config_path", NEO4J_CONFIG)
+            schema_path = cpg_config.get("schema_path", SCHEMA_PATH)
             llm_model = cpg_config.get("llm_model", "gpt-4o")
             parallel_agents = cpg_config.get("parallel_agents", True)
             enable_verification = cpg_config.get("enable_verification", True)

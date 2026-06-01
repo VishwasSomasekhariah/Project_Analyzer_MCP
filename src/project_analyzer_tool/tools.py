@@ -210,6 +210,10 @@ import json
 from typing import Dict, Any, List, Optional
 from mcp.server.fastmcp import FastMCP
 from mcp.server.fastmcp.resources import FunctionResource
+from src.core.paths import (
+    NEO4J_CONFIG, QDRANT_CONFIG, SCHEMA_PATH,
+    GRAPH_INDEXER_MAPPINGS, GRAPH_INDEXER_QUERIES, CLAUDE_SDK_MCP_CONFIG,
+)
 
 # Create a dictionary to store project configuration
 _project_config = {
@@ -242,9 +246,9 @@ def register_all_tools(mcp: FastMCP):
     @mcp.tool()
     async def analyze_project_only(
         project_path: str,
-        mappings_path: str = "/opt/genpod/genpod-graph-indexer/project_analyzer/parsing_utils/mappings.yaml",
-        queries_path: str = "/opt/genpod/genpod-graph-indexer/project_analyzer/final_queries",
-        config_path: str = "/opt/genpod/neo4j_config.json"
+        mappings_path: str = GRAPH_INDEXER_MAPPINGS,
+        queries_path: str = GRAPH_INDEXER_QUERIES,
+        config_path: str = NEO4J_CONFIG
     ) -> dict:
         """
         Analyze project for CPG ONLY - sets up CPG-based file monitoring after completion.
@@ -430,10 +434,10 @@ def register_all_tools(mcp: FastMCP):
     async def full_project_setup(
         project_path: str,
         collection_name: str,
-        mappings_path: str = "/opt/genpod/genpod-graph-indexer/project_analyzer/parsing_utils/mappings.yaml",
-        queries_path: str = "/opt/genpod/genpod-graph-indexer/project_analyzer/final_queries",
+        mappings_path: str = GRAPH_INDEXER_MAPPINGS,
+        queries_path: str = GRAPH_INDEXER_QUERIES,
         vector_config: str = None,
-        neo4j_config: str = "/opt/genpod/neo4j_config.json",
+        neo4j_config: str = NEO4J_CONFIG,
         vector_db: str = "qdrant",
         enable_lsp: bool = True,
         enable_ai: bool = True
@@ -789,7 +793,7 @@ def register_all_tools(mcp: FastMCP):
         query: str,
         project_path: str = "/opt/HelloWorldApp",
         mcts_iterations: int = 20,
-        config: str = "/opt/genpod/qdrant_config.json",
+        config: str = QDRANT_CONFIG,
         output_format: str = "json"
     ) -> dict:
         """
@@ -899,8 +903,8 @@ def register_all_tools(mcp: FastMCP):
     async def query_cpg_rag(
         user_query: str,
         project_name: str = "HelloWorldApp",
-        config_path: str = "/opt/genpod/neo4j_config.json",
-        schema_path: str = "/opt/genpod/src/schemas/project_knowledgebase_graph_schema.yaml",
+        config_path: str = NEO4J_CONFIG,
+        schema_path: str = SCHEMA_PATH,
         llm_model: str = "gpt-4o",
         max_cot_iterations: int = 15,
         max_verifier_iterations: int = 10,
@@ -984,7 +988,7 @@ def register_all_tools(mcp: FastMCP):
                 use_4_agent_team=use_4_agent_team,
                 four_agent_max_iterations=four_agent_max_iterations,
                 # Fallback configuration - only neo4j MCP server for CPG queries
-                fallback_mcp_config_path="/opt/genpod/fallback_agent/neo4j_only_mcp_config.json",
+                fallback_mcp_config_path=CLAUDE_SDK_MCP_CONFIG,
             )
 
             # Initialize and run the multi-agent system
@@ -1122,8 +1126,8 @@ def register_all_tools(mcp: FastMCP):
         project_path: str = "/opt/HelloWorldApp",
         mcts_iterations: int = 20,
         collection_name: str = "helloworldapp-benchmarking",
-        config_path: str = "/opt/genpod/neo4j_config.json",
-        schema_path: str = "/opt/genpod/src/schemas/project_knowledgebase_graph_schema.yaml",
+        config_path: str = NEO4J_CONFIG,
+        schema_path: str = SCHEMA_PATH,
         vector_config_path: str = None,
         vector_db: str = "qdrant",
         enable_reasoning: bool = True,
@@ -1386,9 +1390,9 @@ def register_all_tools(mcp: FastMCP):
         project_path: str = "/opt/HelloWorldApp",
         mcts_iterations: int = 20,
         collection_name: str = "HelloWorldApp_pageindex_v3",
-        neo4j_config_path: str = "/opt/genpod/neo4j_config.json",
-        qdrant_config_path: str = "/opt/genpod/qdrant_config.json",
-        schema_path: str = "/opt/genpod/src/schemas/project_knowledgebase_graph_schema.yaml",
+        neo4j_config_path: str = NEO4J_CONFIG,
+        qdrant_config_path: str = QDRANT_CONFIG,
+        schema_path: str = SCHEMA_PATH,
         max_hops: int = 5,
         max_results: int = 5,
     ) -> dict:

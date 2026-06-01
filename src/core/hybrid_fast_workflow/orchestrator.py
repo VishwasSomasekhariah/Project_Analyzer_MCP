@@ -22,6 +22,7 @@ import logging
 from typing import Any, Dict
 
 from langgraph.graph import StateGraph, END
+from src.core.paths import NEO4J_CONFIG, SCHEMA_PATH
 
 from src.core.graph_rag.adapters.mcp_adapter import MCPCypherAdapter
 from src.core.graph_rag.adapters.session_pool import MCPSessionPool
@@ -75,8 +76,8 @@ async def _ensure_schema_client(config: Dict) -> None:
 
     try:
         import json as _json
-        neo4j_config_path = config.get("neo4j_config_path", "/opt/genpod/neo4j_config.json")
-        schema_path = config.get("schema_path", "/opt/genpod/src/schemas/project_knowledgebase_graph_schema.yaml")
+        neo4j_config_path = config.get("neo4j_config_path", NEO4J_CONFIG)
+        schema_path = config.get("schema_path", SCHEMA_PATH)
 
         with open(neo4j_config_path) as f:
             neo4j_cfg = _json.load(f)

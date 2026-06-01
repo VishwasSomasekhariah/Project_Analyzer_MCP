@@ -12,6 +12,8 @@ import time
 from typing import Dict, Any, List, Optional, Tuple
 from dataclasses import dataclass
 
+from src.core.paths import NEO4J_CONFIG
+
 logger = logging.getLogger(__name__)
 
 @dataclass 
@@ -354,7 +356,7 @@ class HybridRetrievalService:
             
             # Step 3: Execute planned subgraph queries
             executor = GraphQueryExecutor()
-            config_path = graph_params.get("config_path", "/opt/genpod/neo4j_config.json")
+            config_path = graph_params.get("config_path", NEO4J_CONFIG)
             logger.info(f"🔍 HYBRID DEBUG - About to execute subgraph retrieval with config: {config_path}")
             raw_results = await executor.execute_subgraph_retrieval(plan, config_path)
             logger.info(f"🔍 HYBRID DEBUG - Raw results received: {raw_results}")

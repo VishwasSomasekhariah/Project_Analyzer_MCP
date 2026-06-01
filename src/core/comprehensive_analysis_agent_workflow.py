@@ -20,6 +20,8 @@ from typing import Dict, List, Any, Optional, TypedDict, Annotated
 from dataclasses import dataclass, asdict
 import operator
 
+from src.core.paths import NEO4J_CONFIG, SCHEMA_PATH, GRAPH_INDEXER_MAPPINGS, GRAPH_INDEXER_QUERIES
+
 # LangGraph imports
 try:
     from langgraph.graph import StateGraph, END
@@ -319,7 +321,7 @@ class ComprehensiveAnalysisAgentWorkflow:
             # Load schema
             try:
                 import yaml
-                schema_path = "/opt/genpod/src/schemas/project_knowledgebase_graph_schema.yaml"
+                schema_path = SCHEMA_PATH
                 with open(schema_path, 'r') as f:
                     schema = yaml.safe_load(f)
             except Exception as e:
@@ -2771,10 +2773,10 @@ async def create_adaptive_cpg_workflow() -> ComprehensiveAnalysisAgentWorkflow:
 
 # Main execution function for the MCP tool
 async def execute_adaptive_cpg_workflow(user_query: str, project_name: str = "HelloWorldApp",
-                                       neo4j_config: str = "/opt/genpod/neo4j_config.json",
+                                       neo4j_config: str = NEO4J_CONFIG,
                                        project_path: str = "/opt/HelloWorldApp/",
-                                       mappings_path: str = "/opt/genpod/genpod-graph-indexer/project_analyzer/parsing_utils/mappings.yaml",
-                                       queries_path: str = "/opt/genpod/genpod-graph-indexer/project_analyzer/final_queries",
+                                       mappings_path: str = GRAPH_INDEXER_MAPPINGS,
+                                       queries_path: str = GRAPH_INDEXER_QUERIES,
                                        max_iterations: int = 10) -> Dict[str, Any]:
     """
     Main function to execute the adaptive CPG workflow
@@ -2821,7 +2823,7 @@ async def main():
     
     print(f"🔍 Query: {test_query}")
     print(f"🎯 Project: HelloWorldApp")
-    print(f"⚙️  Config: /opt/genpod/neo4j_config.json")
+    print(f"⚙️  Config: {NEO4J_CONFIG}")
     print("=" * 60)
     
     try:
@@ -2829,10 +2831,10 @@ async def main():
         result = await execute_adaptive_cpg_workflow(
             user_query=test_query,
             project_name="HelloWorldApp",
-            neo4j_config="/opt/genpod/neo4j_config.json",
+            neo4j_config=NEO4J_CONFIG,
             project_path="/opt/HelloWorldApp/",
-            mappings_path="/opt/genpod/genpod-graph-indexer/project_analyzer/parsing_utils/mappings.yaml",
-            queries_path="/opt/genpod/genpod-graph-indexer/project_analyzer/final_queries",
+            mappings_path=GRAPH_INDEXER_MAPPINGS,
+            queries_path=GRAPH_INDEXER_QUERIES,
             max_iterations=10
         )
         

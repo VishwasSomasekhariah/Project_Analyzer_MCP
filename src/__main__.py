@@ -1,9 +1,11 @@
 import os
 import cProfile
 import pstats
+from pathlib import Path
 from . import main as package_main
+from src.core.paths import LOG_DIR
 
-with open("/opt/genpod/server_debug.log", "w") as f:
+with open(Path(LOG_DIR) / "server_debug.log", "w") as f:
     f.write("YES: __main__.py ran!\n")
 
 profiler = cProfile.Profile()

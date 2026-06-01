@@ -8,8 +8,16 @@ import os
 from dataclasses import dataclass, field
 from pathlib import Path
 
-_GENPOD = Path("/opt/genpod")
-_DATA = _GENPOD / "dataset_pipeline" / "data"
+from src.core.paths import (
+    NEO4J_CONFIG,
+    QDRANT_CONFIG,
+    FILE_WATCHER_CONFIG,
+    GRAPH_INDEXER_MAPPINGS,
+    GRAPH_INDEXER_QUERIES,
+    GENPOD_DATA,
+)
+
+_PIPELINE_DATA = GENPOD_DATA / "dataset_pipeline" / "data"
 
 
 @dataclass
@@ -20,12 +28,12 @@ class PipelineConfig:
     project_name: str = "HelloWorldApp"
 
     # --- MCP / server config ---
-    mcp_config_file: str = str(_GENPOD / "file_watcher_mcp_config.json")
-    neo4j_config: str = str(_GENPOD / "neo4j_config.json")
-    qdrant_config: str = str(_GENPOD / "qdrant_config.json")
+    mcp_config_file: str = FILE_WATCHER_CONFIG
+    neo4j_config: str = NEO4J_CONFIG
+    qdrant_config: str = QDRANT_CONFIG
     collection_name: str = "HelloWorldApp_pageindex_v3"
-    mappings_path: str = str(_GENPOD / "genpod-graph-indexer/project_analyzer/parsing_utils/mappings.yaml")
-    queries_path: str = str(_GENPOD / "genpod-graph-indexer/project_analyzer/final_queries")
+    mappings_path: str = GRAPH_INDEXER_MAPPINGS
+    queries_path: str = GRAPH_INDEXER_QUERIES
 
     # --- Stage 1 ---
     gt_variants_per_query: int = 7
@@ -53,12 +61,12 @@ class PipelineConfig:
     # --- Stage 6 ---
     val_split: float = 0.1
     max_examples: int = 2500
-    output_dir: str = str(_GENPOD / "dataset_pipeline" / "output")
+    output_dir: str = str(GENPOD_DATA / "dataset_pipeline" / "output")
 
     # --- Working directories ---
-    data_dir: str = str(_DATA)
-    checkpoint_dir: str = str(_DATA / "checkpoints")
-    traces_dir: str = str(_DATA / "traces")
+    data_dir: str = str(_PIPELINE_DATA)
+    checkpoint_dir: str = str(_PIPELINE_DATA / "checkpoints")
+    traces_dir: str = str(_PIPELINE_DATA / "traces")
 
     def ensure_dirs(self) -> None:
         for d in [self.data_dir, self.checkpoint_dir, self.traces_dir, self.output_dir]:

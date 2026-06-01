@@ -10,6 +10,8 @@ from typing import Dict, List, Any, Optional, Tuple
 from dataclasses import dataclass
 import asyncio
 
+from src.core.paths import NEO4J_CONFIG, SCHEMA_PATH
+
 logger = logging.getLogger(__name__)
 
 @dataclass
@@ -38,7 +40,7 @@ class AdaptiveCPGDiscovery:
     """
     
     def __init__(self, schema_path: str = None, graph_executor=None):
-        self.schema_path = schema_path or "/opt/genpod/src/schemas/project_knowledgebase_graph_schema.yaml"
+        self.schema_path = schema_path or SCHEMA_PATH
         self.schema = self._load_schema()
         self.graph_executor = graph_executor
         self.project_capabilities_cache = {}
@@ -130,7 +132,7 @@ class AdaptiveCPGDiscovery:
                 "cypher": discovery_query,
                 "type": "node_discovery",
                 "purpose": "Discover actual node types and properties"
-            }, "/opt/genpod/neo4j_config.json", "node_discovery")
+            }, NEO4J_CONFIG, "node_discovery")
             
             if result["status"] == "success":
                 node_types = []
@@ -182,7 +184,7 @@ class AdaptiveCPGDiscovery:
                 "cypher": topology_query,
                 "type": "topology_discovery", 
                 "purpose": "Discover relationship topology"
-            }, "/opt/genpod/neo4j_config.json", "topology_discovery")
+            }, NEO4J_CONFIG, "topology_discovery")
             
             if result["status"] == "success":
                 relationships = result["results"]
@@ -235,7 +237,7 @@ class AdaptiveCPGDiscovery:
                 "cypher": pattern_query,
                 "type": "pattern_discovery",
                 "purpose": "Discover naming patterns and faults"
-            }, "/opt/genpod/neo4j_config.json", "pattern_discovery")
+            }, NEO4J_CONFIG, "pattern_discovery")
             
             if result["status"] == "success":
                 patterns = {}

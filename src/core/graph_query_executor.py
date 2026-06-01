@@ -10,11 +10,13 @@ import asyncio
 from typing import Dict, List, Any, Optional, Tuple
 import time
 
+from src.core.paths import NEO4J_CONFIG, SCHEMA_PATH
+
 
 class GraphQueryExecutor:
     """Execute planned subgraph queries with rich property retrieval"""
     
-    def __init__(self, config_path: str = "/opt/genpod/neo4j_config.json"):
+    def __init__(self, config_path: str = NEO4J_CONFIG):
         self.config_path = config_path
         self.default_timeout = 30000  # 30 seconds
         self.max_retries = 2
@@ -423,11 +425,11 @@ CORRECTED QUERY:"""
         """Get comprehensive graph schema context from the actual schema file"""
         try:
             import yaml
-            schema_path = "/opt/genpod/src/schemas/project_knowledgebase_graph_schema.yaml"
-            
+            schema_path = SCHEMA_PATH
+
             with open(schema_path, 'r') as f:
                 schema = yaml.safe_load(f)
-            
+
             context = "COMPREHENSIVE GRAPH SCHEMA:\n\n"
             
             # Add detailed node definitions with descriptions

@@ -8,6 +8,7 @@ from pydantic import BaseModel, ConfigDict, Field
 from openai import OpenAI
 
 from .exceptions import ConfigurationError
+from src.core.paths import CLAUDE_SDK_MCP_CONFIG
 
 
 class MCPServerConfig(BaseModel):
@@ -173,15 +174,10 @@ class LLMConfig(BaseModel):
 
                 # Then check common locations
                 if not mcp_config_path:
-                    common_paths = [
-                        Path("fallback_agent/claude_code_mcp_config.json"),
-                        Path("/opt/genpod/fallback_agent/claude_code_mcp_config.json"),
-                        Path.home() / ".claude" / "mcp_config.json",
-                    ]
-                    for path in common_paths:
-                        if path.exists():
-                            mcp_config_path = str(path)
-                            break
+                    # Use the config written by install.sh; override with
+                    # CLAUDE_MCP_CONFIG env var if a different path is needed.
+                    if Path(CLAUDE_SDK_MCP_CONFIG).exists():
+                        mcp_config_path = CLAUDE_SDK_MCP_CONFIG
 
             return ResilientLLMClient(
                 primary_config=client_kwargs,

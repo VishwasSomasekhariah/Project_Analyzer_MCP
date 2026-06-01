@@ -9,6 +9,8 @@ import yaml
 from typing import Dict, List, Any, Optional
 import re
 
+from src.core.paths import NEO4J_CONFIG
+
 
 class EntityExtractionService:
     """Extract entities from user queries using schema-aware analysis"""
@@ -369,7 +371,7 @@ Focus on entities that are relevant for graph database queries and code analysis
                 "purpose": "Get existing project names for entity classification",
                 "priority": 1.0
             }
-            config_path = "/opt/genpod/neo4j_config.json"  # Default config path
+            config_path = NEO4J_CONFIG  # Default config path
             result = await self.graph_executor._execute_single_query(query_info, config_path, "project_lookup")
             
             project_names = []

@@ -10,6 +10,7 @@ import logging
 from typing import Dict, List, Any, Optional, Tuple
 from dataclasses import dataclass
 from src.core.adaptive_cpg_discovery import AdaptiveQuery, ProjectCapabilities
+from src.core.paths import NEO4J_CONFIG
 
 logger = logging.getLogger(__name__)
 
@@ -302,7 +303,7 @@ class EnhancedQueryExecutor:
     Enhanced query executor with adaptive capabilities and critic validation
     """
     
-    def __init__(self, config_path: str = "/opt/genpod/neo4j_config.json"):
+    def __init__(self, config_path: str = NEO4J_CONFIG):
         self.config_path = config_path
         self.critic = QueryCritic()
         self.execution_stats = {

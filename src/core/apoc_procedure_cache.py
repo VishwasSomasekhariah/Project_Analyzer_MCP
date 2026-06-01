@@ -13,6 +13,8 @@ from pathlib import Path
 from typing import Dict, List, Optional, Set
 from datetime import datetime
 
+from src.core.paths import APOC_CACHE
+
 
 class APOCProcedureCache:
     """
@@ -27,7 +29,7 @@ class APOCProcedureCache:
         Args:
             cache_file: Optional path to save/load cache from disk
         """
-        self.cache_file = cache_file or Path("/opt/genpod/.cache/apoc_procedures.json")
+        self.cache_file = cache_file or Path(APOC_CACHE)
         self.procedures: Dict[str, Dict] = {}
         self.categories: Dict[str, List[str]] = {}
         self.initialized = False
