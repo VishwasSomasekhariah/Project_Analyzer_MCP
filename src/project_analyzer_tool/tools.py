@@ -244,30 +244,35 @@ def register_all_tools(mcp: FastMCP):
     mcp.add_resource(project_config_resource)
 
     @mcp.tool()
-    async def analyze_project_only(
+    async def build_graph_index(
         project_path: str,
         mappings_path: str = GRAPH_INDEXER_MAPPINGS,
         queries_path: str = GRAPH_INDEXER_QUERIES,
         config_path: str = NEO4J_CONFIG
     ) -> dict:
         """
-        Analyze project for CPG ONLY - sets up CPG-based file monitoring after completion.
-        
-        This tool performs ONLY CPG analysis using project-analyzer and then enables
-        file monitoring for CPG-based change detection. Use this when you want 
-        CPG-only analysis without vectorization.
+        Build Code Property Graph (CPG) index for a project and store it in Neo4j.
+
+        Runs genpod-graph-indexer to parse the codebase, build the CPG, and upload
+        it to Neo4j via the neo4j-mcp-server. Use this when you want graph-only
+        indexing without vector embeddings.
+
+        Args:
+            project_path: Path to the project root to index
+            mappings_path: Path to the language mappings YAML file
+            queries_path: Path to the Cypher queries directory
+            config_path: Path to Neo4j MCP config file (default: ~/.config/genpod/neo4j_config.json)
         """
         try:
-            # Run the project analyzer CLI using the new Click-based structure
             cli_command = [
-                "project-analyzer",
+                "genpod-graph-indexer",
                 "--config-file", config_path,
                 "analyze",
                 "--project-path", project_path,
                 "--mappings-path", mappings_path,
                 "--queries-path", queries_path
             ]
-            
+
             result = subprocess.run(
                 cli_command,
                 text=True,
@@ -275,10 +280,8 @@ def register_all_tools(mcp: FastMCP):
                 check=False,
                 cwd=os.getcwd()
             )
-            
+
             if result.returncode == 0:
-                # Update project config AFTER CPG analysis completes to enable file monitoring
-                # This signals that user wants CPG-based file monitoring
                 _project_config.update({
                     "project_path": project_path,
                     "mappings_path": mappings_path,
@@ -288,12 +291,11 @@ def register_all_tools(mcp: FastMCP):
                     "supported_extensions": [".py", ".js", ".cs", ".java", ".cpp", ".c", ".h"],
                     "ignore_dirs": ["node_modules", ".git", "bin", "obj", ".venv", "__pycache__"]
                 })
-                
                 return {
                     "status": "success",
                     "project_path": project_path,
                     "stdout": result.stdout,
-                    "message": "CPG analysis completed successfully - CPG-based file monitoring enabled",
+                    "message": "CPG graph index built and stored in Neo4j successfully",
                     "monitoring_enabled": True,
                     "monitoring_mode": "cpg_only"
                 }
@@ -307,7 +309,7 @@ def register_all_tools(mcp: FastMCP):
         except Exception as e:
             return {
                 "status": "error",
-                "step": "analyze_project_only",
+                "step": "build_graph_index",
                 "error": str(e),
                 "traceback": traceback.format_exc()
             }
@@ -334,58 +336,55 @@ def register_all_tools(mcp: FastMCP):
     # ===== Individual CLI Tools (Modular Architecture) =====
     
     @mcp.tool()
-    async def vectorize_codebase_only(
+    async def build_vector_and_pageindex(
         input_dir: str,
         collection_name: str,
         enable_lsp: bool = True,
         enable_ai: bool = True,
         vector_db: str = "qdrant",
-        config: str = None
+        config: str = QDRANT_CONFIG
     ) -> dict:
         """
-        Vectorize codebase ONLY - sets up vector-based file monitoring after completion.
+        Build vector embeddings and PageIndex for a project and store both in Qdrant.
 
-        This tool performs ONLY vectorization using genpod-semantic-rag and then enables
-        file monitoring for vector-based change detection. Use this when you want
-        vector-only analysis without CPG building.
+        Runs genpod-semantic-rag preprocess with --enable-pageindex so that:
+        - Vector embeddings are generated and stored in the Qdrant collection
+        - A PageIndex (per-file .md + __index__.json tree) is written to
+          {input_dir}/.pageindex/ for file-tree navigation queries
 
         Args:
             input_dir: Directory containing source code files to process (required)
-            collection_name: Vector database collection name (required)
+            collection_name: Qdrant collection name to store embeddings in (required)
             enable_lsp: Enable LSP integration for enhanced semantic analysis
-            enable_ai: Enable AI summarization (default: True)
-            vector_db: Vector database type - "chroma", "qdrant", or "weaviate" (default: "qdrant")
-            config: Path to configuration file for vector database MCP settings
+            enable_ai: Enable AI summarization
+            vector_db: Vector database type (default: qdrant)
+            config: Path to Qdrant MCP config file (default: ~/.config/genpod/qdrant_config.json)
         """
         try:
-            # Validate input directory
             if not os.path.exists(input_dir):
                 return {
                     "status": "error",
                     "error": f"Input directory does not exist: {input_dir}"
                 }
 
-            # Build CLI command
-            cli_command = [
-                "genpod-semantic-rag", "preprocess",
+            # Global config flag (-c) must come before the subcommand
+            cli_command = ["genpod-semantic-rag"]
+            if config and os.path.exists(config):
+                cli_command.extend(["-c", config])
+
+            cli_command.extend([
+                "preprocess",
                 "--input-dir", input_dir,
                 "--collection-name", collection_name,
-                "--vector-db", vector_db
-            ]
+                "--vector-db", vector_db,
+                "--enable-pageindex"
+            ])
 
-            # LSP integration
             if enable_lsp:
                 cli_command.append("--enable-lsp")
-
-            # AI summarization
             if enable_ai:
                 cli_command.append("--enable-ai")
 
-            # Configuration file
-            if config and os.path.exists(config):
-                cli_command.extend(["--config", config])
-            
-            # Execute command
             result = subprocess.run(
                 cli_command,
                 text=True,
@@ -393,10 +392,8 @@ def register_all_tools(mcp: FastMCP):
                 check=False,
                 cwd=os.getcwd()
             )
-            
+
             if result.returncode == 0:
-                # Update project config AFTER vectorization completes to enable file monitoring
-                # This signals that user wants vector-based file monitoring
                 _project_config.update({
                     "project_path": input_dir,
                     "vectorization_collection": collection_name,
@@ -404,13 +401,13 @@ def register_all_tools(mcp: FastMCP):
                     "supported_extensions": [".py", ".js", ".cs", ".java", ".cpp", ".c", ".h"],
                     "ignore_dirs": ["node_modules", ".git", "bin", "obj", ".venv", "__pycache__"]
                 })
-                
                 return {
                     "status": "success",
                     "input_dir": input_dir,
                     "collection_name": collection_name,
+                    "pageindex_dir": f"{input_dir}/.pageindex",
                     "stdout": result.stdout,
-                    "message": "Vectorization completed successfully - vector-based file monitoring enabled",
+                    "message": "Vector embeddings and PageIndex built successfully",
                     "monitoring_enabled": True,
                     "monitoring_mode": "vector_only"
                 }
@@ -421,11 +418,11 @@ def register_all_tools(mcp: FastMCP):
                     "stdout": result.stdout,
                     "returncode": result.returncode
                 }
-                
+
         except Exception as e:
             return {
                 "status": "error",
-                "step": "vectorize_codebase_preprocess",
+                "step": "build_vector_and_pageindex",
                 "error": str(e),
                 "traceback": traceback.format_exc()
             }
@@ -436,32 +433,31 @@ def register_all_tools(mcp: FastMCP):
         collection_name: str,
         mappings_path: str = GRAPH_INDEXER_MAPPINGS,
         queries_path: str = GRAPH_INDEXER_QUERIES,
-        vector_config: str = None,
+        vector_config: str = QDRANT_CONFIG,
         neo4j_config: str = NEO4J_CONFIG,
         vector_db: str = "qdrant",
         enable_lsp: bool = True,
         enable_ai: bool = True
     ) -> dict:
         """
-        Complete project setup - vectorization + CPG analysis + comprehensive monitoring.
+        Full project indexing — vector embeddings + PageIndex + CPG graph, all in one shot.
 
-        This orchestrated workflow performs:
-        1. Vectorize codebase using genpod-semantic-rag
-        2. Analyze project for CPG using project-analyzer
-        3. Enable comprehensive file monitoring (both vector + CPG)
-
-        Use this when you want full analysis capabilities with comprehensive monitoring.
+        This orchestrated workflow runs in sequence:
+        1. genpod-semantic-rag preprocess — builds vector embeddings (Qdrant) and
+           writes PageIndex (.pageindex/) into the project directory
+        2. genpod-graph-indexer analyze — parses the codebase and builds the CPG in Neo4j
+        3. Updates project config to enable comprehensive file monitoring
 
         Args:
             project_path: Path to the project root
-            collection_name: Vector database collection name
-            mappings_path: Path to mappings YAML file
-            queries_path: Path to queries directory
-            vector_config: Optional config file for vector operations
-            neo4j_config: Config file for Neo4j connections
-            vector_db: Vector database type - "chroma", "qdrant", or "weaviate" (default: "qdrant")
-            enable_lsp: Enable LSP integration for vectorization
-            enable_ai: Enable AI summarization for vectorization
+            collection_name: Qdrant collection name for vector embeddings
+            mappings_path: Path to the language mappings YAML file
+            queries_path: Path to the Cypher queries directory
+            vector_config: Qdrant MCP config file (default: ~/.config/genpod/qdrant_config.json)
+            neo4j_config: Neo4j MCP config file (default: ~/.config/genpod/neo4j_config.json)
+            vector_db: Vector database type (default: qdrant)
+            enable_lsp: Enable LSP integration for semantic analysis
+            enable_ai: Enable AI summarization
         """
         try:
             workflow_results = {
@@ -471,23 +467,25 @@ def register_all_tools(mcp: FastMCP):
                 "collection_name": collection_name
             }
 
-            # Step 1: Vectorize codebase (without setting project_path)
-            workflow_results["steps"]["1_vectorization"] = {"status": "running"}
+            # Step 1: Vector embeddings + PageIndex
+            workflow_results["steps"]["1_vector_and_pageindex"] = {"status": "running"}
 
-            vector_command = [
-                "genpod-semantic-rag", "preprocess",
+            # Global -c flag must come before the subcommand
+            vector_command = ["genpod-semantic-rag"]
+            if vector_config and os.path.exists(vector_config):
+                vector_command.extend(["-c", vector_config])
+            vector_command.extend([
+                "preprocess",
                 "--input-dir", project_path,
                 "--collection-name", collection_name,
-                "--vector-db", vector_db
-            ]
-
+                "--vector-db", vector_db,
+                "--enable-pageindex"
+            ])
             if enable_lsp:
                 vector_command.append("--enable-lsp")
             if enable_ai:
                 vector_command.append("--enable-ai")
-            if vector_config and os.path.exists(vector_config):
-                vector_command.extend(["--config", vector_config])
-            
+
             vector_result = subprocess.run(
                 vector_command,
                 text=True,
@@ -495,33 +493,33 @@ def register_all_tools(mcp: FastMCP):
                 check=False,
                 cwd=os.getcwd()
             )
-            
+
             if vector_result.returncode != 0:
-                workflow_results["steps"]["1_vectorization"] = {
+                workflow_results["steps"]["1_vector_and_pageindex"] = {
                     "status": "failed",
                     "error": vector_result.stderr
                 }
                 return {
                     "status": "error",
-                    "step": "vectorization",
+                    "step": "vector_and_pageindex",
                     "error": vector_result.stderr,
                     "partial_results": workflow_results
                 }
-            
-            workflow_results["steps"]["1_vectorization"] = {"status": "completed"}
-            
-            # Step 2: CPG Analysis (without setting project_path)
-            workflow_results["steps"]["2_cpg_analysis"] = {"status": "running"}
-            
+
+            workflow_results["steps"]["1_vector_and_pageindex"] = {"status": "completed"}
+
+            # Step 2: CPG graph index
+            workflow_results["steps"]["2_graph_index"] = {"status": "running"}
+
             cpg_command = [
-                "project-analyzer",
+                "genpod-graph-indexer",
                 "--config-file", neo4j_config,
                 "analyze",
                 "--project-path", project_path,
                 "--mappings-path", mappings_path,
                 "--queries-path", queries_path
             ]
-            
+
             cpg_result = subprocess.run(
                 cpg_command,
                 text=True,
@@ -529,24 +527,22 @@ def register_all_tools(mcp: FastMCP):
                 check=False,
                 cwd=os.getcwd()
             )
-            
+
             if cpg_result.returncode != 0:
-                workflow_results["steps"]["2_cpg_analysis"] = {
-                    "status": "failed", 
+                workflow_results["steps"]["2_graph_index"] = {
+                    "status": "failed",
                     "error": cpg_result.stderr
                 }
                 return {
                     "status": "error",
-                    "step": "cpg_analysis",
+                    "step": "graph_index",
                     "error": cpg_result.stderr,
                     "partial_results": workflow_results
                 }
-            
-            workflow_results["steps"]["2_cpg_analysis"] = {"status": "completed"}
-            
-            # Step 3: Enable comprehensive monitoring (AFTER both complete)
-            workflow_results["steps"]["3_enable_monitoring"] = {"status": "running"}
-            
+
+            workflow_results["steps"]["2_graph_index"] = {"status": "completed"}
+
+            # Step 3: Enable comprehensive monitoring
             _project_config.update({
                 "project_path": project_path,
                 "vectorization_collection": collection_name,
@@ -557,21 +553,22 @@ def register_all_tools(mcp: FastMCP):
                 "supported_extensions": [".py", ".js", ".cs", ".java", ".cpp", ".c", ".h"],
                 "ignore_dirs": ["node_modules", ".git", "bin", "obj", ".venv", "__pycache__"]
             })
-            
-            workflow_results["steps"]["3_enable_monitoring"] = {"status": "completed"}
+
+            workflow_results["steps"]["3_monitoring"] = {"status": "completed"}
             workflow_results["status"] = "success"
-            
+
             return {
                 "status": "success",
                 "project_path": project_path,
                 "collection_name": collection_name,
-                "message": "Full project setup completed - comprehensive monitoring enabled",
+                "pageindex_dir": f"{project_path}/.pageindex",
+                "message": "Full project setup completed — vector, PageIndex, and CPG graph are ready",
                 "monitoring_enabled": True,
                 "monitoring_mode": "comprehensive",
                 "workflow_results": workflow_results,
-                "capabilities": ["vector_search", "cpg_analysis", "llm_integration"]
+                "capabilities": ["vector_search", "pageindex_navigation", "cpg_analysis"]
             }
-            
+
         except Exception as e:
             return {
                 "status": "error",
