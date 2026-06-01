@@ -1,9 +1,0 @@
-{
-    "mcpServers": {
-        "neo4j_memory": {
-            "type": "sse",
-            "url": "http://localhost:8100/sse",
-            "description": "Neo4j MCP server for CPG queries"
-        }
-    }
-}

@@ -1,8 +1,0 @@
-{
-    "mcpServers": {
-        "neo4j_memory": {
-            "type": "http",
-            "url": "http://localhost:8100/sse"
-        }
-    }
-}
