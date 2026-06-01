@@ -71,3 +71,4 @@ htmlcov/
 # Root-level test fixtures (not source)
 *.cs
 HelloWorldApp_Facts.yaml
+CLAUDE.md
