@@ -24,7 +24,7 @@ from .parallel_models import AgentState, DiagnosticQueryGeneration, EmptyResultC
 from .parallel_research_engine import ResearchEngine
 from .parallel_context_manager import ContextManager
 from ..llm_service import LLMResponse
-from src.core.paths import NEO4J_CONFIG, SCHEMA_PATH, STATE_PKL
+from src.core.paths import NEO4J_CONFIG, SCHEMA_PATH, STATE_PKL, GENPOD_GRAPH_INDEXER_BIN
 
 logger = logging.getLogger(__name__)
 
@@ -2665,7 +2665,7 @@ Return ONLY a valid JSON object with this exact structure:
                 
                 # Use project-analyzer CLI (same pattern as other tools)
                 cli_command = [
-                    "project-analyzer",
+                    GENPOD_GRAPH_INDEXER_BIN,
                     "--config-file", state.get("neo4j_config", NEO4J_CONFIG),
                     "query",
                     "--cypher", fixed_query,
@@ -3823,7 +3823,7 @@ Analyze the results now:"""
             
             # Use project-analyzer CLI
             cli_command = [
-                "project-analyzer",
+                GENPOD_GRAPH_INDEXER_BIN,
                 "--config-file", neo4j_config,
                 "query",
                 "--cypher", fixed_query,

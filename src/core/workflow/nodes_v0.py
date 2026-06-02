@@ -29,7 +29,7 @@ from .models import AgentState, DiagnosticQueryGeneration, EmptyResultConclusion
 from .research_engine import ResearchEngine
 from .context_manager import ContextManager
 from ..llm_service import LLMResponse
-from src.core.paths import NEO4J_CONFIG, SCHEMA_PATH, STATE_PKL
+from src.core.paths import NEO4J_CONFIG, SCHEMA_PATH, STATE_PKL, GENPOD_GRAPH_INDEXER_BIN
 
 logger = logging.getLogger(__name__)
 
@@ -3859,7 +3859,7 @@ Provide the corrected JSON response:"""
                 logger.debug(f"Modified query: {query_to_execute}")
 
             cli_command = [
-                "project-analyzer",
+                GENPOD_GRAPH_INDEXER_BIN,
                 "--config-file", config_file,
                 "query",
                 "--cypher", query_to_execute,  # Use modified query with inlined params

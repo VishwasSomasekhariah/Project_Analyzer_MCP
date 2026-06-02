@@ -21,7 +21,7 @@ from .models import (
     SynthesisRawResponse, CriticValidationRawResponse, SynthesisImprovementRawResponse,
     EvidenceClaim, RetrieverSummary, ClaimExtractionRawResponse, ReconciliationRawResponse,
 )
-from src.core.paths import NEO4J_CONFIG, SCHEMA_PATH
+from src.core.paths import NEO4J_CONFIG, SCHEMA_PATH, GENPOD_SEMANTIC_RAG_BIN
 
 logger = logging.getLogger(__name__)
 
@@ -332,7 +332,7 @@ Return ONLY a valid JSON object with this exact structure:
                     "pageindex_learnings": {"failure_reason": "project_path not configured"},
                 }
 
-            cli_command = ["genpod-semantic-rag"]
+            cli_command = [GENPOD_SEMANTIC_RAG_BIN]
             if semantic_rag_config:
                 cli_command += ["--config", semantic_rag_config]
             cli_command += [
@@ -709,8 +709,8 @@ Unsupported claims (claims made but not backed by evidence):
 
             # Build CLI command for genpod-semantic-rag (following query_vector_only pattern)
             cli_command = [
-                "genpod-semantic-rag", 
-                "--config", config_path, 
+                GENPOD_SEMANTIC_RAG_BIN,
+                "--config", config_path,
                 "query", user_query,
                 "--collection-name", collection_name,
                 "--vector-db", vector_db,

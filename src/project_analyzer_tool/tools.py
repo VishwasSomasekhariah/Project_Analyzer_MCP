@@ -207,12 +207,16 @@ import traceback
 import os
 import gc
 import json
+import logging
 from typing import Dict, Any, List, Optional
+
+logger = logging.getLogger(__name__)
 from mcp.server.fastmcp import FastMCP
 from mcp.server.fastmcp.resources import FunctionResource
 from src.core.paths import (
     NEO4J_CONFIG, QDRANT_CONFIG, SCHEMA_PATH,
     GRAPH_INDEXER_MAPPINGS, GRAPH_INDEXER_QUERIES, CLAUDE_SDK_MCP_CONFIG,
+    GENPOD_SEMANTIC_RAG_BIN, GENPOD_GRAPH_INDEXER_BIN,
 )
 
 # Create a dictionary to store project configuration
@@ -265,7 +269,7 @@ def register_all_tools(mcp: FastMCP):
         """
         try:
             cli_command = [
-                "genpod-graph-indexer",
+                GENPOD_GRAPH_INDEXER_BIN,
                 "--config-file", config_path,
                 "analyze",
                 "--project-path", project_path,
@@ -273,6 +277,7 @@ def register_all_tools(mcp: FastMCP):
                 "--queries-path", queries_path
             ]
 
+            logger.info("Running: %s", " ".join(cli_command))
             result = subprocess.run(
                 cli_command,
                 text=True,
@@ -280,6 +285,11 @@ def register_all_tools(mcp: FastMCP):
                 check=False,
                 cwd=os.getcwd()
             )
+
+            if result.stdout:
+                logger.info("[genpod-graph-indexer stdout]\n%s", result.stdout)
+            if result.stderr:
+                logger.warning("[genpod-graph-indexer stderr]\n%s", result.stderr)
 
             if result.returncode == 0:
                 _project_config.update({
@@ -368,7 +378,7 @@ def register_all_tools(mcp: FastMCP):
                 }
 
             # Global config flag (-c) must come before the subcommand
-            cli_command = ["genpod-semantic-rag"]
+            cli_command = [GENPOD_SEMANTIC_RAG_BIN]
             if config and os.path.exists(config):
                 cli_command.extend(["-c", config])
 
@@ -385,6 +395,7 @@ def register_all_tools(mcp: FastMCP):
             if enable_ai:
                 cli_command.append("--enable-ai")
 
+            logger.info("Running: %s", " ".join(cli_command))
             result = subprocess.run(
                 cli_command,
                 text=True,
@@ -392,6 +403,11 @@ def register_all_tools(mcp: FastMCP):
                 check=False,
                 cwd=os.getcwd()
             )
+
+            if result.stdout:
+                logger.info("[genpod-semantic-rag stdout]\n%s", result.stdout)
+            if result.stderr:
+                logger.warning("[genpod-semantic-rag stderr]\n%s", result.stderr)
 
             if result.returncode == 0:
                 _project_config.update({
@@ -471,7 +487,7 @@ def register_all_tools(mcp: FastMCP):
             workflow_results["steps"]["1_vector_and_pageindex"] = {"status": "running"}
 
             # Global -c flag must come before the subcommand
-            vector_command = ["genpod-semantic-rag"]
+            vector_command = [GENPOD_SEMANTIC_RAG_BIN]
             if vector_config and os.path.exists(vector_config):
                 vector_command.extend(["-c", vector_config])
             vector_command.extend([
@@ -512,7 +528,7 @@ def register_all_tools(mcp: FastMCP):
             workflow_results["steps"]["2_graph_index"] = {"status": "running"}
 
             cpg_command = [
-                "genpod-graph-indexer",
+                GENPOD_GRAPH_INDEXER_BIN,
                 "--config-file", neo4j_config,
                 "analyze",
                 "--project-path", project_path,
@@ -688,7 +704,7 @@ def register_all_tools(mcp: FastMCP):
         """
         try:
             # Build CLI command - config must come before subcommand
-            cli_command = ["genpod-semantic-rag"]
+            cli_command = [GENPOD_SEMANTIC_RAG_BIN]
 
             # Configuration file comes first (before subcommand)
             if config and os.path.exists(config):
@@ -808,7 +824,7 @@ def register_all_tools(mcp: FastMCP):
             output_format: Output format - "json" or "text" (default: "json")
         """
         try:
-            cli_command = ["genpod-semantic-rag"]
+            cli_command = [GENPOD_SEMANTIC_RAG_BIN]
 
             if config and os.path.exists(config):
                 cli_command.extend(["--config", config])

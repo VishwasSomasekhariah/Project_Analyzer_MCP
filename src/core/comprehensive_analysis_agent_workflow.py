@@ -20,7 +20,7 @@ from typing import Dict, List, Any, Optional, TypedDict, Annotated
 from dataclasses import dataclass, asdict
 import operator
 
-from src.core.paths import NEO4J_CONFIG, SCHEMA_PATH, GRAPH_INDEXER_MAPPINGS, GRAPH_INDEXER_QUERIES
+from src.core.paths import NEO4J_CONFIG, SCHEMA_PATH, GRAPH_INDEXER_MAPPINGS, GRAPH_INDEXER_QUERIES, GENPOD_SEMANTIC_RAG_BIN, GENPOD_GRAPH_INDEXER_BIN
 
 # LangGraph imports
 try:
@@ -2352,7 +2352,7 @@ Return ONLY the JSON object, no other text.
             
             # Build CLI command (same as query_vector_only tool)
             cli_command = [
-                "genpod-semantic-rag", "query", query,
+                GENPOD_SEMANTIC_RAG_BIN, "query", query,
                 "--collection-name", collection_name,
                 "--max-results", "25",  # Match the reference implementation
                 "--output-format", "json"
@@ -2638,7 +2638,7 @@ Vector Analysis Summary:
                 
                 # Use project-analyzer CLI (same pattern as other tools)
                 cli_command = [
-                    "project-analyzer",
+                    GENPOD_GRAPH_INDEXER_BIN,
                     "--config-file", state["neo4j_config"],
                     "query",
                     "--cypher", fixed_query,

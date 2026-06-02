@@ -12,6 +12,8 @@ import subprocess
 import threading
 from typing import Dict, Any, Optional
 
+from src.core.paths import GENPOD_GRAPH_INDEXER_BIN
+
 
 class CypherServerService:
     """
@@ -76,7 +78,7 @@ class CypherServerService:
         try:
             self.logger.info("🔥 Starting hot CLI cypher-server...")
             cmd = [
-                "project-analyzer",
+                GENPOD_GRAPH_INDEXER_BIN,
                 "--config-file", self.config_file_path,
                 "cypher-server",
                 "--input-mode", "stdin",
@@ -493,7 +495,7 @@ async def execute_query_with_fallback(cypher_server_service: Optional[CypherServ
         logger.debug("📋 Using subprocess fallback for query execution")
         
         cmd = [
-            "project-analyzer",
+            GENPOD_GRAPH_INDEXER_BIN,
             "--config-file", config_file_path,
             "query",
             "--cypher", query,

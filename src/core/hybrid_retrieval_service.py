@@ -12,7 +12,7 @@ import time
 from typing import Dict, Any, List, Optional, Tuple
 from dataclasses import dataclass
 
-from src.core.paths import NEO4J_CONFIG
+from src.core.paths import NEO4J_CONFIG, GENPOD_SEMANTIC_RAG_BIN
 
 logger = logging.getLogger(__name__)
 
@@ -236,7 +236,7 @@ class HybridRetrievalService:
             
             # Build CLI command (same as query_vector_only)
             cli_command = [
-                "genpod-semantic-rag", "query", enhanced_query,
+                GENPOD_SEMANTIC_RAG_BIN, "query", enhanced_query,
                 "--collection-name", vector_params.get("collection_name", ""),
                 "--max-results", str(vector_params.get("max_results", 10)),
                 "--output-format", "json"

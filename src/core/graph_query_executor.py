@@ -10,7 +10,7 @@ import asyncio
 from typing import Dict, List, Any, Optional, Tuple
 import time
 
-from src.core.paths import NEO4J_CONFIG, SCHEMA_PATH
+from src.core.paths import NEO4J_CONFIG, SCHEMA_PATH, GENPOD_GRAPH_INDEXER_BIN
 
 
 class GraphQueryExecutor:
@@ -165,7 +165,7 @@ class GraphQueryExecutor:
             try:
                 # Prepare CLI command
                 cli_command = [
-                    "project-analyzer",
+                    GENPOD_GRAPH_INDEXER_BIN,
                     "--config-file", config_path,
                     "query",
                     "--cypher", cypher_query,

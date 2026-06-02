@@ -15,7 +15,7 @@ import json
 import logging
 from typing import List, Optional, Dict, Any
 
-from src.core.paths import NEO4J_CONFIG
+from src.core.paths import NEO4J_CONFIG, GENPOD_GRAPH_INDEXER_BIN
 
 logger = logging.getLogger(__name__)
 
@@ -57,7 +57,7 @@ class CypherServerInstance:
             logger.info(f"🔥 Starting cypher server {self.server_id}...")
 
             cmd = [
-                "project-analyzer",
+                GENPOD_GRAPH_INDEXER_BIN,
                 "--config-file", self.neo4j_config,
                 "cypher-server",
                 "--input-mode", "stdin",

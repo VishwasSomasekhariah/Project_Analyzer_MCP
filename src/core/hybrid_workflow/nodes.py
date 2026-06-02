@@ -19,7 +19,7 @@ from .models import (
     ChainOfThoughtResult, ChainOfThoughtStep, IntentAnalysisRawResponse,
     SynthesisRawResponse, CriticValidationRawResponse, SynthesisImprovementRawResponse
 )
-from src.core.paths import NEO4J_CONFIG, QDRANT_CONFIG, SCHEMA_PATH
+from src.core.paths import NEO4J_CONFIG, QDRANT_CONFIG, SCHEMA_PATH, GENPOD_SEMANTIC_RAG_BIN
 
 logger = logging.getLogger(__name__)
 
@@ -285,8 +285,8 @@ Return ONLY a valid JSON object with this exact structure:
 
             # Build CLI command for genpod-semantic-rag (following query_vector_only pattern)
             cli_command = [
-                "genpod-semantic-rag", 
-                "--config", config_path, 
+                GENPOD_SEMANTIC_RAG_BIN,
+                "--config", config_path,
                 "query", user_query,
                 "--collection-name", collection_name,
                 "--vector-db", vector_db,
@@ -417,7 +417,7 @@ Return ONLY a valid JSON object with this exact structure:
 
             # Build CLI command for pageindex retrieval
             cli_command = [
-                "genpod-semantic-rag",
+                GENPOD_SEMANTIC_RAG_BIN,
                 "--config", config_path,
                 "query", user_query,
                 "--retriever", "pageindex",

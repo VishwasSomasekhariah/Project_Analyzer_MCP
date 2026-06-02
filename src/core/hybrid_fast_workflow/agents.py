@@ -22,7 +22,7 @@ from src.core.graph_rag.tools.manager import ToolManager
 from src.core.hybrid_fast_workflow.models import Citation, make_citation_id
 from src.core.hybrid_fast_workflow.utils import parse_llm_json
 from src.core.retrieval.hybrid_vector_retriever import HybridVectorRetriever
-from src.core.paths import NEO4J_CONFIG, QDRANT_CONFIG, SCHEMA_PATH
+from src.core.paths import NEO4J_CONFIG, QDRANT_CONFIG, SCHEMA_PATH, GENPOD_SEMANTIC_RAG_BIN
 
 logger = logging.getLogger(__name__)
 
@@ -125,7 +125,7 @@ class PageIndexAgent:
         mcts_iterations = config.get("mcts_iterations", 20)
         semantic_rag_config = config.get("semantic_rag_config")
 
-        cli = ["genpod-semantic-rag"]
+        cli = [GENPOD_SEMANTIC_RAG_BIN]
         if semantic_rag_config:
             cli += ["--config", semantic_rag_config]
         cli += [
