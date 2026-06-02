@@ -61,6 +61,9 @@ class WorkflowLogger:
 
         self.log_dir = Path(log_dir)
         self.log_dir.mkdir(parents=True, exist_ok=True)
+        # Touch log files so they exist on disk immediately (before first write).
+        for fname in ("server.log", "workflow.log", "workflow_error.log"):
+            (self.log_dir / fname).touch(exist_ok=True)
 
         # Formatters
         detailed_formatter = logging.Formatter(
@@ -137,6 +140,7 @@ class WorkflowLogger:
         src_logger.propagate = False  # Don't propagate to root to avoid duplicate console output
 
         # Add the same file handlers to src.* loggers
+        src_logger.addHandler(server_handler)
         src_logger.addHandler(workflow_handler)
         src_logger.addHandler(error_handler)
         if enable_debug_file:
