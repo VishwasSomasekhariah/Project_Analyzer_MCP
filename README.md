@@ -118,6 +118,7 @@ All settings live in `genpod.conf` (copy from `genpod.conf.example`). Only the t
 | `GENPOD_HOME` | `~/.config/genpod` | Where config files live |
 | `GENPOD_DATA` | `~/.local/share/genpod` | Where database volumes and logs live |
 | `OPENAI_API_KEY` | optional | For qdrant MCP built-in AI response features |
+| `CLAUDE_CLI_PATH` | optional | Path to a `claude` wrapper script used by `claude-agent-sdk` fallback in sub-tools. Set when the default bundled CLI is not authenticated (e.g. shared/service accounts). |
 
 ---
 
@@ -128,7 +129,7 @@ All settings live in `genpod.conf` (copy from `genpod.conf.example`). Only the t
 | Tool | Source | Purpose |
 |---|---|---|
 | `genpod-graph-indexer` | [GitHub @main](https://github.com/VishwasSomasekhariah/genpod-graph-indexer) | CPG indexing into Neo4j |
-| `genpod-semantic-rag` | [GitHub @main](https://github.com/VishwasSomasekhariah/genpod-semantic-rag) | Vector indexing and RAG via Qdrant |
+| `genpod-semantic-rag` | [GitHub @main](https://github.com/VishwasSomasekhariah/genpod-semantic-rag) | Vector indexing and RAG via Qdrant — installed with `[fallback]` extra for AI summaries |
 | `neo4j-mcp-server` | [GitHub @main](https://github.com/VishwasSomasekhariah/neo4j-mcp) | MCP server exposing Neo4j CPG tools |
 | `mcp-server-qdrant` | [PyPI v0.8.0](https://pypi.org/project/mcp-server-qdrant/) | MCP server for Qdrant vector search |
 
@@ -145,6 +146,19 @@ All containers run with `--restart unless-stopped` and survive reboots.
 ---
 
 ## Troubleshooting
+
+**Server fails to start with "CLI tool not found":**
+The server resolves `genpod-semantic-rag` and `genpod-graph-indexer` at startup and exits immediately if either is missing from `PATH` or `~/.local/bin`.
+
+```bash
+# Re-run install to reinstall missing tools:
+./install.sh
+# Or install manually:
+uv tool install "git+https://github.com/VishwasSomasekhariah/genpod-graph-indexer.git@main"
+uv tool install "git+https://github.com/VishwasSomasekhariah/genpod-semantic-rag.git@main[fallback]"
+```
+
+---
 
 **Neo4j auth fails (`401`) in preflight:**
 The password in `.env` doesn't match the one Neo4j was initialized with. Neo4j locks in the password on first boot from the data volume.
