@@ -133,6 +133,8 @@ All settings live in `genpod.conf` (copy from `genpod.conf.example`). Only the t
 | `neo4j-mcp-server` | [GitHub @main](https://github.com/VishwasSomasekhariah/neo4j-mcp) | MCP server exposing Neo4j CPG tools |
 | `mcp-server-qdrant` | [PyPI v0.8.0](https://pypi.org/project/mcp-server-qdrant/) | MCP server for Qdrant vector search |
 
+> **Note:** `genpod-semantic-rag` always builds the PageIndex alongside vector embeddings (`enable_pageindex` is permanently on). As a result the two preprocessing tools (`genpod-graph-indexer` for CPG/Neo4j, `genpod-semantic-rag` for vectors+pageindex) may be consolidated into a single tool in a future version once the separation is no longer needed.
+
 ### Databases (Docker)
 
 | Container | Image | Ports | Persistent data |
