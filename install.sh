@@ -286,9 +286,17 @@ REDIS_PORT=${REDIS_PORT}
 ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY:-}
 OPENAI_API_KEY=${OPENAI_API_KEY:-}
 
+# ── Claude CLI path (used by claude-agent-sdk fallback in subtools) ───────────
+# Set to a wrapper script if the default bundled CLI is not authenticated.
+# Example: a wrapper that runs claude as a shared/authenticated user.
+CLAUDE_CLI_PATH=${CLAUDE_CLI_PATH:-}
+
 # ── OmniSharp (C# language server) ───────────────────────────────────────────
+# OMNISHARP_PATH is used by the systemd service Environment=PATH= directive.
+# Do NOT set PATH here — systemd EnvironmentFile does not expand shell variables,
+# so a PATH line here overrides the correctly-expanded Environment=PATH= in the
+# service file with a literal unexpanded string.
 OMNISHARP_PATH=${OMNISHARP_INSTALL_DIR}
-PATH=\${OMNISHARP_PATH}:\$PATH
 ENVEOF
     chmod 600 "${ENV_FILE}"
     log "Written ${ENV_FILE} (mode 600)"
@@ -312,8 +320,14 @@ install_git_tool() {
 install_git_tool "genpod-graph-indexer" \
     "https://github.com/VishwasSomasekhariah/genpod-graph-indexer.git"
 
-install_git_tool "genpod-semantic-rag" \
-    "https://github.com/VishwasSomasekhariah/genpod-semantic-rag.git"
+# Install with [fallback] extra so claude-agent-sdk is available for AI summaries
+if uv tool list 2>/dev/null | grep -q "^genpod-semantic-rag "; then
+    warn "genpod-semantic-rag already installed — run 'uv tool upgrade genpod-semantic-rag' to pull latest main"
+else
+    echo "  Installing genpod-semantic-rag (with fallback extra) from @main..."
+    uv tool install "git+https://github.com/VishwasSomasekhariah/genpod-semantic-rag.git@main[fallback]"
+    log "genpod-semantic-rag"
+fi
 
 install_git_tool "neo4j-mcp-server" \
     "https://github.com/VishwasSomasekhariah/neo4j-mcp.git"
@@ -529,6 +543,7 @@ After=network.target
 [Service]
 Type=simple
 EnvironmentFile=${ENV_FILE}
+Environment=PATH=${HOME}/.local/bin:${OMNISHARP_INSTALL_DIR}:/usr/local/bin:/usr/bin:/bin
 ExecStart=${NEO4J_MCP_BIN}
 Restart=on-failure
 RestartSec=5
@@ -546,6 +561,7 @@ After=network.target
 [Service]
 Type=simple
 EnvironmentFile=${ENV_FILE}
+Environment=PATH=${HOME}/.local/bin:${OMNISHARP_INSTALL_DIR}:/usr/local/bin:/usr/bin:/bin
 ExecStart=${QDRANT_MCP_BIN} --transport sse
 Restart=on-failure
 RestartSec=5
@@ -564,6 +580,7 @@ Wants=neo4j-mcp-server.service qdrant-mcp-server.service
 [Service]
 Type=simple
 EnvironmentFile=${ENV_FILE}
+Environment=PATH=${HOME}/.local/bin:${OMNISHARP_INSTALL_DIR}:/usr/local/bin:/usr/bin:/bin
 ExecStart=${PROJECT_ANALYZER_BIN}
 Restart=on-failure
 RestartSec=5
