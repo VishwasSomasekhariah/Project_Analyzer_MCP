@@ -21,6 +21,7 @@ from __future__ import annotations
 import importlib.resources
 import importlib.util
 import os
+import shutil
 from pathlib import Path
 
 # ── Base directories ──────────────────────────────────────────────────────────
@@ -69,24 +70,56 @@ SCHEMA_PATH: str = _resolve_schema()
 # Resolved at runtime via importlib so it works wherever uv installed the tool.
 
 def _resolve_graph_indexer() -> tuple[str, str]:
-    spec = importlib.util.find_spec("project_analyzer")
-    if spec and spec.origin:
-        pkg_root = Path(spec.origin).parent
-        return (
-            str(pkg_root / "parsing_utils" / "mappings.yaml"),
-            str(pkg_root / "final_queries"),
-        )
-    # Fallback: check the conventional uv tools path
+    for pkg_name in ("genpod_graph_indexer", "project_analyzer"):
+        spec = importlib.util.find_spec(pkg_name)
+        if spec and spec.origin:
+            pkg_root = Path(spec.origin).parent
+            return (
+                str(pkg_root / "parsing_utils" / "mappings.yaml"),
+                str(pkg_root / "final_queries"),
+            )
+    # Fallback: scan the uv tools dir for the package regardless of Python version
     _tools = Path.home() / ".local" / "share" / "uv" / "tools" / "genpod-graph-indexer"
-    _pkg = _tools / "lib" / "python3.12" / "site-packages" / "project_analyzer"
-    return (
-        str(_pkg / "parsing_utils" / "mappings.yaml"),
-        str(_pkg / "final_queries"),
+    for py_dir in sorted((_tools / "lib").iterdir()) if (_tools / "lib").exists() else []:
+        for pkg_name in ("genpod_graph_indexer", "project_analyzer"):
+            _pkg = py_dir / "site-packages" / pkg_name
+            if (_pkg / "parsing_utils" / "mappings.yaml").exists():
+                return (
+                    str(_pkg / "parsing_utils" / "mappings.yaml"),
+                    str(_pkg / "final_queries"),
+                )
+    raise FileNotFoundError(
+        "Cannot locate genpod-graph-indexer package data (mappings.yaml). "
+        "Run: uv tool install git+https://github.com/VishwasSomasekhariah/genpod-graph-indexer.git@main"
     )
 
 GRAPH_INDEXER_MAPPINGS: str
 GRAPH_INDEXER_QUERIES: str
 GRAPH_INDEXER_MAPPINGS, GRAPH_INDEXER_QUERIES = _resolve_graph_indexer()
+
+# ── CLI binary paths (resolved at startup, used directly in subprocess calls) ──
+# Using absolute paths avoids PATH manipulation and binary shadowing risks.
+
+def _find_cli(name: str) -> str:
+    """Resolve a uv tool binary to its absolute path.
+
+    Searches PATH first (covers terminal launches where ~/.local/bin is set),
+    then falls back to the conventional uv tools location. Raises FileNotFoundError
+    at server startup if the tool is not installed, failing fast with a clear message.
+    """
+    path = shutil.which(name)
+    if path:
+        return path
+    fallback = Path.home() / ".local" / "bin" / name
+    if fallback.exists():
+        return str(fallback)
+    raise FileNotFoundError(
+        f"CLI tool '{name}' not found in PATH or ~/.local/bin. "
+        f"Install it with: uv tool install git+https://github.com/VishwasSomasekhariah/{name}.git@main"
+    )
+
+GENPOD_SEMANTIC_RAG_BIN:  str = _find_cli("genpod-semantic-rag")
+GENPOD_GRAPH_INDEXER_BIN: str = _find_cli("genpod-graph-indexer")
 
 # ── Cache, state, logs, debug ─────────────────────────────────────────────────
 
