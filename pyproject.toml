@@ -22,35 +22,35 @@ classifiers = [
 
 dependencies = [
     # MCP framework
-    "mcp>=1.9.0",
-    "fastmcp>=2.3.4,<4.0.0",
-    "mcp-use>=1.2.12",
+    "mcp==1.9.0",
+    "fastmcp==2.3.4",
+    "mcp-use==1.2.12",
 
     # LLM clients
-    "anthropic>=0.83.0",
-    "openai>=1.92.2",
-    "claude-agent-sdk>=0.1.25",
+    "anthropic==0.83.0",
+    "openai==1.92.2",
+    "claude-agent-sdk==0.1.25",
 
     # LangGraph / LangChain
-    "langgraph>=0.6.4",
-    "langchain-core>=0.3.74",
+    "langgraph==0.6.4",
+    "langchain-core==0.3.74",
 
     # Web framework
-    "fastapi>=0.115.12",
-    "starlette>=0.46.2",
-    "uvicorn>=0.34.0",
-    "httpx>=0.28.1",
+    "fastapi==0.115.12",
+    "starlette==0.46.2",
+    "uvicorn==0.35.0",
+    "httpx==0.28.1",
 
     # Data
-    "pydantic>=2.11.7",
-    "numpy>=2.3.2",
-    "pandas>=2.3.1",
-    "openpyxl>=3.1.5",
-    "PyYAML>=6.0.2",
+    "pydantic==2.11.7",
+    "numpy==2.3.2",
+    "pandas==2.3.1",
+    "openpyxl==3.1.5",
+    "PyYAML==6.0.2",
 
     # File watching + checksum dedup
-    "watchdog>=6.0.0",
-    "redis>=5.0.0",
+    "watchdog==6.0.0",
+    "redis==6.1.0",
 ]
 
 [project.optional-dependencies]
