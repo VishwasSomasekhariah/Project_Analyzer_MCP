@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env -S ~/.local/share/uv/tools/project-analyzer-mcp/bin/python
 """
 Properly Fixed Comparative Analysis Suite
 
@@ -38,36 +38,46 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
+def _genpod_home() -> str:
+    """Resolve GENPOD_HOME using XDG conventions (mirrors src/core/paths.py)."""
+    if v := os.environ.get("GENPOD_HOME"):
+        return v
+    return os.path.join(
+        os.environ.get("XDG_CONFIG_HOME", os.path.expanduser("~/.config")), "genpod"
+    )
+
+
 class ProperlyFixedComparativeAnalyzer:
-    def __init__(self, test_scenario_filter=None, vector_db="qdrant", retriever_combination="pageindex_vector_graph", tool="hybrid"):
+    def __init__(
+        self,
+        test_scenario_filter=None,
+        retriever_combination="pageindex_vector_graph",
+        tool="hybrid",
+        project_path: str = None,
+        collection_name: str = "HelloWorldApp_pageindex_v3",
+    ):
         """
         Initialize the properly fixed comparative analyzer.
 
         Args:
-            test_scenario_filter: Can be:
-                - None: Run all 90 scenarios (DEFAULT)
-                - int: Run first N scenarios (e.g., 5)
-                - list: Run specific scenario IDs (e.g., ['T001', 'T002', 'F001'])
-                - str: Run scenarios matching category (e.g., 'Technical')
-            vector_db: Vector database to use ("qdrant" or "weaviate")
+            test_scenario_filter: None (all), int (first N), list of IDs, or category str
+            retriever_combination: which retrievers to combine for hybrid queries
+            tool: query tool — hybrid | hybrid_fast | vector | pageindex | cpg
+            project_path: path to the project being analysed
+            collection_name: Qdrant collection name to query against
         """
-        self.config_file = "/opt/genpod/file_watcher_mcp_config.json"
-        self.project_path = "/opt/HelloWorldApp"
-        self.neo4j_config = "/opt/genpod/neo4j_config.json"
-        self.test_scenario_filter = test_scenario_filter
+        _home = _genpod_home()
+        self.config_file   = os.path.join(_home, "file_watcher_mcp_config.json")
+        self.neo4j_config  = os.path.join(_home, "neo4j_config.json")
+        self.vector_config = os.path.join(_home, "qdrant_config.json")
+
+        self.project_path    = project_path or "/opt/HelloWorldApp"
+        self.collection_name = collection_name
+        self.vector_db       = "qdrant"
+
+        self.test_scenario_filter  = test_scenario_filter
         self.retriever_combination = retriever_combination
         self.tool = tool  # "hybrid" | "hybrid_fast" | "vector" | "pageindex" | "cpg"
-
-        # Configure vector database settings
-        self.vector_db = vector_db
-        if vector_db == "qdrant":
-            self.collection_name = "HelloWorldApp_pageindex_v3"
-            self.vector_config = "/opt/genpod/qdrant_config.json"
-        elif vector_db == "weaviate":
-            self.collection_name = "HelloWorldApp_Final_Test"
-            self.vector_config = "/opt/genpod/weaviate_config.json"
-        else:
-            raise ValueError(f"Unsupported vector database: {vector_db}. Use 'qdrant' or 'weaviate'.")
         
         # Note: Schema is now handled by Enhanced Graph RAG system, not hardcoded
         # self.graph_schema_prompt = self.get_comprehensive_schema_prompt()  # Removed - using Enhanced Graph RAG
@@ -964,7 +974,7 @@ class ProperlyFixedComparativeAnalyzer:
                     "user_query": query,
                     "project_name": "HelloWorldApp",
                     "collection_name": self.collection_name,
-                    "vector_config_path": "/opt/genpod/qdrant_config.json",
+                    "vector_config_path": self.vector_config,
                     "config_path": self.neo4j_config,
                     "project_path": self.project_path,
                     "vector_db": self.vector_db,
@@ -1553,21 +1563,121 @@ class ProperlyFixedComparativeAnalyzer:
         return json_file, csv_file, excel_file
 
 def main():
-    """Main function to run the properly fixed comparative analysis."""
+    """Main function to run indexing or comparative analysis against the MCP server."""
     import argparse
-    
-    parser = argparse.ArgumentParser(description="Run properly fixed comparative analysis")
+
+    parser = argparse.ArgumentParser(
+        description="Run indexing or comparative analysis via the project-analyzer-mcp server",
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog="""
+Examples:
+  # Index a project (full: vector + pageindex + CPG graph)
+  python properly_fixed_comparative_analysis.py --index --index-mode full \\
+      --project-path ~/Repos/HelloWorldApp --collection-name helloworld-v1
+
+  # Index vector + pageindex only
+  python properly_fixed_comparative_analysis.py --index --index-mode vector \\
+      --project-path ~/Repos/HelloWorldApp --collection-name helloworld-v1
+
+  # Index CPG graph only
+  python properly_fixed_comparative_analysis.py --index --index-mode graph \\
+      --project-path ~/Repos/HelloWorldApp
+
+  # Run 5 hybrid query scenarios against an indexed project
+  python properly_fixed_comparative_analysis.py --scenarios 5 --tool hybrid \\
+      --project-path ~/Repos/HelloWorldApp --collection-name helloworld-v1
+        """
+    )
+
+    # ── Mode ─────────────────────────────────────────────────────────────────
+    parser.add_argument("--index", action="store_true",
+                        help="Run indexing instead of query analysis")
+    parser.add_argument("--index-mode", type=str, default="full",
+                        choices=["full", "vector", "graph"],
+                        help="Indexing mode: full (vector+pageindex+graph), vector, graph (default: full)")
+
+    # ── Project ──────────────────────────────────────────────────────────────
+    parser.add_argument("--project-path", type=str, default=None,
+                        help="Path to the project to index or query against")
+    parser.add_argument("--collection-name", type=str, default="HelloWorldApp_pageindex_v3",
+                        help="Qdrant collection name (default: HelloWorldApp_pageindex_v3)")
+
+    # ── Query analysis options ────────────────────────────────────────────────
     parser.add_argument("--scenarios", type=str, default="all",
-                       help="Scenarios to run: 'all' (default), number (e.g., '5'), category (e.g., 'Technical'), or comma-separated IDs (e.g., 'T001,T002,F001')")
+                        help="Scenarios: 'all', number (e.g. '5'), category, or comma-separated IDs")
     parser.add_argument("--retriever-combination", type=str, default="pageindex_vector_graph",
-                       help="Retriever combination: pageindex_vector_graph (default), pageindex_vector, pageindex_graph, pageindex_and_graph, pageindex_and_vector")
+                        help="Retriever combination for hybrid queries")
     parser.add_argument("--tool", type=str, default="hybrid",
-                       choices=["hybrid", "hybrid_fast", "vector", "pageindex", "cpg"],
-                       help="Tool to run per scenario: hybrid (default), hybrid_fast, vector, pageindex, cpg")
+                        choices=["hybrid", "hybrid_fast", "vector", "pageindex", "cpg"],
+                        help="Query tool per scenario (default: hybrid)")
 
     args = parser.parse_args()
 
-    # Parse scenario filter
+    # ── Indexing mode ─────────────────────────────────────────────────────────
+    if args.index:
+        if not args.project_path:
+            parser.error("--project-path is required when --index is set")
+
+        _home = _genpod_home()
+        config_file   = os.path.join(_home, "file_watcher_mcp_config.json")
+        neo4j_config  = os.path.join(_home, "neo4j_config.json")
+        qdrant_config = os.path.join(_home, "qdrant_config.json")
+
+        tool_map = {
+            "full":   "full_project_setup",
+            "vector": "build_vector_and_pageindex",
+            "graph":  "build_graph_index",
+        }
+        tool_name = tool_map[args.index_mode]
+
+        # Each tool uses a different parameter name for the project directory:
+        #   build_vector_and_pageindex → input_dir
+        #   build_graph_index          → project_path
+        #   full_project_setup         → project_path
+        if args.index_mode == "vector":
+            tool_args = {
+                "input_dir": args.project_path,
+                "collection_name": args.collection_name,
+                "config": qdrant_config,
+            }
+        elif args.index_mode == "graph":
+            tool_args = {
+                "project_path": args.project_path,
+                "config_path": neo4j_config,
+            }
+        else:  # full
+            tool_args = {
+                "project_path": args.project_path,
+                "collection_name": args.collection_name,
+                "vector_config": qdrant_config,
+                "neo4j_config": neo4j_config,
+            }
+
+        print(f"Indexing mode : {args.index_mode}  →  tool: {tool_name}")
+        print(f"Project path  : {args.project_path}")
+        if "collection_name" in tool_args:
+            print(f"Collection    : {args.collection_name}")
+
+        async def run_indexing():
+            with open(config_file) as _f:
+                _cfg = json.load(_f)
+            _srv = _cfg["mcpServers"]["mcp-analysis-server"]
+            connector = HttpConnector(
+                base_url=_srv["url"],
+                headers=_srv.get("headers"),
+                auth_token=_srv.get("auth_token"),
+                timeout=10,
+                sse_read_timeout=3600,  # indexing can take many minutes
+            )
+            session = MCPSession(connector)
+            await session.initialize()
+            result = await session.call_tool(tool_name, tool_args)
+            await session.disconnect()
+            print(json.dumps(result, indent=2, default=str))
+
+        return asyncio.run(run_indexing())
+
+    # ── Query analysis mode ───────────────────────────────────────────────────
     if args.scenarios == "all":
         scenario_filter = None
     elif args.scenarios.isdigit():
@@ -1577,30 +1687,25 @@ def main():
     else:
         scenario_filter = args.scenarios
 
-    retriever_combination = args.retriever_combination
-    tool = args.tool
-    print(f"🎯 Running with scenario filter: {scenario_filter}")
-    print(f"🔧 Tool: {tool}")
-    print(f"🔧 Retriever combination: {retriever_combination}")
+    print(f"Scenarios         : {scenario_filter or 'all'}")
+    print(f"Tool              : {args.tool}")
+    print(f"Retriever combo   : {args.retriever_combination}")
+    print(f"Project path      : {args.project_path or '(default)'}")
+    print(f"Collection name   : {args.collection_name}")
 
     async def run_analysis():
         analyzer = ProperlyFixedComparativeAnalyzer(
             test_scenario_filter=scenario_filter,
-            retriever_combination=retriever_combination,
-            tool=tool,
+            retriever_combination=args.retriever_combination,
+            tool=args.tool,
+            project_path=args.project_path,
+            collection_name=args.collection_name,
         )
-        
-        # Run the analysis
         results, timestamp = await analyzer.run_comparative_analysis()
-        
-        # Save final results
         json_file, csv_file, excel_file = analyzer.save_final_results(results, timestamp)
-        
-        print(f"\n🎉 Properly Fixed Comparative Analysis completed!")
-        print(f"📁 Results saved to JSON (primary), CSV and Excel formats")
-        
+        print(f"\nAnalysis complete — results saved to JSON, CSV and Excel")
         return json_file, csv_file, excel_file
-    
+
     return asyncio.run(run_analysis())
 
 if __name__ == "__main__":
