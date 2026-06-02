@@ -256,6 +256,7 @@ transport = SseServerTransport("/messages/")
 
 # Define handler function for SSE connections
 async def handle_sse(request):
+    from starlette.responses import Response
     try:
         async with transport.connect_sse(
             request.scope, request.receive, request._send
@@ -265,20 +266,14 @@ async def handle_sse(request):
             )
     except BaseExceptionGroup as eg:
         # Suppress known MCP cancel scope cleanup errors (GitHub issues: python-sdk#521, pydantic-ai#2355)
-        # This occurs when parallel MCP tool calls (like CoT agents) create nested SSE connections
-        # that get cleaned up from different task contexts. The error is benign - responses are
-        # already successfully returned, this only affects cleanup.
         import logging
         logger = logging.getLogger(__name__)
-
-        # Check the FULL exception representation (includes all nested exceptions)
         full_exc_str = repr(eg).lower()
         if "cancel scope" in full_exc_str or "cancel_scope" in full_exc_str:
-            # This is the known benign cleanup error - suppress it
             logger.debug("Suppressed cancel scope cleanup error - this is expected with parallel MCP tool calls")
         else:
-            # Unknown error - re-raise
             raise
+    return Response()
 
 class TransportASGI:
     def __init__(self, transport):
