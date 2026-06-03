@@ -22,14 +22,14 @@ classifiers = [
 
 dependencies = [
     # MCP framework
-    "mcp==1.9.0",
+    "mcp==1.23.0",
     "fastmcp==2.3.4",
     "mcp-use==1.2.12",
 
     # LLM clients
     "anthropic==0.83.0",
     "openai==1.92.2",
-    "claude-agent-sdk==0.1.25",
+    "claude-agent-sdk==0.2.87",
 
     # LangGraph / LangChain
     "langgraph==0.6.4",
