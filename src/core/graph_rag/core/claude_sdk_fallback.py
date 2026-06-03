@@ -16,6 +16,7 @@ Integrates with existing guardrails:
 import asyncio
 import json
 import logging
+import os
 import time
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Callable, Union, TYPE_CHECKING
@@ -659,6 +660,19 @@ class ClaudeSDKFallback:
             "max_buffer_size": self._max_buffer_size,
         }
 
+        # Honour CLAUDE_CLI_PATH so an authenticated wrapper is used instead of the
+        # bundled ELF binary (which may not be logged in in service/systemd contexts).
+        # The SDK checks for its bundled ELF binary before honoring cli_path, so we
+        # patch _find_bundled_cli to return None, forcing it to fall through to cli_path.
+        _cli_path = os.environ.get("CLAUDE_CLI_PATH")
+        if _cli_path:
+            options_kwargs["cli_path"] = _cli_path
+            try:
+                from claude_agent_sdk._internal.transport import subprocess_cli
+                subprocess_cli.SubprocessCLITransport._find_bundled_cli = lambda self: None
+            except Exception:
+                pass
+
         # Add output_format if JSON response is requested
         if output_format:
             options_kwargs["output_format"] = output_format
@@ -778,6 +792,9 @@ class ClaudeSDKFallback:
                     # This is how PerAgentSDKClient does it and it works
                     if follow_up_session_id:
                         follow_up_options_kwargs["resume"] = follow_up_session_id
+
+                    if _cli_path:
+                        follow_up_options_kwargs["cli_path"] = _cli_path
 
                     follow_up_options = ClaudeAgentOptions(**follow_up_options_kwargs)
 

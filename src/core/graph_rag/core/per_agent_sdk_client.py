@@ -29,6 +29,7 @@ Usage:
 import asyncio
 import json
 import logging
+import os
 from dataclasses import dataclass, field
 from datetime import datetime
 from pathlib import Path
@@ -776,6 +777,19 @@ class PerAgentSDKClient:
             # Add session resumption if we have a session_id
             if session_id:
                 options_kwargs["resume"] = session_id
+
+            # Honour CLAUDE_CLI_PATH so an authenticated wrapper is used instead of the
+            # bundled ELF binary (which may not be logged in in service/systemd contexts).
+            # The SDK checks for its bundled ELF binary before honoring cli_path, so we
+            # patch _find_bundled_cli to return None, forcing it to fall through to cli_path.
+            _cli_path = os.environ.get("CLAUDE_CLI_PATH")
+            if _cli_path:
+                options_kwargs["cli_path"] = _cli_path
+                try:
+                    from claude_agent_sdk._internal.transport import subprocess_cli
+                    subprocess_cli.SubprocessCLITransport._find_bundled_cli = lambda self: None
+                except Exception:
+                    pass
 
             options = ClaudeAgentOptions(**options_kwargs)
 
