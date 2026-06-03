@@ -47,6 +47,15 @@ def _genpod_home() -> str:
     )
 
 
+def _genpod_data() -> str:
+    """Resolve GENPOD_DATA using XDG conventions (mirrors src/core/paths.py)."""
+    if v := os.environ.get("GENPOD_DATA"):
+        return v
+    return os.path.join(
+        os.environ.get("XDG_DATA_HOME", os.path.expanduser("~/.local/share")), "genpod"
+    )
+
+
 class ProperlyFixedComparativeAnalyzer:
     def __init__(
         self,
@@ -54,6 +63,7 @@ class ProperlyFixedComparativeAnalyzer:
         retriever_combination="pageindex_vector_graph",
         tool="hybrid",
         project_path: str = None,
+        project_name: str = None,
         collection_name: str = "HelloWorldApp_pageindex_v3",
     ):
         """
@@ -64,16 +74,22 @@ class ProperlyFixedComparativeAnalyzer:
             retriever_combination: which retrievers to combine for hybrid queries
             tool: query tool — hybrid | hybrid_fast | vector | pageindex | cpg
             project_path: path to the project being analysed
+            project_name: short name used as the Neo4j project identifier (defaults to project_path basename)
             collection_name: Qdrant collection name to query against
         """
         _home = _genpod_home()
+        _data = _genpod_data()
         self.config_file   = os.path.join(_home, "file_watcher_mcp_config.json")
         self.neo4j_config  = os.path.join(_home, "neo4j_config.json")
         self.vector_config = os.path.join(_home, "qdrant_config.json")
 
-        self.project_path    = project_path or "/opt/HelloWorldApp"
+        self.project_path    = project_path or os.path.expanduser("~/HelloWorldApp")
+        self.project_name    = project_name or os.path.basename(self.project_path.rstrip("/"))
         self.collection_name = collection_name
         self.vector_db       = "qdrant"
+
+        self.debug_dir   = Path(_data) / "mcp_debug_dumps"
+        self.results_dir = Path(_data) / "test_suite_benchmarking"
 
         self.test_scenario_filter  = test_scenario_filter
         self.retriever_combination = retriever_combination
@@ -466,8 +482,8 @@ class ProperlyFixedComparativeAnalyzer:
             )
             
             # PICKLE DUMP: Save raw MCP result for debugging
-            pickle_dir = Path("/opt/genpod/mcp_debug_dumps")
-            pickle_dir.mkdir(exist_ok=True)
+            pickle_dir = self.debug_dir
+            pickle_dir.mkdir(parents=True, exist_ok=True)
             
             timestamp_str = datetime.now().strftime("%Y%m%d_%H%M%S_%f")[:-3]  # Include milliseconds
             pickle_file = pickle_dir / f"vector_raw_response_{timestamp_str}.pkl"
@@ -565,8 +581,8 @@ class ProperlyFixedComparativeAnalyzer:
             )
 
             # PICKLE DUMP: Save raw MCP result for debugging
-            pickle_dir = Path("/opt/genpod/mcp_debug_dumps")
-            pickle_dir.mkdir(exist_ok=True)
+            pickle_dir = self.debug_dir
+            pickle_dir.mkdir(parents=True, exist_ok=True)
 
             timestamp_str = datetime.now().strftime("%Y%m%d_%H%M%S_%f")[:-3]
             pickle_file = pickle_dir / f"pageindex_raw_response_{timestamp_str}.pkl"
@@ -655,23 +671,18 @@ class ProperlyFixedComparativeAnalyzer:
                 "query_cpg_rag",
                 {
                     "user_query": query,
-                    "project_name": "HelloWorldApp",
+                    "project_name": self.project_name,
                     "config_path": self.neo4j_config,
-                    "project_path": self.project_path,
-                    "mappings_path": "/opt/genpod/project_analyzer_cli/project_analyzer/parsing_utils/mappings.yaml",
-                    "queries_path": "/opt/genpod/project_analyzer_cli/project_analyzer/final_queries",
-                    "max_results": 100,
-                    "max_agent_iterations": 25,  # Increased from 10 to 25 for complex queries
-                    "parallel_agents": False,  # Sequential execution for deterministic results
-                    # Note: max_parallel_workers not used - 4-agent team runs all sub-queries in parallel without worker limits
-                    "use_4_agent_team": True,  # Enable sophisticated 4-agent team workflow
-                    "four_agent_max_iterations": 3  # Limit iterations per 4-agent cycle
+                    "max_cot_iterations": 25,
+                    "parallel_agents": False,
+                    "use_4_agent_team": True,
+                    "four_agent_max_iterations": 3,
                 }
             )
             
             # PICKLE DUMP: Save raw MCP result for debugging
-            pickle_dir = Path("/opt/genpod/mcp_debug_dumps")
-            pickle_dir.mkdir(exist_ok=True)
+            pickle_dir = self.debug_dir
+            pickle_dir.mkdir(parents=True, exist_ok=True)
             
             timestamp_str = datetime.now().strftime("%Y%m%d_%H%M%S_%f")[:-3]  # Include milliseconds
             pickle_file = pickle_dir / f"cpg_raw_response_{timestamp_str}.pkl"
@@ -972,7 +983,7 @@ class ProperlyFixedComparativeAnalyzer:
                 "query_hybrid_rag",
                 {
                     "user_query": query,
-                    "project_name": "HelloWorldApp",
+                    "project_name": self.project_name,
                     "collection_name": self.collection_name,
                     "vector_config_path": self.vector_config,
                     "config_path": self.neo4j_config,
@@ -991,8 +1002,8 @@ class ProperlyFixedComparativeAnalyzer:
             )
             
             # PICKLE DUMP: Save raw MCP result for debugging
-            pickle_dir = Path("/opt/genpod/mcp_debug_dumps")
-            pickle_dir.mkdir(exist_ok=True)
+            pickle_dir = self.debug_dir
+            pickle_dir.mkdir(parents=True, exist_ok=True)
             
             timestamp_str = datetime.now().strftime("%Y%m%d_%H%M%S_%f")[:-3]  # Include milliseconds
             pickle_file = pickle_dir / f"hybrid_raw_response_{timestamp_str}.pkl"
@@ -1195,7 +1206,7 @@ class ProperlyFixedComparativeAnalyzer:
         print(f"🕐 Timestamp: {timestamp}")
         print(f"🔧 Vector-RAG: Using JSON output format")
         print(f"🔧 CPG: Using improved LLM generation with fallbacks")
-        print(f"💾 Results will be saved to: /opt/Test_Suite_Benchmarking/ (JSON format with CSV/Excel backups)")
+        print(f"Results will be saved to: {self.results_dir} (JSON format with CSV/Excel backups)")
         print("=" * 80)
         
         for i, scenario in enumerate(self.filtered_scenarios, 1):
@@ -1208,7 +1219,14 @@ class ProperlyFixedComparativeAnalyzer:
             print(f"Query: {scenario['query'][:100]}...")
 
             # Dispatch to selected tool
-            hybrid_result   = {}
+            hybrid_result = {
+                'status': 'skipped', 'response': '', 'ai_response': '', 'raw_results': [],
+                'response_time_ms': 0, 'error': '', 'metadata': {},
+                'synthesis': {'answer': '', 'confidence': 0.0}, 'synthesis_status': 'skipped',
+                'intent_analysis': {}, 'critic_validation': {}, 'cross_validation': {},
+                'pageindex_full_response': {}, 'vector_full_response': {}, 'cpg_full_response': {},
+                'hops': [], 'hop_count': 0, 'citations': [],
+            }
             vector_result   = {'status': 'skipped', 'ai_response': '', 'response': '', 'raw_results': [], 'response_time_ms': 0, 'error': '', 'metadata': {}, 'reasoning_trace': None}
             cpg_result      = {'status': 'skipped', 'response': '', 'raw_results': [], 'response_time_ms': 0, 'error': '', 'synthesis': {'answer': '', 'details': '', 'confidence': 0.0, 'suggestions': []}}
             pageindex_result = {'status': 'skipped', 'ai_response': '', 'raw_results': [], 'metadata': {}, 'response_time_ms': 0, 'error': ''}
@@ -1395,7 +1413,7 @@ class ProperlyFixedComparativeAnalyzer:
 
     def load_existing_results(self) -> tuple[List[Dict[str, Any]], str]:
         """Load existing results from JSON file if it exists, return results and timestamp."""
-        output_dir = Path("/opt/Test_Suite_Benchmarking")
+        output_dir = self.results_dir
         json_file = output_dir / "properly_fixed_comparative_analysis_current.json"
         
         if json_file.exists():
@@ -1422,7 +1440,7 @@ class ProperlyFixedComparativeAnalyzer:
             return
         
         # Create output directory
-        output_dir = Path("/opt/Test_Suite_Benchmarking")
+        output_dir = self.results_dir
         output_dir.mkdir(exist_ok=True)
         
         # Save to current JSON (for resuming) - main format
@@ -1454,7 +1472,7 @@ class ProperlyFixedComparativeAnalyzer:
     def save_final_results(self, results: List[Dict[str, Any]], timestamp: str):
         """Save final results to timestamped files and clean up current files."""
         # Create output directory
-        output_dir = Path("/opt/Test_Suite_Benchmarking")
+        output_dir = self.results_dir
         output_dir.mkdir(exist_ok=True)
         
         # Save to final timestamped JSON file (main format)
@@ -1599,6 +1617,8 @@ Examples:
     # ── Project ──────────────────────────────────────────────────────────────
     parser.add_argument("--project-path", type=str, default=None,
                         help="Path to the project to index or query against")
+    parser.add_argument("--project-name", type=str, default=None,
+                        help="Short project name used as Neo4j identifier (default: basename of --project-path)")
     parser.add_argument("--collection-name", type=str, default="HelloWorldApp_pageindex_v3",
                         help="Qdrant collection name (default: HelloWorldApp_pageindex_v3)")
 
@@ -1691,6 +1711,7 @@ Examples:
     print(f"Tool              : {args.tool}")
     print(f"Retriever combo   : {args.retriever_combination}")
     print(f"Project path      : {args.project_path or '(default)'}")
+    print(f"Project name      : {args.project_name or '(derived from path)'}")
     print(f"Collection name   : {args.collection_name}")
 
     async def run_analysis():
@@ -1699,6 +1720,7 @@ Examples:
             retriever_combination=args.retriever_combination,
             tool=args.tool,
             project_path=args.project_path,
+            project_name=args.project_name,
             collection_name=args.collection_name,
         )
         results, timestamp = await analyzer.run_comparative_analysis()
