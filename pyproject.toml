@@ -48,6 +48,13 @@ dependencies = [
     "openpyxl==3.1.5",
     "PyYAML==6.0.2",
 
+    # Async utilities
+    "nest-asyncio==1.6.0",
+    "typing-extensions==4.14.1",
+
+    # Embeddings (schema entity extraction in dynamic_schema_manager)
+    "sentence-transformers==4.1.0",
+
     # File watching + checksum dedup
     "watchdog==6.0.0",
     "redis==6.1.0",
