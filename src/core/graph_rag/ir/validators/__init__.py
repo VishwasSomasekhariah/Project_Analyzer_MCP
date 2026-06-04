@@ -1,4 +1,7 @@
 """
+.. deprecated::
+    Not used by any active MCP tools. Part of the deprecated IR pipeline.
+
 IR Validators - 3-layer validation for QueryIR.
 
 Validation Layers:

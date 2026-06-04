@@ -1,4 +1,10 @@
 """
+.. deprecated::
+    This entire IR module is deprecated and not used by any active MCP tools.
+    The active pipeline is the CoT+Verifier multi-agent workflow in
+    ``src/core/graph_rag/orchestrators/`` and ``src/core/graph_rag/workflows/``.
+    Do not use this module for new work.
+
 Intermediate Representation (IR) Module for Graph RAG.
 
 This module provides a structured, validatable intermediate representation

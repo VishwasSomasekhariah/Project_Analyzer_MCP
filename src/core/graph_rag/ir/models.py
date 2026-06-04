@@ -1,4 +1,7 @@
 """
+.. deprecated::
+    Not used by any active MCP tools. Part of the deprecated IR pipeline.
+
 Intermediate Representation (IR) Models for Graph RAG queries.
 
 This module defines the IR schema that sits between natural language queries

@@ -1,4 +1,7 @@
 """
+.. deprecated::
+    Not used by any active MCP tools. Part of the deprecated IR pipeline.
+
 IR Context for efficient alias resolution and schema lookup.
 
 The IRContext is built from a QueryIR and provides O(1) lookups for:

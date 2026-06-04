@@ -1,4 +1,7 @@
 """
+.. deprecated::
+    Not used by any active MCP tools. Part of the deprecated IR pipeline.
+
 IR Validator - Layer 1 (Syntax) and Layer 2 (Schema) validation.
 
 This module provides deterministic validation of QueryIR against:

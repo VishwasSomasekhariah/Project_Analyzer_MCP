@@ -1,4 +1,7 @@
 """
+.. deprecated::
+    Not used by any active MCP tools. Part of the deprecated IR pipeline.
+
 Cypher Compiler - Deterministic IR to Cypher compilation.
 
 This module compiles validated QueryIR to Cypher queries without any LLM.

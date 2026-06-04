@@ -1,4 +1,8 @@
 """
+.. deprecated::
+    Not used by any active MCP tools. See ``src/core/graph_rag/workflows/four_agent_workflow.py``
+    for the active multi-agent pipeline.
+
 MultiAgentIRCoT Orchestrator - IR-based Multi-Agent Chain-of-Thought.
 
 This orchestrator integrates IR-based query generation into the existing

@@ -1,4 +1,7 @@
 """
+.. deprecated::
+    Not used by any active MCP tools. Part of the deprecated IR pipeline.
+
 IR Planner Agent - LLM-based QueryIR generation from natural language.
 
 This agent translates natural language queries into structured QueryIR,

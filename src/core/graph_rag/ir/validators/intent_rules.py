@@ -1,4 +1,7 @@
 """
+.. deprecated::
+    Not used by any active MCP tools. Part of the deprecated IR pipeline.
+
 Intent Rule Engine - Schema-Introspective Semantic Validation.
 
 This module provides OPTIONAL semantic validation that:
