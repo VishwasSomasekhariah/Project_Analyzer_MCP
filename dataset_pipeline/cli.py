@@ -13,6 +13,7 @@ from __future__ import annotations
 import argparse
 import asyncio
 import logging
+import os
 import sys
 
 from dataset_pipeline.config import PipelineConfig
@@ -43,9 +44,18 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument("--plans-per-query", type=int, default=3)
 
     # Stage 3
+    p.add_argument("--collection-name", help="Qdrant collection name")
     p.add_argument("--batch-size", type=int, default=10)
     p.add_argument("--no-resume", action="store_true", help="Start execution from scratch")
     p.add_argument("--query-timeout", type=int, default=300)
+    p.add_argument("--no-async-jobs", action="store_true",
+                   help="Use the legacy single long-held MCP call instead of submit/poll jobs")
+    p.add_argument("--poll-interval", type=int, default=20,
+                   help="Seconds between check_job_status polls (async jobs)")
+    p.add_argument("--job-deadline", type=int, default=7200,
+                   help="Give up on an async job after this many seconds")
+    p.add_argument("--limit", type=int, default=0,
+                   help="Stage 3: only execute the first N not-yet-done plans (0 = all)")
 
     # Stage 4
     p.add_argument("--min-citation-coverage", type=float, default=0.3)
@@ -60,7 +70,7 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument("--output-dir", help="Output directory for train/val JSONL files")
 
     # General
-    p.add_argument("--data-dir", help="Pipeline working directory")
+    p.add_argument("--data-dir", help="Pipeline working directory (checkpoints stored inside data-dir/checkpoints)")
     p.add_argument("--log-level", choices=["DEBUG", "INFO", "WARNING"], default="INFO")
     p.add_argument("--dry-run", action="store_true", help="Print plan, execute nothing")
 
@@ -77,10 +87,16 @@ def build_config(args: argparse.Namespace) -> PipelineConfig:
         cfg.gt_variants_per_query = args.gt_variants_per_query
     if args.plans_per_query:
         cfg.plans_per_query = args.plans_per_query
+    if args.collection_name:
+        cfg.collection_name = args.collection_name
     if args.batch_size:
         cfg.batch_size = args.batch_size
     cfg.resume = not args.no_resume
     cfg.query_timeout = args.query_timeout
+    cfg.use_async_jobs = not args.no_async_jobs
+    cfg.poll_interval_s = args.poll_interval
+    cfg.job_deadline_s = args.job_deadline
+    cfg.limit = args.limit
     cfg.min_citation_coverage = args.min_citation_coverage
     cfg.min_answer_length = args.min_answer_length
     cfg.augment_factor = args.augment_factor
@@ -90,6 +106,7 @@ def build_config(args: argparse.Namespace) -> PipelineConfig:
         cfg.output_dir = args.output_dir
     if args.data_dir:
         cfg.data_dir = args.data_dir
+        cfg.checkpoint_dir = str(os.path.join(args.data_dir, "checkpoints"))
     return cfg
 
 
