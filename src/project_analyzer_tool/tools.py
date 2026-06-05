@@ -241,6 +241,412 @@ project_config_resource = FunctionResource(
     fn=get_project_config  # This was missing in your implementation
 )
 
+# ─────────────────────────────────────────────────────────────────────────────
+# Async job workers (long-running tool calls run as background tasks)
+#
+# These are async-correct copies of the long-running query tools, used by the
+# submit_job / check_job_status / cancel_job tools below. They differ from the
+# legacy @mcp.tool() versions in one critical way: CLI subprocesses are launched
+# with asyncio.create_subprocess_exec instead of the blocking subprocess.run, so
+# they never freeze the event loop (the loop must stay responsive so a polling
+# client's check_job_status returns in milliseconds while a job runs).
+#
+# The legacy tools are kept intact for side-by-side validation (see CLAUDE.md);
+# remove them and this duplication once the async-job path is verified.
+# ─────────────────────────────────────────────────────────────────────────────
+import asyncio
+import inspect
+from src.core.job_store import job_store
+
+
+async def _run_cli_async(cli_command, register_proc=None):
+    """Run a CLI subprocess without blocking the event loop.
+
+    Returns (returncode, stdout, stderr). On task cancellation, kills the child
+    before re-raising so cancel_job actually stops the work.
+    """
+    proc = await asyncio.create_subprocess_exec(
+        *cli_command,
+        stdout=asyncio.subprocess.PIPE,
+        stderr=asyncio.subprocess.PIPE,
+        cwd=os.getcwd(),
+    )
+    if register_proc:
+        register_proc(proc)
+    try:
+        out_b, err_b = await proc.communicate()
+    except asyncio.CancelledError:
+        try:
+            proc.kill()
+            await proc.wait()
+        except Exception:  # noqa: BLE001
+            pass
+        raise
+    return (
+        proc.returncode,
+        out_b.decode("utf-8", "replace"),
+        err_b.decode("utf-8", "replace"),
+    )
+
+
+async def _run_pageindex_only(
+    query: str,
+    project_path: str = "/opt/HelloWorldApp",
+    mcts_iterations: int = 20,
+    config: str = QDRANT_CONFIG,
+    output_format: str = "json",
+    register_proc=None,
+) -> dict:
+    try:
+        cli_command = [GENPOD_SEMANTIC_RAG_BIN]
+        if config and os.path.exists(config):
+            cli_command.extend(["--config", config])
+        cli_command.extend(["query", query])
+        cli_command.extend(["--retriever", "pageindex"])
+        cli_command.extend(["--project-path", project_path])
+        cli_command.extend(["--mcts-iterations", str(mcts_iterations)])
+        if output_format:
+            cli_command.extend(["--output-format", output_format])
+
+        returncode, stdout, stderr = await _run_cli_async(cli_command, register_proc)
+
+        if returncode == 0:
+            if output_format == "json":
+                try:
+                    json_response = json.loads(stdout)
+                    cli_metadata = json_response.get("metadata", {})
+                    validation = cli_metadata.get("validation", {})
+                    entity_grounding = validation.get("entity_grounding", {})
+                    return {
+                        "status": "success",
+                        "query": json_response.get("query", query),
+                        "project_path": project_path,
+                        "ai_response": json_response.get("response", ""),
+                        "raw_results": json_response.get("results", []),
+                        "metadata": {
+                            "total_results": json_response.get("total_results", 0),
+                            "processing_time": json_response.get("processing_time", 0),
+                            "confidence_score": json_response.get("confidence_score"),
+                            "mcts_iterations": mcts_iterations,
+                            "faithfulness_score": validation.get("faithfulness_score"),
+                            "coverage_score": validation.get("coverage_score"),
+                            "unsupported_claims": validation.get("unsupported_claims", []),
+                            "uncovered_topics": validation.get("uncovered_topics", []),
+                            "hallucinated_count": entity_grounding.get("hallucinated_count"),
+                            "hallucinated_entities": entity_grounding.get("hallucinated_entities", []),
+                            "answer_identifiers": entity_grounding.get("answer_identifiers"),
+                            "symbol_table_size": entity_grounding.get("symbol_table_size"),
+                        },
+                        "full_response": stdout,
+                    }
+                except json.JSONDecodeError:
+                    return {
+                        "status": "success",
+                        "query": query,
+                        "project_path": project_path,
+                        "ai_response": stdout,
+                        "raw_results": [],
+                        "metadata": {},
+                        "full_response": stdout,
+                        "note": "JSON parsing failed, using raw output",
+                    }
+            return {
+                "status": "success",
+                "query": query,
+                "project_path": project_path,
+                "ai_response": stdout,
+                "raw_results": [],
+                "metadata": {},
+                "full_response": stdout,
+            }
+        return {
+            "status": "error",
+            "error": stderr,
+            "stdout": stdout,
+            "returncode": returncode,
+        }
+    except asyncio.CancelledError:
+        raise
+    except Exception as e:  # noqa: BLE001
+        return {
+            "status": "error",
+            "step": "query_pageindex_only",
+            "error": str(e),
+            "traceback": traceback.format_exc(),
+        }
+
+
+async def _run_vector_only(
+    query: str,
+    collection_name: str,
+    max_results: int = 10,
+    config: str = None,
+    output_format: str = "json",
+    vector_db: str = "qdrant",
+    enable_reasoning: bool = True,
+    max_branches: int = 2,
+    register_proc=None,
+) -> dict:
+    try:
+        cli_command = [GENPOD_SEMANTIC_RAG_BIN]
+        if config and os.path.exists(config):
+            cli_command.extend(["--config", config])
+        cli_command.extend(["query", query])
+        cli_command.extend(["--collection-name", collection_name])
+        cli_command.extend(["--max-results", str(max_results)])
+        cli_command.extend(["--vector-db", vector_db])
+        if enable_reasoning:
+            cli_command.append("--reasoning")
+            cli_command.extend(["--max-branches", str(max_branches)])
+        if output_format:
+            cli_command.extend(["--output-format", output_format])
+
+        returncode, stdout, stderr = await _run_cli_async(cli_command, register_proc)
+
+        if returncode == 0:
+            if output_format == "json":
+                try:
+                    json_response = json.loads(stdout)
+                    return {
+                        "status": "success",
+                        "query": json_response.get("query", query),
+                        "collection_name": collection_name,
+                        "ai_response": json_response.get("response", ""),
+                        "raw_results": json_response.get("results", []),
+                        "metadata": {
+                            "total_results": json_response.get("total_results", 0),
+                            "processing_time": json_response.get("processing_time", 0),
+                            "confidence_score": json_response.get("confidence_score"),
+                            "has_diagram": json_response.get("has_diagram", False),
+                            "reasoning_used": json_response.get("reasoning_used", False),
+                            "reasoning_metrics": json_response.get("reasoning_metrics"),
+                            "diagram_content": json_response.get("diagram_content"),
+                        },
+                        "reasoning_trace": json_response.get("reasoning_trace"),
+                        "full_response": stdout,
+                    }
+                except json.JSONDecodeError:
+                    return {
+                        "status": "success",
+                        "query": query,
+                        "collection_name": collection_name,
+                        "ai_response": stdout,
+                        "raw_results": [],
+                        "metadata": {},
+                        "full_response": stdout,
+                        "note": "JSON parsing failed, using raw output",
+                    }
+            return {
+                "status": "success",
+                "query": query,
+                "collection_name": collection_name,
+                "ai_response": stdout,
+                "raw_results": [],
+                "metadata": {},
+                "full_response": stdout,
+            }
+        return {
+            "status": "error",
+            "error": stderr,
+            "stdout": stdout,
+            "returncode": returncode,
+        }
+    except asyncio.CancelledError:
+        raise
+    except Exception as e:  # noqa: BLE001
+        return {
+            "status": "error",
+            "step": "query_vector_only",
+            "error": str(e),
+            "traceback": traceback.format_exc(),
+        }
+
+
+async def _run_cpg_rag(
+    user_query: str,
+    project_name: str = "HelloWorldApp",
+    config_path: str = NEO4J_CONFIG,
+    schema_path: str = SCHEMA_PATH,
+    llm_model: str = "gpt-4o",
+    max_cot_iterations: int = 15,
+    max_verifier_iterations: int = 10,
+    max_parallel_workers: int = 5,
+    parallel_agents: bool = True,
+    enable_verification: bool = True,
+    enable_entity_resolution: bool = True,
+    enable_observer: bool = False,
+    use_4_agent_team: bool = True,
+    four_agent_max_iterations: int = 3,
+    register_proc=None,  # unused: cpg_rag is in-process (no subprocess)
+) -> dict:
+    system = None
+    try:
+        import time as _time
+
+        start_time = _time.time()
+        logger.info("Starting Multi-Agent CPG RAG for: %s", user_query)
+
+        from src.core.graph_rag import MultiAgentCoT, SystemConfig
+
+        config = SystemConfig(
+            mcp_config_path=config_path,
+            yaml_schema_path=schema_path,
+            llm_model=llm_model,
+            max_cot_iterations=max_cot_iterations,
+            max_verifier_iterations=max_verifier_iterations,
+            max_parallel_workers=max_parallel_workers,
+            parallel_cot_agents=parallel_agents,
+            verification_enabled=enable_verification,
+            entity_resolution_enabled=enable_entity_resolution,
+            use_4_agent_team=use_4_agent_team,
+            four_agent_max_iterations=four_agent_max_iterations,
+            fallback_mcp_config_path=CLAUDE_SDK_MCP_CONFIG,
+        )
+
+        system = MultiAgentCoT(config, enable_observer=enable_observer)
+        await system.initialize()
+        response = await system.run(user_query)
+
+        citations_list = []
+        for citation in response.citations:
+            citations_list.append({
+                "claim": citation.claim,
+                "source_file": citation.source_file,
+                "source_line": citation.source_line,
+                "source_location": citation.source_location,
+                "entity_name": citation.entity_name,
+                "entity_type": citation.entity_type,
+                "evidence": citation.evidence,
+                "verification_status": citation.verification_status.value if citation.verification_status else None,
+                "verification_explanation": citation.verification_explanation,
+                "discovery_query": citation.discovery_query,
+                "verification_query": citation.verification_query,
+                "cot_agent_id": citation.cot_agent_id,
+                "confidence": citation.confidence.value if citation.confidence else None,
+            })
+
+        token_usage = {}
+        if response.token_usage:
+            token_usage = {
+                "total_tokens": response.token_usage.total_tokens,
+                "total_prompt_tokens": response.token_usage.total_prompt_tokens,
+                "total_completion_tokens": response.token_usage.total_completion_tokens,
+                "call_count": response.token_usage.call_count,
+                "by_agent_role": response.token_usage.by_agent_role or {},
+            }
+
+        workflow_type = "4_agent_team" if use_4_agent_team else "multi_agent_tot_cot"
+
+        return {
+            "status": "success",
+            "tool_name": "query_cpg_rag",
+            "workflow_type": workflow_type,
+            "user_query": user_query,
+            "project_name": project_name,
+            "response": {
+                "answer": response.answer,
+                "confidence": response.confidence.value,
+                "status": "success",
+            },
+            "citations": citations_list,
+            "raw_results": citations_list,
+            "verified_count": response.verified_count,
+            "unverified_count": response.unverified_count,
+            "total_citations": len(citations_list),
+            "sub_queries_count": response.sub_queries_count,
+            "llm_calls_count": response.llm_calls_count,
+            "execution_time_ms": response.execution_time_ms,
+            "token_usage": token_usage,
+            "total_tokens_used": token_usage.get("total_tokens", 0),
+            "total_input_tokens": token_usage.get("total_prompt_tokens", 0),
+            "total_output_tokens": token_usage.get("total_completion_tokens", 0),
+            "agent_workflow": workflow_type,
+            "agent_metadata": {
+                "llm_model": llm_model,
+                "max_cot_iterations": max_cot_iterations,
+                "parallel_agents": parallel_agents,
+                "verification_enabled": enable_verification,
+                "entity_resolution_enabled": enable_entity_resolution,
+                "observer_enabled": enable_observer,
+                "use_4_agent_team": use_4_agent_team,
+                "four_agent_max_iterations": four_agent_max_iterations,
+            },
+            "cli_parameters_used": {
+                "config_path": config_path,
+                "schema_path": schema_path,
+                "llm_model": llm_model,
+            },
+            "message": f"{'4-Agent Team' if use_4_agent_team else 'Multi-Agent CoT'} CPG RAG completed successfully ({response.execution_time_ms}ms)",
+        }
+    except asyncio.CancelledError:
+        raise
+    except ImportError as e:
+        return {
+            "status": "error",
+            "tool_name": "query_cpg_rag",
+            "error": f"Multi-Agent graph_rag module not available: {e}",
+            "traceback": traceback.format_exc(),
+            "fallback_suggestion": "Check that src.core.graph_rag is properly installed",
+            "user_query": user_query,
+        }
+    except Exception as e:  # noqa: BLE001
+        return {
+            "status": "error",
+            "tool_name": "query_cpg_rag",
+            "error": str(e),
+            "traceback": traceback.format_exc(),
+            "user_query": user_query,
+            "project_name": project_name,
+            "message": f"Multi-Agent CPG RAG failed: {str(e)}",
+        }
+    finally:
+        if system:
+            try:
+                await system.shutdown()
+            except Exception:  # noqa: BLE001
+                pass
+
+
+# Tools that may be run as background jobs via submit_job.
+_JOB_WORKERS = {
+    "query_pageindex_only": _run_pageindex_only,
+    "query_vector_only": _run_vector_only,
+    "query_cpg_rag": _run_cpg_rag,
+}
+
+
+# Workers whose bodies can block the event loop with synchronous / CPU-bound
+# work (e.g. sentence-transformers entity extraction in the cpg workflow). These
+# are run in a separate thread with their own event loop so the server stays
+# responsive to check_job_status polls. The subprocess-based workers
+# (pageindex/vector) are already non-blocking and stay on the main loop.
+_THREAD_WORKERS = {"query_cpg_rag"}
+
+
+async def _dispatch_job(tool_name: str, params: dict, register_proc) -> dict:
+    """Call a worker, tolerating (and logging) params it doesn't accept.
+
+    Loop-blocking workers (see _THREAD_WORKERS) run in a worker thread with a
+    fresh event loop via asyncio.to_thread, so the server event loop stays free.
+    """
+    fn = _JOB_WORKERS[tool_name]
+    sig = inspect.signature(fn)
+    accepted = {k: v for k, v in params.items() if k in sig.parameters and k != "register_proc"}
+    dropped = [k for k in params if k not in sig.parameters]
+    if dropped:
+        logger.warning("submit_job: dropping params not accepted by %s: %s", fn.__name__, dropped)
+
+    if tool_name in _THREAD_WORKERS:
+        # A thread running asyncio.run cannot be force-cancelled: cancel_job will
+        # mark the job cancelled and abandon the thread (it finishes in the
+        # background and its result is discarded).
+        return await asyncio.to_thread(lambda a=accepted: asyncio.run(fn(**a)))
+
+    if "register_proc" in sig.parameters:
+        accepted["register_proc"] = register_proc
+    return await fn(**accepted)
+
+
 def register_all_tools(mcp: FastMCP):
     """Register all tools with the MCP server"""
     
@@ -1132,6 +1538,62 @@ def register_all_tools(mcp: FastMCP):
                 except Exception:
                     pass  # Suppress cleanup errors - connections will close anyway
                 
+    @mcp.tool()
+    async def submit_job(tool_name: str, params: dict, idempotency_key: str = None) -> dict:
+        """
+        Submit a long-running tool as a background job and return immediately.
+
+        Use this instead of calling a long-running tool directly when the call may
+        exceed the SSE/proxy idle timeout (~45 min). Returns a job_id; poll
+        check_job_status(job_id) until status is terminal, then read 'result'.
+
+        Args:
+            tool_name: One of query_cpg_rag, query_pageindex_only, query_vector_only
+            params: Keyword arguments for that tool (unknown keys are ignored)
+            idempotency_key: Optional — re-submitting with the same key returns the
+                existing (non-failed) job instead of starting a duplicate.
+
+        Returns:
+            {"status": "queued", "job_id": "<id>", "tool": "<tool_name>"} or an error.
+        """
+        fn = _JOB_WORKERS.get(tool_name)
+        if fn is None:
+            return {
+                "status": "error",
+                "error": f"Unknown tool_name '{tool_name}'. Allowed: {sorted(_JOB_WORKERS)}",
+            }
+        if not isinstance(params, dict):
+            return {"status": "error", "error": "params must be an object/dict"}
+
+        async def _runner(p, register_proc, _tn=tool_name):
+            return await _dispatch_job(_tn, p, register_proc)
+
+        job = await job_store.submit(tool_name, params, _runner, idempotency_key)
+        return {"status": job.status, "job_id": job.job_id, "tool": tool_name}
+
+    @mcp.tool()
+    async def check_job_status(job_id: str) -> dict:
+        """
+        Return the status of a job submitted via submit_job.
+
+        status is one of: queued, running, succeeded, failed, cancelled, lost,
+        not_found. On 'succeeded', 'result' holds the full tool result dict. On
+        failed/cancelled/lost, 'error' explains why. 'lost' means the server
+        restarted while the job was running — resubmit it.
+        """
+        job = job_store.get(job_id)
+        if job is None:
+            return {"status": "not_found", "job_id": job_id}
+        return job.to_public()
+
+    @mcp.tool()
+    async def cancel_job(job_id: str) -> dict:
+        """Cancel a running job (stops its task and kills any child subprocess)."""
+        job = await job_store.cancel(job_id)
+        if job is None:
+            return {"status": "not_found", "job_id": job_id}
+        return job.to_public()
+
     @mcp.tool()
     async def query_hybrid_rag(
         user_query: str,
