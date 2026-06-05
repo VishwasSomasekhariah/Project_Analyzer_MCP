@@ -49,6 +49,12 @@ class PipelineConfig:
     batch_size: int = 10
     query_timeout: int = 300               # seconds per MCP call
     resume: bool = True
+    # Async job execution: submit a long-running tool, then poll for the result
+    # instead of holding one SSE call open for 30-90 min (which proxies drop).
+    use_async_jobs: bool = True
+    poll_interval_s: int = 20              # seconds between check_job_status polls
+    job_deadline_s: int = 7200             # give up on a job after this long (2h)
+    limit: int = 0                         # max plans to execute this run (0 = all)
 
     # --- Stage 4 ---
     min_citation_coverage: float = 0.3
