@@ -125,5 +125,6 @@ GENPOD_GRAPH_INDEXER_BIN: str = _find_cli("genpod-graph-indexer")
 
 APOC_CACHE    = str(GENPOD_HOME / ".cache" / "apoc_procedures.json")
 STATE_PKL     = str(GENPOD_DATA / "STATE.pkl")
+JOBS_DIR      = str(GENPOD_DATA / "jobs")  # async job records (see src/core/job_store.py)
 DEBUG_DUMPS   = str(GENPOD_DATA / "debug_dumps")
 LOG_DIR       = str(Path(os.environ.get("GENPOD_LOG_DIR", str(GENPOD_DATA / "logs"))))
