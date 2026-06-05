@@ -223,6 +223,7 @@ from starlette.responses import JSONResponse
 from mcp.server.fastmcp import FastMCP
 from mcp.server.sse import SseServerTransport
 from src.project_analyzer_tool.tools import register_all_tools, project_config_resource
+from src.core.job_store import job_store
 
 # Configure production logging with rotation
 from src.core.logging_config import setup_logging, cleanup_old_logs
@@ -281,7 +282,24 @@ class TransportASGI:
     async def __call__(self, scope, receive, send):
         await self.transport.handle_post_message(scope, receive, send)
 
+async def _on_startup():
+    """Recover async jobs orphaned by a restart and GC old job records.
+
+    A background job's asyncio.Task and child subprocess die with the server
+    process, so any job left 'running'/'queued' in the durable store is marked
+    'lost' here — the polling client then fails cleanly instead of waiting
+    forever. (See src/core/job_store.py.)
+    """
+    try:
+        lost = job_store.recover_on_startup()
+        removed = job_store.gc(max_age_days=7)
+        logger.info("Job store ready: %d orphaned job(s) -> lost, %d old record(s) removed", lost, removed)
+    except Exception:
+        logger.exception("Job store startup recovery failed")
+
+
 app = Starlette(
+    on_startup=[_on_startup],
     routes=[
         Route("/project-config", get_project_config, methods=["GET"]),
         Route("/sse", endpoint=handle_sse, methods=["GET"]),
