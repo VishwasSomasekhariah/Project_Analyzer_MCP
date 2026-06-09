@@ -16,6 +16,7 @@ import json
 import logging
 import time
 import os
+import uuid
 import pandas as pd
 import pickle
 from pathlib import Path
@@ -65,6 +66,9 @@ class ProperlyFixedComparativeAnalyzer:
         project_path: str = None,
         project_name: str = None,
         collection_name: str = "HelloWorldApp_pageindex_v3",
+        use_async_jobs: bool = True,
+        poll_interval: int = 20,
+        job_deadline: int = 7200,
     ):
         """
         Initialize the properly fixed comparative analyzer.
@@ -94,6 +98,15 @@ class ProperlyFixedComparativeAnalyzer:
         self.test_scenario_filter  = test_scenario_filter
         self.retriever_combination = retriever_combination
         self.tool = tool  # "hybrid" | "hybrid_fast" | "vector" | "pageindex" | "cpg"
+
+        # Async-job (submit + poll) settings. When enabled, long-running tools are
+        # submitted via the server's submit_job and polled with check_job_status,
+        # so no SSE connection is held open during the work (mirrors the dataset
+        # pipeline's AgentRunner). Disable with --no-async-jobs for the legacy
+        # single long-held call.
+        self.use_async_jobs = use_async_jobs
+        self.poll_interval  = poll_interval
+        self.job_deadline   = job_deadline
         
         # Note: Schema is now handled by Enhanced Graph RAG system, not hardcoded
         # self.graph_schema_prompt = self.get_comprehensive_schema_prompt()  # Removed - using Enhanced Graph RAG
@@ -338,31 +351,109 @@ class ProperlyFixedComparativeAnalyzer:
         
         return self.test_scenarios
 
-    async def create_mcp_session_with_timeout(self) -> MCPSession:
-        """Create MCP session with custom timeouts for long-running workflows."""
+    async def create_mcp_session_with_timeout(self, sse_read_timeout: int = 3600) -> MCPSession:
+        """Create MCP session with custom timeouts for long-running workflows.
+
+        sse_read_timeout defaults to 3600s (1 hour) for the legacy long-held tool
+        calls. For async-job submit/poll calls (submit_job/check_job_status), each
+        call returns in milliseconds, so a short timeout is passed instead.
+        """
         # Load config to get server details
         with open(self.config_file) as f:
             config = json.load(f)
 
         server_config = config['mcpServers']['mcp-analysis-server']
 
-        # Create connector with custom timeouts
-        # Default: timeout=5, sse_read_timeout=300 (5 minutes)
-        # Custom: timeout=10, sse_read_timeout=3600 (1 hour for long workflows)
         connector = HttpConnector(
             base_url=server_config['url'],
             headers=server_config.get('headers'),
             auth_token=server_config.get('auth_token'),
             timeout=10,  # HTTP operation timeout
-            sse_read_timeout=3600,  # SSE read timeout: 1 hour (for long workflows)
+            sse_read_timeout=sse_read_timeout,
         )
 
         # Create session with custom connector
         session = MCPSession(connector)
         await session.initialize()
 
-        logger.info("📡 MCP session created with custom SSE timeout: 3600s (1 hour)")
+        logger.info("📡 MCP session created with SSE timeout: %ss", sse_read_timeout)
         return session
+
+    @staticmethod
+    def _parse_tool_result(result) -> Dict[str, Any]:
+        """Extract the JSON dict from an mcp_use call_tool result (content[0].text)."""
+        content = result.content[0] if isinstance(result.content, list) else result.content
+        text = content.text if hasattr(content, 'text') else str(content)
+        try:
+            return json.loads(text)
+        except (json.JSONDecodeError, TypeError):
+            return {"status": "error", "error": "non-JSON tool result", "raw": text}
+
+    async def _call_job_via_session(self, tool: str, params: Dict[str, Any]) -> Dict[str, Any]:
+        """Submit `tool` as a background job, then poll until it finishes.
+
+        Mirrors dataset_pipeline/execution/agent_runner.py::_call_job. No SSE
+        connection is held open during the long-running work — submit and each
+        poll use a short-lived session. Returns the original tool result dict
+        (same shape the synchronous tool would have returned). Raises on
+        failure/timeout so the caller's try/except records the error as before.
+        """
+        idem = uuid.uuid4().hex
+
+        # Submit (short session — returns a job_id in milliseconds).
+        session = await self.create_mcp_session_with_timeout(sse_read_timeout=60)
+        try:
+            submit = self._parse_tool_result(await session.call_tool(
+                "submit_job",
+                {"tool_name": tool, "params": params, "idempotency_key": idem},
+            ))
+        finally:
+            try:
+                await session.disconnect()
+            except Exception:
+                pass
+
+        job_id = submit.get("job_id")
+        if not job_id:
+            raise RuntimeError(f"submit_job failed for {tool}: {submit.get('error', submit)}")
+        logger.info("📨 Submitted %s as job %s — polling every %ss", tool, job_id, self.poll_interval)
+
+        deadline = time.time() + self.job_deadline
+        not_found = 0
+        while time.time() < deadline:
+            await asyncio.sleep(self.poll_interval)
+            session = await self.create_mcp_session_with_timeout(sse_read_timeout=60)
+            try:
+                st = self._parse_tool_result(
+                    await session.call_tool("check_job_status", {"job_id": job_id})
+                )
+            finally:
+                try:
+                    await session.disconnect()
+                except Exception:
+                    pass
+
+            status = st.get("status")
+            if status == "succeeded":
+                logger.info("✅ Job %s (%s) succeeded", job_id, tool)
+                return st.get("result") or {}
+            if status in ("failed", "cancelled", "lost"):
+                raise RuntimeError(f"job {job_id} ({tool}) {status}: {st.get('error')}")
+            if status == "not_found":
+                not_found += 1
+                if not_found >= 3:
+                    raise RuntimeError(f"job {job_id} ({tool}) not found — server may have lost it")
+            else:
+                not_found = 0  # queued / running — keep polling
+
+        # Deadline exceeded — best-effort cancel, then fail.
+        try:
+            session = await self.create_mcp_session_with_timeout(sse_read_timeout=60)
+            await session.call_tool("cancel_job", {"job_id": job_id})
+            await session.disconnect()
+        except Exception:
+            pass
+        raise TimeoutError(f"job {job_id} ({tool}) exceeded deadline of {self.job_deadline}s")
 
     # DEPRECATED: Old hardcoded schema approach - replaced with Enhanced Graph RAG
     # def get_comprehensive_schema_prompt(self) -> str:
@@ -1125,52 +1216,38 @@ class ProperlyFixedComparativeAnalyzer:
         session = None
 
         try:
-            session = await self.create_mcp_session_with_timeout()
+            params = {
+                "user_query": query,
+                "project_path": self.project_path,
+                "collection_name": self.collection_name,
+                "neo4j_config_path": self.neo4j_config,
+                "qdrant_config_path": self.vector_config,
+                "max_hops": 5,
+                "max_results": 5,
+            }
 
-            result = await session.call_tool(
-                "query_hybrid_fast_rag",
-                {
-                    "user_query": query,
-                    "project_path": self.project_path,
-                    "collection_name": self.collection_name,
-                    "neo4j_config_path": self.neo4j_config,
-                    "qdrant_config_path": self.vector_config,
-                    "max_hops": 5,
-                    "max_results": 5,
-                }
-            )
+            if self.use_async_jobs:
+                # Submit + poll — no SSE connection held open during the multi-hop work.
+                result_data = await self._call_job_via_session("query_hybrid_fast_rag", params)
+            else:
+                # Legacy single long-held call.
+                session = await self.create_mcp_session_with_timeout()
+                result = await session.call_tool("query_hybrid_fast_rag", params)
+                result_data = self._parse_tool_result(result)
 
-            result_content = result.content[0] if isinstance(result.content, list) else result.content
-            content_text = result_content.text if hasattr(result_content, 'text') else str(result_content)
             response_time_ms = int((time.time() - start_time) * 1000)
-
-            try:
-                result_data = json.loads(content_text)
-                return {
-                    "status": result_data.get("status", "success"),
-                    "ai_response": result_data.get("answer", ""),
-                    "response": result_data.get("answer", ""),
-                    "raw_results": result_data.get("citations", []),
-                    "hops": result_data.get("hops", []),
-                    "hop_count": result_data.get("hop_count", 0),
-                    "citations": result_data.get("citations", []),
-                    "response_time_ms": response_time_ms,
-                    "error": result_data.get("error", ""),
-                    "metadata": {"hop_count": result_data.get("hop_count", 0)},
-                }
-            except json.JSONDecodeError:
-                return {
-                    "status": "error",
-                    "ai_response": content_text,
-                    "response": content_text,
-                    "raw_results": [],
-                    "hops": [],
-                    "hop_count": 0,
-                    "citations": [],
-                    "response_time_ms": response_time_ms,
-                    "error": "JSON parse error",
-                    "metadata": {},
-                }
+            return {
+                "status": result_data.get("status", "success"),
+                "ai_response": result_data.get("answer", ""),
+                "response": result_data.get("answer", ""),
+                "raw_results": result_data.get("citations", []),
+                "hops": result_data.get("hops", []),
+                "hop_count": result_data.get("hop_count", 0),
+                "citations": result_data.get("citations", []),
+                "response_time_ms": response_time_ms,
+                "error": result_data.get("error", ""),
+                "metadata": {"hop_count": result_data.get("hop_count", 0)},
+            }
 
         except Exception as e:
             logger.error(f"❌ Hybrid Fast RAG query failed: {e}")
@@ -1631,6 +1708,16 @@ Examples:
                         choices=["hybrid", "hybrid_fast", "vector", "pageindex", "cpg"],
                         help="Query tool per scenario (default: hybrid)")
 
+    # ── Async-job (submit + poll) options ─────────────────────────────────────
+    # Mirrors dataset_pipeline/cli.py. Async jobs avoid the ~45-min SSE drop on
+    # long tool calls by submitting work as a background job and polling for it.
+    parser.add_argument("--no-async-jobs", action="store_true",
+                        help="Use the legacy single long-held MCP call instead of submit_job + poll")
+    parser.add_argument("--poll-interval", type=int, default=20,
+                        help="Seconds between check_job_status polls (default: 20)")
+    parser.add_argument("--job-deadline", type=int, default=7200,
+                        help="Give up on a job after N seconds (default: 7200 = 2h)")
+
     args = parser.parse_args()
 
     # ── Indexing mode ─────────────────────────────────────────────────────────
@@ -1713,6 +1800,7 @@ Examples:
     print(f"Project path      : {args.project_path or '(default)'}")
     print(f"Project name      : {args.project_name or '(derived from path)'}")
     print(f"Collection name   : {args.collection_name}")
+    print(f"Async jobs        : {'OFF (legacy long-held call)' if args.no_async_jobs else f'ON (poll {args.poll_interval}s, deadline {args.job_deadline}s)'}")
 
     async def run_analysis():
         analyzer = ProperlyFixedComparativeAnalyzer(
@@ -1722,6 +1810,9 @@ Examples:
             project_path=args.project_path,
             project_name=args.project_name,
             collection_name=args.collection_name,
+            use_async_jobs=not args.no_async_jobs,
+            poll_interval=args.poll_interval,
+            job_deadline=args.job_deadline,
         )
         results, timestamp = await analyzer.run_comparative_analysis()
         json_file, csv_file, excel_file = analyzer.save_final_results(results, timestamp)
