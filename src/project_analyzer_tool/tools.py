@@ -607,11 +607,62 @@ async def _run_cpg_rag(
                 pass
 
 
+async def _run_hybrid_fast(
+    user_query: str,
+    project_path: str = "/opt/HelloWorldApp",
+    mcts_iterations: int = 20,
+    collection_name: str = "HelloWorldApp_pageindex_v3",
+    neo4j_config_path: str = NEO4J_CONFIG,
+    qdrant_config_path: str = QDRANT_CONFIG,
+    schema_path: str = SCHEMA_PATH,
+    max_hops: int = 5,
+    max_results: int = 5,
+    register_proc=None,  # unused: the workflow spawns its own subprocess internally
+) -> dict:
+    """Background-job worker for the hybrid-fast multi-hop orchestrator.
+
+    Mirrors the @mcp.tool() query_hybrid_fast_rag body. Like _run_cpg_rag this is
+    an in-process workflow, and its PageIndex agent runs a blocking subprocess.run
+    (src/core/hybrid_fast_workflow/agents.py), so it is registered in
+    _THREAD_WORKERS and dispatched on a worker thread to keep the server loop free.
+    """
+    try:
+        logger.info("🚀 Hybrid Fast RAG (job) starting: %s", user_query)
+
+        from src.core.hybrid_fast_workflow import HybridFastWorkflow
+
+        workflow = HybridFastWorkflow(max_hops=max_hops)
+        config = {
+            "project_path": project_path,
+            "mcts_iterations": mcts_iterations,
+            "collection_name": collection_name,
+            "neo4j_config_path": neo4j_config_path,
+            "qdrant_config_path": qdrant_config_path,
+            "schema_path": schema_path,
+            "max_results": max_results,
+        }
+
+        result = await workflow.run_analysis(user_query=user_query, config=config)
+        logger.info("✅ Hybrid Fast RAG (job) complete: %s hops", result.get("hop_count", 0))
+        return result
+    except asyncio.CancelledError:
+        raise
+    except Exception as e:  # noqa: BLE001
+        return {
+            "status": "error",
+            "tool_name": "query_hybrid_fast_rag",
+            "error": str(e),
+            "traceback": traceback.format_exc(),
+            "user_query": user_query,
+        }
+
+
 # Tools that may be run as background jobs via submit_job.
 _JOB_WORKERS = {
     "query_pageindex_only": _run_pageindex_only,
     "query_vector_only": _run_vector_only,
     "query_cpg_rag": _run_cpg_rag,
+    "query_hybrid_fast_rag": _run_hybrid_fast,
 }
 
 
@@ -620,7 +671,7 @@ _JOB_WORKERS = {
 # are run in a separate thread with their own event loop so the server stays
 # responsive to check_job_status polls. The subprocess-based workers
 # (pageindex/vector) are already non-blocking and stay on the main loop.
-_THREAD_WORKERS = {"query_cpg_rag"}
+_THREAD_WORKERS = {"query_cpg_rag", "query_hybrid_fast_rag"}
 
 
 async def _dispatch_job(tool_name: str, params: dict, register_proc) -> dict:
