@@ -65,10 +65,14 @@ class PlanExecutionStage:
             mappings_path=self.cfg.mappings_path,
             queries_path=self.cfg.queries_path,
             max_results=self.cfg.max_results,
+            use_async_jobs=self.cfg.use_async_jobs,
+            poll_interval_s=self.cfg.poll_interval_s,
+            job_deadline_s=self.cfg.job_deadline_s,
         )
         llm = _make_llm_service()
 
         total = 0
+        attempted = 0
         for i, rec in enumerate(plans_raw):
             plan = _dict_to_plan(rec)
             original_query = query_map.get(plan.query_id, "")
@@ -81,6 +85,7 @@ class PlanExecutionStage:
                 continue
 
             logger.info(f"Stage 3: executing {plan.plan_id} [{i+1}/{len(plans_raw)}]")
+            attempted += 1
 
             try:
                 trace = await runner.execute_plan(plan, original_query)
@@ -96,6 +101,10 @@ class PlanExecutionStage:
             if (i + 1) % self.cfg.batch_size == 0:
                 logger.info(f"Stage 3: batch complete ({i+1} processed), pausing 5s")
                 await asyncio.sleep(5)
+
+            if self.cfg.limit and attempted >= self.cfg.limit:
+                logger.info(f"Stage 3: reached --limit {self.cfg.limit}, stopping")
+                break
 
         logger.info(
             f"Stage 3 complete: {total} new traces written. "
